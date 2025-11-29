@@ -10,9 +10,9 @@ var CONFIG_OPTIONS = {
     ["main",      "Development"],
   ],
   CONFIG_PROJECTS: [
-    ["Crowdin",   "https://ltdorgtest.crowdin.com/rust-book-l10n"],
-    ["GitHub",    "https://github.com/ltdorgtest/rust-book-l10n"],
-    ["AtomGit",   "https://atomgit.com/ltdorgtest/rust-book-l10n"],
-    ["GitFlic",   "https://gitflic.ru/project/ltdorgtest/rust-book-l10n"],
+    ["Crowdin",   "https://localizethedocs.crowdin.com/rust-book-l10n"],
+    ["GitHub",    "https://github.com/localizethedocs/rust-book-l10n"],
+    ["AtomGit",   "https://atomgit.com/localizethedocs/rust-book-l10n"],
+    ["GitFlic",   "https://gitflic.ru/project/localizethedocs/rust-book-l10n"],
   ]
 };
