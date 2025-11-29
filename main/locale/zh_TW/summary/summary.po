@@ -5,15 +5,15 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/SUMMARY.md:1
 msgid "The Rust Programming Language"
-msgstr ""
+msgstr "Rust 程式設計語言"
 
 #: src/SUMMARY.md:3
 msgid "The Rust Programming Language Foreword Introduction"
@@ -25,15 +25,15 @@ msgstr ""
 
 #: src/SUMMARY.md:8
 msgid "Installation"
-msgstr ""
+msgstr "安裝"
 
 #: src/SUMMARY.md:9
 msgid "Hello, World!"
-msgstr ""
+msgstr "你好，世界！"
 
 #: src/SUMMARY.md:10
 msgid "Hello, Cargo!"
-msgstr ""
+msgstr "你好，Cargo！"
 
 #: src/SUMMARY.md:12
 msgid "Programming a Guessing Game"
@@ -49,7 +49,7 @@ msgstr ""
 
 #: src/SUMMARY.md:16
 msgid "Data Types"
-msgstr ""
+msgstr "資料型別"
 
 #: src/SUMMARY.md:17
 msgid "Functions"
@@ -57,7 +57,7 @@ msgstr ""
 
 #: src/SUMMARY.md:18
 msgid "Comments"
-msgstr ""
+msgstr "註釋"
 
 #: src/SUMMARY.md:19
 msgid "Control Flow"
@@ -65,11 +65,11 @@ msgstr ""
 
 #: src/SUMMARY.md:21
 msgid "Understanding Ownership"
-msgstr ""
+msgstr "理解擁有權"
 
 #: src/SUMMARY.md:22
 msgid "What is Ownership?"
-msgstr ""
+msgstr "什麼是擁有權？"
 
 #: src/SUMMARY.md:23
 msgid "References and Borrowing"
@@ -113,11 +113,11 @@ msgstr ""
 
 #: src/SUMMARY.md:36
 msgid "Packages, Crates, and Modules"
-msgstr ""
+msgstr "軟體包、軟體箱、模組"
 
 #: src/SUMMARY.md:37
 msgid "Packages and Crates"
-msgstr ""
+msgstr "軟體包與軟體箱"
 
 #: src/SUMMARY.md:38
 msgid "Control Scope and Privacy with Modules"
@@ -153,7 +153,7 @@ msgstr ""
 
 #: src/SUMMARY.md:48
 msgid "Error Handling"
-msgstr ""
+msgstr "錯誤處理"
 
 #: src/SUMMARY.md:49
 msgid "Unrecoverable Errors with `panic!`"
@@ -185,11 +185,11 @@ msgstr ""
 
 #: src/SUMMARY.md:58
 msgid "Writing Automated Tests"
-msgstr ""
+msgstr "編寫自動測試"
 
 #: src/SUMMARY.md:59
 msgid "How to Write Tests"
-msgstr ""
+msgstr "如何編寫測試"
 
 #: src/SUMMARY.md:60
 msgid "Controlling How Tests Are Run"
@@ -197,7 +197,7 @@ msgstr ""
 
 #: src/SUMMARY.md:61
 msgid "Test Organization"
-msgstr ""
+msgstr "測試組織"
 
 #: src/SUMMARY.md:63
 msgid "An I/O Project: Building a Command Line Program"
@@ -422,15 +422,15 @@ msgstr ""
 
 #: src/SUMMARY.md:128
 msgid "Appendix"
-msgstr ""
+msgstr "附錄"
 
 #: src/SUMMARY.md:129
 msgid "A - Keywords"
-msgstr ""
+msgstr "A - 關鍵字"
 
 #: src/SUMMARY.md:130
 msgid "B - Operators and Symbols"
-msgstr ""
+msgstr "B - 運算子與符號"
 
 #: src/SUMMARY.md:131
 msgid "C - Derivable Traits"
@@ -438,7 +438,7 @@ msgstr ""
 
 #: src/SUMMARY.md:132
 msgid "D - Useful Development Tools"
-msgstr ""
+msgstr "D - 有用的開發工具"
 
 #: src/SUMMARY.md:133
 msgid "E - Editions"
@@ -446,7 +446,7 @@ msgstr ""
 
 #: src/SUMMARY.md:134
 msgid "F - Translations of the Book"
-msgstr ""
+msgstr "F - 手冊的翻譯"
 
 #: src/SUMMARY.md:135
 msgid "G - How Rust is Made and “Nightly Rust”"

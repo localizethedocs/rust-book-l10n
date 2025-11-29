@@ -5,15 +5,15 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/ch00-00-introduction.md:1
 msgid "Introduction"
-msgstr ""
+msgstr "簡介"
 
 #: src/ch00-00-introduction.md:3
 msgid ""
@@ -45,7 +45,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:23
 msgid "Teams of Developers"
-msgstr ""
+msgstr "開發者團隊"
 
 #: src/ch00-00-introduction.md:25
 msgid ""
@@ -92,7 +92,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:47
 msgid "Students"
-msgstr ""
+msgstr "學生"
 
 #: src/ch00-00-introduction.md:49
 msgid ""
@@ -106,7 +106,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:56
 msgid "Companies"
-msgstr ""
+msgstr "公司"
 
 #: src/ch00-00-introduction.md:58
 msgid ""
@@ -120,7 +120,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:64
 msgid "Open Source Developers"
-msgstr ""
+msgstr "開源開發者"
 
 #: src/ch00-00-introduction.md:66
 msgid ""
@@ -131,7 +131,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:70
 msgid "People Who Value Speed and Stability"
-msgstr ""
+msgstr "重視速度與穩定性的人們"
 
 #: src/ch00-00-introduction.md:72
 msgid ""
@@ -171,7 +171,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:97
 msgid "How to Use This Book"
-msgstr ""
+msgstr "如何使用者本手冊"
 
 #: src/ch00-00-introduction.md:99
 msgid ""
@@ -348,7 +348,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:196
 msgid "Source Code"
-msgstr ""
+msgstr "來源碼"
 
 #: src/ch00-00-introduction.md:198
 msgid ""
