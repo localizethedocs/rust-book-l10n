@@ -1,0 +1,115 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch12-02-reading-a-file.md:1
+msgid "Reading a File"
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:3
+msgid ""
+"Now we’ll add functionality to read the file specified in the `file_path` "
+"argument. First, we need a sample file to test it with: We’ll use a file "
+"with a small amount of text over multiple lines with some repeated words. "
+"Listing 12-3 has an Emily Dickinson poem that will work well! Create a file "
+"called _poem.txt_ at the root level of your project, and enter the poem “I’m "
+"Nobody! Who are you?”"
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:26
+msgid ""
+"With the text in place, edit _src/main.rs_ and add code to read the file, as "
+"shown in Listing 12-4."
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:36
+msgid "// --snip--\n"
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:42
+msgid "\"Searching for {query}\""
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:43
+msgid "\"In file {file_path}\""
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:46
+msgid "\"Should have been able to read the file\""
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:48
+msgid "\"With text:\\n{contents}\""
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:54
+msgid ""
+"First, we bring in a relevant part of the standard library with a `use` "
+"statement: We need `std::fs` to handle files."
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:57
+msgid ""
+"In `main`, the new statement `fs::read_to_string` takes the `file_path`, "
+"opens that file, and returns a value of type `std::io::Result<String>` that "
+"contains the file’s contents."
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:61
+msgid ""
+"After that, we again add a temporary `println!` statement that prints the "
+"value of `contents` after the file is read so that we can check that the "
+"program is working so far."
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:65
+msgid ""
+"Let’s run this code with any string as the first command line argument "
+"(because we haven’t implemented the searching part yet) and the _poem.txt_ "
+"file as the second argument:"
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:69
+msgid ""
+"```console\n"
+"$ cargo run -- the poem.txt\n"
+"   Compiling minigrep v0.1.0 (file:///projects/minigrep)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s\n"
+"     Running `target/debug/minigrep the poem.txt`\n"
+"Searching for the\n"
+"In file poem.txt\n"
+"With text:\n"
+"I'm nobody! Who are you?\n"
+"Are you nobody, too?\n"
+"Then there's a pair of us - don't tell!\n"
+"They'd banish us, you know.\n"
+"\n"
+"How dreary to be somebody!\n"
+"How public, like a frog\n"
+"To tell your name the livelong day\n"
+"To an admiring bog!\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/ch12-02-reading-a-file.md:89
+msgid ""
+"Great! The code read and then printed the contents of the file. But the code "
+"has a few flaws. At the moment, the `main` function has multiple "
+"responsibilities: Generally, functions are clearer and easier to maintain if "
+"each function is responsible for only one idea. The other problem is that "
+"we’re not handling errors as well as we could. The program is still small, "
+"so these flaws aren’t a big problem, but as the program grows, it will be "
+"harder to fix them cleanly. It’s a good practice to begin refactoring early "
+"on when developing a program because it’s much easier to refactor smaller "
+"amounts of code. We’ll do that next."
+msgstr ""

@@ -1,0 +1,318 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch13-02-iterators.md:1
+msgid "Processing a Series of Items with Iterators"
+msgstr ""
+
+#: src/ch13-02-iterators.md:3
+msgid ""
+"The iterator pattern allows you to perform some task on a sequence of items "
+"in turn. An iterator is responsible for the logic of iterating over each "
+"item and determining when the sequence has finished. When you use iterators, "
+"you don’t have to reimplement that logic yourself."
+msgstr ""
+
+#: src/ch13-02-iterators.md:8
+msgid ""
+"In Rust, iterators are _lazy_, meaning they have no effect until you call "
+"methods that consume the iterator to use it up. For example, the code in "
+"Listing 13-10 creates an iterator over the items in the vector `v1` by "
+"calling the `iter` method defined on `Vec<T>`. This code by itself doesn’t "
+"do anything useful."
+msgstr ""
+
+#: src/ch13-02-iterators.md:26
+msgid ""
+"The iterator is stored in the `v1_iter` variable. Once we’ve created an "
+"iterator, we can use it in a variety of ways. In Listing 3-5, we iterated "
+"over an array using a `for` loop to execute some code on each of its items. "
+"Under the hood, this implicitly created and then consumed an iterator, but "
+"we glossed over how exactly that works until now."
+msgstr ""
+
+#: src/ch13-02-iterators.md:32
+msgid ""
+"In the example in Listing 13-11, we separate the creation of the iterator "
+"from the use of the iterator in the `for` loop. When the `for` loop is "
+"called using the iterator in `v1_iter`, each element in the iterator is used "
+"in one iteration of the loop, which prints out each value."
+msgstr ""
+
+#: src/ch13-02-iterators.md:46
+msgid "\"Got: {val}\""
+msgstr ""
+
+#: src/ch13-02-iterators.md:53
+msgid ""
+"In languages that don’t have iterators provided by their standard libraries, "
+"you would likely write this same functionality by starting a variable at "
+"index 0, using that variable to index into the vector to get a value, and "
+"incrementing the variable value in a loop until it reached the total number "
+"of items in the vector."
+msgstr ""
+
+#: src/ch13-02-iterators.md:59
+msgid ""
+"Iterators handle all of that logic for you, cutting down on repetitive code "
+"you could potentially mess up. Iterators give you more flexibility to use "
+"the same logic with many different kinds of sequences, not just data "
+"structures you can index into, like vectors. Let’s examine how iterators do "
+"that."
+msgstr ""
+
+#: src/ch13-02-iterators.md:64
+msgid "The `Iterator` Trait and the `next` Method"
+msgstr ""
+
+#: src/ch13-02-iterators.md:66
+msgid ""
+"All iterators implement a trait named `Iterator` that is defined in the "
+"standard library. The definition of the trait looks like this:"
+msgstr ""
+
+#: src/ch13-02-iterators.md:75
+msgid "// methods with default implementations elided\n"
+msgstr ""
+
+#: src/ch13-02-iterators.md:79
+msgid ""
+"Notice that this definition uses some new syntax: `type Item` and `Self::"
+"Item`, which are defining an associated type with this trait. We’ll talk "
+"about associated types in depth in Chapter 20. For now, all you need to know "
+"is that this code says implementing the `Iterator` trait requires that you "
+"also define an `Item` type, and this `Item` type is used in the return type "
+"of the `next` method. In other words, the `Item` type will be the type "
+"returned from the iterator."
+msgstr ""
+
+#: src/ch13-02-iterators.md:87
+msgid ""
+"The `Iterator` trait only requires implementors to define one method: the "
+"`next` method, which returns one item of the iterator at a time, wrapped in "
+"`Some`, and, when iteration is over, returns `None`."
+msgstr ""
+
+#: src/ch13-02-iterators.md:91
+msgid ""
+"We can call the `next` method on iterators directly; Listing 13-12 "
+"demonstrates what values are returned from repeated calls to `next` on the "
+"iterator created from the vector."
+msgstr ""
+
+#: src/ch13-02-iterators.md:116
+msgid ""
+"Note that we needed to make `v1_iter` mutable: Calling the `next` method on "
+"an iterator changes internal state that the iterator uses to keep track of "
+"where it is in the sequence. In other words, this code _consumes_, or uses "
+"up, the iterator. Each call to `next` eats up an item from the iterator. We "
+"didn’t need to make `v1_iter` mutable when we used a `for` loop, because the "
+"loop took ownership of `v1_iter` and made it mutable behind the scenes."
+msgstr ""
+
+#: src/ch13-02-iterators.md:123
+msgid ""
+"Also note that the values we get from the calls to `next` are immutable "
+"references to the values in the vector. The `iter` method produces an "
+"iterator over immutable references. If we want to create an iterator that "
+"takes ownership of `v1` and returns owned values, we can call `into_iter` "
+"instead of `iter`. Similarly, if we want to iterate over mutable references, "
+"we can call `iter_mut` instead of `iter`."
+msgstr ""
+
+#: src/ch13-02-iterators.md:130
+msgid "Methods That Consume the Iterator"
+msgstr ""
+
+#: src/ch13-02-iterators.md:132
+msgid ""
+"The `Iterator` trait has a number of different methods with default "
+"implementations provided by the standard library; you can find out about "
+"these methods by looking in the standard library API documentation for the "
+"`Iterator` trait. Some of these methods call the `next` method in their "
+"definition, which is why you’re required to implement the `next` method when "
+"implementing the `Iterator` trait."
+msgstr ""
+
+#: src/ch13-02-iterators.md:139
+msgid ""
+"Methods that call `next` are called _consuming adapters_ because calling "
+"them uses up the iterator. One example is the `sum` method, which takes "
+"ownership of the iterator and iterates through the items by repeatedly "
+"calling `next`, thus consuming the iterator. As it iterates through, it adds "
+"each item to a running total and returns the total when iteration is "
+"complete. Listing 13-13 has a test illustrating a use of the `sum` method."
+msgstr ""
+
+#: src/ch13-02-iterators.md:166
+msgid ""
+"We aren’t allowed to use `v1_iter` after the call to `sum`, because `sum` "
+"takes ownership of the iterator we call it on."
+msgstr ""
+
+#: src/ch13-02-iterators.md:169
+msgid "Methods That Produce Other Iterators"
+msgstr ""
+
+#: src/ch13-02-iterators.md:171
+msgid ""
+"_Iterator adapters_ are methods defined on the `Iterator` trait that don’t "
+"consume the iterator. Instead, they produce different iterators by changing "
+"some aspect of the original iterator."
+msgstr ""
+
+#: src/ch13-02-iterators.md:175
+msgid ""
+"Listing 13-14 shows an example of calling the iterator adapter method `map`, "
+"which takes a closure to call on each item as the items are iterated "
+"through. The `map` method returns a new iterator that produces the modified "
+"items. The closure here creates a new iterator in which each item from the "
+"vector will be incremented by 1."
+msgstr ""
+
+#: src/ch13-02-iterators.md:193
+msgid "However, this code produces a warning:"
+msgstr ""
+
+#: src/ch13-02-iterators.md:195
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling iterators v0.1.0 (file:///projects/iterators)\n"
+"warning: unused `Map` that must be used\n"
+" --> src/main.rs:4:5\n"
+"  |\n"
+"4 |     v1.iter().map(|x| x + 1);\n"
+"  |     ^^^^^^^^^^^^^^^^^^^^^^^^\n"
+"  |\n"
+"  = note: iterators are lazy and do nothing unless consumed\n"
+"  = note: `#[warn(unused_must_use)]` on by default\n"
+"help: use `let _ = ...` to ignore the resulting value\n"
+"  |\n"
+"4 |     let _ = v1.iter().map(|x| x + 1);\n"
+"  |     +++++++\n"
+"\n"
+"warning: `iterators` (bin \"iterators\") generated 1 warning\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.47s\n"
+"     Running `target/debug/iterators`\n"
+"```"
+msgstr ""
+
+#: src/ch13-02-iterators.md:216
+msgid ""
+"The code in Listing 13-14 doesn’t do anything; the closure we’ve specified "
+"never gets called. The warning reminds us why: Iterator adapters are lazy, "
+"and we need to consume the iterator here."
+msgstr ""
+
+#: src/ch13-02-iterators.md:220
+msgid ""
+"To fix this warning and consume the iterator, we’ll use the `collect` "
+"method, which we used with `env::args` in Listing 12-1. This method consumes "
+"the iterator and collects the resultant values into a collection data type."
+msgstr ""
+
+#: src/ch13-02-iterators.md:224
+msgid ""
+"In Listing 13-15, we collect the results of iterating over the iterator "
+"that’s returned from the call to `map` into a vector. This vector will end "
+"up containing each item from the original vector, incremented by 1."
+msgstr ""
+
+#: src/ch13-02-iterators.md:242
+msgid ""
+"Because `map` takes a closure, we can specify any operation we want to "
+"perform on each item. This is a great example of how closures let you "
+"customize some behavior while reusing the iteration behavior that the "
+"`Iterator` trait provides."
+msgstr ""
+
+#: src/ch13-02-iterators.md:247
+msgid ""
+"You can chain multiple calls to iterator adapters to perform complex actions "
+"in a readable way. But because all iterators are lazy, you have to call one "
+"of the consuming adapter methods to get results from calls to iterator "
+"adapters."
+msgstr ""
+
+#: src/ch13-02-iterators.md:253
+msgid "<a id=\"using-closures-that-capture-their-environment\"></a>"
+msgstr ""
+
+#: src/ch13-02-iterators.md:255
+msgid "Closures That Capture Their Environment"
+msgstr ""
+
+#: src/ch13-02-iterators.md:257
+msgid ""
+"Many iterator adapters take closures as arguments, and commonly the closures "
+"we’ll specify as arguments to iterator adapters will be closures that "
+"capture their environment."
+msgstr ""
+
+#: src/ch13-02-iterators.md:261
+msgid ""
+"For this example, we’ll use the `filter` method that takes a closure. The "
+"closure gets an item from the iterator and returns a `bool`. If the closure "
+"returns `true`, the value will be included in the iteration produced by "
+"`filter`. If the closure returns `false`, the value won’t be included."
+msgstr ""
+
+#: src/ch13-02-iterators.md:266
+msgid ""
+"In Listing 13-16, we use `filter` with a closure that captures the "
+"`shoe_size` variable from its environment to iterate over a collection of "
+"`Shoe` struct instances. It will return only shoes that are the specified "
+"size."
+msgstr ""
+
+#: src/ch13-02-iterators.md:292 src/ch13-02-iterators.md:311
+msgid "\"sneaker\""
+msgstr ""
+
+#: src/ch13-02-iterators.md:296
+msgid "\"sandal\""
+msgstr ""
+
+#: src/ch13-02-iterators.md:300 src/ch13-02-iterators.md:315
+msgid "\"boot\""
+msgstr ""
+
+#: src/ch13-02-iterators.md:325
+msgid ""
+"The `shoes_in_size` function takes ownership of a vector of shoes and a shoe "
+"size as parameters. It returns a vector containing only shoes of the "
+"specified size."
+msgstr ""
+
+#: src/ch13-02-iterators.md:329
+msgid ""
+"In the body of `shoes_in_size`, we call `into_iter` to create an iterator "
+"that takes ownership of the vector. Then, we call `filter` to adapt that "
+"iterator into a new iterator that only contains elements for which the "
+"closure returns `true`."
+msgstr ""
+
+#: src/ch13-02-iterators.md:334
+msgid ""
+"The closure captures the `shoe_size` parameter from the environment and "
+"compares the value with each shoe’s size, keeping only shoes of the size "
+"specified. Finally, calling `collect` gathers the values returned by the "
+"adapted iterator into a vector that’s returned by the function."
+msgstr ""
+
+#: src/ch13-02-iterators.md:339
+msgid ""
+"The test shows that when we call `shoes_in_size`, we get back only shoes "
+"that have the same size as the value we specified."
+msgstr ""
