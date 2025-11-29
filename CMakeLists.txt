@@ -519,6 +519,12 @@ add_custom_target(crowdin_download_po
             -P ${PROJ_CMAKE_TARGETS_DIR}/crowdin_download_po.cmake
     VERBATIM)
 
+add_custom_target(create_rtd_symlinks
+    COMMAND ${CMAKE_COMMAND} -E env ${SCRIPT_MODE_ENV}
+            ${CMAKE_COMMAND} ${SCRIPT_MODE_CACHE}
+            -P ${PROJ_CMAKE_TARGETS_DIR}/create_rtd_symlinks.cmake
+    VERBATIM)
+
 #[============================================================[
 # Add Dependencies for Fundamental Targets.
 #]============================================================]
