@@ -1,0 +1,50 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch14-00-more-about-cargo.md:1
+msgid "More About Cargo and Crates.io"
+msgstr ""
+
+#: src/ch14-00-more-about-cargo.md:3
+msgid ""
+"So far, we’ve used only the most basic features of Cargo to build, run, and "
+"test our code, but it can do a lot more. In this chapter, we’ll discuss some "
+"of its other, more advanced features to show you how to do the following:"
+msgstr ""
+
+#: src/ch14-00-more-about-cargo.md:7
+msgid "Customize your build through release profiles."
+msgstr ""
+
+#: src/ch14-00-more-about-cargo.md:8
+msgid "Publish libraries on [crates.io](https://crates.io/)<!-- ignore -->."
+msgstr ""
+
+#: src/ch14-00-more-about-cargo.md:9
+msgid "Organize large projects with workspaces."
+msgstr ""
+
+#: src/ch14-00-more-about-cargo.md:10
+msgid "Install binaries from [crates.io](https://crates.io/)<!-- ignore -->."
+msgstr ""
+
+#: src/ch14-00-more-about-cargo.md:11
+msgid "Extend Cargo using custom commands."
+msgstr ""
+
+#: src/ch14-00-more-about-cargo.md:13
+msgid ""
+"Cargo can do even more than the functionality we cover in this chapter, so "
+"for a full explanation of all its features, see [its documentation](https://"
+"doc.rust-lang.org/cargo/)."
+msgstr ""

@@ -1,0 +1,397 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch01-03-hello-cargo.md:1
+msgid "Hello, Cargo!"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:3
+msgid ""
+"Cargo is Rust’s build system and package manager. Most Rustaceans use this "
+"tool to manage their Rust projects because Cargo handles a lot of tasks for "
+"you, such as building your code, downloading the libraries your code depends "
+"on, and building those libraries. (We call the libraries that your code "
+"needs _dependencies_.)"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:9
+msgid ""
+"The simplest Rust programs, like the one we’ve written so far, don’t have "
+"any dependencies. If we had built the “Hello, world!” project with Cargo, it "
+"would only use the part of Cargo that handles building your code. As you "
+"write more complex Rust programs, you’ll add dependencies, and if you start "
+"a project using Cargo, adding dependencies will be much easier to do."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:15
+msgid ""
+"Because the vast majority of Rust projects use Cargo, the rest of this book "
+"assumes that you’re using Cargo too. Cargo comes installed with Rust if you "
+"used the official installers discussed in the [“Installation”](ch01-01-"
+"installation.html#installation)<!-- ignore --> section. If you installed "
+"Rust through some other means, check whether Cargo is installed by entering "
+"the following in your terminal:"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:26
+msgid ""
+"If you see a version number, you have it! If you see an error, such as "
+"`command not found`, look at the documentation for your method of "
+"installation to determine how to install Cargo separately."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:30
+msgid "Creating a Project with Cargo"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:32
+msgid ""
+"Let’s create a new project using Cargo and look at how it differs from our "
+"original “Hello, world!” project. Navigate back to your _projects_ directory "
+"(or wherever you decided to store your code). Then, on any operating system, "
+"run the following:"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:42
+msgid ""
+"The first command creates a new directory and project called _hello_cargo_. "
+"We’ve named our project _hello_cargo_, and Cargo creates its files in a "
+"directory of the same name."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:46
+msgid ""
+"Go into the _hello_cargo_ directory and list the files. You’ll see that "
+"Cargo has generated two files and one directory for us: a _Cargo.toml_ file "
+"and a _src_ directory with a _main.rs_ file inside."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:50
+msgid ""
+"It has also initialized a new Git repository along with a _.gitignore_ file. "
+"Git files won’t be generated if you run `cargo new` within an existing Git "
+"repository; you can override this behavior by using `cargo new --vcs=git`."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:54
+msgid ""
+"Note: Git is a common version control system. You can change `cargo new` to "
+"use a different version control system or no version control system by using "
+"the `--vcs` flag. Run `cargo new --help` to see the available options."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:58
+msgid ""
+"Open _Cargo.toml_ in your text editor of choice. It should look similar to "
+"the code in Listing 1-2."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:63
+msgid ""
+"```toml\n"
+"[package]\n"
+"name = \"hello_cargo\"\n"
+"version = \"0.1.0\"\n"
+"edition = \"2024\"\n"
+"\n"
+"[dependencies]\n"
+"```"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:74
+msgid ""
+"This file is in the [_TOML_](https://toml.io)<!-- ignore --> (_Tom’s "
+"Obvious, Minimal Language_) format, which is Cargo’s configuration format."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:77
+msgid ""
+"The first line, `[package]`, is a section heading that indicates that the "
+"following statements are configuring a package. As we add more information "
+"to this file, we’ll add other sections."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:81
+msgid ""
+"The next three lines set the configuration information Cargo needs to "
+"compile your program: the name, the version, and the edition of Rust to use. "
+"We’ll talk about the `edition` key in [Appendix E](appendix-05-editions."
+"html)<!-- ignore -->."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:85
+msgid ""
+"The last line, `[dependencies]`, is the start of a section for you to list "
+"any of your project’s dependencies. In Rust, packages of code are referred "
+"to as _crates_. We won’t need any other crates for this project, but we will "
+"in the first project in Chapter 2, so we’ll use this dependencies section "
+"then."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:90
+msgid "Now open _src/main.rs_ and take a look:"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:92
+msgid "<span class=\"filename\">Filename: src/main.rs</span>"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:96
+msgid "\"Hello, world!\""
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:100
+msgid ""
+"Cargo has generated a “Hello, world!” program for you, just like the one we "
+"wrote in Listing 1-1! So far, the differences between our project and the "
+"project Cargo generated are that Cargo placed the code in the _src_ "
+"directory, and we have a _Cargo.toml_ configuration file in the top "
+"directory."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:105
+msgid ""
+"Cargo expects your source files to live inside the _src_ directory. The top-"
+"level project directory is just for README files, license information, "
+"configuration files, and anything else not related to your code. Using Cargo "
+"helps you organize your projects. There’s a place for everything, and "
+"everything is in its place."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:111
+msgid ""
+"If you started a project that doesn’t use Cargo, as we did with the “Hello, "
+"world!” project, you can convert it to a project that does use Cargo. Move "
+"the project code into the _src_ directory and create an appropriate _Cargo."
+"toml_ file. One easy way to get that _Cargo.toml_ file is to run `cargo "
+"init`, which will create it for you automatically."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:117
+msgid "Building and Running a Cargo Project"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:119
+msgid ""
+"Now let’s look at what’s different when we build and run the “Hello, world!” "
+"program with Cargo! From your _hello_cargo_ directory, build your project by "
+"entering the following command:"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:123
+msgid ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)\n"
+"    Finished dev [unoptimized + debuginfo] target(s) in 2.85 secs\n"
+"```"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:129
+msgid ""
+"This command creates an executable file in _target/debug/hello_cargo_ (or "
+"_target\\debug\\hello_cargo.exe_ on Windows) rather than in your current "
+"directory. Because the default build is a debug build, Cargo puts the binary "
+"in a directory named _debug_. You can run the executable with this command:"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:139
+msgid ""
+"If all goes well, `Hello, world!` should print to the terminal. Running "
+"`cargo build` for the first time also causes Cargo to create a new file at "
+"the top level: _Cargo.lock_. This file keeps track of the exact versions of "
+"dependencies in your project. This project doesn’t have dependencies, so the "
+"file is a bit sparse. You won’t ever need to change this file manually; "
+"Cargo manages its contents for you."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:146
+msgid ""
+"We just built a project with `cargo build` and ran it with `./target/debug/"
+"hello_cargo`, but we can also use `cargo run` to compile the code and then "
+"run the resultant executable all in one command:"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:157
+msgid ""
+"Using `cargo run` is more convenient than having to remember to run `cargo "
+"build` and then use the whole path to the binary, so most developers use "
+"`cargo run`."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:161
+msgid ""
+"Notice that this time we didn’t see output indicating that Cargo was "
+"compiling `hello_cargo`. Cargo figured out that the files hadn’t changed, so "
+"it didn’t rebuild but just ran the binary. If you had modified your source "
+"code, Cargo would have rebuilt the project before running it, and you would "
+"have seen this output:"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:167
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)\n"
+"    Finished dev [unoptimized + debuginfo] target(s) in 0.33 secs\n"
+"     Running `target/debug/hello_cargo`\n"
+"Hello, world!\n"
+"```"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:175
+msgid ""
+"Cargo also provides a command called `cargo check`. This command quickly "
+"checks your code to make sure it compiles but doesn’t produce an executable:"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:178
+msgid ""
+"```console\n"
+"$ cargo check\n"
+"   Checking hello_cargo v0.1.0 (file:///projects/hello_cargo)\n"
+"    Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs\n"
+"```"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:184
+msgid ""
+"Why would you not want an executable? Often, `cargo check` is much faster "
+"than `cargo build` because it skips the step of producing an executable. If "
+"you’re continually checking your work while writing the code, using `cargo "
+"check` will speed up the process of letting you know if your project is "
+"still compiling! As such, many Rustaceans run `cargo check` periodically as "
+"they write their program to make sure it compiles. Then, they run `cargo "
+"build` when they’re ready to use the executable."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:192
+msgid "Let’s recap what we’ve learned so far about Cargo:"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:194
+msgid "We can create a project using `cargo new`."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:195
+msgid "We can build a project using `cargo build`."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:196
+msgid "We can build and run a project in one step using `cargo run`."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:197
+msgid ""
+"We can build a project without producing a binary to check for errors using "
+"`cargo check`."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:199
+msgid ""
+"Instead of saving the result of the build in the same directory as our code, "
+"Cargo stores it in the _target/debug_ directory."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:202
+msgid ""
+"An additional advantage of using Cargo is that the commands are the same no "
+"matter which operating system you’re working on. So, at this point, we’ll no "
+"longer provide specific instructions for Linux and macOS versus Windows."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:206
+msgid "Building for Release"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:208
+msgid ""
+"When your project is finally ready for release, you can use `cargo build --"
+"release` to compile it with optimizations. This command will create an "
+"executable in _target/release_ instead of _target/debug_. The optimizations "
+"make your Rust code run faster, but turning them on lengthens the time it "
+"takes for your program to compile. This is why there are two different "
+"profiles: one for development, when you want to rebuild quickly and often, "
+"and another for building the final program you’ll give to a user that won’t "
+"be rebuilt repeatedly and that will run as fast as possible. If you’re "
+"benchmarking your code’s running time, be sure to run `cargo build --"
+"release` and benchmark with the executable in _target/release_."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:220
+msgid "<a id=\"cargo-as-convention\"></a>"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:222
+msgid "Leveraging Cargo’s Conventions"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:224
+msgid ""
+"With simple projects, Cargo doesn’t provide a lot of value over just using "
+"`rustc`, but it will prove its worth as your programs become more intricate. "
+"Once programs grow to multiple files or need a dependency, it’s much easier "
+"to let Cargo coordinate the build."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:229
+msgid ""
+"Even though the `hello_cargo` project is simple, it now uses much of the "
+"real tooling you’ll use in the rest of your Rust career. In fact, to work on "
+"any existing projects, you can use the following commands to check out the "
+"code using Git, change to that project’s directory, and build:"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:240
+msgid ""
+"For more information about Cargo, check out [its documentation](https://doc."
+"rust-lang.org/cargo/)."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:242
+msgid "Summary"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:244
+msgid ""
+"You’re already off to a great start on your Rust journey! In this chapter, "
+"you learned how to:"
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:247
+msgid "Install the latest stable version of Rust using `rustup`."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:248
+msgid "Update to a newer Rust version."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:249
+msgid "Open locally installed documentation."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:250
+msgid "Write and run a “Hello, world!” program using `rustc` directly."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:251
+msgid "Create and run a new project using the conventions of Cargo."
+msgstr ""
+
+#: src/ch01-03-hello-cargo.md:253
+msgid ""
+"This is a great time to build a more substantial program to get used to "
+"reading and writing Rust code. So, in Chapter 2, we’ll build a guessing game "
+"program. If you would rather start by learning how common programming "
+"concepts work in Rust, see Chapter 3 and then return to Chapter 2."
+msgstr ""

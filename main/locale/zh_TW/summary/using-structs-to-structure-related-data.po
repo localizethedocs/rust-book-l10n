@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch05-00-structs.md:1
+msgid "Using Structs to Structure Related Data"
+msgstr ""
+
+#: src/ch05-00-structs.md:3
+msgid ""
+"A _struct_, or _structure_, is a custom data type that lets you package "
+"together and name multiple related values that make up a meaningful group. "
+"If you’re familiar with an object-oriented language, a struct is like an "
+"object’s data attributes. In this chapter, we’ll compare and contrast tuples "
+"with structs to build on what you already know and demonstrate when structs "
+"are a better way to group data."
+msgstr ""
+
+#: src/ch05-00-structs.md:10
+msgid ""
+"We’ll demonstrate how to define and instantiate structs. We’ll discuss how "
+"to define associated functions, especially the kind of associated functions "
+"called _methods_, to specify behavior associated with a struct type. Structs "
+"and enums (discussed in Chapter 6) are the building blocks for creating new "
+"types in your program’s domain to take full advantage of Rust’s compile-time "
+"type checking."
+msgstr ""

@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch21-00-final-project-a-web-server.md:1
+msgid "Final Project: Building a Multithreaded Web Server"
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:3
+msgid ""
+"It’s been a long journey, but we’ve reached the end of the book. In this "
+"chapter, we’ll build one more project together to demonstrate some of the "
+"concepts we covered in the final chapters, as well as recap some earlier "
+"lessons."
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:8
+msgid ""
+"For our final project, we’ll make a web server that says “Hello!” and looks "
+"like Figure 21-1 in a web browser."
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:11
+msgid "Here is our plan for building the web server:"
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:13
+msgid "Learn a bit about TCP and HTTP."
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:14
+msgid "Listen for TCP connections on a socket."
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:15
+msgid "Parse a small number of HTTP requests."
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:16
+msgid "Create a proper HTTP response."
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:17
+msgid "Improve the throughput of our server with a thread pool."
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:21
+msgid "<span class=\"caption\">Figure 21-1: Our final shared project</span>"
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:23
+msgid ""
+"Before we get started, we should mention two details. First, the method "
+"we’ll use won’t be the best way to build a web server with Rust. Community "
+"members have published a number of production-ready crates available at "
+"[crates.io](https://crates.io/) that provide more complete web server and "
+"thread pool implementations than we’ll build. However, our intention in this "
+"chapter is to help you learn, not to take the easy route. Because Rust is a "
+"systems programming language, we can choose the level of abstraction we want "
+"to work with and can go to a lower level than is possible or practical in "
+"other languages."
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:33
+msgid ""
+"Second, we will not be using async and await here. Building a thread pool is "
+"a big enough challenge on its own, without adding in building an async "
+"runtime! However, we will note how async and await might be applicable to "
+"some of the same problems we will see in this chapter. Ultimately, as we "
+"noted back in Chapter 17, many async runtimes use thread pools for managing "
+"their work."
+msgstr ""
+
+#: src/ch21-00-final-project-a-web-server.md:39
+msgid ""
+"We’ll therefore write the basic HTTP server and thread pool manually so that "
+"you can learn the general ideas and techniques behind the crates you might "
+"use in the future."
+msgstr ""

@@ -1,0 +1,172 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:3
+msgid ""
+"<a id=\"writing-error-messages-to-standard-error-instead-of-standard-"
+"output\"></a>"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:5
+msgid "Redirecting Errors to Standard Error"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:7
+msgid ""
+"At the moment, we’re writing all of our output to the terminal using the "
+"`println!` macro. In most terminals, there are two kinds of output: "
+"_standard output_ (`stdout`) for general information and _standard error_ "
+"(`stderr`) for error messages. This distinction enables users to choose to "
+"direct the successful output of a program to a file but still print error "
+"messages to the screen."
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:14
+msgid ""
+"The `println!` macro is only capable of printing to standard output, so we "
+"have to use something else to print to standard error."
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:17
+msgid "Checking Where Errors Are Written"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:19
+msgid ""
+"First, let’s observe how the content printed by `minigrep` is currently "
+"being written to standard output, including any error messages we want to "
+"write to standard error instead. We’ll do that by redirecting the standard "
+"output stream to a file while intentionally causing an error. We won’t "
+"redirect the standard error stream, so any content sent to standard error "
+"will continue to display on the screen."
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:26
+msgid ""
+"Command line programs are expected to send error messages to the standard "
+"error stream so that we can still see error messages on the screen even if "
+"we redirect the standard output stream to a file. Our program is not "
+"currently well behaved: We’re about to see that it saves the error message "
+"output to a file instead!"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:32
+msgid ""
+"To demonstrate this behavior, we’ll run the program with `>` and the file "
+"path, _output.txt_, that we want to redirect the standard output stream to. "
+"We won’t pass any arguments, which should cause an error:"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:40
+msgid ""
+"The `>` syntax tells the shell to write the contents of standard output to "
+"_output.txt_ instead of the screen. We didn’t see the error message we were "
+"expecting printed to the screen, so that means it must have ended up in the "
+"file. This is what _output.txt_ contains:"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:49
+msgid ""
+"Yup, our error message is being printed to standard output. It’s much more "
+"useful for error messages like this to be printed to standard error so that "
+"only data from a successful run ends up in the file. We’ll change that."
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:53
+msgid "Printing Errors to Standard Error"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:55
+msgid ""
+"We’ll use the code in Listing 12-24 to change how error messages are "
+"printed. Because of the refactoring we did earlier in this chapter, all the "
+"code that prints error messages is in one function, `main`. The standard "
+"library provides the `eprintln!` macro that prints to the standard error "
+"stream, so let’s change the two places we were calling `println!` to print "
+"errors to use `eprintln!` instead."
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:76
+msgid "\"Problem parsing arguments: {err}\""
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:81
+msgid "\"Application error: {e}\""
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:95
+msgid "\"not enough arguments\""
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:101
+msgid "\"IGNORE_CASE\""
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:121
+msgid "\"{line}\""
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:130
+msgid ""
+"Let’s now run the program again in the same way, without any arguments and "
+"redirecting standard output with `>`:"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:138
+msgid ""
+"Now we see the error onscreen and _output.txt_ contains nothing, which is "
+"the behavior we expect of command line programs."
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:141
+msgid ""
+"Let’s run the program again with arguments that don’t cause an error but "
+"still redirect standard output to a file, like so:"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:148
+msgid ""
+"We won’t see any output to the terminal, and _output.txt_ will contain our "
+"results:"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:151
+msgid "<span class=\"filename\">Filename: output.txt</span>"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:158
+msgid ""
+"This demonstrates that we’re now using standard output for successful output "
+"and standard error for error output as appropriate."
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:161
+msgid "Summary"
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:163
+msgid ""
+"This chapter recapped some of the major concepts you’ve learned so far and "
+"covered how to perform common I/O operations in Rust. By using command line "
+"arguments, files, environment variables, and the `eprintln!` macro for "
+"printing errors, you’re now prepared to write command line applications. "
+"Combined with the concepts in previous chapters, your code will be well "
+"organized, store data effectively in the appropriate data structures, handle "
+"errors nicely, and be well tested."
+msgstr ""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:171
+msgid ""
+"Next, we’ll explore some Rust features that were influenced by functional "
+"languages: closures and iterators."
+msgstr ""

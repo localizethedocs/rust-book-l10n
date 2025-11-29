@@ -1,0 +1,755 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch03-02-data-types.md:1
+msgid "Data Types"
+msgstr ""
+
+#: src/ch03-02-data-types.md:3
+msgid ""
+"Every value in Rust is of a certain _data type_, which tells Rust what kind "
+"of data is being specified so that it knows how to work with that data. "
+"We’ll look at two data type subsets: scalar and compound."
+msgstr ""
+
+#: src/ch03-02-data-types.md:7
+msgid ""
+"Keep in mind that Rust is a _statically typed_ language, which means that it "
+"must know the types of all variables at compile time. The compiler can "
+"usually infer what type we want to use based on the value and how we use it. "
+"In cases when many types are possible, such as when we converted a `String` "
+"to a numeric type using `parse` in the [“Comparing the Guess to the Secret "
+"Number”](ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-the-"
+"secret-number)<!-- ignore --> section in Chapter 2, we must add a type "
+"annotation, like this:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:16
+msgid "\"42\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:16
+msgid "\"Not a number!\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:19
+msgid ""
+"If we don’t add the `: u32` type annotation shown in the preceding code, "
+"Rust will display the following error, which means the compiler needs more "
+"information from us to know which type we want to use:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:23
+msgid ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling no_type_annotations v0.1.0 (file:///projects/"
+"no_type_annotations)\n"
+"error[E0284]: type annotations needed\n"
+" --> src/main.rs:2:9\n"
+"  |\n"
+"2 |     let guess = \"42\".parse().expect(\"Not a number!\");\n"
+"  |         ^^^^^        ----- type must be known at this point\n"
+"  |\n"
+"  = note: cannot satisfy `<_ as FromStr>::Err == _`\n"
+"help: consider giving `guess` an explicit type\n"
+"  |\n"
+"2 |     let guess: /* Type */ = \"42\".parse().expect(\"Not a number!\");\n"
+"  |              ++++++++++++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0284`.\n"
+"error: could not compile `no_type_annotations` (bin \"no_type_annotations\") "
+"due to 1 previous error\n"
+"```"
+msgstr ""
+
+#: src/ch03-02-data-types.md:42
+msgid "You’ll see different type annotations for other data types."
+msgstr ""
+
+#: src/ch03-02-data-types.md:44
+msgid "Scalar Types"
+msgstr ""
+
+#: src/ch03-02-data-types.md:46
+msgid ""
+"A _scalar_ type represents a single value. Rust has four primary scalar "
+"types: integers, floating-point numbers, Booleans, and characters. You may "
+"recognize these from other programming languages. Let’s jump into how they "
+"work in Rust."
+msgstr ""
+
+#: src/ch03-02-data-types.md:50
+msgid "Integer Types"
+msgstr ""
+
+#: src/ch03-02-data-types.md:52
+msgid ""
+"An _integer_ is a number without a fractional component. We used one integer "
+"type in Chapter 2, the `u32` type. This type declaration indicates that the "
+"value it’s associated with should be an unsigned integer (signed integer "
+"types start with `i` instead of `u`) that takes up 32 bits of space. Table "
+"3-1 shows the built-in integer types in Rust. We can use any of these "
+"variants to declare the type of an integer value."
+msgstr ""
+
+#: src/ch03-02-data-types.md:59
+msgid "<span class=\"caption\">Table 3-1: Integer Types in Rust</span>"
+msgstr ""
+
+#: src/ch03-02-data-types.md:61
+msgid "Length"
+msgstr ""
+
+#: src/ch03-02-data-types.md:61
+msgid "Signed"
+msgstr ""
+
+#: src/ch03-02-data-types.md:61
+msgid "Unsigned"
+msgstr ""
+
+#: src/ch03-02-data-types.md:63
+msgid "8-bit"
+msgstr ""
+
+#: src/ch03-02-data-types.md:63
+msgid "`i8`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:63
+msgid "`u8`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:64
+msgid "16-bit"
+msgstr ""
+
+#: src/ch03-02-data-types.md:64
+msgid "`i16`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:64
+msgid "`u16`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:65
+msgid "32-bit"
+msgstr ""
+
+#: src/ch03-02-data-types.md:65
+msgid "`i32`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:65
+msgid "`u32`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:66
+msgid "64-bit"
+msgstr ""
+
+#: src/ch03-02-data-types.md:66
+msgid "`i64`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:66
+msgid "`u64`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:67
+msgid "128-bit"
+msgstr ""
+
+#: src/ch03-02-data-types.md:67
+msgid "`i128`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:67
+msgid "`u128`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:68
+msgid "Architecture-dependent"
+msgstr ""
+
+#: src/ch03-02-data-types.md:68
+msgid "`isize`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:68
+msgid "`usize`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:70
+msgid ""
+"Each variant can be either signed or unsigned and has an explicit size. "
+"_Signed_ and _unsigned_ refer to whether it’s possible for the number to be "
+"negative—in other words, whether the number needs to have a sign with it "
+"(signed) or whether it will only ever be positive and can therefore be "
+"represented without a sign (unsigned). It’s like writing numbers on paper: "
+"When the sign matters, a number is shown with a plus sign or a minus sign; "
+"however, when it’s safe to assume the number is positive, it’s shown with no "
+"sign. Signed numbers are stored using [two’s complement](https://en."
+"wikipedia.org/wiki/Two%27s_complement)<!-- ignore\n"
+"--> representation."
+msgstr ""
+
+#: src/ch03-02-data-types.md:80
+msgid ""
+"Each signed variant can store numbers from −(2<sup>n − 1</sup>) to 2<sup>n − "
+"1</sup> − 1 inclusive, where _n_ is the number of bits that variant uses. "
+"So, an `i8` can store numbers from −(2<sup>7</sup>) to 2<sup>7</sup> − 1, "
+"which equals −128 to 127. Unsigned variants can store numbers from 0 to "
+"2<sup>n</sup> − 1, so a `u8` can store numbers from 0 to 2<sup>8</sup> − 1, "
+"which equals 0 to 255."
+msgstr ""
+
+#: src/ch03-02-data-types.md:86
+msgid ""
+"Additionally, the `isize` and `usize` types depend on the architecture of "
+"the computer your program is running on: 64 bits if you’re on a 64-bit "
+"architecture and 32 bits if you’re on a 32-bit architecture."
+msgstr ""
+
+#: src/ch03-02-data-types.md:90
+msgid ""
+"You can write integer literals in any of the forms shown in Table 3-2. Note "
+"that number literals that can be multiple numeric types allow a type suffix, "
+"such as `57u8`, to designate the type. Number literals can also use `_` as a "
+"visual separator to make the number easier to read, such as `1_000`, which "
+"will have the same value as if you had specified `1000`."
+msgstr ""
+
+#: src/ch03-02-data-types.md:96
+msgid "<span class=\"caption\">Table 3-2: Integer Literals in Rust</span>"
+msgstr ""
+
+#: src/ch03-02-data-types.md:98
+msgid "Number literals"
+msgstr ""
+
+#: src/ch03-02-data-types.md:98
+msgid "Example"
+msgstr ""
+
+#: src/ch03-02-data-types.md:100
+msgid "Decimal"
+msgstr ""
+
+#: src/ch03-02-data-types.md:100
+msgid "`98_222`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:101
+msgid "Hex"
+msgstr ""
+
+#: src/ch03-02-data-types.md:101
+msgid "`0xff`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:102
+msgid "Octal"
+msgstr ""
+
+#: src/ch03-02-data-types.md:102
+msgid "`0o77`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:103
+msgid "Binary"
+msgstr ""
+
+#: src/ch03-02-data-types.md:103
+msgid "`0b1111_0000`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:104
+msgid "Byte (`u8` only)"
+msgstr ""
+
+#: src/ch03-02-data-types.md:104
+msgid "`b'A'`"
+msgstr ""
+
+#: src/ch03-02-data-types.md:106
+msgid ""
+"So how do you know which type of integer to use? If you’re unsure, Rust’s "
+"defaults are generally good places to start: Integer types default to `i32`. "
+"The primary situation in which you’d use `isize` or `usize` is when indexing "
+"some sort of collection."
+msgstr ""
+
+#: src/ch03-02-data-types.md:111
+msgid "Integer Overflow"
+msgstr ""
+
+#: src/ch03-02-data-types.md:113
+msgid ""
+"Let’s say you have a variable of type `u8` that can hold values between 0 "
+"and 255. If you try to change the variable to a value outside that range, "
+"such as 256, _integer overflow_ will occur, which can result in one of two "
+"behaviors. When you’re compiling in debug mode, Rust includes checks for "
+"integer overflow that cause your program to _panic_ at runtime if this "
+"behavior occurs. Rust uses the term _panicking_ when a program exits with an "
+"error; we’ll discuss panics in more depth in the [“Unrecoverable Errors with "
+"`panic!`”](ch09-01-unrecoverable-errors-with-panic.html)<!-- ignore --> "
+"section in Chapter 9."
+msgstr ""
+
+#: src/ch03-02-data-types.md:123
+msgid ""
+"When you’re compiling in release mode with the `--release` flag, Rust does "
+"_not_ include checks for integer overflow that cause panics. Instead, if "
+"overflow occurs, Rust performs _two’s complement wrapping_. In short, values "
+"greater than the maximum value the type can hold “wrap around” to the "
+"minimum of the values the type can hold. In the case of a `u8`, the value "
+"256 becomes 0, the value 257 becomes 1, and so on. The program won’t panic, "
+"but the variable will have a value that probably isn’t what you were "
+"expecting it to have. Relying on integer overflow’s wrapping behavior is "
+"considered an error."
+msgstr ""
+
+#: src/ch03-02-data-types.md:132
+msgid ""
+"To explicitly handle the possibility of overflow, you can use these families "
+"of methods provided by the standard library for primitive numeric types:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:135
+msgid ""
+"Wrap in all modes with the `wrapping_*` methods, such as `wrapping_add`."
+msgstr ""
+
+#: src/ch03-02-data-types.md:136
+msgid ""
+"Return the `None` value if there is overflow with the `checked_*` methods."
+msgstr ""
+
+#: src/ch03-02-data-types.md:137
+msgid ""
+"Return the value and a Boolean indicating whether there was overflow with "
+"the `overflowing_*` methods."
+msgstr ""
+
+#: src/ch03-02-data-types.md:139
+msgid ""
+"Saturate at the value’s minimum or maximum values with the `saturating_*` "
+"methods."
+msgstr ""
+
+#: src/ch03-02-data-types.md:142
+msgid "Floating-Point Types"
+msgstr ""
+
+#: src/ch03-02-data-types.md:144
+msgid ""
+"Rust also has two primitive types for _floating-point numbers_, which are "
+"numbers with decimal points. Rust’s floating-point types are `f32` and "
+"`f64`, which are 32 bits and 64 bits in size, respectively. The default type "
+"is `f64` because on modern CPUs, it’s roughly the same speed as `f32` but is "
+"capable of more precision. All floating-point types are signed."
+msgstr ""
+
+#: src/ch03-02-data-types.md:150
+msgid "Here’s an example that shows floating-point numbers in action:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:152 src/ch03-02-data-types.md:171
+#: src/ch03-02-data-types.md:204 src/ch03-02-data-types.md:223
+#: src/ch03-02-data-types.md:260 src/ch03-02-data-types.md:272
+#: src/ch03-02-data-types.md:293 src/ch03-02-data-types.md:325
+#: src/ch03-02-data-types.md:384 src/ch03-02-data-types.md:405
+msgid "<span class=\"filename\">Filename: src/main.rs</span>"
+msgstr ""
+
+#: src/ch03-02-data-types.md:156
+msgid "// f64\n"
+msgstr ""
+
+#: src/ch03-02-data-types.md:158
+msgid "// f32\n"
+msgstr ""
+
+#: src/ch03-02-data-types.md:162
+msgid ""
+"Floating-point numbers are represented according to the IEEE-754 standard."
+msgstr ""
+
+#: src/ch03-02-data-types.md:164
+msgid "Numeric Operations"
+msgstr ""
+
+#: src/ch03-02-data-types.md:166
+msgid ""
+"Rust supports the basic mathematical operations you’d expect for all the "
+"number types: addition, subtraction, multiplication, division, and "
+"remainder. Integer division truncates toward zero to the nearest integer. "
+"The following code shows how you’d use each numeric operation in a `let` "
+"statement:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:175
+msgid "// addition\n"
+msgstr ""
+
+#: src/ch03-02-data-types.md:178
+msgid "// subtraction\n"
+msgstr ""
+
+#: src/ch03-02-data-types.md:181
+msgid "// multiplication\n"
+msgstr ""
+
+#: src/ch03-02-data-types.md:184
+msgid "// division\n"
+msgstr ""
+
+#: src/ch03-02-data-types.md:186
+msgid "// Results in -1\n"
+msgstr ""
+
+#: src/ch03-02-data-types.md:188
+msgid "// remainder\n"
+msgstr ""
+
+#: src/ch03-02-data-types.md:193
+msgid ""
+"Each expression in these statements uses a mathematical operator and "
+"evaluates to a single value, which is then bound to a variable. [Appendix B]"
+"(appendix-02-operators.md)<!-- ignore --> contains a list of all operators "
+"that Rust provides."
+msgstr ""
+
+#: src/ch03-02-data-types.md:198
+msgid "The Boolean Type"
+msgstr ""
+
+#: src/ch03-02-data-types.md:200
+msgid ""
+"As in most other programming languages, a Boolean type in Rust has two "
+"possible values: `true` and `false`. Booleans are one byte in size. The "
+"Boolean type in Rust is specified using `bool`. For example:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:210 src/ch03-02-data-types.md:228
+msgid "// with explicit type annotation\n"
+msgstr ""
+
+#: src/ch03-02-data-types.md:214
+msgid ""
+"The main way to use Boolean values is through conditionals, such as an `if` "
+"expression. We’ll cover how `if` expressions work in Rust in the [“Control "
+"Flow”](ch03-05-control-flow.html#control-flow)<!-- ignore --> section."
+msgstr ""
+
+#: src/ch03-02-data-types.md:218
+msgid "The Character Type"
+msgstr ""
+
+#: src/ch03-02-data-types.md:220
+msgid ""
+"Rust’s `char` type is the language’s most primitive alphabetic type. Here "
+"are some examples of declaring `char` values:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:227
+msgid "'z'"
+msgstr ""
+
+#: src/ch03-02-data-types.md:228
+msgid "'ℤ'"
+msgstr ""
+
+#: src/ch03-02-data-types.md:229
+msgid "'😻'"
+msgstr ""
+
+#: src/ch03-02-data-types.md:233
+msgid ""
+"Note that we specify `char` literals with single quotation marks, as opposed "
+"to string literals, which use double quotation marks. Rust’s `char` type is "
+"4 bytes in size and represents a Unicode scalar value, which means it can "
+"represent a lot more than just ASCII. Accented letters; Chinese, Japanese, "
+"and Korean characters; emojis; and zero-width spaces are all valid `char` "
+"values in Rust. Unicode scalar values range from `U+0000` to `U+D7FF` and "
+"`U+E000` to `U+10FFFF` inclusive. However, a “character” isn’t really a "
+"concept in Unicode, so your human intuition for what a “character” is may "
+"not match up with what a `char` is in Rust. We’ll discuss this topic in "
+"detail in [“Storing UTF-8 Encoded Text with Strings”](ch08-02-strings."
+"html#storing-utf-8-encoded-text-with-strings)<!-- ignore --> in Chapter 8."
+msgstr ""
+
+#: src/ch03-02-data-types.md:244
+msgid "Compound Types"
+msgstr ""
+
+#: src/ch03-02-data-types.md:246
+msgid ""
+"_Compound types_ can group multiple values into one type. Rust has two "
+"primitive compound types: tuples and arrays."
+msgstr ""
+
+#: src/ch03-02-data-types.md:249
+msgid "The Tuple Type"
+msgstr ""
+
+#: src/ch03-02-data-types.md:251
+msgid ""
+"A _tuple_ is a general way of grouping together a number of values with a "
+"variety of types into one compound type. Tuples have a fixed length: Once "
+"declared, they cannot grow or shrink in size."
+msgstr ""
+
+#: src/ch03-02-data-types.md:255
+msgid ""
+"We create a tuple by writing a comma-separated list of values inside "
+"parentheses. Each position in the tuple has a type, and the types of the "
+"different values in the tuple don’t have to be the same. We’ve added "
+"optional type annotations in this example:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:268
+msgid ""
+"The variable `tup` binds to the entire tuple because a tuple is considered a "
+"single compound element. To get the individual values out of a tuple, we can "
+"use pattern matching to destructure a tuple value, like this:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:280
+msgid "\"The value of y is: {y}\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:284
+msgid ""
+"This program first creates a tuple and binds it to the variable `tup`. It "
+"then uses a pattern with `let` to take `tup` and turn it into three separate "
+"variables, `x`, `y`, and `z`. This is called _destructuring_ because it "
+"breaks the single tuple into three parts. Finally, the program prints the "
+"value of `y`, which is `6.4`."
+msgstr ""
+
+#: src/ch03-02-data-types.md:290
+msgid ""
+"We can also access a tuple element directly by using a period (`.`) followed "
+"by the index of the value we want to access. For example:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:307
+msgid ""
+"This program creates the tuple `x` and then accesses each element of the "
+"tuple using their respective indices. As with most programming languages, "
+"the first index in a tuple is 0."
+msgstr ""
+
+#: src/ch03-02-data-types.md:311
+msgid ""
+"The tuple without any values has a special name, _unit_. This value and its "
+"corresponding type are both written `()` and represent an empty value or an "
+"empty return type. Expressions implicitly return the unit value if they "
+"don’t return any other value."
+msgstr ""
+
+#: src/ch03-02-data-types.md:316
+msgid "The Array Type"
+msgstr ""
+
+#: src/ch03-02-data-types.md:318
+msgid ""
+"Another way to have a collection of multiple values is with an _array_. "
+"Unlike a tuple, every element of an array must have the same type. Unlike "
+"arrays in some other languages, arrays in Rust have a fixed length."
+msgstr ""
+
+#: src/ch03-02-data-types.md:322
+msgid ""
+"We write the values in an array as a comma-separated list inside square "
+"brackets:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:333
+msgid ""
+"Arrays are useful when you want your data allocated on the stack, the same "
+"as the other types we have seen so far, rather than the heap (we will "
+"discuss the stack and the heap more in [Chapter 4](ch04-01-what-is-ownership."
+"html#the-stack-and-the-heap)<!-- ignore -->) or when you want to ensure that "
+"you always have a fixed number of elements. An array isn’t as flexible as "
+"the vector type, though. A vector is a similar collection type provided by "
+"the standard library that _is_ allowed to grow or shrink in size because its "
+"contents live on the heap. If you’re unsure whether to use an array or a "
+"vector, chances are you should use a vector. [Chapter 8](ch08-01-vectors."
+"html)<!-- ignore --> discusses vectors in more detail."
+msgstr ""
+
+#: src/ch03-02-data-types.md:343
+msgid ""
+"However, arrays are more useful when you know the number of elements will "
+"not need to change. For example, if you were using the names of the month in "
+"a program, you would probably use an array rather than a vector because you "
+"know it will always contain 12 elements:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:349
+msgid "\"January\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:349
+msgid "\"February\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:349
+msgid "\"March\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:349
+msgid "\"April\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:349
+msgid "\"May\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:349
+msgid "\"June\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:349
+msgid "\"July\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:350
+msgid "\"August\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:350
+msgid "\"September\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:350
+msgid "\"October\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:350
+msgid "\"November\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:350
+msgid "\"December\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:353
+msgid ""
+"You write an array’s type using square brackets with the type of each "
+"element, a semicolon, and then the number of elements in the array, like so:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:360
+msgid ""
+"Here, `i32` is the type of each element. After the semicolon, the number `5` "
+"indicates the array contains five elements."
+msgstr ""
+
+#: src/ch03-02-data-types.md:363
+msgid ""
+"You can also initialize an array to contain the same value for each element "
+"by specifying the initial value, followed by a semicolon, and then the "
+"length of the array in square brackets, as shown here:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:371
+msgid ""
+"The array named `a` will contain `5` elements that will all be set to the "
+"value `3` initially. This is the same as writing `let a = [3, 3, 3, 3, 3];` "
+"but in a more concise way."
+msgstr ""
+
+#: src/ch03-02-data-types.md:376
+msgid "<a id=\"accessing-array-elements\"></a>"
+msgstr ""
+
+#: src/ch03-02-data-types.md:378
+msgid "Array Element Access"
+msgstr ""
+
+#: src/ch03-02-data-types.md:380
+msgid ""
+"An array is a single chunk of memory of a known, fixed size that can be "
+"allocated on the stack. You can access elements of an array using indexing, "
+"like this:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:395
+msgid ""
+"In this example, the variable named `first` will get the value `1` because "
+"that is the value at index `[0]` in the array. The variable named `second` "
+"will get the value `2` from index `[1]` in the array."
+msgstr ""
+
+#: src/ch03-02-data-types.md:399
+msgid "Invalid Array Element Access"
+msgstr ""
+
+#: src/ch03-02-data-types.md:401
+msgid ""
+"Let’s see what happens if you try to access an element of an array that is "
+"past the end of the array. Say you run this code, similar to the guessing "
+"game in Chapter 2, to get an array index from the user:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:413
+msgid "\"Please enter an array index.\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:419
+msgid "\"Failed to read line\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:424
+msgid "\"Index entered was not a number\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:428
+msgid "\"The value of the element at index {index} is: {element}\""
+msgstr ""
+
+#: src/ch03-02-data-types.md:432
+msgid ""
+"This code compiles successfully. If you run this code using `cargo run` and "
+"enter `0`, `1`, `2`, `3`, or `4`, the program will print out the "
+"corresponding value at that index in the array. If you instead enter a "
+"number past the end of the array, such as `10`, you’ll see output like this:"
+msgstr ""
+
+#: src/ch03-02-data-types.md:449
+msgid ""
+"The program resulted in a runtime error at the point of using an invalid "
+"value in the indexing operation. The program exited with an error message "
+"and didn’t execute the final `println!` statement. When you attempt to "
+"access an element using indexing, Rust will check that the index you’ve "
+"specified is less than the array length. If the index is greater than or "
+"equal to the length, Rust will panic. This check has to happen at runtime, "
+"especially in this case, because the compiler can’t possibly know what value "
+"a user will enter when they run the code later."
+msgstr ""
+
+#: src/ch03-02-data-types.md:458
+msgid ""
+"This is an example of Rust’s memory safety principles in action. In many low-"
+"level languages, this kind of check is not done, and when you provide an "
+"incorrect index, invalid memory can be accessed. Rust protects you against "
+"this kind of error by immediately exiting instead of allowing the memory "
+"access and continuing. Chapter 9 discusses more of Rust’s error handling and "
+"how you can write readable, safe code that neither panics nor allows invalid "
+"memory access."
+msgstr ""

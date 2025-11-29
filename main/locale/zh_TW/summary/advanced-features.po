@@ -1,0 +1,63 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch20-00-advanced-features.md:1
+msgid "Advanced Features"
+msgstr ""
+
+#: src/ch20-00-advanced-features.md:3
+msgid ""
+"By now, you’ve learned the most commonly used parts of the Rust programming "
+"language. Before we do one more project, in Chapter 21, we’ll look at a few "
+"aspects of the language you might run into every once in a while but may not "
+"use every day. You can use this chapter as a reference for when you "
+"encounter any unknowns. The features covered here are useful in very "
+"specific situations. Although you might not reach for them often, we want to "
+"make sure you have a grasp of all the features Rust has to offer."
+msgstr ""
+
+#: src/ch20-00-advanced-features.md:11
+msgid "In this chapter, we’ll cover:"
+msgstr ""
+
+#: src/ch20-00-advanced-features.md:13
+msgid ""
+"Unsafe Rust: How to opt out of some of Rust’s guarantees and take "
+"responsibility for manually upholding those guarantees"
+msgstr ""
+
+#: src/ch20-00-advanced-features.md:15
+msgid ""
+"Advanced traits: Associated types, default type parameters, fully qualified "
+"syntax, supertraits, and the newtype pattern in relation to traits"
+msgstr ""
+
+#: src/ch20-00-advanced-features.md:17
+msgid ""
+"Advanced types: More about the newtype pattern, type aliases, the never "
+"type, and dynamically sized types"
+msgstr ""
+
+#: src/ch20-00-advanced-features.md:19
+msgid ""
+"Advanced functions and closures: Function pointers and returning closures"
+msgstr ""
+
+#: src/ch20-00-advanced-features.md:20
+msgid "Macros: Ways to define code that defines more code at compile time"
+msgstr ""
+
+#: src/ch20-00-advanced-features.md:22
+msgid ""
+"It’s a panoply of Rust features with something for everyone! Let’s dive in!"
+msgstr ""

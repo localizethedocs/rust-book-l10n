@@ -13,22 +13,22 @@
     },
     "zh_CN" : 
     {
-      "branch" : "",
+      "branch" : "main",
       "commit" : 
       {
-        "date" : "",
-        "hash" : "",
-        "title" : ""
+        "date" : "2025-11-18 10:36:41 -0500",
+        "hash" : "8c0eacd5c4acbb650497454f3a58c9e8083202a4",
+        "title" : "Update ch07-02-defining-modules-to-control-scope-and-privacy.md"
       }
     },
     "zh_TW" : 
     {
-      "branch" : "",
+      "branch" : "main",
       "commit" : 
       {
-        "date" : "",
-        "hash" : "",
-        "title" : ""
+        "date" : "2025-11-18 10:36:41 -0500",
+        "hash" : "8c0eacd5c4acbb650497454f3a58c9e8083202a4",
+        "title" : "Update ch07-02-defining-modules-to-control-scope-and-privacy.md"
       }
     }
   },

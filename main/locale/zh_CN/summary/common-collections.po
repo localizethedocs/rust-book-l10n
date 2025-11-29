@@ -1,0 +1,59 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch08-00-common-collections.md:1
+msgid "Common Collections"
+msgstr ""
+
+#: src/ch08-00-common-collections.md:3
+msgid ""
+"Rust’s standard library includes a number of very useful data structures "
+"called _collections_. Most other data types represent one specific value, "
+"but collections can contain multiple values. Unlike the built-in array and "
+"tuple types, the data that these collections point to is stored on the heap, "
+"which means the amount of data does not need to be known at compile time and "
+"can grow or shrink as the program runs. Each kind of collection has "
+"different capabilities and costs, and choosing an appropriate one for your "
+"current situation is a skill you’ll develop over time. In this chapter, "
+"we’ll discuss three collections that are used very often in Rust programs:"
+msgstr ""
+
+#: src/ch08-00-common-collections.md:13
+msgid ""
+"A _vector_ allows you to store a variable number of values next to each "
+"other."
+msgstr ""
+
+#: src/ch08-00-common-collections.md:14
+msgid ""
+"A _string_ is a collection of characters. We’ve mentioned the `String` type "
+"previously, but in this chapter, we’ll talk about it in depth."
+msgstr ""
+
+#: src/ch08-00-common-collections.md:16
+msgid ""
+"A _hash map_ allows you to associate a value with a specific key. It’s a "
+"particular implementation of the more general data structure called a _map_."
+msgstr ""
+
+#: src/ch08-00-common-collections.md:19
+msgid ""
+"To learn about the other kinds of collections provided by the standard "
+"library, see [the documentation](../std/collections/index.html)."
+msgstr ""
+
+#: src/ch08-00-common-collections.md:22
+msgid ""
+"We’ll discuss how to create and update vectors, strings, and hash maps, as "
+"well as what makes each special."
+msgstr ""

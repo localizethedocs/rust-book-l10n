@@ -1,0 +1,359 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch16-01-threads.md:1
+msgid "Using Threads to Run Code Simultaneously"
+msgstr ""
+
+#: src/ch16-01-threads.md:3
+msgid ""
+"In most current operating systems, an executed program’s code is run in a "
+"_process_, and the operating system will manage multiple processes at once. "
+"Within a program, you can also have independent parts that run "
+"simultaneously. The features that run these independent parts are called "
+"_threads_. For example, a web server could have multiple threads so that it "
+"can respond to more than one request at the same time."
+msgstr ""
+
+#: src/ch16-01-threads.md:10
+msgid ""
+"Splitting the computation in your program into multiple threads to run "
+"multiple tasks at the same time can improve performance, but it also adds "
+"complexity. Because threads can run simultaneously, there’s no inherent "
+"guarantee about the order in which parts of your code on different threads "
+"will run. This can lead to problems, such as:"
+msgstr ""
+
+#: src/ch16-01-threads.md:16
+msgid ""
+"Race conditions, in which threads are accessing data or resources in an "
+"inconsistent order"
+msgstr ""
+
+#: src/ch16-01-threads.md:18
+msgid ""
+"Deadlocks, in which two threads are waiting for each other, preventing both "
+"threads from continuing"
+msgstr ""
+
+#: src/ch16-01-threads.md:20
+msgid ""
+"Bugs that only happen in certain situations and are hard to reproduce and "
+"fix reliably"
+msgstr ""
+
+#: src/ch16-01-threads.md:23
+msgid ""
+"Rust attempts to mitigate the negative effects of using threads, but "
+"programming in a multithreaded context still takes careful thought and "
+"requires a code structure that is different from that in programs running in "
+"a single thread."
+msgstr ""
+
+#: src/ch16-01-threads.md:28
+msgid ""
+"Programming languages implement threads in a few different ways, and many "
+"operating systems provide an API the programming language can call for "
+"creating new threads. The Rust standard library uses a _1:1_ model of thread "
+"implementation, whereby a program uses one operating system thread per one "
+"language thread. There are crates that implement other models of threading "
+"that make different trade-offs to the 1:1 model. (Rust’s async system, which "
+"we will see in the next chapter, provides another approach to concurrency as "
+"well.)"
+msgstr ""
+
+#: src/ch16-01-threads.md:36
+msgid "Creating a New Thread with `spawn`"
+msgstr ""
+
+#: src/ch16-01-threads.md:38
+msgid ""
+"To create a new thread, we call the `thread::spawn` function and pass it a "
+"closure (we talked about closures in Chapter 13) containing the code we want "
+"to run in the new thread. The example in Listing 16-1 prints some text from "
+"a main thread and other text from a new thread."
+msgstr ""
+
+#: src/ch16-01-threads.md:52 src/ch16-01-threads.md:127
+#: src/ch16-01-threads.md:184
+msgid "\"hi number {i} from the spawned thread!\""
+msgstr ""
+
+#: src/ch16-01-threads.md:58 src/ch16-01-threads.md:133
+#: src/ch16-01-threads.md:192
+msgid "\"hi number {i} from the main thread!\""
+msgstr ""
+
+#: src/ch16-01-threads.md:66
+msgid ""
+"Note that when the main thread of a Rust program completes, all spawned "
+"threads are shut down, whether or not they have finished running. The output "
+"from this program might be a little different every time, but it will look "
+"similar to the following:"
+msgstr ""
+
+#: src/ch16-01-threads.md:87
+msgid ""
+"The calls to `thread::sleep` force a thread to stop its execution for a "
+"short duration, allowing a different thread to run. The threads will "
+"probably take turns, but that isn’t guaranteed: It depends on how your "
+"operating system schedules the threads. In this run, the main thread printed "
+"first, even though the print statement from the spawned thread appears first "
+"in the code. And even though we told the spawned thread to print until `i` "
+"is `9`, it only got to `5` before the main thread shut down."
+msgstr ""
+
+#: src/ch16-01-threads.md:95
+msgid ""
+"If you run this code and only see output from the main thread, or don’t see "
+"any overlap, try increasing the numbers in the ranges to create more "
+"opportunities for the operating system to switch between the threads."
+msgstr ""
+
+#: src/ch16-01-threads.md:101
+msgid "<a id=\"waiting-for-all-threads-to-finish-using-join-handles\"></a>"
+msgstr ""
+
+#: src/ch16-01-threads.md:103
+msgid "Waiting for All Threads to Finish"
+msgstr ""
+
+#: src/ch16-01-threads.md:105
+msgid ""
+"The code in Listing 16-1 not only stops the spawned thread prematurely most "
+"of the time due to the main thread ending, but because there is no guarantee "
+"on the order in which threads run, we also can’t guarantee that the spawned "
+"thread will get to run at all!"
+msgstr ""
+
+#: src/ch16-01-threads.md:110
+msgid ""
+"We can fix the problem of the spawned thread not running or of it ending "
+"prematurely by saving the return value of `thread::spawn` in a variable. The "
+"return type of `thread::spawn` is `JoinHandle<T>`. A `JoinHandle<T>` is an "
+"owned value that, when we call the `join` method on it, will wait for its "
+"thread to finish. Listing 16-2 shows how to use the `JoinHandle<T>` of the "
+"thread we created in Listing 16-1 and how to call `join` to make sure the "
+"spawned thread finishes before `main` exits."
+msgstr ""
+
+#: src/ch16-01-threads.md:143
+msgid ""
+"Calling `join` on the handle blocks the thread currently running until the "
+"thread represented by the handle terminates. _Blocking_ a thread means that "
+"thread is prevented from performing work or exiting. Because we’ve put the "
+"call to `join` after the main thread’s `for` loop, running Listing 16-2 "
+"should produce output similar to this:"
+msgstr ""
+
+#: src/ch16-01-threads.md:169
+msgid ""
+"The two threads continue alternating, but the main thread waits because of "
+"the call to `handle.join()` and does not end until the spawned thread is "
+"finished."
+msgstr ""
+
+#: src/ch16-01-threads.md:172
+msgid ""
+"But let’s see what happens when we instead move `handle.join()` before the "
+"`for` loop in `main`, like this:"
+msgstr ""
+
+#: src/ch16-01-threads.md:200
+msgid ""
+"The main thread will wait for the spawned thread to finish and then run its "
+"`for` loop, so the output won’t be interleaved anymore, as shown here:"
+msgstr ""
+
+#: src/ch16-01-threads.md:223
+msgid ""
+"Small details, such as where `join` is called, can affect whether or not "
+"your threads run at the same time."
+msgstr ""
+
+#: src/ch16-01-threads.md:226
+msgid "Using `move` Closures with Threads"
+msgstr ""
+
+#: src/ch16-01-threads.md:228
+msgid ""
+"We’ll often use the `move` keyword with closures passed to `thread::spawn` "
+"because the closure will then take ownership of the values it uses from the "
+"environment, thus transferring ownership of those values from one thread to "
+"another. In [“Capturing References or Moving Ownership”](ch13-01-closures."
+"html#capturing-references-or-moving-ownership)<!-- ignore\n"
+"--> in Chapter 13, we discussed `move` in the context of closures. Now we’ll "
+"concentrate more on the interaction between `move` and `thread::spawn`."
+msgstr ""
+
+#: src/ch16-01-threads.md:235
+msgid ""
+"Notice in Listing 16-1 that the closure we pass to `thread::spawn` takes no "
+"arguments: We’re not using any data from the main thread in the spawned "
+"thread’s code. To use data from the main thread in the spawned thread, the "
+"spawned thread’s closure must capture the values it needs. Listing 16-3 "
+"shows an attempt to create a vector in the main thread and use it in the "
+"spawned thread. However, this won’t work yet, as you’ll see in a moment."
+msgstr ""
+
+#: src/ch16-01-threads.md:251 src/ch16-01-threads.md:310
+#: src/ch16-01-threads.md:356
+msgid "\"Here's a vector: {v:?}\""
+msgstr ""
+
+#: src/ch16-01-threads.md:260
+msgid ""
+"The closure uses `v`, so it will capture `v` and make it part of the "
+"closure’s environment. Because `thread::spawn` runs this closure in a new "
+"thread, we should be able to access `v` inside that new thread. But when we "
+"compile this example, we get the following error:"
+msgstr ""
+
+#: src/ch16-01-threads.md:265
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling threads v0.1.0 (file:///projects/threads)\n"
+"error[E0373]: closure may outlive the current function, but it borrows `v`, "
+"which is owned by the current function\n"
+" --> src/main.rs:6:32\n"
+"  |\n"
+"6 |     let handle = thread::spawn(|| {\n"
+"  |                                ^^ may outlive borrowed value `v`\n"
+"7 |         println!(\"Here's a vector: {v:?}\");\n"
+"  |                                     - `v` is borrowed here\n"
+"  |\n"
+"note: function requires argument type to outlive `'static`\n"
+" --> src/main.rs:6:18\n"
+"  |\n"
+"6 |       let handle = thread::spawn(|| {\n"
+"  |  __________________^\n"
+"7 | |         println!(\"Here's a vector: {v:?}\");\n"
+"8 | |     });\n"
+"  | |______^\n"
+"help: to force the closure to take ownership of `v` (and any other "
+"referenced variables), use the `move` keyword\n"
+"  |\n"
+"6 |     let handle = thread::spawn(move || {\n"
+"  |                                ++++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0373`.\n"
+"error: could not compile `threads` (bin \"threads\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+
+#: src/ch16-01-threads.md:293
+msgid ""
+"Rust _infers_ how to capture `v`, and because `println!` only needs a "
+"reference to `v`, the closure tries to borrow `v`. However, there’s a "
+"problem: Rust can’t tell how long the spawned thread will run, so it doesn’t "
+"know whether the reference to `v` will always be valid."
+msgstr ""
+
+#: src/ch16-01-threads.md:298
+msgid ""
+"Listing 16-4 provides a scenario that’s more likely to have a reference to "
+"`v` that won’t be valid."
+msgstr ""
+
+#: src/ch16-01-threads.md:313
+msgid "// oh no!\n"
+msgstr ""
+
+#: src/ch16-01-threads.md:321
+msgid ""
+"If Rust allowed us to run this code, there’s a possibility that the spawned "
+"thread would be immediately put in the background without running at all. "
+"The spawned thread has a reference to `v` inside, but the main thread "
+"immediately drops `v`, using the `drop` function we discussed in Chapter 15. "
+"Then, when the spawned thread starts to execute, `v` is no longer valid, so "
+"a reference to it is also invalid. Oh no!"
+msgstr ""
+
+#: src/ch16-01-threads.md:328
+msgid ""
+"To fix the compiler error in Listing 16-3, we can use the error message’s "
+"advice:"
+msgstr ""
+
+#: src/ch16-01-threads.md:342
+msgid ""
+"By adding the `move` keyword before the closure, we force the closure to "
+"take ownership of the values it’s using rather than allowing Rust to infer "
+"that it should borrow the values. The modification to Listing 16-3 shown in "
+"Listing 16-5 will compile and run as we intend."
+msgstr ""
+
+#: src/ch16-01-threads.md:365
+msgid ""
+"We might be tempted to try the same thing to fix the code in Listing 16-4 "
+"where the main thread called `drop` by using a `move` closure. However, this "
+"fix will not work because what Listing 16-4 is trying to do is disallowed "
+"for a different reason. If we added `move` to the closure, we would move `v` "
+"into the closure’s environment, and we could no longer call `drop` on it in "
+"the main thread. We would get this compiler error instead:"
+msgstr ""
+
+#: src/ch16-01-threads.md:372
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling threads v0.1.0 (file:///projects/threads)\n"
+"error[E0382]: use of moved value: `v`\n"
+"  --> src/main.rs:10:10\n"
+"   |\n"
+" 4 |     let v = vec![1, 2, 3];\n"
+"   |         - move occurs because `v` has type `Vec<i32>`, which does not "
+"implement the `Copy` trait\n"
+" 5 |\n"
+" 6 |     let handle = thread::spawn(move || {\n"
+"   |                                ------- value moved into closure here\n"
+" 7 |         println!(\"Here's a vector: {v:?}\");\n"
+"   |                                     - variable moved due to use in "
+"closure\n"
+"...\n"
+"10 |     drop(v); // oh no!\n"
+"   |          ^ value used here after move\n"
+"   |\n"
+"help: consider cloning the value before moving it into the closure\n"
+"   |\n"
+" 6 ~     let value = v.clone();\n"
+" 7 ~     let handle = thread::spawn(move || {\n"
+" 8 ~         println!(\"Here's a vector: {value:?}\");\n"
+"   |\n"
+"\n"
+"For more information about this error, try `rustc --explain E0382`.\n"
+"error: could not compile `threads` (bin \"threads\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+
+#: src/ch16-01-threads.md:400
+msgid ""
+"Rust’s ownership rules have saved us again! We got an error from the code in "
+"Listing 16-3 because Rust was being conservative and only borrowing `v` for "
+"the thread, which meant the main thread could theoretically invalidate the "
+"spawned thread’s reference. By telling Rust to move ownership of `v` to the "
+"spawned thread, we’re guaranteeing to Rust that the main thread won’t use "
+"`v` anymore. If we change Listing 16-4 in the same way, we’re then violating "
+"the ownership rules when we try to use `v` in the main thread. The `move` "
+"keyword overrides Rust’s conservative default of borrowing; it doesn’t let "
+"us violate the ownership rules."
+msgstr ""
+
+#: src/ch16-01-threads.md:410
+msgid ""
+"Now that we’ve covered what threads are and the methods supplied by the "
+"thread API, let’s look at some situations in which we can use threads."
+msgstr ""

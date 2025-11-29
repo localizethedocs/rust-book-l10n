@@ -1,0 +1,426 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch10-01-syntax.md:1
+msgid "Generic Data Types"
+msgstr ""
+
+#: src/ch10-01-syntax.md:3
+msgid ""
+"We use generics to create definitions for items like function signatures or "
+"structs, which we can then use with many different concrete data types. "
+"Let’s first look at how to define functions, structs, enums, and methods "
+"using generics. Then, we’ll discuss how generics affect code performance."
+msgstr ""
+
+#: src/ch10-01-syntax.md:8
+msgid "In Function Definitions"
+msgstr ""
+
+#: src/ch10-01-syntax.md:10
+msgid ""
+"When defining a function that uses generics, we place the generics in the "
+"signature of the function where we would usually specify the data types of "
+"the parameters and return value. Doing so makes our code more flexible and "
+"provides more functionality to callers of our function while preventing code "
+"duplication."
+msgstr ""
+
+#: src/ch10-01-syntax.md:15
+msgid ""
+"Continuing with our `largest` function, Listing 10-4 shows two functions "
+"that both find the largest value in a slice. We’ll then combine these into a "
+"single function that uses generics."
+msgstr ""
+
+#: src/ch10-01-syntax.md:50 src/ch10-01-syntax.md:115
+msgid "\"The largest number is {result}\""
+msgstr ""
+
+#: src/ch10-01-syntax.md:53 src/ch10-01-syntax.md:57 src/ch10-01-syntax.md:117
+msgid "'y'"
+msgstr ""
+
+#: src/ch10-01-syntax.md:53 src/ch10-01-syntax.md:117
+msgid "'m'"
+msgstr ""
+
+#: src/ch10-01-syntax.md:53 src/ch10-01-syntax.md:117
+msgid "'a'"
+msgstr ""
+
+#: src/ch10-01-syntax.md:53 src/ch10-01-syntax.md:117
+msgid "'q'"
+msgstr ""
+
+#: src/ch10-01-syntax.md:56 src/ch10-01-syntax.md:120
+msgid "\"The largest char is {result}\""
+msgstr ""
+
+#: src/ch10-01-syntax.md:63
+msgid ""
+"The `largest_i32` function is the one we extracted in Listing 10-3 that "
+"finds the largest `i32` in a slice. The `largest_char` function finds the "
+"largest `char` in a slice. The function bodies have the same code, so let’s "
+"eliminate the duplication by introducing a generic type parameter in a "
+"single function."
+msgstr ""
+
+#: src/ch10-01-syntax.md:68
+msgid ""
+"To parameterize the types in a new single function, we need to name the type "
+"parameter, just as we do for the value parameters to a function. You can use "
+"any identifier as a type parameter name. But we’ll use `T` because, by "
+"convention, type parameter names in Rust are short, often just one letter, "
+"and Rust’s type-naming convention is UpperCamelCase. Short for _type_, `T` "
+"is the default choice of most Rust programmers."
+msgstr ""
+
+#: src/ch10-01-syntax.md:75
+msgid ""
+"When we use a parameter in the body of the function, we have to declare the "
+"parameter name in the signature so that the compiler knows what that name "
+"means. Similarly, when we use a type parameter name in a function signature, "
+"we have to declare the type parameter name before we use it. To define the "
+"generic `largest` function, we place type name declarations inside angle "
+"brackets, `<>`, between the name of the function and the parameter list, "
+"like this:"
+msgstr ""
+
+#: src/ch10-01-syntax.md:86
+msgid ""
+"We read this definition as “The function `largest` is generic over some type "
+"`T`.” This function has one parameter named `list`, which is a slice of "
+"values of type `T`. The `largest` function will return a reference to a "
+"value of the same type `T`."
+msgstr ""
+
+#: src/ch10-01-syntax.md:91
+msgid ""
+"Listing 10-5 shows the combined `largest` function definition using the "
+"generic data type in its signature. The listing also shows how we can call "
+"the function with either a slice of `i32` values or `char` values. Note that "
+"this code won’t compile yet."
+msgstr ""
+
+#: src/ch10-01-syntax.md:126
+msgid "If we compile this code right now, we’ll get this error:"
+msgstr ""
+
+#: src/ch10-01-syntax.md:128
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0369]: binary operation `>` cannot be applied to type `&T`\n"
+" --> src/main.rs:5:17\n"
+"  |\n"
+"5 |         if item > largest {\n"
+"  |            ---- ^ ------- &T\n"
+"  |            |\n"
+"  |            &T\n"
+"  |\n"
+"help: consider restricting type parameter `T` with trait `PartialOrd`\n"
+"  |\n"
+"1 | fn largest<T: std::cmp::PartialOrd>(list: &[T]) -> &T {\n"
+"  |             ++++++++++++++++++++++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0369`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+
+#: src/ch10-01-syntax.md:148
+msgid ""
+"The help text mentions `std::cmp::PartialOrd`, which is a trait, and we’re "
+"going to talk about traits in the next section. For now, know that this "
+"error states that the body of `largest` won’t work for all possible types "
+"that `T` could be. Because we want to compare values of type `T` in the "
+"body, we can only use types whose values can be ordered. To enable "
+"comparisons, the standard library has the `std::cmp::PartialOrd` trait that "
+"you can implement on types (see Appendix C for more on this trait). To fix "
+"Listing 10-5, we can follow the help text’s suggestion and restrict the "
+"types valid for `T` to only those that implement `PartialOrd`. The listing "
+"will then compile, because the standard library implements `PartialOrd` on "
+"both `i32` and `char`."
+msgstr ""
+
+#: src/ch10-01-syntax.md:159
+msgid "In Struct Definitions"
+msgstr ""
+
+#: src/ch10-01-syntax.md:161
+msgid ""
+"We can also define structs to use a generic type parameter in one or more "
+"fields using the `<>` syntax. Listing 10-6 defines a `Point<T>` struct to "
+"hold `x` and `y` coordinate values of any type."
+msgstr ""
+
+#: src/ch10-01-syntax.md:181
+msgid ""
+"The syntax for using generics in struct definitions is similar to that used "
+"in function definitions. First, we declare the name of the type parameter "
+"inside angle brackets just after the name of the struct. Then, we use the "
+"generic type in the struct definition where we would otherwise specify "
+"concrete data types."
+msgstr ""
+
+#: src/ch10-01-syntax.md:186
+msgid ""
+"Note that because we’ve used only one generic type to define `Point<T>`, "
+"this definition says that the `Point<T>` struct is generic over some type "
+"`T`, and the fields `x` and `y` are _both_ that same type, whatever that "
+"type may be. If we create an instance of a `Point<T>` that has values of "
+"different types, as in Listing 10-7, our code won’t compile."
+msgstr ""
+
+#: src/ch10-01-syntax.md:207
+msgid ""
+"In this example, when we assign the integer value `5` to `x`, we let the "
+"compiler know that the generic type `T` will be an integer for this instance "
+"of `Point<T>`. Then, when we specify `4.0` for `y`, which we’ve defined to "
+"have the same type as `x`, we’ll get a type mismatch error like this:"
+msgstr ""
+
+#: src/ch10-01-syntax.md:212
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0308]: mismatched types\n"
+" --> src/main.rs:7:38\n"
+"  |\n"
+"7 |     let wont_work = Point { x: 5, y: 4.0 };\n"
+"  |                                      ^^^ expected integer, found "
+"floating-point number\n"
+"\n"
+"For more information about this error, try `rustc --explain E0308`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+
+#: src/ch10-01-syntax.md:225
+msgid ""
+"To define a `Point` struct where `x` and `y` are both generics but could "
+"have different types, we can use multiple generic type parameters. For "
+"example, in Listing 10-8, we change the definition of `Point` to be generic "
+"over types `T` and `U` where `x` is of type `T` and `y` is of type `U`."
+msgstr ""
+
+#: src/ch10-01-syntax.md:247
+msgid ""
+"Now all the instances of `Point` shown are allowed! You can use as many "
+"generic type parameters in a definition as you want, but using more than a "
+"few makes your code hard to read. If you’re finding you need lots of generic "
+"types in your code, it could indicate that your code needs restructuring "
+"into smaller pieces."
+msgstr ""
+
+#: src/ch10-01-syntax.md:253
+msgid "In Enum Definitions"
+msgstr ""
+
+#: src/ch10-01-syntax.md:255
+msgid ""
+"As we did with structs, we can define enums to hold generic data types in "
+"their variants. Let’s take another look at the `Option<T>` enum that the "
+"standard library provides, which we used in Chapter 6:"
+msgstr ""
+
+#: src/ch10-01-syntax.md:266
+msgid ""
+"This definition should now make more sense to you. As you can see, the "
+"`Option<T>` enum is generic over type `T` and has two variants: `Some`, "
+"which holds one value of type `T`, and a `None` variant that doesn’t hold "
+"any value. By using the `Option<T>` enum, we can express the abstract "
+"concept of an optional value, and because `Option<T>` is generic, we can use "
+"this abstraction no matter what the type of the optional value is."
+msgstr ""
+
+#: src/ch10-01-syntax.md:273
+msgid ""
+"Enums can use multiple generic types as well. The definition of the `Result` "
+"enum that we used in Chapter 9 is one example:"
+msgstr ""
+
+#: src/ch10-01-syntax.md:283
+msgid ""
+"The `Result` enum is generic over two types, `T` and `E`, and has two "
+"variants: `Ok`, which holds a value of type `T`, and `Err`, which holds a "
+"value of type `E`. This definition makes it convenient to use the `Result` "
+"enum anywhere we have an operation that might succeed (return a value of "
+"some type `T`) or fail (return an error of some type `E`). In fact, this is "
+"what we used to open a file in Listing 9-3, where `T` was filled in with the "
+"type `std::fs::File` when the file was opened successfully and `E` was "
+"filled in with the type `std::io::Error` when there were problems opening "
+"the file."
+msgstr ""
+
+#: src/ch10-01-syntax.md:292
+msgid ""
+"When you recognize situations in your code with multiple struct or enum "
+"definitions that differ only in the types of the values they hold, you can "
+"avoid duplication by using generic types instead."
+msgstr ""
+
+#: src/ch10-01-syntax.md:296
+msgid "In Method Definitions"
+msgstr ""
+
+#: src/ch10-01-syntax.md:298
+msgid ""
+"We can implement methods on structs and enums (as we did in Chapter 5) and "
+"use generic types in their definitions too. Listing 10-9 shows the "
+"`Point<T>` struct we defined in Listing 10-6 with a method named `x` "
+"implemented on it."
+msgstr ""
+
+#: src/ch10-01-syntax.md:319 src/ch10-01-syntax.md:366
+msgid "\"p.x = {}\""
+msgstr ""
+
+#: src/ch10-01-syntax.md:325
+msgid ""
+"Here, we’ve defined a method named `x` on `Point<T>` that returns a "
+"reference to the data in the field `x`."
+msgstr ""
+
+#: src/ch10-01-syntax.md:328
+msgid ""
+"Note that we have to declare `T` just after `impl` so that we can use `T` to "
+"specify that we’re implementing methods on the type `Point<T>`. By declaring "
+"`T` as a generic type after `impl`, Rust can identify that the type in the "
+"angle brackets in `Point` is a generic type rather than a concrete type. We "
+"could have chosen a different name for this generic parameter than the "
+"generic parameter declared in the struct definition, but using the same name "
+"is conventional. If you write a method within an `impl` that declares a "
+"generic type, that method will be defined on any instance of the type, no "
+"matter what concrete type ends up substituting for the generic type."
+msgstr ""
+
+#: src/ch10-01-syntax.md:338
+msgid ""
+"We can also specify constraints on generic types when defining methods on "
+"the type. We could, for example, implement methods only on `Point<f32>` "
+"instances rather than on `Point<T>` instances with any generic type. In "
+"Listing 10-10, we use the concrete type `f32`, meaning we don’t declare any "
+"types after `impl`."
+msgstr ""
+
+#: src/ch10-01-syntax.md:372
+msgid ""
+"This code means the type `Point<f32>` will have a `distance_from_origin` "
+"method; other instances of `Point<T>` where `T` is not of type `f32` will "
+"not have this method defined. The method measures how far our point is from "
+"the point at coordinates (0.0, 0.0) and uses mathematical operations that "
+"are available only for floating-point types."
+msgstr ""
+
+#: src/ch10-01-syntax.md:378
+msgid ""
+"Generic type parameters in a struct definition aren’t always the same as "
+"those you use in that same struct’s method signatures. Listing 10-11 uses "
+"the generic types `X1` and `Y1` for the `Point` struct and `X2` and `Y2` for "
+"the `mixup` method signature to make the example clearer. The method creates "
+"a new `Point` instance with the `x` value from the `self` `Point` (of type "
+"`X1`) and the `y` value from the passed-in `Point` (of type `Y2`)."
+msgstr ""
+
+#: src/ch10-01-syntax.md:404
+msgid "\"Hello\""
+msgstr ""
+
+#: src/ch10-01-syntax.md:404
+msgid "'c'"
+msgstr ""
+
+#: src/ch10-01-syntax.md:408
+msgid "\"p3.x = {}, p3.y = {}\""
+msgstr ""
+
+#: src/ch10-01-syntax.md:414
+msgid ""
+"In `main`, we’ve defined a `Point` that has an `i32` for `x` (with value "
+"`5`) and an `f64` for `y` (with value `10.4`). The `p2` variable is a "
+"`Point` struct that has a string slice for `x` (with value `\"Hello\"`) and "
+"a `char` for `y` (with value `c`). Calling `mixup` on `p1` with the argument "
+"`p2` gives us `p3`, which will have an `i32` for `x` because `x` came from "
+"`p1`. The `p3` variable will have a `char` for `y` because `y` came from "
+"`p2`. The `println!` macro call will print `p3.x = 5, p3.y = c`."
+msgstr ""
+
+#: src/ch10-01-syntax.md:422
+msgid ""
+"The purpose of this example is to demonstrate a situation in which some "
+"generic parameters are declared with `impl` and some are declared with the "
+"method definition. Here, the generic parameters `X1` and `Y1` are declared "
+"after `impl` because they go with the struct definition. The generic "
+"parameters `X2` and `Y2` are declared after `fn mixup` because they’re only "
+"relevant to the method."
+msgstr ""
+
+#: src/ch10-01-syntax.md:429
+msgid "Performance of Code Using Generics"
+msgstr ""
+
+#: src/ch10-01-syntax.md:431
+msgid ""
+"You might be wondering whether there is a runtime cost when using generic "
+"type parameters. The good news is that using generic types won’t make your "
+"program run any slower than it would with concrete types."
+msgstr ""
+
+#: src/ch10-01-syntax.md:435
+msgid ""
+"Rust accomplishes this by performing monomorphization of the code using "
+"generics at compile time. _Monomorphization_ is the process of turning "
+"generic code into specific code by filling in the concrete types that are "
+"used when compiled. In this process, the compiler does the opposite of the "
+"steps we used to create the generic function in Listing 10-5: The compiler "
+"looks at all the places where generic code is called and generates code for "
+"the concrete types the generic code is called with."
+msgstr ""
+
+#: src/ch10-01-syntax.md:443
+msgid ""
+"Let’s look at how this works by using the standard library’s generic "
+"`Option<T>` enum:"
+msgstr ""
+
+#: src/ch10-01-syntax.md:451
+msgid ""
+"When Rust compiles this code, it performs monomorphization. During that "
+"process, the compiler reads the values that have been used in `Option<T>` "
+"instances and identifies two kinds of `Option<T>`: One is `i32` and the "
+"other is `f64`. As such, it expands the generic definition of `Option<T>` "
+"into two definitions specialized to `i32` and `f64`, thereby replacing the "
+"generic definition with the specific ones."
+msgstr ""
+
+#: src/ch10-01-syntax.md:458
+msgid ""
+"The monomorphized version of the code looks similar to the following (the "
+"compiler uses different names than what we’re using here for illustration):"
+msgstr ""
+
+#: src/ch10-01-syntax.md:482
+msgid ""
+"The generic `Option<T>` is replaced with the specific definitions created by "
+"the compiler. Because Rust compiles generic code into code that specifies "
+"the type in each instance, we pay no runtime cost for using generics. When "
+"the code runs, it performs just as it would if we had duplicated each "
+"definition by hand. The process of monomorphization makes Rust’s generics "
+"extremely efficient at runtime."
+msgstr ""

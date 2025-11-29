@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch03-04-comments.md:1
+msgid "Comments"
+msgstr ""
+
+#: src/ch03-04-comments.md:3
+msgid ""
+"All programmers strive to make their code easy to understand, but sometimes "
+"extra explanation is warranted. In these cases, programmers leave _comments_ "
+"in their source code that the compiler will ignore but that people reading "
+"the source code may find useful."
+msgstr ""
+
+#: src/ch03-04-comments.md:8
+msgid "Here’s a simple comment:"
+msgstr ""
+
+#: src/ch03-04-comments.md:11
+msgid "// hello, world\n"
+msgstr ""
+
+#: src/ch03-04-comments.md:14
+msgid ""
+"In Rust, the idiomatic comment style starts a comment with two slashes, and "
+"the comment continues until the end of the line. For comments that extend "
+"beyond a single line, you’ll need to include `//` on each line, like this:"
+msgstr ""
+
+#: src/ch03-04-comments.md:19
+msgid ""
+"// So we're doing something complicated here, long enough that we need\n"
+"// multiple lines of comments to do it! Whew! Hopefully, this comment will\n"
+"// explain what's going on.\n"
+msgstr ""
+
+#: src/ch03-04-comments.md:24
+msgid "Comments can also be placed at the end of lines containing code:"
+msgstr ""
+
+#: src/ch03-04-comments.md:26 src/ch03-04-comments.md:37
+msgid "<span class=\"filename\">Filename: src/main.rs</span>"
+msgstr ""
+
+#: src/ch03-04-comments.md:30 src/ch03-04-comments.md:41
+msgid "// I'm feeling lucky today\n"
+msgstr ""
+
+#: src/ch03-04-comments.md:34
+msgid ""
+"But you’ll more often see them used in this format, with the comment on a "
+"separate line above the code it’s annotating:"
+msgstr ""
+
+#: src/ch03-04-comments.md:46
+msgid ""
+"Rust also has another kind of comment, documentation comments, which we’ll "
+"discuss in the [“Publishing a Crate to Crates.io”](ch14-02-publishing-to-"
+"crates-io.html)<!-- ignore --> section of Chapter 14."
+msgstr ""

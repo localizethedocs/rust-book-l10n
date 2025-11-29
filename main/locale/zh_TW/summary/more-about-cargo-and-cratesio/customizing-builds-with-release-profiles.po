@@ -1,0 +1,92 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch14-01-release-profiles.md:1
+msgid "Customizing Builds with Release Profiles"
+msgstr ""
+
+#: src/ch14-01-release-profiles.md:3
+msgid ""
+"In Rust, _release profiles_ are predefined, customizable profiles with "
+"different configurations that allow a programmer to have more control over "
+"various options for compiling code. Each profile is configured independently "
+"of the others."
+msgstr ""
+
+#: src/ch14-01-release-profiles.md:8
+msgid ""
+"Cargo has two main profiles: the `dev` profile Cargo uses when you run "
+"`cargo build`, and the `release` profile Cargo uses when you run `cargo "
+"build --release`. The `dev` profile is defined with good defaults for "
+"development, and the `release` profile has good defaults for release builds."
+msgstr ""
+
+#: src/ch14-01-release-profiles.md:13
+msgid "These profile names might be familiar from the output of your builds:"
+msgstr ""
+
+#: src/ch14-01-release-profiles.md:29
+msgid ""
+"The `dev` and `release` are these different profiles used by the compiler."
+msgstr ""
+
+#: src/ch14-01-release-profiles.md:31
+msgid ""
+"Cargo has default settings for each of the profiles that apply when you "
+"haven't explicitly added any `[profile.*]` sections in the project’s _Cargo."
+"toml_ file. By adding `[profile.*]` sections for any profile you want to "
+"customize, you override any subset of the default settings. For example, "
+"here are the default values for the `opt-level` setting for the `dev` and "
+"`release` profiles:"
+msgstr ""
+
+#: src/ch14-01-release-profiles.md:37 src/ch14-01-release-profiles.md:62
+msgid "<span class=\"filename\">Filename: Cargo.toml</span>"
+msgstr ""
+
+#: src/ch14-01-release-profiles.md:47
+msgid ""
+"The `opt-level` setting controls the number of optimizations Rust will apply "
+"to your code, with a range of 0 to 3. Applying more optimizations extends "
+"compiling time, so if you’re in development and compiling your code often, "
+"you’ll want fewer optimizations to compile faster even if the resultant code "
+"runs slower. The default `opt-level` for `dev` is therefore `0`. When you’re "
+"ready to release your code, it’s best to spend more time compiling. You’ll "
+"only compile in release mode once, but you’ll run the compiled program many "
+"times, so release mode trades longer compile time for code that runs faster. "
+"That is why the default `opt-level` for the `release` profile is `3`."
+msgstr ""
+
+#: src/ch14-01-release-profiles.md:57
+msgid ""
+"You can override a default setting by adding a different value for it in "
+"_Cargo.toml_. For example, if we want to use optimization level 1 in the "
+"development profile, we can add these two lines to our project’s _Cargo."
+"toml_ file:"
+msgstr ""
+
+#: src/ch14-01-release-profiles.md:69
+msgid ""
+"This code overrides the default setting of `0`. Now when we run `cargo "
+"build`, Cargo will use the defaults for the `dev` profile plus our "
+"customization to `opt-level`. Because we set `opt-level` to `1`, Cargo will "
+"apply more optimizations than the default, but not as many as in a release "
+"build."
+msgstr ""
+
+#: src/ch14-01-release-profiles.md:74
+msgid ""
+"For the full list of configuration options and defaults for each profile, "
+"see [Cargo’s documentation](https://doc.rust-lang.org/cargo/reference/"
+"profiles.html)."
+msgstr ""

@@ -1,0 +1,92 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch15-00-smart-pointers.md:1
+msgid "Smart Pointers"
+msgstr ""
+
+#: src/ch15-00-smart-pointers.md:3
+msgid ""
+"A pointer is a general concept for a variable that contains an address in "
+"memory. This address refers to, or “points at,” some other data. The most "
+"common kind of pointer in Rust is a reference, which you learned about in "
+"Chapter 4. References are indicated by the `&` symbol and borrow the value "
+"they point to. They don’t have any special capabilities other than referring "
+"to data, and they have no overhead."
+msgstr ""
+
+#: src/ch15-00-smart-pointers.md:10
+msgid ""
+"_Smart pointers_, on the other hand, are data structures that act like a "
+"pointer but also have additional metadata and capabilities. The concept of "
+"smart pointers isn’t unique to Rust: Smart pointers originated in C++ and "
+"exist in other languages as well. Rust has a variety of smart pointers "
+"defined in the standard library that provide functionality beyond that "
+"provided by references. To explore the general concept, we’ll look at a "
+"couple of different examples of smart pointers, including a _reference "
+"counting_ smart pointer type. This pointer enables you to allow data to have "
+"multiple owners by keeping track of the number of owners and, when no owners "
+"remain, cleaning up the data."
+msgstr ""
+
+#: src/ch15-00-smart-pointers.md:20
+msgid ""
+"In Rust, with its concept of ownership and borrowing, there is an additional "
+"difference between references and smart pointers: While references only "
+"borrow data, in many cases smart pointers _own_ the data they point to."
+msgstr ""
+
+#: src/ch15-00-smart-pointers.md:24
+msgid ""
+"Smart pointers are usually implemented using structs. Unlike an ordinary "
+"struct, smart pointers implement the `Deref` and `Drop` traits. The `Deref` "
+"trait allows an instance of the smart pointer struct to behave like a "
+"reference so that you can write your code to work with either references or "
+"smart pointers. The `Drop` trait allows you to customize the code that’s run "
+"when an instance of the smart pointer goes out of scope. In this chapter, "
+"we’ll discuss both of these traits and demonstrate why they’re important to "
+"smart pointers."
+msgstr ""
+
+#: src/ch15-00-smart-pointers.md:32
+msgid ""
+"Given that the smart pointer pattern is a general design pattern used "
+"frequently in Rust, this chapter won’t cover every existing smart pointer. "
+"Many libraries have their own smart pointers, and you can even write your "
+"own. We’ll cover the most common smart pointers in the standard library:"
+msgstr ""
+
+#: src/ch15-00-smart-pointers.md:37
+msgid "`Box<T>`, for allocating values on the heap"
+msgstr ""
+
+#: src/ch15-00-smart-pointers.md:38
+msgid "`Rc<T>`, a reference counting type that enables multiple ownership"
+msgstr ""
+
+#: src/ch15-00-smart-pointers.md:39
+msgid ""
+"`Ref<T>` and `RefMut<T>`, accessed through `RefCell<T>`, a type that "
+"enforces the borrowing rules at runtime instead of compile time"
+msgstr ""
+
+#: src/ch15-00-smart-pointers.md:42
+msgid ""
+"In addition, we’ll cover the _interior mutability_ pattern where an "
+"immutable type exposes an API for mutating an interior value. We’ll also "
+"discuss reference cycles: how they can leak memory and how to prevent them."
+msgstr ""
+
+#: src/ch15-00-smart-pointers.md:46
+msgid "Let’s dive in!"
+msgstr ""

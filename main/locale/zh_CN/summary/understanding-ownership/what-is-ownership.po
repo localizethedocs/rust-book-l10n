@@ -1,0 +1,958 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch04-01-what-is-ownership.md:1
+msgid "What Is Ownership?"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:3
+msgid ""
+"_Ownership_ is a set of rules that govern how a Rust program manages memory. "
+"All programs have to manage the way they use a computer’s memory while "
+"running. Some languages have garbage collection that regularly looks for no-"
+"longer-used memory as the program runs; in other languages, the programmer "
+"must explicitly allocate and free the memory. Rust uses a third approach: "
+"Memory is managed through a system of ownership with a set of rules that the "
+"compiler checks. If any of the rules are violated, the program won’t "
+"compile. None of the features of ownership will slow down your program while "
+"it’s running."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:12
+msgid ""
+"Because ownership is a new concept for many programmers, it does take some "
+"time to get used to. The good news is that the more experienced you become "
+"with Rust and the rules of the ownership system, the easier you’ll find it "
+"to naturally develop code that is safe and efficient. Keep at it!"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:17
+msgid ""
+"When you understand ownership, you’ll have a solid foundation for "
+"understanding the features that make Rust unique. In this chapter, you’ll "
+"learn ownership by working through some examples that focus on a very common "
+"data structure: strings."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:22
+msgid "The Stack and the Heap"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:24
+msgid ""
+"Many programming languages don’t require you to think about the stack and "
+"the heap very often. But in a systems programming language like Rust, "
+"whether a value is on the stack or the heap affects how the language behaves "
+"and why you have to make certain decisions. Parts of ownership will be "
+"described in relation to the stack and the heap later in this chapter, so "
+"here is a brief explanation in preparation."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:31
+msgid ""
+"Both the stack and the heap are parts of memory available to your code to "
+"use at runtime, but they are structured in different ways. The stack stores "
+"values in the order it gets them and removes the values in the opposite "
+"order. This is referred to as _last in, first out (LIFO)_. Think of a stack "
+"of plates: When you add more plates, you put them on top of the pile, and "
+"when you need a plate, you take one off the top. Adding or removing plates "
+"from the middle or bottom wouldn’t work as well! Adding data is called "
+"_pushing onto the stack_, and removing data is called _popping off the "
+"stack_. All data stored on the stack must have a known, fixed size. Data "
+"with an unknown size at compile time or a size that might change must be "
+"stored on the heap instead."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:43
+msgid ""
+"The heap is less organized: When you put data on the heap, you request a "
+"certain amount of space. The memory allocator finds an empty spot in the "
+"heap that is big enough, marks it as being in use, and returns a _pointer_, "
+"which is the address of that location. This process is called _allocating on "
+"the heap_ and is sometimes abbreviated as just _allocating_ (pushing values "
+"onto the stack is not considered allocating). Because the pointer to the "
+"heap is a known, fixed size, you can store the pointer on the stack, but "
+"when you want the actual data, you must follow the pointer. Think of being "
+"seated at a restaurant. When you enter, you state the number of people in "
+"your group, and the host finds an empty table that fits everyone and leads "
+"you there. If someone in your group comes late, they can ask where you’ve "
+"been seated to find you."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:56
+msgid ""
+"Pushing to the stack is faster than allocating on the heap because the "
+"allocator never has to search for a place to store new data; that location "
+"is always at the top of the stack. Comparatively, allocating space on the "
+"heap requires more work because the allocator must first find a big enough "
+"space to hold the data and then perform bookkeeping to prepare for the next "
+"allocation."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:63
+msgid ""
+"Accessing data in the heap is generally slower than accessing data on the "
+"stack because you have to follow a pointer to get there. Contemporary "
+"processors are faster if they jump around less in memory. Continuing the "
+"analogy, consider a server at a restaurant taking orders from many tables. "
+"It’s most efficient to get all the orders at one table before moving on to "
+"the next table. Taking an order from table A, then an order from table B, "
+"then one from A again, and then one from B again would be a much slower "
+"process. By the same token, a processor can usually do its job better if it "
+"works on data that’s close to other data (as it is on the stack) rather than "
+"farther away (as it can be on the heap)."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:74
+msgid ""
+"When your code calls a function, the values passed into the function "
+"(including, potentially, pointers to data on the heap) and the function’s "
+"local variables get pushed onto the stack. When the function is over, those "
+"values get popped off the stack."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:79
+msgid ""
+"Keeping track of what parts of code are using what data on the heap, "
+"minimizing the amount of duplicate data on the heap, and cleaning up unused "
+"data on the heap so that you don’t run out of space are all problems that "
+"ownership addresses. Once you understand ownership, you won’t need to think "
+"about the stack and the heap very often. But knowing that the main purpose "
+"of ownership is to manage heap data can help explain why it works the way it "
+"does."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:87
+msgid "Ownership Rules"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:89
+msgid ""
+"First, let’s take a look at the ownership rules. Keep these rules in mind as "
+"we work through the examples that illustrate them:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:92
+msgid "Each value in Rust has an _owner_."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:93
+msgid "There can only be one owner at a time."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:94
+msgid "When the owner goes out of scope, the value will be dropped."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:96
+msgid "Variable Scope"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:98
+msgid ""
+"Now that we’re past basic Rust syntax, we won’t include all the `fn main() "
+"{` code in the examples, so if you’re following along, make sure to put the "
+"following examples inside a `main` function manually. As a result, our "
+"examples will be a bit more concise, letting us focus on the actual details "
+"rather than boilerplate code."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:104
+msgid ""
+"As a first example of ownership, we’ll look at the scope of some variables. "
+"A _scope_ is the range within a program for which an item is valid. Take the "
+"following variable:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:109 src/ch04-01-what-is-ownership.md:122
+#: src/ch04-01-what-is-ownership.md:167 src/ch04-01-what-is-ownership.md:181
+#: src/ch04-01-what-is-ownership.md:230 src/ch04-01-what-is-ownership.md:285
+#: src/ch04-01-what-is-ownership.md:354 src/ch04-01-what-is-ownership.md:420
+#: src/ch04-01-what-is-ownership.md:459 src/ch04-01-what-is-ownership.md:534
+#: src/ch04-01-what-is-ownership.md:578 src/ch04-01-what-is-ownership.md:625
+msgid "\"hello\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:112
+msgid ""
+"The variable `s` refers to a string literal, where the value of the string "
+"is hardcoded into the text of our program. The variable is valid from the "
+"point at which it’s declared until the end of the current scope. Listing 4-1 "
+"shows a program with comments annotating where the variable `s` would be "
+"valid."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:121
+msgid "// s is not valid here, since it's not yet declared\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:122 src/ch04-01-what-is-ownership.md:230
+msgid "// s is valid from this point forward\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:124 src/ch04-01-what-is-ownership.md:232
+msgid "// do stuff with s\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:125
+msgid "// this scope is now over, and s is no longer valid\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:131
+msgid "In other words, there are two important points in time here:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:133
+msgid "When `s` comes _into_ scope, it is valid."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:134
+msgid "It remains valid until it goes _out of_ scope."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:136
+msgid ""
+"At this point, the relationship between scopes and when variables are valid "
+"is similar to that in other programming languages. Now we’ll build on top of "
+"this understanding by introducing the `String` type."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:140
+msgid "The `String` Type"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:142
+msgid ""
+"To illustrate the rules of ownership, we need a data type that is more "
+"complex than those we covered in the [“Data Types”](ch03-02-data-types."
+"html#data-types)<!-- ignore --> section of Chapter 3. The types covered "
+"previously are of a known size, can be stored on the stack and popped off "
+"the stack when their scope is over, and can be quickly and trivially copied "
+"to make a new, independent instance if another part of code needs to use the "
+"same value in a different scope. But we want to look at data that is stored "
+"on the heap and explore how Rust knows when to clean up that data, and the "
+"`String` type is a great example."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:151
+msgid ""
+"We’ll concentrate on the parts of `String` that relate to ownership. These "
+"aspects also apply to other complex data types, whether they are provided by "
+"the standard library or created by you. We’ll discuss non-ownership aspects "
+"of `String` in [Chapter 8](ch08-02-strings.html)<!-- ignore -->."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:156
+msgid ""
+"We’ve already seen string literals, where a string value is hardcoded into "
+"our program. String literals are convenient, but they aren’t suitable for "
+"every situation in which we may want to use text. One reason is that they’re "
+"immutable. Another is that not every string value can be known when we write "
+"our code: For example, what if we want to take user input and store it? It "
+"is for these situations that Rust has the `String` type. This type manages "
+"data allocated on the heap and as such is able to store an amount of text "
+"that is unknown to us at compile time. You can create a `String` from a "
+"string literal using the `from` function, like so:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:170
+msgid ""
+"The double colon `::` operator allows us to namespace this particular `from` "
+"function under the `String` type rather than using some sort of name like "
+"`string_from`. We’ll discuss this syntax more in the [“Methods”](ch05-03-"
+"method-syntax.html#methods)<!--\n"
+"ignore --> section of Chapter 5, and when we talk about namespacing with "
+"modules in [“Paths for Referring to an Item in the Module Tree”](ch07-03-"
+"paths-for-referring-to-an-item-in-the-module-tree.html)<!-- ignore --> in "
+"Chapter 7."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:177
+msgid "This kind of string _can_ be mutated:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:183
+msgid "\", world!\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:183
+msgid "// push_str() appends a literal to a String\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:185
+msgid "\"{s}\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:185
+msgid "// this will print `hello, world!`\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:189
+msgid ""
+"So, what’s the difference here? Why can `String` be mutated but literals "
+"cannot? The difference is in how these two types deal with memory."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:192
+msgid "Memory and Allocation"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:194
+msgid ""
+"In the case of a string literal, we know the contents at compile time, so "
+"the text is hardcoded directly into the final executable. This is why string "
+"literals are fast and efficient. But these properties only come from the "
+"string literal’s immutability. Unfortunately, we can’t put a blob of memory "
+"into the binary for each piece of text whose size is unknown at compile time "
+"and whose size might change while running the program."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:201
+msgid ""
+"With the `String` type, in order to support a mutable, growable piece of "
+"text, we need to allocate an amount of memory on the heap, unknown at "
+"compile time, to hold the contents. This means:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:205
+msgid "The memory must be requested from the memory allocator at runtime."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:206
+msgid ""
+"We need a way of returning this memory to the allocator when we’re done with "
+"our `String`."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:209
+msgid ""
+"That first part is done by us: When we call `String::from`, its "
+"implementation requests the memory it needs. This is pretty much universal "
+"in programming languages."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:213
+msgid ""
+"However, the second part is different. In languages with a _garbage "
+"collector (GC)_, the GC keeps track of and cleans up memory that isn’t being "
+"used anymore, and we don’t need to think about it. In most languages without "
+"a GC, it’s our responsibility to identify when memory is no longer being "
+"used and to call code to explicitly free it, just as we did to request it. "
+"Doing this correctly has historically been a difficult programming problem. "
+"If we forget, we’ll waste memory. If we do it too early, we’ll have an "
+"invalid variable. If we do it twice, that’s a bug too. We need to pair "
+"exactly one `allocate` with exactly one `free`."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:223
+msgid ""
+"Rust takes a different path: The memory is automatically returned once the "
+"variable that owns it goes out of scope. Here’s a version of our scope "
+"example from Listing 4-1 using a `String` instead of a string literal:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:233
+msgid ""
+"// this scope is now over, and s is no\n"
+"                                       // longer valid\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:238
+msgid ""
+"There is a natural point at which we can return the memory our `String` "
+"needs to the allocator: when `s` goes out of scope. When a variable goes out "
+"of scope, Rust calls a special function for us. This function is called "
+"[`drop`](../std/ops/trait.Drop.html#tymethod.drop)<!-- ignore -->, and it’s "
+"where the author of `String` can put the code to return the memory. Rust "
+"calls `drop` automatically at the closing curly bracket."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:245
+msgid ""
+"Note: In C++, this pattern of deallocating resources at the end of an item’s "
+"lifetime is sometimes called _Resource Acquisition Is Initialization "
+"(RAII)_. The `drop` function in Rust will be familiar to you if you’ve used "
+"RAII patterns."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:250
+msgid ""
+"This pattern has a profound impact on the way Rust code is written. It may "
+"seem simple right now, but the behavior of code can be unexpected in more "
+"complicated situations when we want to have multiple variables use the data "
+"we’ve allocated on the heap. Let’s explore some of those situations now."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:257
+msgid "<a id=\"ways-variables-and-data-interact-move\"></a>"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:259
+msgid "Variables and Data Interacting with Move"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:261
+msgid ""
+"Multiple variables can interact with the same data in different ways in "
+"Rust. Listing 4-2 shows an example using an integer."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:275
+msgid ""
+"We can probably guess what this is doing: “Bind the value `5` to `x`; then, "
+"make a copy of the value in `x` and bind it to `y`.” We now have two "
+"variables, `x` and `y`, and both equal `5`. This is indeed what is "
+"happening, because integers are simple values with a known, fixed size, and "
+"these two `5` values are pushed onto the stack."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:281
+msgid "Now let’s look at the `String` version:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:290
+msgid ""
+"This looks very similar, so we might assume that the way it works would be "
+"the same: That is, the second line would make a copy of the value in `s1` "
+"and bind it to `s2`. But this isn’t quite what happens."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:294
+msgid ""
+"Take a look at Figure 4-1 to see what is happening to `String` under the "
+"covers. A `String` is made up of three parts, shown on the left: a pointer "
+"to the memory that holds the contents of the string, a length, and a "
+"capacity. This group of data is stored on the stack. On the right is the "
+"memory on the heap that holds the contents."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:300
+msgid ""
+"<img alt=\"Two tables: the first table contains the representation of s1 on "
+"the\n"
+"stack, consisting of its length (5), capacity (5), and a pointer to the "
+"first\n"
+"value in the second table. The second table contains the representation of "
+"the\n"
+"string data on the heap, byte by byte.\" src=\"img/trpl04-01.svg\" "
+"class=\"center\"\n"
+"style=\"width: 50%;\" />"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:306
+msgid ""
+"<span class=\"caption\">Figure 4-1: The representation in memory of a "
+"`String` holding the value `\"hello\"` bound to `s1`</span>"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:309
+msgid ""
+"The length is how much memory, in bytes, the contents of the `String` are "
+"currently using. The capacity is the total amount of memory, in bytes, that "
+"the `String` has received from the allocator. The difference between length "
+"and capacity matters, but not in this context, so for now, it’s fine to "
+"ignore the capacity."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:315
+msgid ""
+"When we assign `s1` to `s2`, the `String` data is copied, meaning we copy "
+"the pointer, the length, and the capacity that are on the stack. We do not "
+"copy the data on the heap that the pointer refers to. In other words, the "
+"data representation in memory looks like Figure 4-2."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:320
+msgid ""
+"<img alt=\"Three tables: tables s1 and s2 representing those strings on the\n"
+"stack, respectively, and both pointing to the same string data on the heap."
+"\"\n"
+"src=\"img/trpl04-02.svg\" class=\"center\" style=\"width: 50%;\" />"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:324
+msgid ""
+"<span class=\"caption\">Figure 4-2: The representation in memory of the "
+"variable `s2` that has a copy of the pointer, length, and capacity of `s1`</"
+"span>"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:327
+msgid ""
+"The representation does _not_ look like Figure 4-3, which is what memory "
+"would look like if Rust instead copied the heap data as well. If Rust did "
+"this, the operation `s2 = s1` could be very expensive in terms of runtime "
+"performance if the data on the heap were large."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:332
+msgid ""
+"<img alt=\"Four tables: two tables representing the stack data for s1 and "
+"s2,\n"
+"and each points to its own copy of string data on the heap.\"\n"
+"src=\"img/trpl04-03.svg\" class=\"center\" style=\"width: 50%;\" />"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:336
+msgid ""
+"<span class=\"caption\">Figure 4-3: Another possibility for what `s2 = s1` "
+"might do if Rust copied the heap data as well</span>"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:339
+msgid ""
+"Earlier, we said that when a variable goes out of scope, Rust automatically "
+"calls the `drop` function and cleans up the heap memory for that variable. "
+"But Figure 4-2 shows both data pointers pointing to the same location. This "
+"is a problem: When `s2` and `s1` go out of scope, they will both try to free "
+"the same memory. This is known as a _double free_ error and is one of the "
+"memory safety bugs we mentioned previously. Freeing memory twice can lead to "
+"memory corruption, which can potentially lead to security vulnerabilities."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:347
+msgid ""
+"To ensure memory safety, after the line `let s2 = s1;`, Rust considers `s1` "
+"as no longer valid. Therefore, Rust doesn’t need to free anything when `s1` "
+"goes out of scope. Check out what happens when you try to use `s1` after "
+"`s2` is created; it won’t work:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:357
+msgid "\"{s1}, world!\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:361
+msgid ""
+"You’ll get an error like this because Rust prevents you from using the "
+"invalidated reference:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:364
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling ownership v0.1.0 (file:///projects/ownership)\n"
+"error[E0382]: borrow of moved value: `s1`\n"
+" --> src/main.rs:5:16\n"
+"  |\n"
+"2 |     let s1 = String::from(\"hello\");\n"
+"  |         -- move occurs because `s1` has type `String`, which does not "
+"implement the `Copy` trait\n"
+"3 |     let s2 = s1;\n"
+"  |              -- value moved here\n"
+"4 |\n"
+"5 |     println!(\"{s1}, world!\");\n"
+"  |                ^^ value borrowed here after move\n"
+"  |\n"
+"  = note: this error originates in the macro `$crate::format_args_nl` which "
+"comes from the expansion of the macro `println` (in Nightly builds, run with "
+"-Z macro-backtrace for more info)\n"
+"help: consider cloning the value if the performance cost is acceptable\n"
+"  |\n"
+"3 |     let s2 = s1.clone();\n"
+"  |                ++++++++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0382`.\n"
+"error: could not compile `ownership` (bin \"ownership\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:388
+msgid ""
+"If you’ve heard the terms _shallow copy_ and _deep copy_ while working with "
+"other languages, the concept of copying the pointer, length, and capacity "
+"without copying the data probably sounds like making a shallow copy. But "
+"because Rust also invalidates the first variable, instead of being called a "
+"shallow copy, it’s known as a _move_. In this example, we would say that "
+"`s1` was _moved_ into `s2`. So, what actually happens is shown in Figure 4-4."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:395
+msgid ""
+"<img alt=\"Three tables: tables s1 and s2 representing those strings on the\n"
+"stack, respectively, and both pointing to the same string data on the heap.\n"
+"Table s1 is grayed out because s1 is no longer valid; only s2 can be used "
+"to\n"
+"access the heap data.\" src=\"img/trpl04-04.svg\" class=\"center\" "
+"style=\"width:\n"
+"50%;\" />"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:401
+msgid ""
+"<span class=\"caption\">Figure 4-4: The representation in memory after `s1` "
+"has been invalidated</span>"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:404
+msgid ""
+"That solves our problem! With only `s2` valid, when it goes out of scope it "
+"alone will free the memory, and we’re done."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:407
+msgid ""
+"In addition, there’s a design choice that’s implied by this: Rust will never "
+"automatically create “deep” copies of your data. Therefore, any _automatic_ "
+"copying can be assumed to be inexpensive in terms of runtime performance."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:411
+msgid "Scope and Assignment"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:413
+msgid ""
+"The inverse of this is true for the relationship between scoping, ownership, "
+"and memory being freed via the `drop` function as well. When you assign a "
+"completely new value to an existing variable, Rust will call `drop` and free "
+"the original value’s memory immediately. Consider this code, for example:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:421
+msgid "\"ahoy\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:423
+msgid "\"{s}, world!\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:427
+msgid ""
+"We initially declare a variable `s` and bind it to a `String` with the value "
+"`\"hello\"`. Then, we immediately create a new `String` with the value "
+"`\"ahoy\"` and assign it to `s`. At this point, nothing is referring to the "
+"original value on the heap at all. Figure 4-5 illustrates the stack and heap "
+"data now:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:432
+msgid ""
+"<img alt=\"One table representing the string value on the stack, pointing "
+"to\n"
+"the second piece of string data (ahoy) on the heap, with the original "
+"string\n"
+"data (hello) grayed out because it cannot be accessed anymore.\"\n"
+"src=\"img/trpl04-05.svg\" class=\"center\" style=\"width: 50%;\" />"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:437
+msgid ""
+"<span class=\"caption\">Figure 4-5: The representation in memory after the "
+"initial value has been replaced in its entirety</span>"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:440
+msgid ""
+"The original string thus immediately goes out of scope. Rust will run the "
+"`drop` function on it and its memory will be freed right away. When we print "
+"the value at the end, it will be `\"ahoy, world!\"`."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:446
+msgid "<a id=\"ways-variables-and-data-interact-clone\"></a>"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:448
+msgid "Variables and Data Interacting with Clone"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:450
+msgid ""
+"If we _do_ want to deeply copy the heap data of the `String`, not just the "
+"stack data, we can use a common method called `clone`. We’ll discuss method "
+"syntax in Chapter 5, but because methods are a common feature in many "
+"programming languages, you’ve probably seen them before."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:455
+msgid "Here’s an example of the `clone` method in action:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:462
+msgid "\"s1 = {s1}, s2 = {s2}\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:466
+msgid ""
+"This works just fine and explicitly produces the behavior shown in Figure "
+"4-3, where the heap data _does_ get copied."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:469
+msgid ""
+"When you see a call to `clone`, you know that some arbitrary code is being "
+"executed and that code may be expensive. It’s a visual indicator that "
+"something different is going on."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:473
+msgid "Stack-Only Data: Copy"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:475
+msgid ""
+"There’s another wrinkle we haven’t talked about yet. This code using integers"
+"—part of which was shown in Listing 4-2—works and is valid:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:483
+msgid "\"x = {x}, y = {y}\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:487
+msgid ""
+"But this code seems to contradict what we just learned: We don’t have a call "
+"to `clone`, but `x` is still valid and wasn’t moved into `y`."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:490
+msgid ""
+"The reason is that types such as integers that have a known size at compile "
+"time are stored entirely on the stack, so copies of the actual values are "
+"quick to make. That means there’s no reason we would want to prevent `x` "
+"from being valid after we create the variable `y`. In other words, there’s "
+"no difference between deep and shallow copying here, so calling `clone` "
+"wouldn’t do anything different from the usual shallow copying, and we can "
+"leave it out."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:497
+msgid ""
+"Rust has a special annotation called the `Copy` trait that we can place on "
+"types that are stored on the stack, as integers are (we’ll talk more about "
+"traits in [Chapter 10](ch10-02-traits.html)<!-- ignore -->). If a type "
+"implements the `Copy` trait, variables that use it do not move, but rather "
+"are trivially copied, making them still valid after assignment to another "
+"variable."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:503
+msgid ""
+"Rust won’t let us annotate a type with `Copy` if the type, or any of its "
+"parts, has implemented the `Drop` trait. If the type needs something special "
+"to happen when the value goes out of scope and we add the `Copy` annotation "
+"to that type, we’ll get a compile-time error. To learn about how to add the "
+"`Copy` annotation to your type to implement the trait, see [“Derivable "
+"Traits”](appendix-03-derivable-traits.html)<!-- ignore --> in Appendix C."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:510
+msgid ""
+"So, what types implement the `Copy` trait? You can check the documentation "
+"for the given type to be sure, but as a general rule, any group of simple "
+"scalar values can implement `Copy`, and nothing that requires allocation or "
+"is some form of resource can implement `Copy`. Here are some of the types "
+"that implement `Copy`:"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:516
+msgid "All the integer types, such as `u32`."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:517
+msgid "The Boolean type, `bool`, with values `true` and `false`."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:518
+msgid "All the floating-point types, such as `f64`."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:519
+msgid "The character type, `char`."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:520
+msgid ""
+"Tuples, if they only contain types that also implement `Copy`. For example, "
+"`(i32, i32)` implements `Copy`, but `(i32, String)` does not."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:523
+msgid "Ownership and Functions"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:525
+msgid ""
+"The mechanics of passing a value to a function are similar to those when "
+"assigning a value to a variable. Passing a variable to a function will move "
+"or copy, just as assignment does. Listing 4-3 has an example with some "
+"annotations showing where variables go into and out of scope."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:534
+msgid "// s comes into scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:536
+msgid ""
+"// s's value moves into the function...\n"
+"                                    // ... and so is no longer valid here\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:539
+msgid "// x comes into scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:541
+msgid ""
+"// Because i32 implements the Copy trait,\n"
+"                                    // x does NOT move into the function,\n"
+"                                    // so it's okay to use x afterward.\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:545
+msgid ""
+"// Here, x goes out of scope, then s. However, because s's value was moved,\n"
+"  // nothing special happens.\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:548 src/ch04-01-what-is-ownership.md:590
+msgid "// some_string comes into scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:549
+msgid "\"{some_string}\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:550
+msgid ""
+"// Here, some_string goes out of scope and `drop` is called. The backing\n"
+"  // memory is freed.\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:553
+msgid "// some_integer comes into scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:554
+msgid "\"{some_integer}\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:555
+msgid "// Here, some_integer goes out of scope. Nothing special happens.\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:560
+msgid ""
+"If we tried to use `s` after the call to `takes_ownership`, Rust would throw "
+"a compile-time error. These static checks protect us from mistakes. Try "
+"adding code to `main` that uses `s` and `x` to see where you can use them "
+"and where the ownership rules prevent you from doing so."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:565
+msgid "Return Values and Scope"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:567
+msgid ""
+"Returning values can also transfer ownership. Listing 4-4 shows an example "
+"of a function that returns some value, with similar annotations as those in "
+"Listing 4-3."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:575
+msgid ""
+"// gives_ownership moves its return\n"
+"                                       // value into s1\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:578
+msgid "// s2 comes into scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:580
+msgid ""
+"// s2 is moved into\n"
+"                                       // takes_and_gives_back, which also\n"
+"                                       // moves its return value into s3\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:583
+msgid ""
+"// Here, s3 goes out of scope and is dropped. s2 was moved, so nothing\n"
+"  // happens. s1 goes out of scope and is dropped.\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:586
+msgid ""
+"// gives_ownership will move its\n"
+"                                       // return value into the function\n"
+"                                       // that calls it\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:590
+msgid "\"yours\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:592
+msgid ""
+"// some_string is returned and\n"
+"                                       // moves out to the calling\n"
+"                                       // function\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:596
+msgid "// This function takes a String and returns a String.\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:599
+msgid ""
+"// a_string comes into\n"
+"    // scope\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:602
+msgid "// a_string is returned and moves out to the calling function\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:608
+msgid ""
+"The ownership of a variable follows the same pattern every time: Assigning a "
+"value to another variable moves it. When a variable that includes data on "
+"the heap goes out of scope, the value will be cleaned up by `drop` unless "
+"ownership of the data has been moved to another variable."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:613
+msgid ""
+"While this works, taking ownership and then returning ownership with every "
+"function is a bit tedious. What if we want to let a function use a value but "
+"not take ownership? It’s quite annoying that anything we pass in also needs "
+"to be passed back if we want to use it again, in addition to any data "
+"resulting from the body of the function that we might want to return as well."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:619
+msgid ""
+"Rust does let us return multiple values using a tuple, as shown in Listing "
+"4-5."
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:629
+msgid "\"The length of '{s2}' is {len}.\""
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:633
+msgid "// len() returns the length of a String\n"
+msgstr ""
+
+#: src/ch04-01-what-is-ownership.md:641
+msgid ""
+"But this is too much ceremony and a lot of work for a concept that should be "
+"common. Luckily for us, Rust has a feature for using a value without "
+"transferring ownership: references."
+msgstr ""

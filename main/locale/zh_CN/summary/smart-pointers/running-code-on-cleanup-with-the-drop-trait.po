@@ -1,0 +1,266 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch15-03-drop.md:1
+msgid "Running Code on Cleanup with the `Drop` Trait"
+msgstr ""
+
+#: src/ch15-03-drop.md:3
+msgid ""
+"The second trait important to the smart pointer pattern is `Drop`, which "
+"lets you customize what happens when a value is about to go out of scope. "
+"You can provide an implementation for the `Drop` trait on any type, and that "
+"code can be used to release resources like files or network connections."
+msgstr ""
+
+#: src/ch15-03-drop.md:8
+msgid ""
+"We’re introducing `Drop` in the context of smart pointers because the "
+"functionality of the `Drop` trait is almost always used when implementing a "
+"smart pointer. For example, when a `Box<T>` is dropped, it will deallocate "
+"the space on the heap that the box points to."
+msgstr ""
+
+#: src/ch15-03-drop.md:13
+msgid ""
+"In some languages, for some types, the programmer must call code to free "
+"memory or resources every time they finish using an instance of those types. "
+"Examples include file handles, sockets, and locks. If the programmer "
+"forgets, the system might become overloaded and crash. In Rust, you can "
+"specify that a particular bit of code be run whenever a value goes out of "
+"scope, and the compiler will insert this code automatically. As a result, "
+"you don’t need to be careful about placing cleanup code everywhere in a "
+"program that an instance of a particular type is finished with—you still "
+"won’t leak resources!"
+msgstr ""
+
+#: src/ch15-03-drop.md:22
+msgid ""
+"You specify the code to run when a value goes out of scope by implementing "
+"the `Drop` trait. The `Drop` trait requires you to implement one method "
+"named `drop` that takes a mutable reference to `self`. To see when Rust "
+"calls `drop`, let’s implement `drop` with `println!` statements for now."
+msgstr ""
+
+#: src/ch15-03-drop.md:27
+msgid ""
+"Listing 15-14 shows a `CustomSmartPointer` struct whose only custom "
+"functionality is that it will print `Dropping CustomSmartPointer!` when the "
+"instance goes out of scope, to show when Rust runs the `drop` method."
+msgstr ""
+
+#: src/ch15-03-drop.md:40 src/ch15-03-drop.md:115 src/ch15-03-drop.md:180
+msgid "\"Dropping CustomSmartPointer with data `{}`!\""
+msgstr ""
+
+#: src/ch15-03-drop.md:46
+msgid "\"my stuff\""
+msgstr ""
+
+#: src/ch15-03-drop.md:49
+msgid "\"other stuff\""
+msgstr ""
+
+#: src/ch15-03-drop.md:51
+msgid "\"CustomSmartPointers created\""
+msgstr ""
+
+#: src/ch15-03-drop.md:57
+msgid ""
+"The `Drop` trait is included in the prelude, so we don’t need to bring it "
+"into scope. We implement the `Drop` trait on `CustomSmartPointer` and "
+"provide an implementation for the `drop` method that calls `println!`. The "
+"body of the `drop` method is where you would place any logic that you wanted "
+"to run when an instance of your type goes out of scope. We’re printing some "
+"text here to demonstrate visually when Rust will call `drop`."
+msgstr ""
+
+#: src/ch15-03-drop.md:64
+msgid ""
+"In `main`, we create two instances of `CustomSmartPointer` and then print "
+"`CustomSmartPointers created`. At the end of `main`, our instances of "
+"`CustomSmartPointer` will go out of scope, and Rust will call the code we "
+"put in the `drop` method, printing our final message. Note that we didn’t "
+"need to call the `drop` method explicitly."
+msgstr ""
+
+#: src/ch15-03-drop.md:70
+msgid "When we run this program, we’ll see the following output:"
+msgstr ""
+
+#: src/ch15-03-drop.md:72
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling drop-example v0.1.0 (file:///projects/drop-example)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.60s\n"
+"     Running `target/debug/drop-example`\n"
+"CustomSmartPointers created\n"
+"Dropping CustomSmartPointer with data `other stuff`!\n"
+"Dropping CustomSmartPointer with data `my stuff`!\n"
+"```"
+msgstr ""
+
+#: src/ch15-03-drop.md:82
+msgid ""
+"Rust automatically called `drop` for us when our instances went out of "
+"scope, calling the code we specified. Variables are dropped in the reverse "
+"order of their creation, so `d` was dropped before `c`. This example’s "
+"purpose is to give you a visual guide to how the `drop` method works; "
+"usually you would specify the cleanup code that your type needs to run "
+"rather than a print message."
+msgstr ""
+
+#: src/ch15-03-drop.md:91
+msgid "<a id=\"dropping-a-value-early-with-std-mem-drop\"></a>"
+msgstr ""
+
+#: src/ch15-03-drop.md:93
+msgid ""
+"Unfortunately, it’s not straightforward to disable the automatic `drop` "
+"functionality. Disabling `drop` isn’t usually necessary; the whole point of "
+"the `Drop` trait is that it’s taken care of automatically. Occasionally, "
+"however, you might want to clean up a value early. One example is when using "
+"smart pointers that manage locks: You might want to force the `drop` method "
+"that releases the lock so that other code in the same scope can acquire the "
+"lock. Rust doesn’t let you call the `Drop` trait’s `drop` method manually; "
+"instead, you have to call the `std::mem::drop` function provided by the "
+"standard library if you want to force a value to be dropped before the end "
+"of its scope."
+msgstr ""
+
+#: src/ch15-03-drop.md:103
+msgid ""
+"Trying to call the `Drop` trait’s `drop` method manually by modifying the "
+"`main` function from Listing 15-14 won’t work, as shown in Listing 15-15."
+msgstr ""
+
+#: src/ch15-03-drop.md:121 src/ch15-03-drop.md:186
+msgid "\"some data\""
+msgstr ""
+
+#: src/ch15-03-drop.md:123 src/ch15-03-drop.md:188
+msgid "\"CustomSmartPointer created\""
+msgstr ""
+
+#: src/ch15-03-drop.md:125 src/ch15-03-drop.md:190
+msgid "\"CustomSmartPointer dropped before the end of main\""
+msgstr ""
+
+#: src/ch15-03-drop.md:131
+msgid "When we try to compile this code, we’ll get this error:"
+msgstr ""
+
+#: src/ch15-03-drop.md:133
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling drop-example v0.1.0 (file:///projects/drop-example)\n"
+"error[E0040]: explicit use of destructor method\n"
+"  --> src/main.rs:16:7\n"
+"   |\n"
+"16 |     c.drop();\n"
+"   |       ^^^^ explicit destructor calls not allowed\n"
+"   |\n"
+"help: consider using `drop` function\n"
+"   |\n"
+"16 -     c.drop();\n"
+"16 +     drop(c);\n"
+"   |\n"
+"\n"
+"For more information about this error, try `rustc --explain E0040`.\n"
+"error: could not compile `drop-example` (bin \"drop-example\") due to 1 "
+"previous error\n"
+"```"
+msgstr ""
+
+#: src/ch15-03-drop.md:152
+msgid ""
+"This error message states that we’re not allowed to explicitly call `drop`. "
+"The error message uses the term _destructor_, which is the general "
+"programming term for a function that cleans up an instance. A _destructor_ "
+"is analogous to a _constructor_, which creates an instance. The `drop` "
+"function in Rust is one particular destructor."
+msgstr ""
+
+#: src/ch15-03-drop.md:158
+msgid ""
+"Rust doesn’t let us call `drop` explicitly, because Rust would still "
+"automatically call `drop` on the value at the end of `main`. This would "
+"cause a double free error because Rust would be trying to clean up the same "
+"value twice."
+msgstr ""
+
+#: src/ch15-03-drop.md:162
+msgid ""
+"We can’t disable the automatic insertion of `drop` when a value goes out of "
+"scope, and we can’t call the `drop` method explicitly. So, if we need to "
+"force a value to be cleaned up early, we use the `std::mem::drop` function."
+msgstr ""
+
+#: src/ch15-03-drop.md:166
+msgid ""
+"The `std::mem::drop` function is different from the `drop` method in the "
+"`Drop` trait. We call it by passing as an argument the value we want to "
+"force-drop. The function is in the prelude, so we can modify `main` in "
+"Listing 15-15 to call the `drop` function, as shown in Listing 15-16."
+msgstr ""
+
+#: src/ch15-03-drop.md:196
+msgid "Running this code will print the following:"
+msgstr ""
+
+#: src/ch15-03-drop.md:198
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling drop-example v0.1.0 (file:///projects/drop-example)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.73s\n"
+"     Running `target/debug/drop-example`\n"
+"CustomSmartPointer created\n"
+"Dropping CustomSmartPointer with data `some data`!\n"
+"CustomSmartPointer dropped before the end of main\n"
+"```"
+msgstr ""
+
+#: src/ch15-03-drop.md:208
+msgid ""
+"The text ``Dropping CustomSmartPointer with data `some data`!`` is printed "
+"between the `CustomSmartPointer created` and `CustomSmartPointer dropped "
+"before the end of main` text, showing that the `drop` method code is called "
+"to drop `c` at that point."
+msgstr ""
+
+#: src/ch15-03-drop.md:213
+msgid ""
+"You can use code specified in a `Drop` trait implementation in many ways to "
+"make cleanup convenient and safe: For instance, you could use it to create "
+"your own memory allocator! With the `Drop` trait and Rust’s ownership "
+"system, you don’t have to remember to clean up, because Rust does it "
+"automatically."
+msgstr ""
+
+#: src/ch15-03-drop.md:218
+msgid ""
+"You also don’t have to worry about problems resulting from accidentally "
+"cleaning up values still in use: The ownership system that makes sure "
+"references are always valid also ensures that `drop` gets called only once "
+"when the value is no longer being used."
+msgstr ""
+
+#: src/ch15-03-drop.md:223
+msgid ""
+"Now that we’ve examined `Box<T>` and some of the characteristics of smart "
+"pointers, let’s look at a few other smart pointers defined in the standard "
+"library."
+msgstr ""

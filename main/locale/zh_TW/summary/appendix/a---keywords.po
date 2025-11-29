@@ -1,0 +1,333 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/appendix-01-keywords.md:1
+msgid "Appendix A: Keywords"
+msgstr ""
+
+#: src/appendix-01-keywords.md:3
+msgid ""
+"The following lists contain keywords that are reserved for current or future "
+"use by the Rust language. As such, they cannot be used as identifiers "
+"(except as raw identifiers, as we discuss in the [“Raw Identifiers”](#raw-"
+"identifiers)<!-- ignore --> section). _Identifiers_ are names of functions, "
+"variables, parameters, struct fields, modules, crates, constants, macros, "
+"static values, attributes, types, traits, or lifetimes."
+msgstr ""
+
+#: src/appendix-01-keywords.md:12
+msgid "Keywords Currently in Use"
+msgstr ""
+
+#: src/appendix-01-keywords.md:14
+msgid ""
+"The following is a list of keywords currently in use, with their "
+"functionality described."
+msgstr ""
+
+#: src/appendix-01-keywords.md:17
+msgid ""
+"**`as`**: Perform primitive casting, disambiguate the specific trait "
+"containing an item, or rename items in `use` statements."
+msgstr ""
+
+#: src/appendix-01-keywords.md:19
+msgid "**`async`**: Return a `Future` instead of blocking the current thread."
+msgstr ""
+
+#: src/appendix-01-keywords.md:20
+msgid "**`await`**: Suspend execution until the result of a `Future` is ready."
+msgstr ""
+
+#: src/appendix-01-keywords.md:21
+msgid "**`break`**: Exit a loop immediately."
+msgstr ""
+
+#: src/appendix-01-keywords.md:22
+msgid "**`const`**: Define constant items or constant raw pointers."
+msgstr ""
+
+#: src/appendix-01-keywords.md:23
+msgid "**`continue`**: Continue to the next loop iteration."
+msgstr ""
+
+#: src/appendix-01-keywords.md:24
+msgid "**`crate`**: In a module path, refers to the crate root."
+msgstr ""
+
+#: src/appendix-01-keywords.md:25
+msgid "**`dyn`**: Dynamic dispatch to a trait object."
+msgstr ""
+
+#: src/appendix-01-keywords.md:26
+msgid "**`else`**: Fallback for `if` and `if let` control flow constructs."
+msgstr ""
+
+#: src/appendix-01-keywords.md:27
+msgid "**`enum`**: Define an enumeration."
+msgstr ""
+
+#: src/appendix-01-keywords.md:28
+msgid "**`extern`**: Link an external function or variable."
+msgstr ""
+
+#: src/appendix-01-keywords.md:29
+msgid "**`false`**: Boolean false literal."
+msgstr ""
+
+#: src/appendix-01-keywords.md:30
+msgid "**`fn`**: Define a function or the function pointer type."
+msgstr ""
+
+#: src/appendix-01-keywords.md:31
+msgid ""
+"**`for`**: Loop over items from an iterator, implement a trait, or specify a "
+"higher ranked lifetime."
+msgstr ""
+
+#: src/appendix-01-keywords.md:33
+msgid "**`if`**: Branch based on the result of a conditional expression."
+msgstr ""
+
+#: src/appendix-01-keywords.md:34
+msgid "**`impl`**: Implement inherent or trait functionality."
+msgstr ""
+
+#: src/appendix-01-keywords.md:35
+msgid "**`in`**: Part of `for` loop syntax."
+msgstr ""
+
+#: src/appendix-01-keywords.md:36
+msgid "**`let`**: Bind a variable."
+msgstr ""
+
+#: src/appendix-01-keywords.md:37
+msgid "**`loop`**: Loop unconditionally."
+msgstr ""
+
+#: src/appendix-01-keywords.md:38
+msgid "**`match`**: Match a value to patterns."
+msgstr ""
+
+#: src/appendix-01-keywords.md:39
+msgid "**`mod`**: Define a module."
+msgstr ""
+
+#: src/appendix-01-keywords.md:40
+msgid "**`move`**: Make a closure take ownership of all its captures."
+msgstr ""
+
+#: src/appendix-01-keywords.md:41
+msgid ""
+"**`mut`**: Denote mutability in references, raw pointers, or pattern "
+"bindings."
+msgstr ""
+
+#: src/appendix-01-keywords.md:42
+msgid ""
+"**`pub`**: Denote public visibility in struct fields, `impl` blocks, or "
+"modules."
+msgstr ""
+
+#: src/appendix-01-keywords.md:44
+msgid "**`ref`**: Bind by reference."
+msgstr ""
+
+#: src/appendix-01-keywords.md:45
+msgid "**`return`**: Return from function."
+msgstr ""
+
+#: src/appendix-01-keywords.md:46
+msgid "**`Self`**: A type alias for the type we are defining or implementing."
+msgstr ""
+
+#: src/appendix-01-keywords.md:47
+msgid "**`self`**: Method subject or current module."
+msgstr ""
+
+#: src/appendix-01-keywords.md:48
+msgid ""
+"**`static`**: Global variable or lifetime lasting the entire program "
+"execution."
+msgstr ""
+
+#: src/appendix-01-keywords.md:50
+msgid "**`struct`**: Define a structure."
+msgstr ""
+
+#: src/appendix-01-keywords.md:51
+msgid "**`super`**: Parent module of the current module."
+msgstr ""
+
+#: src/appendix-01-keywords.md:52
+msgid "**`trait`**: Define a trait."
+msgstr ""
+
+#: src/appendix-01-keywords.md:53
+msgid "**`true`**: Boolean true literal."
+msgstr ""
+
+#: src/appendix-01-keywords.md:54
+msgid "**`type`**: Define a type alias or associated type."
+msgstr ""
+
+#: src/appendix-01-keywords.md:55
+msgid ""
+"**`union`**: Define a [union](../reference/items/unions.html)<!-- ignore --"
+">; is a keyword only when used in a union declaration."
+msgstr ""
+
+#: src/appendix-01-keywords.md:57
+msgid ""
+"**`unsafe`**: Denote unsafe code, functions, traits, or implementations."
+msgstr ""
+
+#: src/appendix-01-keywords.md:58
+msgid "**`use`**: Bring symbols into scope."
+msgstr ""
+
+#: src/appendix-01-keywords.md:59
+msgid "**`where`**: Denote clauses that constrain a type."
+msgstr ""
+
+#: src/appendix-01-keywords.md:60
+msgid "**`while`**: Loop conditionally based on the result of an expression."
+msgstr ""
+
+#: src/appendix-01-keywords.md:64
+msgid "Keywords Reserved for Future Use"
+msgstr ""
+
+#: src/appendix-01-keywords.md:66
+msgid ""
+"The following keywords do not yet have any functionality but are reserved by "
+"Rust for potential future use:"
+msgstr ""
+
+#: src/appendix-01-keywords.md:69
+msgid "`abstract`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:70
+msgid "`become`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:71
+msgid "`box`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:72
+msgid "`do`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:73
+msgid "`final`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:74
+msgid "`gen`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:75
+msgid "`macro`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:76
+msgid "`override`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:77
+msgid "`priv`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:78
+msgid "`try`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:79
+msgid "`typeof`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:80
+msgid "`unsized`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:81
+msgid "`virtual`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:82
+msgid "`yield`"
+msgstr ""
+
+#: src/appendix-01-keywords.md:84
+msgid "Raw Identifiers"
+msgstr ""
+
+#: src/appendix-01-keywords.md:86
+msgid ""
+"_Raw identifiers_ are the syntax that lets you use keywords where they "
+"wouldn’t normally be allowed. You use a raw identifier by prefixing a "
+"keyword with `r#`."
+msgstr ""
+
+#: src/appendix-01-keywords.md:89
+msgid ""
+"For example, `match` is a keyword. If you try to compile the following "
+"function that uses `match` as its name:"
+msgstr ""
+
+#: src/appendix-01-keywords.md:92 src/appendix-01-keywords.md:114
+msgid "<span class=\"filename\">Filename: src/main.rs</span>"
+msgstr ""
+
+#: src/appendix-01-keywords.md:100
+msgid "you’ll get this error:"
+msgstr ""
+
+#: src/appendix-01-keywords.md:110
+msgid ""
+"The error shows that you can’t use the keyword `match` as the function "
+"identifier. To use `match` as a function name, you need to use the raw "
+"identifier syntax, like this:"
+msgstr ""
+
+#: src/appendix-01-keywords.md:122
+msgid "\"foo\""
+msgstr ""
+
+#: src/appendix-01-keywords.md:122
+msgid "\"foobar\""
+msgstr ""
+
+#: src/appendix-01-keywords.md:126
+msgid ""
+"This code will compile without any errors. Note the `r#` prefix on the "
+"function name in its definition as well as where the function is called in "
+"`main`."
+msgstr ""
+
+#: src/appendix-01-keywords.md:129
+msgid ""
+"Raw identifiers allow you to use any word you choose as an identifier, even "
+"if that word happens to be a reserved keyword. This gives us more freedom to "
+"choose identifier names, as well as lets us integrate with programs written "
+"in a language where these words aren’t keywords. In addition, raw "
+"identifiers allow you to use libraries written in a different Rust edition "
+"than your crate uses. For example, `try` isn’t a keyword in the 2015 edition "
+"but is in the 2018, 2021, and 2024 editions. If you depend on a library that "
+"is written using the 2015 edition and has a `try` function, you’ll need to "
+"use the raw identifier syntax, `r#try` in this case, to call that function "
+"from your code on later editions. See [Appendix E](appendix-05-editions."
+"html)<!-- ignore --> for more information on editions."
+msgstr ""
