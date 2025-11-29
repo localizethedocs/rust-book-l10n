@@ -1,0 +1,423 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch12-04-testing-the-librarys-functionality.md:2
+msgid ""
+"<a id=\"developing-the-librarys-functionality-with-test-driven-"
+"development\"></a>"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:4
+msgid "Adding Functionality with Test-Driven Development"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:6
+msgid ""
+"Now that we have the search logic in _src/lib.rs_ separate from the `main` "
+"function, it’s much easier to write tests for the core functionality of our "
+"code. We can call functions directly with various arguments and check return "
+"values without having to call our binary from the command line."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:11
+msgid ""
+"In this section, we’ll add the searching logic to the `minigrep` program "
+"using the test-driven development (TDD) process with the following steps:"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:14
+msgid ""
+"Write a test that fails and run it to make sure it fails for the reason you "
+"expect."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:16
+msgid "Write or modify just enough code to make the new test pass."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:17
+msgid ""
+"Refactor the code you just added or changed and make sure the tests continue "
+"to pass."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:19
+msgid "Repeat from step 1!"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:21
+msgid ""
+"Though it’s just one of many ways to write software, TDD can help drive code "
+"design. Writing the test before you write the code that makes the test pass "
+"helps maintain high test coverage throughout the process."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:25
+msgid ""
+"We’ll test-drive the implementation of the functionality that will actually "
+"do the searching for the query string in the file contents and produce a "
+"list of lines that match the query. We’ll add this functionality in a "
+"function called `search`."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:30
+msgid "Writing a Failing Test"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:32
+msgid ""
+"In _src/lib.rs_, we’ll add a `tests` module with a test function, as we did "
+"in [Chapter 11](ch11-01-writing-tests.html#the-anatomy-of-a-test-"
+"function)<!-- ignore -->. The test function specifies the behavior we want "
+"the `search` function to have: It will take a query and the text to search, "
+"and it will return only the lines from the text that contain the query. "
+"Listing 12-15 shows this test."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:44
+msgid "// --snip--\n"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:53
+#: src/ch12-04-testing-the-librarys-functionality.md:93
+#: src/ch12-04-testing-the-librarys-functionality.md:191
+#: src/ch12-04-testing-the-librarys-functionality.md:233
+#: src/ch12-04-testing-the-librarys-functionality.md:278
+msgid "\"duct\""
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:54
+msgid ""
+"\"\\\n"
+"Rust:\n"
+"safe, fast, productive.\n"
+"Pick three.\""
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:59
+#: src/ch12-04-testing-the-librarys-functionality.md:99
+#: src/ch12-04-testing-the-librarys-functionality.md:197
+#: src/ch12-04-testing-the-librarys-functionality.md:239
+#: src/ch12-04-testing-the-librarys-functionality.md:284
+msgid "\"safe, fast, productive.\""
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:66
+msgid ""
+"This test searches for the string `\"duct\"`. The text we’re searching is "
+"three lines, only one of which contains `\"duct\"` (note that the backslash "
+"after the opening double quote tells Rust not to put a newline character at "
+"the beginning of the contents of this string literal). We assert that the "
+"value returned from the `search` function contains only the line we expect."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:72
+msgid ""
+"If we run this test, it will currently fail because the `unimplemented!` "
+"macro panics with the message “not implemented”. In accordance with TDD "
+"principles, we’ll take a small step of adding just enough code to get the "
+"test to not panic when calling the function by defining the `search` "
+"function to always return an empty vector, as shown in Listing 12-16. Then, "
+"the test should compile and fail because an empty vector doesn’t match a "
+"vector containing the line `\"safe, fast, productive.\"`."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:94
+#: src/ch12-04-testing-the-librarys-functionality.md:192
+#: src/ch12-04-testing-the-librarys-functionality.md:234
+#: src/ch12-04-testing-the-librarys-functionality.md:279
+msgid ""
+"\"\\\n"
+"# Rust:\n"
+"# safe, fast, productive.\n"
+"# Pick three.\""
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:106
+msgid ""
+"Now let’s discuss why we need to define an explicit lifetime `'a` in the "
+"signature of `search` and use that lifetime with the `contents` argument and "
+"the return value. Recall in [Chapter 10](ch10-03-lifetime-syntax.html)<!-- "
+"ignore --> that the lifetime parameters specify which argument lifetime is "
+"connected to the lifetime of the return value. In this case, we indicate "
+"that the returned vector should contain string slices that reference slices "
+"of the argument `contents` (rather than the argument `query`)."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:114
+msgid ""
+"In other words, we tell Rust that the data returned by the `search` function "
+"will live as long as the data passed into the `search` function in the "
+"`contents` argument. This is important! The data referenced _by_ a slice "
+"needs to be valid for the reference to be valid; if the compiler assumes "
+"we’re making string slices of `query` rather than `contents`, it will do its "
+"safety checking incorrectly."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:121
+msgid ""
+"If we forget the lifetime annotations and try to compile this function, "
+"we’ll get this error:"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:124
+msgid ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling minigrep v0.1.0 (file:///projects/minigrep)\n"
+"error[E0106]: missing lifetime specifier\n"
+" --> src/lib.rs:1:51\n"
+"  |\n"
+"1 | pub fn search(query: &str, contents: &str) -> Vec<&str> {\n"
+"  |                      ----            ----         ^ expected named "
+"lifetime parameter\n"
+"  |\n"
+"  = help: this function's return type contains a borrowed value, but the "
+"signature does not say whether it is borrowed from `query` or `contents`\n"
+"help: consider introducing a named lifetime parameter\n"
+"  |\n"
+"1 | pub fn search<'a>(query: &'a str, contents: &'a str) -> Vec<&'a str> {\n"
+"  |              ++++         ++                 ++              ++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0106`.\n"
+"error: could not compile `minigrep` (lib) due to 1 previous error\n"
+"```"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:143
+msgid ""
+"Rust can’t know which of the two parameters we need for the output, so we "
+"need to tell it explicitly. Note that the help text suggests specifying the "
+"same lifetime parameter for all the parameters and the output type, which is "
+"incorrect! Because `contents` is the parameter that contains all of our text "
+"and we want to return the parts of that text that match, we know `contents` "
+"is the only parameter that should be connected to the return value using the "
+"lifetime syntax."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:151
+msgid ""
+"Other programming languages don’t require you to connect arguments to return "
+"values in the signature, but this practice will get easier over time. You "
+"might want to compare this example with the examples in the [“Validating "
+"References with Lifetimes”](ch10-03-lifetime-syntax.html#validating-"
+"references-with-lifetimes)<!-- ignore --> section in Chapter 10."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:157
+msgid "Writing Code to Pass the Test"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:159
+msgid ""
+"Currently, our test is failing because we always return an empty vector. To "
+"fix that and implement `search`, our program needs to follow these steps:"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:162
+msgid "Iterate through each line of the contents."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:163
+msgid "Check whether the line contains our query string."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:164
+msgid "If it does, add it to the list of values we’re returning."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:165
+msgid "If it doesn’t, do nothing."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:166
+msgid "Return the list of results that match."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:168
+msgid "Let’s work through each step, starting with iterating through lines."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:170
+msgid "Iterating Through Lines with the `lines` Method"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:172
+msgid ""
+"Rust has a helpful method to handle line-by-line iteration of strings, "
+"conveniently named `lines`, that works as shown in Listing 12-17. Note that "
+"this won’t compile yet."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:181
+#: src/ch12-04-testing-the-librarys-functionality.md:222
+msgid "// do something with line\n"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:204
+msgid ""
+"The `lines` method returns an iterator. We’ll talk about iterators in depth "
+"in [Chapter 13](ch13-02-iterators.html)<!-- ignore -->. But recall that you "
+"saw this way of using an iterator in [Listing 3-5](ch03-05-control-flow."
+"html#looping-through-a-collection-with-for)<!-- ignore -->, where we used a "
+"`for` loop with an iterator to run some code on each item in a collection."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:209
+msgid "Searching Each Line for the Query"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:211
+msgid ""
+"Next, we’ll check whether the current line contains our query string. "
+"Fortunately, strings have a helpful method named `contains` that does this "
+"for us! Add a call to the `contains` method in the `search` function, as "
+"shown in Listing 12-18. Note that this still won’t compile yet."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:246
+msgid ""
+"At the moment, we’re building up functionality. To get the code to compile, "
+"we need to return a value from the body as we indicated we would in the "
+"function signature."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:250
+msgid "Storing Matching Lines"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:252
+msgid ""
+"To finish this function, we need a way to store the matching lines that we "
+"want to return. For that, we can make a mutable vector before the `for` loop "
+"and call the `push` method to store a `line` in the vector. After the `for` "
+"loop, we return the vector, as shown in Listing 12-19."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:291
+msgid ""
+"Now the `search` function should return only the lines that contain `query`, "
+"and our test should pass. Let’s run the test:"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:294
+msgid ""
+"```console\n"
+"$ cargo test\n"
+"   Compiling minigrep v0.1.0 (file:///projects/minigrep)\n"
+"    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.22s\n"
+"     Running unittests src/lib.rs (target/debug/deps/"
+"minigrep-9cd200e5fac0fc94)\n"
+"\n"
+"running 1 test\n"
+"test tests::one_result ... ok\n"
+"\n"
+"test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; "
+"finished in 0.00s\n"
+"\n"
+"     Running unittests src/main.rs (target/debug/deps/"
+"minigrep-9cd200e5fac0fc94)\n"
+"\n"
+"running 0 tests\n"
+"\n"
+"test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; "
+"finished in 0.00s\n"
+"\n"
+"   Doc-tests minigrep\n"
+"\n"
+"running 0 tests\n"
+"\n"
+"test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; "
+"finished in 0.00s\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:319
+msgid "Our test passed, so we know it works!"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:321
+msgid ""
+"At this point, we could consider opportunities for refactoring the "
+"implementation of the search function while keeping the tests passing to "
+"maintain the same functionality. The code in the search function isn’t too "
+"bad, but it doesn’t take advantage of some useful features of iterators. "
+"We’ll return to this example in [Chapter 13](ch13-02-iterators.html)<!-- "
+"ignore -->, where we’ll explore iterators in detail, and look at how to "
+"improve it."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:328
+msgid ""
+"Now the entire program should work! Let’s try it out, first with a word that "
+"should return exactly one line from the Emily Dickinson poem: _frog_."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:331
+msgid ""
+"```console\n"
+"$ cargo run -- frog poem.txt\n"
+"   Compiling minigrep v0.1.0 (file:///projects/minigrep)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.38s\n"
+"     Running `target/debug/minigrep frog poem.txt`\n"
+"How public, like a frog\n"
+"```"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:339
+msgid "Cool! Now let’s try a word that will match multiple lines, like _body_:"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:341
+msgid ""
+"```console\n"
+"$ cargo run -- body poem.txt\n"
+"   Compiling minigrep v0.1.0 (file:///projects/minigrep)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s\n"
+"     Running `target/debug/minigrep body poem.txt`\n"
+"I'm nobody! Who are you?\n"
+"Are you nobody, too?\n"
+"How dreary to be somebody!\n"
+"```"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:351
+msgid ""
+"And finally, let’s make sure that we don’t get any lines when we search for "
+"a word that isn’t anywhere in the poem, such as _monomorphization_:"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:354
+msgid ""
+"```console\n"
+"$ cargo run -- monomorphization poem.txt\n"
+"   Compiling minigrep v0.1.0 (file:///projects/minigrep)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s\n"
+"     Running `target/debug/minigrep monomorphization poem.txt`\n"
+"```"
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:361
+msgid ""
+"Excellent! We’ve built our own mini version of a classic tool and learned a "
+"lot about how to structure applications. We’ve also learned a bit about file "
+"input and output, lifetimes, testing, and command line parsing."
+msgstr ""
+
+#: src/ch12-04-testing-the-librarys-functionality.md:365
+msgid ""
+"To round out this project, we’ll briefly demonstrate how to work with "
+"environment variables and how to print to standard error, both of which are "
+"useful when you’re writing command line programs."
+msgstr ""

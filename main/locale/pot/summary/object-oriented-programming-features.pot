@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch18-00-oop.md:1
+msgid "Object-Oriented Programming Features"
+msgstr ""
+
+#: src/ch18-00-oop.md:5
+msgid "<a id=\"object-oriented-programming-features-of-rust\"></a>"
+msgstr ""
+
+#: src/ch18-00-oop.md:7
+msgid ""
+"Object-oriented programming (OOP) is a way of modeling programs. Objects as "
+"a programmatic concept were introduced in the programming language Simula in "
+"the 1960s. Those objects influenced Alan Kay’s programming architecture in "
+"which objects pass messages to each other. To describe this architecture, he "
+"coined the term _object-oriented programming_ in 1967. Many competing "
+"definitions describe what OOP is, and by some of these definitions Rust is "
+"object oriented but by others it is not. In this chapter, we’ll explore "
+"certain characteristics that are commonly considered object oriented and how "
+"those characteristics translate to idiomatic Rust. We’ll then show you how "
+"to implement an object-oriented design pattern in Rust and discuss the trade-"
+"offs of doing so versus implementing a solution using some of Rust’s "
+"strengths instead."
+msgstr ""

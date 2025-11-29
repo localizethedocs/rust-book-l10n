@@ -1,0 +1,47 @@
+{
+  "po" : 
+  {
+    "en_US" : 
+    {
+      "branch" : "",
+      "commit" : 
+      {
+        "date" : "",
+        "hash" : "",
+        "title" : ""
+      }
+    },
+    "zh_CN" : 
+    {
+      "branch" : "",
+      "commit" : 
+      {
+        "date" : "",
+        "hash" : "",
+        "title" : ""
+      }
+    },
+    "zh_TW" : 
+    {
+      "branch" : "",
+      "commit" : 
+      {
+        "date" : "",
+        "hash" : "",
+        "title" : ""
+      }
+    }
+  },
+  "pot" : 
+  {
+    "branch" : "main",
+    "commit" : 
+    {
+      "date" : "2025-11-18 10:36:41 -0500",
+      "hash" : "8c0eacd5c4acbb650497454f3a58c9e8083202a4",
+      "title" : "Update ch07-02-defining-modules-to-control-scope-and-privacy.md"
+    }
+  },
+  "type" : "branch",
+  "version" : "main"
+}
