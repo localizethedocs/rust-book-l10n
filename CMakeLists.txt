@@ -79,7 +79,7 @@ set(GETTEXT_WRAP_WIDTH 79
     # See https://www.gnu.org/software/gettext/manual/html_node/msgcat-Invocation.html
     # and https://www.gnu.org/software/gettext/manual/html_node/msgmerge-Invocation.html for details.
 
-set(REMOTE_URL_OF_L10N "https://github.com/ltdorgtest/rust-book-l10n.git"
+set(REMOTE_URL_OF_L10N "https://github.com/localizethedocs/rust-book-l10n.git"
     CACHE STRING "The remote URL of the 'l10n' repository.")
 
 set(REMOTE_URL_OF_DOCS "https://github.com/rust-lang/book.git"
