@@ -10,6 +10,7 @@ var CONFIG_OPTIONS = {
     ["main",      "Development"],
   ],
   CONFIG_PROJECTS: [
+    ["Index",     "https://projects.localizethedocs.org"],
     ["Crowdin",   "https://localizethedocs.crowdin.com/rust-book-l10n"],
     ["GitHub",    "https://github.com/localizethedocs/rust-book-l10n"],
     ["AtomGit",   "https://atomgit.com/localizethedocs/rust-book-l10n"],
