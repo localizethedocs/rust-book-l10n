@@ -1,0 +1,502 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch04-02-references-and-borrowing.md:1
+msgid "References and Borrowing"
+msgstr "參考與借用"
+
+#: src/ch04-02-references-and-borrowing.md:3
+msgid ""
+"The issue with the tuple code in Listing 4-5 is that we have to return the "
+"`String` to the calling function so that we can still use the `String` after "
+"the call to `calculate_length`, because the `String` was moved into "
+"`calculate_length`. Instead, we can provide a reference to the `String` "
+"value. A reference is like a pointer in that it’s an address we can follow "
+"to access the data stored at that address; that data is owned by some other "
+"variable. Unlike a pointer, a reference is guaranteed to point to a valid "
+"value of a particular type for the life of that reference."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:12
+msgid ""
+"Here is how you would define and use a `calculate_length` function that has "
+"a reference to an object as a parameter instead of taking ownership of the "
+"value:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:19
+#: src/ch04-02-references-and-borrowing.md:55
+#: src/ch04-02-references-and-borrowing.md:76
+#: src/ch04-02-references-and-borrowing.md:107
+#: src/ch04-02-references-and-borrowing.md:151
+#: src/ch04-02-references-and-borrowing.md:176
+#: src/ch04-02-references-and-borrowing.md:233
+#: src/ch04-02-references-and-borrowing.md:248
+#: src/ch04-02-references-and-borrowing.md:294
+#: src/ch04-02-references-and-borrowing.md:338
+#: src/ch04-02-references-and-borrowing.md:393
+#: src/ch04-02-references-and-borrowing.md:415
+msgid "\"hello\""
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:23
+#: src/ch04-02-references-and-borrowing.md:59
+#: src/ch04-02-references-and-borrowing.md:80
+msgid "\"The length of '{s1}' is {len}.\""
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:33
+msgid ""
+"First, notice that all the tuple code in the variable declaration and the "
+"function return value is gone. Second, note that we pass `&s1` into "
+"`calculate_length` and, in its definition, we take `&String` rather than "
+"`String`. These ampersands represent references, and they allow you to refer "
+"to some value without taking ownership of it. Figure 4-6 depicts this "
+"concept."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:39
+msgid ""
+"<img alt=\"Three tables: the table for s contains only a pointer to the "
+"table\n"
+"for s1. The table for s1 contains the stack data for s1 and points to the\n"
+"string data on the heap.\" src=\"img/trpl04-06.svg\" class=\"center\" />"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:43
+msgid ""
+"<span class=\"caption\">Figure 4-6: A diagram of `&String` `s` pointing at "
+"`String` `s1`</span>"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:46
+msgid ""
+"Note: The opposite of referencing by using `&` is _dereferencing_, which is "
+"accomplished with the dereference operator, `*`. We’ll see some uses of the "
+"dereference operator in Chapter 8 and discuss details of dereferencing in "
+"Chapter 15."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:51
+msgid "Let’s take a closer look at the function call here:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:67
+msgid ""
+"The `&s1` syntax lets us create a reference that _refers_ to the value of "
+"`s1` but does not own it. Because the reference does not own it, the value "
+"it points to will not be dropped when the reference stops being used."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:71
+msgid ""
+"Likewise, the signature of the function uses `&` to indicate that the type "
+"of the parameter `s` is a reference. Let’s add some explanatory annotations:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:83
+msgid "// s is a reference to a String\n"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:85
+msgid ""
+"// Here, s goes out of scope. But because s does not have ownership of what\n"
+"  // it refers to, the String is not dropped.\n"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:89
+msgid ""
+"The scope in which the variable `s` is valid is the same as any function "
+"parameter’s scope, but the value pointed to by the reference is not dropped "
+"when `s` stops being used, because `s` doesn’t have ownership. When "
+"functions have references as parameters instead of the actual values, we "
+"won’t need to return the values in order to give back ownership, because we "
+"never had ownership."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:96
+msgid ""
+"We call the action of creating a reference _borrowing_. As in real life, if "
+"a person owns something, you can borrow it from them. When you’re done, you "
+"have to give it back. You don’t own it."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:100
+msgid ""
+"So, what happens if we try to modify something we’re borrowing? Try the code "
+"in Listing 4-6. Spoiler alert: It doesn’t work!"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:113
+#: src/ch04-02-references-and-borrowing.md:157
+msgid "\", world\""
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:119
+#: src/ch04-02-references-and-borrowing.md:187
+#: src/ch04-02-references-and-borrowing.md:258
+#: src/ch04-02-references-and-borrowing.md:346
+msgid "Here’s the error:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:121
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling ownership v0.1.0 (file:///projects/ownership)\n"
+"error[E0596]: cannot borrow `*some_string` as mutable, as it is behind a `&` "
+"reference\n"
+" --> src/main.rs:8:5\n"
+"  |\n"
+"8 |     some_string.push_str(\", world\");\n"
+"  |     ^^^^^^^^^^^ `some_string` is a `&` reference, so the data it refers "
+"to cannot be borrowed as mutable\n"
+"  |\n"
+"help: consider changing this to be a mutable reference\n"
+"  |\n"
+"7 | fn change(some_string: &mut String) {\n"
+"  |                         +++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0596`.\n"
+"error: could not compile `ownership` (bin \"ownership\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:139
+msgid ""
+"Just as variables are immutable by default, so are references. We’re not "
+"allowed to modify something we have a reference to."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:142
+msgid "Mutable References"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:144
+msgid ""
+"We can fix the code from Listing 4-6 to allow us to modify a borrowed value "
+"with just a few small tweaks that use, instead, a _mutable reference_:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:163
+msgid ""
+"First, we change `s` to be `mut`. Then, we create a mutable reference with "
+"`&mut s` where we call the `change` function and update the function "
+"signature to accept a mutable reference with `some_string: &mut String`. "
+"This makes it very clear that the `change` function will mutate the value it "
+"borrows."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:168
+msgid ""
+"Mutable references have one big restriction: If you have a mutable reference "
+"to a value, you can have no other references to that value. This code that "
+"attempts to create two mutable references to `s` will fail:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:181
+msgid "\"{r1}, {r2}\""
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:189
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling ownership v0.1.0 (file:///projects/ownership)\n"
+"error[E0499]: cannot borrow `s` as mutable more than once at a time\n"
+" --> src/main.rs:5:14\n"
+"  |\n"
+"4 |     let r1 = &mut s;\n"
+"  |              ------ first mutable borrow occurs here\n"
+"5 |     let r2 = &mut s;\n"
+"  |              ^^^^^^ second mutable borrow occurs here\n"
+"6 |\n"
+"7 |     println!(\"{r1}, {r2}\");\n"
+"  |                -- first borrow later used here\n"
+"\n"
+"For more information about this error, try `rustc --explain E0499`.\n"
+"error: could not compile `ownership` (bin \"ownership\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:207
+msgid ""
+"This error says that this code is invalid because we cannot borrow `s` as "
+"mutable more than once at a time. The first mutable borrow is in `r1` and "
+"must last until it’s used in the `println!`, but between the creation of "
+"that mutable reference and its usage, we tried to create another mutable "
+"reference in `r2` that borrows the same data as `r1`."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:213
+msgid ""
+"The restriction preventing multiple mutable references to the same data at "
+"the same time allows for mutation but in a very controlled fashion. It’s "
+"something that new Rustaceans struggle with because most languages let you "
+"mutate whenever you’d like. The benefit of having this restriction is that "
+"Rust can prevent data races at compile time. A _data race_ is similar to a "
+"race condition and happens when these three behaviors occur:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:220
+msgid "Two or more pointers access the same data at the same time."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:221
+msgid "At least one of the pointers is being used to write to the data."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:222
+msgid "There’s no mechanism being used to synchronize access to the data."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:224
+msgid ""
+"Data races cause undefined behavior and can be difficult to diagnose and fix "
+"when you’re trying to track them down at runtime; Rust prevents this problem "
+"by refusing to compile code with data races!"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:228
+msgid ""
+"As always, we can use curly brackets to create a new scope, allowing for "
+"multiple mutable references, just not _simultaneous_ ones:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:237
+msgid ""
+"// r1 goes out of scope here, so we can make a new reference with no "
+"problems.\n"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:243
+msgid ""
+"Rust enforces a similar rule for combining mutable and immutable references. "
+"This code results in an error:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:250
+#: src/ch04-02-references-and-borrowing.md:251
+#: src/ch04-02-references-and-borrowing.md:296
+#: src/ch04-02-references-and-borrowing.md:297
+#: src/ch04-02-references-and-borrowing.md:301
+msgid "// no problem\n"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:252
+msgid "// BIG PROBLEM\n"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:254
+msgid "\"{r1}, {r2}, and {r3}\""
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:260
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling ownership v0.1.0 (file:///projects/ownership)\n"
+"error[E0502]: cannot borrow `s` as mutable because it is also borrowed as "
+"immutable\n"
+" --> src/main.rs:6:14\n"
+"  |\n"
+"4 |     let r1 = &s; // no problem\n"
+"  |              -- immutable borrow occurs here\n"
+"5 |     let r2 = &s; // no problem\n"
+"6 |     let r3 = &mut s; // BIG PROBLEM\n"
+"  |              ^^^^^^ mutable borrow occurs here\n"
+"7 |\n"
+"8 |     println!(\"{r1}, {r2}, and {r3}\");\n"
+"  |                -- immutable borrow later used here\n"
+"\n"
+"For more information about this error, try `rustc --explain E0502`.\n"
+"error: could not compile `ownership` (bin \"ownership\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:279
+msgid ""
+"Whew! We _also_ cannot have a mutable reference while we have an immutable "
+"one to the same value."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:282
+msgid ""
+"Users of an immutable reference don’t expect the value to suddenly change "
+"out from under them! However, multiple immutable references are allowed "
+"because no one who is just reading the data has the ability to affect anyone "
+"else’s reading of the data."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:287
+msgid ""
+"Note that a reference’s scope starts from where it is introduced and "
+"continues through the last time that reference is used. For instance, this "
+"code will compile because the last usage of the immutable references is in "
+"the `println!`, before the mutable reference is introduced:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:298
+msgid "\"{r1} and {r2}\""
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:299
+msgid "// Variables r1 and r2 will not be used after this point.\n"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:302
+msgid "\"{r3}\""
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:306
+msgid ""
+"The scopes of the immutable references `r1` and `r2` end after the `println!"
+"` where they are last used, which is before the mutable reference `r3` is "
+"created. These scopes don’t overlap, so this code is allowed: The compiler "
+"can tell that the reference is no longer being used at a point before the "
+"end of the scope."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:312
+msgid ""
+"Even though borrowing errors may be frustrating at times, remember that it’s "
+"the Rust compiler pointing out a potential bug early (at compile time rather "
+"than at runtime) and showing you exactly where the problem is. Then, you "
+"don’t have to track down why your data isn’t what you thought it was."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:317
+msgid "Dangling References"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:319
+msgid ""
+"In languages with pointers, it’s easy to erroneously create a _dangling "
+"pointer_—a pointer that references a location in memory that may have been "
+"given to someone else—by freeing some memory while preserving a pointer to "
+"that memory. In Rust, by contrast, the compiler guarantees that references "
+"will never be dangling references: If you have a reference to some data, the "
+"compiler will ensure that the data will not go out of scope before the "
+"reference to the data does."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:327
+msgid ""
+"Let’s try to create a dangling reference to see how Rust prevents them with "
+"a compile-time error:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:348
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling ownership v0.1.0 (file:///projects/ownership)\n"
+"error[E0106]: missing lifetime specifier\n"
+" --> src/main.rs:5:16\n"
+"  |\n"
+"5 | fn dangle() -> &String {\n"
+"  |                ^ expected named lifetime parameter\n"
+"  |\n"
+"  = help: this function's return type contains a borrowed value, but there "
+"is no value for it to be borrowed from\n"
+"help: consider using the `'static` lifetime, but this is uncommon unless "
+"you're returning a borrowed value from a `const` or a `static`\n"
+"  |\n"
+"5 | fn dangle() -> &'static String {\n"
+"  |                 +++++++\n"
+"help: instead, you are more likely to want to return an owned value\n"
+"  |\n"
+"5 - fn dangle() -> &String {\n"
+"5 + fn dangle() -> String {\n"
+"  |\n"
+"\n"
+"For more information about this error, try `rustc --explain E0106`.\n"
+"error: could not compile `ownership` (bin \"ownership\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:372
+msgid ""
+"This error message refers to a feature we haven’t covered yet: lifetimes. "
+"We’ll discuss lifetimes in detail in Chapter 10. But, if you disregard the "
+"parts about lifetimes, the message does contain the key to why this code is "
+"a problem:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:381
+msgid ""
+"Let’s take a closer look at exactly what’s happening at each stage of our "
+"`dangle` code:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:391
+msgid "// dangle returns a reference to a String\n"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:393
+msgid "// s is a new String\n"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:395
+msgid "// we return a reference to the String, s\n"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:396
+msgid ""
+"// Here, s goes out of scope and is dropped, so its memory goes away.\n"
+"  // Danger!\n"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:402
+msgid ""
+"Because `s` is created inside `dangle`, when the code of `dangle` is "
+"finished, `s` will be deallocated. But we tried to return a reference to it. "
+"That means this reference would be pointing to an invalid `String`. That’s "
+"no good! Rust won’t let us do this."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:407
+msgid "The solution here is to return the `String` directly:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:421
+msgid ""
+"This works without any problems. Ownership is moved out, and nothing is "
+"deallocated."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:424
+msgid "The Rules of References"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:426
+msgid "Let’s recap what we’ve discussed about references:"
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:428
+msgid ""
+"At any given time, you can have _either_ one mutable reference _or_ any "
+"number of immutable references."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:430
+msgid "References must always be valid."
+msgstr ""
+
+#: src/ch04-02-references-and-borrowing.md:432
+msgid "Next, we’ll look at a different kind of reference: slices."
+msgstr ""

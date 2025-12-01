@@ -1,0 +1,101 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:3
+msgid ""
+"<a id=\"managing-growing-projects-with-packages-crates-and-modules\"></a>"
+msgstr ""
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:5
+msgid "Packages, Crates, and Modules"
+msgstr ""
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:7
+msgid ""
+"As you write large programs, organizing your code will become increasingly "
+"important. By grouping related functionality and separating code with "
+"distinct features, you’ll clarify where to find code that implements a "
+"particular feature and where to go to change how a feature works."
+msgstr ""
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:12
+msgid ""
+"The programs we’ve written so far have been in one module in one file. As a "
+"project grows, you should organize code by splitting it into multiple "
+"modules and then multiple files. A package can contain multiple binary "
+"crates and optionally one library crate. As a package grows, you can extract "
+"parts into separate crates that become external dependencies. This chapter "
+"covers all these techniques. For very large projects comprising a set of "
+"interrelated packages that evolve together, Cargo provides workspaces, which "
+"we’ll cover in [“Cargo Workspaces”](ch14-03-cargo-workspaces.html)<!-- "
+"ignore --> in Chapter 14."
+msgstr ""
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:21
+msgid ""
+"We’ll also discuss encapsulating implementation details, which lets you "
+"reuse code at a higher level: Once you’ve implemented an operation, other "
+"code can call your code via its public interface without having to know how "
+"the implementation works. The way you write code defines which parts are "
+"public for other code to use and which parts are private implementation "
+"details that you reserve the right to change. This is another way to limit "
+"the amount of detail you have to keep in your head."
+msgstr ""
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:29
+msgid ""
+"A related concept is scope: The nested context in which code is written has "
+"a set of names that are defined as “in scope.” When reading, writing, and "
+"compiling code, programmers and compilers need to know whether a particular "
+"name at a particular spot refers to a variable, function, struct, enum, "
+"module, constant, or other item and what that item means. You can create "
+"scopes and change which names are in or out of scope. You can’t have two "
+"items with the same name in the same scope; tools are available to resolve "
+"name conflicts."
+msgstr ""
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:37
+msgid ""
+"Rust has a number of features that allow you to manage your code’s "
+"organization, including which details are exposed, which details are "
+"private, and what names are in each scope in your programs. These features, "
+"sometimes collectively referred to as the _module system_, include:"
+msgstr ""
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:42
+msgid ""
+"**Packages**: A Cargo feature that lets you build, test, and share crates"
+msgstr ""
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:43
+msgid "**Crates**: A tree of modules that produces a library or executable"
+msgstr ""
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:44
+msgid ""
+"**Modules and use**: Let you control the organization, scope, and privacy of "
+"paths"
+msgstr ""
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:46
+msgid ""
+"**Paths**: A way of naming an item, such as a struct, function, or module"
+msgstr ""
+
+#: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:48
+msgid ""
+"In this chapter, we’ll cover all these features, discuss how they interact, "
+"and explain how to use them to manage scope. By the end, you should have a "
+"solid understanding of the module system and be able to work with scopes "
+"like a pro!"
+msgstr ""

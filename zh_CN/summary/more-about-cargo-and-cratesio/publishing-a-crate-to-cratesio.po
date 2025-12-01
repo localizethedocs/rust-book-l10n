@@ -1,0 +1,698 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch14-02-publishing-to-crates-io.md:1
+msgid "Publishing a Crate to Crates.io"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:3
+msgid ""
+"We’ve used packages from [crates.io](https://crates.io/)<!-- ignore --> as "
+"dependencies of our project, but you can also share your code with other "
+"people by publishing your own packages. The crate registry at [crates.io]"
+"(https://crates.io/)<!-- ignore --> distributes the source code of your "
+"packages, so it primarily hosts code that is open source."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:9
+msgid ""
+"Rust and Cargo have features that make your published package easier for "
+"people to find and use. We’ll talk about some of these features next and "
+"then explain how to publish a package."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:13
+msgid "Making Useful Documentation Comments"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:15
+msgid ""
+"Accurately documenting your packages will help other users know how and when "
+"to use them, so it’s worth investing the time to write documentation. In "
+"Chapter 3, we discussed how to comment Rust code using two slashes, `//`. "
+"Rust also has a particular kind of comment for documentation, known "
+"conveniently as a _documentation comment_, that will generate HTML "
+"documentation. The HTML displays the contents of documentation comments for "
+"public API items intended for programmers interested in knowing how to _use_ "
+"your crate as opposed to how your crate is _implemented_."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:24
+msgid ""
+"Documentation comments use three slashes, `///`, instead of two and support "
+"Markdown notation for formatting the text. Place documentation comments just "
+"before the item they’re documenting. Listing 14-1 shows documentation "
+"comments for an `add_one` function in a crate named `my_crate`."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:32
+msgid ""
+"/// Adds one to the number given.\n"
+"///\n"
+"/// # Examples\n"
+"///\n"
+"/// ```\n"
+"/// let arg = 5;\n"
+"/// let answer = my_crate::add_one(arg);\n"
+"///\n"
+"/// assert_eq!(6, answer);\n"
+"/// ```\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:49
+msgid ""
+"Here, we give a description of what the `add_one` function does, start a "
+"section with the heading `Examples`, and then provide code that demonstrates "
+"how to use the `add_one` function. We can generate the HTML documentation "
+"from this documentation comment by running `cargo doc`. This command runs "
+"the `rustdoc` tool distributed with Rust and puts the generated HTML "
+"documentation in the _target/doc_ directory."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:56
+msgid ""
+"For convenience, running `cargo doc --open` will build the HTML for your "
+"current crate’s documentation (as well as the documentation for all of your "
+"crate’s dependencies) and open the result in a web browser. Navigate to the "
+"`add_one` function and you’ll see how the text in the documentation comments "
+"is rendered, as shown in Figure 14-1."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:64
+msgid ""
+"<span class=\"caption\">Figure 14-1: The HTML documentation for the "
+"`add_one` function</span>"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:67
+msgid "Commonly Used Sections"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:69
+msgid ""
+"We used the `# Examples` Markdown heading in Listing 14-1 to create a "
+"section in the HTML with the title “Examples.” Here are some other sections "
+"that crate authors commonly use in their documentation:"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:73
+msgid ""
+"**Panics**: These are the scenarios in which the function being documented "
+"could panic. Callers of the function who don’t want their programs to panic "
+"should make sure they don’t call the function in these situations."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:76
+msgid ""
+"**Errors**: If the function returns a `Result`, describing the kinds of "
+"errors that might occur and what conditions might cause those errors to be "
+"returned can be helpful to callers so that they can write code to handle the "
+"different kinds of errors in different ways."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:80
+msgid ""
+"**Safety**: If the function is `unsafe` to call (we discuss unsafety in "
+"Chapter 20), there should be a section explaining why the function is unsafe "
+"and covering the invariants that the function expects callers to uphold."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:84
+msgid ""
+"Most documentation comments don’t need all of these sections, but this is a "
+"good checklist to remind you of the aspects of your code users will be "
+"interested in knowing about."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:88
+msgid "Documentation Comments as Tests"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:90
+msgid ""
+"Adding example code blocks in your documentation comments can help "
+"demonstrate how to use your library and has an additional bonus: Running "
+"`cargo test` will run the code examples in your documentation as tests! "
+"Nothing is better than documentation with examples. But nothing is worse "
+"than examples that don’t work because the code has changed since the "
+"documentation was written. If we run `cargo test` with the documentation for "
+"the `add_one` function from Listing 14-1, we will see a section in the test "
+"results that looks like this:"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:113
+msgid ""
+"Now, if we change either the function or the example so that the `assert_eq!"
+"` in the example panics, and run `cargo test` again, we’ll see that the doc "
+"tests catch that the example and the code are out of sync with each other!"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:119
+msgid "<a id=\"commenting-contained-items\"></a>"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:121
+msgid "Contained Item Comments"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:123
+msgid ""
+"The style of doc comment `//!` adds documentation to the item that "
+"_contains_ the comments rather than to the items _following_ the comments. "
+"We typically use these doc comments inside the crate root file (_src/lib.rs_ "
+"by convention) or inside a module to document the crate or the module as a "
+"whole."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:128
+msgid ""
+"For example, to add documentation that describes the purpose of the "
+"`my_crate` crate that contains the `add_one` function, we add documentation "
+"comments that start with `//!` to the beginning of the _src/lib.rs_ file, as "
+"shown in Listing 14-2."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:136
+msgid ""
+"//! # My Crate\n"
+"//!\n"
+"//! `my_crate` is a collection of utilities to make performing certain\n"
+"//! calculations more convenient.\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:140
+msgid ""
+"/// Adds one to the number given.\n"
+"// --snip--\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:143
+#: src/ch14-02-publishing-to-crates-io.md:145
+#: src/ch14-02-publishing-to-crates-io.md:149
+msgid "///\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:144
+msgid "/// # Examples\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:146
+#: src/ch14-02-publishing-to-crates-io.md:151
+msgid "/// ```\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:147
+msgid "/// let arg = 5;\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:148
+msgid "/// let answer = my_crate::add_one(arg);\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:150
+msgid "/// assert_eq!(6, answer);\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:159
+msgid ""
+"Notice there isn’t any code after the last line that begins with `//!`. "
+"Because we started the comments with `//!` instead of `///`, we’re "
+"documenting the item that contains this comment rather than an item that "
+"follows this comment. In this case, that item is the _src/lib.rs_ file, "
+"which is the crate root. These comments describe the entire crate."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:165
+msgid ""
+"When we run `cargo doc --open`, these comments will display on the front "
+"page of the documentation for `my_crate` above the list of public items in "
+"the crate, as shown in Figure 14-2."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:169
+msgid ""
+"Documentation comments within items are useful for describing crates and "
+"modules especially. Use them to explain the overall purpose of the container "
+"to help your users understand the crate’s organization."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:175
+msgid ""
+"<span class=\"caption\">Figure 14-2: The rendered documentation for "
+"`my_crate`, including the comment describing the crate as a whole</span>"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:180
+msgid "<a id=\"exporting-a-convenient-public-api-with-pub-use\"></a>"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:182
+msgid "Exporting a Convenient Public API"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:184
+msgid ""
+"The structure of your public API is a major consideration when publishing a "
+"crate. People who use your crate are less familiar with the structure than "
+"you are and might have difficulty finding the pieces they want to use if "
+"your crate has a large module hierarchy."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:189
+msgid ""
+"In Chapter 7, we covered how to make items public using the `pub` keyword, "
+"and how to bring items into a scope with the `use` keyword. However, the "
+"structure that makes sense to you while you’re developing a crate might not "
+"be very convenient for your users. You might want to organize your structs "
+"in a hierarchy containing multiple levels, but then people who want to use a "
+"type you’ve defined deep in the hierarchy might have trouble finding out "
+"that type exists. They might also be annoyed at having to enter `use "
+"my_crate::some_module::another_module::UsefulType;` rather than `use "
+"my_crate::UsefulType;`."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:199
+msgid ""
+"The good news is that if the structure _isn’t_ convenient for others to use "
+"from another library, you don’t have to rearrange your internal "
+"organization: Instead, you can re-export items to make a public structure "
+"that’s different from your private structure by using `pub use`. _Re-"
+"exporting_ takes a public item in one location and makes it public in "
+"another location, as if it were defined in the other location instead."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:206
+msgid ""
+"For example, say we made a library named `art` for modeling artistic "
+"concepts. Within this library are two modules: a `kinds` module containing "
+"two enums named `PrimaryColor` and `SecondaryColor` and a `utils` module "
+"containing a function named `mix`, as shown in Listing 14-3."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:214
+#: src/ch14-02-publishing-to-crates-io.md:296
+msgid ""
+"//! # Art\n"
+"//!\n"
+"//! A library for modeling artistic concepts.\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:219
+#: src/ch14-02-publishing-to-crates-io.md:306
+msgid "/// The primary colors according to the RYB color model.\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:226
+#: src/ch14-02-publishing-to-crates-io.md:313
+msgid "/// The secondary colors according to the RYB color model.\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:237
+msgid ""
+"/// Combines two primary colors in equal amounts to create\n"
+"    /// a secondary color.\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:240
+#: src/ch14-02-publishing-to-crates-io.md:305
+#: src/ch14-02-publishing-to-crates-io.md:322
+#: src/ch14-02-publishing-to-crates-io.md:355
+msgid "// --snip--\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:248
+msgid ""
+"Figure 14-3 shows what the front page of the documentation for this crate "
+"generated by `cargo doc` would look like."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:253
+msgid ""
+"<span class=\"caption\">Figure 14-3: The front page of the documentation for "
+"`art` that lists the `kinds` and `utils` modules</span>"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:256
+msgid ""
+"Note that the `PrimaryColor` and `SecondaryColor` types aren’t listed on the "
+"front page, nor is the `mix` function. We have to click `kinds` and `utils` "
+"to see them."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:260
+msgid ""
+"Another crate that depends on this library would need `use` statements that "
+"bring the items from `art` into scope, specifying the module structure "
+"that’s currently defined. Listing 14-4 shows an example of a crate that uses "
+"the `PrimaryColor` and `mix` items from the `art` crate."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:280
+msgid ""
+"The author of the code in Listing 14-4, which uses the `art` crate, had to "
+"figure out that `PrimaryColor` is in the `kinds` module and `mix` is in the "
+"`utils` module. The module structure of the `art` crate is more relevant to "
+"developers working on the `art` crate than to those using it. The internal "
+"structure doesn’t contain any useful information for someone trying to "
+"understand how to use the `art` crate, but rather causes confusion because "
+"developers who use it have to figure out where to look, and must specify the "
+"module names in the `use` statements."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:289
+msgid ""
+"To remove the internal organization from the public API, we can modify the "
+"`art` crate code in Listing 14-3 to add `pub use` statements to re-export "
+"the items at the top level, as shown in Listing 14-5."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:325
+msgid "/// Combines two primary colors in equal amounts to create\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:326
+msgid "/// a secondary color.\n"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:335
+msgid ""
+"The API documentation that `cargo doc` generates for this crate will now "
+"list and link re-exports on the front page, as shown in Figure 14-4, making "
+"the `PrimaryColor` and `SecondaryColor` types and the `mix` function easier "
+"to find."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:341
+msgid ""
+"<span class=\"caption\">Figure 14-4: The front page of the documentation for "
+"`art` that lists the re-exports</span>"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:344
+msgid ""
+"The `art` crate users can still see and use the internal structure from "
+"Listing 14-3 as demonstrated in Listing 14-4, or they can use the more "
+"convenient structure in Listing 14-5, as shown in Listing 14-6."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:364
+msgid ""
+"In cases where there are many nested modules, re-exporting the types at the "
+"top level with `pub use` can make a significant difference in the experience "
+"of people who use the crate. Another common use of `pub use` is to re-export "
+"definitions of a dependency in the current crate to make that crate's "
+"definitions part of your crate’s public API."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:370
+msgid ""
+"Creating a useful public API structure is more an art than a science, and "
+"you can iterate to find the API that works best for your users. Choosing "
+"`pub use` gives you flexibility in how you structure your crate internally "
+"and decouples that internal structure from what you present to your users. "
+"Look at some of the code of crates you’ve installed to see if their internal "
+"structure differs from their public API."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:377
+msgid "Setting Up a Crates.io Account"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:379
+msgid ""
+"Before you can publish any crates, you need to create an account on [crates."
+"io](https://crates.io/)<!-- ignore --> and get an API token. To do so, visit "
+"the home page at [crates.io](https://crates.io/)<!-- ignore --> and log in "
+"via a GitHub account. (The GitHub account is currently a requirement, but "
+"the site might support other ways of creating an account in the future.) "
+"Once you’re logged in, visit your account settings at [https://crates.io/me/]"
+"(https://crates.io/me/)<!-- ignore --> and retrieve your API key. Then, run "
+"the `cargo login` command and paste your API key when prompted, like this:"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:393
+msgid ""
+"This command will inform Cargo of your API token and store it locally in _~/."
+"cargo/credentials.toml_. Note that this token is a secret: Do not share it "
+"with anyone else. If you do share it with anyone for any reason, you should "
+"revoke it and generate a new token on [crates.io](https://crates.io/)<!-- "
+"ignore\n"
+"-->."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:399
+msgid "Adding Metadata to a New Crate"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:401
+msgid ""
+"Let’s say you have a crate you want to publish. Before publishing, you’ll "
+"need to add some metadata in the `[package]` section of the crate’s _Cargo."
+"toml_ file."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:405
+msgid ""
+"Your crate will need a unique name. While you’re working on a crate locally, "
+"you can name a crate whatever you’d like. However, crate names on [crates.io]"
+"(https://crates.io/)<!-- ignore --> are allocated on a first-come, first-"
+"served basis. Once a crate name is taken, no one else can publish a crate "
+"with that name. Before attempting to publish a crate, search for the name "
+"you want to use. If the name has been used, you will need to find another "
+"name and edit the `name` field in the _Cargo.toml_ file under the "
+"`[package]` section to use the new name for publishing, like so:"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:414
+#: src/ch14-02-publishing-to-crates-io.md:452
+#: src/ch14-02-publishing-to-crates-io.md:474
+msgid "<span class=\"filename\">Filename: Cargo.toml</span>"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:416
+msgid ""
+"```toml\n"
+"[package]\n"
+"name = \"guessing_game\"\n"
+"```"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:421
+msgid ""
+"Even if you’ve chosen a unique name, when you run `cargo publish` to publish "
+"the crate at this point, you’ll get a warning and then an error:"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:431
+msgid ""
+"```console\n"
+"$ cargo publish\n"
+"    Updating crates.io index\n"
+"warning: manifest has no description, license, license-file, documentation, "
+"homepage or repository.\n"
+"See https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata "
+"for more info.\n"
+"--snip--\n"
+"error: failed to publish to registry at https://crates.io\n"
+"\n"
+"Caused by:\n"
+"  the remote server responded with an error (status 400 Bad Request): "
+"missing or empty metadata fields: description, license. Please see https://"
+"doc.rust-lang.org/cargo/reference/manifest.html for more information on "
+"configuring these fields\n"
+"```"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:443
+msgid ""
+"This results in an error because you’re missing some crucial information: A "
+"description and license are required so that people will know what your "
+"crate does and under what terms they can use it. In _Cargo.toml_, add a "
+"description that's just a sentence or two, because it will appear with your "
+"crate in search results. For the `license` field, you need to give a "
+"_license identifier value_. The [Linux Foundation’s Software Package Data "
+"Exchange (SPDX)](https://spdx.org/licenses/) lists the identifiers you can "
+"use for this value. For example, to specify that you’ve licensed your crate "
+"using the MIT License, add the `MIT` identifier:"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:454
+msgid ""
+"```toml\n"
+"[package]\n"
+"name = \"guessing_game\"\n"
+"license = \"MIT\"\n"
+"```"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:460
+msgid ""
+"If you want to use a license that doesn’t appear in the SPDX, you need to "
+"place the text of that license in a file, include the file in your project, "
+"and then use `license-file` to specify the name of that file instead of "
+"using the `license` key."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:465
+msgid ""
+"Guidance on which license is appropriate for your project is beyond the "
+"scope of this book. Many people in the Rust community license their projects "
+"in the same way as Rust by using a dual license of `MIT OR Apache-2.0`. This "
+"practice demonstrates that you can also specify multiple license identifiers "
+"separated by `OR` to have multiple licenses for your project."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:471
+msgid ""
+"With a unique name, the version, your description, and a license added, the "
+"_Cargo.toml_ file for a project that is ready to publish might look like "
+"this:"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:476
+msgid ""
+"```toml\n"
+"[package]\n"
+"name = \"guessing_game\"\n"
+"version = \"0.1.0\"\n"
+"edition = \"2024\"\n"
+"description = \"A fun game where you guess what number the computer has "
+"chosen.\"\n"
+"license = \"MIT OR Apache-2.0\"\n"
+"\n"
+"[dependencies]\n"
+"```"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:487
+msgid ""
+"[Cargo’s documentation](https://doc.rust-lang.org/cargo/) describes other "
+"metadata you can specify to ensure that others can discover and use your "
+"crate more easily."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:491
+msgid "Publishing to Crates.io"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:493
+msgid ""
+"Now that you’ve created an account, saved your API token, chosen a name for "
+"your crate, and specified the required metadata, you’re ready to publish! "
+"Publishing a crate uploads a specific version to [crates.io](https://crates."
+"io/)<!-- ignore --> for others to use."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:498
+msgid ""
+"Be careful, because a publish is _permanent_. The version can never be "
+"overwritten, and the code cannot be deleted except in certain circumstances. "
+"One major goal of Crates.io is to act as a permanent archive of code so that "
+"builds of all projects that depend on crates from [crates.io](https://crates."
+"io/)<!-- ignore --> will continue to work. Allowing version deletions would "
+"make fulfilling that goal impossible. However, there is no limit to the "
+"number of crate versions you can publish."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:506
+msgid "Run the `cargo publish` command again. It should succeed now:"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:514
+msgid ""
+"```console\n"
+"$ cargo publish\n"
+"    Updating crates.io index\n"
+"   Packaging guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Packaged 6 files, 1.2KiB (895.0B compressed)\n"
+"   Verifying guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"   Compiling guessing_game v0.1.0\n"
+"(file:///projects/guessing_game/target/package/guessing_game-0.1.0)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s\n"
+"   Uploading guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Uploaded guessing_game v0.1.0 to registry `crates-io`\n"
+"note: waiting for `guessing_game v0.1.0` to be available at registry\n"
+"`crates-io`.\n"
+"You may press ctrl-c to skip waiting; the crate should be available "
+"shortly.\n"
+"   Published guessing_game v0.1.0 at registry `crates-io`\n"
+"```"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:531
+msgid ""
+"Congratulations! You’ve now shared your code with the Rust community, and "
+"anyone can easily add your crate as a dependency of their project."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:534
+msgid "Publishing a New Version of an Existing Crate"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:536
+msgid ""
+"When you’ve made changes to your crate and are ready to release a new "
+"version, you change the `version` value specified in your _Cargo.toml_ file "
+"and republish. Use the [Semantic Versioning rules](https://semver.org/) to "
+"decide what an appropriate next version number is, based on the kinds of "
+"changes you’ve made. Then, run `cargo publish` to upload the new version."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:544
+msgid ""
+"<a id=\"removing-versions-from-cratesio-with-cargo-yank\"></a> <a "
+"id=\"deprecating-versions-from-cratesio-with-cargo-yank\"></a>"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:547
+msgid "Deprecating Versions from Crates.io"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:549
+msgid ""
+"Although you can’t remove previous versions of a crate, you can prevent any "
+"future projects from adding them as a new dependency. This is useful when a "
+"crate version is broken for one reason or another. In such situations, Cargo "
+"supports yanking a crate version."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:554
+msgid ""
+"_Yanking_ a version prevents new projects from depending on that version "
+"while allowing all existing projects that depend on it to continue. "
+"Essentially, a yank means that all projects with a _Cargo.lock_ will not "
+"break, and any future _Cargo.lock_ files generated will not use the yanked "
+"version."
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:559
+msgid ""
+"To yank a version of a crate, in the directory of the crate that you’ve "
+"previously published, run `cargo yank` and specify which version you want to "
+"yank. For example, if we’ve published a crate named `guessing_game` version "
+"1.0.1 and we want to yank it, then we’d run the following in the project "
+"directory for `guessing_game`:"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:576
+msgid ""
+"By adding `--undo` to the command, you can also undo a yank and allow "
+"projects to start depending on a version again:"
+msgstr ""
+
+#: src/ch14-02-publishing-to-crates-io.md:585
+msgid ""
+"A yank _does not_ delete any code. It cannot, for example, delete "
+"accidentally uploaded secrets. If that happens, you must reset those secrets "
+"immediately."
+msgstr ""

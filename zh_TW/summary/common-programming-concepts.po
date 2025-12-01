@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch03-00-common-programming-concepts.md:1
+msgid "Common Programming Concepts"
+msgstr ""
+
+#: src/ch03-00-common-programming-concepts.md:3
+msgid ""
+"This chapter covers concepts that appear in almost every programming "
+"language and how they work in Rust. Many programming languages have much in "
+"common at their core. None of the concepts presented in this chapter are "
+"unique to Rust, but we’ll discuss them in the context of Rust and explain "
+"the conventions around using them."
+msgstr ""
+
+#: src/ch03-00-common-programming-concepts.md:9
+msgid ""
+"Specifically, you’ll learn about variables, basic types, functions, "
+"comments, and control flow. These foundations will be in every Rust program, "
+"and learning them early will give you a strong core to start from."
+msgstr ""
+
+#: src/ch03-00-common-programming-concepts.md:13
+msgid "Keywords"
+msgstr ""
+
+#: src/ch03-00-common-programming-concepts.md:15
+msgid ""
+"The Rust language has a set of _keywords_ that are reserved for use by the "
+"language only, much as in other languages. Keep in mind that you cannot use "
+"these words as names of variables or functions. Most of the keywords have "
+"special meanings, and you’ll be using them to do various tasks in your Rust "
+"programs; a few have no current functionality associated with them but have "
+"been reserved for functionality that might be added to Rust in the future. "
+"You can find the list of the keywords in [Appendix A](appendix-01-keywords."
+"md)<!-- ignore -->."
+msgstr ""

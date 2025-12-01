@@ -1,0 +1,374 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch12-05-working-with-environment-variables.md:1
+msgid "Working with Environment Variables"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:3
+msgid ""
+"We’ll improve the `minigrep` binary by adding an extra feature: an option "
+"for case-insensitive searching that the user can turn on via an environment "
+"variable. We could make this feature a command line option and require that "
+"users enter it each time they want it to apply, but by instead making it an "
+"environment variable, we allow our users to set the environment variable "
+"once and have all their searches be case insensitive in that terminal "
+"session."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:11
+msgid ""
+"<a id=\"writing-a-failing-test-for-the-case-insensitive-search-function\"></"
+"a>"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:13
+msgid "Writing a Failing Test for Case-Insensitive Search"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:15
+msgid ""
+"We first add a new `search_case_insensitive` function to the `minigrep` "
+"library that will be called when the environment variable has a value. We’ll "
+"continue to follow the TDD process, so the first step is again to write a "
+"failing test. We’ll add a new test for the new `search_case_insensitive` "
+"function and rename our old test from `one_result` to `case_sensitive` to "
+"clarify the differences between the two tests, as shown in Listing 12-20."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:43
+#: src/ch12-05-working-with-environment-variables.md:132
+msgid "\"duct\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:44
+msgid ""
+"\"\\\n"
+"Rust:\n"
+"safe, fast, productive.\n"
+"Pick three.\n"
+"Duct tape.\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:50
+#: src/ch12-05-working-with-environment-variables.md:139
+msgid "\"safe, fast, productive.\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:55
+#: src/ch12-05-working-with-environment-variables.md:144
+msgid "\"rUsT\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:56
+msgid ""
+"\"\\\n"
+"Rust:\n"
+"safe, fast, productive.\n"
+"Pick three.\n"
+"Trust me.\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:63
+#: src/ch12-05-working-with-environment-variables.md:152
+msgid "\"Rust:\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:63
+#: src/ch12-05-working-with-environment-variables.md:152
+msgid "\"Trust me.\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:72
+msgid ""
+"Note that we’ve edited the old test’s `contents` too. We’ve added a new line "
+"with the text `\"Duct tape.\"` using a capital _D_ that shouldn’t match the "
+"query `\"duct\"` when we’re searching in a case-sensitive manner. Changing "
+"the old test in this way helps ensure that we don’t accidentally break the "
+"case-sensitive search functionality that we’ve already implemented. This "
+"test should pass now and should continue to pass as we work on the case-"
+"insensitive search."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:79
+msgid ""
+"The new test for the case-_insensitive_ search uses `\"rUsT\"` as its query. "
+"In the `search_case_insensitive` function we’re about to add, the query "
+"`\"rUsT\"` should match the line containing `\"Rust:\"` with a capital _R_ "
+"and match the line `\"Trust me.\"` even though both have different casing "
+"from the query. This is our failing test, and it will fail to compile "
+"because we haven’t yet defined the `search_case_insensitive` function. Feel "
+"free to add a skeleton implementation that always returns an empty vector, "
+"similar to the way we did for the `search` function in Listing 12-16 to see "
+"the test compile and fail."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:88
+msgid "Implementing the `search_case_insensitive` Function"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:90
+msgid ""
+"The `search_case_insensitive` function, shown in Listing 12-21, will be "
+"almost the same as the `search` function. The only difference is that we’ll "
+"lowercase the `query` and each `line` so that whatever the case of the input "
+"arguments, they’ll be the same case when we check whether the line contains "
+"the query."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:133
+msgid ""
+"\"\\\n"
+"# Rust:\n"
+"# safe, fast, productive.\n"
+"# Pick three.\n"
+"# Duct tape.\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:145
+msgid ""
+"\"\\\n"
+"# Rust:\n"
+"# safe, fast, productive.\n"
+"# Pick three.\n"
+"# Trust me.\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:161
+msgid ""
+"First, we lowercase the `query` string and store it in a new variable with "
+"the same name, shadowing the original `query`. Calling `to_lowercase` on the "
+"query is necessary so that no matter whether the user’s query is `\"rust\"`, "
+"`\"RUST\"`, `\"Rust\"`, or `\"rUsT\"`, we’ll treat the query as if it were "
+"`\"rust\"` and be insensitive to the case. While `to_lowercase` will handle "
+"basic Unicode, it won’t be 100 percent accurate. If we were writing a real "
+"application, we’d want to do a bit more work here, but this section is about "
+"environment variables, not Unicode, so we’ll leave it at that here."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:170
+msgid ""
+"Note that `query` is now a `String` rather than a string slice because "
+"calling `to_lowercase` creates new data rather than referencing existing "
+"data. Say the query is `\"rUsT\"`, as an example: That string slice doesn’t "
+"contain a lowercase `u` or `t` for us to use, so we have to allocate a new "
+"`String` containing `\"rust\"`. When we pass `query` as an argument to the "
+"`contains` method now, we need to add an ampersand because the signature of "
+"`contains` is defined to take a string slice."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:178
+msgid ""
+"Next, we add a call to `to_lowercase` on each `line` to lowercase all "
+"characters. Now that we’ve converted `line` and `query` to lowercase, we’ll "
+"find matches no matter what the case of the query is."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:182
+msgid "Let’s see if this implementation passes the tests:"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:184
+msgid ""
+"```console\n"
+"$ cargo test\n"
+"   Compiling minigrep v0.1.0 (file:///projects/minigrep)\n"
+"    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.33s\n"
+"     Running unittests src/lib.rs (target/debug/deps/"
+"minigrep-9cd200e5fac0fc94)\n"
+"\n"
+"running 2 tests\n"
+"test tests::case_insensitive ... ok\n"
+"test tests::case_sensitive ... ok\n"
+"\n"
+"test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; "
+"finished in 0.00s\n"
+"\n"
+"     Running unittests src/main.rs (target/debug/deps/"
+"minigrep-9cd200e5fac0fc94)\n"
+"\n"
+"running 0 tests\n"
+"\n"
+"test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; "
+"finished in 0.00s\n"
+"\n"
+"   Doc-tests minigrep\n"
+"\n"
+"running 0 tests\n"
+"\n"
+"test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; "
+"finished in 0.00s\n"
+"\n"
+"```"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:210
+msgid ""
+"Great! They passed. Now let’s call the new `search_case_insensitive` "
+"function from the `run` function. First, we’ll add a configuration option to "
+"the `Config` struct to switch between case-sensitive and case-insensitive "
+"search. Adding this field will cause compiler errors because we aren’t "
+"initializing this field anywhere yet:"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:216
+msgid "<span class=\"filename\">Filename: src/main.rs</span>"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:226
+#: src/ch12-05-working-with-environment-variables.md:293
+msgid "// --snip--\n"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:233
+#: src/ch12-05-working-with-environment-variables.md:301
+#: src/ch12-05-working-with-environment-variables.md:369
+msgid "\"Problem parsing arguments: {err}\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:238
+#: src/ch12-05-working-with-environment-variables.md:306
+#: src/ch12-05-working-with-environment-variables.md:374
+msgid "\"Application error: {e}\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:252
+#: src/ch12-05-working-with-environment-variables.md:320
+#: src/ch12-05-working-with-environment-variables.md:388
+msgid "\"not enough arguments\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:272
+#: src/ch12-05-working-with-environment-variables.md:340
+#: src/ch12-05-working-with-environment-variables.md:414
+msgid "\"{line}\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:279
+msgid ""
+"We added the `ignore_case` field that holds a Boolean. Next, we need the "
+"`run` function to check the `ignore_case` field’s value and use that to "
+"decide whether to call the `search` function or the "
+"`search_case_insensitive` function, as shown in Listing 12-22. This still "
+"won’t compile yet."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:349
+msgid ""
+"Finally, we need to check for the environment variable. The functions for "
+"working with environment variables are in the `env` module in the standard "
+"library, which is already in scope at the top of _src/main.rs_. We’ll use "
+"the `var` function from the `env` module to check to see if any value has "
+"been set for an environment variable named `IGNORE_CASE`, as shown in "
+"Listing 12-23."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:394
+msgid "\"IGNORE_CASE\""
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:423
+msgid ""
+"Here, we create a new variable, `ignore_case`. To set its value, we call the "
+"`env::var` function and pass it the name of the `IGNORE_CASE` environment "
+"variable. The `env::var` function returns a `Result` that will be the "
+"successful `Ok` variant that contains the value of the environment variable "
+"if the environment variable is set to any value. It will return the `Err` "
+"variant if the environment variable is not set."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:430
+msgid ""
+"We’re using the `is_ok` method on the `Result` to check whether the "
+"environment variable is set, which means the program should do a case-"
+"insensitive search. If the `IGNORE_CASE` environment variable isn’t set to "
+"anything, `is_ok` will return `false` and the program will perform a case-"
+"sensitive search. We don’t care about the _value_ of the environment "
+"variable, just whether it’s set or unset, so we’re checking `is_ok` rather "
+"than using `unwrap`, `expect`, or any of the other methods we’ve seen on "
+"`Result`."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:438
+msgid ""
+"We pass the value in the `ignore_case` variable to the `Config` instance so "
+"that the `run` function can read that value and decide whether to call "
+"`search_case_insensitive` or `search`, as we implemented in Listing 12-22."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:442
+msgid ""
+"Let’s give it a try! First, we’ll run our program without the environment "
+"variable set and with the query `to`, which should match any line that "
+"contains the word _to_ in all lowercase:"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:446
+msgid ""
+"```console\n"
+"$ cargo run -- to poem.txt\n"
+"   Compiling minigrep v0.1.0 (file:///projects/minigrep)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s\n"
+"     Running `target/debug/minigrep to poem.txt`\n"
+"Are you nobody, too?\n"
+"How dreary to be somebody!\n"
+"```"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:455
+msgid ""
+"Looks like that still works! Now let’s run the program with `IGNORE_CASE` "
+"set to `1` but with the same query `to`:"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:462
+msgid ""
+"If you’re using PowerShell, you will need to set the environment variable "
+"and run the program as separate commands:"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:469
+msgid ""
+"This will make `IGNORE_CASE` persist for the remainder of your shell "
+"session. It can be unset with the `Remove-Item` cmdlet:"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:476
+msgid ""
+"We should get lines that contain _to_ that might have uppercase letters:"
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:491
+msgid ""
+"Excellent, we also got lines containing _To_! Our `minigrep` program can now "
+"do case-insensitive searching controlled by an environment variable. Now you "
+"know how to manage options set using either command line arguments or "
+"environment variables."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:496
+msgid ""
+"Some programs allow arguments _and_ environment variables for the same "
+"configuration. In those cases, the programs decide that one or the other "
+"takes precedence. For another exercise on your own, try controlling case "
+"sensitivity through either a command line argument or an environment "
+"variable. Decide whether the command line argument or the environment "
+"variable should take precedence if the program is run with one set to case "
+"sensitive and one set to ignore case."
+msgstr ""
+
+#: src/ch12-05-working-with-environment-variables.md:504
+msgid ""
+"The `std::env` module contains many more useful features for dealing with "
+"environment variables: Check out its documentation to see what is available."
+msgstr ""
