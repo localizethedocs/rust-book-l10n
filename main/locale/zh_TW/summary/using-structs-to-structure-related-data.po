@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch05-00-structs.md:1
 msgid "Using Structs to Structure Related Data"
-msgstr ""
+msgstr "使用結構體組織相關資料"
 
 #: src/ch05-00-structs.md:3
 msgid ""

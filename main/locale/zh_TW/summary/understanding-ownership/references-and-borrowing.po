@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch04-02-references-and-borrowing.md:1
 msgid "References and Borrowing"
-msgstr ""
+msgstr "參考與借用"
 
 #: src/ch04-02-references-and-borrowing.md:3
 msgid ""

@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch04-03-slices.md:1
 msgid "The Slice Type"
-msgstr ""
+msgstr "切片型別"
 
 #: src/ch04-03-slices.md:3
 msgid ""
