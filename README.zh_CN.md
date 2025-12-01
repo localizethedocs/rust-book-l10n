@@ -1,8 +1,8 @@
 <div align="center">
-<h1 id="localization-of-rust-book">Localization of Rust Book</h1>
+<h1 id="localization-of-rust-book">Rust 手册的本地化</h1>
 </div>
 
-<details><summary><strong>Switch Languages</strong></summary>
+<details><summary><strong>切换语言</strong></summary>
 <p></p>
 <ul>
   <li><a href="./README.md"><code>en_US</code> : English</a></li>
