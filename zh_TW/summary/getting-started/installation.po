@@ -1,0 +1,243 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch01-01-installation.md:1
+msgid "Installation"
+msgstr "安裝"
+
+#: src/ch01-01-installation.md:3
+msgid ""
+"The first step is to install Rust. We’ll download Rust through `rustup`, a "
+"command line tool for managing Rust versions and associated tools. You’ll "
+"need an internet connection for the download."
+msgstr ""
+
+#: src/ch01-01-installation.md:7
+msgid ""
+"Note: If you prefer not to use `rustup` for some reason, please see the "
+"[Other Rust Installation Methods page](https://forge.rust-lang.org/infra/"
+"other-installation-methods.html) for more options."
+msgstr ""
+
+#: src/ch01-01-installation.md:10
+msgid ""
+"The following steps install the latest stable version of the Rust compiler. "
+"Rust’s stability guarantees ensure that all the examples in the book that "
+"compile will continue to compile with newer Rust versions. The output might "
+"differ slightly between versions because Rust often improves error messages "
+"and warnings. In other words, any newer, stable version of Rust you install "
+"using these steps should work as expected with the content of this book."
+msgstr ""
+
+#: src/ch01-01-installation.md:17
+msgid "Command Line Notation"
+msgstr ""
+
+#: src/ch01-01-installation.md:19
+msgid ""
+"In this chapter and throughout the book, we’ll show some commands used in "
+"the terminal. Lines that you should enter in a terminal all start with `$`. "
+"You don’t need to type the `$` character; it’s the command line prompt shown "
+"to indicate the start of each command. Lines that don’t start with `$` "
+"typically show the output of the previous command. Additionally, PowerShell-"
+"specific examples will use `>` rather than `$`."
+msgstr ""
+
+#: src/ch01-01-installation.md:26
+msgid "Installing `rustup` on Linux or macOS"
+msgstr ""
+
+#: src/ch01-01-installation.md:28
+msgid ""
+"If you’re using Linux or macOS, open a terminal and enter the following "
+"command:"
+msgstr ""
+
+#: src/ch01-01-installation.md:30
+msgid ""
+"```console\n"
+"$ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh\n"
+"```"
+msgstr ""
+
+#: src/ch01-01-installation.md:34
+msgid ""
+"The command downloads a script and starts the installation of the `rustup` "
+"tool, which installs the latest stable version of Rust. You might be "
+"prompted for your password. If the install is successful, the following line "
+"will appear:"
+msgstr ""
+
+#: src/ch01-01-installation.md:42
+msgid ""
+"You will also need a _linker_, which is a program that Rust uses to join its "
+"compiled outputs into one file. It is likely you already have one. If you "
+"get linker errors, you should install a C compiler, which will typically "
+"include a linker. A C compiler is also useful because some common Rust "
+"packages depend on C code and will need a C compiler."
+msgstr ""
+
+#: src/ch01-01-installation.md:48
+msgid "On macOS, you can get a C compiler by running:"
+msgstr ""
+
+#: src/ch01-01-installation.md:54
+msgid ""
+"Linux users should generally install GCC or Clang, according to their "
+"distribution’s documentation. For example, if you use Ubuntu, you can "
+"install the `build-essential` package."
+msgstr ""
+
+#: src/ch01-01-installation.md:58
+msgid "Installing `rustup` on Windows"
+msgstr ""
+
+#: src/ch01-01-installation.md:60
+msgid ""
+"On Windows, go to [https://www.rust-lang.org/tools/install](https://www.rust-"
+"lang.org/tools/install)<!-- ignore\n"
+"--> and follow the instructions for installing Rust. At some point in the "
+"installation, you’ll be prompted to install Visual Studio. This provides a "
+"linker and the native libraries needed to compile programs. If you need more "
+"help with this step, see [https://rust-lang.github.io/rustup/installation/"
+"windows-msvc.html](https://rust-lang.github.io/rustup/installation/windows-"
+"msvc.html)<!--\n"
+"ignore -->."
+msgstr ""
+
+#: src/ch01-01-installation.md:68
+msgid ""
+"The rest of this book uses commands that work in both _cmd.exe_ and "
+"PowerShell. If there are specific differences, we’ll explain which to use."
+msgstr ""
+
+#: src/ch01-01-installation.md:71
+msgid "Troubleshooting"
+msgstr ""
+
+#: src/ch01-01-installation.md:73
+msgid ""
+"To check whether you have Rust installed correctly, open a shell and enter "
+"this line:"
+msgstr ""
+
+#: src/ch01-01-installation.md:80
+msgid ""
+"You should see the version number, commit hash, and commit date for the "
+"latest stable version that has been released, in the following format:"
+msgstr ""
+
+#: src/ch01-01-installation.md:87
+msgid ""
+"If you see this information, you have installed Rust successfully! If you "
+"don’t see this information, check that Rust is in your `%PATH%` system "
+"variable as follows."
+msgstr ""
+
+#: src/ch01-01-installation.md:91
+msgid "In Windows CMD, use:"
+msgstr ""
+
+#: src/ch01-01-installation.md:97
+msgid "In PowerShell, use:"
+msgstr ""
+
+#: src/ch01-01-installation.md:103
+msgid "In Linux and macOS, use:"
+msgstr ""
+
+#: src/ch01-01-installation.md:109
+msgid ""
+"If that’s all correct and Rust still isn’t working, there are a number of "
+"places you can get help. Find out how to get in touch with other Rustaceans "
+"(a silly nickname we call ourselves) on [the community page](https://www."
+"rust-lang.org/community)."
+msgstr ""
+
+#: src/ch01-01-installation.md:113
+msgid "Updating and Uninstalling"
+msgstr ""
+
+#: src/ch01-01-installation.md:115
+msgid ""
+"Once Rust is installed via `rustup`, updating to a newly released version is "
+"easy. From your shell, run the following update script:"
+msgstr ""
+
+#: src/ch01-01-installation.md:122
+msgid ""
+"To uninstall Rust and `rustup`, run the following uninstall script from your "
+"shell:"
+msgstr ""
+
+#: src/ch01-01-installation.md:130
+msgid "<a id=\"local-documentation\"></a>"
+msgstr ""
+
+#: src/ch01-01-installation.md:132
+msgid "Reading the Local Documentation"
+msgstr ""
+
+#: src/ch01-01-installation.md:134
+msgid ""
+"The installation of Rust also includes a local copy of the documentation so "
+"that you can read it offline. Run `rustup doc` to open the local "
+"documentation in your browser."
+msgstr ""
+
+#: src/ch01-01-installation.md:138
+msgid ""
+"Any time a type or function is provided by the standard library and you’re "
+"not sure what it does or how to use it, use the application programming "
+"interface (API) documentation to find out!"
+msgstr ""
+
+#: src/ch01-01-installation.md:143
+msgid "<a id=\"text-editors-and-integrated-development-environments\"></a>"
+msgstr ""
+
+#: src/ch01-01-installation.md:145
+msgid "Using Text Editors and IDEs"
+msgstr ""
+
+#: src/ch01-01-installation.md:147
+msgid ""
+"This book makes no assumptions about what tools you use to author Rust code. "
+"Just about any text editor will get the job done! However, many text editors "
+"and integrated development environments (IDEs) have built-in support for "
+"Rust. You can always find a fairly current list of many editors and IDEs on "
+"[the tools page](https://www.rust-lang.org/tools) on the Rust website."
+msgstr ""
+
+#: src/ch01-01-installation.md:153
+msgid "Working Offline with This Book"
+msgstr ""
+
+#: src/ch01-01-installation.md:155
+msgid ""
+"In several examples, we will use Rust packages beyond the standard library. "
+"To work through those examples, you will either need to have an internet "
+"connection or to have downloaded those dependencies ahead of time. To "
+"download the dependencies ahead of time, you can run the following commands. "
+"(We’ll explain what `cargo` is and what each of these commands does in "
+"detail later.)"
+msgstr ""
+
+#: src/ch01-01-installation.md:167
+msgid ""
+"This will cache the downloads for these packages so you will not need to "
+"download them later. Once you have run this command, you do not need to keep "
+"the `get-dependencies` folder. If you have run this command, you can use the "
+"`--offline` flag with all `cargo` commands in the rest of the book to use "
+"these cached versions instead of attempting to use the network."
+msgstr ""

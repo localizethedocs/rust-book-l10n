@@ -1,0 +1,59 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch14-04-installing-binaries.md:3
+msgid "<a id=\"installing-binaries-from-cratesio-with-cargo-install\"></a>"
+msgstr ""
+
+#: src/ch14-04-installing-binaries.md:5
+msgid "Installing Binaries with `cargo install`"
+msgstr ""
+
+#: src/ch14-04-installing-binaries.md:7
+msgid ""
+"The `cargo install` command allows you to install and use binary crates "
+"locally. This isn’t intended to replace system packages; it’s meant to be a "
+"convenient way for Rust developers to install tools that others have shared "
+"on [crates.io](https://crates.io/)<!-- ignore -->. Note that you can only "
+"install packages that have binary targets. A _binary target_ is the runnable "
+"program that is created if the crate has a _src/main.rs_ file or another "
+"file specified as a binary, as opposed to a library target that isn’t "
+"runnable on its own but is suitable for including within other programs. "
+"Usually, crates have information in the README file about whether a crate is "
+"a library, has a binary target, or both."
+msgstr ""
+
+#: src/ch14-04-installing-binaries.md:18
+msgid ""
+"All binaries installed with `cargo install` are stored in the installation "
+"root’s _bin_ folder. If you installed Rust using _rustup.rs_ and don’t have "
+"any custom configurations, this directory will be _$HOME/.cargo/bin_. Ensure "
+"that this directory is in your `$PATH` to be able to run programs you’ve "
+"installed with `cargo install`."
+msgstr ""
+
+#: src/ch14-04-installing-binaries.md:24
+msgid ""
+"For example, in Chapter 12 we mentioned that there’s a Rust implementation "
+"of the `grep` tool called `ripgrep` for searching files. To install "
+"`ripgrep`, we can run the following:"
+msgstr ""
+
+#: src/ch14-04-installing-binaries.md:45
+msgid ""
+"The second-to-last line of the output shows the location and the name of the "
+"installed binary, which in the case of `ripgrep` is `rg`. As long as the "
+"installation directory is in your `$PATH`, as mentioned previously, you can "
+"then run `rg --help` and start using a faster, Rustier tool for searching "
+"files!"
+msgstr ""

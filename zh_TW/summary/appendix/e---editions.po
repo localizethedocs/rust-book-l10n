@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/appendix-05-editions.md:1
+msgid "Appendix E: Editions"
+msgstr "附錄 E：版次"
+
+#: src/appendix-05-editions.md:3
+msgid ""
+"In Chapter 1, you saw that `cargo new` adds a bit of metadata to your _Cargo."
+"toml_ file about an edition. This appendix talks about what that means!"
+msgstr ""
+
+#: src/appendix-05-editions.md:6
+msgid ""
+"The Rust language and compiler have a six-week release cycle, meaning users "
+"get a constant stream of new features. Other programming languages release "
+"larger changes less often; Rust releases smaller updates more frequently. "
+"After a while, all of these tiny changes add up. But from release to "
+"release, it can be difficult to look back and say, “Wow, between Rust 1.10 "
+"and Rust 1.31, Rust has changed a lot!”"
+msgstr ""
+
+#: src/appendix-05-editions.md:13
+msgid ""
+"Every three years or so, the Rust team produces a new Rust _edition_. Each "
+"edition brings together the features that have landed into a clear package "
+"with fully updated documentation and tooling. New editions ship as part of "
+"the usual six-week release process."
+msgstr ""
+
+#: src/appendix-05-editions.md:18
+msgid "Editions serve different purposes for different people:"
+msgstr ""
+
+#: src/appendix-05-editions.md:20
+msgid ""
+"For active Rust users, a new edition brings together incremental changes "
+"into an easy-to-understand package."
+msgstr ""
+
+#: src/appendix-05-editions.md:22
+msgid ""
+"For non-users, a new edition signals that some major advancements have "
+"landed, which might make Rust worth another look."
+msgstr ""
+
+#: src/appendix-05-editions.md:24
+msgid ""
+"For those developing Rust, a new edition provides a rallying point for the "
+"project as a whole."
+msgstr ""
+
+#: src/appendix-05-editions.md:27
+msgid ""
+"At the time of this writing, four Rust editions are available: Rust 2015, "
+"Rust 2018, Rust 2021, and Rust 2024. This book is written using Rust 2024 "
+"edition idioms."
+msgstr ""
+
+#: src/appendix-05-editions.md:31
+msgid ""
+"The `edition` key in _Cargo.toml_ indicates which edition the compiler "
+"should use for your code. If the key doesn’t exist, Rust uses `2015` as the "
+"edition value for backward compatibility reasons."
+msgstr ""
+
+#: src/appendix-05-editions.md:35
+msgid ""
+"Each project can opt in to an edition other than the default 2015 edition. "
+"Editions can contain incompatible changes, such as including a new keyword "
+"that conflicts with identifiers in code. However, unless you opt in to those "
+"changes, your code will continue to compile even as you upgrade the Rust "
+"compiler version you use."
+msgstr ""
+
+#: src/appendix-05-editions.md:41
+msgid ""
+"All Rust compiler versions support any edition that existed prior to that "
+"compiler’s release, and they can link crates of any supported editions "
+"together. Edition changes only affect the way the compiler initially parses "
+"code. Therefore, if you’re using Rust 2015 and one of your dependencies uses "
+"Rust 2018, your project will compile and be able to use that dependency. The "
+"opposite situation, where your project uses Rust 2018 and a dependency uses "
+"Rust 2015, works as well."
+msgstr ""
+
+#: src/appendix-05-editions.md:49
+msgid ""
+"To be clear: Most features will be available on all editions. Developers "
+"using any Rust edition will continue to see improvements as new stable "
+"releases are made. However, in some cases, mainly when new keywords are "
+"added, some new features might only be available in later editions. You will "
+"need to switch editions if you want to take advantage of such features."
+msgstr ""
+
+#: src/appendix-05-editions.md:55
+msgid ""
+"For more details, see [_The Rust Edition Guide_](https://doc.rust-lang.org/"
+"stable/edition-guide). This is a complete book that enumerates the "
+"differences between editions and explains how to automatically upgrade your "
+"code to a new edition via `cargo fix`."
+msgstr ""

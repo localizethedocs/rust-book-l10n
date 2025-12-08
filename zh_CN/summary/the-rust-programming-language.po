@@ -1,0 +1,58 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/title-page.md:1
+msgid "The Rust Programming Language"
+msgstr ""
+
+#: src/title-page.md:3
+msgid ""
+"_by Steve Klabnik, Carol Nichols, and Chris Krycho, with contributions from "
+"the Rust Community_"
+msgstr ""
+
+#: src/title-page.md:6
+msgid ""
+"This version of the text assumes you’re using Rust 1.90.0 (released "
+"2025-09-18) or later with `edition = \"2024\"` in the _Cargo.toml_ file of "
+"all projects to configure them to use Rust 2024 Edition idioms. See the "
+"[“Installation” section of Chapter 1](ch01-01-installation.html)<!-- ignore "
+"--> for instructions on installing or updating Rust, and see [Appendix E]"
+"(appendix-05-editions.html)<!-- ignore --> for information on editions."
+msgstr ""
+
+#: src/title-page.md:13
+msgid ""
+"The HTML format is available online at [https://doc.rust-lang.org/stable/"
+"book/](https://doc.rust-lang.org/stable/book/) and offline with "
+"installations of Rust made with `rustup`; run `rustup doc --book` to open."
+msgstr ""
+
+#: src/title-page.md:18
+msgid ""
+"Several community [translations](appendix-06-translation.html) are also "
+"available."
+msgstr ""
+
+#: src/title-page.md:20
+msgid ""
+"This text is available in [paperback and ebook format from No Starch Press]"
+"(https://nostarch.com/rust-programming-language-3rd-edition)."
+msgstr ""
+
+#: src/title-page.md:28
+msgid ""
+"**🚨 Want a more interactive learning experience? Try out a different "
+"version of the Rust Book, featuring: quizzes, highlighting, visualizations, "
+"and more**: <https://rust-book.cs.brown.edu>"
+msgstr ""

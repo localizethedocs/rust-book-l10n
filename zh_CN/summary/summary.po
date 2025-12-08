@@ -1,0 +1,453 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/SUMMARY.md:1
+msgid "The Rust Programming Language"
+msgstr ""
+
+#: src/SUMMARY.md:3
+msgid "The Rust Programming Language Foreword Introduction"
+msgstr ""
+
+#: src/SUMMARY.md:7
+msgid "Getting Started"
+msgstr ""
+
+#: src/SUMMARY.md:8
+msgid "Installation"
+msgstr ""
+
+#: src/SUMMARY.md:9
+msgid "Hello, World!"
+msgstr ""
+
+#: src/SUMMARY.md:10
+msgid "Hello, Cargo!"
+msgstr ""
+
+#: src/SUMMARY.md:12
+msgid "Programming a Guessing Game"
+msgstr ""
+
+#: src/SUMMARY.md:14
+msgid "Common Programming Concepts"
+msgstr ""
+
+#: src/SUMMARY.md:15
+msgid "Variables and Mutability"
+msgstr ""
+
+#: src/SUMMARY.md:16
+msgid "Data Types"
+msgstr ""
+
+#: src/SUMMARY.md:17
+msgid "Functions"
+msgstr ""
+
+#: src/SUMMARY.md:18
+msgid "Comments"
+msgstr ""
+
+#: src/SUMMARY.md:19
+msgid "Control Flow"
+msgstr ""
+
+#: src/SUMMARY.md:21
+msgid "Understanding Ownership"
+msgstr ""
+
+#: src/SUMMARY.md:22
+msgid "What is Ownership?"
+msgstr ""
+
+#: src/SUMMARY.md:23
+msgid "References and Borrowing"
+msgstr ""
+
+#: src/SUMMARY.md:24
+msgid "The Slice Type"
+msgstr ""
+
+#: src/SUMMARY.md:26
+msgid "Using Structs to Structure Related Data"
+msgstr ""
+
+#: src/SUMMARY.md:27
+msgid "Defining and Instantiating Structs"
+msgstr ""
+
+#: src/SUMMARY.md:28
+msgid "An Example Program Using Structs"
+msgstr ""
+
+#: src/SUMMARY.md:29
+msgid "Methods"
+msgstr ""
+
+#: src/SUMMARY.md:31
+msgid "Enums and Pattern Matching"
+msgstr ""
+
+#: src/SUMMARY.md:32
+msgid "Defining an Enum"
+msgstr ""
+
+#: src/SUMMARY.md:33
+msgid "The `match` Control Flow Construct"
+msgstr ""
+
+#: src/SUMMARY.md:34
+msgid "Concise Control Flow with `if let` and `let...else`"
+msgstr ""
+
+#: src/SUMMARY.md:36
+msgid "Packages, Crates, and Modules"
+msgstr ""
+
+#: src/SUMMARY.md:37
+msgid "Packages and Crates"
+msgstr ""
+
+#: src/SUMMARY.md:38
+msgid "Control Scope and Privacy with Modules"
+msgstr ""
+
+#: src/SUMMARY.md:39
+msgid "Paths for Referring to an Item in the Module Tree"
+msgstr ""
+
+#: src/SUMMARY.md:40
+msgid "Bringing Paths Into Scope with the `use` Keyword"
+msgstr ""
+
+#: src/SUMMARY.md:41
+msgid "Separating Modules into Different Files"
+msgstr ""
+
+#: src/SUMMARY.md:43
+msgid "Common Collections"
+msgstr ""
+
+#: src/SUMMARY.md:44
+msgid "Storing Lists of Values with Vectors"
+msgstr ""
+
+#: src/SUMMARY.md:45
+msgid "Storing UTF-8 Encoded Text with Strings"
+msgstr ""
+
+#: src/SUMMARY.md:46
+msgid "Storing Keys with Associated Values in Hash Maps"
+msgstr ""
+
+#: src/SUMMARY.md:48
+msgid "Error Handling"
+msgstr ""
+
+#: src/SUMMARY.md:49
+msgid "Unrecoverable Errors with `panic!`"
+msgstr ""
+
+#: src/SUMMARY.md:50
+msgid "Recoverable Errors with `Result`"
+msgstr ""
+
+#: src/SUMMARY.md:51
+msgid "To `panic!` or Not to `panic!`"
+msgstr ""
+
+#: src/SUMMARY.md:53
+msgid "Generic Types, Traits, and Lifetimes"
+msgstr ""
+
+#: src/SUMMARY.md:54
+msgid "Generic Data Types"
+msgstr ""
+
+#: src/SUMMARY.md:55
+msgid "Defining Shared Behavior with Traits"
+msgstr ""
+
+#: src/SUMMARY.md:56
+msgid "Validating References with Lifetimes"
+msgstr ""
+
+#: src/SUMMARY.md:58
+msgid "Writing Automated Tests"
+msgstr ""
+
+#: src/SUMMARY.md:59
+msgid "How to Write Tests"
+msgstr ""
+
+#: src/SUMMARY.md:60
+msgid "Controlling How Tests Are Run"
+msgstr ""
+
+#: src/SUMMARY.md:61
+msgid "Test Organization"
+msgstr ""
+
+#: src/SUMMARY.md:63
+msgid "An I/O Project: Building a Command Line Program"
+msgstr ""
+
+#: src/SUMMARY.md:64
+msgid "Accepting Command Line Arguments"
+msgstr ""
+
+#: src/SUMMARY.md:65
+msgid "Reading a File"
+msgstr ""
+
+#: src/SUMMARY.md:66
+msgid "Refactoring to Improve Modularity and Error Handling"
+msgstr ""
+
+#: src/SUMMARY.md:67
+msgid "Adding Functionality with Test Driven Development"
+msgstr ""
+
+#: src/SUMMARY.md:68
+msgid "Working with Environment Variables"
+msgstr ""
+
+#: src/SUMMARY.md:69
+msgid "Redirecting Errors to Standard Error"
+msgstr ""
+
+#: src/SUMMARY.md:71
+msgid "Functional Language Features: Iterators and Closures"
+msgstr ""
+
+#: src/SUMMARY.md:72
+msgid "Closures"
+msgstr ""
+
+#: src/SUMMARY.md:73
+msgid "Processing a Series of Items with Iterators"
+msgstr ""
+
+#: src/SUMMARY.md:74
+msgid "Improving Our I/O Project"
+msgstr ""
+
+#: src/SUMMARY.md:75
+msgid "Performance in Loops vs. Iterators"
+msgstr ""
+
+#: src/SUMMARY.md:77
+msgid "More about Cargo and Crates.io"
+msgstr ""
+
+#: src/SUMMARY.md:78
+msgid "Customizing Builds with Release Profiles"
+msgstr ""
+
+#: src/SUMMARY.md:79
+msgid "Publishing a Crate to Crates.io"
+msgstr ""
+
+#: src/SUMMARY.md:80
+msgid "Cargo Workspaces"
+msgstr ""
+
+#: src/SUMMARY.md:81
+msgid "Installing Binaries with `cargo install`"
+msgstr ""
+
+#: src/SUMMARY.md:82
+msgid "Extending Cargo with Custom Commands"
+msgstr ""
+
+#: src/SUMMARY.md:84
+msgid "Smart Pointers"
+msgstr ""
+
+#: src/SUMMARY.md:85
+msgid "Using `Box<T>` to Point to Data on the Heap"
+msgstr ""
+
+#: src/SUMMARY.md:86
+msgid "Treating Smart Pointers Like Regular References"
+msgstr ""
+
+#: src/SUMMARY.md:87
+msgid "Running Code on Cleanup with the `Drop` Trait"
+msgstr ""
+
+#: src/SUMMARY.md:88
+msgid "`Rc<T>`, the Reference Counted Smart Pointer"
+msgstr ""
+
+#: src/SUMMARY.md:89
+msgid "`RefCell<T>` and the Interior Mutability Pattern"
+msgstr ""
+
+#: src/SUMMARY.md:90
+msgid "Reference Cycles Can Leak Memory"
+msgstr ""
+
+#: src/SUMMARY.md:92
+msgid "Fearless Concurrency"
+msgstr ""
+
+#: src/SUMMARY.md:93
+msgid "Using Threads to Run Code Simultaneously"
+msgstr ""
+
+#: src/SUMMARY.md:94
+msgid "Transfer Data Between Threads with Message Passing"
+msgstr ""
+
+#: src/SUMMARY.md:95
+msgid "Shared-State Concurrency"
+msgstr ""
+
+#: src/SUMMARY.md:96
+msgid "Extensible Concurrency with `Send` and `Sync`"
+msgstr ""
+
+#: src/SUMMARY.md:98
+msgid ""
+"Fundamentals of Asynchronous Programming: Async, Await, Futures, and Streams"
+msgstr ""
+
+#: src/SUMMARY.md:99
+msgid "Futures and the Async Syntax"
+msgstr ""
+
+#: src/SUMMARY.md:100
+msgid "Applying Concurrency with Async"
+msgstr ""
+
+#: src/SUMMARY.md:101
+msgid "Working With Any Number of Futures"
+msgstr ""
+
+#: src/SUMMARY.md:102
+msgid "Streams: Futures in Sequence"
+msgstr ""
+
+#: src/SUMMARY.md:103
+msgid "A Closer Look at the Traits for Async"
+msgstr ""
+
+#: src/SUMMARY.md:104
+msgid "Futures, Tasks, and Threads"
+msgstr ""
+
+#: src/SUMMARY.md:106
+msgid "Object Oriented Programming Features"
+msgstr ""
+
+#: src/SUMMARY.md:107
+msgid "Characteristics of Object-Oriented Languages"
+msgstr ""
+
+#: src/SUMMARY.md:108
+msgid "Using Trait Objects to Abstract over Shared Behavior"
+msgstr ""
+
+#: src/SUMMARY.md:109
+msgid "Implementing an Object-Oriented Design Pattern"
+msgstr ""
+
+#: src/SUMMARY.md:111
+msgid "Patterns and Matching"
+msgstr ""
+
+#: src/SUMMARY.md:112
+msgid "All the Places Patterns Can Be Used"
+msgstr ""
+
+#: src/SUMMARY.md:113
+msgid "Refutability: Whether a Pattern Might Fail to Match"
+msgstr ""
+
+#: src/SUMMARY.md:114
+msgid "Pattern Syntax"
+msgstr ""
+
+#: src/SUMMARY.md:116
+msgid "Advanced Features"
+msgstr ""
+
+#: src/SUMMARY.md:117
+msgid "Unsafe Rust"
+msgstr ""
+
+#: src/SUMMARY.md:118
+msgid "Advanced Traits"
+msgstr ""
+
+#: src/SUMMARY.md:119
+msgid "Advanced Types"
+msgstr ""
+
+#: src/SUMMARY.md:120
+msgid "Advanced Functions and Closures"
+msgstr ""
+
+#: src/SUMMARY.md:121
+msgid "Macros"
+msgstr ""
+
+#: src/SUMMARY.md:123
+msgid "Final Project: Building a Multithreaded Web Server"
+msgstr ""
+
+#: src/SUMMARY.md:124
+msgid "Building a Single-Threaded Web Server"
+msgstr ""
+
+#: src/SUMMARY.md:125
+msgid "From Single-Threaded to Multithreaded Server"
+msgstr ""
+
+#: src/SUMMARY.md:126
+msgid "Graceful Shutdown and Cleanup"
+msgstr ""
+
+#: src/SUMMARY.md:128
+msgid "Appendix"
+msgstr ""
+
+#: src/SUMMARY.md:129
+msgid "A - Keywords"
+msgstr ""
+
+#: src/SUMMARY.md:130
+msgid "B - Operators and Symbols"
+msgstr ""
+
+#: src/SUMMARY.md:131
+msgid "C - Derivable Traits"
+msgstr ""
+
+#: src/SUMMARY.md:132
+msgid "D - Useful Development Tools"
+msgstr ""
+
+#: src/SUMMARY.md:133
+msgid "E - Editions"
+msgstr ""
+
+#: src/SUMMARY.md:134
+msgid "F - Translations of the Book"
+msgstr ""
+
+#: src/SUMMARY.md:135
+msgid "G - How Rust is Made and “Nightly Rust”"
+msgstr ""

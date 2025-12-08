@@ -1,0 +1,1105 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch21-02-multithreaded.md:3
+msgid ""
+"<a id=\"turning-our-single-threaded-server-into-a-multithreaded-server\"></"
+"a> <a id=\"from-single-threaded-to-multithreaded-server\"></a>"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:6
+msgid "From a Single-Threaded to a Multithreaded Server"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:8
+msgid ""
+"Right now, the server will process each request in turn, meaning it won’t "
+"process a second connection until the first connection is finished "
+"processing. If the server received more and more requests, this serial "
+"execution would be less and less optimal. If the server receives a request "
+"that takes a long time to process, subsequent requests will have to wait "
+"until the long request is finished, even if the new requests can be "
+"processed quickly. We’ll need to fix this, but first we’ll look at the "
+"problem in action."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:18
+msgid ""
+"<a id=\"simulating-a-slow-request-in-the-current-server-implementation\"></a>"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:20
+msgid "Simulating a Slow Request"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:22
+msgid ""
+"We’ll look at how a slowly processing request can affect other requests made "
+"to our current server implementation. Listing 21-10 implements handling a "
+"request to _/sleep_ with a simulated slow response that will cause the "
+"server to sleep for five seconds before responding."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:36 src/ch21-02-multithreaded.md:50
+#: src/ch21-02-multithreaded.md:64 src/ch21-02-multithreaded.md:486
+#: src/ch21-02-multithreaded.md:560 src/ch21-02-multithreaded.md:624
+#: src/ch21-02-multithreaded.md:643 src/ch21-02-multithreaded.md:727
+#: src/ch21-02-multithreaded.md:746 src/ch21-02-multithreaded.md:836
+#: src/ch21-02-multithreaded.md:857 src/ch21-02-multithreaded.md:903
+#: src/ch21-02-multithreaded.md:924 src/ch21-02-multithreaded.md:932
+#: src/ch21-02-multithreaded.md:1013 src/ch21-02-multithreaded.md:1024
+#: src/ch21-02-multithreaded.md:1048 src/ch21-02-multithreaded.md:1056
+#: src/ch21-02-multithreaded.md:1066 src/ch21-02-multithreaded.md:1104
+#: src/ch21-02-multithreaded.md:1110 src/ch21-02-multithreaded.md:1143
+#: src/ch21-02-multithreaded.md:1232 src/ch21-02-multithreaded.md:1391
+msgid "// --snip--\n"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:40 src/ch21-02-multithreaded.md:175
+#: src/ch21-02-multithreaded.md:245 src/ch21-02-multithreaded.md:348
+msgid "\"127.0.0.1:7878\""
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:56 src/ch21-02-multithreaded.md:191
+#: src/ch21-02-multithreaded.md:262 src/ch21-02-multithreaded.md:365
+msgid "\"GET / HTTP/1.1\""
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:56 src/ch21-02-multithreaded.md:59
+#: src/ch21-02-multithreaded.md:191 src/ch21-02-multithreaded.md:194
+#: src/ch21-02-multithreaded.md:262 src/ch21-02-multithreaded.md:265
+#: src/ch21-02-multithreaded.md:365 src/ch21-02-multithreaded.md:368
+msgid "\"HTTP/1.1 200 OK\""
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:56 src/ch21-02-multithreaded.md:59
+#: src/ch21-02-multithreaded.md:191 src/ch21-02-multithreaded.md:194
+#: src/ch21-02-multithreaded.md:262 src/ch21-02-multithreaded.md:265
+#: src/ch21-02-multithreaded.md:365 src/ch21-02-multithreaded.md:368
+msgid "\"hello.html\""
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:57 src/ch21-02-multithreaded.md:192
+#: src/ch21-02-multithreaded.md:263 src/ch21-02-multithreaded.md:366
+msgid "\"GET /sleep HTTP/1.1\""
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:61 src/ch21-02-multithreaded.md:196
+#: src/ch21-02-multithreaded.md:267 src/ch21-02-multithreaded.md:370
+msgid "\"HTTP/1.1 404 NOT FOUND\""
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:61 src/ch21-02-multithreaded.md:196
+#: src/ch21-02-multithreaded.md:267 src/ch21-02-multithreaded.md:370
+msgid "\"404.html\""
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:70 src/ch21-02-multithreaded.md:203
+#: src/ch21-02-multithreaded.md:274 src/ch21-02-multithreaded.md:377
+msgid "\"{status_line}\\r\\nContent-Length: {length}\\r\\n\\r\\n{contents}\""
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:78
+msgid ""
+"We switched from `if` to `match` now that we have three cases. We need to "
+"explicitly match on a slice of `request_line` to pattern-match against the "
+"string literal values; `match` doesn’t do automatic referencing and "
+"dereferencing, like the equality method does."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:83
+msgid ""
+"The first arm is the same as the `if` block from Listing 21-9. The second "
+"arm matches a request to _/sleep_. When that request is received, the server "
+"will sleep for five seconds before rendering the successful HTML page. The "
+"third arm is the same as the `else` block from Listing 21-9."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:88
+msgid ""
+"You can see how primitive our server is: Real libraries would handle the "
+"recognition of multiple requests in a much less verbose way!"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:91
+msgid ""
+"Start the server using `cargo run`. Then, open two browser windows: one for "
+"_http://127.0.0.1:7878_ and the other for _http://127.0.0.1:7878/sleep_. If "
+"you enter the _/_ URI a few times, as before, you’ll see it respond quickly. "
+"But if you enter _/sleep_ and then load _/_, you’ll see that _/_ waits until "
+"`sleep` has slept for its full five seconds before loading."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:97
+msgid ""
+"There are multiple techniques we could use to avoid requests backing up "
+"behind a slow request, including using async as we did Chapter 17; the one "
+"we’ll implement is a thread pool."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:101
+msgid "Improving Throughput with a Thread Pool"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:103
+msgid ""
+"A _thread pool_ is a group of spawned threads that are ready and waiting to "
+"handle a task. When the program receives a new task, it assigns one of the "
+"threads in the pool to the task, and that thread will process the task. The "
+"remaining threads in the pool are available to handle any other tasks that "
+"come in while the first thread is processing. When the first thread is done "
+"processing its task, it’s returned to the pool of idle threads, ready to "
+"handle a new task. A thread pool allows you to process connections "
+"concurrently, increasing the throughput of your server."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:112
+msgid ""
+"We’ll limit the number of threads in the pool to a small number to protect "
+"us from DoS attacks; if we had our program create a new thread for each "
+"request as it came in, someone making 10 million requests to our server "
+"could wreak havoc by using up all our server’s resources and grinding the "
+"processing of requests to a halt."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:118
+msgid ""
+"Rather than spawning unlimited threads, then, we’ll have a fixed number of "
+"threads waiting in the pool. Requests that come in are sent to the pool for "
+"processing. The pool will maintain a queue of incoming requests. Each of the "
+"threads in the pool will pop off a request from this queue, handle the "
+"request, and then ask the queue for another request. With this design, we "
+"can process up to _`N`_ requests concurrently, where _`N`_ is the number of "
+"threads. If each thread is responding to a long-running request, subsequent "
+"requests can still back up in the queue, but we’ve increased the number of "
+"long-running requests we can handle before reaching that point."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:128
+msgid ""
+"This technique is just one of many ways to improve the throughput of a web "
+"server. Other options you might explore are the fork/join model, the single-"
+"threaded async I/O model, and the multithreaded async I/O model. If you’re "
+"interested in this topic, you can read more about other solutions and try to "
+"implement them; with a low-level language like Rust, all of these options "
+"are possible."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:135
+msgid ""
+"Before we begin implementing a thread pool, let’s talk about what using the "
+"pool should look like. When you’re trying to design code, writing the client "
+"interface first can help guide your design. Write the API of the code so "
+"that it’s structured in the way you want to call it; then, implement the "
+"functionality within that structure rather than implementing the "
+"functionality and then designing the public API."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:142
+msgid ""
+"Similar to how we used test-driven development in the project in Chapter 12, "
+"we’ll use compiler-driven development here. We’ll write the code that calls "
+"the functions we want, and then we’ll look at errors from the compiler to "
+"determine what we should change next to get the code to work. Before we do "
+"that, however, we’ll explore the technique we’re not going to use as a "
+"starting point."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:150
+msgid ""
+"<a id=\"code-structure-if-we-could-spawn-a-thread-for-each-request\"></a>"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:152
+msgid "Spawning a Thread for Each Request"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:154
+msgid ""
+"First, let’s explore how our code might look if it did create a new thread "
+"for every connection. As mentioned earlier, this isn’t our final plan due to "
+"the problems with potentially spawning an unlimited number of threads, but "
+"it is a starting point to get a working multithreaded server first. Then, "
+"we’ll add the thread pool as an improvement, and contrasting the two "
+"solutions will be easier."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:160
+msgid ""
+"Listing 21-11 shows the changes to make to `main` to spawn a new thread to "
+"handle each stream within the `for` loop."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:211
+msgid ""
+"As you learned in Chapter 16, `thread::spawn` will create a new thread and "
+"then run the code in the closure in the new thread. If you run this code and "
+"load _/sleep_ in your browser, then _/_ in two more browser tabs, you’ll "
+"indeed see that the requests to _/_ don’t have to wait for _/sleep_ to "
+"finish. However, as we mentioned, this will eventually overwhelm the system "
+"because you’d be making new threads without any limit."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:218
+msgid ""
+"You may also recall from Chapter 17 that this is exactly the kind of "
+"situation where async and await really shine! Keep that in mind as we build "
+"the thread pool and think about how things would look different or the same "
+"with async."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:224
+msgid ""
+"<a id=\"creating-a-similar-interface-for-a-finite-number-of-threads\"></a>"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:226
+msgid "Creating a Finite Number of Threads"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:228
+msgid ""
+"We want our thread pool to work in a similar, familiar way so that switching "
+"from threads to a thread pool doesn’t require large changes to the code that "
+"uses our API. Listing 21-12 shows the hypothetical interface for a "
+"`ThreadPool` struct we want to use instead of `thread::spawn`."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:282
+msgid ""
+"We use `ThreadPool::new` to create a new thread pool with a configurable "
+"number of threads, in this case four. Then, in the `for` loop, `pool."
+"execute` has a similar interface as `thread::spawn` in that it takes a "
+"closure that the pool should run for each stream. We need to implement `pool."
+"execute` so that it takes the closure and gives it to a thread in the pool "
+"to run. This code won’t yet compile, but we’ll try so that the compiler can "
+"guide us in how to fix it."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:291
+msgid ""
+"<a id=\"building-the-threadpool-struct-using-compiler-driven-development\"></"
+"a>"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:293
+msgid "Building `ThreadPool` Using Compiler-Driven Development"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:295
+msgid ""
+"Make the changes in Listing 21-12 to _src/main.rs_, and then let’s use the "
+"compiler errors from `cargo check` to drive our development. Here is the "
+"first error we get:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:299
+msgid ""
+"```console\n"
+"$ cargo check\n"
+"    Checking hello v0.1.0 (file:///projects/hello)\n"
+"error[E0433]: failed to resolve: use of undeclared type `ThreadPool`\n"
+"  --> src/main.rs:11:16\n"
+"   |\n"
+"11 |     let pool = ThreadPool::new(4);\n"
+"   |                ^^^^^^^^^^ use of undeclared type `ThreadPool`\n"
+"\n"
+"For more information about this error, try `rustc --explain E0433`.\n"
+"error: could not compile `hello` (bin \"hello\") due to 1 previous error\n"
+"```"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:312
+msgid ""
+"Great! This error tells us we need a `ThreadPool` type or module, so we’ll "
+"build one now. Our `ThreadPool` implementation will be independent of the "
+"kind of work our web server is doing. So, let’s switch the `hello` crate "
+"from a binary crate to a library crate to hold our `ThreadPool` "
+"implementation. After we change to a library crate, we could also use the "
+"separate thread pool library for any work we want to do using a thread pool, "
+"not just for serving web requests."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:320
+msgid ""
+"Create a _src/lib.rs_ file that contains the following, which is the "
+"simplest definition of a `ThreadPool` struct that we can have for now:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:332
+msgid ""
+"Then, edit the _main.rs_ file to bring `ThreadPool` into scope from the "
+"library crate by adding the following code to the top of _src/main.rs_:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:385
+msgid ""
+"This code still won’t work, but let’s check it again to get the next error "
+"that we need to address:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:388
+msgid ""
+"```console\n"
+"$ cargo check\n"
+"    Checking hello v0.1.0 (file:///projects/hello)\n"
+"error[E0599]: no function or associated item named `new` found for struct "
+"`ThreadPool` in the current scope\n"
+"  --> src/main.rs:12:28\n"
+"   |\n"
+"12 |     let pool = ThreadPool::new(4);\n"
+"   |                            ^^^ function or associated item not found in "
+"`ThreadPool`\n"
+"\n"
+"For more information about this error, try `rustc --explain E0599`.\n"
+"error: could not compile `hello` (bin \"hello\") due to 1 previous error\n"
+"```"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:401
+msgid ""
+"This error indicates that next we need to create an associated function "
+"named `new` for `ThreadPool`. We also know that `new` needs to have one "
+"parameter that can accept `4` as an argument and should return a "
+"`ThreadPool` instance. Let’s implement the simplest `new` function that will "
+"have those characteristics:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:421
+msgid ""
+"We chose `usize` as the type of the `size` parameter because we know that a "
+"negative number of threads doesn’t make any sense. We also know we’ll use "
+"this `4` as the number of elements in a collection of threads, which is what "
+"the `usize` type is for, as discussed in the [“Integer Types”](ch03-02-data-"
+"types.html#integer-types)<!--\n"
+"ignore --> section in Chapter 3."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:427
+msgid "Let’s check the code again:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:429
+msgid ""
+"```console\n"
+"$ cargo check\n"
+"    Checking hello v0.1.0 (file:///projects/hello)\n"
+"error[E0599]: no method named `execute` found for struct `ThreadPool` in the "
+"current scope\n"
+"  --> src/main.rs:17:14\n"
+"   |\n"
+"17 |         pool.execute(|| {\n"
+"   |         -----^^^^^^^ method not found in `ThreadPool`\n"
+"\n"
+"For more information about this error, try `rustc --explain E0599`.\n"
+"error: could not compile `hello` (bin \"hello\") due to 1 previous error\n"
+"```"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:442
+msgid ""
+"Now the error occurs because we don’t have an `execute` method on "
+"`ThreadPool`. Recall from the [“Creating a Finite Number of Threads”]"
+"(#creating-a-finite-number-of-threads)<!-- ignore --> section that we "
+"decided our thread pool should have an interface similar to `thread::spawn`. "
+"In addition, we’ll implement the `execute` function so that it takes the "
+"closure it’s given and gives it to an idle thread in the pool to run."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:449
+msgid ""
+"We’ll define the `execute` method on `ThreadPool` to take a closure as a "
+"parameter. Recall from the [“Moving Captured Values Out of Closures”]"
+"(ch13-01-closures.html#moving-captured-values-out-of-closures)<!-- ignore --"
+"> in Chapter 13 that we can take closures as parameters with three different "
+"traits: `Fn`, `FnMut`, and `FnOnce`. We need to decide which kind of closure "
+"to use here. We know we’ll end up doing something similar to the standard "
+"library `thread::spawn` implementation, so we can look at what bounds the "
+"signature of `thread::spawn` has on its parameter. The documentation shows "
+"us the following:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:466
+msgid ""
+"The `F` type parameter is the one we’re concerned with here; the `T` type "
+"parameter is related to the return value, and we’re not concerned with that. "
+"We can see that `spawn` uses `FnOnce` as the trait bound on `F`. This is "
+"probably what we want as well, because we’ll eventually pass the argument we "
+"get in `execute` to `spawn`. We can be further confident that `FnOnce` is "
+"the trait we want to use because the thread for running a request will only "
+"execute that request’s closure one time, which matches the `Once` in "
+"`FnOnce`."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:474
+msgid ""
+"The `F` type parameter also has the trait bound `Send` and the lifetime "
+"bound `'static`, which are useful in our situation: We need `Send` to "
+"transfer the closure from one thread to another and `'static` because we "
+"don’t know how long the thread will take to execute. Let’s create an "
+"`execute` method on `ThreadPool` that will take a generic parameter of type "
+"`F` with these bounds:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:501
+msgid ""
+"We still use the `()` after `FnOnce` because this `FnOnce` represents a "
+"closure that takes no parameters and returns the unit type `()`. Just like "
+"function definitions, the return type can be omitted from the signature, but "
+"even if we have no parameters, we still need the parentheses."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:506
+msgid ""
+"Again, this is the simplest implementation of the `execute` method: It does "
+"nothing, but we’re only trying to make our code compile. Let’s check it "
+"again:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:509
+msgid ""
+"```console\n"
+"$ cargo check\n"
+"    Checking hello v0.1.0 (file:///projects/hello)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.24s\n"
+"```"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:515
+msgid ""
+"It compiles! But note that if you try `cargo run` and make a request in the "
+"browser, you’ll see the errors in the browser that we saw at the beginning "
+"of the chapter. Our library isn’t actually calling the closure passed to "
+"`execute` yet!"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:520
+msgid ""
+"Note: A saying you might hear about languages with strict compilers, such as "
+"Haskell and Rust, is “If the code compiles, it works.” But this saying is "
+"not universally true. Our project compiles, but it does absolutely nothing! "
+"If we were building a real, complete project, this would be a good time to "
+"start writing unit tests to check that the code compiles _and_ has the "
+"behavior we want."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:527
+msgid ""
+"Consider: What would be different here if we were going to execute a future "
+"instead of a closure?"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:530
+msgid "Validating the Number of Threads in `new`"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:532
+msgid ""
+"We aren’t doing anything with the parameters to `new` and `execute`. Let’s "
+"implement the bodies of these functions with the behavior we want. To start, "
+"let’s think about `new`. Earlier we chose an unsigned type for the `size` "
+"parameter because a pool with a negative number of threads makes no sense. "
+"However, a pool with zero threads also makes no sense, yet zero is a "
+"perfectly valid `usize`. We’ll add code to check that `size` is greater than "
+"zero before we return a `ThreadPool` instance, and we’ll have the program "
+"panic if it receives a zero by using the `assert!` macro, as shown in "
+"Listing 21-13."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:547
+msgid ""
+"/// Create a new ThreadPool.\n"
+"    ///\n"
+"    /// The size is the number of threads in the pool.\n"
+"    ///\n"
+"    /// # Panics\n"
+"    ///\n"
+"    /// The `new` function will panic if the size is zero.\n"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:571
+msgid ""
+"We’ve also added some documentation for our `ThreadPool` with doc comments. "
+"Note that we followed good documentation practices by adding a section that "
+"calls out the situations in which our function can panic, as discussed in "
+"Chapter 14. Try running `cargo doc --open` and clicking the `ThreadPool` "
+"struct to see what the generated docs for `new` look like!"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:577
+msgid ""
+"Instead of adding the `assert!` macro as we’ve done here, we could change "
+"`new` into `build` and return a `Result` like we did with `Config::build` in "
+"the I/O project in Listing 12-9. But we’ve decided in this case that trying "
+"to create a thread pool without any threads should be an unrecoverable "
+"error. If you’re feeling ambitious, try to write a function named `build` "
+"with the following signature to compare with the `new` function:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:588
+msgid "Creating Space to Store the Threads"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:590
+msgid ""
+"Now that we have a way to know we have a valid number of threads to store in "
+"the pool, we can create those threads and store them in the `ThreadPool` "
+"struct before returning the struct. But how do we “store” a thread? Let’s "
+"take another look at the `thread::spawn` signature:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:603
+msgid ""
+"The `spawn` function returns a `JoinHandle<T>`, where `T` is the type that "
+"the closure returns. Let’s try using `JoinHandle` too and see what happens. "
+"In our case, the closures we’re passing to the thread pool will handle the "
+"connection and not return anything, so `T` will be the unit type `()`."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:608
+msgid ""
+"The code in Listing 21-14 will compile, but it doesn’t create any threads "
+"yet. We’ve changed the definition of `ThreadPool` to hold a vector of "
+"`thread::JoinHandle<()>` instances, initialized the vector with a capacity "
+"of `size`, set up a `for` loop that will run some code to create the "
+"threads, and returned a `ThreadPool` instance containing them."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:625 src/ch21-02-multithreaded.md:728
+#: src/ch21-02-multithreaded.md:837 src/ch21-02-multithreaded.md:904
+#: src/ch21-02-multithreaded.md:1025 src/ch21-02-multithreaded.md:1111
+#: src/ch21-02-multithreaded.md:1195 src/ch21-02-multithreaded.md:1355
+msgid "/// Create a new ThreadPool.\n"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:626 src/ch21-02-multithreaded.md:628
+#: src/ch21-02-multithreaded.md:630 src/ch21-02-multithreaded.md:729
+#: src/ch21-02-multithreaded.md:731 src/ch21-02-multithreaded.md:733
+#: src/ch21-02-multithreaded.md:838 src/ch21-02-multithreaded.md:840
+#: src/ch21-02-multithreaded.md:842 src/ch21-02-multithreaded.md:905
+#: src/ch21-02-multithreaded.md:907 src/ch21-02-multithreaded.md:909
+#: src/ch21-02-multithreaded.md:1026 src/ch21-02-multithreaded.md:1028
+#: src/ch21-02-multithreaded.md:1030 src/ch21-02-multithreaded.md:1112
+#: src/ch21-02-multithreaded.md:1114 src/ch21-02-multithreaded.md:1116
+#: src/ch21-02-multithreaded.md:1196 src/ch21-02-multithreaded.md:1198
+#: src/ch21-02-multithreaded.md:1200 src/ch21-02-multithreaded.md:1356
+#: src/ch21-02-multithreaded.md:1358 src/ch21-02-multithreaded.md:1360
+msgid "///\n"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:627 src/ch21-02-multithreaded.md:730
+#: src/ch21-02-multithreaded.md:839 src/ch21-02-multithreaded.md:906
+#: src/ch21-02-multithreaded.md:1027 src/ch21-02-multithreaded.md:1113
+#: src/ch21-02-multithreaded.md:1197 src/ch21-02-multithreaded.md:1357
+msgid "/// The size is the number of threads in the pool.\n"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:629 src/ch21-02-multithreaded.md:732
+#: src/ch21-02-multithreaded.md:841 src/ch21-02-multithreaded.md:908
+#: src/ch21-02-multithreaded.md:1029 src/ch21-02-multithreaded.md:1115
+#: src/ch21-02-multithreaded.md:1199 src/ch21-02-multithreaded.md:1359
+msgid "/// # Panics\n"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:631 src/ch21-02-multithreaded.md:734
+#: src/ch21-02-multithreaded.md:843 src/ch21-02-multithreaded.md:910
+#: src/ch21-02-multithreaded.md:1031 src/ch21-02-multithreaded.md:1117
+#: src/ch21-02-multithreaded.md:1201 src/ch21-02-multithreaded.md:1361
+msgid "/// The `new` function will panic if the size is zero.\n"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:638
+msgid "// create some threads and store them in the vector\n"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:655
+msgid ""
+"We’ve brought `std::thread` into scope in the library crate because we’re "
+"using `thread::JoinHandle` as the type of the items in the vector in "
+"`ThreadPool`."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:659
+msgid ""
+"Once a valid size is received, our `ThreadPool` creates a new vector that "
+"can hold `size` items. The `with_capacity` function performs the same task "
+"as `Vec::new` but with an important difference: It pre-allocates space in "
+"the vector. Because we know we need to store `size` elements in the vector, "
+"doing this allocation up front is slightly more efficient than using `Vec::"
+"new`, which resizes itself as elements are inserted."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:666
+msgid "When you run `cargo check` again, it should succeed."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:669
+msgid ""
+"<a id =\"a-worker-struct-responsible-for-sending-code-from-the-threadpool-to-"
+"a-thread\"></a>"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:671
+msgid "Sending Code from the `ThreadPool` to a Thread"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:673
+msgid ""
+"We left a comment in the `for` loop in Listing 21-14 regarding the creation "
+"of threads. Here, we’ll look at how we actually create threads. The standard "
+"library provides `thread::spawn` as a way to create threads, and `thread::"
+"spawn` expects to get some code the thread should run as soon as the thread "
+"is created. However, in our case, we want to create the threads and have "
+"them _wait_ for code that we’ll send later. The standard library’s "
+"implementation of threads doesn’t include any way to do that; we have to "
+"implement it manually."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:682
+msgid ""
+"We’ll implement this behavior by introducing a new data structure between "
+"the `ThreadPool` and the threads that will manage this new behavior. We’ll "
+"call this data structure _Worker_, which is a common term in pooling "
+"implementations. The `Worker` picks up code that needs to be run and runs "
+"the code in its thread."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:688
+msgid ""
+"Think of people working in the kitchen at a restaurant: The workers wait "
+"until orders come in from customers, and then they’re responsible for taking "
+"those orders and filling them."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:692
+msgid ""
+"Instead of storing a vector of `JoinHandle<()>` instances in the thread "
+"pool, we’ll store instances of the `Worker` struct. Each `Worker` will store "
+"a single `JoinHandle<()>` instance. Then, we’ll implement a method on "
+"`Worker` that will take a closure of code to run and send it to the already "
+"running thread for execution. We’ll also give each `Worker` an `id` so that "
+"we can distinguish between the different instances of `Worker` in the pool "
+"when logging or debugging."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:700
+msgid ""
+"Here is the new process that will happen when we create a `ThreadPool`. "
+"We’ll implement the code that sends the closure to the thread after we have "
+"`Worker` set up in this way:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:704
+msgid "Define a `Worker` struct that holds an `id` and a `JoinHandle<()>`."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:705
+msgid "Change `ThreadPool` to hold a vector of `Worker` instances."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:706
+msgid ""
+"Define a `Worker::new` function that takes an `id` number and returns a "
+"`Worker` instance that holds the `id` and a thread spawned with an empty "
+"closure."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:709
+msgid ""
+"In `ThreadPool::new`, use the `for` loop counter to generate an `id`, create "
+"a new `Worker` with that `id`, and store the `Worker` in the vector."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:712
+msgid ""
+"If you’re up for a challenge, try implementing these changes on your own "
+"before looking at the code in Listing 21-15."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:715
+msgid ""
+"Ready? Here is Listing 21-15 with one way to make the preceding "
+"modifications."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:771
+msgid ""
+"We’ve changed the name of the field on `ThreadPool` from `threads` to "
+"`workers` because it’s now holding `Worker` instances instead of "
+"`JoinHandle<()>` instances. We use the counter in the `for` loop as an "
+"argument to `Worker::new`, and we store each new `Worker` in the vector "
+"named `workers`."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:776
+msgid ""
+"External code (like our server in _src/main.rs_) doesn’t need to know the "
+"implementation details regarding using a `Worker` struct within "
+"`ThreadPool`, so we make the `Worker` struct and its `new` function private. "
+"The `Worker::new` function uses the `id` we give it and stores a "
+"`JoinHandle<()>` instance that is created by spawning a new thread using an "
+"empty closure."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:782
+msgid ""
+"Note: If the operating system can’t create a thread because there aren’t "
+"enough system resources, `thread::spawn` will panic. That will cause our "
+"whole server to panic, even though the creation of some threads might "
+"succeed. For simplicity’s sake, this behavior is fine, but in a production "
+"thread pool implementation, you’d likely want to use [`std::thread::Builder`]"
+"(../std/thread/struct.Builder.html)<!-- ignore --> and its [`spawn`](../std/"
+"thread/struct.Builder.html#method.spawn)<!-- ignore --> method that returns "
+"`Result` instead."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:790
+msgid ""
+"This code will compile and will store the number of `Worker` instances we "
+"specified as an argument to `ThreadPool::new`. But we’re _still_ not "
+"processing the closure that we get in `execute`. Let’s look at how to do "
+"that next."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:794
+msgid "Sending Requests to Threads via Channels"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:796
+msgid ""
+"The next problem we’ll tackle is that the closures given to `thread::spawn` "
+"do absolutely nothing. Currently, we get the closure we want to execute in "
+"the `execute` method. But we need to give `thread::spawn` a closure to run "
+"when we create each `Worker` during the creation of the `ThreadPool`."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:801
+msgid ""
+"We want the `Worker` structs that we just created to fetch the code to run "
+"from a queue held in the `ThreadPool` and send that code to its thread to "
+"run."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:804
+msgid ""
+"The channels we learned about in Chapter 16—a simple way to communicate "
+"between two threads—would be perfect for this use case. We’ll use a channel "
+"to function as the queue of jobs, and `execute` will send a job from the "
+"`ThreadPool` to the `Worker` instances, which will send the job to its "
+"thread. Here is the plan:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:809
+msgid "The `ThreadPool` will create a channel and hold on to the sender."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:810
+msgid "Each `Worker` will hold on to the receiver."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:811
+msgid ""
+"We’ll create a new `Job` struct that will hold the closures we want to send "
+"down the channel."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:813
+msgid ""
+"The `execute` method will send the job it wants to execute through the "
+"sender."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:815
+msgid ""
+"In its thread, the `Worker` will loop over its receiver and execute the "
+"closures of any jobs it receives."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:818
+msgid ""
+"Let’s start by creating a channel in `ThreadPool::new` and holding the "
+"sender in the `ThreadPool` instance, as shown in Listing 21-16. The `Job` "
+"struct doesn’t hold anything for now but will be the type of item we’re "
+"sending down the channel."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:882
+msgid ""
+"In `ThreadPool::new`, we create our new channel and have the pool hold the "
+"sender. This will successfully compile."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:885
+msgid ""
+"Let’s try passing a receiver of the channel into each `Worker` as the thread "
+"pool creates the channel. We know we want to use the receiver in the thread "
+"that the `Worker` instances spawn, so we’ll reference the `receiver` "
+"parameter in the closure. The code in Listing 21-17 won’t quite compile yet."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:954
+msgid ""
+"We’ve made some small and straightforward changes: We pass the receiver into "
+"`Worker::new`, and then we use it inside the closure."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:957
+msgid "When we try to check this code, we get this error:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:959
+msgid ""
+"```console\n"
+"$ cargo check\n"
+"    Checking hello v0.1.0 (file:///projects/hello)\n"
+"error[E0382]: use of moved value: `receiver`\n"
+"  --> src/lib.rs:26:42\n"
+"   |\n"
+"21 |         let (sender, receiver) = mpsc::channel();\n"
+"   |                      -------- move occurs because `receiver` has type "
+"`std::sync::mpsc::Receiver<Job>`, which does not implement the `Copy` trait\n"
+"...\n"
+"25 |         for id in 0..size {\n"
+"   |         ----------------- inside of this loop\n"
+"26 |             workers.push(Worker::new(id, receiver));\n"
+"   |                                          ^^^^^^^^ value moved here, in "
+"previous iteration of loop\n"
+"   |\n"
+"note: consider changing this parameter type in method `new` to borrow "
+"instead if owning the value isn't necessary\n"
+"  --> src/lib.rs:47:33\n"
+"   |\n"
+"47 |     fn new(id: usize, receiver: mpsc::Receiver<Job>) -> Worker {\n"
+"   |        --- in this method       ^^^^^^^^^^^^^^^^^^^ this parameter "
+"takes ownership of the value\n"
+"help: consider moving the expression out of the loop so it is only moved "
+"once\n"
+"   |\n"
+"25 ~         let mut value = Worker::new(id, receiver);\n"
+"26 ~         for id in 0..size {\n"
+"27 ~             workers.push(value);\n"
+"   |\n"
+"\n"
+"For more information about this error, try `rustc --explain E0382`.\n"
+"error: could not compile `hello` (lib) due to 1 previous error\n"
+"```"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:989
+msgid ""
+"The code is trying to pass `receiver` to multiple `Worker` instances. This "
+"won’t work, as you’ll recall from Chapter 16: The channel implementation "
+"that Rust provides is multiple _producer_, single _consumer_. This means we "
+"can’t just clone the consuming end of the channel to fix this code. We also "
+"don’t want to send a message multiple times to multiple consumers; we want "
+"one list of messages with multiple `Worker` instances such that each message "
+"gets processed once."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:997
+msgid ""
+"Additionally, taking a job off the channel queue involves mutating the "
+"`receiver`, so the threads need a safe way to share and modify `receiver`; "
+"otherwise, we might get race conditions (as covered in Chapter 16)."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1001
+msgid ""
+"Recall the thread-safe smart pointers discussed in Chapter 16: To share "
+"ownership across multiple threads and allow the threads to mutate the value, "
+"we need to use `Arc<Mutex<T>>`. The `Arc` type will let multiple `Worker` "
+"instances own the receiver, and `Mutex` will ensure that only one `Worker` "
+"gets a job from the receiver at a time. Listing 21-18 shows the changes we "
+"need to make."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1078
+msgid ""
+"In `ThreadPool::new`, we put the receiver in an `Arc` and a `Mutex`. For "
+"each new `Worker`, we clone the `Arc` to bump the reference count so that "
+"the `Worker` instances can share ownership of the receiver."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1082
+msgid "With these changes, the code compiles! We’re getting there!"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1084
+msgid "Implementing the `execute` Method"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1086
+msgid ""
+"Let’s finally implement the `execute` method on `ThreadPool`. We’ll also "
+"change `Job` from a struct to a type alias for a trait object that holds the "
+"type of closure that `execute` receives. As discussed in the [“Type Synonyms "
+"and Type Aliases”](ch20-03-advanced-types.html#type-synonyms-and-type-"
+"aliases)<!-- ignore --> section in Chapter 20, type aliases allow us to make "
+"long types shorter for ease of use. Look at Listing 21-19."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1164
+msgid ""
+"After creating a new `Job` instance using the closure we get in `execute`, "
+"we send that job down the sending end of the channel. We’re calling `unwrap` "
+"on `send` for the case that sending fails. This might happen if, for "
+"example, we stop all our threads from executing, meaning the receiving end "
+"has stopped receiving new messages. At the moment, we can’t stop our threads "
+"from executing: Our threads continue executing as long as the pool exists. "
+"The reason we use `unwrap` is that we know the failure case won’t happen, "
+"but the compiler doesn’t know that."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1173
+msgid ""
+"But we’re not quite done yet! In the `Worker`, our closure being passed to "
+"`thread::spawn` still only _references_ the receiving end of the channel. "
+"Instead, we need the closure to loop forever, asking the receiving end of "
+"the channel for a job and running the job when it gets one. Let’s make the "
+"change shown in Listing 21-20 to `Worker::new`."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1241 src/ch21-02-multithreaded.md:1398
+msgid "\"Worker {id} got a job; executing.\""
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1254
+msgid ""
+"Here, we first call `lock` on the `receiver` to acquire the mutex, and then "
+"we call `unwrap` to panic on any errors. Acquiring a lock might fail if the "
+"mutex is in a _poisoned_ state, which can happen if some other thread "
+"panicked while holding the lock rather than releasing the lock. In this "
+"situation, calling `unwrap` to have this thread panic is the correct action "
+"to take. Feel free to change this `unwrap` to an `expect` with an error "
+"message that is meaningful to you."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1262
+msgid ""
+"If we get the lock on the mutex, we call `recv` to receive a `Job` from the "
+"channel. A final `unwrap` moves past any errors here as well, which might "
+"occur if the thread holding the sender has shut down, similar to how the "
+"`send` method returns `Err` if the receiver shuts down."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1267
+msgid ""
+"The call to `recv` blocks, so if there is no job yet, the current thread "
+"will wait until a job becomes available. The `Mutex<T>` ensures that only "
+"one `Worker` thread at a time is trying to request a job."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1271
+msgid ""
+"Our thread pool is now in a working state! Give it a `cargo run` and make "
+"some requests:"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1281
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling hello v0.1.0 (file:///projects/hello)\n"
+"warning: field `workers` is never read\n"
+" --> src/lib.rs:7:5\n"
+"  |\n"
+"6 | pub struct ThreadPool {\n"
+"  |            ---------- field in this struct\n"
+"7 |     workers: Vec<Worker>,\n"
+"  |     ^^^^^^^\n"
+"  |\n"
+"  = note: `#[warn(dead_code)]` on by default\n"
+"\n"
+"warning: fields `id` and `thread` are never read\n"
+"  --> src/lib.rs:48:5\n"
+"   |\n"
+"47 | struct Worker {\n"
+"   |        ------ fields in this struct\n"
+"48 |     id: usize,\n"
+"   |     ^^\n"
+"49 |     thread: thread::JoinHandle<()>,\n"
+"   |     ^^^^^^\n"
+"\n"
+"warning: `hello` (lib) generated 2 warnings\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.91s\n"
+"     Running `target/debug/hello`\n"
+"Worker 0 got a job; executing.\n"
+"Worker 2 got a job; executing.\n"
+"Worker 1 got a job; executing.\n"
+"Worker 3 got a job; executing.\n"
+"Worker 0 got a job; executing.\n"
+"Worker 2 got a job; executing.\n"
+"Worker 1 got a job; executing.\n"
+"Worker 3 got a job; executing.\n"
+"Worker 0 got a job; executing.\n"
+"Worker 2 got a job; executing.\n"
+"```"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1319
+msgid ""
+"Success! We now have a thread pool that executes connections asynchronously. "
+"There are never more than four threads created, so our system won’t get "
+"overloaded if the server receives a lot of requests. If we make a request to "
+"_/sleep_, the server will be able to serve other requests by having another "
+"thread run them."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1325
+msgid ""
+"Note: If you open _/sleep_ in multiple browser windows simultaneously, they "
+"might load one at a time in five-second intervals. Some web browsers execute "
+"multiple instances of the same request sequentially for caching reasons. "
+"This limitation is not caused by our web server."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1330
+msgid ""
+"This is a good time to pause and consider how the code in Listings 21-18, "
+"21-19, and 21-20 would be different if we were using futures instead of a "
+"closure for the work to be done. What types would change? How would the "
+"method signatures be different, if at all? What parts of the code would stay "
+"the same?"
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1335
+msgid ""
+"After learning about the `while let` loop in Chapter 17 and Chapter 19, you "
+"might be wondering why we didn’t write the `Worker` thread code as shown in "
+"Listing 21-21."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1411
+msgid ""
+"This code compiles and runs but doesn’t result in the desired threading "
+"behavior: A slow request will still cause other requests to wait to be "
+"processed. The reason is somewhat subtle: The `Mutex` struct has no public "
+"`unlock` method because the ownership of the lock is based on the lifetime "
+"of the `MutexGuard<T>` within the `LockResult<MutexGuard<T>>` that the "
+"`lock` method returns. At compile time, the borrow checker can then enforce "
+"the rule that a resource guarded by a `Mutex` cannot be accessed unless we "
+"hold the lock. However, this implementation can also result in the lock "
+"being held longer than intended if we aren’t mindful of the lifetime of the "
+"`MutexGuard<T>`."
+msgstr ""
+
+#: src/ch21-02-multithreaded.md:1422
+msgid ""
+"The code in Listing 21-20 that uses `let job = receiver.lock().unwrap()."
+"recv().unwrap();` works because with `let`, any temporary values used in the "
+"expression on the right-hand side of the equal sign are immediately dropped "
+"when the `let` statement ends. However, `while let` (and `if let` and "
+"`match`) does not drop temporary values until the end of the associated "
+"block. In Listing 21-21, the lock remains held for the duration of the call "
+"to `job()`, meaning other `Worker` instances cannot receive jobs."
+msgstr ""

@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch09-00-error-handling.md:1
+msgid "Error Handling"
+msgstr "錯誤處理"
+
+#: src/ch09-00-error-handling.md:3
+msgid ""
+"Errors are a fact of life in software, so Rust has a number of features for "
+"handling situations in which something goes wrong. In many cases, Rust "
+"requires you to acknowledge the possibility of an error and take some action "
+"before your code will compile. This requirement makes your program more "
+"robust by ensuring that you’ll discover errors and handle them appropriately "
+"before deploying your code to production!"
+msgstr ""
+
+#: src/ch09-00-error-handling.md:10
+msgid ""
+"Rust groups errors into two major categories: recoverable and unrecoverable "
+"errors. For a _recoverable error_, such as a _file not found_ error, we most "
+"likely just want to report the problem to the user and retry the operation. "
+"_Unrecoverable errors_ are always symptoms of bugs, such as trying to access "
+"a location beyond the end of an array, and so we want to immediately stop "
+"the program."
+msgstr ""
+
+#: src/ch09-00-error-handling.md:17
+msgid ""
+"Most languages don’t distinguish between these two kinds of errors and "
+"handle both in the same way, using mechanisms such as exceptions. Rust "
+"doesn’t have exceptions. Instead, it has the type `Result<T, E>` for "
+"recoverable errors and the `panic!` macro that stops execution when the "
+"program encounters an unrecoverable error. This chapter covers calling "
+"`panic!` first and then talks about returning `Result<T, E>` values. "
+"Additionally, we’ll explore considerations when deciding whether to try to "
+"recover from an error or to stop execution."
+msgstr ""

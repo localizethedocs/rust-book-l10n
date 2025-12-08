@@ -1,0 +1,550 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch17-02-concurrency-with-async.md:3
+msgid "<a id=\"concurrency-with-async\"></a>"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:5
+msgid "Applying Concurrency with Async"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:7
+msgid ""
+"In this section, we’ll apply async to some of the same concurrency "
+"challenges we tackled with threads in Chapter 16. Because we already talked "
+"about a lot of the key ideas there, in this section we’ll focus on what’s "
+"different between threads and futures."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:12
+msgid ""
+"In many cases, the APIs for working with concurrency using async are very "
+"similar to those for using threads. In other cases, they end up being quite "
+"different. Even when the APIs _look_ similar between threads and async, they "
+"often have different behavior—and they nearly always have different "
+"performance characteristics."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:20
+msgid "<a id=\"counting\"></a>"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:22
+msgid "Creating a New Task with `spawn_task`"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:24
+msgid ""
+"The first operation we tackled in the [“Creating a New Thread with `spawn`”]"
+"(ch16-01-threads.html#creating-a-new-thread-with-spawn)<!-- ignore --> "
+"section in Chapter 16 was counting up on two separate threads. Let’s do the "
+"same using async. The `trpl` crate supplies a `spawn_task` function that "
+"looks very similar to the `thread::spawn` API, and a `sleep` function that "
+"is an async version of the `thread::sleep` API. We can use these together to "
+"implement the counting example, as shown in Listing 17-6."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:34
+#: src/ch17-02-concurrency-with-async.md:101
+#: src/ch17-02-concurrency-with-async.md:171
+#: src/ch17-02-concurrency-with-async.md:261
+#: src/ch17-02-concurrency-with-async.md:314
+#: src/ch17-02-concurrency-with-async.md:404
+#: src/ch17-02-concurrency-with-async.md:479
+#: src/ch17-02-concurrency-with-async.md:528
+msgid "// required for mdbook test\n"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:42
+#: src/ch17-02-concurrency-with-async.md:109
+#: src/ch17-02-concurrency-with-async.md:179
+msgid "\"hi number {i} from the first task!\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:48
+#: src/ch17-02-concurrency-with-async.md:115
+#: src/ch17-02-concurrency-with-async.md:186
+msgid "\"hi number {i} from the second task!\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:57
+msgid ""
+"As our starting point, we set up our `main` function with `trpl::block_on` "
+"so that our top-level function can be async."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:60
+msgid ""
+"Note: From this point forward in the chapter, every example will include "
+"this exact same wrapping code with `trpl::block_on` in `main`, so we’ll "
+"often skip it just as we do with `main`. Remember to include it in your code!"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:64
+msgid ""
+"Then we write two loops within that block, each containing a `trpl::sleep` "
+"call, which waits for half a second (500 milliseconds) before sending the "
+"next message. We put one loop in the body of a `trpl::spawn_task` and the "
+"other in a top-level `for` loop. We also add an `await` after the `sleep` "
+"calls."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:69
+msgid ""
+"This code behaves similarly to the thread-based implementation—including the "
+"fact that you may see the messages appear in a different order in your own "
+"terminal when you run it:"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:89
+msgid ""
+"This version stops as soon as the `for` loop in the body of the main async "
+"block finishes, because the task spawned by `spawn_task` is shut down when "
+"the `main` function ends. If you want it to run all the way to the task’s "
+"completion, you will need to use a join handle to wait for the first task to "
+"complete. With threads, we used the `join` method to “block” until the "
+"thread was done running. In Listing 17-7, we can use `await` to do the same "
+"thing, because the task handle itself is a future. Its `Output` type is a "
+"`Result`, so we also unwrap it after awaiting it."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:126
+msgid "This updated version runs until _both_ loops finish:"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:148
+msgid ""
+"So far, it looks like async and threads give us similar outcomes, just with "
+"different syntax: using `await` instead of calling `join` on the join "
+"handle, and awaiting the `sleep` calls."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:152
+msgid ""
+"The bigger difference is that we didn’t need to spawn another operating "
+"system thread to do this. In fact, we don’t even need to spawn a task here. "
+"Because async blocks compile to anonymous futures, we can put each loop in "
+"an async block and have the runtime run them both to completion using the "
+"`trpl::join` function."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:158
+msgid ""
+"In the [“Waiting for All Threads to Finish”](ch16-01-threads.html#waiting-"
+"for-all-threads-to-finish)<!-- ignore --> section in Chapter 16, we showed "
+"how to use the `join` method on the `JoinHandle` type returned when you call "
+"`std::thread::spawn`. The `trpl::join` function is similar, but for futures. "
+"When you give it two futures, it produces a single new future whose output "
+"is a tuple containing the output of each future you passed in once they "
+"_both_ complete. Thus, in Listing 17-8, we use `trpl::join` to wait for both "
+"`fut1` and `fut2` to finish. We do _not_ await `fut1` and `fut2` but instead "
+"the new future produced by `trpl::join`. We ignore the output, because it’s "
+"just a tuple containing two unit values."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:198
+msgid "When we run this, we see both futures run to completion:"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:220
+msgid ""
+"Now, you’ll see the exact same order every time, which is very different "
+"from what we saw with threads and with `trpl::spawn_task` in Listing 17-7. "
+"That is because the `trpl::join` function is _fair_, meaning it checks each "
+"future equally often, alternating between them, and never lets one race "
+"ahead if the other is ready. With threads, the operating system decides "
+"which thread to check and how long to let it run. With async Rust, the "
+"runtime decides which task to check. (In practice, the details get "
+"complicated because an async runtime might use operating system threads "
+"under the hood as part of how it manages concurrency, so guaranteeing "
+"fairness can be more work for a runtime—but it’s still possible!) Runtimes "
+"don’t have to guarantee fairness for any given operation, and they often "
+"offer different APIs to let you choose whether or not you want fairness."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:233
+msgid ""
+"Try some of these variations on awaiting the futures and see what they do:"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:235
+msgid "Remove the async block from around either or both of the loops."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:236
+msgid "Await each async block immediately after defining it."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:237
+msgid ""
+"Wrap only the first loop in an async block, and await the resulting future "
+"after the body of second loop."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:240
+msgid ""
+"For an extra challenge, see if you can figure out what the output will be in "
+"each case _before_ running the code!"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:245
+msgid ""
+"<a id=\"message-passing\"></a> <a id=\"counting-up-on-two-tasks-using-"
+"message-passing\"></a>"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:248
+msgid "Sending Data Between Two Tasks Using Message Passing"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:250
+msgid ""
+"Sharing data between futures will also be familiar: we’ll use message "
+"passing again, but this time with async versions of the types and functions. "
+"We’ll take a slightly different path than we did in the [“Transfer Data "
+"Between Threads with Message Passing”](ch16-02-message-passing.html)<!-- "
+"ignore --> section in Chapter 16 to illustrate some of the key differences "
+"between thread-based and futures-based concurrency. In Listing 17-9, we’ll "
+"begin with just a single async block—_not_ spawning a separate task as we "
+"spawned a separate thread."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:267
+#: src/ch17-02-concurrency-with-async.md:323
+#: src/ch17-02-concurrency-with-async.md:414
+#: src/ch17-02-concurrency-with-async.md:490
+#: src/ch17-02-concurrency-with-async.md:539
+msgid "\"hi\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:271
+msgid "\"received '{received}'\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:278
+msgid ""
+"Here, we use `trpl::channel`, an async version of the multiple-producer, "
+"single-consumer channel API we used with threads back in Chapter 16. The "
+"async version of the API is only a little different from the thread-based "
+"version: it uses a mutable rather than an immutable receiver `rx`, and its "
+"`recv` method produces a future we need to await rather than producing the "
+"value directly. Now we can send messages from the sender to the receiver. "
+"Notice that we don’t have to spawn a separate thread or even a task; we "
+"merely need to await the `rx.recv` call."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:287
+msgid ""
+"The synchronous `Receiver::recv` method in `std::mpsc::channel` blocks until "
+"it receives a message. The `trpl::Receiver::recv` method does not, because "
+"it is async. Instead of blocking, it hands control back to the runtime until "
+"either a message is received or the send side of the channel closes. By "
+"contrast, we don’t await the `send` call, because it doesn’t block. It "
+"doesn’t need to, because the channel we’re sending it into is unbounded."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:294
+msgid ""
+"Note: Because all of this async code runs in an async block in a `trpl::"
+"block_on` call, everything within it can avoid blocking. However, the code "
+"_outside_ it will block on the `block_on` function returning. That’s the "
+"whole point of the `trpl::block_on` function: it lets you _choose_ where to "
+"block on some set of async code, and thus where to transition between sync "
+"and async code."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:301
+msgid ""
+"Notice two things about this example. First, the message will arrive right "
+"away. Second, although we use a future here, there’s no concurrency yet. "
+"Everything in the listing happens in sequence, just as it would if there "
+"were no futures involved."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:306
+msgid ""
+"Let’s address the first part by sending a series of messages and sleeping in "
+"between them, as shown in Listing 17-10."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:324
+#: src/ch17-02-concurrency-with-async.md:415
+#: src/ch17-02-concurrency-with-async.md:491
+#: src/ch17-02-concurrency-with-async.md:540
+msgid "\"from\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:325
+#: src/ch17-02-concurrency-with-async.md:416
+#: src/ch17-02-concurrency-with-async.md:492
+#: src/ch17-02-concurrency-with-async.md:541
+msgid "\"the\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:326
+#: src/ch17-02-concurrency-with-async.md:417
+#: src/ch17-02-concurrency-with-async.md:493
+#: src/ch17-02-concurrency-with-async.md:542
+msgid "\"future\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:335
+#: src/ch17-02-concurrency-with-async.md:428
+#: src/ch17-02-concurrency-with-async.md:504
+#: src/ch17-02-concurrency-with-async.md:553
+msgid "\"received '{value}'\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:343
+msgid ""
+"In addition to sending the messages, we need to receive them. In this case, "
+"because we know how many messages are coming in, we could do that manually "
+"by calling `rx.recv().await` four times. In the real world, though, we’ll "
+"generally be waiting on some _unknown_ number of messages, so we need to "
+"keep waiting until we determine that there are no more messages."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:349
+msgid ""
+"In Listing 16-10, we used a `for` loop to process all the items received "
+"from a synchronous channel. Rust doesn’t yet have a way to use a `for` loop "
+"with an _asynchronously produced_ series of items, however, so we need to "
+"use a loop we haven’t seen before: the `while let` conditional loop. This is "
+"the loop version of the `if let` construct we saw back in the [“Concise "
+"Control Flow with `if let` and `let...else`”](ch06-03-if-let.html)<!-- "
+"ignore --> section in Chapter 6. The loop will continue executing as long as "
+"the pattern it specifies continues to match the value."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:358
+msgid ""
+"The `rx.recv` call produces a future, which we await. The runtime will pause "
+"the future until it is ready. Once a message arrives, the future will "
+"resolve to `Some(message)` as many times as a message arrives. When the "
+"channel closes, regardless of whether _any_ messages have arrived, the "
+"future will instead resolve to `None` to indicate that there are no more "
+"values and thus we should stop polling—that is, stop awaiting."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:365
+msgid ""
+"The `while let` loop pulls all of this together. If the result of calling "
+"`rx.recv().await` is `Some(message)`, we get access to the message and we "
+"can use it in the loop body, just as we could with `if let`. If the result "
+"is `None`, the loop ends. Every time the loop completes, it hits the await "
+"point again, so the runtime pauses it again until another message arrives."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:371
+msgid ""
+"The code now successfully sends and receives all of the messages. "
+"Unfortunately, there are still a couple of problems. For one thing, the "
+"messages do not arrive at half-second intervals. They arrive all at once, 2 "
+"seconds (2,000 milliseconds) after we start the program. For another, this "
+"program also never exits! Instead, it waits forever for new messages. You "
+"will need to shut it down using <kbd>ctrl</kbd>\\-<kbd>C</kbd>."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:378
+msgid "Code Within One Async Block Executes Linearly"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:380
+msgid ""
+"Let’s start by examining why the messages come in all at once after the full "
+"delay, rather than coming in with delays between each one. Within a given "
+"async block, the order in which `await` keywords appear in the code is also "
+"the order in which they’re executed when the program runs."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:385
+msgid ""
+"There’s only one async block in Listing 17-10, so everything in it runs "
+"linearly. There’s still no concurrency. All the `tx.send` calls happen, "
+"interspersed with all of the `trpl::sleep` calls and their associated await "
+"points. Only then does the `while let` loop get to go through any of the "
+"`await` points on the `recv` calls."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:391
+msgid ""
+"To get the behavior we want, where the sleep delay happens between each "
+"message, we need to put the `tx` and `rx` operations in their own async "
+"blocks, as shown in Listing 17-11. Then the runtime can execute each of them "
+"separately using `trpl::join`, just as in Listing 17-8. Once again, we await "
+"the result of calling `trpl::join`, not the individual futures. If we "
+"awaited the individual futures in sequence, we would just end up back in a "
+"sequential flow—exactly what we’re trying _not_ to do."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:439
+msgid ""
+"With the updated code in Listing 17-11, the messages get printed at 500-"
+"millisecond intervals, rather than all in a rush after 2 seconds."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:442
+msgid "Moving Ownership Into an Async Block"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:444
+msgid ""
+"The program still never exits, though, because of the way the `while let` "
+"loop interacts with `trpl::join`:"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:447
+msgid ""
+"The future returned from `trpl::join` completes only once _both_ futures "
+"passed to it have completed."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:449
+msgid ""
+"The `tx_fut` future completes once it finishes sleeping after sending the "
+"last message in `vals`."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:451
+msgid "The `rx_fut` future won’t complete until the `while let` loop ends."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:452
+msgid ""
+"The `while let` loop won’t end until awaiting `rx.recv` produces `None`."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:453
+msgid ""
+"Awaiting `rx.recv` will return `None` only once the other end of the channel "
+"is closed."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:455
+msgid ""
+"The channel will close only if we call `rx.close` or when the sender side, "
+"`tx`, is dropped."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:457
+msgid ""
+"We don’t call `rx.close` anywhere, and `tx` won’t be dropped until the "
+"outermost async block passed to `trpl::block_on` ends."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:459
+msgid ""
+"The block can’t end because it is blocked on `trpl::join` completing, which "
+"takes us back to the top of this list."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:462
+msgid ""
+"Right now, the async block where we send the messages only _borrows_ `tx` "
+"because sending a message doesn’t require ownership, but if we could _move_ "
+"`tx` into that async block, it would be dropped once that block ends. In the "
+"[“Capturing References or Moving Ownership”](ch13-01-closures.html#capturing-"
+"references-or-moving-ownership)<!-- ignore --> section in Chapter 13, you "
+"learned how to use the `move` keyword with closures, and, as discussed in "
+"the [“Using `move` Closures with Threads”](ch16-01-threads.html#using-move-"
+"closures-with-threads)<!-- ignore --> section in Chapter 16, we often need "
+"to move data into closures when working with threads. The same basic "
+"dynamics apply to async blocks, so the `move` keyword works with async "
+"blocks just as it does with closures."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:473
+msgid ""
+"In Listing 17-12, we change the block used to send messages from `async` to "
+"`async move`."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:488
+msgid "// --snip--\n"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:515
+msgid ""
+"When we run _this_ version of the code, it shuts down gracefully after the "
+"last message is sent and received. Next, let’s see what would need to change "
+"to send data from more than one future."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:519
+msgid "Joining a Number of Futures with the `join!` Macro"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:521
+msgid ""
+"This async channel is also a multiple-producer channel, so we can call "
+"`clone` on `tx` if we want to send messages from multiple futures, as shown "
+"in Listing 17-13."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:559
+msgid "\"more\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:560
+msgid "\"messages\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:561
+msgid "\"for\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:562
+msgid "\"you\""
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:578
+msgid ""
+"First, we clone `tx`, creating `tx1` outside the first async block. We move "
+"`tx1` into that block just as we did before with `tx`. Then, later, we move "
+"the original `tx` into a _new_ async block, where we send more messages on a "
+"slightly slower delay. We happen to put this new async block after the async "
+"block for receiving messages, but it could go before it just as well. The "
+"key is the order in which the futures are awaited, not in which they’re "
+"created."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:585
+msgid ""
+"Both of the async blocks for sending messages need to be `async move` blocks "
+"so that both `tx` and `tx1` get dropped when those blocks finish. Otherwise, "
+"we’ll end up back in the same infinite loop we started out in."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:589
+msgid ""
+"Finally, we switch from `trpl::join` to `trpl::join!` to handle the "
+"additional future: the `join!` macro awaits an arbitrary number of futures "
+"where we know the number of futures at compile time. We’ll discuss awaiting "
+"a collection of an unknown number of futures later in this chapter."
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:594
+msgid ""
+"Now we see all the messages from both sending futures, and because the "
+"sending futures use slightly different delays after sending, the messages "
+"are also received at those different intervals:"
+msgstr ""
+
+#: src/ch17-02-concurrency-with-async.md:613
+msgid ""
+"We’ve explored how to use message passing to send data between futures, how "
+"code within an async block runs sequentially, how to move ownership into an "
+"async block, and how to join multiple futures. Next, let’s discuss how and "
+"why to tell the runtime it can switch to another task."
+msgstr ""

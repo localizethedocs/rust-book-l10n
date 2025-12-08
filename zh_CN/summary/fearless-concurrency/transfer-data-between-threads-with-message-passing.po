@@ -1,0 +1,369 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch16-02-message-passing.md:3
+msgid "<a id=\"using-message-passing-to-transfer-data-between-threads\"></a>"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:5
+msgid "Transfer Data Between Threads with Message Passing"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:7
+msgid ""
+"One increasingly popular approach to ensuring safe concurrency is message "
+"passing, where threads or actors communicate by sending each other messages "
+"containing data. Here’s the idea in a slogan from [the Go language "
+"documentation](https://golang.org/doc/effective_go.html#concurrency): “Do "
+"not communicate by sharing memory; instead, share memory by communicating.”"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:12
+msgid ""
+"To accomplish message-sending concurrency, Rust’s standard library provides "
+"an implementation of channels. A _channel_ is a general programming concept "
+"by which data is sent from one thread to another."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:16
+msgid ""
+"You can imagine a channel in programming as being like a directional channel "
+"of water, such as a stream or a river. If you put something like a rubber "
+"duck into a river, it will travel downstream to the end of the waterway."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:20
+msgid ""
+"A channel has two halves: a transmitter and a receiver. The transmitter half "
+"is the upstream location where you put the rubber duck into the river, and "
+"the receiver half is where the rubber duck ends up downstream. One part of "
+"your code calls methods on the transmitter with the data you want to send, "
+"and another part checks the receiving end for arriving messages. A channel "
+"is said to be _closed_ if either the transmitter or receiver half is dropped."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:27
+msgid ""
+"Here, we’ll work up to a program that has one thread to generate values and "
+"send them down a channel, and another thread that will receive the values "
+"and print them out. We’ll be sending simple values between threads using a "
+"channel to illustrate the feature. Once you’re familiar with the technique, "
+"you could use channels for any threads that need to communicate with each "
+"other, such as a chat system or a system where many threads perform parts of "
+"a calculation and send the parts to one thread that aggregates the results."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:35
+msgid ""
+"First, in Listing 16-6, we’ll create a channel but not do anything with it. "
+"Note that this won’t compile yet because Rust can’t tell what type of values "
+"we want to send over the channel."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:51
+msgid ""
+"We create a new channel using the `mpsc::channel` function; `mpsc` stands "
+"for _multiple producer, single consumer_. In short, the way Rust’s standard "
+"library implements channels means a channel can have multiple _sending_ ends "
+"that produce values but only one _receiving_ end that consumes those values. "
+"Imagine multiple streams flowing together into one big river: Everything "
+"sent down any of the streams will end up in one river at the end. We’ll "
+"start with a single producer for now, but we’ll add multiple producers when "
+"we get this example working."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:60
+msgid ""
+"The `mpsc::channel` function returns a tuple, the first element of which is "
+"the sending end—the transmitter—and the second element of which is the "
+"receiving end—the receiver. The abbreviations `tx` and `rx` are "
+"traditionally used in many fields for _transmitter_ and _receiver_, "
+"respectively, so we name our variables as such to indicate each end. We’re "
+"using a `let` statement with a pattern that destructures the tuples; we’ll "
+"discuss the use of patterns in `let` statements and destructuring in Chapter "
+"19. For now, know that using a `let` statement in this way is a convenient "
+"approach to extract the pieces of the tuple returned by `mpsc::channel`."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:70
+msgid ""
+"Let’s move the transmitting end into a spawned thread and have it send one "
+"string so that the spawned thread is communicating with the main thread, as "
+"shown in Listing 16-7. This is like putting a rubber duck in the river "
+"upstream or sending a chat message from one thread to another."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:85 src/ch16-02-message-passing.md:119
+#: src/ch16-02-message-passing.md:185 src/ch16-02-message-passing.md:253
+#: src/ch16-02-message-passing.md:326
+msgid "\"hi\""
+msgstr ""
+
+#: src/ch16-02-message-passing.md:93
+msgid ""
+"Again, we’re using `thread::spawn` to create a new thread and then using "
+"`move` to move `tx` into the closure so that the spawned thread owns `tx`. "
+"The spawned thread needs to own the transmitter to be able to send messages "
+"through the channel."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:98
+msgid ""
+"The transmitter has a `send` method that takes the value we want to send. "
+"The `send` method returns a `Result<T, E>` type, so if the receiver has "
+"already been dropped and there’s nowhere to send a value, the send operation "
+"will return an error. In this example, we’re calling `unwrap` to panic in "
+"case of an error. But in a real application, we would handle it properly: "
+"Return to Chapter 9 to review strategies for proper error handling."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:105
+msgid ""
+"In Listing 16-8, we’ll get the value from the receiver in the main thread. "
+"This is like retrieving the rubber duck from the water at the end of the "
+"river or receiving a chat message."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:124 src/ch16-02-message-passing.md:191
+#: src/ch16-02-message-passing.md:266 src/ch16-02-message-passing.md:353
+msgid "\"Got: {received}\""
+msgstr ""
+
+#: src/ch16-02-message-passing.md:130
+msgid ""
+"The receiver has two useful methods: `recv` and `try_recv`. We’re using "
+"`recv`, short for _receive_, which will block the main thread’s execution "
+"and wait until a value is sent down the channel. Once a value is sent, "
+"`recv` will return it in a `Result<T, E>`. When the transmitter closes, "
+"`recv` will return an error to signal that no more values will be coming."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:136
+msgid ""
+"The `try_recv` method doesn’t block, but will instead return a `Result<T, "
+"E>` immediately: an `Ok` value holding a message if one is available and an "
+"`Err` value if there aren’t any messages this time. Using `try_recv` is "
+"useful if this thread has other work to do while waiting for messages: We "
+"could write a loop that calls `try_recv` every so often, handles a message "
+"if one is available, and otherwise does other work for a little while until "
+"checking again."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:144
+msgid ""
+"We’ve used `recv` in this example for simplicity; we don’t have any other "
+"work for the main thread to do other than wait for messages, so blocking the "
+"main thread is appropriate."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:148
+msgid ""
+"When we run the code in Listing 16-8, we’ll see the value printed from the "
+"main thread:"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:159
+msgid "Perfect!"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:163
+msgid "<a id=\"channels-and-ownership-transference\"></a>"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:165
+msgid "Transferring Ownership Through Channels"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:167
+msgid ""
+"The ownership rules play a vital role in message sending because they help "
+"you write safe, concurrent code. Preventing errors in concurrent programming "
+"is the advantage of thinking about ownership throughout your Rust programs. "
+"Let’s do an experiment to show how channels and ownership work together to "
+"prevent problems: We’ll try to use a `val` value in the spawned thread "
+"_after_ we’ve sent it down the channel. Try compiling the code in Listing "
+"16-9 to see why this code isn’t allowed."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:187
+msgid "\"val is {val}\""
+msgstr ""
+
+#: src/ch16-02-message-passing.md:197
+msgid ""
+"Here, we try to print `val` after we’ve sent it down the channel via `tx."
+"send`. Allowing this would be a bad idea: Once the value has been sent to "
+"another thread, that thread could modify or drop it before we try to use the "
+"value again. Potentially, the other thread’s modifications could cause "
+"errors or unexpected results due to inconsistent or nonexistent data. "
+"However, Rust gives us an error if we try to compile the code in Listing "
+"16-9:"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:204
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling message-passing v0.1.0 (file:///projects/message-passing)\n"
+"error[E0382]: borrow of moved value: `val`\n"
+"  --> src/main.rs:10:27\n"
+"   |\n"
+" 8 |         let val = String::from(\"hi\");\n"
+"   |             --- move occurs because `val` has type `String`, which does "
+"not implement the `Copy` trait\n"
+" 9 |         tx.send(val).unwrap();\n"
+"   |                 --- value moved here\n"
+"10 |         println!(\"val is {val}\");\n"
+"   |                           ^^^ value borrowed here after move\n"
+"   |\n"
+"   = note: this error originates in the macro `$crate::format_args_nl` which "
+"comes from the expansion of the macro `println` (in Nightly builds, run with "
+"-Z macro-backtrace for more info)\n"
+"\n"
+"For more information about this error, try `rustc --explain E0382`.\n"
+"error: could not compile `message-passing` (bin \"message-passing\") due to "
+"1 previous error\n"
+"```"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:223
+msgid ""
+"Our concurrency mistake has caused a compile-time error. The `send` function "
+"takes ownership of its parameter, and when the value is moved the receiver "
+"takes ownership of it. This stops us from accidentally using the value again "
+"after sending it; the ownership system checks that everything is okay."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:230
+msgid "<a id=\"sending-multiple-values-and-seeing-the-receiver-waiting\"></a>"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:232
+msgid "Sending Multiple Values"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:234
+msgid ""
+"The code in Listing 16-8 compiled and ran, but it didn’t clearly show us "
+"that two separate threads were talking to each other over the channel."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:237
+msgid ""
+"In Listing 16-10, we’ve made some modifications that will prove the code in "
+"Listing 16-8 is running concurrently: The spawned thread will now send "
+"multiple messages and pause for a second between each message."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:254 src/ch16-02-message-passing.md:327
+msgid "\"from\""
+msgstr ""
+
+#: src/ch16-02-message-passing.md:255 src/ch16-02-message-passing.md:328
+msgid "\"the\""
+msgstr ""
+
+#: src/ch16-02-message-passing.md:256 src/ch16-02-message-passing.md:329
+msgid "\"thread\""
+msgstr ""
+
+#: src/ch16-02-message-passing.md:273
+msgid ""
+"This time, the spawned thread has a vector of strings that we want to send "
+"to the main thread. We iterate over them, sending each individually, and "
+"pause between each by calling the `thread::sleep` function with a `Duration` "
+"value of one second."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:278
+msgid ""
+"In the main thread, we’re not calling the `recv` function explicitly "
+"anymore: Instead, we’re treating `rx` as an iterator. For each value "
+"received, we’re printing it. When the channel is closed, iteration will end."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:282
+msgid ""
+"When running the code in Listing 16-10, you should see the following output "
+"with a one-second pause in between each line:"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:296
+msgid ""
+"Because we don’t have any code that pauses or delays in the `for` loop in "
+"the main thread, we can tell that the main thread is waiting to receive "
+"values from the spawned thread."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:302
+msgid "<a id=\"creating-multiple-producers-by-cloning-the-transmitter\"></a>"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:304
+msgid "Creating Multiple Producers"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:306
+msgid ""
+"Earlier we mentioned that `mpsc` was an acronym for _multiple producer, "
+"single consumer_. Let’s put `mpsc` to use and expand the code in Listing "
+"16-10 to create multiple threads that all send values to the same receiver. "
+"We can do so by cloning the transmitter, as shown in Listing 16-11."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:319 src/ch16-02-message-passing.md:356
+msgid "// --snip--\n"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:340
+msgid "\"more\""
+msgstr ""
+
+#: src/ch16-02-message-passing.md:341
+msgid "\"messages\""
+msgstr ""
+
+#: src/ch16-02-message-passing.md:342
+msgid "\"for\""
+msgstr ""
+
+#: src/ch16-02-message-passing.md:343
+msgid "\"you\""
+msgstr ""
+
+#: src/ch16-02-message-passing.md:362
+msgid ""
+"This time, before we create the first spawned thread, we call `clone` on the "
+"transmitter. This will give us a new transmitter we can pass to the first "
+"spawned thread. We pass the original transmitter to a second spawned thread. "
+"This gives us two threads, each sending different messages to the one "
+"receiver."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:367
+msgid "When you run the code, your output should look something like this:"
+msgstr ""
+
+#: src/ch16-02-message-passing.md:384
+msgid ""
+"You might see the values in another order, depending on your system. This is "
+"what makes concurrency interesting as well as difficult. If you experiment "
+"with `thread::sleep`, giving it various values in the different threads, "
+"each run will be more nondeterministic and create different output each time."
+msgstr ""
+
+#: src/ch16-02-message-passing.md:389
+msgid ""
+"Now that we’ve looked at how channels work, let’s look at a different method "
+"of concurrency."
+msgstr ""
