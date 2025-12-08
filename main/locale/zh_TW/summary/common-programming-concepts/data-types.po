@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch03-02-data-types.md:1
 msgid "Data Types"
-msgstr ""
+msgstr "資料型別"
 
 #: src/ch03-02-data-types.md:3
 msgid ""

@@ -68,7 +68,7 @@ msgstr ""
 
 #: src/ch08-01-vectors.md:55
 msgid "Updating a Vector"
-msgstr ""
+msgstr "更新向量"
 
 #: src/ch08-01-vectors.md:57
 msgid ""
@@ -86,7 +86,7 @@ msgstr ""
 
 #: src/ch08-01-vectors.md:80
 msgid "Reading Elements of Vectors"
-msgstr ""
+msgstr "讀取向量的元素"
 
 #: src/ch08-01-vectors.md:82
 msgid ""

@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch11-00-testing.md:1
 msgid "Writing Automated Tests"
-msgstr ""
+msgstr "編寫自動測試"
 
 #: src/ch11-00-testing.md:3
 msgid ""

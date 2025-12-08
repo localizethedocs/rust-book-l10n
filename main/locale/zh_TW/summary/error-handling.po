@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch09-00-error-handling.md:1
 msgid "Error Handling"
-msgstr ""
+msgstr "錯誤處理"
 
 #: src/ch09-00-error-handling.md:3
 msgid ""

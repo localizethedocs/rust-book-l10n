@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch01-03-hello-cargo.md:1
 msgid "Hello, Cargo!"
-msgstr ""
+msgstr "你好，Cargo！"
 
 #: src/ch01-03-hello-cargo.md:3
 msgid ""

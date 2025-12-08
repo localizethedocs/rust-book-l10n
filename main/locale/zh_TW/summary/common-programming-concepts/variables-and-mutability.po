@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch03-01-variables-and-mutability.md:1
 msgid "Variables and Mutability"
-msgstr ""
+msgstr "變數與可變性"
 
 #: src/ch03-01-variables-and-mutability.md:3
 msgid ""
@@ -268,6 +268,14 @@ msgid ""
 "The value of x is: 6\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling variables v0.1.0 (file:///projects/variables)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s\n"
+"     Running `target/debug/variables`\n"
+"The value of x in the inner scope is: 12\n"
+"The value of x is: 6\n"
+"```"
 
 #: src/ch03-01-variables-and-mutability.md:202
 msgid ""

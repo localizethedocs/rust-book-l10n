@@ -43,7 +43,7 @@ msgstr ""
 
 #: src/ch08-02-strings.md:23
 msgid "Defining Strings"
-msgstr ""
+msgstr "定義字串"
 
 #: src/ch08-02-strings.md:25
 msgid ""

@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch07-01-packages-and-crates.md:1
 msgid "Packages and Crates"
-msgstr ""
+msgstr "軟體包與軟體箱"
 
 #: src/ch07-01-packages-and-crates.md:3
 msgid ""

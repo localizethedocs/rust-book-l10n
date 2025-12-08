@@ -45,7 +45,7 @@ msgstr ""
 
 #: src/SUMMARY.md:15
 msgid "Variables and Mutability"
-msgstr ""
+msgstr "變數與可變性"
 
 #: src/SUMMARY.md:16
 msgid "Data Types"
@@ -77,7 +77,7 @@ msgstr ""
 
 #: src/SUMMARY.md:24
 msgid "The Slice Type"
-msgstr ""
+msgstr "切片型別"
 
 #: src/SUMMARY.md:26
 msgid "Using Structs to Structure Related Data"
@@ -241,7 +241,7 @@ msgstr ""
 
 #: src/SUMMARY.md:74
 msgid "Improving Our I/O Project"
-msgstr ""
+msgstr "改善我們的 I/O 專案"
 
 #: src/SUMMARY.md:75
 msgid "Performance in Loops vs. Iterators"
@@ -261,7 +261,7 @@ msgstr ""
 
 #: src/SUMMARY.md:80
 msgid "Cargo Workspaces"
-msgstr ""
+msgstr "Cargo 工作空間"
 
 #: src/SUMMARY.md:81
 msgid "Installing Binaries with `cargo install`"
@@ -386,7 +386,7 @@ msgstr ""
 
 #: src/SUMMARY.md:117
 msgid "Unsafe Rust"
-msgstr ""
+msgstr "不安全的 Rust"
 
 #: src/SUMMARY.md:118
 msgid "Advanced Traits"
@@ -394,7 +394,7 @@ msgstr ""
 
 #: src/SUMMARY.md:119
 msgid "Advanced Types"
-msgstr ""
+msgstr "進階型別"
 
 #: src/SUMMARY.md:120
 msgid "Advanced Functions and Closures"
@@ -442,7 +442,7 @@ msgstr "D - 有用的開發工具"
 
 #: src/SUMMARY.md:133
 msgid "E - Editions"
-msgstr ""
+msgstr "E - 版次"
 
 #: src/SUMMARY.md:134
 msgid "F - Translations of the Book"

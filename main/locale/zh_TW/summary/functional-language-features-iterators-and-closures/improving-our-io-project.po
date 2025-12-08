@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch13-03-improving-our-io-project.md:1
 msgid "Improving Our I/O Project"
-msgstr ""
+msgstr "改善我們的 I/O 專案"
 
 #: src/ch13-03-improving-our-io-project.md:3
 msgid ""

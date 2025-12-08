@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch01-01-installation.md:1
 msgid "Installation"
-msgstr ""
+msgstr "安裝"
 
 #: src/ch01-01-installation.md:3
 msgid ""

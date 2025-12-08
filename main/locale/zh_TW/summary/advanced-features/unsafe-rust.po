@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch20-01-unsafe-rust.md:1
 msgid "Unsafe Rust"
-msgstr ""
+msgstr "不安全的 Rust"
 
 #: src/ch20-01-unsafe-rust.md:3
 msgid ""

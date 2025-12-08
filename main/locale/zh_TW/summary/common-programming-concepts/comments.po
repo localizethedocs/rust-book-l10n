@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch03-04-comments.md:1
 msgid "Comments"
-msgstr ""
+msgstr "註釋"
 
 #: src/ch03-04-comments.md:3
 msgid ""
@@ -51,7 +51,7 @@ msgstr ""
 
 #: src/ch03-04-comments.md:26 src/ch03-04-comments.md:37
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">檔案名稱：src/main.rs</span>"
 
 #: src/ch03-04-comments.md:30 src/ch03-04-comments.md:41
 msgid "// I'm feeling lucky today\n"

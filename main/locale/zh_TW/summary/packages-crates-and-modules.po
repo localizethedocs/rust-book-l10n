@@ -18,7 +18,7 @@ msgstr ""
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:5
 msgid "Packages, Crates, and Modules"
-msgstr ""
+msgstr "軟體包、軟體箱、模組"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:7
 msgid ""

@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch20-03-advanced-types.md:1
 msgid "Advanced Types"
-msgstr ""
+msgstr "進階型別"
 
 #: src/ch20-03-advanced-types.md:3
 msgid ""

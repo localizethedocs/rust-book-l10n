@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch11-03-test-organization.md:1
 msgid "Test Organization"
-msgstr ""
+msgstr "測試組織"
 
 #: src/ch11-03-test-organization.md:3
 msgid ""

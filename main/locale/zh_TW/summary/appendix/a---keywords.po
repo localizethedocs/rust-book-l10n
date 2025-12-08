@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/appendix-01-keywords.md:1
 msgid "Appendix A: Keywords"
-msgstr ""
+msgstr "附錄 A：關鍵字"
 
 #: src/appendix-01-keywords.md:3
 msgid ""
@@ -121,7 +121,7 @@ msgstr ""
 
 #: src/appendix-01-keywords.md:39
 msgid "**`mod`**: Define a module."
-msgstr ""
+msgstr "**`mod`**：定義模組。"
 
 #: src/appendix-01-keywords.md:40
 msgid "**`move`**: Make a closure take ownership of all its captures."
@@ -216,27 +216,27 @@ msgstr ""
 
 #: src/appendix-01-keywords.md:69
 msgid "`abstract`"
-msgstr ""
+msgstr "`abstract`"
 
 #: src/appendix-01-keywords.md:70
 msgid "`become`"
-msgstr ""
+msgstr "`become`"
 
 #: src/appendix-01-keywords.md:71
 msgid "`box`"
-msgstr ""
+msgstr "`box`"
 
 #: src/appendix-01-keywords.md:72
 msgid "`do`"
-msgstr ""
+msgstr "`do`"
 
 #: src/appendix-01-keywords.md:73
 msgid "`final`"
-msgstr ""
+msgstr "`final`"
 
 #: src/appendix-01-keywords.md:74
 msgid "`gen`"
-msgstr ""
+msgstr "`gen`"
 
 #: src/appendix-01-keywords.md:75
 msgid "`macro`"

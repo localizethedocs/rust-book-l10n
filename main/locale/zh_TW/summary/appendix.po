@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/appendix-00.md:1
 msgid "Appendix"
-msgstr ""
+msgstr "附錄"
 
 #: src/appendix-00.md:3
 msgid ""

@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch04-00-understanding-ownership.md:1
 msgid "Understanding Ownership"
-msgstr ""
+msgstr "理解擁有權"
 
 #: src/ch04-00-understanding-ownership.md:3
 msgid ""

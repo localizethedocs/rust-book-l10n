@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch11-01-writing-tests.md:1
 msgid "How to Write Tests"
-msgstr ""
+msgstr "如何編寫測試"
 
 #: src/ch11-01-writing-tests.md:3
 msgid ""

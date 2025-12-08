@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/appendix-05-editions.md:1
 msgid "Appendix E: Editions"
-msgstr ""
+msgstr "附錄 E：版次"
 
 #: src/appendix-05-editions.md:3
 msgid ""

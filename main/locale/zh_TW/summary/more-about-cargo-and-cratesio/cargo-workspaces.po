@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch14-03-cargo-workspaces.md:1
 msgid "Cargo Workspaces"
-msgstr ""
+msgstr "Cargo 工作空間"
 
 #: src/ch14-03-cargo-workspaces.md:3
 msgid ""
@@ -26,7 +26,7 @@ msgstr ""
 
 #: src/ch14-03-cargo-workspaces.md:9
 msgid "Creating a Workspace"
-msgstr ""
+msgstr "建立工作空間"
 
 #: src/ch14-03-cargo-workspaces.md:11
 msgid ""
@@ -53,7 +53,7 @@ msgstr ""
 
 #: src/ch14-03-cargo-workspaces.md:33 src/ch14-03-cargo-workspaces.md:113
 msgid "<span class=\"filename\">Filename: Cargo.toml</span>"
-msgstr ""
+msgstr "<span class=\"filename\">檔案名稱：Cargo.toml</span>"
 
 #: src/ch14-03-cargo-workspaces.md:35
 msgid ""
@@ -62,6 +62,10 @@ msgid ""
 "resolver = \"3\"\n"
 "```"
 msgstr ""
+"```toml\n"
+"[workspace]\n"
+"resolver = \"3\"\n"
+"```"
 
 #: src/ch14-03-cargo-workspaces.md:40
 msgid ""
@@ -77,6 +81,11 @@ msgid ""
 "      Adding `adder` as member of workspace at `file:///projects/add`\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo new adder\n"
+"     Created binary (application) `adder` package\n"
+"      Adding `adder` as member of workspace at `file:///projects/add`\n"
+"```"
 
 #: src/ch14-03-cargo-workspaces.md:57
 msgid ""
@@ -169,7 +178,7 @@ msgstr ""
 
 #: src/ch14-03-cargo-workspaces.md:151
 msgid "<span class=\"filename\">Filename: adder/Cargo.toml</span>"
-msgstr ""
+msgstr "<span class=\"filename\">檔案名稱：adder/Cargo.toml</span>"
 
 #: src/ch14-03-cargo-workspaces.md:153
 msgid ""
@@ -257,6 +266,10 @@ msgid ""
 "rand = \"0.8.5\"\n"
 "```"
 msgstr ""
+"```toml\n"
+"[dependencies]\n"
+"rand = \"0.8.5\"\n"
+"```"
 
 #: src/ch14-03-cargo-workspaces.md:240
 msgid ""
@@ -313,6 +326,16 @@ msgid ""
 "  |     ^^^^ no external crate `rand`\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo build\n"
+"  --snip--\n"
+"   Compiling adder v0.1.0 (file:///projects/add/adder)\n"
+"error[E0432]: unresolved import `rand`\n"
+" --> adder/src/main.rs:2:5\n"
+"  |\n"
+"2 | use rand;\n"
+"  |     ^^^^ no external crate `rand`\n"
+"```"
 
 #: src/ch14-03-cargo-workspaces.md:294
 msgid ""

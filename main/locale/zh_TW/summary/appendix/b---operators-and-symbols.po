@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/appendix-02-operators.md:1
 msgid "Appendix B: Operators and Symbols"
-msgstr ""
+msgstr "附錄 B：運算子與符號"
 
 #: src/appendix-02-operators.md:3
 msgid ""

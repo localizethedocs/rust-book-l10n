@@ -13,13 +13,15 @@ msgstr ""
 
 #: src/title-page.md:1
 msgid "The Rust Programming Language"
-msgstr ""
+msgstr "Rust 程式設計語言"
 
 #: src/title-page.md:3
 msgid ""
 "_by Steve Klabnik, Carol Nichols, and Chris Krycho, with contributions from "
 "the Rust Community_"
 msgstr ""
+"_由 Steve Klabnik、Carol Nichols 與 Chris Krycho，以及 Rust 社群的貢獻撰寫而"
+"成_"
 
 #: src/title-page.md:6
 msgid ""
