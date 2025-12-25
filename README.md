@@ -1,4 +1,12 @@
 <div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://cdn.jsdelivr.net/gh/localizethedocs/static/mark/rust-white.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://cdn.jsdelivr.net/gh/localizethedocs/static/mark/rust-black.svg">
+  <img height="100" src="https://cdn.jsdelivr.net/gh/localizethedocs/static/mark/rust-black.svg">
+</picture>
+</div>
+
+<div align="center">
 <h1 id="localization-of-rust-book">Localization of Rust Book</h1>
 </div>
 
