@@ -1,5 +1,13 @@
 <div align="center">
-<h1 id="localization-of-rust-book">Rust 手冊的在地化</h1>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://cdn.jsdelivr.net/gh/localizethedocs/static/mark/rust-white.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://cdn.jsdelivr.net/gh/localizethedocs/static/mark/rust-black.svg">
+  <img height="100" src="https://cdn.jsdelivr.net/gh/localizethedocs/static/mark/rust-black.svg">
+</picture>
+</div>
+
+<div align="center">
+<h1 id="localization-of-rust-book">Localization of Rust Book</h1>
 </div>
 
 <details><summary><strong>切換語言</strong></summary>
@@ -18,7 +26,7 @@
   <li><a href="#progress-of-translations">翻譯進度</a></li>
   <li><a href="#preview-translations">預覽翻譯</a></li>
   <li><a href="#maintainers">維護者</a></li>
-  <li><a href="#support-this-project">Support this Project</a></li>
+  <li><a href="#support-this-project">支援此專案</a></li>
   <li><a href="#sponsorship">贊助</a></li>
   <li><a href="#code-contributors">程式碼貢獻者</a></li>
   <li><a href="#financial-contributors">財務貢獻者</a></li>
@@ -131,7 +139,7 @@ The goal of this project is to translate the Rust Book into multiple languages. 
         <div><a href="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-mdbook-update-pot.yml" ><img alt="ci-mdbook-update-pot" src="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-mdbook-update-pot.yml/badge.svg" /></a></div>
       </td>
       <td rowspan="1" colspan="1" align="left" style="text-align: left;">
-        <div>Update <code>.pot</code> files by mdBook with <code>xgettext</code> renderer.</div>
+        <div>透過 mdBook 使用 <code>xgettext</code> 算繪器更新 <code>.pot</code> 檔案。</div>
       </td>
     </tr>
     <tr>
@@ -147,7 +155,7 @@ The goal of this project is to translate the Rust Book into multiple languages. 
         <div><a href="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-gettext-compendium.yml"><img alt="ci-gettext-compendium" src="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-gettext-compendium.yml/badge.svg" /></a></div>
       </td>
       <td rowspan="1" colspan="1" align="left" style="text-align: left;">
-        <div>Update <code>.po</code> files from the compendium by Gettext toolkit.</div>
+        <div>透過 Gettext 工具組從編目檔更新 <code>.po</code> 檔案。</div>
       </td>
     </tr>
     <tr>
@@ -330,7 +338,7 @@ cmake --preset ${LANGUAGE} -DVERSION=${VERSION}
 cmake --build out/build/${LANGUAGE}
 ```
 
-You can switch to other available languages and versions by the flyout navigation menu.
+您可以透過飛出式導航選單切換到其他可用的語言和版本。
 
 <h2 id="maintainers"><a href="#table-of-contents">維護者</a></h2>
 
