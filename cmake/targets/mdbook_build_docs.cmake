@@ -20,20 +20,20 @@ include(JsonUtils)
 include(GettextUtils)
 
 
-message(STATUS "Removing directory '${PROJ_OUT_REPO_BOOK_LOCALE_DIR}/'...")
-if (EXISTS "${PROJ_OUT_REPO_BOOK_LOCALE_DIR}")
-    file(REMOVE_RECURSE "${PROJ_OUT_REPO_BOOK_LOCALE_DIR}")
+message(STATUS "Removing directory '${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/'...")
+if (EXISTS "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}")
+    file(REMOVE_RECURSE "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}")
     remove_cmake_message_indent()
     message("")
-    message("Directory '${PROJ_OUT_REPO_BOOK_LOCALE_DIR}/' exists.")
-    message("Removed '${PROJ_OUT_REPO_BOOK_LOCALE_DIR}/'.")
+    message("Directory '${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/' exists.")
+    message("Removed '${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/'.")
     message("")
     restore_cmake_message_indent()
 else()
     remove_cmake_message_indent()
     message("")
-    message("Directory '${PROJ_OUT_REPO_BOOK_LOCALE_DIR}/' does NOT exist.")
-    message("No need to remove '${PROJ_OUT_REPO_BOOK_LOCALE_DIR}/'.")
+    message("Directory '${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/' does NOT exist.")
+    message("No need to remove '${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/'.")
     message("")
     restore_cmake_message_indent()
 endif()
@@ -42,10 +42,10 @@ endif()
 message(STATUS "Copying .po files to the local repository...")
 if (NOT LANGUAGE STREQUAL "all")
     set(PO_SRC_DIR  "${PROJ_L10N_VERSION_LOCALE_DIR}/${LANGUAGE}")
-    set(PO_DST_DIR  "${PROJ_OUT_REPO_BOOK_LOCALE_DIR}/${LANGUAGE}")
+    set(PO_DST_DIR  "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/${LANGUAGE}")
 else()
     set(PO_SRC_DIR  "${PROJ_L10N_VERSION_LOCALE_DIR}")
-    set(PO_DST_DIR  "${PROJ_OUT_REPO_BOOK_LOCALE_DIR}")
+    set(PO_DST_DIR  "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}")
 endif()
 remove_cmake_message_indent()
 message("")
@@ -82,8 +82,8 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         # file using msgcat before mdbook can process the translations. Once the issue is
         # resolved, this entire concatenation step can be removed.
         message(STATUS "Running 'msgcat' command to concatenate translations of '${VERSION}' version for '${_LANGUAGE}' language...")
-        set(PO_LOCALE_DIR   "${PROJ_OUT_REPO_BOOK_LOCALE_DIR}/${_LANGUAGE}")
-        set(PO_SINGLE_FILE  "${PROJ_OUT_REPO_BOOK_LOCALE_DIR}/${_LANGUAGE}.po")
+        set(PO_LOCALE_DIR   "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/${_LANGUAGE}")
+        set(PO_SINGLE_FILE  "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/${_LANGUAGE}.po")
         remove_cmake_message_indent()
         message("")
         concat_po_from_locale_to_single(
@@ -128,7 +128,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
                     --read toml
                     --write json
                     "output.${MDBOOK_RENDERER}"
-            WORKING_DIRECTORY ${PROJ_OUT_REPO_BOOK_DIR}
+            WORKING_DIRECTORY ${PROJ_OUT_REPO_DOCS_BOOK_DIR}
             RESULT_VARIABLE RES_VAR
             OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
             ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
@@ -137,7 +137,8 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         else()
             set(MDBOOK_OUTPUT__RENDERER "{}")
         endif()
-        string(JSON MDBOOK_OUTPUT SET "{}" "${MDBOOK_RENDERER}" "${MDBOOK_OUTPUT__RENDERER}")
+        string(JSON MDBOOK_OUTPUT__RENDERER SET "${MDBOOK_OUTPUT__RENDERER}" "theme" "\"${THEME_TO_BOOK_DIR}\"")
+        string(JSON MDBOOK_OUTPUT           SET "{}" "${MDBOOK_RENDERER}" "${MDBOOK_OUTPUT__RENDERER}")
     endblock()
     block(PROPAGATE MDBOOK_PREPROCESSOR)
         execute_process(
@@ -146,7 +147,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
                     --read toml
                     --write json
                     "preprocessor"
-            WORKING_DIRECTORY ${PROJ_OUT_REPO_BOOK_DIR}
+            WORKING_DIRECTORY ${PROJ_OUT_REPO_DOCS_BOOK_DIR}
             RESULT_VARIABLE RES_VAR
             OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
             ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
@@ -176,17 +177,18 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
     message("ENV_MDBOOK_PREPROCESSOR    = ${ENV_MDBOOK_PREPROCESSOR}")
     message("")
     message("mdbook build:")
-    message("  ${PROJ_OUT_REPO_BOOK_DIR}")
+    message("  ${PROJ_OUT_REPO_DOCS_BOOK_DIR}")
     message("  --dest-dir ${PROJ_OUT_RENDERER_DIR}/${_LANGTAG}/${VERSION}")
+    message("  [work-dir] ${PROJ_OUT_REPO_DOCS_DIR}")
     message("")
     execute_process(
         COMMAND ${CMAKE_COMMAND} -E env
                 ${ENV_VARS_OF_SYSTEM}
                 ${ENV_VARS_OF_COMMON}
                 ${mdBook_EXECUTABLE} build
-                ${PROJ_OUT_REPO_BOOK_DIR}
+                ${PROJ_OUT_REPO_DOCS_BOOK_DIR}
                 --dest-dir ${PROJ_OUT_RENDERER_DIR}/${_LANGTAG}/${VERSION}
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_BOOK_DIR}
+        WORKING_DIRECTORY ${PROJ_OUT_REPO_DOCS_DIR}
         ECHO_OUTPUT_VARIABLE
         ECHO_ERROR_VARIABLE
         RESULT_VARIABLE RES_VAR

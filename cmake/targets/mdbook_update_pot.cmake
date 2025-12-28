@@ -65,14 +65,14 @@ restore_cmake_message_indent()
 
 
 message(STATUS "Copying 'head.hbs' file to the mdbook theme directory...")
-file(MAKE_DIRECTORY "${PROJ_OUT_REPO_BOOK_THEME_DIR}")
+file(MAKE_DIRECTORY "${PROJ_OUT_REPO_DOCS_THEME_DIR}")
 file(COPY_FILE
     "${PROJ_CMAKE_CUSTOM_DIR}/head.hbs"
-    "${PROJ_OUT_REPO_BOOK_THEME_DIR}/head.hbs")
+    "${PROJ_OUT_REPO_DOCS_THEME_DIR}/head.hbs")
 remove_cmake_message_indent()
 message("")
 message("From: ${PROJ_CMAKE_CUSTOM_DIR}/head.hbs")
-message("To:   ${PROJ_OUT_REPO_BOOK_THEME_DIR}/head.hbs")
+message("To:   ${PROJ_OUT_REPO_DOCS_THEME_DIR}/head.hbs")
 message("")
 restore_cmake_message_indent()
 
@@ -122,7 +122,7 @@ block(PROPAGATE MDBOOK_PREPROCESSOR)
                 --read toml
                 --write json
                 "preprocessor"
-        WORKING_DIRECTORY ${PROJ_OUT_REPO_BOOK_DIR}
+        WORKING_DIRECTORY ${PROJ_OUT_REPO_DOCS_BOOK_DIR}
         RESULT_VARIABLE RES_VAR
         OUTPUT_VARIABLE OUT_VAR OUTPUT_STRIP_TRAILING_WHITESPACE
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
@@ -145,17 +145,18 @@ message("ENV_MDBOOK_OUTPUT          = ${ENV_MDBOOK_OUTPUT}")
 message("ENV_MDBOOK_PREPROCESSOR    = ${ENV_MDBOOK_PREPROCESSOR}")
 message("")
 message("mdbook build:")
-message("  ${PROJ_OUT_REPO_BOOK_DIR}")
-message("  --dest-dir ${PROJ_OUT_REPO_BOOK_LOCALE_DIR}/pot")
+message("  ${PROJ_OUT_REPO_DOCS_BOOK_DIR}")
+message("  --dest-dir ${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/pot")
+message("  [work-dir] ${PROJ_OUT_REPO_DOCS_DIR}")
 message("")
 execute_process(
     COMMAND ${CMAKE_COMMAND} -E env
             ${ENV_VARS_OF_SYSTEM}
             ${ENV_VARS_OF_COMMON}
             ${mdBook_EXECUTABLE} build
-            ${PROJ_OUT_REPO_BOOK_DIR}
-            --dest-dir ${PROJ_OUT_REPO_BOOK_LOCALE_DIR}/pot
-    WORKING_DIRECTORY ${PROJ_OUT_REPO_BOOK_DIR}
+            ${PROJ_OUT_REPO_DOCS_BOOK_DIR}
+            --dest-dir ${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/pot
+    WORKING_DIRECTORY ${PROJ_OUT_REPO_DOCS_DIR}
     ECHO_OUTPUT_VARIABLE
     ECHO_ERROR_VARIABLE
     RESULT_VARIABLE RES_VAR
@@ -174,7 +175,7 @@ restore_cmake_message_indent()
 
 
 message(STATUS "Running 'msgmerge/msgcat' command to update .pot files...")
-set(SRC_POT_DIR "${PROJ_OUT_REPO_BOOK_LOCALE_DIR}/pot")
+set(SRC_POT_DIR "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}/pot")
 set(DST_POT_DIR "${PROJ_L10N_VERSION_LOCALE_DIR}/pot")
 remove_cmake_message_indent()
 message("")
