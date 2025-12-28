@@ -113,10 +113,11 @@ set(PROJ_CMAKE_TARGETS_DIR          "${PROJ_SOURCE_DIR}/cmake/targets")
 set(PROJ_CONDA_DIR                  "${PROJ_SOURCE_DIR}/.conda")
 set(PROJ_OUT_DIR                    "${PROJ_SOURCE_DIR}/out")
 set(PROJ_OUT_REPO_DIR               "${PROJ_OUT_DIR}/repo")
-set(PROJ_OUT_REPO_BOOK_DIR          "${PROJ_OUT_REPO_DIR}")
-set(PROJ_OUT_REPO_BOOK_SRC_DIR      "${PROJ_OUT_REPO_BOOK_DIR}/src")
-set(PROJ_OUT_REPO_BOOK_THEME_DIR    "${PROJ_OUT_REPO_BOOK_DIR}/theme")
-set(PROJ_OUT_REPO_BOOK_LOCALE_DIR   "${PROJ_OUT_REPO_BOOK_DIR}/locale")
+set(PROJ_OUT_REPO_DOCS_DIR          "${PROJ_OUT_REPO_DIR}")
+set(PROJ_OUT_REPO_DOCS_BOOK_DIR     "${PROJ_OUT_REPO_DOCS_DIR}")
+set(PROJ_OUT_REPO_DOCS_SRC_DIR      "${PROJ_OUT_REPO_DOCS_DIR}/src")
+set(PROJ_OUT_REPO_DOCS_THEME_DIR    "${PROJ_OUT_REPO_DOCS_DIR}/theme")
+set(PROJ_OUT_REPO_DOCS_LOCALE_DIR   "${PROJ_OUT_REPO_DOCS_DIR}/locale")
 set(PROJ_OUT_RENDERER_DIR           "${PROJ_OUT_DIR}/${MDBOOK_RENDERER}")
 set(PROJ_L10N_DIR                   "${PROJ_SOURCE_DIR}/l10n")
 set(PROJ_L10N_VERSION_DIR           "${PROJ_L10N_DIR}/${VERSION}")
@@ -242,18 +243,23 @@ if (NOT "$CACHE{VERSION_OF_MDBOOK_I18N_HELPERS}" STREQUAL "[default]")
 endif()
 
 #[============================================================[
-# Prepare SRC_TO_BOOK_DIR    for 'mdbook_update_pot' and
-                                 'mdbook_build_docs' targets.
-# Prepare LOCALE_TO_BOOK_DIR for 'mdbook_build_docs' target.
+# Prepare SRC_TO_BOOK_DIR     for 'mdbook_update_pot' and
+                                  'mdbook_build_docs' targets.
+# Prepare THEME_TO_BOOK_DIR   for 'mdbook_build_docs' target.
+# Prepare LOCALE_TO_BOOK_DIR  for 'mdbook_build_docs' target.
 #]============================================================]
 
 file(RELATIVE_PATH SRC_TO_BOOK_DIR
-    "${PROJ_OUT_REPO_BOOK_DIR}"
-    "${PROJ_OUT_REPO_BOOK_SRC_DIR}")
+    "${PROJ_OUT_REPO_DOCS_BOOK_DIR}"
+    "${PROJ_OUT_REPO_DOCS_SRC_DIR}")
+
+file(RELATIVE_PATH THEME_TO_BOOK_DIR
+    "${PROJ_OUT_REPO_DOCS_BOOK_DIR}"
+    "${PROJ_OUT_REPO_DOCS_THEME_DIR}")
 
 file(RELATIVE_PATH LOCALE_TO_BOOK_DIR
-    "${PROJ_OUT_REPO_BOOK_DIR}"
-    "${PROJ_OUT_REPO_BOOK_LOCALE_DIR}")
+    "${PROJ_OUT_REPO_DOCS_BOOK_DIR}"
+    "${PROJ_OUT_REPO_DOCS_LOCALE_DIR}")
 
 #[============================================================[
 # Check prerequisites.
@@ -330,10 +336,11 @@ message(STATUS "PROJ_CMAKE_TARGETS_DIR          = ${PROJ_CMAKE_TARGETS_DIR}")
 message(STATUS "PROJ_CONDA_DIR                  = ${PROJ_CONDA_DIR}")
 message(STATUS "PROJ_OUT_DIR                    = ${PROJ_OUT_DIR}")
 message(STATUS "PROJ_OUT_REPO_DIR               = ${PROJ_OUT_REPO_DIR}")
-message(STATUS "PROJ_OUT_REPO_BOOK_DIR          = ${PROJ_OUT_REPO_BOOK_DIR}")
-message(STATUS "PROJ_OUT_REPO_BOOK_SRC_DIR      = ${PROJ_OUT_REPO_BOOK_SRC_DIR}")
-message(STATUS "PROJ_OUT_REPO_BOOK_THEME_DIR    = ${PROJ_OUT_REPO_BOOK_THEME_DIR}")
-message(STATUS "PROJ_OUT_REPO_BOOK_LOCALE_DIR   = ${PROJ_OUT_REPO_BOOK_LOCALE_DIR}")
+message(STATUS "PROJ_OUT_REPO_DOCS_DIR          = ${PROJ_OUT_REPO_DOCS_DIR}")
+message(STATUS "PROJ_OUT_REPO_DOCS_BOOK_DIR     = ${PROJ_OUT_REPO_DOCS_BOOK_DIR}")
+message(STATUS "PROJ_OUT_REPO_DOCS_SRC_DIR      = ${PROJ_OUT_REPO_DOCS_SRC_DIR}")
+message(STATUS "PROJ_OUT_REPO_DOCS_THEME_DIR    = ${PROJ_OUT_REPO_DOCS_THEME_DIR}")
+message(STATUS "PROJ_OUT_REPO_DOCS_LOCALE_DIR   = ${PROJ_OUT_REPO_DOCS_LOCALE_DIR}")
 message(STATUS "PROJ_OUT_RENDERER_DIR           = ${PROJ_OUT_RENDERER_DIR}")
 message(STATUS "PROJ_L10N_DIR                   = ${PROJ_L10N_DIR}")
 message(STATUS "PROJ_L10N_VERSION_DIR           = ${PROJ_L10N_VERSION_DIR}")
@@ -350,6 +357,7 @@ message(STATUS "STATISTICS_TXT_PATH             = ${STATISTICS_TXT_PATH}")
 message(STATUS "CROWDIN_YML_PATH                = ${CROWDIN_YML_PATH}")
 message(STATUS "---------- Other Variables ----------")
 message(STATUS "SRC_TO_BOOK_DIR                 = ${SRC_TO_BOOK_DIR}")
+message(STATUS "THEME_TO_BOOK_DIR               = ${THEME_TO_BOOK_DIR}")
 message(STATUS "LOCALE_TO_BOOK_DIR              = ${LOCALE_TO_BOOK_DIR}")
 message(STATUS "LANGUAGE_LIST                   = ${LANGUAGE_LIST}")
 message(STATUS "VERSION_TYPE                    = ${VERSION_TYPE}")
@@ -424,10 +432,11 @@ set(SCRIPT_MODE_CACHE
     -D PROJ_CONDA_DIR=${PROJ_CONDA_DIR}
     -D PROJ_OUT_DIR=${PROJ_OUT_DIR}
     -D PROJ_OUT_REPO_DIR=${PROJ_OUT_REPO_DIR}
-    -D PROJ_OUT_REPO_BOOK_DIR=${PROJ_OUT_REPO_BOOK_DIR}
-    -D PROJ_OUT_REPO_BOOK_SRC_DIR=${PROJ_OUT_REPO_BOOK_SRC_DIR}
-    -D PROJ_OUT_REPO_BOOK_THEME_DIR=${PROJ_OUT_REPO_BOOK_THEME_DIR}
-    -D PROJ_OUT_REPO_BOOK_LOCALE_DIR=${PROJ_OUT_REPO_BOOK_LOCALE_DIR}
+    -D PROJ_OUT_REPO_DOCS_DIR=${PROJ_OUT_REPO_DOCS_DIR}
+    -D PROJ_OUT_REPO_DOCS_BOOK_DIR=${PROJ_OUT_REPO_DOCS_BOOK_DIR}
+    -D PROJ_OUT_REPO_DOCS_SRC_DIR=${PROJ_OUT_REPO_DOCS_SRC_DIR}
+    -D PROJ_OUT_REPO_DOCS_THEME_DIR=${PROJ_OUT_REPO_DOCS_THEME_DIR}
+    -D PROJ_OUT_REPO_DOCS_LOCALE_DIR=${PROJ_OUT_REPO_DOCS_LOCALE_DIR}
     -D PROJ_OUT_RENDERER_DIR=${PROJ_OUT_RENDERER_DIR}
     -D PROJ_L10N_DIR=${PROJ_L10N_DIR}
     -D PROJ_L10N_VERSION_DIR=${PROJ_L10N_VERSION_DIR}
@@ -444,6 +453,7 @@ set(SCRIPT_MODE_CACHE
     -D CROWDIN_YML_PATH=${CROWDIN_YML_PATH}
     # [Other Variables]
     -D SRC_TO_BOOK_DIR=${SRC_TO_BOOK_DIR}
+    -D THEME_TO_BOOK_DIR=${THEME_TO_BOOK_DIR}
     -D LOCALE_TO_BOOK_DIR=${LOCALE_TO_BOOK_DIR}
     -D LANGUAGE_LIST=${LANGUAGE_LIST}
     -D VERSION_TYPE=${VERSION_TYPE}
