@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-11-29T06:49:36Z\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
