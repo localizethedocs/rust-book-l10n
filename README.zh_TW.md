@@ -118,10 +118,10 @@ The goal of this project is to translate the Rust Book into multiple languages. 
 <table>
   <thead>
     <tr>
-      <th rowspan="1" colspan="2" align="center" style="text-align: center;"><div>Branch Structure</div></th>
+      <th rowspan="1" colspan="2" align="center" style="text-align: center;"><div>分支結構</div></th>
     </tr>
     <tr>
-      <th rowspan="1" colspan="1" align="center" style="text-align: center;"><div>Branch</div></th>
+      <th rowspan="1" colspan="1" align="center" style="text-align: center;"><div>分支</div></th>
       <th rowspan="1" colspan="1" align="center" style="text-align: center;"><div>描述</div></th>
     </tr>
   </thead>
@@ -171,7 +171,7 @@ The goal of this project is to translate the Rust Book into multiple languages. 
         <div><a href="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-mdbook-build-docs.yml" ><img alt="ci-mdbook-build-docs" src="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-mdbook-build-docs.yml/badge.svg" /></a></div>
       </td>
       <td rowspan="1" colspan="1" align="left" style="text-align: left;">
-        <div>透過 mdBook 建置文件並上傳建置製品。</div>
+        <div>Build documents by mdBook and upload build artifacts.</div>
       </td>
     </tr>
     <tr>
@@ -179,7 +179,7 @@ The goal of this project is to translate the Rust Book into multiple languages. 
         <div><a href="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-mdbook-update-pot.yml" ><img alt="ci-mdbook-update-pot" src="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-mdbook-update-pot.yml/badge.svg" /></a></div>
       </td>
       <td rowspan="1" colspan="1" align="left" style="text-align: left;">
-        <div>透過 mdBook 使用 <code>xgettext</code> 算繪器更新 <code>.pot</code> 檔案。</div>
+        <div>Update <code>.pot</code> files by mdBook with <code>xgettext</code> renderer.</div>
       </td>
     </tr>
     <tr>
