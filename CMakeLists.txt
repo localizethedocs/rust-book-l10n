@@ -79,6 +79,9 @@ set(GETTEXT_WRAP_WIDTH 79
     # See https://www.gnu.org/software/gettext/manual/html_node/msgcat-Invocation.html
     # and https://www.gnu.org/software/gettext/manual/html_node/msgmerge-Invocation.html for details.
 
+set(BRANCH_OF_WORKTREE "l10n"
+    CACHE STRING "The branch of the 'l10n' git worktree.")
+
 set(REMOTE_URL_OF_L10N "https://github.com/localizethedocs/rust-book-l10n.git"
     CACHE STRING "The remote URL of the 'l10n' repository.")
 
@@ -275,6 +278,7 @@ find_package(Crowdin    MODULE QUIET)
 #]============================================================]
 
 create_git_worktree_for_l10n_branch(
+    IN_BRANCH           "${BRANCH_OF_WORKTREE}"
     IN_REMOTE_URL       "${REMOTE_URL_OF_L10N}"
     IN_LOCAL_PATH       "${PROJ_SOURCE_DIR}"
     IN_WORKTREE_PATH    "${PROJ_L10N_DIR}")
@@ -319,6 +323,7 @@ message(STATUS "MODE_OF_INSTALL                 = ${MODE_OF_INSTALL}")
 message(STATUS "MDBOOK_RENDERER                 = ${MDBOOK_RENDERER}")
 message(STATUS "MDBOOK_XGETTEXT_DEPTH           = ${MDBOOK_XGETTEXT_DEPTH}")
 message(STATUS "GETTEXT_WRAP_WIDTH              = ${GETTEXT_WRAP_WIDTH}")
+message(STATUS "BRANCH_OF_WORKTREE              = ${BRANCH_OF_WORKTREE}")
 message(STATUS "REMOTE_URL_OF_L10N              = ${REMOTE_URL_OF_L10N}")
 message(STATUS "REMOTE_URL_OF_DOCS              = ${REMOTE_URL_OF_DOCS}")
 message(STATUS "BASEURL_HREF                    = ${BASEURL_HREF}")
@@ -412,6 +417,7 @@ set(SCRIPT_MODE_CACHE
     -D REMOVE_REDUNDANT=${REMOVE_REDUNDANT}
     -D MODE_OF_UPDATE=${MODE_OF_UPDATE}
     -D MODE_OF_INSTALL=${MODE_OF_INSTALL}
+    -D BRANCH_OF_WORKTREE=${BRANCH_OF_WORKTREE}
     -D REMOTE_URL_OF_L10N=${REMOTE_URL_OF_L10N}
     -D REMOTE_URL_OF_DOCS=${REMOTE_URL_OF_DOCS}
     -D BASEURL_HREF=${BASEURL_HREF}
