@@ -7,7 +7,7 @@
 </div>
 
 <div align="center">
-<h1 id="localization-of-rust-book">Rust 手册的本地化</h1>
+<h1 id="localization-of-the-rust-book">Localization of The Rust Book</h1>
 </div>
 
 <details><summary><strong>切换语言</strong></summary>
@@ -64,7 +64,7 @@
 
 <p></p>
 
-The goal of this project is to translate the Rust Book into multiple languages. Translations are contributed via the Crowdin platform, automatically synchronized with the GitHub repository, and can be previewed on GitHub Pages.
+The goal of this project is to translate The Rust Book into multiple languages. Translations are contributed via the Crowdin platform, automatically synchronized with the GitHub repository, and can be previewed on GitHub Pages.
 
 > [!NOTE]
 > The translation is <strong>unofficial</strong> and <strong>community-driven</strong>. If you find any inaccuracies, always refer to the <a href="https://doc.rust-lang.org/book/">official documentation</a> or the <a href="https://github.com/rust-lang/book">source repository</a> of the upstream project for the most reliable information.
