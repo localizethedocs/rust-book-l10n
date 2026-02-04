@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch14-00-more-about-cargo.md:1
 msgid "More About Cargo and Crates.io"
-msgstr ""
+msgstr "Cargo 與 Crates.io 的更多內容"
 
 #: src/ch14-00-more-about-cargo.md:3
 msgid ""
@@ -21,26 +21,28 @@ msgid ""
 "test our code, but it can do a lot more. In this chapter, we’ll discuss some "
 "of its other, more advanced features to show you how to do the following:"
 msgstr ""
+"到目前為止，我們只使用了 Cargo 最基本的功能來建置、執行與測試程式碼，但它能做"
+"的遠不止如此。在本章中，我們會討論它其他更進階的功能，示範如何做到以下事項："
 
 #: src/ch14-00-more-about-cargo.md:7
 msgid "Customize your build through release profiles."
-msgstr ""
+msgstr "透過發佈設定檔自訂建置。"
 
 #: src/ch14-00-more-about-cargo.md:8
 msgid "Publish libraries on [crates.io](https://crates.io/)<!-- ignore -->."
-msgstr ""
+msgstr "在 [crates.io](https://crates.io/)<!-- ignore --> 發佈函式庫。"
 
 #: src/ch14-00-more-about-cargo.md:9
 msgid "Organize large projects with workspaces."
-msgstr ""
+msgstr "使用工作空間組織大型專案。"
 
 #: src/ch14-00-more-about-cargo.md:10
 msgid "Install binaries from [crates.io](https://crates.io/)<!-- ignore -->."
-msgstr ""
+msgstr "從 [crates.io](https://crates.io/)<!-- ignore --> 安裝二進位檔。"
 
 #: src/ch14-00-more-about-cargo.md:11
 msgid "Extend Cargo using custom commands."
-msgstr ""
+msgstr "使用自訂命令擴充 Cargo。"
 
 #: src/ch14-00-more-about-cargo.md:13
 msgid ""
@@ -48,3 +50,5 @@ msgid ""
 "for a full explanation of all its features, see [its documentation](https://"
 "doc.rust-lang.org/cargo/)."
 msgstr ""
+"Cargo 能做的事情比本章涵蓋的功能還要多，如需完整說明，請參閱[文件](https://"
+"doc.rust-lang.org/cargo/)。"

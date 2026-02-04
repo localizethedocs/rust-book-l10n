@@ -27,6 +27,9 @@ msgid ""
 "distinct features, you’ll clarify where to find code that implements a "
 "particular feature and where to go to change how a feature works."
 msgstr ""
+"當你撰寫大型程式時，組織程式碼會變得越來越重要。透過將相關功能分組，並把不同"
+"功能的程式碼分開，你就能清楚知道在哪裡找到實作某項功能的程式碼，以及要到哪裡"
+"修改該功能的運作方式。"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:12
 msgid ""
@@ -40,6 +43,12 @@ msgid ""
 "we’ll cover in [“Cargo Workspaces”](ch14-03-cargo-workspaces.html)<!-- "
 "ignore --> in Chapter 14."
 msgstr ""
+"到目前為止，我們寫的程式都在單一檔案中的單一模組內。當專案成長時，你應該把程"
+"式碼拆分成多個模組，再拆分成多個檔案來組織。一個軟體包可以包含多個二進位箱，"
+"並可選擇包含一個程式庫箱。當軟體包成長時，你可以把部分功能抽成獨立的軟體箱，"
+"作為外部相依性。本章會涵蓋這些技術。對於由一組彼此關聯且共同演進的軟體包所組"
+"成的超大型專案，Cargo 提供工作區（workspace），我們會在第 14 章的[「Cargo 工"
+"作區」](ch14-03-cargo-workspaces.html)<!-- ignore -->中說明。"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:21
 msgid ""
@@ -51,6 +60,10 @@ msgid ""
 "details that you reserve the right to change. This is another way to limit "
 "the amount of detail you have to keep in your head."
 msgstr ""
+"我們也會討論封裝實作細節，讓你能以更高層次重用程式碼：當你完成某個操作的實作"
+"後，其他程式碼就能透過公開介面呼叫它，而不必知道實作如何運作。你撰寫程式碼的"
+"方式決定了哪些部分是公開給其他程式碼使用，哪些部分是你保留可變更權利的私有實"
+"作細節。這也是一種降低你腦中需要記住細節量的方法。"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:29
 msgid ""
@@ -63,6 +76,11 @@ msgid ""
 "items with the same name in the same scope; tools are available to resolve "
 "name conflicts."
 msgstr ""
+"另一個相關概念是作用域：撰寫程式碼的巢狀情境中有一組被定義為「在作用域內」的"
+"名稱。在閱讀、撰寫與編譯程式碼時，程式設計師與編譯器需要知道某個位置上的特定"
+"名稱指的是變數、函式、struct、enum、模組、常數或其他項目，以及該項目的意義。"
+"你可以建立作用域並改變哪些名稱在作用域內或外。在同一個作用域中不能有兩個同名"
+"項目；可使用工具來解決命名衝突。"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:37
 msgid ""
@@ -71,26 +89,28 @@ msgid ""
 "private, and what names are in each scope in your programs. These features, "
 "sometimes collectively referred to as the _module system_, include:"
 msgstr ""
+"Rust 有多種功能可讓你管理程式碼的組織方式，包括哪些細節要公開、哪些細節要私"
+"有，以及程式中各作用域有哪些名稱。這些功能有時統稱為 _模組系統_，包括："
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:42
 msgid ""
 "**Packages**: A Cargo feature that lets you build, test, and share crates"
-msgstr ""
+msgstr "**軟體包**：Cargo 的功能，可讓你建置、測試並分享 crate"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:43
 msgid "**Crates**: A tree of modules that produces a library or executable"
-msgstr ""
+msgstr "**Crate**：由模組構成的樹狀結構，可產生函式庫或可執行檔"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:44
 msgid ""
 "**Modules and use**: Let you control the organization, scope, and privacy of "
 "paths"
-msgstr ""
+msgstr "**模組與 use**：讓你控制路徑的組織方式、作用域與隱私"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:46
 msgid ""
 "**Paths**: A way of naming an item, such as a struct, function, or module"
-msgstr ""
+msgstr "**路徑**：為項目命名的方式，例如 struct、function 或 module"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:48
 msgid ""
@@ -99,3 +119,5 @@ msgid ""
 "solid understanding of the module system and be able to work with scopes "
 "like a pro!"
 msgstr ""
+"在本章中，我們會涵蓋這些功能、討論它們如何互動，並說明如何用它們來管理作用"
+"域。讀完之後，你應該能對模組系統有扎實的理解，並能像專家一樣處理作用域！"

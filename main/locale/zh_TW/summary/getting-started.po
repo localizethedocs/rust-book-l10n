@@ -20,15 +20,17 @@ msgid ""
 "Let’s start your Rust journey! There’s a lot to learn, but every journey "
 "starts somewhere. In this chapter, we’ll discuss:"
 msgstr ""
+"讓我們開始你的 Rust 旅程吧！要學的東西很多，但每段旅程都要從某個地方開始。在"
+"本章中，我們會討論："
 
 #: src/ch01-00-getting-started.md:6
 msgid "Installing Rust on Linux, macOS, and Windows"
-msgstr ""
+msgstr "在 Linux、macOS 與 Windows 上安裝 Rust"
 
 #: src/ch01-00-getting-started.md:7
 msgid "Writing a program that prints `Hello, world!`"
-msgstr ""
+msgstr "撰寫一個輸出 `Hello, world!` 的程式"
 
 #: src/ch01-00-getting-started.md:8
 msgid "Using `cargo`, Rust’s package manager and build system"
-msgstr ""
+msgstr "使用 `cargo`，Rust 的套件管理與建置系統"

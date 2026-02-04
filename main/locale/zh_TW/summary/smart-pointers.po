@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch15-00-smart-pointers.md:1
 msgid "Smart Pointers"
-msgstr ""
+msgstr "智慧指標"
 
 #: src/ch15-00-smart-pointers.md:3
 msgid ""
@@ -24,6 +24,9 @@ msgid ""
 "they point to. They don’t have any special capabilities other than referring "
 "to data, and they have no overhead."
 msgstr ""
+"指標是一種通用概念，指的是包含記憶體位址的變數。這個位址用來指向其他資料。"
+"Rust 中最常見的指標是參考，你在第 4 章已經學過。參考以 `&` 符號表示，並借用它"
+"所指向的值。除了指向資料外，它們沒有任何特殊能力，而且沒有額外開銷。"
 
 #: src/ch15-00-smart-pointers.md:10
 msgid ""
@@ -38,6 +41,11 @@ msgid ""
 "multiple owners by keeping track of the number of owners and, when no owners "
 "remain, cleaning up the data."
 msgstr ""
+"_智慧指標_ 則是類似指標但也具備額外中繼資料與能力的資料結構。智慧指標的概念並"
+"非 Rust 獨有：智慧指標起源於 C++，在其他語言中也存在。Rust 在標準函式庫中定義"
+"了多種智慧指標，提供超越參考的功能。為了探討這個一般概念，我們會看看幾個不同"
+"的智慧指標例子，包括一種 _參考計數_ 的智慧指標型別。這個指標會追蹤擁有者的數"
+"量，讓資料可以有多個擁有者，並在沒有擁有者時清理資料。"
 
 #: src/ch15-00-smart-pointers.md:20
 msgid ""
@@ -45,6 +53,8 @@ msgid ""
 "difference between references and smart pointers: While references only "
 "borrow data, in many cases smart pointers _own_ the data they point to."
 msgstr ""
+"在 Rust 中，由於擁有權與借用的概念，參考與智慧指標之間還有另一個差異：參考只"
+"會借用資料，但在許多情況下，智慧指標會 _擁有_ 它們所指向的資料。"
 
 #: src/ch15-00-smart-pointers.md:24
 msgid ""
@@ -57,6 +67,11 @@ msgid ""
 "we’ll discuss both of these traits and demonstrate why they’re important to "
 "smart pointers."
 msgstr ""
+"智慧指標通常以 struct 來實作。與一般的 struct 不同，智慧指標會實作 `Deref` "
+"與 `Drop` 特徵。`Deref` 特徵讓智慧指標 struct 的實例能像參考一樣運作，如此你"
+"就能撰寫同時可與參考或智慧指標一起運作的程式碼。`Drop` 特徵讓你自訂智慧指標實"
+"例離開作用域時要執行的程式碼。在本章中，我們會討論這兩個特徵，並示範為什麼它"
+"們對智慧指標很重要。"
 
 #: src/ch15-00-smart-pointers.md:32
 msgid ""
@@ -65,20 +80,25 @@ msgid ""
 "Many libraries have their own smart pointers, and you can even write your "
 "own. We’ll cover the most common smart pointers in the standard library:"
 msgstr ""
+"由於智慧指標模式是在 Rust 中常見的通用設計模式，本章不會涵蓋所有現有的智慧指"
+"標。許多函式庫都有自己的智慧指標，你甚至可以自行撰寫。我們會介紹標準函式庫中"
+"最常見的智慧指標："
 
 #: src/ch15-00-smart-pointers.md:37
 msgid "`Box<T>`, for allocating values on the heap"
-msgstr ""
+msgstr "`Box<T>`：在堆上配置值"
 
 #: src/ch15-00-smart-pointers.md:38
 msgid "`Rc<T>`, a reference counting type that enables multiple ownership"
-msgstr ""
+msgstr "`Rc<T>`：讓資料可被多重擁有的參考計數型別"
 
 #: src/ch15-00-smart-pointers.md:39
 msgid ""
 "`Ref<T>` and `RefMut<T>`, accessed through `RefCell<T>`, a type that "
 "enforces the borrowing rules at runtime instead of compile time"
 msgstr ""
+"`Ref<T>` 與 `RefMut<T>`：透過 `RefCell<T>` 取得的型別，它在執行期而非編譯期強"
+"制借用規則"
 
 #: src/ch15-00-smart-pointers.md:42
 msgid ""
@@ -86,7 +106,9 @@ msgid ""
 "immutable type exposes an API for mutating an interior value. We’ll also "
 "discuss reference cycles: how they can leak memory and how to prevent them."
 msgstr ""
+"此外，我們還會介紹 _內部可變性_ 模式，該模式讓不可變型別提供能修改內部值的 "
+"API。我們也會討論參考循環：它們如何造成記憶體洩漏，以及如何避免。"
 
 #: src/ch15-00-smart-pointers.md:46
 msgid "Let’s dive in!"
-msgstr ""
+msgstr "讓我們開始吧！"
