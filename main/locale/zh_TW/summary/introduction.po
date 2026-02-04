@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:1
 msgid "Introduction"
-msgstr "簡介"
+msgstr "介紹"
 
 #: src/ch00-00-introduction.md:3
 msgid ""
@@ -21,6 +21,9 @@ msgid ""
 "(https://nostarch.com/rust-programming-language-3rd-edition) available in "
 "print and ebook format from [No Starch Press](https://nostarch.com/)."
 msgstr ""
+"注意：本書的版次與由 [No Starch Press](https://nostarch.com/) 出版之《[The "
+"Rust Programming Language](https://nostarch.com/rust-programming-"
+"language-3rd-edition)》的紙本與電子書內容相同。"
 
 #: src/ch00-00-introduction.md:10
 msgid ""
@@ -32,16 +35,21 @@ msgid ""
 "gives you the option to control low-level details (such as memory usage) "
 "without all the hassle traditionally associated with such control."
 msgstr ""
+"歡迎來到《_The Rust Programming Language_》，這是一本介紹 Rust 的入門書。"
+"Rust 程式語言能幫助你撰寫更快、更可靠的軟體。在程式語言設計中，高階易用性與低"
+"階控制力常常彼此衝突；Rust 挑戰了這個矛盾。透過在強大技術能力與良好開發體驗間"
+"取得平衡，Rust 讓你在不必承受傳統上與此類控制相關的麻煩情況下，仍可掌控低階細"
+"節（例如記憶體使用）。"
 
 #: src/ch00-00-introduction.md:18
 msgid "Who Rust Is For"
-msgstr ""
+msgstr "Rust 適合誰"
 
 #: src/ch00-00-introduction.md:20
 msgid ""
 "Rust is ideal for many people for a variety of reasons. Let’s look at a few "
 "of the most important groups."
-msgstr ""
+msgstr "Rust 因為各種原因而非常適合許多人。讓我們看看幾個最重要的族群。"
 
 #: src/ch00-00-introduction.md:23
 msgid "Teams of Developers"
@@ -58,12 +66,17 @@ msgid ""
 "bugs. By working alongside the compiler, the team can spend its time "
 "focusing on the program’s logic rather than chasing down bugs."
 msgstr ""
+"Rust 正證明自己是大型開發團隊協作的高產能工具，無論團隊成員的系統程式設計知識"
+"程度如何。低階程式碼容易出現各種微妙的錯誤，在多數語言中只能仰賴大量測試與資"
+"深開發者仔細的程式碼審查來發現。在 Rust 中，編譯器扮演守門人的角色，會拒絕編"
+"譯包含這些隱晦錯誤（包含並行錯誤）的程式碼。與編譯器並肩合作後，團隊就能把時"
+"間用在程式邏輯上，而非追逐錯誤。"
 
 #: src/ch00-00-introduction.md:34
 msgid ""
 "Rust also brings contemporary developer tools to the systems programming "
 "world:"
-msgstr ""
+msgstr "Rust 也把現代開發者工具帶進系統程式設計的世界："
 
 #: src/ch00-00-introduction.md:36
 msgid ""
@@ -71,24 +84,30 @@ msgid ""
 "compiling, and managing dependencies painless and consistent across the Rust "
 "ecosystem."
 msgstr ""
+"Rust 內建的相依性管理與建置工具 Cargo，讓新增、編譯與管理相依性變得輕鬆，並"
+"在 Rust 生態系中保持一致。"
 
 #: src/ch00-00-introduction.md:39
 msgid ""
 "The `rustfmt` formatting tool ensures a consistent coding style across "
 "developers."
-msgstr ""
+msgstr "格式化工具 `rustfmt` 確保開發者之間的程式碼風格一致。"
 
 #: src/ch00-00-introduction.md:41
 msgid ""
 "The Rust Language Server powers integrated development environment (IDE) "
 "integration for code completion and inline error messages."
 msgstr ""
+"Rust Language Server 為整合式開發環境（IDE）提供整合，支援程式碼補全與行內錯"
+"誤訊息。"
 
 #: src/ch00-00-introduction.md:44
 msgid ""
 "By using these and other tools in the Rust ecosystem, developers can be "
 "productive while writing systems-level code."
 msgstr ""
+"藉由使用 Rust 生態系中的這些與其他工具，開發者撰寫系統層級程式碼時也能保持高"
+"效率。"
 
 #: src/ch00-00-introduction.md:47
 msgid "Students"
@@ -103,6 +122,9 @@ msgid ""
 "to make systems concepts more accessible to more people, especially those "
 "new to programming."
 msgstr ""
+"Rust 適合學生以及對系統概念有興趣的人。藉由使用 Rust，許多人學習了像是作業系"
+"統開發等主題。社群非常友善，樂於回答學生的問題。透過本書等努力，Rust 團隊希望"
+"讓系統概念對更多人更容易接近，特別是對程式設計新手。"
 
 #: src/ch00-00-introduction.md:56
 msgid "Companies"
@@ -117,6 +139,9 @@ msgid ""
 "applications, machine learning, and even major parts of the Firefox web "
 "browser."
 msgstr ""
+"數百家大大小小的公司在生產環境中使用 Rust 來完成各式各樣的任務，包括命令行工"
+"具、網路服務、DevOps 工具、嵌入式裝置、音訊與視訊分析及轉碼、加密貨幣、生物資"
+"訊、搜尋引擎、物聯網應用、機器學習，甚至 Firefox 網頁瀏覽器的重要部分。"
 
 #: src/ch00-00-introduction.md:64
 msgid "Open Source Developers"
@@ -128,6 +153,8 @@ msgid ""
 "community, developer tools, and libraries. We’d love to have you contribute "
 "to the Rust language."
 msgstr ""
+"Rust 適合想要打造 Rust 程式語言、社群、開發者工具與函式庫的人。我們很期待你能"
+"為 Rust 語言貢獻。"
 
 #: src/ch00-00-introduction.md:70
 msgid "People Who Value Speed and Stability"
@@ -144,6 +171,11 @@ msgid ""
 "lower-level code as fast as code written manually—Rust endeavors to make "
 "safe code be fast code as well."
 msgstr ""
+"Rust 適合重視速度與穩定性的人。所謂速度，既指 Rust 程式碼的執行速度，也指 "
+"Rust 讓你撰寫程式的速度。Rust 編譯器的檢查能在新增功能與重構時確保穩定性。這"
+"與缺少這些檢查的語言中脆弱的既有程式碼形成對比，開發者往往不敢修改那類程式"
+"碼。透過追求零成本抽象——高階特性能編譯成與手寫低階程式碼同等速度的程式碼——"
+"Rust 努力讓安全的程式碼同時也是快速的程式碼。"
 
 #: src/ch00-00-introduction.md:81
 msgid ""
@@ -153,10 +185,13 @@ msgid ""
 "decades by providing safety _and_ productivity, speed _and_ ergonomics. Give "
 "Rust a try, and see if its choices work for you."
 msgstr ""
+"Rust 語言也希望能支援更多使用者；這裡提到的只是其中影響力較大的族群。總體而"
+"言，Rust 最大的企圖心是藉由同時提供安全性與生產力、速度與易用性，消除程式設計"
+"師數十年來接受的取捨。試試看 Rust，看看它的選擇是否適合你。"
 
 #: src/ch00-00-introduction.md:87
 msgid "Who This Book Is For"
-msgstr ""
+msgstr "本書適合誰"
 
 #: src/ch00-00-introduction.md:89
 msgid ""
@@ -168,10 +203,14 @@ msgid ""
 "would be better served by reading a book that specifically provides an "
 "introduction to programming."
 msgstr ""
+"本書假設你曾用其他程式語言寫過程式碼，但不假設是哪一種。我們盡量讓內容對各種"
+"不同程式設計背景的讀者都易於理解。我們不會花太多時間討論程式設計「是什麼」或"
+"該如何思考。若你完全是程式設計新手，會更適合閱讀一本專門介紹程式設計入門的"
+"書。"
 
 #: src/ch00-00-introduction.md:97
 msgid "How to Use This Book"
-msgstr "如何使用者本手冊"
+msgstr "如何使用本書"
 
 #: src/ch00-00-introduction.md:99
 msgid ""
@@ -180,6 +219,8 @@ msgid ""
 "chapters might not delve into details on a particular topic but will revisit "
 "the topic in a later chapter."
 msgstr ""
+"一般而言，本書假設你會依序從頭讀到尾。後續章節會建立在先前章節的概念上，而前"
+"面的章節可能不會深入某些主題，但會在後續章節再回到那些主題。"
 
 #: src/ch00-00-introduction.md:104
 msgid ""
@@ -189,6 +230,9 @@ msgid ""
 "learned so far. Chapter 2, Chapter 12, and Chapter 21 are project chapters; "
 "the rest are concept chapters."
 msgstr ""
+"本書包含兩種章節：概念章與專案章。概念章會介紹 Rust 的某個面向；專案章則會帶"
+"你一起建立小型程式，運用你到目前為止學到的內容。第 2 章、第 12 章與第 21 章是"
+"專案章，其餘則是概念章。"
 
 #: src/ch00-00-introduction.md:110
 msgid ""
@@ -204,6 +248,13 @@ msgid ""
 "those of other programming languages; then, you can return to Chapter 2 when "
 "you’d like to work on a project applying the details you’ve learned."
 msgstr ""
+"**第 1 章**說明如何安裝 Rust、如何撰寫「Hello, world!」程式，以及如何使用 "
+"Rust 的套件管理與建置工具 Cargo。**第 2 章**是動手實作的 Rust 程式撰寫導論，"
+"帶你建立一個猜數字遊戲。在這裡我們以高層次的方式介紹概念，後續章節會提供更多"
+"細節。若你想立刻動手，第 2 章正是適合的地方。若你是特別一絲不苟的學習者，偏好"
+"在前往下一章前先了解所有細節，你可以先跳過第 2 章，直接進到 **第 3 章**，其內"
+"容涵蓋與其他程式語言相似的 Rust 功能；之後當你想做專案並運用所學細節時，再回"
+"到第 2 章。"
 
 #: src/ch00-00-introduction.md:122
 msgid ""
@@ -212,6 +263,9 @@ msgid ""
 "expressions, and the `if let` and `let...else` control flow constructs. "
 "You’ll use structs and enums to make custom types."
 msgstr ""
+"在 **第 4 章**，你會學到 Rust 的所有權系統。**第 5 章**討論 struct 與方法。**"
+"第 6 章**涵蓋 enum、`match` 表達式，以及 `if let` 與 `let...else` 控制流程結"
+"構。你會使用 struct 與 enum 來建立自訂型別。"
 
 #: src/ch00-00-introduction.md:127
 msgid ""
@@ -221,6 +275,9 @@ msgid ""
 "structures that the standard library provides: vectors, strings, and hash "
 "maps. **Chapter 9** explores Rust’s error-handling philosophy and techniques."
 msgstr ""
+"在 **第 7 章**，你會學到 Rust 的模組系統，以及用來組織程式碼與公開應用程式介"
+"面（API）的隱私規則。**第 8 章**討論標準函式庫提供的一些常見集合資料結構：向"
+"量、字串與雜湊表。**第 9 章**探索 Rust 的錯誤處理理念與技巧。"
 
 #: src/ch00-00-introduction.md:133
 msgid ""
@@ -232,6 +289,10 @@ msgid ""
 "line tool that searches for text within files. For this, we’ll use many of "
 "the concepts we discussed in the previous chapters."
 msgstr ""
+"**第 10 章**深入探討泛型、特徵與生命週期，這些讓你能定義可套用到多種型別的程"
+"式碼。**第 11 章**完全聚焦於測試，即使有 Rust 的安全保證，測試仍是確保程式邏"
+"輯正確所必需的。在 **第 12 章**，我們會建立 `grep` 命令行工具的部分功能實作，"
+"用來在檔案中搜尋文字。為此，我們會使用先前章節討論的許多概念。"
 
 #: src/ch00-00-introduction.md:141
 msgid ""
@@ -241,6 +302,9 @@ msgid ""
 "with others. **Chapter 15** discusses smart pointers that the standard "
 "library provides and the traits that enable their functionality."
 msgstr ""
+"**第 13 章**探索閉包與疊代器：源自函數式程式語言的 Rust 功能。在 **第 14 章"
+"**，我們會更深入檢視 Cargo，並討論與他人分享函式庫的最佳實務。**第 15 章**討"
+"論標準函式庫提供的智慧指標，以及讓它們發揮功能的特徵。"
 
 #: src/ch00-00-introduction.md:147
 msgid ""
@@ -250,6 +314,10 @@ msgid ""
 "and await syntax, along with tasks, futures, and streams, and the "
 "lightweight concurrency model they enable."
 msgstr ""
+"在 **第 16 章**，我們會走過不同的並行程式設計模型，並說明 Rust 如何幫助你無懼"
+"地進行多執行緒程式設計。在 **第 17 章**，我們會延續這些內容，探索 Rust 的 "
+"async 與 await 語法，以及任務、future 與 stream，還有它們所啟用的輕量級並行模"
+"型。"
 
 #: src/ch00-00-introduction.md:153
 msgid ""
@@ -260,12 +328,16 @@ msgid ""
 "smorgasbord of advanced topics of interest, including unsafe Rust, macros, "
 "and more about lifetimes, traits, types, functions, and closures."
 msgstr ""
+"**第 18 章**探討 Rust 慣用法與你可能熟悉的物件導向程式設計原則之比較。**第 "
+"19 章**是關於模式與模式比對的參考章節，它們是在 Rust 程式中表達想法的強大方"
+"式。**第 20 章**包含一系列引人注目的進階主題，包含不安全的 Rust、巨集，以及更"
+"多關於生命週期、特徵、型別、函式與閉包的內容。"
 
 #: src/ch00-00-introduction.md:160
 msgid ""
 "In **Chapter 21**, we’ll complete a project in which we’ll implement a low-"
 "level multithreaded web server!"
-msgstr ""
+msgstr "在 **第 21 章**，我們會完成一個專案，實作低階的多執行緒網頁伺服器！"
 
 #: src/ch00-00-introduction.md:163
 msgid ""
@@ -277,6 +349,11 @@ msgid ""
 "**Appendix F**, you can find translations of the book, and in **Appendix G** "
 "we’ll cover how Rust is made and what nightly Rust is."
 msgstr ""
+"最後，部分附錄以較參考式的格式提供關於語言的有用資訊。**附錄 A**涵蓋 Rust 的"
+"關鍵字，**附錄 B**涵蓋 Rust 的運算子與符號，**附錄 C**涵蓋標準函式庫提供的可"
+"推導特徵，**附錄 D**涵蓋一些有用的開發工具，**附錄 E**說明 Rust 版次。在 **附"
+"錄 F**，你可以找到本書的翻譯，而在 **附錄 G**，我們會介紹 Rust 是如何製作的，"
+"以及什麼是 nightly Rust。"
 
 #: src/ch00-00-introduction.md:171
 msgid ""
@@ -284,6 +361,8 @@ msgid ""
 "it! You might have to jump back to earlier chapters if you experience any "
 "confusion. But do whatever works for you."
 msgstr ""
+"讀這本書沒有錯的方法：如果你想跳著看，就去做吧！若遇到困惑，你可能需要回頭翻"
+"閱之前的章節。但做對你有用的方式即可。"
 
 #: src/ch00-00-introduction.md:175
 msgid "<span id=\"ferris\"></span>"
@@ -301,6 +380,11 @@ msgid ""
 "version of any code that doesn’t compile. Ferris will also help you "
 "distinguish code that isn’t meant to work:"
 msgstr ""
+"學習 Rust 的重要一環，是學會閱讀編譯器顯示的錯誤訊息：它們會引導你走向可運作"
+"的程式碼。因此，我們會提供許多無法編譯的範例，並附上編譯器在各種情況下會顯示"
+"的錯誤訊息。請注意，若你隨意輸入並執行某個範例，它可能無法編譯！務必閱讀周邊"
+"文字，確認你要執行的範例是否本來就應該出錯。在大多數情況下，我們會帶你找到無"
+"法編譯之程式碼的正確版本。Ferris 也會幫助你辨識哪些程式碼不是為了運作："
 
 #: src/ch00-00-introduction.md:187
 msgid "Ferris"
@@ -308,7 +392,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:187
 msgid "Meaning"
-msgstr ""
+msgstr "含義"
 
 #: src/ch00-00-introduction.md:189
 msgid ""
@@ -318,7 +402,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:189
 msgid "This code does not compile!"
-msgstr ""
+msgstr "這段程式碼無法編譯！"
 
 #: src/ch00-00-introduction.md:190
 msgid ""
@@ -328,7 +412,7 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:190
 msgid "This code panics!"
-msgstr ""
+msgstr "這段程式碼會 panic！"
 
 #: src/ch00-00-introduction.md:191
 msgid ""
@@ -338,13 +422,13 @@ msgstr ""
 
 #: src/ch00-00-introduction.md:191
 msgid "This code does not produce the desired behavior."
-msgstr ""
+msgstr "這段程式碼沒有產生預期的行為。"
 
 #: src/ch00-00-introduction.md:193
 msgid ""
 "In most situations, we’ll lead you to the correct version of any code that "
 "doesn’t compile."
-msgstr ""
+msgstr "在大多數情況下，我們會帶你找到任何無法編譯之程式碼的正確版本。"
 
 #: src/ch00-00-introduction.md:196
 msgid "Source Code"
@@ -355,3 +439,5 @@ msgid ""
 "The source files from which this book is generated can be found on [GitHub]"
 "(https://github.com/rust-lang/book/tree/main/src)."
 msgstr ""
+"本書的原始檔案可在 [GitHub](https://github.com/rust-lang/book/tree/main/src) "
+"找到。"

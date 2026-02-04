@@ -21,7 +21,7 @@ msgstr ""
 
 #: src/SUMMARY.md:7
 msgid "Getting Started"
-msgstr ""
+msgstr "開始使用"
 
 #: src/SUMMARY.md:8
 msgid "Installation"

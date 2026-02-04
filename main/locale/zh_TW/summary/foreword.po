@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/foreword.md:1
 msgid "Foreword"
-msgstr ""
+msgstr "序言"
 
 #: src/foreword.md:3
 msgid ""
@@ -26,6 +26,10 @@ msgid ""
 "through open source communities and catalyzed wide-scale adoption across "
 "industries."
 msgstr ""
+"Rust 程式語言在短短幾年內走了很長一段路，從由小而新興的熱情社群孕育與孵化開"
+"始，成長為全球最受喜愛且需求最高的程式語言之一。回顧過去，Rust 的力量與承諾引"
+"人注目並在系統程式設計中站穩腳步是必然的。並非必然的是，開源社群中迅速擴散的"
+"全球性興趣與創新，進而催化跨產業的大規模採用。"
 
 #: src/foreword.md:11
 msgid ""
@@ -39,6 +43,11 @@ msgid ""
 "developers a tool that makes it easier to write safe, fast, and reliable "
 "code."
 msgstr ""
+"到了現在，要用 Rust 所提供的精彩特性來解釋這波興趣與採用的爆發是很容易的。誰"
+"不想要記憶體安全、_又_ 有高效能、_又_ 有友善的編譯器、_又_ 有優秀的工具等眾多"
+"優點呢？你今天看到的 Rust，結合了多年的系統程式設計研究與充滿活力且熱情的社群"
+"所累積的實務智慧。這門語言以明確的目的設計、並以細心打造，為開發者提供一個更"
+"容易撰寫安全、快速且可靠程式碼的工具。"
 
 #: src/foreword.md:20
 msgid ""
@@ -51,6 +60,10 @@ msgid ""
 "Foundation, which also invests in key initiatives to ensure that Rust is "
 "secure, stable, and sustainable."
 msgstr ""
+"但真正讓 Rust 特別的是，它根植於賦能使用者、幫助你達成目標。這是一門希望你成"
+"功的語言，而賦能的理念貫穿於建構、維護並推廣這門語言的社群核心。自前一版權威"
+"文本以來，Rust 進一步發展為真正全球化且值得信賴的語言。Rust 專案如今由 Rust "
+"基金會穩健支持，並投資關鍵計畫以確保 Rust 的安全、穩定與永續。"
 
 #: src/foreword.md:29
 msgid ""
@@ -62,6 +75,11 @@ msgid ""
 "Rust for the first time or an experienced Rustacean looking to refine your "
 "skills, this edition offers something for everyone."
 msgstr ""
+"《_The Rust Programming Language_》的這個版次是一個全面更新，反映了語言多年來"
+"的演進，並提供有價值的新資訊。但它不只是語法與函式庫的指南——它也是一張邀請"
+"函，邀請你加入重視品質、效能與深思熟慮設計的社群。無論你是想第一次探索 Rust "
+"的資深開發者，或是希望精進技能的資深 Rustacean，這個版次都能提供你需要的內"
+"容。"
 
 #: src/foreword.md:37
 msgid ""
@@ -73,11 +91,15 @@ msgid ""
 "not just learning a new programming language—you’re joining a movement to "
 "make software better, safer, and more enjoyable to work with."
 msgstr ""
+"Rust 的旅程是一段協作、學習與反覆精進的歷程。這門語言與其生態系的成長，正是背"
+"後充滿活力且多元社群的直接映照。從核心語言設計者到一般貢獻者，數千位開發者的"
+"投入，造就了 Rust 如此獨特且強大的工具。拿起這本書，你不只是學習一門新的程式"
+"語言——你也加入了一場讓軟體更好、更安全、且更令人樂於投入的運動。"
 
 #: src/foreword.md:45
 msgid "Welcome to the Rust community!"
-msgstr ""
+msgstr "歡迎加入 Rust 社群！"
 
 #: src/foreword.md:47
 msgid "Bec Rumbul, Executive Director of the Rust Foundation"
-msgstr ""
+msgstr "Bec Rumbul，Rust Foundation 執行董事"
