@@ -6,7 +6,7 @@ name: ci-mdbook-build-docs
 on:
   # Triggers the workflow based on a schedule.
   schedule:
-    - cron: '0 8 * * 1'   # CRON_dev
+    - cron: '0 8 * * 2'   # CRON_dev
   # Triggers the workflow manually through the GitHub UI.
   workflow_dispatch:
     inputs:
@@ -45,7 +45,7 @@ on:
           - 'false'
 
 env:
-  CRON_dev: '0 8 * * 1'
+  CRON_dev: '0 8 * * 2'
 
 jobs:
   precondition:
