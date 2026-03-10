@@ -7,7 +7,7 @@
 </div>
 
 <div align="center">
-<h1 id="localization-of-the-rust-book">Localization of The Rust Book</h1>
+<h1 id="localization-of-the-rust-book">Rust 手冊的在地化</h1>
 </div>
 
 <details><summary><strong>切換語言</strong></summary>
@@ -67,7 +67,7 @@
 
 <p></p>
 
-The goal of this project is to translate The Rust Book into multiple languages. Translations are contributed via the Crowdin platform, automatically synchronized with the GitHub repository, and can be previewed on GitHub Pages.
+The goal of this project is to translate The Rust Book into multiple languages. 翻譯是在 Crowdin 平臺上進行貢獻，然後會自動與 GitHub 儲存庫進行同步，並且可以在 GitHub Pages 上進行預覽。
 
 > [!NOTE]
 > The translation is <strong>unofficial</strong> and <strong>community-driven</strong>. If you find any inaccuracies, always refer to the <a href="https://doc.rust-lang.org/book/">official documentation</a> or the <a href="https://github.com/rust-lang/book">source repository</a> of the upstream project for the most reliable information.
@@ -133,19 +133,19 @@ The goal of this project is to translate The Rust Book into multiple languages. 
     <tr>
       <td rowspan="1" colspan="1" align="center" style="text-align: center;"><div><code>main</code></div></td>
       <td rowspan="1" colspan="1" align="left"   style="text-align: left;">
-        <div>Store CMake scripts and GitHub workflows for the infrastructure.</div>
+        <div>儲存基礎設施的 CMake 腳本和 GitHub 工作流。</div>
       </td>
     </tr>
     <tr>
       <td rowspan="1" colspan="1" align="center" style="text-align: center;"><div><code>l10n</code></div></td>
       <td rowspan="1" colspan="1" align="left"   style="text-align: left;">
-        <div>Store <code>.pot</code> and <code>.po</code> files generated from the upstream project.</div>
+        <div>儲存從上游專案生成的 <code>.pot</code> 和 <code>.po</code> 檔案。</div>
       </td>
     </tr>
     <tr>
       <td rowspan="1" colspan="1" align="center" style="text-align: center;"><div><code>pages</code></div></td>
       <td rowspan="1" colspan="1" align="left"   style="text-align: left;">
-        <div>Store the built documentation deployed to GitHub Pages.</div>
+        <div>儲存部署到 GitHub Pages 的建置文件。</div>
       </td>
     </tr>
     <tr>
@@ -175,7 +175,7 @@ The goal of this project is to translate The Rust Book into multiple languages. 
         <div><a href="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-mdbook-build-docs.yml" ><img alt="ci-mdbook-build-docs" src="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-mdbook-build-docs.yml/badge.svg" /></a></div>
       </td>
       <td rowspan="1" colspan="1" align="left" style="text-align: left;">
-        <div>Build documents by mdBook and upload build artifacts.</div>
+        <div>透過 mdBook 建置文件並上傳建置製品。</div>
       </td>
     </tr>
     <tr>
@@ -183,7 +183,7 @@ The goal of this project is to translate The Rust Book into multiple languages. 
         <div><a href="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-mdbook-update-pot.yml" ><img alt="ci-mdbook-update-pot" src="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-mdbook-update-pot.yml/badge.svg" /></a></div>
       </td>
       <td rowspan="1" colspan="1" align="left" style="text-align: left;">
-        <div>Update <code>.pot</code> files by mdBook with <code>xgettext</code> renderer.</div>
+        <div>透過 mdBook 使用 <code>xgettext</code> 算繪器更新 <code>.pot</code> 檔案。</div>
       </td>
     </tr>
     <tr>
@@ -271,7 +271,7 @@ The goal of this project is to translate The Rust Book into multiple languages. 
         <div><a href="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-update-submodule.yml"><img alt="ci-update-submodule" src="https://github.com/localizethedocs/rust-book-l10n/actions/workflows/ci-update-submodule.yml/badge.svg" /></a></div>
       </td>
       <td rowspan="1" colspan="1" align="left" style="text-align: left;">
-        <div>Update each of the submodules to their latest commit.</div>
+        <div>將每個子模組更新至其最新送交。</div>
       </td>
     </tr>
   </tbody>
@@ -413,7 +413,7 @@ This project is currently maintained by:
 </table>
 </div>
 
-<h2 id="support-this-project"><a href="#table-of-contents">Support this Project</a></h2>
+<h2 id="support-this-project"><a href="#table-of-contents">支援此專案</a></h2>
 
 您可以透過以下任何方式貢獻並支援這個專案：
 
