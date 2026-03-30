@@ -155,14 +155,14 @@ execute_process(
     ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
 if (RES_VAR EQUAL 0)
     if (ERR_VAR)
-        string(APPEND WARNING_REASON
+        string(CONCAT WARNING_REASON
         "The command succeeded with warnings.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
         "    stderr:\n\n${ERR_VAR}")
         message("${WARNING_REASON}")
     endif()
 else()
-    string(APPEND FAILURE_REASON
+    string(CONCAT FAILURE_REASON
     "The command failed with fatal errors.\n"
     "    result:\n${RES_VAR}\n"
     "    stderr:\n${ERR_VAR}")
@@ -189,14 +189,14 @@ execute_process(
     ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
 if (RES_VAR EQUAL 0)
     if (ERR_VAR)
-        string(APPEND WARNING_REASON
+        string(CONCAT WARNING_REASON
         "The command succeeded with warnings.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
         "    stderr:\n\n${ERR_VAR}")
         message("${WARNING_REASON}")
     endif()
 else()
-    string(APPEND FAILURE_REASON
+    string(CONCAT FAILURE_REASON
     "The command failed with fatal errors.\n"
     "    result:\n${RES_VAR}\n"
     "    stderr:\n${ERR_VAR}")
@@ -260,14 +260,14 @@ execute_process(
     ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
 if (RES_VAR EQUAL 0)
     if (ERR_VAR)
-        string(APPEND WARNING_REASON
+        string(CONCAT WARNING_REASON
         "The command succeeded with warnings.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
         "    stderr:\n\n${ERR_VAR}")
         message("${WARNING_REASON}")
     endif()
 else()
-    string(APPEND FAILURE_REASON
+    string(CONCAT FAILURE_REASON
     "The command failed with fatal errors.\n"
     "    result:\n${RES_VAR}\n"
     "    stderr:\n${ERR_VAR}")
@@ -316,14 +316,14 @@ execute_process(
     ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
 if (RES_VAR EQUAL 0)
     if (ERR_VAR)
-        string(APPEND WARNING_REASON
+        string(CONCAT WARNING_REASON
         "The command succeeded with warnings.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
         "    stderr:\n\n${ERR_VAR}")
         message("${WARNING_REASON}")
     endif()
 else()
-    string(APPEND FAILURE_REASON
+    string(CONCAT FAILURE_REASON
     "The command failed with fatal errors.\n"
     "    result:\n${RES_VAR}\n"
     "    stderr:\n${ERR_VAR}")
@@ -345,14 +345,14 @@ if (RES_VAR EQUAL 0)
     set(CONDA_INSTALLED_PACKAGES  "${OUT_VAR}")
     message("${CONDA_INSTALLED_PACKAGES}")
     if (ERR_VAR)
-        string(APPEND WARNING_REASON
+        string(CONCAT WARNING_REASON
         "The command succeeded with warnings.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
         "    stderr:\n\n${ERR_VAR}")
         message("${WARNING_REASON}")
     endif()
 else()
-    string(APPEND FAILURE_REASON
+    string(CONCAT FAILURE_REASON
     "The command failed with fatal errors.\n"
     "    result:\n${RES_VAR}\n"
     "    stderr:\n${ERR_VAR}")
@@ -374,14 +374,14 @@ if (RES_VAR EQUAL 0)
     set(CARGO_INSTALLED_PACKAGES  "${OUT_VAR}")
     message("${CARGO_INSTALLED_PACKAGES}")
     if (ERR_VAR)
-        string(APPEND WARNING_REASON
+        string(CONCAT WARNING_REASON
         "The command succeeded with warnings.\n\n"
         "    result:\n\n${RES_VAR}\n\n"
         "    stderr:\n\n${ERR_VAR}")
         message("${WARNING_REASON}")
     endif()
 else()
-    string(APPEND FAILURE_REASON
+    string(CONCAT FAILURE_REASON
     "The command failed with fatal errors.\n"
     "    result:\n${RES_VAR}\n"
     "    stderr:\n${ERR_VAR}")
