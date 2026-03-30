@@ -196,7 +196,7 @@ foreach(_LANGUAGE ${LANGUAGE_LIST})
         ERROR_VARIABLE  ERR_VAR ERROR_STRIP_TRAILING_WHITESPACE)
     if (RES_VAR EQUAL 0)
     else()
-        string(APPEND FAILURE_REASON
+        string(CONCAT FAILURE_REASON
         "The command failed with fatal errors.\n"
         "    result:\n${RES_VAR}\n"
         "    stderr:\n${ERR_VAR}")
