@@ -16,9 +16,9 @@
       "branch" : "main",
       "commit" : 
       {
-        "date" : "2025-12-12 11:02:27 -0500",
-        "hash" : "39aeceaa3aeab845bc4517e7a44e48727d3b9dbe",
-        "title" : "Synchronize TrplNote name"
+        "date" : "2026-02-03 10:19:04 -0500",
+        "hash" : "05d114287b7d6f6c9253d5242540f00fbd6172ab",
+        "title" : "Temporarily remove the link to `Drop::drop`"
       }
     },
     "zh_TW" : 
@@ -26,9 +26,9 @@
       "branch" : "main",
       "commit" : 
       {
-        "date" : "2025-12-12 11:02:27 -0500",
-        "hash" : "39aeceaa3aeab845bc4517e7a44e48727d3b9dbe",
-        "title" : "Synchronize TrplNote name"
+        "date" : "2026-02-03 10:19:04 -0500",
+        "hash" : "05d114287b7d6f6c9253d5242540f00fbd6172ab",
+        "title" : "Temporarily remove the link to `Drop::drop`"
       }
     }
   },
