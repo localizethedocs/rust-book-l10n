@@ -1,8 +1,8 @@
 <div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://cdn.jsdelivr.net/gh/localizethedocs/static/mark/rust-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://cdn.jsdelivr.net/gh/localizethedocs/static/mark/rust-light.svg">
-  <img height="100" src="https://cdn.jsdelivr.net/gh/localizethedocs/static/mark/rust-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./rust-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./rust-light.svg">
+  <img height="150" src="./rust-light.svg">
 </picture>
 </div>
 
