@@ -230,7 +230,7 @@ msgstr ""
 
 #: src/ch13-01-closures.md:249
 msgid "\"hello\""
-msgstr ""
+msgstr "\"hello\""
 
 #: src/ch13-01-closures.md:256
 msgid "The compiler gives us this error:"

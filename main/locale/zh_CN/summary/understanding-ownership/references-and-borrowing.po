@@ -47,7 +47,7 @@ msgstr ""
 #: src/ch04-02-references-and-borrowing.md:393
 #: src/ch04-02-references-and-borrowing.md:415
 msgid "\"hello\""
-msgstr ""
+msgstr "\"hello\""
 
 #: src/ch04-02-references-and-borrowing.md:23
 #: src/ch04-02-references-and-borrowing.md:59
@@ -495,7 +495,7 @@ msgstr ""
 
 #: src/ch04-02-references-and-borrowing.md:430
 msgid "References must always be valid."
-msgstr ""
+msgstr "引用必须始终有效。"
 
 #: src/ch04-02-references-and-borrowing.md:432
 msgid "Next, we’ll look at a different kind of reference: slices."

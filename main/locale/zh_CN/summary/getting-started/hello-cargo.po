@@ -144,7 +144,7 @@ msgstr ""
 
 #: src/ch01-03-hello-cargo.md:92
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
 #: src/ch01-03-hello-cargo.md:96
 msgid "\"Hello, world!\""
@@ -360,7 +360,7 @@ msgstr ""
 
 #: src/ch01-03-hello-cargo.md:242
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch01-03-hello-cargo.md:244
 msgid ""

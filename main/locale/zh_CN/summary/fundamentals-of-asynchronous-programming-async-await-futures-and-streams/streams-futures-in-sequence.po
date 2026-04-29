@@ -112,6 +112,8 @@ msgstr ""
 #: src/ch17-04-streams.md:121
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch17-04-streams.md:134
 msgid ""

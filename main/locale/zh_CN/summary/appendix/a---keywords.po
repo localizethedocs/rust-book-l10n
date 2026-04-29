@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/appendix-01-keywords.md:1
 msgid "Appendix A: Keywords"
-msgstr ""
+msgstr "附录A：关键词"
 
 #: src/appendix-01-keywords.md:3
 msgid ""
@@ -24,195 +24,206 @@ msgid ""
 "variables, parameters, struct fields, modules, crates, constants, macros, "
 "static values, attributes, types, traits, or lifetimes."
 msgstr ""
+"以下列表中包含那些被Rust语言预留用于当前或未来使用的关键字。因此，它们不能用"
+"作标识符（  除非是原始标识符，我们在[“原始标识符”][raw-identifiers]<!-- "
+"ignore -->部分中有讨论）。**标识符**是指函数、变量、参数、结构字段、模块、软"
+"件包、常量、宏、静态值、属性、类型、特质或生命周期的名称。"
 
 #: src/appendix-01-keywords.md:12
 msgid "Keywords Currently in Use"
-msgstr ""
+msgstr "当前使用的关键词"
 
 #: src/appendix-01-keywords.md:14
 msgid ""
 "The following is a list of keywords currently in use, with their "
 "functionality described."
-msgstr ""
+msgstr "以下是当前使用的关键词列表，以及它们的功能描述。"
 
 #: src/appendix-01-keywords.md:17
 msgid ""
 "**`as`**: Perform primitive casting, disambiguate the specific trait "
 "containing an item, or rename items in `use` statements."
 msgstr ""
+"**`as`**：执行基本类型转换，消除包含特定项的歧义，或在`use`语句中重命名这些"
+"项。"
 
 #: src/appendix-01-keywords.md:19
 msgid "**`async`**: Return a `Future` instead of blocking the current thread."
-msgstr ""
+msgstr "**`async`**: 返回`Future`而不是阻塞当前线程。"
 
 #: src/appendix-01-keywords.md:20
 msgid "**`await`**: Suspend execution until the result of a `Future` is ready."
-msgstr ""
+msgstr "**`await`**：暂停执行，直到`Future`的结果准备好为止。"
 
 #: src/appendix-01-keywords.md:21
 msgid "**`break`**: Exit a loop immediately."
-msgstr ""
+msgstr "**`break`**：立即退出循环。"
 
 #: src/appendix-01-keywords.md:22
 msgid "**`const`**: Define constant items or constant raw pointers."
 msgstr ""
+"**`const`**：定义常量项或常量原始指针。- **`continue`**: 继续到下一个循环迭"
+"代。"
 
 #: src/appendix-01-keywords.md:23
 msgid "**`continue`**: Continue to the next loop iteration."
-msgstr ""
+msgstr "**`continue`**：继续到下一个循环迭代。"
 
 #: src/appendix-01-keywords.md:24
 msgid "**`crate`**: In a module path, refers to the crate root."
-msgstr ""
+msgstr "**`crate`**: 在模块路径中，指的是crate的根目录。"
 
 #: src/appendix-01-keywords.md:25
 msgid "**`dyn`**: Dynamic dispatch to a trait object."
-msgstr ""
+msgstr "**`dyn`**: 动态调用一个trait对象。"
 
 #: src/appendix-01-keywords.md:26
 msgid "**`else`**: Fallback for `if` and `if let` control flow constructs."
-msgstr ""
+msgstr "**`else`**: `if`和`if let`控制流结构的备用方案。"
 
 #: src/appendix-01-keywords.md:27
 msgid "**`enum`**: Define an enumeration."
-msgstr ""
+msgstr "**`enum`**: 定义一个枚举类型。"
 
 #: src/appendix-01-keywords.md:28
 msgid "**`extern`**: Link an external function or variable."
-msgstr ""
+msgstr "**`extern`**: 链接一个外部函数或变量。"
 
 #: src/appendix-01-keywords.md:29
 msgid "**`false`**: Boolean false literal."
-msgstr ""
+msgstr "**`false`**: 布尔值的false字面量。"
 
 #: src/appendix-01-keywords.md:30
 msgid "**`fn`**: Define a function or the function pointer type."
-msgstr ""
+msgstr "**`fn`**: 定义函数或函数指针类型。"
 
 #: src/appendix-01-keywords.md:31
 msgid ""
 "**`for`**: Loop over items from an iterator, implement a trait, or specify a "
 "higher ranked lifetime."
 msgstr ""
+"**`for`**: 遍历迭代器中的项目，实现特定特征，或指定更高的生命周期等级 。"
 
 #: src/appendix-01-keywords.md:33
 msgid "**`if`**: Branch based on the result of a conditional expression."
-msgstr ""
+msgstr "**`if`**: 根据条件表达式的结果进行分支处理。"
 
 #: src/appendix-01-keywords.md:34
 msgid "**`impl`**: Implement inherent or trait functionality."
-msgstr ""
+msgstr "**`impl`**: 实现固有的或特征性的功能。"
 
 #: src/appendix-01-keywords.md:35
 msgid "**`in`**: Part of `for` loop syntax."
-msgstr ""
+msgstr "**`in`**: 属于`for`循环语法的一部分。"
 
 #: src/appendix-01-keywords.md:36
 msgid "**`let`**: Bind a variable."
-msgstr ""
+msgstr "**`let`**: 绑定一个变量。"
 
 #: src/appendix-01-keywords.md:37
 msgid "**`loop`**: Loop unconditionally."
-msgstr ""
+msgstr "**`loop`**: 无条件地执行循环。"
 
 #: src/appendix-01-keywords.md:38
 msgid "**`match`**: Match a value to patterns."
-msgstr ""
+msgstr "**`match`**: 将值与模式进行匹配。"
 
 #: src/appendix-01-keywords.md:39
 msgid "**`mod`**: Define a module."
-msgstr ""
+msgstr "**`mod`**: 定义模块。"
 
 #: src/appendix-01-keywords.md:40
 msgid "**`move`**: Make a closure take ownership of all its captures."
-msgstr ""
+msgstr "**`move`**: 使闭包拥有所有捕获的数据。"
 
 #: src/appendix-01-keywords.md:41
 msgid ""
 "**`mut`**: Denote mutability in references, raw pointers, or pattern "
 "bindings."
-msgstr ""
+msgstr "**`mut`**: 表示引用、原始指针或模式绑定中的可变性。"
 
 #: src/appendix-01-keywords.md:42
 msgid ""
 "**`pub`**: Denote public visibility in struct fields, `impl` blocks, or "
 "modules."
-msgstr ""
+msgstr "**`pub`**: 在结构体字段、`impl`块或模块中表示公共可见性。"
 
 #: src/appendix-01-keywords.md:44
 msgid "**`ref`**: Bind by reference."
-msgstr ""
+msgstr "**`ref`**: 通过引用进行绑定。"
 
 #: src/appendix-01-keywords.md:45
 msgid "**`return`**: Return from function."
-msgstr ""
+msgstr "**`return`**: 从函数中返回。"
 
 #: src/appendix-01-keywords.md:46
 msgid "**`Self`**: A type alias for the type we are defining or implementing."
-msgstr ""
+msgstr "**`Self`**: 我们正在定义或实现的类型别名。"
 
 #: src/appendix-01-keywords.md:47
 msgid "**`self`**: Method subject or current module."
-msgstr ""
+msgstr "**`self`**: 方法主体或当前模块。"
 
 #: src/appendix-01-keywords.md:48
 msgid ""
 "**`static`**: Global variable or lifetime lasting the entire program "
 "execution."
-msgstr ""
+msgstr "**`static`**: 全局变量，或在整个程序执行过程中一直存在的变量。"
 
 #: src/appendix-01-keywords.md:50
 msgid "**`struct`**: Define a structure."
-msgstr ""
+msgstr "**`struct`**: 定义结构体。"
 
 #: src/appendix-01-keywords.md:51
 msgid "**`super`**: Parent module of the current module."
-msgstr ""
+msgstr "**`super`**: 当前模块的父模块。"
 
 #: src/appendix-01-keywords.md:52
 msgid "**`trait`**: Define a trait."
-msgstr ""
+msgstr "**`trait`**: 定义特质。"
 
 #: src/appendix-01-keywords.md:53
 msgid "**`true`**: Boolean true literal."
-msgstr ""
+msgstr "**`true`**: 布尔值的真值。"
 
 #: src/appendix-01-keywords.md:54
 msgid "**`type`**: Define a type alias or associated type."
-msgstr ""
+msgstr "**`type`**: 定义类型别名或相关类型。"
 
 #: src/appendix-01-keywords.md:55
 msgid ""
 "**`union`**: Define a [union](../reference/items/unions.html)<!-- ignore --"
 ">; is a keyword only when used in a union declaration."
 msgstr ""
+"**`union`**: 定义一个[联合][ ../reference/items/unions.html]；仅在联合声明中"
+"使用时才会作为关键字使用。"
 
 #: src/appendix-01-keywords.md:57
 msgid ""
 "**`unsafe`**: Denote unsafe code, functions, traits, or implementations."
-msgstr ""
+msgstr "**`unsafe`**: 表示不安全的代码、函数、特质或实现方式。"
 
 #: src/appendix-01-keywords.md:58
 msgid "**`use`**: Bring symbols into scope."
-msgstr ""
+msgstr "**`use`**: 将符号引入作用域中。"
 
 #: src/appendix-01-keywords.md:59
 msgid "**`where`**: Denote clauses that constrain a type."
-msgstr ""
+msgstr "**`where`**: 表示用于约束类型的条款。"
 
 #: src/appendix-01-keywords.md:60
 msgid "**`while`**: Loop conditionally based on the result of an expression."
-msgstr ""
+msgstr "**`while`**: 根据表达式的结果有条件地执行循环。"
 
 #: src/appendix-01-keywords.md:64
 msgid "Keywords Reserved for Future Use"
-msgstr ""
+msgstr "关键词仅供将来使用"
 
 #: src/appendix-01-keywords.md:66
 msgid ""
 "The following keywords do not yet have any functionality but are reserved by "
 "Rust for potential future use:"
-msgstr ""
+msgstr "以下这些关键字目前还没有任何功能，但被Rust保留，以备将来使用："
 
 #: src/appendix-01-keywords.md:69
 msgid "`abstract`"
@@ -280,20 +291,24 @@ msgid ""
 "wouldn’t normally be allowed. You use a raw identifier by prefixing a "
 "keyword with `r#`."
 msgstr ""
+"**原始标识符**是一种语法，允许你在通常不允许使用的关键词前加上`r#`前缀。通过"
+"这种方式，你可以在这些关键词被限制使用的场合下使用它们。"
 
 #: src/appendix-01-keywords.md:89
 msgid ""
 "For example, `match` is a keyword. If you try to compile the following "
 "function that uses `match` as its name:"
 msgstr ""
+"例如，``match``是一个关键字。如果你尝试编译以下函数，并且该函数的名称使用了"
+"``match``，那么将会发生错误:"
 
 #: src/appendix-01-keywords.md:92 src/appendix-01-keywords.md:114
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">文件名：src/main.rs</span>"
 
 #: src/appendix-01-keywords.md:100
 msgid "you’ll get this error:"
-msgstr ""
+msgstr "你会遇到这个错误："
 
 #: src/appendix-01-keywords.md:110
 msgid ""
@@ -301,6 +316,8 @@ msgid ""
 "identifier. To use `match` as a function name, you need to use the raw "
 "identifier syntax, like this:"
 msgstr ""
+"该错误表明您不能使用关键字 ``match`` 作为函数标识符。若想使用 ``match`` 作为"
+"函数名称，则需要使用原始标识符语法，如下所示："
 
 #: src/appendix-01-keywords.md:122
 msgid "\"foo\""
@@ -316,6 +333,8 @@ msgid ""
 "function name in its definition as well as where the function is called in "
 "`main`."
 msgstr ""
+"这段代码可以无错误地编译。请注意，在函数的定义中函数名称前有`r#`的前缀，同时"
+"也在`main`中指定了函数的调用位置。"
 
 #: src/appendix-01-keywords.md:129
 msgid ""
@@ -331,3 +350,11 @@ msgid ""
 "from your code on later editions. See [Appendix E](appendix-05-editions."
 "html)<!-- ignore --> for more information on editions."
 msgstr ""
+"原始标识符允许您使用任何您选择的单词作为标识符，即使该单词恰好是一个保留的关"
+"键字。这为我们选择标识符名称提供了更大的自由度，同时也使我们能够与用其他语言"
+"编写的程序集成，而这些语言中的这些单词并不被视为关键字。此外，原始标识符还允"
+"许您使用与您的 crate 使用的 Rust 版本不同的库。例如，``try`` 在 2015 版中不是"
+"关键字，但在 2018 版、2021 版中却是。以及2024版本。如果您使用的库是基于2015版"
+"本编写的，并且包含`try`这个函数，那么您需要在后续版本的代码中使用原始标识符语"
+"法`r#try`来调用该函数。有关版本的更多信息，请参阅[附录E][appendix-05-"
+"editions.html]<!-- ignore -->。"

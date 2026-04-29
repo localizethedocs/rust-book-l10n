@@ -172,7 +172,7 @@ msgstr ""
 
 #: src/ch17-05-traits-for-async.md:152 src/ch17-05-traits-for-async.md:478
 msgid "\"hi\""
-msgstr ""
+msgstr "\"hi\""
 
 #: src/ch17-05-traits-for-async.md:153 src/ch17-05-traits-for-async.md:479
 msgid "\"from\""
@@ -195,6 +195,8 @@ msgstr ""
 #: src/ch17-05-traits-for-async.md:498
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch17-05-traits-for-async.md:173 src/ch17-05-traits-for-async.md:500
 msgid "\"more\""

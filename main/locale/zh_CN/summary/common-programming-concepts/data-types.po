@@ -241,7 +241,7 @@ msgstr ""
 
 #: src/ch03-02-data-types.md:98
 msgid "Example"
-msgstr ""
+msgstr "例子  示例"
 
 #: src/ch03-02-data-types.md:100
 msgid "Decimal"
@@ -372,7 +372,7 @@ msgstr ""
 #: src/ch03-02-data-types.md:293 src/ch03-02-data-types.md:325
 #: src/ch03-02-data-types.md:384 src/ch03-02-data-types.md:405
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
 #: src/ch03-02-data-types.md:156
 msgid "// f64\n"
@@ -713,7 +713,7 @@ msgstr ""
 
 #: src/ch03-02-data-types.md:419
 msgid "\"Failed to read line\""
-msgstr ""
+msgstr "“未猜对”"
 
 #: src/ch03-02-data-types.md:424
 msgid "\"Index entered was not a number\""

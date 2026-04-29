@@ -156,6 +156,8 @@ msgstr ""
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:391
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:178
 msgid ""
@@ -271,31 +273,31 @@ msgstr ""
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:355
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:395
 msgid "\"Guess the number!\""
-msgstr ""
+msgstr "“猜测数字！”"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:302
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:359
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:399
 msgid "\"The secret number is: {secret_number}\""
-msgstr ""
+msgstr "“秘密号码是：{secret_number}”"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:304
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:361
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:401
 msgid "\"Please input your guess.\""
-msgstr ""
+msgstr "“请输入你的猜测。”"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:310
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:367
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:407
 msgid "\"Failed to read line\""
-msgstr ""
+msgstr "“未猜对”"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:312
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:369
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:411
 msgid "\"You guessed: {guess}\""
-msgstr ""
+msgstr "“你猜对了：{猜}”"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:316
 msgid ""
@@ -339,17 +341,17 @@ msgstr ""
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:372
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:414
 msgid "\"Too small!\""
-msgstr ""
+msgstr "“太小了！”"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:373
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:415
 msgid "\"Too big!\""
-msgstr ""
+msgstr " “太大了！”"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:374
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:416
 msgid "\"You win!\""
-msgstr ""
+msgstr "“你赢了！”"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:381
 msgid ""

@@ -127,6 +127,8 @@ msgstr ""
 #: src/ch06-02-match.md:123 src/ch06-02-match.md:153
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch06-02-match.md:138
 msgid ""

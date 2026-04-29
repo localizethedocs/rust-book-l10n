@@ -84,7 +84,7 @@ msgstr ""
 #: src/ch02-00-guessing-game-tutorial.md:1006
 #: src/ch02-00-guessing-game-tutorial.md:1105
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
 #: src/ch02-00-guessing-game-tutorial.md:59
 msgid "\"Hello, world!\""
@@ -147,7 +147,7 @@ msgstr ""
 #: src/ch02-00-guessing-game-tutorial.md:1167
 #: src/ch02-00-guessing-game-tutorial.md:1277
 msgid "\"Guess the number!\""
-msgstr ""
+msgstr "“猜测数字！”"
 
 #: src/ch02-00-guessing-game-tutorial.md:95
 #: src/ch02-00-guessing-game-tutorial.md:120
@@ -165,7 +165,7 @@ msgstr ""
 #: src/ch02-00-guessing-game-tutorial.md:1174
 #: src/ch02-00-guessing-game-tutorial.md:1282
 msgid "\"Please input your guess.\""
-msgstr ""
+msgstr "“请输入你的猜测。”"
 
 #: src/ch02-00-guessing-game-tutorial.md:101
 #: src/ch02-00-guessing-game-tutorial.md:126
@@ -184,7 +184,7 @@ msgstr ""
 #: src/ch02-00-guessing-game-tutorial.md:1182
 #: src/ch02-00-guessing-game-tutorial.md:1288
 msgid "\"Failed to read line\""
-msgstr ""
+msgstr "“未猜对”"
 
 #: src/ch02-00-guessing-game-tutorial.md:103
 #: src/ch02-00-guessing-game-tutorial.md:128
@@ -202,7 +202,7 @@ msgstr ""
 #: src/ch02-00-guessing-game-tutorial.md:1189
 #: src/ch02-00-guessing-game-tutorial.md:1295
 msgid "\"You guessed: {guess}\""
-msgstr ""
+msgstr "“你猜对了：{猜}”"
 
 #: src/ch02-00-guessing-game-tutorial.md:109
 msgid ""
@@ -797,7 +797,7 @@ msgstr ""
 #: src/ch02-00-guessing-game-tutorial.md:1118
 #: src/ch02-00-guessing-game-tutorial.md:1171
 msgid "\"The secret number is: {secret_number}\""
-msgstr ""
+msgstr "“秘密号码是：{secret_number}”"
 
 #: src/ch02-00-guessing-game-tutorial.md:692
 msgid ""
@@ -894,6 +894,8 @@ msgstr ""
 #: src/ch02-00-guessing-game-tutorial.md:1191
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch02-00-guessing-game-tutorial.md:787
 #: src/ch02-00-guessing-game-tutorial.md:912
@@ -902,7 +904,7 @@ msgstr ""
 #: src/ch02-00-guessing-game-tutorial.md:1194
 #: src/ch02-00-guessing-game-tutorial.md:1298
 msgid "\"Too small!\""
-msgstr ""
+msgstr "“太小了！”"
 
 #: src/ch02-00-guessing-game-tutorial.md:788
 #: src/ch02-00-guessing-game-tutorial.md:913
@@ -911,7 +913,7 @@ msgstr ""
 #: src/ch02-00-guessing-game-tutorial.md:1195
 #: src/ch02-00-guessing-game-tutorial.md:1299
 msgid "\"Too big!\""
-msgstr ""
+msgstr " “太大了！”"
 
 #: src/ch02-00-guessing-game-tutorial.md:789
 #: src/ch02-00-guessing-game-tutorial.md:914
@@ -920,7 +922,7 @@ msgstr ""
 #: src/ch02-00-guessing-game-tutorial.md:1197
 #: src/ch02-00-guessing-game-tutorial.md:1301
 msgid "\"You win!\""
-msgstr ""
+msgstr "“你赢了！”"
 
 #: src/ch02-00-guessing-game-tutorial.md:796
 msgid ""
@@ -1318,7 +1320,7 @@ msgstr ""
 
 #: src/ch02-00-guessing-game-tutorial.md:1313
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch02-00-guessing-game-tutorial.md:1315
 msgid ""

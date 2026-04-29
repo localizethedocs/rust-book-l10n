@@ -240,20 +240,22 @@ msgstr ""
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:166
 msgid "\"Guess the number!\""
-msgstr ""
+msgstr "“猜测数字！”"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:171
 #: src/ch09-03-to-panic-or-not-to-panic.md:192
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:173
 msgid "\"Please input your guess.\""
-msgstr ""
+msgstr "“请输入你的猜测。”"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:179
 msgid "\"Failed to read line\""
-msgstr ""
+msgstr "“未猜对”"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:187
 msgid "\"The secret number will be between 1 and 100.\""
@@ -261,15 +263,15 @@ msgstr ""
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:193
 msgid "\"Too small!\""
-msgstr ""
+msgstr "“太小了！”"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:194
 msgid "\"Too big!\""
-msgstr ""
+msgstr " “太大了！”"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:196
 msgid "\"You win!\""
-msgstr ""
+msgstr "“你赢了！”"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:206
 msgid ""
@@ -353,7 +355,7 @@ msgstr ""
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:283
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:285
 msgid ""

@@ -129,7 +129,7 @@ msgstr ""
 
 #: src/ch16-04-extensible-concurrency-sync-and-send.md:78
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch16-04-extensible-concurrency-sync-and-send.md:80
 msgid ""

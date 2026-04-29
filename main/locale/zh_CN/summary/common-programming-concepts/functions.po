@@ -35,7 +35,7 @@ msgstr ""
 #: src/ch03-03-how-functions-work.md:223 src/ch03-03-how-functions-work.md:262
 #: src/ch03-03-how-functions-work.md:305 src/ch03-03-how-functions-work.md:323
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
 #: src/ch03-03-how-functions-work.md:16
 msgid "\"Hello, world!\""
@@ -111,7 +111,7 @@ msgstr ""
 #: src/ch03-03-how-functions-work.md:74 src/ch03-03-how-functions-work.md:272
 #: src/ch03-03-how-functions-work.md:311 src/ch03-03-how-functions-work.md:329
 msgid "\"The value of x is: {x}\""
-msgstr ""
+msgstr "\"The value of x is: {x}\""
 
 #: src/ch03-03-how-functions-work.md:78
 msgid "Try running this program; you should get the following output:"

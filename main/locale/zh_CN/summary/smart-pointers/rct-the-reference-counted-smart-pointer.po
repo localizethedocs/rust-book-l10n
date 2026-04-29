@@ -223,6 +223,8 @@ msgstr ""
 #: src/ch15-04-rc.md:189
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch15-04-rc.md:194
 msgid "\"count after creating a = {}\""

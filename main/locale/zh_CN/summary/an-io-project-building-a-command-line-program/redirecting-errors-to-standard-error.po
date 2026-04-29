@@ -152,7 +152,7 @@ msgstr ""
 
 #: src/ch12-06-writing-to-stderr-instead-of-stdout.md:161
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch12-06-writing-to-stderr-instead-of-stdout.md:163
 msgid ""

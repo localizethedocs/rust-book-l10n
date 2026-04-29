@@ -34,6 +34,8 @@ msgstr ""
 #: src/ch12-02-reading-a-file.md:36
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch12-02-reading-a-file.md:42
 msgid "\"Searching for {query}\""

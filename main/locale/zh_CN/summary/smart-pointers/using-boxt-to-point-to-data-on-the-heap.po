@@ -196,6 +196,8 @@ msgstr ""
 #: src/ch15-01-box.md:146
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch15-01-box.md:158
 msgid ""

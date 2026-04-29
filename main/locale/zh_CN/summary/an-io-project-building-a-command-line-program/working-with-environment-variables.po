@@ -223,12 +223,14 @@ msgstr ""
 
 #: src/ch12-05-working-with-environment-variables.md:216
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
 #: src/ch12-05-working-with-environment-variables.md:226
 #: src/ch12-05-working-with-environment-variables.md:293
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch12-05-working-with-environment-variables.md:233
 #: src/ch12-05-working-with-environment-variables.md:301

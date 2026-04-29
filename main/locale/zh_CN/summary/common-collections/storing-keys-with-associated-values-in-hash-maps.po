@@ -320,7 +320,7 @@ msgstr ""
 
 #: src/ch08-03-hash-maps.md:295
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch08-03-hash-maps.md:297
 msgid ""

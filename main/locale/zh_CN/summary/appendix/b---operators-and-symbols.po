@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/appendix-02-operators.md:1
 msgid "Appendix B: Operators and Symbols"
-msgstr ""
+msgstr "附录 B：运算符与符号"
 
 #: src/appendix-02-operators.md:3
 msgid ""
@@ -21,6 +21,8 @@ msgid ""
 "other symbols that appear by themselves or in the context of paths, "
 "generics, trait bounds, macros, attributes, comments, tuples, and brackets."
 msgstr ""
+"该附录包含了 Rust 语法的词汇表，包括运算符以及其他的符号，这些符号单独出现或"
+"出现在路径、泛型、trait bounds、宏、属性、注释、元组以及大括号上下文中。"
 
 #: src/appendix-02-operators.md:7
 msgid "Operators"
@@ -33,18 +35,23 @@ msgid ""
 "overloadable. If an operator is overloadable, the relevant trait to use to "
 "overload that operator is listed."
 msgstr ""
+"表B-1载列了Rust的经营者，这是经营者如何出现在环境中的一个例子。 一个简短的解"
+"释，以及该运营商是否负荷过重。 如果操作员负载过重，则列出操作员所使用的超负荷"
+"相关特性。"
 
 #: src/appendix-02-operators.md:14
 msgid "<span class=\"caption\">Table B-1: Operators</span>"
 msgstr ""
+"<span class=\"caption\">表 B-1: 运算符</span><span class=“caption”>表 B-1： "
+"运算符</span>"
 
 #: src/appendix-02-operators.md:16
 msgid "Operator"
-msgstr ""
+msgstr "操作员"
 
 #: src/appendix-02-operators.md:16
 msgid "Example"
-msgstr ""
+msgstr "例子  示例"
 
 #: src/appendix-02-operators.md:16 src/appendix-02-operators.md:85
 #: src/appendix-02-operators.md:104 src/appendix-02-operators.md:121
@@ -52,11 +59,11 @@ msgstr ""
 #: src/appendix-02-operators.md:164 src/appendix-02-operators.md:177
 #: src/appendix-02-operators.md:191 src/appendix-02-operators.md:200
 msgid "Explanation"
-msgstr ""
+msgstr "解释"
 
 #: src/appendix-02-operators.md:16
 msgid "Overloadable?"
-msgstr ""
+msgstr "是否可重载 "
 
 #: src/appendix-02-operators.md:18 src/appendix-02-operators.md:19
 #: src/appendix-02-operators.md:96
@@ -65,11 +72,11 @@ msgstr ""
 
 #: src/appendix-02-operators.md:18 src/appendix-02-operators.md:158
 msgid "`ident!(...)`, `ident!{...}`, `ident![...]`"
-msgstr ""
+msgstr "`ident!(...)`, `ident!{...}`, `ident![...]`"
 
 #: src/appendix-02-operators.md:18
 msgid "Macro expansion"
-msgstr ""
+msgstr "宏扩展"
 
 #: src/appendix-02-operators.md:19
 msgid "`!expr`"
@@ -77,7 +84,7 @@ msgstr ""
 
 #: src/appendix-02-operators.md:19
 msgid "Bitwise or logical complement"
-msgstr ""
+msgstr "按位非或逻辑非"
 
 #: src/appendix-02-operators.md:19
 msgid "`Not`"

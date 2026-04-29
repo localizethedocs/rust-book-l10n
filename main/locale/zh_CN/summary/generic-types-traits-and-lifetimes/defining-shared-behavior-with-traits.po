@@ -524,6 +524,8 @@ msgstr ""
 #: src/ch10-02-traits.md:660
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch10-02-traits.md:664
 msgid ""

@@ -80,6 +80,8 @@ msgstr ""
 #: src/ch20-02-advanced-traits.md:73
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch20-02-advanced-traits.md:86
 msgid ""
@@ -669,7 +671,7 @@ msgstr ""
 
 #: src/ch20-02-advanced-traits.md:808
 msgid "\"hello\""
-msgstr ""
+msgstr "\"hello\""
 
 #: src/ch20-02-advanced-traits.md:808
 msgid "\"world\""

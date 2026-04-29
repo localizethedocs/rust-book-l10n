@@ -119,13 +119,15 @@ msgstr ""
 
 #: src/ch13-03-improving-our-io-project.md:107
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
 #: src/ch13-03-improving-our-io-project.md:125
 #: src/ch13-03-improving-our-io-project.md:195
 #: src/ch13-03-improving-our-io-project.md:288
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch13-03-improving-our-io-project.md:175
 msgid ""

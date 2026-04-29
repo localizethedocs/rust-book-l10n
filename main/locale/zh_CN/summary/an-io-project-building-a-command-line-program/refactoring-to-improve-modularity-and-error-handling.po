@@ -159,6 +159,8 @@ msgstr ""
 #: src/ch12-03-improving-error-handling-and-modularity.md:884
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch12-03-improving-error-handling-and-modularity.md:89
 msgid "\"Searching for {query}\""
@@ -730,7 +732,7 @@ msgstr ""
 
 #: src/ch12-03-improving-error-handling-and-modularity.md:763
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
 #: src/ch12-03-improving-error-handling-and-modularity.md:785
 #: src/ch12-03-improving-error-handling-and-modularity.md:880

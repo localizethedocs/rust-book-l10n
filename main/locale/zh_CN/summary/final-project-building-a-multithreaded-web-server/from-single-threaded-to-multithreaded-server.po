@@ -64,6 +64,8 @@ msgstr ""
 #: src/ch21-02-multithreaded.md:1232 src/ch21-02-multithreaded.md:1391
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch21-02-multithreaded.md:40 src/ch21-02-multithreaded.md:175
 #: src/ch21-02-multithreaded.md:245 src/ch21-02-multithreaded.md:348

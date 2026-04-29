@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch15-05-interior-mutability.md:1
 msgid "`RefCell<T>` and the Interior Mutability Pattern"
-msgstr ""
+msgstr "`RefCell<T>`与内部可变性模式"
 
 #: src/ch15-05-interior-mutability.md:3
 msgid ""
@@ -25,6 +25,11 @@ msgid ""
 "we’re checking the rules manually instead of relying on the compiler to "
 "check them for us; we will discuss unsafe code more in Chapter 20."
 msgstr ""
+"“内部可变性”是Rust中的一种设计模式，它允许你在存在不可变引用的情况下修改数"
+"据。通常情况下，这种操作是被借用规则所禁止的。为了实现数据修改，该模式会在数"
+"据结构内部使用`unsafe`代码，从而打破Rust中关于变异和借用的一般规则。使用"
+"Unsafe代码可以向编译器表明，我们是手动检查这些规则，而不是依赖编译器来为我们"
+"进行检查。我们将在第20章中更详细地讨论不安全的代码。"
 
 #: src/ch15-05-interior-mutability.md:11
 msgid ""
@@ -33,20 +38,23 @@ msgid ""
 "compiler can’t guarantee that. The `unsafe` code involved is then wrapped in "
 "a safe API, and the outer type is still immutable."
 msgstr ""
+"我们只能在能够确保借用规则在运行时得到遵守的情况下，使用采用内部可变性模式的"
+"类型。尽管编译器无法保证这一点，但涉及的``unsafe``代码会被封装在一个安全的API"
+"中，而外部类型仍然保持不可变性。"
 
 #: src/ch15-05-interior-mutability.md:16
 msgid ""
 "Let’s explore this concept by looking at the `RefCell<T>` type that follows "
 "the interior mutability pattern."
-msgstr ""
+msgstr "让我们通过查看遵循内部可变性模式的`RefCell<T>`类型来探讨这个概念。"
 
 #: src/ch15-05-interior-mutability.md:21
 msgid "<a id=\"enforcing-borrowing-rules-at-runtime-with-refcellt\"></a>"
-msgstr ""
+msgstr "<a id=\"enforcing-borrowing-rules-at-runtime-with-refcellt\"></a>"
 
 #: src/ch15-05-interior-mutability.md:23
 msgid "Enforcing Borrowing Rules at Runtime"
-msgstr ""
+msgstr "在运行时强制执行借用规则"
 
 #: src/ch15-05-interior-mutability.md:25
 msgid ""
@@ -54,16 +62,21 @@ msgid ""
 "data it holds. So, what makes `RefCell<T>` different from a type like "
 "`Box<T>`? Recall the borrowing rules you learned in Chapter 4:"
 msgstr ""
+"与`Rc<T>`不同，`RefCell<T>`类型代表了对数据的单一所有权。那么，是什么让"
+"`RefCell<T>`与`Box<T>`这样的类型有所不同呢？请回想一下你在第4章中学到的借用规"
+"则。"
 
 #: src/ch15-05-interior-mutability.md:29
 msgid ""
 "At any given time, you can have _either_ one mutable reference or any number "
 "of immutable references (but not both)."
 msgstr ""
+"在任何时候，你可以拥有一个可变引用，或者任意数量的不变引用（但不能同时拥有两"
+"者）。"
 
 #: src/ch15-05-interior-mutability.md:31
 msgid "References must always be valid."
-msgstr ""
+msgstr "引用必须始终有效。"
 
 #: src/ch15-05-interior-mutability.md:33
 msgid ""
@@ -73,6 +86,10 @@ msgid ""
 "error. With `RefCell<T>`, if you break these rules, your program will panic "
 "and exit."
 msgstr ""
+"通过引用和`Box<T>`，借用规则的不变量在编译时就被强制执行了。而通过"
+"`RefCell<T>`，这些不变量则在运行时被强制执行。使用引用方式时，如果你违反了这"
+"些规则，将会出现编译器错误。而使用`RefCell<T>`时，如果你违反了这些规则，程序"
+"将会崩溃并退出。"
 
 #: src/ch15-05-interior-mutability.md:38
 msgid ""
@@ -83,6 +100,9 @@ msgid ""
 "is the best choice in the majority of cases, which is why this is Rust’s "
 "default."
 msgstr ""
+"在编译时检查借用规则的优势在于，可以在开发过程中更早地发现错误，而且由于所有"
+"分析都在事先完成，因此不会影响到运行时的性能。基于这些原因，在大多数情况下，"
+"编译时检查借用规则是最佳选择，这也是Rust的默认行为。"
 
 #: src/ch15-05-interior-mutability.md:44
 msgid ""
@@ -94,6 +114,10 @@ msgid ""
 "Problem, which is beyond the scope of this book but is an interesting topic "
 "to research."
 msgstr ""
+"在运行时检查借用规则的优势在于，某些内存安全的场景可以被允许，而这些场景在编"
+"译时检查中是不被允许的。静态分析，比如Rust编译器，本质上是一种保守的方法。有"
+"些代码特性是无法通过分析代码来检测的：最著名的例子就是停机问题，这个问题超出"
+"了本书的讨论范围，但确实是一个值得研究的话题。"
 
 #: src/ch15-05-interior-mutability.md:51
 msgid ""
@@ -106,6 +130,11 @@ msgid ""
 "sure your code follows the borrowing rules but the compiler is unable to "
 "understand and guarantee that."
 msgstr ""
+"因为有些分析是不可能的，如果Rust编译器无法确定代码是否符合所有权规则，它可能"
+"会拒绝一个正确的程序。这样一来，Rust的做法就显得比较保守。如果Rust接受一个错"
+"误的程序，用户就无法相信Rust所做出的保证。然而，如果Rust拒绝一个正确的程序，"
+"程序员会感到不便，但并不会发生什么灾难性的情况。当您确信``RefCell<T>``类型"
+"时，它非常有用。代码遵循了借用规则，但编译器无法理解和保证这一点。"
 
 #: src/ch15-05-interior-mutability.md:60
 msgid ""
@@ -114,17 +143,21 @@ msgid ""
 "multithreaded context. We’ll talk about how to get the functionality of "
 "`RefCell<T>` in a multithreaded program in Chapter 16."
 msgstr ""
+"类似于“<T>Rc”，“RefCell<T>”仅适用于单线程场景，如果你尝试在多线程环境中使用，"
+"会给你编译时错误。我们将在<T>第 16 章讨论如何在多线程程序中实现“RefCell”的功"
+"能。"
 
 #: src/ch15-05-interior-mutability.md:65
 msgid ""
 "Here is a recap of the reasons to choose `Box<T>`, `Rc<T>`, or `RefCell<T>`:"
-msgstr ""
+msgstr "以下是选择`Box<T>`、`Rc<T>`或`RefCell<T>`的理由总结："
 
 #: src/ch15-05-interior-mutability.md:67
 msgid ""
 "`Rc<T>` enables multiple owners of the same data; `Box<T>` and `RefCell<T>` "
 "have single owners."
 msgstr ""
+"`Rc<T>`支持同一数据由多个所有者管理；`Box<T>`和`RefCell<T>`则只有单个所有者。"
 
 #: src/ch15-05-interior-mutability.md:69
 msgid ""
@@ -132,6 +165,8 @@ msgid ""
 "`Rc<T>` allows only immutable borrows checked at compile time; `RefCell<T>` "
 "allows immutable or mutable borrows checked at runtime."
 msgstr ""
+"`Box<T>`允许在编译时检查可变或不可变的借用行为；`Rc<T>`仅允许在编译时检查不可"
+"变的借用行为；`RefCell<T>`允许在运行时检查可变或不可变的借用行为。"
 
 #: src/ch15-05-interior-mutability.md:72
 msgid ""
@@ -139,6 +174,8 @@ msgid ""
 "mutate the value inside the `RefCell<T>` even when the `RefCell<T>` is "
 "immutable."
 msgstr ""
+"因为“RefCell<T>”允许在运行时检查可变借用，即使 <T>“RefCell<T>”是不可变的，也"
+"可以在“RefCell”内部变异。"
 
 #: src/ch15-05-interior-mutability.md:76
 msgid ""
@@ -146,25 +183,30 @@ msgid ""
 "pattern. Let’s look at a situation in which interior mutability is useful "
 "and examine how it’s possible."
 msgstr ""
+"在不可变值内部修改其值是内部可变性模式。让我们来看一个内部可变性有用的场景，"
+"并探讨如何实现这种特性。"
 
 #: src/ch15-05-interior-mutability.md:82
 msgid ""
 "<a id=\"interior-mutability-a-mutable-borrow-to-an-immutable-value\"></a>"
 msgstr ""
+"<a id=\"interior-mutability-a-mutable-borrow-to-an-immutable-value\"></a>"
 
 #: src/ch15-05-interior-mutability.md:84
 msgid "Using Interior Mutability"
-msgstr ""
+msgstr "使用内部可变性"
 
 #: src/ch15-05-interior-mutability.md:86
 msgid ""
 "A consequence of the borrowing rules is that when you have an immutable "
 "value, you can’t borrow it mutably. For example, this code won’t compile:"
 msgstr ""
+"借用规则的一个结果是，当你有一个不可变的值时，你不能对其进行可变借用。例如，"
+"这段代码将无法编译："
 
 #: src/ch15-05-interior-mutability.md:96
 msgid "If you tried to compile this code, you’d get the following error:"
-msgstr ""
+msgstr "如果你尝试编译这段代码，将会出现以下错误："
 
 #: src/ch15-05-interior-mutability.md:98
 msgid ""
@@ -188,6 +230,25 @@ msgid ""
 "error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling borrowing v0.1.0 (file:///projects/borrowing)\n"
+"error[E0596]: cannot borrow `x` as mutable, as it is not declared as "
+"mutable\n"
+" --> src/main.rs:3:13\n"
+"  |\n"
+"3 |     let y = &mut x;\n"
+"  |             ^^^^^^ cannot borrow as mutable\n"
+"  |\n"
+"help: consider changing this to be mutable\n"
+"  |\n"
+"2 |     let mut x = 5;\n"
+"  |         +++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0596`.\n"
+"error: could not compile `borrowing` (bin \"borrowing\") due to 1 previous "
+"error\n"
+"```"
 
 #: src/ch15-05-interior-mutability.md:116
 msgid ""
@@ -200,20 +261,27 @@ msgid ""
 "rules are checked at runtime instead. If you violate the rules, you’ll get a "
 "`panic!` instead of a compiler error."
 msgstr ""
+"然而，在某些情况下，让一个值在自身的方法中发生变异，但对其他代码来说却看起来"
+"是不可变的，这是非常有用的。位于该值方法之外的代码将无法对该值进行变异。使用"
+"`RefCell<T>`是一种实现内部可变异性的方法，但`RefCell<T>`并不能完全解决借用问"
+"题：编译器的借用检查器允许这种内部可变性，而借用规则仍然需要被检查。改为在运"
+"行时进行。如果你违反了规则，你将收到一个`panic!`的提示，而不是编译器错误。"
 
 #: src/ch15-05-interior-mutability.md:125
 msgid ""
 "Let’s work through a practical example where we can use `RefCell<T>` to "
 "mutate an immutable value and see why that is useful."
 msgstr ""
+"让我们通过一个实际例子来演示如何使用 ``RefCell<T>`` 来修改一个不可变的值，并"
+"了解为什么这样做是有用的。"
 
 #: src/ch15-05-interior-mutability.md:130
 msgid "<a id=\"a-use-case-for-interior-mutability-mock-objects\"></a>"
-msgstr ""
+msgstr "<a id=\"a-use-case-for-interior-mutability-mock-objects\"></a>"
 
 #: src/ch15-05-interior-mutability.md:132
 msgid "Testing with Mock Objects"
-msgstr ""
+msgstr "使用模拟对象进行测试"
 
 #: src/ch15-05-interior-mutability.md:134
 msgid ""
@@ -226,6 +294,11 @@ msgid ""
 "objects_ are specific types of test doubles that record what happens during "
 "a test so that you can assert that the correct actions took place."
 msgstr ""
+"在测试过程中，有时程序员会使用一种类型来代替另一种类型，以便观察特定的行为，"
+"并确认该类型是否正确实现。这种占位符类型被称为“测试用双精度型”。可以将其想象"
+"成电影中的替身演员，他们代替真实的演员来表演特别复杂的场景。当我们进行测试"
+"时，测试用双精度型就代表了其他类型。而“模拟对象”则是特定类型的测试工具。该记"
+"录详细描述了测试过程中的所有事件，以便您可以确认正确的操作确实已经执行了。"
 
 #: src/ch15-05-interior-mutability.md:143
 msgid ""
@@ -234,6 +307,9 @@ msgid ""
 "library as some other languages do. However, you can definitely create a "
 "struct that will serve the same purposes as a mock object."
 msgstr ""
+"Rust中的对象与其他语言中的对象有所不同，而且Rust的标准库中没有内置类似于其他"
+"语言中的模拟对象功能。不过，您完全可以创建一个结构体，使其具备与模拟对象相同"
+"的功能。"
 
 #: src/ch15-05-interior-mutability.md:148
 msgid ""
@@ -243,6 +319,8 @@ msgid ""
 "user’s quota for the number of API calls they’re allowed to make, for "
 "example."
 msgstr ""
+"我们将测试以下场景：我们创建一个库，该库会跟踪一个数值，并根据当前数值与最大"
+"值之间的差距来发送消息。例如，这个库可以用来记录用户允许的API调用次数配额。"
 
 #: src/ch15-05-interior-mutability.md:153
 msgid ""
@@ -255,27 +333,32 @@ msgid ""
 "implements a trait we’ll provide, called `Messenger`. Listing 15-20 shows "
 "the library code."
 msgstr ""
+"我们的库只会提供追踪某个值距离最大值还有多远的功能，以及在这些时间点应该发送"
+"哪些消息。使用我们库的应用程序需要自行实现发送消息的机制：应用程序可以直接向"
+"用户显示消息，或者发送电子邮件、发送短信，或者采取其他方式。库不需要了解这些"
+"细节。它只需要一个实现了我们定义的特征的组件即可。提供的内容被命名为"
+"`Messenger`。列表15-20展示了相关的库代码。"
 
 #: src/ch15-05-interior-mutability.md:192
 #: src/ch15-05-interior-mutability.md:255
 #: src/ch15-05-interior-mutability.md:387
 #: src/ch15-05-interior-mutability.md:511
 msgid "\"Error: You are over your quota!\""
-msgstr ""
+msgstr "\"错误：您超过了您的配额！\""
 
 #: src/ch15-05-interior-mutability.md:195
 #: src/ch15-05-interior-mutability.md:258
 #: src/ch15-05-interior-mutability.md:390
 #: src/ch15-05-interior-mutability.md:514
 msgid "\"Urgent warning: You've used up over 90% of your quota!\""
-msgstr ""
+msgstr "\"紧急警告：你已经占用了超过90%的配额！\""
 
 #: src/ch15-05-interior-mutability.md:198
 #: src/ch15-05-interior-mutability.md:261
 #: src/ch15-05-interior-mutability.md:393
 #: src/ch15-05-interior-mutability.md:517
 msgid "\"Warning: You've used up over 75% of your quota!\""
-msgstr ""
+msgstr "\"警告: 您已经使用了超过75%的配额！\""
 
 #: src/ch15-05-interior-mutability.md:206
 msgid ""
@@ -291,6 +374,14 @@ msgid ""
 "`max`, the messenger is told to send the appropriate messages when we pass "
 "different numbers for `value`."
 msgstr ""
+"这段代码的一个重要部分是，``Messenger`` 这个特性包含一个名为 ``send`` 的方"
+"法。该方法接受一个不可变的引用指向 ``self``，以及一段消息的文本。这个特性是我"
+"们模拟对象需要实现的接口，这样模拟对象就可以像真实对象一样被使用。另一个重要"
+"的部分是，我们想要测试 ``set_value`` 方法的行为。`LimitTracker`。我们可以改变"
+"传递给`value`参数的内容，但是`set_value`并不返回任何可以用来进行断言的数据。"
+"我们希望能够说，如果我们创建一个具有`Messenger`特性的`LimitTracker`，并且为"
+"`max`赋予特定的值，那么当我们在`value`中传递不同的数值时，系统会发送相应的消"
+"息。"
 
 #: src/ch15-05-interior-mutability.md:217
 msgid ""
@@ -302,6 +393,11 @@ msgid ""
 "shows an attempt to implement a mock object to do just that, but the borrow "
 "checker won’t allow it."
 msgstr ""
+"我们需要一个模拟对象，当调用`send`时，它不会发送电子邮件或短信，而只是记录它"
+"被指示要发送的消息。我们可以创建一个新的模拟对象实例，创建一个使用该模拟对象"
+"的`LimitTracker`，然后调用`LimitTracker`中的`set_value`方法，最后检查模拟对象"
+"是否包含我们期望的消息。清单15-21展示了实现这样一个模拟对象的尝试，但借用检查"
+"器不允许这样做。"
 
 #: src/ch15-05-interior-mutability.md:302
 msgid ""
@@ -314,6 +410,13 @@ msgid ""
 "In the definition of the `send` method, we take the message passed in as a "
 "parameter and store it in the `MockMessenger` list of `sent_messages`."
 msgstr ""
+"这段测试代码定义了一个 ``MockMessenger`` 结构体，该结构体包含一个 "
+"``sent_messages`` 字段，该字段具有 ``Vec`` 类型的 ``String`` 值，用于记录需要"
+"发送的消息。我们还定义了一个相关的函数 ``new``，以便能够方便地创建以空消息列"
+"表开头的新的 ``MockMessenger`` 值。同时，我们为 ``MockMessenger`` 实现了 "
+"``Messenger`` 特性，这样我们就可以对其进行操作了。将`MockMessenger`转换为"
+"`LimitTracker`。在定义`send`方法时，将作为参数传递的消息存储到`sent_messages`"
+"的`MockMessenger`列表中。"
 
 #: src/ch15-05-interior-mutability.md:311
 msgid ""
@@ -326,10 +429,16 @@ msgid ""
 "percent of 100. Then, we assert that the list of messages that the "
 "`MockMessenger` is keeping track of should now have one message in it."
 msgstr ""
+"在测试中，我们旨在了解当`LimitTracker`被设置为`value`的值超过`max`值的75%时会"
+"发生什么。首先，我们创建一个新的`MockMessenger`，它开始时包含一个空的消息列"
+"表。然后，我们创建一个新的`LimitTracker`，并为其分配对新的`MockMessenger`的引"
+"用，以及值为`100`的`max`。我们调用`set_value`方法来进行测试。``LimitTracker``"
+"的值为``80``，这超过了100的75%。因此，我们认为``MockMessenger``所跟踪的消息列"
+"表中现在应该有一个消息。"
 
 #: src/ch15-05-interior-mutability.md:320
 msgid "However, there’s one problem with this test, as shown here:"
-msgstr ""
+msgstr "然而，这个测试存在一个问题，如下所示："
 
 #: src/ch15-05-interior-mutability.md:322
 msgid ""
@@ -358,6 +467,30 @@ msgid ""
 "error: could not compile `limit-tracker` (lib test) due to 1 previous error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo test\n"
+"   Compiling limit-tracker v0.1.0 (file:///projects/limit-tracker)\n"
+"error[E0596]: cannot borrow `self.sent_messages` as mutable, as it is behind "
+"a `&` reference\n"
+"  --> src/lib.rs:58:13\n"
+"   |\n"
+"58 |             self.sent_messages.push(String::from(message));\n"
+"   |             ^^^^^^^^^^^^^^^^^^ `self` is a `&` reference, so the data "
+"it refers to cannot be borrowed as mutable\n"
+"   |\n"
+"help: consider changing this to be a mutable reference in the `impl` method "
+"and the `trait` definition\n"
+"   |\n"
+" 2 ~     fn send(&mut self, msg: &str);\n"
+" 3 | }\n"
+"...\n"
+"56 |     impl Messenger for MockMessenger {\n"
+"57 ~         fn send(&mut self, message: &str) {\n"
+"   |\n"
+"\n"
+"For more information about this error, try `rustc --explain E0596`.\n"
+"error: could not compile `limit-tracker` (lib test) due to 1 previous error\n"
+"```"
 
 #: src/ch15-05-interior-mutability.md:344
 msgid ""
@@ -368,6 +501,10 @@ msgid ""
 "trait solely for the sake of testing. Instead, we need to find a way to make "
 "our test code work correctly with our existing design."
 msgstr ""
+"我们无法修改`MockMessenger`来跟踪消息，因为`send`方法需要的是对`self`的不可变"
+"引用。我们也无法根据错误文本的建议，在`impl`方法和特征定义中同时使用`&mut "
+"self`。我们并不想仅仅为了测试而更改`Messenger`特征。相反，我们需要找到一种方"
+"法，让我们的测试代码能够与我们现有的设计兼容并正确运行。"
 
 #: src/ch15-05-interior-mutability.md:351
 msgid ""
@@ -376,10 +513,15 @@ msgid ""
 "able to modify `sent_messages` to store the messages we’ve seen. Listing "
 "15-22 shows what that looks like."
 msgstr ""
+"这种情况中，内部可变性可以发挥重要作用！我们将`sent_messages`存储到"
+"`RefCell<T>`中，然后`send`方法就可以修改`sent_messages`，以存储我们看到的消"
+"息。列表15-22展示了这一过程的实现方式。"
 
 #: src/ch15-05-interior-mutability.md:423
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch15-05-interior-mutability.md:436
 msgid ""
@@ -387,6 +529,9 @@ msgid ""
 "`Vec<String>`. In the `new` function, we create a new `RefCell<Vec<String>>` "
 "instance around the empty vector."
 msgstr ""
+"现在，``sent_messages``字段的类型变成了``RefCell<Vec<String>>``，而不是"
+"``Vec<String>``。在``new``函数中，我们在空向量周围创建了一个新的"
+"``RefCell<Vec<String>>``实例。"
 
 #: src/ch15-05-interior-mutability.md:440
 msgid ""
@@ -397,6 +542,11 @@ msgid ""
 "the vector. Then, we can call `push` on the mutable reference to the vector "
 "to keep track of the messages sent during the test."
 msgstr ""
+"在实现`send`方法时，第一个参数仍然是`self`的一个不可修改的引用，这与特征定义"
+"相匹配。我们在`self.sent_messages`中的`RefCell<Vec<String>>`上调用"
+"`borrow_mut`，以获取对`RefCell<Vec<String>>`内部值的可变引用，该值是一个向"
+"量。然后，我们可以对这个可变引用的向量调用`push`，以跟踪测试过程中发送的消"
+"息。"
 
 #: src/ch15-05-interior-mutability.md:447
 msgid ""
@@ -404,19 +554,23 @@ msgid ""
 "are in the inner vector, we call `borrow` on the `RefCell<Vec<String>>` to "
 "get an immutable reference to the vector."
 msgstr ""
+"我们最后需要进行的修改是在断言中：为了查看内部向量中有多少个元素，我们调用"
+"`borrow`来访问`RefCell<Vec<String>>`，从而获取对该向量的不可变引用。"
 
 #: src/ch15-05-interior-mutability.md:451
 msgid ""
 "Now that you’ve seen how to use `RefCell<T>`, let’s dig into how it works!"
 msgstr ""
+"\n"
+"既然你已经了解了如何使用“RefCell<T>”，让我们来深入了解它是如何工作的！"
 
 #: src/ch15-05-interior-mutability.md:455
 msgid "<a id=\"keeping-track-of-borrows-at-runtime-with-refcellt\"></a>"
-msgstr ""
+msgstr "<a id=\"keeping-track-of-borrows-at-runtime-with-refcellt\"></a>"
 
 #: src/ch15-05-interior-mutability.md:457
 msgid "Tracking Borrows at Runtime"
-msgstr ""
+msgstr "运行时跟踪借用情况"
 
 #: src/ch15-05-interior-mutability.md:459
 msgid ""
@@ -427,6 +581,11 @@ msgid ""
 "and `borrow_mut` returns the smart pointer type `RefMut<T>`. Both types "
 "implement `Deref`, so we can treat them like regular references."
 msgstr ""
+"在创建不可变和可变引用时，我们分别使用`&`和`&mut`语法。对于`RefCell<T>`，我们"
+"使用`borrow`和`borrow_mut`方法，这些方法属于安全API的一部分，而该安全API又归"
+"属于`RefCell<T>`。`borrow`方法返回智能指针类型`Ref<T>`，而`borrow_mut`则返回"
+"智能指针类型`RefMut<T>`。这两种类型都实现了`Deref`功能，因此……可以像对待普通"
+"的引用一样处理它们。"
 
 #: src/ch15-05-interior-mutability.md:466
 msgid ""
@@ -437,6 +596,11 @@ msgid ""
 "by 1. Just like the compile-time borrowing rules, `RefCell<T>` lets us have "
 "many immutable borrows or one mutable borrow at any point in time."
 msgstr ""
+"`RefCell<T>` 记录了当前有多少个 `Ref<T>` 和 `RefMut<T>` 智能指针处于活动状"
+"态。每次调用 `borrow` 时，`RefCell<T>` 会增加其不可变借用对象的数量。当 "
+"`Ref<T>` 的值超出作用域时，不可变借用的数量就会减少1。就像编译时的借用规则一"
+"样，`RefCell<T>` 允许我们在任何时候拥有多个不可变借用对象，或者只有一个可变借"
+"用对象。"
 
 #: src/ch15-05-interior-mutability.md:473
 msgid ""
@@ -447,6 +611,10 @@ msgid ""
 "active for the same scope to illustrate that `RefCell<T>` prevents us from "
 "doing this at runtime."
 msgstr ""
+"如果我们试图违反这些规则，那么编译器不会报错，而是会在运行时导致"
+"``RefCell<T>``的实现出现异常。清单15-23展示了对清单15-22中``send``实现的修"
+"改。我们故意尝试创建两个可变的借用关系，它们作用于同一个作用域，以此来说明"
+"``RefCell<T>``能够在运行时阻止我们这样做。"
 
 #: src/ch15-05-interior-mutability.md:563
 msgid ""
@@ -456,6 +624,10 @@ msgid ""
 "scope, which isn’t allowed. When we run the tests for our library, the code "
 "in Listing 15-23 will compile without any errors, but the test will fail:"
 msgstr ""
+"我们为从`borrow_mut`返回的`RefMut<T>`智能指针创建了一个变量`one_borrow`。然"
+"后，我们以相同的方式在变量`two_borrow`中创建了另一个可变的借用对象。这样就在"
+"同一个作用域中创建了两个可变引用，这是不允许的。当我们运行库中的测试时，"
+"Listing 15-23中的代码会成功编译，但测试将会失败："
 
 #: src/ch15-05-interior-mutability.md:569
 msgid ""
@@ -489,6 +661,35 @@ msgid ""
 "error: test failed, to rerun pass `--lib`\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo test\n"
+"   Compiling limit-tracker v0.1.0 (file:///projects/limit-tracker)\n"
+"    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.91s\n"
+"     Running unittests src/lib.rs (target/debug/deps/limit_tracker-"
+"e599811fa246dbde)\n"
+"\n"
+"running 1 test\n"
+"test tests::it_sends_an_over_75_percent_warning_message ... FAILED\n"
+"\n"
+"failures:\n"
+"\n"
+"---- tests::it_sends_an_over_75_percent_warning_message stdout ----\n"
+"\n"
+"thread 'tests::it_sends_an_over_75_percent_warning_message' panicked at src/"
+"lib.rs:60:53:\n"
+"RefCell already borrowed\n"
+"note: run with `RUST_BACKTRACE=1` environment variable to display a "
+"backtrace\n"
+"\n"
+"\n"
+"failures:\n"
+"    tests::it_sends_an_over_75_percent_warning_message\n"
+"\n"
+"test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered "
+"out; finished in 0.00s\n"
+"\n"
+"error: test failed, to rerun pass `--lib`\n"
+"```"
 
 #: src/ch15-05-interior-mutability.md:595
 msgid ""
@@ -496,6 +697,8 @@ msgid ""
 "BorrowMutError`. This is how `RefCell<T>` handles violations of the "
 "borrowing rules at runtime."
 msgstr ""
+"请注意，代码在出现以下消息时陷入了恐慌：`already borrowed: BorrowMutError`. "
+"This is how `RefCell<T>`，该消息用于处理运行时出现的借用规则违反情况。"
 
 #: src/ch15-05-interior-mutability.md:599
 msgid ""
@@ -510,6 +713,12 @@ msgid ""
 "You can use `RefCell<T>` despite its trade-offs to get more functionality "
 "than regular references provide."
 msgstr ""
+"选择在运行时而不是编译时捕获借用错误，就像我们在这里所做的那样，意味着你在开"
+"发过程中可能会发现代码中的错误——可能要等到代码被部署到生产环境之后才会被发"
+"现。此外，由于需要在运行时而不是编译时跟踪借用情况，代码的运行性能会略有下"
+"降。不过，使用`RefCell<T>`可以编写一个模拟对象，从而……它会自我修改，以记录你"
+"在使用它时所看到的消息。在这种情况下，只允许使用不可变的值。尽管存在这些限"
+"制，你仍然可以使用`RefCell<T>`来获得比常规引用更多的功能。"
 
 #: src/ch15-05-interior-mutability.md:612
 msgid ""
@@ -517,10 +726,13 @@ msgid ""
 "cell-t\"></a> <a id=\"allowing-multiple-owners-of-mutable-data-with-rct-and-"
 "refcellt\"></a>"
 msgstr ""
+"<a id=\"having-multiple-owners-of-mutable-data-by-combining-rc-t-and-ref-"
+"cell-t\"></a> <a id=\"allowing-multiple-owners-of-mutable-data-with-rct-and-"
+"refcellt\"></a>"
 
 #: src/ch15-05-interior-mutability.md:615
 msgid "Allowing Multiple Owners of Mutable Data"
-msgstr ""
+msgstr "允许多个可变数据的所有者"
 
 #: src/ch15-05-interior-mutability.md:617
 msgid ""
@@ -530,6 +742,10 @@ msgid ""
 "`RefCell<T>`, you can get a value that can have multiple owners _and_ that "
 "you can mutate!"
 msgstr ""
+"使用`RefCell<T>`的一种常见方式是与`Rc<T>`结合使用。需要注意的是，`Rc<T>`允许"
+"某些数据拥有多个所有者，但它仅提供对该数据的不可修改的访问权限。如果你有一个"
+"`Rc<T>`，其中包含了`RefCell<T>`，那么你可以获取一个具有多个所有者且可以被修改"
+"的值！"
 
 #: src/ch15-05-interior-mutability.md:622
 msgid ""
@@ -541,18 +757,23 @@ msgid ""
 "`RefCell<T>` in the `Cons` definition, we can modify the value stored in all "
 "the lists."
 msgstr ""
+"例如，回想一下清单15-18中的cons列表示例，我们使用`Rc<T>`来允许多个列表共享另"
+"一个列表的所有权。由于`Rc<T>`只能存储不可变的值，因此一旦我们创建了这些值，就"
+"无法对其进行修改。让我们加入`RefCell<T>`，以便能够修改这些列表中的值。清单"
+"15-24展示了通过在`Cons`定义中使用`RefCell<T>`，我们可以修改所有列表中存储的"
+"值。这些列表。"
 
 #: src/ch15-05-interior-mutability.md:653
 msgid "\"a after = {a:?}\""
-msgstr ""
+msgstr "\"a after = {a:?}\""
 
 #: src/ch15-05-interior-mutability.md:654
 msgid "\"b after = {b:?}\""
-msgstr ""
+msgstr "\"b after = {b:?}\""
 
 #: src/ch15-05-interior-mutability.md:655
 msgid "\"c after = {c:?}\""
-msgstr ""
+msgstr "\"c after = {c:?}\""
 
 #: src/ch15-05-interior-mutability.md:661
 msgid ""
@@ -563,12 +784,19 @@ msgid ""
 "value rather than transferring ownership from `value` to `a` or having `a` "
 "borrow from `value`."
 msgstr ""
+"我们创建一个属于`Rc<RefCell<i32>>`的实例，并将其存储在一个名为`value`的变量"
+"中，这样之后就可以直接访问它。接着，我们在`a`中创建一个`List`，并使用一个包含"
+"`value`的`Cons`来定义这个`List`。我们需要克隆`value`，这样`a`和`value`就能拥"
+"有内部值`5`的所有权了。而不是将所有权从`value`转移到`a`，或者让`a`从`value`那"
+"里借用权限。"
 
 #: src/ch15-05-interior-mutability.md:668
 msgid ""
 "We wrap the list `a` in an `Rc<T>` so that when we create lists `b` and `c`, "
 "they can both refer to `a`, which is what we did in Listing 15-18."
 msgstr ""
+"我们将列表`a`封装在`Rc<T>`中，这样当我们创建列表`b`和`c`时，它们都可以引用"
+"`a`，正如我们在清单15-18中所做的那样。"
 
 #: src/ch15-05-interior-mutability.md:671
 msgid ""
@@ -580,12 +808,18 @@ msgid ""
 "`borrow_mut` method returns a `RefMut<T>` smart pointer, and we use the "
 "dereference operator on it and change the inner value."
 msgstr ""
+"在我们创建了`a`、`b`和`c`之后，我们希望在`value`中的值上加上10。我们通过调用"
+"`value`上的`borrow_mut`来实现这一点。该调用利用了我们在第5章中讨论过的自动解"
+"引用功能，从而将`Rc<T>`解引用为内部的`RefCell<T>`值。`borrow_mut`方法返回一个"
+"结果。`RefMut<T>`智能指针，我们对其使用解引用运算符，并修改其内部值。"
 
 #: src/ch15-05-interior-mutability.md:679
 msgid ""
 "When we print `a`, `b`, and `c`, we can see that they all have the modified "
 "value of `15` rather than `5`:"
 msgstr ""
+"当我们打印 `a`、`b` 和 `c` 时，可以看到它们都显示的是修改后的 `15` 的值，而不"
+"是 `5` 的值："
 
 #: src/ch15-05-interior-mutability.md:682
 msgid ""
@@ -599,6 +833,15 @@ msgid ""
 "c after = Cons(RefCell { value: 4 }, Cons(RefCell { value: 15 }, Nil))\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling cons-list v0.1.0 (file:///projects/cons-list)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.63s\n"
+"     Running `target/debug/cons-list`\n"
+"a after = Cons(RefCell { value: 15 }, Nil)\n"
+"b after = Cons(RefCell { value: 3 }, Cons(RefCell { value: 15 }, Nil))\n"
+"c after = Cons(RefCell { value: 4 }, Cons(RefCell { value: 15 }, Nil))\n"
+"```"
 
 #: src/ch15-05-interior-mutability.md:692
 msgid ""
@@ -611,3 +854,9 @@ msgid ""
 "multithreaded code! `Mutex<T>` is the thread-safe version of `RefCell<T>`, "
 "and we’ll discuss `Mutex<T>` in Chapter 16."
 msgstr ""
+"这种技术非常棒！通过使用`RefCell<T>`，我们获得了在外部不可修改的`List`值。但"
+"是，我们可以对`RefCell<T>`使用相关方法，从而访问其内部的可变性，这样在需要时"
+"就可以修改我们的数据。运行时对借用规则的检查可以保护我们免受数据竞争的影响，"
+"有时候为了获得这种灵活性而牺牲一点速度也是值得的。请注意，`RefCell<T>`并不适"
+"用于多线程代码！`Mutex<T>`是`RefCell<T>`的线程安全版本，而`Mutex<T>`将在第16"
+"章中讨论。"

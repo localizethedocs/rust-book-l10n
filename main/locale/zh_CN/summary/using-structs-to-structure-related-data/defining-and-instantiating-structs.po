@@ -156,6 +156,8 @@ msgstr ""
 #: src/ch05-01-defining-structs.md:207 src/ch05-01-defining-structs.md:242
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch05-01-defining-structs.md:219 src/ch05-01-defining-structs.md:252
 msgid "\"another@example.com\""

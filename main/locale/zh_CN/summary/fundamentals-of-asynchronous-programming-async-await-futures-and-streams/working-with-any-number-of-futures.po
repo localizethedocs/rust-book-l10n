@@ -286,6 +286,8 @@ msgstr ""
 #: src/ch17-03-more-futures.md:381
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch17-03-more-futures.md:413
 msgid ""

@@ -387,7 +387,7 @@ msgstr ""
 
 #: src/ch08-02-strings.md:294
 msgid "\"hi\""
-msgstr ""
+msgstr "\"hi\""
 
 #: src/ch08-02-strings.md:301
 msgid "This code will result in the following error:"

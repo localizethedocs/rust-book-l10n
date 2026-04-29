@@ -155,6 +155,8 @@ msgstr ""
 #: src/ch06-01-defining-an-enum.md:208 src/ch06-01-defining-an-enum.md:212
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch06-01-defining-an-enum.md:221
 msgid ""
@@ -237,7 +239,7 @@ msgstr ""
 
 #: src/ch06-01-defining-an-enum.md:297
 msgid "\"hello\""
-msgstr ""
+msgstr "\"hello\""
 
 #: src/ch06-01-defining-an-enum.md:302
 msgid ""

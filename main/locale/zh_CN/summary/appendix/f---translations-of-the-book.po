@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/appendix-06-translation.md:1
 msgid "Appendix F: Translations of the Book"
-msgstr ""
+msgstr "附录F：本书的翻译内容"
 
 #: src/appendix-06-translation.md:3
 msgid ""
@@ -22,28 +22,33 @@ msgid ""
 "q=is%3Aopen+is%3Aissue+label%3ATranslations) to help or let us know about a "
 "new translation!"
 msgstr ""
+"对于非英语的语言资源，大部分仍在建设中；请参阅[翻译标签](https://github.com/"
+"rust-lang/book/issues?q=is%3Aopen+is%3Aissue+label%3ATranslations)，以获取帮"
+"助或向我们报告新的翻译成果！"
 
 #: src/appendix-06-translation.md:8
 msgid "[Português](https://github.com/rust-br/rust-book-pt-br) (BR)"
-msgstr ""
+msgstr "[葡萄牙语]（https://github.com/rust-br/rust-book-pt-br)(BR)"
 
 #: src/appendix-06-translation.md:9
 msgid "[Português](https://github.com/nunojesus/rust-book-pt-pt) (PT)"
-msgstr ""
+msgstr "[葡萄牙语](https://github.com/nunojesus/rust-book-pt-pt) (PT)"
 
 #: src/appendix-06-translation.md:10
 msgid ""
 "简体中文: [KaiserY/trpl-zh-cn](https://github.com/KaiserY/trpl-zh-cn), "
 "[gnu4cn/rust-lang-Zh_CN](https://github.com/gnu4cn/rust-lang-Zh_CN)"
 msgstr ""
+"简体中文: [KaiserY/trpl-zh-cn](https://github.com/KaiserY/trpl-zh-cn), "
+"[gnu4cn/rust-lang-Zh_CN](https://github.com/gnu4cn/rust-lang-Zh_CN)"
 
 #: src/appendix-06-translation.md:11
 msgid "[正體中文](https://github.com/rust-tw/book-tw)"
-msgstr ""
+msgstr "[正體中文](https://github.com/rust-tw/book-tw)"
 
 #: src/appendix-06-translation.md:12
 msgid "[Українська](https://rust-lang-ua.github.io/rustbook_ukrainian)"
-msgstr ""
+msgstr "[乌克兰语](https://rust-lang-ua.github.io/rustbook_ukrainian)"
 
 #: src/appendix-06-translation.md:13
 msgid ""
@@ -51,81 +56,86 @@ msgid ""
 "ManRR/rust-book-es), [Español por RustLangES](https://github.com/RustLangES/"
 "rust-book-es)"
 msgstr ""
+"[其他语言版本](https://github.com/ManRR/rust-book-es), [alternate](https://"
+"github.com/ManRR/rust-book-es), [Español por RustLangES](https://github.com/"
+"RustLangES/rust-book-es)"
 
 #: src/appendix-06-translation.md:14
 msgid "[Русский](https://github.com/rust-lang-ru/book)"
-msgstr ""
+msgstr "[俄语](https://github.com/rust-lang-ru/book)"
 
 #: src/appendix-06-translation.md:15
 msgid "[한국어](https://github.com/rust-kr/doc.rust-kr.org)"
-msgstr ""
+msgstr "[韩语](https://github.com/rust-kr/doc.rust-kr.org)"
 
 #: src/appendix-06-translation.md:16
 msgid "[日本語](https://github.com/rust-lang-ja/book-ja)"
-msgstr ""
+msgstr "[日语](https://github.com/rust-lang-ja/book-ja)"
 
 #: src/appendix-06-translation.md:17
 msgid "[Français](https://github.com/Jimskapt/rust-book-fr)"
-msgstr ""
+msgstr "[法语](https://github.com/Jimskapt/rust-book-fr)"
 
 #: src/appendix-06-translation.md:18
 msgid "[Polski](https://github.com/paytchoo/book-pl)"
-msgstr ""
+msgstr "[波兰语](https://github.com/paytchoo/book-pl)"
 
 #: src/appendix-06-translation.md:19
 msgid "[Cebuano](https://github.com/agentzero1/book)"
-msgstr ""
+msgstr "[宿务语](https://github.com/agentzero1/book)"
 
 #: src/appendix-06-translation.md:20
 msgid "[Tagalog](https://github.com/josephace135/book)"
-msgstr ""
+msgstr "[塔加洛语](https://github.com/josephace135/book)"
 
 #: src/appendix-06-translation.md:21
 msgid "[Esperanto](https://github.com/psychoslave/Rust-libro)"
-msgstr ""
+msgstr "[世界语](https://github.com/psychoslave/Rust-libro)"
 
 #: src/appendix-06-translation.md:22
 msgid "[ελληνική](https://github.com/TChatzigiannakis/rust-book-greek)"
-msgstr ""
+msgstr "[希腊语](https://github.com/TChatzigiannakis/rust-book-greek)"
 
 #: src/appendix-06-translation.md:23
 msgid "[Svenska](https://github.com/sebras/book)"
-msgstr ""
+msgstr "[瑞典语](https://github.com/sebras/book)"
 
 #: src/appendix-06-translation.md:24
 msgid ""
 "[Farsi](https://github.com/RustFarsi/book), [Persian (FA)](https://github."
 "com/persian-rust/book)"
 msgstr ""
+"[波斯语](https://github.com/RustFarsi/book),\n"
+"[波斯语版(FA)](https://github.com/persian-rust/book)"
 
 #: src/appendix-06-translation.md:25
 msgid "[Deutsch](https://github.com/rust-lang-de/rustbook-de)"
-msgstr ""
+msgstr "[德语](https://github.com/rust-lang-de/rustbook-de)"
 
 #: src/appendix-06-translation.md:26
 msgid "[हिंदी](https://github.com/venkatarun95/rust-book-hindi)"
-msgstr ""
+msgstr "[印地语](https://github.com/venkatarun95/rust-book-hindi)"
 
 #: src/appendix-06-translation.md:27
 msgid "[ไทย](https://github.com/rust-lang-th/book-th)"
-msgstr ""
+msgstr "[泰语](https://github.com/rust-lang-th/book-th)"
 
 #: src/appendix-06-translation.md:28
 msgid "[Danske](https://github.com/DanKHansen/book-dk)"
-msgstr ""
+msgstr "[丹麦语](https://github.com/DanKHansen/book-dk)"
 
 #: src/appendix-06-translation.md:29
 msgid "[O'zbek](https://github.com/rust-lang-uz/book)"
-msgstr ""
+msgstr "[乌兹别克语](https://github.com/rust-lang-uz/book)"
 
 #: src/appendix-06-translation.md:30
 msgid "[Tiếng Việt](https://github.com/tuanemdev/rust-book-vn)"
-msgstr ""
+msgstr "[越南语](https://github.com/tuanemdev/rust-book-vn)"
 
 #: src/appendix-06-translation.md:31
 msgid "[Italiano](https://nixxo.github.io/rust-lang-book-it/)"
-msgstr ""
+msgstr "[意大利语](https://nixxo.github.io/rust-lang-book-it/)"
 
 #: src/appendix-06-translation.md:32
 msgid "[বাংলা](https://github.com/IsmailHosenIsmailJames/rust-book-bn)"
-msgstr ""
+msgstr "[孟加拉语](https://github.com/IsmailHosenIsmailJames/rust-book-bn)"

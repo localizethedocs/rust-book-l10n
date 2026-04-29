@@ -916,7 +916,7 @@ msgstr ""
 
 #: src/ch19-03-pattern-syntax.md:892
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch19-03-pattern-syntax.md:894
 msgid ""

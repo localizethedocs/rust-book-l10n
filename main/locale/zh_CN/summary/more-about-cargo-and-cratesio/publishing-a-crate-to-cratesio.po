@@ -329,6 +329,8 @@ msgstr ""
 #: src/ch14-02-publishing-to-crates-io.md:355
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:248
 msgid ""

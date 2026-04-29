@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/appendix-03-derivable-traits.md:1
 msgid "Appendix C: Derivable Traits"
-msgstr ""
+msgstr "附录C：可推导出的特征"
 
 #: src/appendix-03-derivable-traits.md:3
 msgid ""
@@ -22,33 +22,38 @@ msgid ""
 "generates code that will implement a trait with its own default "
 "implementation on the type you’ve annotated with the `derive` syntax."
 msgstr ""
+"在书的各个部分中，我们讨论过`derive`属性，您可以将该属性应用于结构体或枚举类"
+"型的定义。`derive`属性则会生成代码，用于在该类型上实现具有自定义默认实现的特"
+"征。"
 
 #: src/appendix-03-derivable-traits.md:8
 msgid ""
 "In this appendix, we provide a reference of all the traits in the standard "
 "library that you can use with `derive`. Each section covers:"
 msgstr ""
+"在这个附录中，我们提供了标准库中所有可以与`derive`一起使用的特性的参考。每个"
+"部分都涵盖了以下内容："
 
 #: src/appendix-03-derivable-traits.md:11
 msgid "What operators and methods deriving this trait will enable"
-msgstr ""
+msgstr "哪些操作符和方法能够启用此特性"
 
 #: src/appendix-03-derivable-traits.md:12
 msgid "What the implementation of the trait provided by `derive` does"
-msgstr ""
+msgstr "`derive`所提供的特性实现内容是什么"
 
 #: src/appendix-03-derivable-traits.md:13
 msgid "What implementing the trait signifies about the type"
-msgstr ""
+msgstr "实现该特性对类型有何意义"
 
 #: src/appendix-03-derivable-traits.md:14
 msgid ""
 "The conditions in which you’re allowed or not allowed to implement the trait"
-msgstr ""
+msgstr "在哪些情况下可以或不可以实现该特性"
 
 #: src/appendix-03-derivable-traits.md:15
 msgid "Examples of operations that require the trait"
-msgstr ""
+msgstr "需要使用该特性的操作示例"
 
 #: src/appendix-03-derivable-traits.md:17
 msgid ""
@@ -56,6 +61,8 @@ msgid ""
 "consult the [standard library documentation](../std/index.html)<!-- ignore --"
 "> for each trait for details on how to manually implement them."
 msgstr ""
+"如果您希望获得与 ``derive`` 属性所提供的行为不同的结果，请查阅[标准库文档]"
+"(../std/index.html)中的相关说明，了解如何手动实现这些功能的具体方法。"
 
 #: src/appendix-03-derivable-traits.md:21
 msgid ""
@@ -65,6 +72,9 @@ msgid ""
 "you to implement them in the way that makes sense for what you’re trying to "
 "accomplish."
 msgstr ""
+"这里列出的特性是标准库中唯一可以通过`derive`在你的类型上实现的特性。标准库中"
+"定义的其他特性并没有合理的默认行为，因此你需要根据自己的需求来合理地实现它"
+"们。"
 
 #: src/appendix-03-derivable-traits.md:26
 msgid ""
@@ -75,6 +85,10 @@ msgid ""
 "would be most relevant to them? The Rust compiler doesn’t have this insight, "
 "so it can’t provide appropriate default behavior for you."
 msgstr ""
+"一个无法被派生的特性的例子是`Display`，它负责处理最终用户的格式设置问题。在向"
+"最终用户展示某个类型时，你应该始终考虑合适的展示方式。最终用户应该能够看到该"
+"类型的哪些部分？他们认为哪些部分是相关的？哪种数据格式对他们来说最为重要？"
+"Rust编译器并没有这种洞察力，因此无法为你提供适当的默认行为。"
 
 #: src/appendix-03-derivable-traits.md:33
 msgid ""
@@ -85,16 +99,23 @@ msgid ""
 "Macros”](ch20-05-macros.html#custom-derive-macros)<!-- ignore --> section in "
 "Chapter 20."
 msgstr ""
+"本附录中提供的可派生特性列表并不全面：  \n"
+"库可以为其自身特性实现 ``derive``，这使得可以与 ``derive`` 结合使用的特性数量"
+"变得非常广泛。而实现 ``derive`` 则需要使用过程式宏，相关内容将在第20章的[“自"
+"定义 ``derive`` 宏”](ch20-05-macros.html#custom-derive-macros)<!-- 忽略 -->部"
+"分进行介绍。"
 
 #: src/appendix-03-derivable-traits.md:39
 msgid "`Debug` for Programmer Output"
-msgstr ""
+msgstr "`Debug` 供程序员输出使用"
 
 #: src/appendix-03-derivable-traits.md:41
 msgid ""
 "The `Debug` trait enables debug formatting in format strings, which you "
 "indicate by adding `:?` within `{}` placeholders."
 msgstr ""
+"``Debug``特性使得在格式字符串中能够启用调试格式化功能，您可以通过在``{}``占位"
+"符中添加``:?``来实现这一点。"
 
 #: src/appendix-03-derivable-traits.md:44
 msgid ""
@@ -102,6 +123,8 @@ msgid ""
 "purposes, so you and other programmers using your type can inspect an "
 "instance at a particular point in a program’s execution."
 msgstr ""
+"``Debug``特性允许您打印某个类型的实例，以便于调试。这样，您和其他使用该类型的"
+"程序员可以在程序执行的特定阶段检查该实例。"
 
 #: src/appendix-03-derivable-traits.md:48
 msgid ""
@@ -110,16 +133,20 @@ msgid ""
 "equality assertion fails so that programmers can see why the two instances "
 "weren’t equal."
 msgstr ""
+"需要使用`Debug`特性，例如在调用`assert_eq!`宏时。当相等性断言失败时，该宏会打"
+"印作为参数传递的实例的值，这样程序员就能了解为什么这两个实例并不相等。"
 
 #: src/appendix-03-derivable-traits.md:53
 msgid "`PartialEq` and `Eq` for Equality Comparisons"
-msgstr ""
+msgstr "用于相等性比较的`PartialEq`和`Eq`"
 
 #: src/appendix-03-derivable-traits.md:55
 msgid ""
 "The `PartialEq` trait allows you to compare instances of a type to check for "
 "equality and enables use of the `==` and `!=` operators."
 msgstr ""
+"`PartialEq`特性允许您比较同一类型的实例以检查其相等性，并使得可以使用`==`和`!"
+"=`运算符。"
 
 #: src/appendix-03-derivable-traits.md:58
 msgid ""
@@ -128,6 +155,9 @@ msgid ""
 "instances are not equal if _any_ fields are not equal. When derived on "
 "enums, each variant is equal to itself and not equal to the other variants."
 msgstr ""
+"派生出的`PartialEq`实现了`eq`方法。当在结构体上派生`PartialEq`时，只有当所有"
+"字段都相等时，两个实例才相等；如果有任何字段不相等，则这两个实例就不相等。而"
+"当在枚举类型上进行派生时，每个变体都等于自身，而不等于其他变体。"
 
 #: src/appendix-03-derivable-traits.md:63
 msgid ""
@@ -135,6 +165,8 @@ msgid ""
 "`assert_eq!` macro, which needs to be able to compare two instances of a "
 "type for equality."
 msgstr ""
+"需要使用`PartialEq`特性，例如，通过使用`assert_eq!`宏，该宏需要能够比较两个类"
+"型的实例是否相等。"
 
 #: src/appendix-03-derivable-traits.md:67
 msgid ""
@@ -146,16 +178,22 @@ msgid ""
 "states that two instances of the not-a-number (`NaN`) value are not equal to "
 "each other."
 msgstr ""
+"`Eq`特性没有方法。其目的是为了表明注释类型的每个值都等于自己。 `Eq`特性只能应"
+"用于实现`PartialEq`的类型，尽管并非所有实现`PartialEq`的类型都能实现`Eq`。 这"
+"方面的一个例子是浮点数类型：浮点数的实现表示两个非数字(“NAN”)值的实例不等于对"
+"方。"
 
 #: src/appendix-03-derivable-traits.md:74
 msgid ""
 "An example of when `Eq` is required is for keys in a `HashMap<K, V>` so that "
 "the `HashMap<K, V>` can tell whether two keys are the same."
 msgstr ""
+"一个需要使用`Eq`的例子是出现在`HashMap<K, V>`中的键，这样`HashMap<K, V>`就能"
+"判断两个键是否相同。"
 
 #: src/appendix-03-derivable-traits.md:77
 msgid "`PartialOrd` and `Ord` for Ordering Comparisons"
-msgstr ""
+msgstr "用于排序比较的 `PartialOrd` 和 `Ord`"
 
 #: src/appendix-03-derivable-traits.md:79
 msgid ""
@@ -164,6 +202,9 @@ msgid ""
 "`<=`, and `>=` operators. You can only apply the `PartialOrd` trait to types "
 "that also implement `PartialEq`."
 msgstr ""
+"`PartialOrd`特性允许您为了排序的目的而比较同一类型的实例。实现了`PartialOrd`"
+"的类型可以与`<`、`>`、`<=`以及`>=`运算符一起使用。您只能将`PartialOrd`特性应"
+"用于同时实现了`PartialEq`的类型。"
 
 #: src/appendix-03-derivable-traits.md:84
 msgid ""
@@ -174,6 +215,10 @@ msgid ""
 "value. Calling `partial_cmp` with any floating-point number and the `NaN` "
 "floating-point value will return `None`."
 msgstr ""
+"调用 `PartialOrd` 会执行 `partial_cmp` 方法，该方法返回一个 "
+"`Option<Ordering>` 值。当给定的值无法产生排序时，该值将被转换为 `None`。一个"
+"无法产生排序的例子是 `NaN` 浮点数值。无论使用哪个浮点数值以及 `NaN` 浮点数"
+"值，调用 `partial_cmp` 都会返回 `None`。"
 
 #: src/appendix-03-derivable-traits.md:91
 msgid ""
@@ -183,6 +228,9 @@ msgid ""
 "earlier in the enum definition are considered less than the variants listed "
 "later."
 msgstr ""
+"在结构体上派生时，``PartialOrd``通过按照结构体定义中字段出现的顺序来比较两个"
+"实例中的各个字段的值。在枚举上派生时，枚举定义中较早声明的枚举变体会被视为比"
+"后面列出的变体更不优先。"
 
 #: src/appendix-03-derivable-traits.md:96
 msgid ""
@@ -190,6 +238,8 @@ msgid ""
 "from the `rand` crate that generates a random value in the range specified "
 "by a range expression."
 msgstr ""
+"需要`PartialOrd`特性，例如，在`gen_range`方法中。该方法来自`rand`框架，该框架"
+"能够生成由范围表达式指定的范围内的随机值。"
 
 #: src/appendix-03-derivable-traits.md:100
 msgid ""
@@ -202,6 +252,12 @@ msgid ""
 "same way as the derived implementation for `partial_cmp` does with "
 "`PartialOrd`."
 msgstr ""
+"`Ord` 特性允许你确定，对于任何两个被标注的类型值来说，总存在一种有效的排序方"
+"式。`Ord` 特性实现了 `cmp` 方法，该方法返回的是 `Ordering` 而不是 "
+"`Option<Ordering>`，因为总是可以找到一个有效的排序方式。你只能将 `Ord` 特性应"
+"用于那些同时实现了 `PartialOrd` 和 `Eq` 的类型（而 `Eq` 则需要 "
+"`PartialEq`）。在结构体和集合类型中派生时，``cmp``的行为与``partial_cmp``的"
+"`derivedimplementation`对``PartialOrd``的行为相同。"
 
 #: src/appendix-03-derivable-traits.md:108
 msgid ""
@@ -209,10 +265,12 @@ msgid ""
 "`BTreeSet<T>`, a data structure that stores data based on the sort order of "
 "the values."
 msgstr ""
+"当需要`Ord`时，一个例子是当将值存储在`BTreeSet<T>`时， 基于值排序的数据结构储"
+"存数据。"
 
 #: src/appendix-03-derivable-traits.md:111
 msgid "`Clone` and `Copy` for Duplicating Values"
-msgstr ""
+msgstr "用于复制值的 `Clone` 和 `Copy`"
 
 #: src/appendix-03-derivable-traits.md:113
 msgid ""
@@ -222,6 +280,10 @@ msgid ""
 "what-is-ownership.html#variables-and-data-interacting-with-clone)<!-- ignore "
 "--> section in Chapter 4 for more information on `Clone`."
 msgstr ""
+"``Clone``特性允许您显式地创建一个值的深度复制，而复制过程可能涉及运行任意代码"
+"以及复制堆数据。有关``Clone``的更多信息，请参阅第4章中的[“变量与数据在克隆中"
+"的交互”](ch04-01-what-is-ownership.html#variables-and-data-interacting-with-"
+"clone)<!-- 忽略 -->部分。"
 
 #: src/appendix-03-derivable-traits.md:119
 msgid ""
@@ -230,6 +292,9 @@ msgid ""
 "all the fields or values in the type must also implement `Clone` to derive "
 "`Clone`."
 msgstr ""
+"派生`Clone`实现了`clone`方法，当实现整个类型时，在类型的每个部分上调用 "
+"`clone` 方法。 这意味着类型中的所有字段或值都必须实现 `Clone` 才能找到 "
+"`Clone` 。"
 
 #: src/appendix-03-derivable-traits.md:123
 msgid ""
@@ -239,6 +304,9 @@ msgid ""
 "calls `clone` on each item. Thus, the type stored in the slice must "
 "implement `Clone`."
 msgstr ""
+"当需要`Clone`时，一个例子是在切片上调用 `to_vec` 方法。 切片不拥有它包含的类"
+"型实例， 但从`to_vec`返回的矢量将需要拥有其实例，所以`to_vec`在每个项目上调用"
+"`clone`。 因此，切片中存储的类型必须实现 `Clone'。"
 
 #: src/appendix-03-derivable-traits.md:128
 msgid ""
@@ -247,6 +315,9 @@ msgid ""
 "Copy”](ch04-01-what-is-ownership.html#stack-only-data-copy)<!-- ignore --> "
 "section in Chapter 4 for more information on `Copy`."
 msgstr ""
+"``Copy``特性允许您通过仅复制存储在栈上的数据来复制一个值；无需编写任何自定义"
+"代码。有关``Copy``的更多信息，请参阅第4章中的(ch04-01-what-is-ownership."
+"html#stack-only-data-copy)部分。"
 
 #: src/appendix-03-derivable-traits.md:133
 msgid ""
@@ -255,6 +326,9 @@ msgid ""
 "code is being run. That way, all programmers can assume that copying a value "
 "will be very fast."
 msgstr ""
+"`Copy`这个特性并没有定义任何方法来防止程序员过度使用这些方法，从而避免违反“不"
+"会运行任意代码”的假设。这样一来，所有程序员都可以认为复制一个值的过程会非常快"
+"速。"
 
 #: src/appendix-03-derivable-traits.md:138
 msgid ""
@@ -263,6 +337,9 @@ msgid ""
 "implements `Copy` has a trivial implementation of `Clone` that performs the "
 "same task as `Copy`."
 msgstr ""
+"你可以将`Copy`应用于任何其所有部分都实现了`Copy`的类型。一个实现了`Copy`的类"
+"型也必须实现`Clone`，因为一个实现了`Copy`的类型有一个简单的实现方式来实现"
+"`Clone`，而这个实现方式与`Copy`所执行的任务相同。"
 
 #: src/appendix-03-derivable-traits.md:143
 msgid ""
@@ -270,16 +347,20 @@ msgid ""
 "optimizations available, meaning you don’t have to call `clone`, which makes "
 "the code more concise."
 msgstr ""
+"`Copy`特性很少被需要；实现了`Copy`的类型具有优化功能，这意味着不必调用"
+"`clone`，从而使代码更加简洁。"
 
 #: src/appendix-03-derivable-traits.md:147
 msgid ""
 "Everything possible with `Copy` you can also accomplish with `Clone`, but "
 "the code might be slower or have to use `clone` in places."
 msgstr ""
+"使用`Copy`可以完成所有可能的事情，你也可以使用`Clone`来实现同样的功能，不过代"
+"码可能会运行得较慢，或者在某些地方需要使用`clone`。"
 
 #: src/appendix-03-derivable-traits.md:150
 msgid "`Hash` for Mapping a Value to a Value of Fixed Size"
-msgstr ""
+msgstr "`Hash` 用于将值映射到固定大小的值"
 
 #: src/appendix-03-derivable-traits.md:152
 msgid ""
@@ -290,16 +371,20 @@ msgid ""
 "of the type, meaning all fields or values must also implement `Hash` to "
 "derive `Hash`."
 msgstr ""
+"`Hash`特性允许您获取一个任意大小的类型实例，并使用哈希函数将该实例映射为固定"
+"大小的值。`Hash`实现了`hash`方法。`hash`的派生实现会调用`hash`来处理类型的每"
+"个部分，这意味着所有字段或值也必须实现`Hash`才能推导出`Hash`。"
 
 #: src/appendix-03-derivable-traits.md:158
 msgid ""
 "An example of when `Hash` is required is in storing keys in a `HashMap<K, "
 "V>` to store data efficiently."
 msgstr ""
+"在存储键时使用`Hash`的一个例子是在`HashMap<K, V>`中，以便高效存储数据。"
 
 #: src/appendix-03-derivable-traits.md:161
 msgid "`Default` for Default Values"
-msgstr ""
+msgstr "`Default` 用于默认值"
 
 #: src/appendix-03-derivable-traits.md:163
 msgid ""
@@ -309,6 +394,9 @@ msgid ""
 "each part of the type, meaning all fields or values in the type must also "
 "implement `Default` to derive `Default`."
 msgstr ""
+"`Default` 特性允许您为某个类型创建一个默认值。`Default` 实现了 `default` 函"
+"数。`default` 函数的派生实现会调用 `default` 函数来处理该类型的每个部分，这意"
+"味着该类型中的所有字段或值也必须实现 `Default` 才能派生出 `Default`。"
 
 #: src/appendix-03-derivable-traits.md:169
 msgid ""
@@ -320,6 +408,11 @@ msgid ""
 "and then set and use a default value for the rest of the fields by using `.."
 "Default::default()`."
 msgstr ""
+"`Default::default`函数通常与在第五章的(ch05-01-defining-structs."
+"html#creating-instances-from-other-instances-with-struct-update-syntax)"
+"[creating-instances-from-other-instances-with-struct-update-syntax]节中讨论的"
+"结构更新语法一起使用。您可以通过使用`..Default::default()`来自定义结构的某些"
+"字段，并为其余字段设置并使用默认值。"
 
 #: src/appendix-03-derivable-traits.md:177
 msgid ""
@@ -328,3 +421,6 @@ msgid ""
 "method `unwrap_or_default` will return the result of `Default::default` for "
 "the type `T` stored in the `Option<T>`."
 msgstr ""
+"例如，当您在`Option<T>`实例上使用`unwrap_or_default`方法时，需要引入`Default`"
+"特性。如果`Option<T>`等于`None`，那么`unwrap_or_default`方法将返回存储在"
+"`Option<T>`中的`T`类型的`Default::default`的结果。"

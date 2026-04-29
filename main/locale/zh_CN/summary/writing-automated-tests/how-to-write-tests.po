@@ -398,6 +398,8 @@ msgstr ""
 #: src/ch11-01-writing-tests.md:932 src/ch11-01-writing-tests.md:999
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch11-01-writing-tests.md:446
 msgid ""

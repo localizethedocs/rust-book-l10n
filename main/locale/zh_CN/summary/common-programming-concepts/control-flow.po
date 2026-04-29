@@ -46,7 +46,7 @@ msgstr ""
 #: src/ch03-05-control-flow.md:217 src/ch03-05-control-flow.md:274
 #: src/ch03-05-control-flow.md:541
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
 #: src/ch03-05-control-flow.md:25 src/ch03-05-control-flow.md:65
 msgid "\"condition was true\""
@@ -638,7 +638,7 @@ msgstr ""
 
 #: src/ch03-05-control-flow.md:554
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch03-05-control-flow.md:556
 msgid ""

@@ -221,6 +221,8 @@ msgstr ""
 #: src/ch18-03-oo-design-patterns.md:663 src/ch18-03-oo-design-patterns.md:896
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch18-03-oo-design-patterns.md:198
 msgid ""
@@ -702,7 +704,7 @@ msgstr ""
 
 #: src/ch18-03-oo-design-patterns.md:985
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch18-03-oo-design-patterns.md:987
 msgid ""

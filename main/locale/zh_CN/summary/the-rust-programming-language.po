@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/title-page.md:1
 msgid "The Rust Programming Language"
-msgstr ""
+msgstr "Rust 程序设计语言"
 
 #: src/title-page.md:3
 msgid ""

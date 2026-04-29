@@ -226,7 +226,7 @@ msgstr ""
 #: src/ch17-02-concurrency-with-async.md:490
 #: src/ch17-02-concurrency-with-async.md:539
 msgid "\"hi\""
-msgstr ""
+msgstr "\"hi\""
 
 #: src/ch17-02-concurrency-with-async.md:271
 msgid "\"received '{received}'\""
@@ -473,6 +473,8 @@ msgstr ""
 #: src/ch17-02-concurrency-with-async.md:488
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch17-02-concurrency-with-async.md:515
 msgid ""

@@ -28,7 +28,7 @@ msgstr ""
 
 #: src/ch14-05-extending-cargo.md:10
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch14-05-extending-cargo.md:12
 msgid ""

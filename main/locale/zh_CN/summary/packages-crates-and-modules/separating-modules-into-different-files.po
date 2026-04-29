@@ -159,7 +159,7 @@ msgstr ""
 
 #: src/ch07-05-separating-modules-into-different-files.md:125
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch07-05-separating-modules-into-different-files.md:127
 msgid ""

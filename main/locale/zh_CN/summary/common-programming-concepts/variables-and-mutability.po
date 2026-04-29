@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch03-01-variables-and-mutability.md:1
 msgid "Variables and Mutability"
-msgstr ""
+msgstr "变量与可变性"
 
 #: src/ch03-01-variables-and-mutability.md:3
 msgid ""
@@ -25,6 +25,11 @@ msgid ""
 "your variables mutable. Let’s explore how and why Rust encourages you to "
 "favor immutability and why sometimes you might want to opt out."
 msgstr ""
+"如[\"使用变量存储值\"](ch02-00-guessing-game-tutorial.html#storing-values-"
+"with-variables)节所述，默认情况下，变量是不可变的。这是Rust提供的一种机制，旨"
+"在帮助你以充分利用其安全性和便捷并发性的方式编写代码。不过，你仍然可以选择使"
+"变量变为可变的。接下来，我们将探讨为什么Rust鼓励你采用不可变性，以及为什么有"
+"时你可能希望放弃这种特性。"
 
 #: src/ch03-01-variables-and-mutability.md:11
 msgid ""
@@ -32,18 +37,23 @@ msgid ""
 "change that value. To illustrate this, generate a new project called "
 "_variables_ in your _projects_ directory by using `cargo new variables`."
 msgstr ""
+"当一个变量是不可变的时，一旦某个值被绑定到一个名称上，就无法再更改该值。为了"
+"说明这一点，请使用`cargo new variables`在你的_projects目录下创建一个名为"
+"_variables_的新项目。"
 
 #: src/ch03-01-variables-and-mutability.md:15
 msgid ""
 "Then, in your new _variables_ directory, open _src/main.rs_ and replace its "
 "code with the following code, which won’t compile just yet:"
 msgstr ""
+"然后，在你的新的`_variables_`目录下，打开`_src/main.rs`文件，并用以下代码替换"
+"其中的代码。不过，目前这段代码还无法编译。"
 
 #: src/ch03-01-variables-and-mutability.md:18
 #: src/ch03-01-variables-and-mutability.md:80
 #: src/ch03-01-variables-and-mutability.md:168
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
 #: src/ch03-01-variables-and-mutability.md:23
 #: src/ch03-01-variables-and-mutability.md:25
@@ -51,13 +61,15 @@ msgstr ""
 #: src/ch03-01-variables-and-mutability.md:87
 #: src/ch03-01-variables-and-mutability.md:181
 msgid "\"The value of x is: {x}\""
-msgstr ""
+msgstr "\"The value of x is: {x}\""
 
 #: src/ch03-01-variables-and-mutability.md:29
 msgid ""
 "Save and run the program using `cargo run`. You should receive an error "
 "message regarding an immutability error, as shown in this output:"
 msgstr ""
+"使用`cargo run`保存并运行程序。你应该会收到一个关于不可变性错误的错误消息，如"
+"此输出所示："
 
 #: src/ch03-01-variables-and-mutability.md:32
 msgid ""
@@ -83,6 +95,27 @@ msgid ""
 "error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling variables v0.1.0 (file:///projects/variables)\n"
+"error[E0384]: cannot assign twice to immutable variable `x`\n"
+" --> src/main.rs:4:5\n"
+"  |\n"
+"2 |     let x = 5;\n"
+"  |         - first assignment to `x`\n"
+"3 |     println!(\"The value of x is: {x}\");\n"
+"4 |     x = 6;\n"
+"  |     ^^^^^ cannot assign twice to immutable variable\n"
+"  |\n"
+"help: consider making this binding mutable\n"
+"  |\n"
+"2 |     let mut x = 5;\n"
+"  |         +++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0384`.\n"
+"error: could not compile `variables` (bin \"variables\") due to 1 previous "
+"error\n"
+"```"
 
 #: src/ch03-01-variables-and-mutability.md:53
 msgid ""
@@ -92,6 +125,10 @@ msgid ""
 "you’re not a good programmer! Experienced Rustaceans still get compiler "
 "errors."
 msgstr ""
+"这个例子展示了编译器如何帮助您发现程序中的错误。  \n"
+"编译器错误可能会让人感到沮丧，但实际上，它们只是意味着您的程序还没有能够安全"
+"地完成您期望它做的事情；这并不意味着您不是一个优秀的程序员！经验丰富的Rust开"
+"发者仍然会遇到编译器错误。"
 
 #: src/ch03-01-variables-and-mutability.md:58
 msgid ""
@@ -99,6 +136,8 @@ msgid ""
 "`x` `` because you tried to assign a second value to the immutable `x` "
 "variable."
 msgstr ""
+"您收到了错误信息：``不能将值赋给不可变变量`x` ``，因为您试图将第二个值赋给不"
+"可变的`x`变量。"
 
 #: src/ch03-01-variables-and-mutability.md:60
 msgid ""
@@ -113,6 +152,10 @@ msgid ""
 "won’t change, it really won’t change, so you don’t have to keep track of it "
 "yourself. Your code is thus easier to reason through."
 msgstr ""
+"当我们尝试更改被指定为不可变的值时，必须避免编译时错误，因为这种情况可能导致"
+"错误。如果代码的一部分假设某个值永远不会改变，而另一部分代码改变了该值，那么"
+"代码的第一部分可能无法实现它设计时的效果。这种 bug 的原因在事后很难追溯，尤其"
+"是当第二段代码改变了值时"
 
 #: src/ch03-01-variables-and-mutability.md:71
 msgid ""
@@ -124,14 +167,19 @@ msgid ""
 "by indicating that other parts of the code will be changing this variable’s "
 "value."
 msgstr ""
+"但是，可变性非常有用，可以让代码更易于编写。虽然默认情况下变量是不可变的，但"
+"你可以通过在变量名称前添加`mut`来使其变为可变状态，就像在[第2章](ch02-00-"
+"guessing-game-tutorial.html#storing-values-with-variables)中所做的那样。同时"
+"添加`mut`还可以向代码的未来读者传达意图，表明代码的其他部分将会改变这个变量的"
+"值。"
 
 #: src/ch03-01-variables-and-mutability.md:78
 msgid "For example, let’s change _src/main.rs_ to the following:"
-msgstr ""
+msgstr "例如，让我们将`_src/main.rs_`改为如下内容："
 
 #: src/ch03-01-variables-and-mutability.md:91
 msgid "When we run the program now, we get this:"
-msgstr ""
+msgstr "现在当我们运行这个程序时，我们得到这样的结果："
 
 #: src/ch03-01-variables-and-mutability.md:93
 msgid ""
@@ -144,6 +192,14 @@ msgid ""
 "The value of x is: 6\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling variables v0.1.0 (file:///projects/variables)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s\n"
+"     Running `target/debug/variables`\n"
+"The value of x is: 5\n"
+"The value of x is: 6\n"
+"```"
 
 #: src/ch03-01-variables-and-mutability.md:102
 msgid ""
@@ -151,14 +207,16 @@ msgid ""
 "used. Ultimately, deciding whether to use mutability or not is up to you and "
 "depends on what you think is clearest in that particular situation."
 msgstr ""
+"当使用`mut`时，我们被允许将绑定到`x`的值从`5`更改为`6`。最终，是否使用可变性"
+"取决于你的判断，以及你认为在特定情况下哪种方式更为清晰。"
 
 #: src/ch03-01-variables-and-mutability.md:107
 msgid "<a id=\"constants\"></a>"
-msgstr ""
+msgstr "<a id=\"constants\"></a>"
 
 #: src/ch03-01-variables-and-mutability.md:109
 msgid "Declaring Constants"
-msgstr ""
+msgstr "声明常量"
 
 #: src/ch03-01-variables-and-mutability.md:111
 msgid ""
@@ -166,6 +224,8 @@ msgid ""
 "and are not allowed to change, but there are a few differences between "
 "constants and variables."
 msgstr ""
+"与不可变变量类似，常量也是绑定到一个名称的值，并且不允许改变。不过，常量和变"
+"量之间还是有一些区别的。"
 
 #: src/ch03-01-variables-and-mutability.md:115
 msgid ""
@@ -177,22 +237,31 @@ msgid ""
 "so don’t worry about the details right now. Just know that you must always "
 "annotate the type."
 msgstr ""
+"首先，不允许在常量中使用`mut`。常量默认是不可变的——它们始终都是不可变的。你应"
+"该使用`const`关键字来声明常量，而不是`let`关键字。此外，常量的值类型必须被注"
+"释说明。关于类型和类型注释的详细信息，我们将在下一节中讨论，即[“数据类型”]"
+"(ch03-02-data-types.html#data-types)<!-- ignore -->，所以现在不必担心这些细"
+"节。只需记住，你必须始终对类型进行注释说明即可。"
 
 #: src/ch03-01-variables-and-mutability.md:122
 msgid ""
 "Constants can be declared in any scope, including the global scope, which "
 "makes them useful for values that many parts of code need to know about."
 msgstr ""
+"常量可以在任何作用域中声明，包括全局作用域，这使得它们对于代码中的多个部分都"
+"需要知道的值非常有用。"
 
 #: src/ch03-01-variables-and-mutability.md:125
 msgid ""
 "The last difference is that constants may be set only to a constant "
 "expression, not the result of a value that could only be computed at runtime."
 msgstr ""
+"最后一个区别在于，常量只能被设置为一个常量表达式，而不能是只能在运行时计算得"
+"到的值的结果。"
 
 #: src/ch03-01-variables-and-mutability.md:128
 msgid "Here’s an example of a constant declaration:"
-msgstr ""
+msgstr "以下是一个常量声明的例子："
 
 #: src/ch03-01-variables-and-mutability.md:134
 msgid ""
@@ -207,6 +276,13 @@ msgid ""
 "on constant evaluation](../reference/const_eval.html) for more information "
 "on what operations can be used when declaring constants."
 msgstr ""
+"这个常量的名称是 ``THREE_HOURS_IN_SECONDS``，其值是通过将60（一分钟的秒数）乘"
+"以60（一小时中的分钟数）再乘以3（我们在这个程序中想要计算的小时数）得到的结"
+"果。Rust中常量的命名规范是使用全大写字母，并且单词之间使用下划线来分隔。编译"
+"器能够在编译时评估有限的一组操作，这使我们能够自行编写出这个表达式的值。采用"
+"更易于理解和验证的方式，而不是将这个常量设置为10800。有关在声明常量时可以使用"
+"哪些操作的更多信息，请参阅[Rust参考手册中关于常量评估的部分](../reference/"
+"const_eval.html)。"
 
 #: src/ch03-01-variables-and-mutability.md:145
 msgid ""
@@ -216,6 +292,9 @@ msgid ""
 "know about, such as the maximum number of points any player of a game is "
 "allowed to earn, or the speed of light."
 msgstr ""
+"常量在整个程序运行期间都是有效的，且仅在它们被声明的作用域内有效。这一特性使"
+"得常量适用于应用程序领域中那些可能被程序的多个部分需要知道的值，例如游戏中玩"
+"家允许获得的最大分数，或者光速等数值。"
 
 #: src/ch03-01-variables-and-mutability.md:151
 msgid ""
@@ -224,10 +303,13 @@ msgid ""
 "also helps to have only one place in your code that you would need to change "
 "if the hardcoded value needed to be updated in the future."
 msgstr ""
+"在程序中将硬编码的值命名为常量，有助于向未来的维护人员传达该值的含义。此外，"
+"这样做还可以确保代码中只有一个需要修改的地方，从而避免在将来需要更新硬编码值"
+"时进行多次修改。"
 
 #: src/ch03-01-variables-and-mutability.md:156
 msgid "Shadowing"
-msgstr ""
+msgstr "影子行为"
 
 #: src/ch03-01-variables-and-mutability.md:158
 msgid ""
@@ -241,10 +323,17 @@ msgid ""
 "is shadowed or the scope ends. We can shadow a variable by using the same "
 "variable’s name and repeating the use of the `let` keyword as follows:"
 msgstr ""
+"正如你在[第2章](ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-"
+"the-secret-number)中的猜谜游戏教程中看到的那样，你可以重新声明一个具有相同名"
+"称的变量。Rustaceans称第一个变量被第二个变量“遮蔽”，这意味着当你使用该变量的"
+"名称时，编译器会看到的是第二个变量。实际上，第二个变量会覆盖第一个变量，从而"
+"占据所有对该变量的使用机会。变量名称会一直指向自身，直到该变量被遮蔽或者作用"
+"域结束。我们可以通过使用相同的变量名称，并重复使用`let`关键字来遮蔽一个变量，"
+"如下所示："
 
 #: src/ch03-01-variables-and-mutability.md:178
 msgid "\"The value of x in the inner scope is: {x}\""
-msgstr ""
+msgstr "\"The value of x in the inner scope is: {x}\""
 
 #: src/ch03-01-variables-and-mutability.md:185
 msgid ""
@@ -256,6 +345,11 @@ msgid ""
 "value of `12`. When that scope is over, the inner shadowing ends and `x` "
 "returns to being `6`. When we run this program, it will output the following:"
 msgstr ""
+"该程序首先将`x`绑定到`5`的值。然后，通过重复`let x =`来创建一个新的变量`x`，"
+"将原始值加上`1`，使得`x`的值变为`6`。接着，在由大括号创建的内部作用域内，第三"
+"个`let`语句也会覆盖`x`，并创建一个新的变量。变量将前一个值乘以`2`，从而让`x`"
+"获得`12`的值。当这个作用域结束时，内部遮蔽就终止了，而`x`又恢复为`6`。当我们"
+"运行这个程序时，它会输出以下内容："
 
 #: src/ch03-01-variables-and-mutability.md:193
 msgid ""
@@ -268,6 +362,14 @@ msgid ""
 "The value of x is: 6\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling variables v0.1.0 (file:///projects/variables)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s\n"
+"     Running `target/debug/variables`\n"
+"The value of x in the inner scope is: 12\n"
+"The value of x is: 6\n"
+"```"
 
 #: src/ch03-01-variables-and-mutability.md:202
 msgid ""
@@ -277,6 +379,9 @@ msgid ""
 "transformations on a value but have the variable be immutable after those "
 "transformations have completed."
 msgstr ""
+"影子操作与将变量标记为`mut`是不同的，因为如果我们不小心尝试重新赋值给这个变"
+"量，而不使用`let`关键字，将会引发编译时错误。通过使用`let`，我们可以对值进行"
+"一些转换，但在这些转换完成后，该变量仍然是不可变的。"
 
 #: src/ch03-01-variables-and-mutability.md:208
 msgid ""
@@ -287,11 +392,15 @@ msgid ""
 "by inputting space characters, and then we want to store that input as a "
 "number:"
 msgstr ""
+"`mut`与影子作用的其他区别在于，当我们再次使用`let`关键字时，实际上会创建一个"
+"新的变量，因此我们可以改变值的类型，但可以使用相同的名称。例如，假设我们的程"
+"序要求用户输入某个文本之间所需的空格数，然后我们希望将这些输入存储为一个数"
+"字。"
 
 #: src/ch03-01-variables-and-mutability.md:216
 #: src/ch03-01-variables-and-mutability.md:229
 msgid "\"   \""
-msgstr ""
+msgstr "\"   \""
 
 #: src/ch03-01-variables-and-mutability.md:221
 msgid ""
@@ -301,10 +410,14 @@ msgid ""
 "reuse the simpler `spaces` name. However, if we try to use `mut` for this, "
 "as shown here, we’ll get a compile-time error:"
 msgstr ""
+"第一个变量`spaces`是字符串类型，而第二个变量`spaces`是数字类型。通过影子作用"
+"域，我们不必为变量起不同的名称，比如`spaces_str`和`spaces_num`；相反，我们可"
+"以使用更简单的名称`spaces`。然而，如果我们尝试像这里那样使用`mut`，将会出现编"
+"译时错误。"
 
 #: src/ch03-01-variables-and-mutability.md:234
 msgid "The error says we’re not allowed to mutate a variable’s type:"
-msgstr ""
+msgstr "错误信息显示我们不允许修改变量的类型。"
 
 #: src/ch03-01-variables-and-mutability.md:236
 msgid ""
@@ -324,9 +437,26 @@ msgid ""
 "error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling variables v0.1.0 (file:///projects/variables)\n"
+"error[E0308]: mismatched types\n"
+" --> src/main.rs:3:14\n"
+"  |\n"
+"2 |     let mut spaces = \"   \";\n"
+"  |                      ----- expected due to this value\n"
+"3 |     spaces = spaces.len();\n"
+"  |              ^^^^^^^^^^^^ expected `&str`, found `usize`\n"
+"\n"
+"For more information about this error, try `rustc --explain E0308`.\n"
+"error: could not compile `variables` (bin \"variables\") due to 1 previous "
+"error\n"
+"```"
 
 #: src/ch03-01-variables-and-mutability.md:251
 msgid ""
 "Now that we’ve explored how variables work, let’s look at more data types "
 "they can have."
 msgstr ""
+"现在我们已经了解了变量是如何工作的，接下来让我们看看它们还可以拥有哪些数据类"
+"型。"

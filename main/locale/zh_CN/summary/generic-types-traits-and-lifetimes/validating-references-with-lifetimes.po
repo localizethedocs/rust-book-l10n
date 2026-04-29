@@ -678,11 +678,11 @@ msgstr ""
 
 #: src/ch10-03-lifetime-syntax.md:587
 msgid "b' '"
-msgstr ""
+msgstr "b' '"
 
 #: src/ch10-03-lifetime-syntax.md:596 src/ch10-03-lifetime-syntax.md:601
 msgid "\"hello world\""
-msgstr ""
+msgstr "\"hello world\""
 
 #: src/ch10-03-lifetime-syntax.md:598
 msgid "// first_word works on slices of `String`s\n"
@@ -977,7 +977,7 @@ msgstr ""
 
 #: src/ch10-03-lifetime-syntax.md:881
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch10-03-lifetime-syntax.md:883
 msgid ""

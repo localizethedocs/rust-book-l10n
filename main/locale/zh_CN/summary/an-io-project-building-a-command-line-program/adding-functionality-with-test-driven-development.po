@@ -87,6 +87,8 @@ msgstr ""
 #: src/ch12-04-testing-the-librarys-functionality.md:44
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch12-04-testing-the-librarys-functionality.md:53
 #: src/ch12-04-testing-the-librarys-functionality.md:93

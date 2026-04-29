@@ -181,7 +181,7 @@ msgstr ""
 #: src/ch04-01-what-is-ownership.md:459 src/ch04-01-what-is-ownership.md:534
 #: src/ch04-01-what-is-ownership.md:578 src/ch04-01-what-is-ownership.md:625
 msgid "\"hello\""
-msgstr ""
+msgstr "\"hello\""
 
 #: src/ch04-01-what-is-ownership.md:112
 msgid ""

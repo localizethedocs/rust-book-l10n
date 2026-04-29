@@ -448,6 +448,8 @@ msgstr ""
 #: src/ch20-05-macros.md:392
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch20-05-macros.md:395
 msgid "\"Pancakes\""
@@ -669,7 +671,7 @@ msgstr ""
 
 #: src/ch20-05-macros.md:586
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch20-05-macros.md:588
 msgid ""

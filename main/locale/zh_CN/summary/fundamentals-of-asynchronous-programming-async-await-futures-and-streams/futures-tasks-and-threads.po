@@ -138,7 +138,7 @@ msgstr ""
 
 #: src/ch17-06-futures-tasks-threads.md:106
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch17-06-futures-tasks-threads.md:108
 msgid ""

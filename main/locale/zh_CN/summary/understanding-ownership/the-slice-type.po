@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch04-03-slices.md:1
 msgid "The Slice Type"
-msgstr ""
+msgstr "切片类型"
 
 #: src/ch04-03-slices.md:3
 msgid ""
@@ -21,6 +21,8 @@ msgid ""
 "[collection](ch08-00-common-collections.md)<!-- ignore -->. A slice is a "
 "kind of reference, so it does not have ownership."
 msgstr ""
+"_Slices_允许你引用一个连续的元素序列，这个序列属于[集合](ch08-00-common-"
+"collections.md)<!-- 忽略 -->。Slice是一种引用方式，因此它不拥有所有权。"
 
 #: src/ch04-03-slices.md:7
 msgid ""
@@ -29,6 +31,9 @@ msgid ""
 "string. If the function doesn’t find a space in the string, the whole string "
 "must be one word, so the entire string should be returned."
 msgstr ""
+"这里有一个简单的编程问题：编写一个函数，该函数接收一个由空格分隔的单词字符"
+"串，并返回该字符串中第一个找到的单词。如果函数在字符串中找不到空格，那么整个"
+"字符串应该被视为一个单词，因此应该返回整个字符串。"
 
 #: src/ch04-03-slices.md:12
 msgid ""
@@ -37,12 +42,17 @@ msgid ""
 "[“Storing UTF-8 Encoded Text with Strings”](ch08-02-strings.html#storing-"
 "utf-8-encoded-text-with-strings)<!-- ignore --> section of Chapter 8."
 msgstr ""
+"注意：为了引入切片，我们仅假设本节使用 ASCII;关于 UTF-8 处理的更详细讨论见第 "
+"8 章[“存储带字符串的 UTF-8 编码文本”]（ch08-02-strings.html#storing-utf-8-"
+"encoded-text-with-strings）部分 <!--忽略->--部分。"
 
 #: src/ch04-03-slices.md:17
 msgid ""
 "Let’s work through how we’d write the signature of this function without "
 "using slices, to understand the problem that slices will solve:"
 msgstr ""
+"让我们来分析如何在不使用切片的情况下写出该函数的签名，以理解切片能解决的问"
+"题："
 
 #: src/ch04-03-slices.md:24
 msgid ""
@@ -54,13 +64,18 @@ msgid ""
 "the index of the end of the word, indicated by a space. Let’s try that, as "
 "shown in Listing 4-7."
 msgstr ""
+"`first_word`函数的参数类型为`&String`。我们不需要拥有该参数的所有权，所以这样"
+"是可以的。（在Rust的惯用语法中，除非有必要，否则函数不会拥有其参数的所有权，"
+"这一点在我们继续阅读的过程中会逐渐明白。）但是，我们应该返回什么呢？实际上，"
+"我们无法以某种方式描述字符串的“部分”。不过，我们可以返回单词末尾的索引位置，"
+"这个位置通常由一个空格来表示。让我们尝试这样做，如清单4-7所示。"
 
 #: src/ch04-03-slices.md:38 src/ch04-03-slices.md:60 src/ch04-03-slices.md:78
 #: src/ch04-03-slices.md:112 src/ch04-03-slices.md:137
 #: src/ch04-03-slices.md:264 src/ch04-03-slices.md:309
 #: src/ch04-03-slices.md:397 src/ch04-03-slices.md:446
 msgid "b' '"
-msgstr ""
+msgstr "b' '"
 
 #: src/ch04-03-slices.md:51
 msgid ""
@@ -68,11 +83,13 @@ msgid ""
 "whether a value is a space, we’ll convert our `String` to an array of bytes "
 "using the `as_bytes` method."
 msgstr ""
+"因为我们需要逐个检查`String`元素，判断某个值是否为空格，所以我们将使用"
+"`as_bytes`方法将`String`转换为字节数组。"
 
 #: src/ch04-03-slices.md:71
 msgid ""
 "Next, we create an iterator over the array of bytes using the `iter` method:"
-msgstr ""
+msgstr "接下来，我们用“iter”方法在字节数组上创建一个迭代器："
 
 #: src/ch04-03-slices.md:89
 msgid ""
@@ -84,6 +101,11 @@ msgid ""
 "a reference to the element. This is a bit more convenient than calculating "
 "the index ourselves."
 msgstr ""
+"我们将在[第13章](ch13-02-iterators.html)中详细讨论迭代器。  \n"
+"目前，请注意`iter`是一个方法，它返回集合中的每个元素；而`enumerate`则封装了"
+"`iter`的结果，并将每个元素作为元组的一部分返回。从`enumerate`返回的元组的第一"
+"个元素是索引，第二个元素则是对该元素的引用。这种方式比我们自己计算索引要方便"
+"得多。"
 
 #: src/ch04-03-slices.md:96
 msgid ""
@@ -94,6 +116,11 @@ msgid ""
 "`&item` for the single byte in the tuple. Because we get a reference to the "
 "element from `.iter().enumerate()`, we use `&` in the pattern."
 msgstr ""
+"因为`enumerate`方法返回一个元组，我们可以使用模式来解析这个元组。我们将在[第6"
+"章](ch06-02-match.html#patterns-that-bind-to-values)中进一步讨论模式。在`for`"
+"循环中，我们指定了一个模式，该模式使用`i`作为元组的索引，而使用`&item`来表示"
+"元组中的单个字节。由于我们从`.iter().enumerate()`获取了元素的引用，因此我们在"
+"模式中使用了`&`。"
 
 #: src/ch04-03-slices.md:103
 msgid ""
@@ -101,6 +128,8 @@ msgid ""
 "using the byte literal syntax. If we find a space, we return the position. "
 "Otherwise, we return the length of the string by using `s.len()`."
 msgstr ""
+"在`for`循环中，我们通过使用字节字面量语法来查找代表空格的字节。如果找到了空"
+"格，我们就返回该位置。否则，我们使用`s.len()`来返回字符串的长度。"
 
 #: src/ch04-03-slices.md:123
 msgid ""
@@ -111,13 +140,17 @@ msgid ""
 "that it will still be valid in the future. Consider the program in Listing "
 "4-8 that uses the `first_word` function from Listing 4-7."
 msgstr ""
+"我们现在有办法找出字符串中第一个单词的末尾索引，但存在一个问题。我们返回的是"
+"一个单独的`usize`值，然而这个值只有在`&String`的上下文中才具有实际意义。换句"
+"话说，由于它是一个与`String`不同的独立值，因此无法保证它在未来仍然有效。请参"
+"考清单4-8中的程序，该程序使用了来自清单4-7中的`first_word`函数。"
 
 #: src/ch04-03-slices.md:146 src/ch04-03-slices.md:187
 #: src/ch04-03-slices.md:318 src/ch04-03-slices.md:406
 #: src/ch04-03-slices.md:415 src/ch04-03-slices.md:455
 #: src/ch04-03-slices.md:464
 msgid "\"hello world\""
-msgstr ""
+msgstr "\"hello world\""
 
 #: src/ch04-03-slices.md:148
 msgid "// word will get the value 5\n"
@@ -143,6 +176,10 @@ msgid ""
 "this would be a bug because the contents of `s` have changed since we saved "
 "`5` in `word`."
 msgstr ""
+"这个程序在编译时没有任何错误，如果我们在使用`s.clear()`之后调用`word`的话，同"
+"样也不会出现错误。因为`word`与`s`的状态完全无关，所以`word`中仍然包含`5`的"
+"值。我们可以使用这个值和变量`s`来尝试提取第一个单词，但这实际上是一个错误。因"
+"为自从我们将 `5` 保存在 `word` 之后，`s` 的内容已经发生了变化。"
 
 #: src/ch04-03-slices.md:165
 msgid ""
@@ -151,6 +188,8 @@ msgid ""
 "brittle if we write a `second_word` function. Its signature would have to "
 "look like this:"
 msgstr ""
+"在`word`中，必须担心索引与`s`中的数据不同步，这既繁琐又容易出错！如果我们编写"
+"`second_word`函数，管理这些索引会更加困难。该函数的签名必须如下所示："
 
 #: src/ch04-03-slices.md:173
 msgid ""
@@ -159,20 +198,23 @@ msgid ""
 "to that state at all. We have three unrelated variables floating around that "
 "need to be kept in sync."
 msgstr ""
+"现在，我们跟踪了一个起始索引和一个结束索引，而且还有更多的值是从特定状态的数"
+"据中计算出来的，但这些值与那个状态完全无关。我们有三个不相关的变量在四处游"
+"荡，需要保持同步。"
 
 #: src/ch04-03-slices.md:178
 msgid "Luckily, Rust has a solution to this problem: string slices."
-msgstr ""
+msgstr "幸运的是，Rust有一个解决这个问题的方案：字符串切片。"
 
 #: src/ch04-03-slices.md:180
 msgid "String Slices"
-msgstr ""
+msgstr "字符串切片"
 
 #: src/ch04-03-slices.md:182
 msgid ""
 "A _string slice_ is a reference to a contiguous sequence of the elements of "
 "a `String`, and it looks like this:"
-msgstr ""
+msgstr "字符串切片是指对一个`String`中连续元素的引用，其形式如下："
 
 #: src/ch04-03-slices.md:194
 msgid ""
@@ -187,10 +229,17 @@ msgid ""
 "would be a slice that contains a pointer to the byte at index 6 of `s` with "
 "a length value of `5`."
 msgstr ""
+"与其引用整个`String`，不如引用`hello`，它指的是`String`的一部分，这部分是通过"
+"额外的`[0..5]`位来指定的。我们使用方括号内的范围来创建切片，具体方法是指定"
+"`[starting_index..ending_index]`，其中_`starting_index`表示切片的起始位置，而"
+"_`ending_index`则比切片的最后一个位置多一个位置。在内部，切片数据结构会存储起"
+"始位置的数据。切片的长度等于`ending_index`减去`starting_index`。因此，在`let "
+"world = &s[6..11];`的情况下，`world`将是一个包含指向`s`中索引为6的字节的指针"
+"的切片，其长度值为`5`。"
 
 #: src/ch04-03-slices.md:205
 msgid "Figure 4-7 shows this in a diagram."
-msgstr ""
+msgstr "图4-7以图表的形式展示了这一内容。"
 
 #: src/ch04-03-slices.md:207
 msgid ""
@@ -203,35 +252,49 @@ msgid ""
 "has a length value of 5 and points to byte 6 of the heap data table.\"\n"
 "src=\"img/trpl04-07.svg\" class=\"center\" style=\"width: 50%;\" />"
 msgstr ""
+"<img alt=\"Three tables: a table representing the stack data of s, which "
+"points\n"
+"to the byte at index 0 in a table of the string data &quot;hello world&quot; "
+"on\n"
+"the heap. The third table represents the stack data of the slice world, "
+"which\n"
+"has a length value of 5 and points to byte 6 of the heap data table.\"\n"
+"src=\"img/trpl04-07.svg\" class=\"center\" style=\"width: 50%;\" />"
 
 #: src/ch04-03-slices.md:213
 msgid ""
 "<span class=\"caption\">Figure 4-7: A string slice referring to part of a "
 "`String`</span>"
 msgstr ""
+"<span class=\"caption\">图4-7：一个字符串切片，指代`String`的一部分</span>"
 
 #: src/ch04-03-slices.md:216
 msgid ""
 "With Rust’s `..` range syntax, if you want to start at index 0, you can drop "
 "the value before the two periods. In other words, these are equal:"
 msgstr ""
+"在Rust的`..`范围语法中，如果你想从索引0开始，可以省略两个小数点之前的值。换句"
+"话说，这两个值是相等的："
 
 #: src/ch04-03-slices.md:220 src/ch04-03-slices.md:230
 #: src/ch04-03-slices.md:242
 msgid "\"hello\""
-msgstr ""
+msgstr "\"hello\""
 
 #: src/ch04-03-slices.md:226
 msgid ""
 "By the same token, if your slice includes the last byte of the `String`, you "
 "can drop the trailing number. That means these are equal:"
 msgstr ""
+"同样地，如果你的切片包含了`String`的最后一个字节，那么你可以省略后面的数字。"
+"这意味着这两者是相等的："
 
 #: src/ch04-03-slices.md:238
 msgid ""
 "You can also drop both values to take a slice of the entire string. So, "
 "these are equal:"
 msgstr ""
+"您还可以同时输入两个值，以提取整个字符串的一部分。所以，这两个值是相等的："
 
 #: src/ch04-03-slices.md:250
 msgid ""
@@ -239,6 +302,8 @@ msgid ""
 "boundaries. If you attempt to create a string slice in the middle of a "
 "multibyte character, your program will exit with an error."
 msgstr ""
+"注意：字符串切片的范围索引必须位于有效的UTF-8字符边界上。如果您尝试在多字节字"
+"符的中间位置进行字符串切片，程序将会因错误而退出。"
 
 #: src/ch04-03-slices.md:254
 msgid ""
@@ -461,7 +526,7 @@ msgstr ""
 
 #: src/ch04-03-slices.md:504
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch04-03-slices.md:506
 msgid ""

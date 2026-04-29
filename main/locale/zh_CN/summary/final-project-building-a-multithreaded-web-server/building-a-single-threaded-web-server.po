@@ -455,6 +455,8 @@ msgstr ""
 #: src/ch21-01-single-threaded.md:656
 msgid "// --snip--\n"
 msgstr ""
+"// --snip--\n"
+"——剪——\n"
 
 #: src/ch21-01-single-threaded.md:431 src/ch21-01-single-threaded.md:500
 #: src/ch21-01-single-threaded.md:566 src/ch21-01-single-threaded.md:661

@@ -261,7 +261,7 @@ msgstr ""
 
 #: src/ch15-06-reference-cycles.md:227 src/ch15-06-reference-cycles.md:314
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
 #: src/ch15-06-reference-cycles.md:252
 msgid ""
@@ -436,7 +436,7 @@ msgstr ""
 
 #: src/ch15-06-reference-cycles.md:516
 msgid "Summary"
-msgstr ""
+msgstr "摘要"
 
 #: src/ch15-06-reference-cycles.md:518
 msgid ""
