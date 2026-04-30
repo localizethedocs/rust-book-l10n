@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch15-03-drop.md:1
 msgid "Running Code on Cleanup with the `Drop` Trait"
-msgstr ""
+msgstr "使用`Drop`特性进行代码清理"
 
 #: src/ch15-03-drop.md:3
 msgid ""

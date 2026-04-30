@@ -19,7 +19,7 @@ msgstr ""
 
 #: src/ch12-06-writing-to-stderr-instead-of-stdout.md:5
 msgid "Redirecting Errors to Standard Error"
-msgstr ""
+msgstr "将错误重定向到标准错误流"
 
 #: src/ch12-06-writing-to-stderr-instead-of-stdout.md:7
 msgid ""

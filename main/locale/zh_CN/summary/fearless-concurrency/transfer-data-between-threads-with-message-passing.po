@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/ch16-02-message-passing.md:5
 msgid "Transfer Data Between Threads with Message Passing"
-msgstr ""
+msgstr "通过消息传递在线程之间传输数据"
 
 #: src/ch16-02-message-passing.md:7
 msgid ""

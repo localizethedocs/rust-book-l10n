@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch05-02-example-structs.md:1
 msgid "An Example Program Using Structs"
-msgstr ""
+msgstr "一个使用结构体的示例程序"
 
 #: src/ch05-02-example-structs.md:3
 msgid ""

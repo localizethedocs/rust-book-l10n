@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/ch14-04-installing-binaries.md:5
 msgid "Installing Binaries with `cargo install`"
-msgstr ""
+msgstr "使用`cargo install`安装二进制文件"
 
 #: src/ch14-04-installing-binaries.md:7
 msgid ""

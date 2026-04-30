@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:1
 msgid "To `panic!` or Not to `panic!`"
-msgstr ""
+msgstr "是否应该使用`panic!`还是`panic!`"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:3
 msgid ""
@@ -267,7 +267,7 @@ msgstr "“太小了！”"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:194
 msgid "\"Too big!\""
-msgstr " “太大了！”"
+msgstr "“太大了！”"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:196
 msgid "\"You win!\""

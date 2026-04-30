@@ -426,7 +426,7 @@ msgstr ""
 
 #: src/ch14-02-publishing-to-crates-io.md:377
 msgid "Setting Up a Crates.io Account"
-msgstr ""
+msgstr "設定一個 Crates.io 帳號"
 
 #: src/ch14-02-publishing-to-crates-io.md:379
 msgid ""
@@ -512,6 +512,22 @@ msgid ""
 "configuring these fields\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo publish\n"
+"    Updating crates.io index\n"
+"warning: manifest has no description, license, license-file, documentation, "
+"homepage or repository.\n"
+"See https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata "
+"for more info.\n"
+"--snip--\n"
+"error: failed to publish to registry at https://crates.io\n"
+"\n"
+"Caused by:\n"
+"  the remote server responded with an error (status 400 Bad Request): "
+"missing or empty metadata fields: description, license. Please see https://"
+"doc.rust-lang.org/cargo/reference/manifest.html for more information on "
+"configuring these fields\n"
+"```"
 
 #: src/ch14-02-publishing-to-crates-io.md:443
 msgid ""
@@ -534,6 +550,11 @@ msgid ""
 "license = \"MIT\"\n"
 "```"
 msgstr ""
+"```toml\n"
+"[package]\n"
+"name = \"guessing_game\"\n"
+"license = \"MIT\"\n"
+"```"
 
 #: src/ch14-02-publishing-to-crates-io.md:460
 msgid ""
@@ -573,6 +594,17 @@ msgid ""
 "[dependencies]\n"
 "```"
 msgstr ""
+"```toml\n"
+"[package]\n"
+"name = \"guessing_game\"\n"
+"version = \"0.1.0\"\n"
+"edition = \"2024\"\n"
+"description = \"A fun game where you guess what number the computer has "
+"chosen.\"\n"
+"license = \"MIT OR Apache-2.0\"\n"
+"\n"
+"[dependencies]\n"
+"```"
 
 #: src/ch14-02-publishing-to-crates-io.md:487
 msgid ""
@@ -583,7 +615,7 @@ msgstr ""
 
 #: src/ch14-02-publishing-to-crates-io.md:491
 msgid "Publishing to Crates.io"
-msgstr ""
+msgstr "發佈至 Crates.io"
 
 #: src/ch14-02-publishing-to-crates-io.md:493
 msgid ""
@@ -628,6 +660,23 @@ msgid ""
 "   Published guessing_game v0.1.0 at registry `crates-io`\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo publish\n"
+"    Updating crates.io index\n"
+"   Packaging guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Packaged 6 files, 1.2KiB (895.0B compressed)\n"
+"   Verifying guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"   Compiling guessing_game v0.1.0\n"
+"(file:///projects/guessing_game/target/package/guessing_game-0.1.0)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s\n"
+"   Uploading guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Uploaded guessing_game v0.1.0 to registry `crates-io`\n"
+"note: waiting for `guessing_game v0.1.0` to be available at registry\n"
+"`crates-io`.\n"
+"You may press ctrl-c to skip waiting; the crate should be available "
+"shortly.\n"
+"   Published guessing_game v0.1.0 at registry `crates-io`\n"
+"```"
 
 #: src/ch14-02-publishing-to-crates-io.md:531
 msgid ""
@@ -637,7 +686,7 @@ msgstr ""
 
 #: src/ch14-02-publishing-to-crates-io.md:534
 msgid "Publishing a New Version of an Existing Crate"
-msgstr ""
+msgstr "發佈現有軟體箱的新版本"
 
 #: src/ch14-02-publishing-to-crates-io.md:536
 msgid ""
@@ -653,6 +702,8 @@ msgid ""
 "<a id=\"removing-versions-from-cratesio-with-cargo-yank\"></a> <a "
 "id=\"deprecating-versions-from-cratesio-with-cargo-yank\"></a>"
 msgstr ""
+"<a id=\"removing-versions-from-cratesio-with-cargo-yank\"></a> <a "
+"id=\"deprecating-versions-from-cratesio-with-cargo-yank\"></a>"
 
 #: src/ch14-02-publishing-to-crates-io.md:547
 msgid "Deprecating Versions from Crates.io"

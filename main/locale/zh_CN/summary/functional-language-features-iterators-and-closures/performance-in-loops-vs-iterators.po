@@ -26,7 +26,7 @@ msgid ""
 "explicit `for` loop or the version with iterators."
 msgstr ""
 "要判断是使用循环还是迭代器，你需要了解哪种实现更快：是带有显式`for`循环的"
-"`search`函数的版本，还是使用迭代器的版本"
+"`search`函数的版本，还是使用迭代器的版本。"
 
 #: src/ch13-04-performance.md:11
 msgid ""
@@ -65,7 +65,7 @@ msgstr ""
 "于：尽管迭代器是一种高级抽象机制，但它在编译后仍然会被转化为与你自己编写底层"
 "代码大致相同的代码。迭代器是Rust中一种“零成本抽象”机制，这意味着使用这种抽象"
 "机制并不会带来额外的开销。不会增加额外的运行时间开销。这与Bjarne Stroustrup在"
-"2012年ETAPS主题演讲《C++的基础》中提出的“零开销”概念类似。"
+"2012年ETAPS主题演讲《C++的基础》中提出的“零开销”概念类似："
 
 #: src/ch13-04-performance.md:36
 msgid ""

@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch19-02-refutability.md:1
 msgid "Refutability: Whether a Pattern Might Fail to Match"
-msgstr ""
+msgstr "可证伪性：模式是否可能无法匹配目标数据"
 
 #: src/ch19-02-refutability.md:3
 msgid ""

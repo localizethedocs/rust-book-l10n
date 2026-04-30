@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch03-03-how-functions-work.md:1
 msgid "Functions"
-msgstr ""
+msgstr "函数"
 
 #: src/ch03-03-how-functions-work.md:3
 msgid ""

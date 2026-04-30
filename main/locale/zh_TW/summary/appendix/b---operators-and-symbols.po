@@ -223,11 +223,11 @@ msgstr ""
 
 #: src/appendix-02-operators.md:29
 msgid "`MulAssign`"
-msgstr ""
+msgstr "`MulAssign`"
 
 #: src/appendix-02-operators.md:30
 msgid "`*expr`"
-msgstr ""
+msgstr "`*expr`"
 
 #: src/appendix-02-operators.md:30
 msgid "Dereference"
@@ -243,7 +243,7 @@ msgstr ""
 
 #: src/appendix-02-operators.md:31
 msgid "Raw pointer"
-msgstr ""
+msgstr "原始指標"
 
 #: src/appendix-02-operators.md:32 src/appendix-02-operators.md:33
 msgid "`+`"
@@ -267,15 +267,15 @@ msgstr ""
 
 #: src/appendix-02-operators.md:33
 msgid "`Add`"
-msgstr ""
+msgstr "`Add`"
 
 #: src/appendix-02-operators.md:34
 msgid "`+=`"
-msgstr ""
+msgstr "`+=`"
 
 #: src/appendix-02-operators.md:34
 msgid "`var += expr`"
-msgstr ""
+msgstr "`var += expr`"
 
 #: src/appendix-02-operators.md:34
 msgid "Arithmetic addition and assignment"
@@ -283,15 +283,15 @@ msgstr ""
 
 #: src/appendix-02-operators.md:34
 msgid "`AddAssign`"
-msgstr ""
+msgstr "`AddAssign`"
 
 #: src/appendix-02-operators.md:35
 msgid "`,`"
-msgstr ""
+msgstr "`,`"
 
 #: src/appendix-02-operators.md:35
 msgid "`expr, expr`"
-msgstr ""
+msgstr "`expr, expr`"
 
 #: src/appendix-02-operators.md:35
 msgid "Argument and element separator"
@@ -339,15 +339,15 @@ msgstr ""
 
 #: src/appendix-02-operators.md:38
 msgid "`SubAssign`"
-msgstr ""
+msgstr "`SubAssign`"
 
 #: src/appendix-02-operators.md:39
 msgid "`->`"
-msgstr ""
+msgstr "`->`"
 
 #: src/appendix-02-operators.md:39
 msgid "`fn(...) -> type`, <code>\\|...\\| -> type</code>"
-msgstr ""
+msgstr "`fn(...) -> type`, <code>\\|...\\| -> type</code>"
 
 #: src/appendix-02-operators.md:39
 msgid "Function and closure return type"
@@ -905,7 +905,7 @@ msgstr ""
 
 #: src/appendix-02-operators.md:106
 msgid "Namespace path"
-msgstr ""
+msgstr "命名空間路徑"
 
 #: src/appendix-02-operators.md:107
 msgid "`::path`"

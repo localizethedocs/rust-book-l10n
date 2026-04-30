@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/ch10-02-traits.md:5
 msgid "Defining Shared Behavior with Traits"
-msgstr ""
+msgstr "通过特质定义共享行为"
 
 #: src/ch10-02-traits.md:7
 msgid ""

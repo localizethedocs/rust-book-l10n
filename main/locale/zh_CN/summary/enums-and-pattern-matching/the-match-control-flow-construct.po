@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/ch06-02-match.md:5
 msgid "The `match` Control Flow Construct"
-msgstr ""
+msgstr "`match`控制流结构"
 
 #: src/ch06-02-match.md:7
 msgid ""

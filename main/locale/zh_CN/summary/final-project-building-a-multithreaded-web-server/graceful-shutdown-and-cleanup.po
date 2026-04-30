@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch21-03-graceful-shutdown-and-cleanup.md:1
 msgid "Graceful Shutdown and Cleanup"
-msgstr ""
+msgstr "优雅关闭与清理工作"
 
 #: src/ch21-03-graceful-shutdown-and-cleanup.md:3
 msgid ""

@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch03-05-control-flow.md:1
 msgid "Control Flow"
-msgstr ""
+msgstr "控制流"
 
 #: src/ch03-05-control-flow.md:3
 msgid ""

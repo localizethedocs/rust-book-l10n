@@ -13,10 +13,10 @@ msgstr ""
 
 #: src/appendix-00.md:1
 msgid "Appendix"
-msgstr ""
+msgstr "关键字"
 
 #: src/appendix-00.md:3
 msgid ""
 "The following sections contain reference material you may find useful in "
 "your Rust journey."
-msgstr ""
+msgstr "以下章节包含了一些在您学习Rust过程中可能会用到的参考资料。"

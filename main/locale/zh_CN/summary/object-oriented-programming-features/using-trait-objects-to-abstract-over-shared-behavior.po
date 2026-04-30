@@ -18,7 +18,7 @@ msgstr ""
 
 #: src/ch18-02-trait-objects.md:5
 msgid "Using Trait Objects to Abstract over Shared Behavior"
-msgstr ""
+msgstr "使用特质对象来抽象共享行为"
 
 #: src/ch18-02-trait-objects.md:7
 msgid ""

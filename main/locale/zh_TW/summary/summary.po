@@ -402,7 +402,7 @@ msgstr ""
 
 #: src/SUMMARY.md:121
 msgid "Macros"
-msgstr ""
+msgstr "巨集"
 
 #: src/SUMMARY.md:123
 msgid "Final Project: Building a Multithreaded Web Server"

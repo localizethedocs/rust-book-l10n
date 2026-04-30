@@ -75,19 +75,19 @@ msgstr ""
 
 #: src/ch19-03-pattern-syntax.md:49 src/ch19-03-pattern-syntax.md:767
 msgid "\"Got 50\""
-msgstr ""
+msgstr "\"Got 50\""
 
 #: src/ch19-03-pattern-syntax.md:50
 msgid "\"Matched, y = {y}\""
-msgstr ""
+msgstr "\"Matched, y = {y}\""
 
 #: src/ch19-03-pattern-syntax.md:51 src/ch19-03-pattern-syntax.md:769
 msgid "\"Default case, x = {x:?}\""
-msgstr ""
+msgstr "\"Default case, x = {x:?}\""
 
 #: src/ch19-03-pattern-syntax.md:54 src/ch19-03-pattern-syntax.md:772
 msgid "\"at the end: x = {x:?}, y = {y}\""
-msgstr ""
+msgstr "\"at the end: x = {x:?}, y = {y}\""
 
 #: src/ch19-03-pattern-syntax.md:60
 msgid ""
@@ -473,7 +473,7 @@ msgstr ""
 
 #: src/ch19-03-pattern-syntax.md:426
 msgid "<a id=\"ignoring-an-entire-value-with-_\"></a>"
-msgstr ""
+msgstr "<a id=\"ignoring-an-entire-value-with-_\"></a>"
 
 #: src/ch19-03-pattern-syntax.md:428
 msgid "An Entire Value with `_`"
@@ -631,7 +631,7 @@ msgstr ""
 
 #: src/ch19-03-pattern-syntax.md:601
 msgid "<a id=\"ignoring-remaining-parts-of-a-value-with-\"></a>"
-msgstr ""
+msgstr "<a id=\"ignoring-remaining-parts-of-a-value-with-\"></a>"
 
 #: src/ch19-03-pattern-syntax.md:603
 msgid "Remaining Parts of a Value with `..`"
@@ -686,7 +686,7 @@ msgstr ""
 
 #: src/ch19-03-pattern-syntax.md:673
 msgid "\"Some numbers: {second}\""
-msgstr ""
+msgstr "\"Some numbers: {second}\""
 
 #: src/ch19-03-pattern-syntax.md:681
 msgid "When we compile this example, we get this error:"
@@ -709,6 +709,20 @@ msgid ""
 "error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling patterns v0.1.0 (file:///projects/patterns)\n"
+"error: `..` can only be used once per tuple pattern\n"
+" --> src/main.rs:5:22\n"
+"  |\n"
+"5 |         (.., second, ..) => {\n"
+"  |          --          ^^ can only be used once per tuple pattern\n"
+"  |          |\n"
+"  |          previously used here\n"
+"\n"
+"error: could not compile `patterns` (bin \"patterns\") due to 1 previous "
+"error\n"
+"```"
 
 #: src/ch19-03-pattern-syntax.md:697
 msgid ""
@@ -724,7 +738,7 @@ msgstr ""
 
 #: src/ch19-03-pattern-syntax.md:707
 msgid "<a id=\"extra-conditionals-with-match-guards\"></a>"
-msgstr ""
+msgstr "<a id=\"extra-conditionals-with-match-guards\"></a>"
 
 #: src/ch19-03-pattern-syntax.md:709
 msgid "Adding Conditionals with Match Guards"

@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch12-02-reading-a-file.md:1
 msgid "Reading a File"
-msgstr ""
+msgstr "读取文件"
 
 #: src/ch12-02-reading-a-file.md:3
 msgid ""

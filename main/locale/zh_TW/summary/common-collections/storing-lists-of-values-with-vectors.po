@@ -258,7 +258,7 @@ msgstr ""
 
 #: src/ch08-01-vectors.md:257
 msgid "Using an Enum to Store Multiple Types"
-msgstr ""
+msgstr "使用列舉儲存多種型別"
 
 #: src/ch08-01-vectors.md:259
 msgid ""

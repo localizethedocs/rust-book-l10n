@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch15-06-reference-cycles.md:1
 msgid "Reference Cycles Can Leak Memory"
-msgstr ""
+msgstr "参考循环可能会泄露内存"
 
 #: src/ch15-06-reference-cycles.md:3
 msgid ""

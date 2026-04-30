@@ -30,7 +30,7 @@ msgstr ""
 
 #: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:12
 msgid "Modules Cheat Sheet"
-msgstr ""
+msgstr "模組速查表"
 
 #: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:14
 msgid ""
@@ -63,11 +63,11 @@ msgstr ""
 
 #: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:28
 msgid "In the file _src/garden.rs_"
-msgstr ""
+msgstr "在 _src/garden.rs_ 檔案中"
 
 #: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:29
 msgid "In the file _src/garden/mod.rs_"
-msgstr ""
+msgstr "在 _src/garden/mod.rs_ 檔案中"
 
 #: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:30
 msgid ""

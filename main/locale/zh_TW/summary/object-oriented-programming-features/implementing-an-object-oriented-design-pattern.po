@@ -82,11 +82,11 @@ msgstr ""
 
 #: src/ch18-03-oo-design-patterns.md:41
 msgid "<a id=\"a-traditional-object-oriented-attempt\"></a>"
-msgstr ""
+msgstr "<a id=\"a-traditional-object-oriented-attempt\"></a>"
 
 #: src/ch18-03-oo-design-patterns.md:43
 msgid "Attempting Traditional Object-Oriented Style"
-msgstr ""
+msgstr "嘗試傳統的物件導向風格"
 
 #: src/ch18-03-oo-design-patterns.md:45
 msgid ""

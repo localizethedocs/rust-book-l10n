@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch09-00-error-handling.md:1
 msgid "Error Handling"
-msgstr ""
+msgstr "错误处理"
 
 #: src/ch09-00-error-handling.md:3
 msgid ""
@@ -24,6 +24,10 @@ msgid ""
 "robust by ensuring that you’ll discover errors and handle them appropriately "
 "before deploying your code to production!"
 msgstr ""
+"在软件开发中，错误是不可避免的现象。因此，Rust提供了许多功能来处理可能出现的"
+"问题。在许多情况下，Rust要求你在代码能够编译之前，意识到可能存在错误并采取相"
+"应的措施。这一要求使得程序更加健壮，因为它能确保你在将代码部署到生产环境之"
+"前，能够发现错误并妥善处理它们！"
 
 #: src/ch09-00-error-handling.md:10
 msgid ""
@@ -34,6 +38,10 @@ msgid ""
 "a location beyond the end of an array, and so we want to immediately stop "
 "the program."
 msgstr ""
+"Rust将错误分为两大类：可恢复的错误和不可恢复的错误。对于可恢复的错误，比如“文"
+"件未找到”的错误，我们通常只需要向用户报告问题并重新尝试操作即可。而不可恢复的"
+"错误则通常是程序出现错误的症状，例如试图访问数组之外的位置，这种情况下我们需"
+"要立即停止程序的运行。"
 
 #: src/ch09-00-error-handling.md:17
 msgid ""
@@ -46,3 +54,8 @@ msgid ""
 "Additionally, we’ll explore considerations when deciding whether to try to "
 "recover from an error or to stop execution."
 msgstr ""
+"大多数语言并不区分这两种错误，而是以相同的方式处理它们，例如通过异常机制来实"
+"现。Rust没有异常机制。相反，它有一个名为`Result<T, E>`的类型，用于可恢复的错"
+"误；还有一个`panic!`宏，当程序遇到无法恢复的错误时，它会停止执行。本章首先介"
+"绍如何调用`panic!`，然后讨论如何返回`Result<T, E>`的值。此外，我们还将探讨其"
+"他相关内容。在决定是否尝试从错误中恢复或停止执行时需要考虑的因素。"

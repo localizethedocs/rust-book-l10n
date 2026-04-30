@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:1
 msgid "Paths for Referring to an Item in the Module Tree"
-msgstr ""
+msgstr "在模块树中引用项目的路径"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:3
 msgid ""

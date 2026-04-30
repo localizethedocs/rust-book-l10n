@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/ch17-05-traits-for-async.md:5
 msgid "A Closer Look at the Traits for Async"
-msgstr ""
+msgstr "深入探究异步的特性"
 
 #: src/ch17-05-traits-for-async.md:7
 msgid ""

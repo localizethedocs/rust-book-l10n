@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch13-02-iterators.md:1
 msgid "Processing a Series of Items with Iterators"
-msgstr ""
+msgstr "使用迭代器处理一系列元素"
 
 #: src/ch13-02-iterators.md:3
 msgid ""

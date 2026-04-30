@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch14-02-publishing-to-crates-io.md:1
 msgid "Publishing a Crate to Crates.io"
-msgstr ""
+msgstr "将Crate发布到Crates.io"
 
 #: src/ch14-02-publishing-to-crates-io.md:3
 msgid ""
@@ -479,7 +479,7 @@ msgstr ""
 #: src/ch14-02-publishing-to-crates-io.md:452
 #: src/ch14-02-publishing-to-crates-io.md:474
 msgid "<span class=\"filename\">Filename: Cargo.toml</span>"
-msgstr ""
+msgstr "<span class=\"filename\">文件名：Cargo.toml</span>"
 
 #: src/ch14-02-publishing-to-crates-io.md:416
 msgid ""

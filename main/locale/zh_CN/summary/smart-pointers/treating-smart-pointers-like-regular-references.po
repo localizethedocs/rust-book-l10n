@@ -20,7 +20,7 @@ msgstr ""
 
 #: src/ch15-02-deref.md:6
 msgid "Treating Smart Pointers Like Regular References"
-msgstr ""
+msgstr "将智能指针视为普通引用"
 
 #: src/ch15-02-deref.md:8
 msgid ""

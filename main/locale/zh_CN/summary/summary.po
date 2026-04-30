@@ -17,31 +17,31 @@ msgstr "Rust 程序设计语言"
 
 #: src/SUMMARY.md:3
 msgid "The Rust Programming Language Foreword Introduction"
-msgstr ""
+msgstr "Rust 编程语言序言介绍"
 
 #: src/SUMMARY.md:7
 msgid "Getting Started"
-msgstr ""
+msgstr "入门指南"
 
 #: src/SUMMARY.md:8
 msgid "Installation"
-msgstr ""
+msgstr "安装步骤"
 
 #: src/SUMMARY.md:9
 msgid "Hello, World!"
-msgstr ""
+msgstr "\"Hello, World！\""
 
 #: src/SUMMARY.md:10
 msgid "Hello, Cargo!"
-msgstr ""
+msgstr "\"Hello, Cargo!\"."
 
 #: src/SUMMARY.md:12
 msgid "Programming a Guessing Game"
-msgstr ""
+msgstr "编程实现一个猜谜游戏"
 
 #: src/SUMMARY.md:14
 msgid "Common Programming Concepts"
-msgstr ""
+msgstr "常见的编程概念"
 
 #: src/SUMMARY.md:15
 msgid "Variables and Mutability"
@@ -49,31 +49,31 @@ msgstr "变量与可变性"
 
 #: src/SUMMARY.md:16
 msgid "Data Types"
-msgstr ""
+msgstr "数据类型"
 
 #: src/SUMMARY.md:17
 msgid "Functions"
-msgstr ""
+msgstr "函数"
 
 #: src/SUMMARY.md:18
 msgid "Comments"
-msgstr ""
+msgstr "注释"
 
 #: src/SUMMARY.md:19
 msgid "Control Flow"
-msgstr ""
+msgstr "控制流"
 
 #: src/SUMMARY.md:21
 msgid "Understanding Ownership"
-msgstr ""
+msgstr "理解所有权"
 
 #: src/SUMMARY.md:22
 msgid "What is Ownership?"
-msgstr ""
+msgstr "什么是所有权？"
 
 #: src/SUMMARY.md:23
 msgid "References and Borrowing"
-msgstr ""
+msgstr "引用与借用"
 
 #: src/SUMMARY.md:24
 msgid "The Slice Type"
@@ -81,167 +81,167 @@ msgstr "切片类型"
 
 #: src/SUMMARY.md:26
 msgid "Using Structs to Structure Related Data"
-msgstr ""
+msgstr "使用结构体来组织相关数据"
 
 #: src/SUMMARY.md:27
 msgid "Defining and Instantiating Structs"
-msgstr ""
+msgstr "定义和实例化结构体"
 
 #: src/SUMMARY.md:28
 msgid "An Example Program Using Structs"
-msgstr ""
+msgstr "一个使用结构体的示例程序"
 
 #: src/SUMMARY.md:29
 msgid "Methods"
-msgstr ""
+msgstr "方法"
 
 #: src/SUMMARY.md:31
 msgid "Enums and Pattern Matching"
-msgstr ""
+msgstr "枚举与模式匹配"
 
 #: src/SUMMARY.md:32
 msgid "Defining an Enum"
-msgstr ""
+msgstr "定义枚举类型"
 
 #: src/SUMMARY.md:33
 msgid "The `match` Control Flow Construct"
-msgstr ""
+msgstr "`match`控制流结构"
 
 #: src/SUMMARY.md:34
 msgid "Concise Control Flow with `if let` and `let...else`"
-msgstr ""
+msgstr "使用`if let`和`let...else`实现简洁的控制流"
 
 #: src/SUMMARY.md:36
 msgid "Packages, Crates, and Modules"
-msgstr ""
+msgstr "包、箱子和模块"
 
 #: src/SUMMARY.md:37
 msgid "Packages and Crates"
-msgstr ""
+msgstr "包及箱子"
 
 #: src/SUMMARY.md:38
 msgid "Control Scope and Privacy with Modules"
-msgstr ""
+msgstr "通过模块控制作用域和隐私性"
 
 #: src/SUMMARY.md:39
 msgid "Paths for Referring to an Item in the Module Tree"
-msgstr ""
+msgstr "在模块树中引用项目的路径"
 
 #: src/SUMMARY.md:40
 msgid "Bringing Paths Into Scope with the `use` Keyword"
-msgstr ""
+msgstr "使用 `use` 关键字将路径引入作用域"
 
 #: src/SUMMARY.md:41
 msgid "Separating Modules into Different Files"
-msgstr ""
+msgstr "将模块分离到不同的文件中"
 
 #: src/SUMMARY.md:43
 msgid "Common Collections"
-msgstr ""
+msgstr "常见集合类型"
 
 #: src/SUMMARY.md:44
 msgid "Storing Lists of Values with Vectors"
-msgstr ""
+msgstr "使用向量存储值列表"
 
 #: src/SUMMARY.md:45
 msgid "Storing UTF-8 Encoded Text with Strings"
-msgstr ""
+msgstr "使用字符串存储UTF-8编码的文本"
 
 #: src/SUMMARY.md:46
 msgid "Storing Keys with Associated Values in Hash Maps"
-msgstr ""
+msgstr "使用哈希映射存储带有关联值的键"
 
 #: src/SUMMARY.md:48
 msgid "Error Handling"
-msgstr ""
+msgstr "错误处理"
 
 #: src/SUMMARY.md:49
 msgid "Unrecoverable Errors with `panic!`"
-msgstr ""
+msgstr "使用`panic!`处理无法恢复的错误"
 
 #: src/SUMMARY.md:50
 msgid "Recoverable Errors with `Result`"
-msgstr ""
+msgstr "使用`Result`处理可恢复的错误"
 
 #: src/SUMMARY.md:51
 msgid "To `panic!` or Not to `panic!`"
-msgstr ""
+msgstr "是否应该使用`panic!`还是`panic!`"
 
 #: src/SUMMARY.md:53
 msgid "Generic Types, Traits, and Lifetimes"
-msgstr ""
+msgstr "泛型类型、特质与生命周期"
 
 #: src/SUMMARY.md:54
 msgid "Generic Data Types"
-msgstr ""
+msgstr "泛型数据类型"
 
 #: src/SUMMARY.md:55
 msgid "Defining Shared Behavior with Traits"
-msgstr ""
+msgstr "通过特质定义共享行为"
 
 #: src/SUMMARY.md:56
 msgid "Validating References with Lifetimes"
-msgstr ""
+msgstr "利用生命周期验证引用关系"
 
 #: src/SUMMARY.md:58
 msgid "Writing Automated Tests"
-msgstr ""
+msgstr "编写自动化测试"
 
 #: src/SUMMARY.md:59
 msgid "How to Write Tests"
-msgstr ""
+msgstr "如何编写测试"
 
 #: src/SUMMARY.md:60
 msgid "Controlling How Tests Are Run"
-msgstr ""
+msgstr "控制测试的执行方式"
 
 #: src/SUMMARY.md:61
 msgid "Test Organization"
-msgstr ""
+msgstr "测试组织"
 
 #: src/SUMMARY.md:63
 msgid "An I/O Project: Building a Command Line Program"
-msgstr ""
+msgstr "一个I/O项目：构建命令行程序"
 
 #: src/SUMMARY.md:64
 msgid "Accepting Command Line Arguments"
-msgstr ""
+msgstr "接受命令行参数"
 
 #: src/SUMMARY.md:65
 msgid "Reading a File"
-msgstr ""
+msgstr "读取文件"
 
 #: src/SUMMARY.md:66
 msgid "Refactoring to Improve Modularity and Error Handling"
-msgstr ""
+msgstr "改建以改进模块化和错误处理"
 
 #: src/SUMMARY.md:67
 msgid "Adding Functionality with Test Driven Development"
-msgstr ""
+msgstr "添加功能与测试驱动器开发"
 
 #: src/SUMMARY.md:68
 msgid "Working with Environment Variables"
-msgstr ""
+msgstr "环境变量工作"
 
 #: src/SUMMARY.md:69
 msgid "Redirecting Errors to Standard Error"
-msgstr ""
+msgstr "将错误重定向到标准错误流"
 
 #: src/SUMMARY.md:71
 msgid "Functional Language Features: Iterators and Closures"
-msgstr ""
+msgstr "函数式语言特性：迭代器和闭包"
 
 #: src/SUMMARY.md:72
 msgid "Closures"
-msgstr ""
+msgstr "闭包"
 
 #: src/SUMMARY.md:73
 msgid "Processing a Series of Items with Iterators"
-msgstr ""
+msgstr "使用迭代器处理一系列元素"
 
 #: src/SUMMARY.md:74
 msgid "Improving Our I/O Project"
-msgstr ""
+msgstr "改进我们的I/O项目"
 
 #: src/SUMMARY.md:75
 msgid "Performance in Loops vs. Iterators"
@@ -249,47 +249,47 @@ msgstr "循环与迭代器的性能对比"
 
 #: src/SUMMARY.md:77
 msgid "More about Cargo and Crates.io"
-msgstr ""
+msgstr "关于Cargo和Crates.io的更多信息"
 
 #: src/SUMMARY.md:78
 msgid "Customizing Builds with Release Profiles"
-msgstr ""
+msgstr "使用发布配置文件自定义构建过程"
 
 #: src/SUMMARY.md:79
 msgid "Publishing a Crate to Crates.io"
-msgstr ""
+msgstr "将Crate发布到Crates.io"
 
 #: src/SUMMARY.md:80
 msgid "Cargo Workspaces"
-msgstr ""
+msgstr "Cargo工作空间"
 
 #: src/SUMMARY.md:81
 msgid "Installing Binaries with `cargo install`"
-msgstr ""
+msgstr "使用`cargo install`安装二进制文件"
 
 #: src/SUMMARY.md:82
 msgid "Extending Cargo with Custom Commands"
-msgstr ""
+msgstr "通过自定义命令扩展Cargo的功能"
 
 #: src/SUMMARY.md:84
 msgid "Smart Pointers"
-msgstr ""
+msgstr "智能指针"
 
 #: src/SUMMARY.md:85
 msgid "Using `Box<T>` to Point to Data on the Heap"
-msgstr ""
+msgstr "使用`Box<T>`指向堆上的数据"
 
 #: src/SUMMARY.md:86
 msgid "Treating Smart Pointers Like Regular References"
-msgstr ""
+msgstr "将智能指针视为普通引用"
 
 #: src/SUMMARY.md:87
 msgid "Running Code on Cleanup with the `Drop` Trait"
-msgstr ""
+msgstr "使用`Drop`特性进行代码清理"
 
 #: src/SUMMARY.md:88
 msgid "`Rc<T>`, the Reference Counted Smart Pointer"
-msgstr ""
+msgstr "`Rc<T>`，一种基于引用计数智能指针"
 
 #: src/SUMMARY.md:89
 msgid "`RefCell<T>` and the Interior Mutability Pattern"
@@ -297,100 +297,100 @@ msgstr "`RefCell<T>`与内部可变性模式"
 
 #: src/SUMMARY.md:90
 msgid "Reference Cycles Can Leak Memory"
-msgstr ""
+msgstr "参考循环可能会泄露内存"
 
 #: src/SUMMARY.md:92
 msgid "Fearless Concurrency"
-msgstr ""
+msgstr "无惧并发"
 
 #: src/SUMMARY.md:93
 msgid "Using Threads to Run Code Simultaneously"
-msgstr ""
+msgstr "使用线程同时运行代码"
 
 #: src/SUMMARY.md:94
 msgid "Transfer Data Between Threads with Message Passing"
-msgstr ""
+msgstr "通过消息传递在线程之间传输数据"
 
 #: src/SUMMARY.md:95
 msgid "Shared-State Concurrency"
-msgstr ""
+msgstr "共享状态并发"
 
 #: src/SUMMARY.md:96
 msgid "Extensible Concurrency with `Send` and `Sync`"
-msgstr ""
+msgstr "通过`Send`和`Sync`实现可扩展的并发功能"
 
 #: src/SUMMARY.md:98
 msgid ""
 "Fundamentals of Asynchronous Programming: Async, Await, Futures, and Streams"
-msgstr ""
+msgstr "异步编程基础：异步、等待、未来值和流"
 
 #: src/SUMMARY.md:99
 msgid "Futures and the Async Syntax"
-msgstr ""
+msgstr "未来值与异步语法"
 
 #: src/SUMMARY.md:100
 msgid "Applying Concurrency with Async"
-msgstr ""
+msgstr "正在应用同步功能"
 
 #: src/SUMMARY.md:101
 msgid "Working With Any Number of Futures"
-msgstr ""
+msgstr "使用任何未来数量"
 
 #: src/SUMMARY.md:102
 msgid "Streams: Futures in Sequence"
-msgstr ""
+msgstr "流：序列中的未来值"
 
 #: src/SUMMARY.md:103
 msgid "A Closer Look at the Traits for Async"
-msgstr ""
+msgstr "深入探究异步的特性"
 
 #: src/SUMMARY.md:104
 msgid "Futures, Tasks, and Threads"
-msgstr ""
+msgstr "未来值、任务与线程"
 
 #: src/SUMMARY.md:106
 msgid "Object Oriented Programming Features"
-msgstr ""
+msgstr "面向对象编程特性"
 
 #: src/SUMMARY.md:107
 msgid "Characteristics of Object-Oriented Languages"
-msgstr ""
+msgstr "面向对象语言的特点"
 
 #: src/SUMMARY.md:108
 msgid "Using Trait Objects to Abstract over Shared Behavior"
-msgstr ""
+msgstr "使用特质对象来抽象共享行为"
 
 #: src/SUMMARY.md:109
 msgid "Implementing an Object-Oriented Design Pattern"
-msgstr ""
+msgstr "实现面向对象的设计模式"
 
 #: src/SUMMARY.md:111
 msgid "Patterns and Matching"
-msgstr ""
+msgstr "模式与匹配"
 
 #: src/SUMMARY.md:112
 msgid "All the Places Patterns Can Be Used"
-msgstr ""
+msgstr "所有地方模式可以使用"
 
 #: src/SUMMARY.md:113
 msgid "Refutability: Whether a Pattern Might Fail to Match"
-msgstr ""
+msgstr "可证伪性：模式是否可能无法匹配目标数据"
 
 #: src/SUMMARY.md:114
 msgid "Pattern Syntax"
-msgstr ""
+msgstr "模式语法"
 
 #: src/SUMMARY.md:116
 msgid "Advanced Features"
-msgstr ""
+msgstr "高级功能"
 
 #: src/SUMMARY.md:117
 msgid "Unsafe Rust"
-msgstr ""
+msgstr "不安全的Rust"
 
 #: src/SUMMARY.md:118
 msgid "Advanced Traits"
-msgstr ""
+msgstr "高级特性"
 
 #: src/SUMMARY.md:119
 msgid "Advanced Types"
@@ -398,56 +398,56 @@ msgstr "高级类型"
 
 #: src/SUMMARY.md:120
 msgid "Advanced Functions and Closures"
-msgstr ""
+msgstr "高级函数和闭包"
 
 #: src/SUMMARY.md:121
 msgid "Macros"
-msgstr ""
+msgstr "宏"
 
 #: src/SUMMARY.md:123
 msgid "Final Project: Building a Multithreaded Web Server"
-msgstr ""
+msgstr "最终项目：构建多线程Web服务器"
 
 #: src/SUMMARY.md:124
 msgid "Building a Single-Threaded Web Server"
-msgstr ""
+msgstr "构建单线程Web服务器"
 
 #: src/SUMMARY.md:125
 msgid "From Single-Threaded to Multithreaded Server"
-msgstr ""
+msgstr "从单线程到多线程服务器"
 
 #: src/SUMMARY.md:126
 msgid "Graceful Shutdown and Cleanup"
-msgstr ""
+msgstr "优雅关闭与清理工作"
 
 #: src/SUMMARY.md:128
 msgid "Appendix"
-msgstr ""
+msgstr "关键字"
 
 #: src/SUMMARY.md:129
 msgid "A - Keywords"
-msgstr ""
+msgstr "附录 A 运算符与符号"
 
 #: src/SUMMARY.md:130
 msgid "B - Operators and Symbols"
-msgstr ""
+msgstr "附录 B 可推导的特质"
 
 #: src/SUMMARY.md:131
 msgid "C - Derivable Traits"
-msgstr ""
+msgstr "附录 C - 可衍生特性"
 
 #: src/SUMMARY.md:132
 msgid "D - Useful Development Tools"
-msgstr ""
+msgstr "附录 D 实用开发工具"
 
 #: src/SUMMARY.md:133
 msgid "E - Editions"
-msgstr ""
+msgstr "附录 E - 版本"
 
 #: src/SUMMARY.md:134
 msgid "F - Translations of the Book"
-msgstr ""
+msgstr "附录 F 本书的翻译内容"
 
 #: src/SUMMARY.md:135
 msgid "G - How Rust is Made and “Nightly Rust”"
-msgstr ""
+msgstr "附录 G - Rust的制造过程与“Nightly Rust”"

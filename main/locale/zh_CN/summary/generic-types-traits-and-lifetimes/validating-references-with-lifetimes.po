@@ -108,6 +108,26 @@ msgid ""
 "error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0597]: `x` does not live long enough\n"
+" --> src/main.rs:6:13\n"
+"  |\n"
+"5 |         let x = 5;\n"
+"  |             - binding `x` declared here\n"
+"6 |         r = &x;\n"
+"  |             ^^ borrowed value does not live long enough\n"
+"7 |     }\n"
+"  |     - `x` dropped here while still borrowed\n"
+"8 |\n"
+"9 |     println!(\"r: {r}\");\n"
+"  |                   - borrow later used here\n"
+"\n"
+"For more information about this error, try `rustc --explain E0597`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
 
 #: src/ch10-03-lifetime-syntax.md:85
 msgid ""
@@ -136,6 +156,8 @@ msgid ""
 "// ---------+-- 'a\n"
 "                          //          |\n"
 msgstr ""
+"// ---------+-- 'a\n"
+"                          //          |\n"
 
 #: src/ch10-03-lifetime-syntax.md:105 src/ch10-03-lifetime-syntax.md:110
 msgid "//          |\n"
@@ -174,29 +196,35 @@ msgstr ""
 msgid ""
 "Listing 10-18 fixes the code so that it doesn’t have a dangling reference "
 "and it compiles without any errors."
-msgstr ""
+msgstr "列出10-18可以修正代码，避免有悬挂的引用，编译时没有错误。"
 
 #: src/ch10-03-lifetime-syntax.md:130
 msgid ""
 "// ----------+-- 'b\n"
 "                          //           |\n"
 msgstr ""
+"// ----------+-- 'b\n"
+"                          //           |\n"
 
 #: src/ch10-03-lifetime-syntax.md:132
 msgid ""
 "// --+-- 'a  |\n"
 "                          //   |       |\n"
 msgstr ""
+"// --+-- 'a  |\n"
+"                          //   |       |\n"
 
 #: src/ch10-03-lifetime-syntax.md:134
 msgid ""
 "//   |       |\n"
 "                          // --+       |\n"
 msgstr ""
+"//   |       |\n"
+"                          // --+       |\n"
 
 #: src/ch10-03-lifetime-syntax.md:136
 msgid "// ----------+\n"
-msgstr ""
+msgstr "// ----------+\n"
 
 #: src/ch10-03-lifetime-syntax.md:141
 msgid ""

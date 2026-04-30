@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:5
 msgid "Control Scope and Privacy with Modules"
-msgstr ""
+msgstr "通过模块控制作用域和隐私性"
 
 #: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:7
 msgid ""

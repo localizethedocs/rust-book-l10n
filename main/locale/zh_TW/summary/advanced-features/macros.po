@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch20-05-macros.md:1
 msgid "Macros"
-msgstr ""
+msgstr "巨集"
 
 #: src/ch20-05-macros.md:3
 msgid ""
@@ -637,7 +637,7 @@ msgstr ""
 
 #: src/ch20-05-macros.md:557
 msgid "Function-Like Macros"
-msgstr ""
+msgstr "類函式巨集"
 
 #: src/ch20-05-macros.md:559
 msgid ""

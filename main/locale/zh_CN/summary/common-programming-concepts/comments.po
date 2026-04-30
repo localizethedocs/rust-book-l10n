@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch03-04-comments.md:1
 msgid "Comments"
-msgstr ""
+msgstr "注释"
 
 #: src/ch03-04-comments.md:3
 msgid ""

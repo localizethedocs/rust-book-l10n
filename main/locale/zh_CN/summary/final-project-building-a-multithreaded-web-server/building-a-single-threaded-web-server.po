@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch21-01-single-threaded.md:1
 msgid "Building a Single-Threaded Web Server"
-msgstr ""
+msgstr "构建单线程Web服务器"
 
 #: src/ch21-01-single-threaded.md:3
 msgid ""

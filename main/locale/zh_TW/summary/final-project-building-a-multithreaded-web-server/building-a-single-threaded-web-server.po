@@ -185,7 +185,7 @@ msgstr ""
 
 #: src/ch21-01-single-threaded.md:136
 msgid "Reading the Request"
-msgstr ""
+msgstr "讀取請求"
 
 #: src/ch21-01-single-threaded.md:138
 msgid ""
@@ -595,7 +595,7 @@ msgstr ""
 
 #: src/ch21-01-single-threaded.md:622
 msgid "<a id=\"a-touch-of-refactoring\"></a>"
-msgstr ""
+msgstr "<a id=\"a-touch-of-refactoring\"></a>"
 
 #: src/ch21-01-single-threaded.md:624
 msgid "Refactoring"

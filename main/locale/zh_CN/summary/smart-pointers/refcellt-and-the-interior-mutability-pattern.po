@@ -64,7 +64,7 @@ msgid ""
 msgstr ""
 "与`Rc<T>`不同，`RefCell<T>`类型代表了对数据的单一所有权。那么，是什么让"
 "`RefCell<T>`与`Box<T>`这样的类型有所不同呢？请回想一下你在第4章中学到的借用规"
-"则。"
+"则："
 
 #: src/ch15-05-interior-mutability.md:29
 msgid ""
@@ -560,9 +560,7 @@ msgstr ""
 #: src/ch15-05-interior-mutability.md:451
 msgid ""
 "Now that you’ve seen how to use `RefCell<T>`, let’s dig into how it works!"
-msgstr ""
-"\n"
-"既然你已经了解了如何使用“RefCell<T>”，让我们来深入了解它是如何工作的！"
+msgstr "既然你已经了解了如何使用“RefCell<T>”，让我们来深入了解它是如何工作的！"
 
 #: src/ch15-05-interior-mutability.md:455
 msgid "<a id=\"keeping-track-of-borrows-at-runtime-with-refcellt\"></a>"
@@ -808,10 +806,11 @@ msgid ""
 "`borrow_mut` method returns a `RefMut<T>` smart pointer, and we use the "
 "dereference operator on it and change the inner value."
 msgstr ""
-"在我们创建了`a`、`b`和`c`之后，我们希望在`value`中的值上加上10。我们通过调用"
-"`value`上的`borrow_mut`来实现这一点。该调用利用了我们在第5章中讨论过的自动解"
-"引用功能，从而将`Rc<T>`解引用为内部的`RefCell<T>`值。`borrow_mut`方法返回一个"
-"结果。`RefMut<T>`智能指针，我们对其使用解引用运算符，并修改其内部值。"
+"当我们在`a`、`b`和`c`中创建列表后，我们想要在`value`中添加10个值。 我们在"
+"`value`上调用 `brow_mut` 方法做到这一点，它使用了我们在[“`->`运算符的位置？”]"
+"(ch05-03-method-syntax.html#wheres-the---operator)<中讨论的自动去参照功能！ "
+"- 忽略 --> 在第5章，将`Rc<T>`中去除为内部的 `Refcell<T>`值。 `brow_mut` 方法"
+"返回一个 `RefMut<T>` 智能指针，我们在它上使用去参照操作员并更改内值。"
 
 #: src/ch15-05-interior-mutability.md:679
 msgid ""

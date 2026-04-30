@@ -19,7 +19,7 @@ msgstr ""
 
 #: src/ch13-01-closures.md:6
 msgid "Closures"
-msgstr ""
+msgstr "闭包"
 
 #: src/ch13-01-closures.md:8
 msgid ""
@@ -107,7 +107,7 @@ msgstr ""
 
 #: src/ch13-01-closures.md:125
 msgid "Running this code prints the following:"
-msgstr ""
+msgstr "运行这段代码会输出以下内容："
 
 #: src/ch13-01-closures.md:127
 msgid ""

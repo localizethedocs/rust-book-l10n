@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch05-03-method-syntax.md:1
 msgid "Methods"
-msgstr ""
+msgstr "方法"
 
 #: src/ch05-03-method-syntax.md:3
 msgid ""

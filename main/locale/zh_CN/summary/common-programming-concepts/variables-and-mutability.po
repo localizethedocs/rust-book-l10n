@@ -47,7 +47,7 @@ msgid ""
 "code with the following code, which won’t compile just yet:"
 msgstr ""
 "然后，在你的新的`_variables_`目录下，打开`_src/main.rs`文件，并用以下代码替换"
-"其中的代码。不过，目前这段代码还无法编译。"
+"其中的代码。不过，目前这段代码还无法编译："
 
 #: src/ch03-01-variables-and-mutability.md:18
 #: src/ch03-01-variables-and-mutability.md:80
@@ -125,10 +125,9 @@ msgid ""
 "you’re not a good programmer! Experienced Rustaceans still get compiler "
 "errors."
 msgstr ""
-"这个例子展示了编译器如何帮助您发现程序中的错误。  \n"
-"编译器错误可能会让人感到沮丧，但实际上，它们只是意味着您的程序还没有能够安全"
-"地完成您期望它做的事情；这并不意味着您不是一个优秀的程序员！经验丰富的Rust开"
-"发者仍然会遇到编译器错误。"
+"这个例子展示了编译器如何帮助您发现程序中的错误。编译器错误可能会让人感到沮"
+"丧，但实际上，它们只是意味着您的程序还没有能够安全地完成您期望它做的事情；这"
+"并不意味着您不是一个优秀的程序员！经验丰富的Rust开发者仍然会遇到编译器错误。"
 
 #: src/ch03-01-variables-and-mutability.md:58
 msgid ""
@@ -155,7 +154,7 @@ msgstr ""
 "当我们尝试更改被指定为不可变的值时，必须避免编译时错误，因为这种情况可能导致"
 "错误。如果代码的一部分假设某个值永远不会改变，而另一部分代码改变了该值，那么"
 "代码的第一部分可能无法实现它设计时的效果。这种 bug 的原因在事后很难追溯，尤其"
-"是当第二段代码改变了值时"
+"是当第二段代码改变了值时。"
 
 #: src/ch03-01-variables-and-mutability.md:71
 msgid ""
@@ -280,8 +279,8 @@ msgstr ""
 "以60（一小时中的分钟数）再乘以3（我们在这个程序中想要计算的小时数）得到的结"
 "果。Rust中常量的命名规范是使用全大写字母，并且单词之间使用下划线来分隔。编译"
 "器能够在编译时评估有限的一组操作，这使我们能够自行编写出这个表达式的值。采用"
-"更易于理解和验证的方式，而不是将这个常量设置为10800。有关在声明常量时可以使用"
-"哪些操作的更多信息，请参阅[Rust参考手册中关于常量评估的部分](../reference/"
+"更易于理解和验证的方式，而不是将这个常量设置为10,800。有关在声明常量时可以使"
+"用哪些操作的更多信息，请参阅[Rust参考手册中关于常量评估的部分](../reference/"
 "const_eval.html)。"
 
 #: src/ch03-01-variables-and-mutability.md:145
@@ -395,7 +394,7 @@ msgstr ""
 "`mut`与影子作用的其他区别在于，当我们再次使用`let`关键字时，实际上会创建一个"
 "新的变量，因此我们可以改变值的类型，但可以使用相同的名称。例如，假设我们的程"
 "序要求用户输入某个文本之间所需的空格数，然后我们希望将这些输入存储为一个数"
-"字。"
+"字："
 
 #: src/ch03-01-variables-and-mutability.md:216
 #: src/ch03-01-variables-and-mutability.md:229
@@ -413,11 +412,11 @@ msgstr ""
 "第一个变量`spaces`是字符串类型，而第二个变量`spaces`是数字类型。通过影子作用"
 "域，我们不必为变量起不同的名称，比如`spaces_str`和`spaces_num`；相反，我们可"
 "以使用更简单的名称`spaces`。然而，如果我们尝试像这里那样使用`mut`，将会出现编"
-"译时错误。"
+"译时错误："
 
 #: src/ch03-01-variables-and-mutability.md:234
 msgid "The error says we’re not allowed to mutate a variable’s type:"
-msgstr "错误信息显示我们不允许修改变量的类型。"
+msgstr "错误信息显示我们不允许修改变量的类型："
 
 #: src/ch03-01-variables-and-mutability.md:236
 msgid ""

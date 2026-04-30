@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch05-01-defining-structs.md:1
 msgid "Defining and Instantiating Structs"
-msgstr ""
+msgstr "定义和实例化结构体"
 
 #: src/ch05-01-defining-structs.md:3
 msgid ""

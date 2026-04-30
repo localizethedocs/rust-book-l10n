@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch19-00-patterns.md:1
 msgid "Patterns and Matching"
-msgstr ""
+msgstr "模式与匹配"
 
 #: src/ch19-00-patterns.md:3
 msgid ""
@@ -22,26 +22,29 @@ msgid ""
 "expressions and other constructs gives you more control over a program’s "
 "control flow. A pattern consists of some combination of the following:"
 msgstr ""
+"在Rust中，模式是一种特殊的语法，用于匹配各种类型的结构，无论是复杂的还是简单"
+"的类型。将模式与`match`表达式以及其他结构结合使用，可以让你更好地控制程序的执"
+"行流程。一个模式由以下元素的组合构成："
 
 #: src/ch19-00-patterns.md:8
 msgid "Literals"
-msgstr ""
+msgstr "字面量"
 
 #: src/ch19-00-patterns.md:9
 msgid "Destructured arrays, enums, structs, or tuples"
-msgstr ""
+msgstr "结构化数组、枚举类型、结构体或元组"
 
 #: src/ch19-00-patterns.md:10
 msgid "Variables"
-msgstr ""
+msgstr "变量"
 
 #: src/ch19-00-patterns.md:11
 msgid "Wildcards"
-msgstr ""
+msgstr "通配符"
 
 #: src/ch19-00-patterns.md:12
 msgid "Placeholders"
-msgstr ""
+msgstr "占位符"
 
 #: src/ch19-00-patterns.md:14
 msgid ""
@@ -51,6 +54,8 @@ msgid ""
 "whether it has the correct shape of data to continue running a particular "
 "piece of code."
 msgstr ""
+"一些示例模式包括`x`, `(a, 3)`和`某些(Color::Red)`。 然后我们的程序与模式匹配"
+"值，以确定它是否有正确的数据形状来继续运行特定的代码。"
 
 #: src/ch19-00-patterns.md:19
 msgid ""
@@ -60,6 +65,9 @@ msgid ""
 "the value fits the shape of the pattern, we can use the named pieces. If it "
 "doesn’t, the code associated with the pattern won’t run."
 msgstr ""
+"为了使用模式，我们比较它与某些值。如果模式与值相匹配，我们使用代码中的值部"
+"分。 回顾第6章中使用模式的 `match` 表达式，例如硬币分类机例子。 如果值符合模"
+"式的形状，我们可以使用命名的碎片。 如果它没有，与模式关联的代码将不会运行。"
 
 #: src/ch19-00-patterns.md:25
 msgid ""
@@ -69,3 +77,6 @@ msgid ""
 "might see. By the end of the chapter, you’ll know how to use patterns to "
 "express many concepts in a clear way."
 msgstr ""
+"本章是与模式有关的所有事项的参考。 我们将覆盖使用模式的有效位置，可辩驳和不可"
+"辩驳模式之间的差额。 以及您可能看到的不同类型的模式语法。 到本章末尾，你将知"
+"道如何使用模式来清楚地表达许多概念。"

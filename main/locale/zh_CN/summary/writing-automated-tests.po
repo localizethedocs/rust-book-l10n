@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch11-00-testing.md:1
 msgid "Writing Automated Tests"
-msgstr ""
+msgstr "编写自动化测试"
 
 #: src/ch11-00-testing.md:3
 msgid ""
@@ -22,6 +22,9 @@ msgid ""
 "but it is hopelessly inadequate for showing their absence.” That doesn’t "
 "mean we shouldn’t try to test as much as we can!"
 msgstr ""
+"在1972年发表的《谦逊的程序员》一文中，埃德斯格·W·迪杰斯特拉指出：“程序测试是"
+"一种非常有效的发现错误的方法，但用它来确认程序没有错误则远远不够。”但这并不意"
+"味着我们就不应该尽可能地进行测试！"
 
 #: src/ch11-00-testing.md:8
 msgid ""
@@ -32,6 +35,10 @@ msgid ""
 "cannot catch everything. As such, Rust includes support for writing "
 "automated software tests."
 msgstr ""
+"我们程序中的**正确性**，指的是我们的代码能够按照预期执行的程度。Rust在设计时"
+"非常注重程序的准确性，但正确性是一个复杂的问题，并不容易证明。Rust的类型系统"
+"承担了很大一部分责任，不过类型系统并不能涵盖所有情况。因此，Rust提供了编写自"
+"动化软件测试的支持。"
 
 #: src/ch11-00-testing.md:15
 msgid ""
@@ -45,6 +52,12 @@ msgid ""
 "plus 2 rather than, say, the parameter plus 10 or the parameter minus 50! "
 "That’s where tests come in."
 msgstr ""
+"假设我们编写了一个名为 ``add_two`` 的函数，该函数会将2加到传递给它的任何数字"
+"上。这个函数的签名接受一个整数作为参数，并返回一个整数作为结果。当我们实现并"
+"编译这个函数时，Rust会进行所有类型检查和借用检查，以确保例如我们没有传递一个 "
+"``String`` 的值或对该函数的无效引用。但是，Rust无法确保这个函数一定会按照预期"
+"的方式运行。我们的意图是返回参数加2，而不是比如参数加10或者参数减50！这就是测"
+"试发挥作用的地方。"
 
 #: src/ch11-00-testing.md:24
 msgid ""
@@ -53,6 +66,9 @@ msgid ""
 "whenever we make changes to our code to make sure any existing correct "
 "behavior has not changed."
 msgstr ""
+"我们可以编写测试，例如，当我们将`3`传递给`add_two`函数时，返回的值应该是`5`。"
+"每当我们对代码进行更改时，都可以运行这些测试，以确保现有的正确行为没有发生变"
+"化。"
 
 #: src/ch11-00-testing.md:29
 msgid ""
@@ -63,3 +79,7 @@ msgid ""
 "options provided for running your tests, and how to organize tests into unit "
 "tests and integration tests."
 msgstr ""
+"测试是一项复杂的技能：虽然我们无法在某一章中涵盖编写优质测试的所有细节，但在"
+"这章中，我们将讨论Rust的测试功能机制。我们会介绍在编写测试时可用的注释和宏，"
+"默认的行为以及用于运行测试的选项，还会讲解如何将测试组织成单元测试和集成测"
+"试。"

@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch12-03-improving-error-handling-and-modularity.md:1
 msgid "Refactoring to Improve Modularity and Error Handling"
-msgstr ""
+msgstr "改建以改进模块化和错误处理"
 
 #: src/ch12-03-improving-error-handling-and-modularity.md:3
 msgid ""

@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch07-05-separating-modules-into-different-files.md:1
 msgid "Separating Modules into Different Files"
-msgstr ""
+msgstr "将模块分离到不同的文件中"
 
 #: src/ch07-05-separating-modules-into-different-files.md:3
 msgid ""

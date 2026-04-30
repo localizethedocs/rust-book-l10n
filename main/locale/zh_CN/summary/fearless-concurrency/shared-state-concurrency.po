@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch16-03-shared-state.md:1
 msgid "Shared-State Concurrency"
-msgstr ""
+msgstr "共享状态并发"
 
 #: src/ch16-03-shared-state.md:3
 msgid ""

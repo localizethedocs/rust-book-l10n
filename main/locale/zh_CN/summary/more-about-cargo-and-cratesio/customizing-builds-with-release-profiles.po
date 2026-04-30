@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch14-01-release-profiles.md:1
 msgid "Customizing Builds with Release Profiles"
-msgstr ""
+msgstr "使用发布配置文件自定义构建过程"
 
 #: src/ch14-01-release-profiles.md:3
 msgid ""
@@ -52,7 +52,7 @@ msgstr ""
 
 #: src/ch14-01-release-profiles.md:37 src/ch14-01-release-profiles.md:62
 msgid "<span class=\"filename\">Filename: Cargo.toml</span>"
-msgstr ""
+msgstr "<span class=\"filename\">文件名：Cargo.toml</span>"
 
 #: src/ch14-01-release-profiles.md:47
 msgid ""

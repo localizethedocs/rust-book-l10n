@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch10-01-syntax.md:1
 msgid "Generic Data Types"
-msgstr ""
+msgstr "泛型数据类型"
 
 #: src/ch10-01-syntax.md:3
 msgid ""
@@ -45,7 +45,7 @@ msgstr ""
 
 #: src/ch10-01-syntax.md:50 src/ch10-01-syntax.md:115
 msgid "\"The largest number is {result}\""
-msgstr ""
+msgstr "“秘密号码是：{result}”"
 
 #: src/ch10-01-syntax.md:53 src/ch10-01-syntax.md:57 src/ch10-01-syntax.md:117
 msgid "'y'"

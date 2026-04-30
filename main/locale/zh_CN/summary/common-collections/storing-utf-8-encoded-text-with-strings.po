@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch08-02-strings.md:1
 msgid "Storing UTF-8 Encoded Text with Strings"
-msgstr ""
+msgstr "使用字符串存储UTF-8编码的文本"
 
 #: src/ch08-02-strings.md:3
 msgid ""

@@ -13,11 +13,11 @@ msgstr ""
 
 #: src/ch18-00-oop.md:1
 msgid "Object-Oriented Programming Features"
-msgstr ""
+msgstr "面向对象编程的特点"
 
 #: src/ch18-00-oop.md:5
 msgid "<a id=\"object-oriented-programming-features-of-rust\"></a>"
-msgstr ""
+msgstr "<a id=\"object-oriented-programming-features-of-rust\"></a>"
 
 #: src/ch18-00-oop.md:7
 msgid ""
@@ -34,3 +34,11 @@ msgid ""
 "offs of doing so versus implementing a solution using some of Rust’s "
 "strengths instead."
 msgstr ""
+"面向对象编程（OOP）是一种编程模型。作为编程概念的对象最早出现在 20 世纪 60 年"
+"代的Simula语言中。这些对象对Alan Kay的编程架构产生了影响，在该架构中，对象之"
+"间可以相互传递消息。为了描述这一架构，他在1967年提出了“面向对象编程”这一术"
+"语。许多不同的定义都描述了什么是OOP，根据其中一些定义，Rust也是一种面向对象的"
+"编程语言。但是，对于其他人来说并非如此。在本章中，我们将探讨一些通常被认为是"
+"面向对象的特征，以及这些特征如何体现在Rust的惯用语法中。接着，我们将向您展示"
+"如何在Rust中实现面向对象的设计模式，并讨论这样做与利用Rust的一些优势来解决问"
+"题之间的权衡。"

@@ -297,7 +297,7 @@ msgstr "“未猜对”"
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:369
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:411
 msgid "\"You guessed: {guess}\""
-msgstr "“你猜对了：{猜}”"
+msgstr "“你猜对了：{guess}”"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:316
 msgid ""
@@ -346,7 +346,7 @@ msgstr "“太小了！”"
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:373
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:415
 msgid "\"Too big!\""
-msgstr " “太大了！”"
+msgstr "“太大了！”"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:374
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:416
@@ -363,7 +363,7 @@ msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:409
 msgid "\"Please type a number!\""
-msgstr ""
+msgstr "请输入数字！"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:423
 msgid ""

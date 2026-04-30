@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch04-00-understanding-ownership.md:1
 msgid "Understanding Ownership"
-msgstr ""
+msgstr "理解所有权"
 
 #: src/ch04-00-understanding-ownership.md:3
 msgid ""
@@ -24,3 +24,7 @@ msgid ""
 "several related features: borrowing, slices, and how Rust lays data out in "
 "memory."
 msgstr ""
+"所有权是Rust最独特的功能之一，它对整个语言的发展有着深远的影响。它使得Rust能"
+"够在不需要垃圾收集器的情况下提供内存安全性的保障，因此理解所有权的运作方式非"
+"常重要。在本章中，我们将讨论所有权以及几个相关的特性：借用、切片，还有Rust在"
+"内存中如何分配数据。"

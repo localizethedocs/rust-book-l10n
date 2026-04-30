@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch18-03-oo-design-patterns.md:1
 msgid "Implementing an Object-Oriented Design Pattern"
-msgstr ""
+msgstr "实现面向对象的设计模式"
 
 #: src/ch18-03-oo-design-patterns.md:3
 msgid ""

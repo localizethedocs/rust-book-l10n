@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch14-05-extending-cargo.md:1
 msgid "Extending Cargo with Custom Commands"
-msgstr ""
+msgstr "通过自定义命令扩展Cargo的功能"
 
 #: src/ch14-05-extending-cargo.md:3
 msgid ""

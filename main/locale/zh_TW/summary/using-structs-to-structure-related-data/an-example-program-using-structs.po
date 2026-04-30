@@ -49,6 +49,13 @@ msgid ""
 "The area of the rectangle is 1500 square pixels.\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling rectangles v0.1.0 (file:///projects/rectangles)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.42s\n"
+"     Running `target/debug/rectangles`\n"
+"The area of the rectangle is 1500 square pixels.\n"
+"```"
 
 #: src/ch05-02-example-structs.md:42
 msgid ""
@@ -144,7 +151,7 @@ msgstr ""
 
 #: src/ch05-02-example-structs.md:166
 msgid "<a id=\"adding-useful-functionality-with-derived-traits\"></a>"
-msgstr ""
+msgstr "<a id=\"adding-useful-functionality-with-derived-traits\"></a>"
 
 #: src/ch05-02-example-structs.md:168
 msgid "Adding Functionality with Derived Traits"
@@ -229,6 +236,13 @@ msgid ""
 "rect1 is Rectangle { width: 30, height: 50 }\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling rectangles v0.1.0 (file:///projects/rectangles)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.48s\n"
+"     Running `target/debug/rectangles`\n"
+"rect1 is Rectangle { width: 30, height: 50 }\n"
+"```"
 
 #: src/ch05-02-example-structs.md:275
 msgid ""
@@ -252,6 +266,16 @@ msgid ""
 "}\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling rectangles v0.1.0 (file:///projects/rectangles)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.48s\n"
+"     Running `target/debug/rectangles`\n"
+"rect1 is Rectangle {\n"
+"    width: 30,\n"
+"    height: 50,\n"
+"}\n"
+"```"
 
 #: src/ch05-02-example-structs.md:292
 msgid ""

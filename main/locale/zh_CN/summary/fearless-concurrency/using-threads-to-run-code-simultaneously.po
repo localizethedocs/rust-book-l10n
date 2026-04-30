@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch16-01-threads.md:1
 msgid "Using Threads to Run Code Simultaneously"
-msgstr ""
+msgstr "使用线程同时运行代码"
 
 #: src/ch16-01-threads.md:3
 msgid ""

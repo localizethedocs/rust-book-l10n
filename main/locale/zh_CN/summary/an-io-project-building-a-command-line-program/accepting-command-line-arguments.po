@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch12-01-accepting-command-line-arguments.md:1
 msgid "Accepting Command Line Arguments"
-msgstr ""
+msgstr "接受命令行参数"
 
 #: src/ch12-01-accepting-command-line-arguments.md:3
 msgid ""

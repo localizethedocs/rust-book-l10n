@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch05-00-structs.md:1
 msgid "Using Structs to Structure Related Data"
-msgstr ""
+msgstr "使用结构体来组织相关数据"
 
 #: src/ch05-00-structs.md:3
 msgid ""
@@ -24,6 +24,10 @@ msgid ""
 "with structs to build on what you already know and demonstrate when structs "
 "are a better way to group data."
 msgstr ""
+"**结构体**，或者称为**结构**，是一种自定义数据类型，它允许你将多个相关的数值"
+"组合在一起，并给它们命名，从而形成一个有意义的整体。如果你熟悉面向对象语言，"
+"那么结构体就相当于对象的数据属性。在本章中，我们将比较元组与结构体之间的区"
+"别，以进一步巩固你已经掌握的知识，并展示何时使用结构体是分组数据的更好方式。"
 
 #: src/ch05-00-structs.md:10
 msgid ""
@@ -34,3 +38,6 @@ msgid ""
 "types in your program’s domain to take full advantage of Rust’s compile-time "
 "type checking."
 msgstr ""
+"我们将演示如何定义和实例化结构体。我们还将讨论如何定义相关函数，特别是那些被"
+"称为“方法_”的相关函数，以指定与结构体类型相关的行为。结构体与枚举（在第六章中"
+"讨论过）是创建程序中新类型的基石，从而充分利用Rust的编译时类型检查功能。"

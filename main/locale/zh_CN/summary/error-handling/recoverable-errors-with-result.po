@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch09-02-recoverable-errors-with-result.md:1
 msgid "Recoverable Errors with `Result`"
-msgstr ""
+msgstr "使用`Result`处理可恢复的错误"
 
 #: src/ch09-02-recoverable-errors-with-result.md:3
 msgid ""

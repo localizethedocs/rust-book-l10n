@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch11-02-running-tests.md:1
 msgid "Controlling How Tests Are Run"
-msgstr ""
+msgstr "控制测试的执行方式"
 
 #: src/ch11-02-running-tests.md:3
 msgid ""

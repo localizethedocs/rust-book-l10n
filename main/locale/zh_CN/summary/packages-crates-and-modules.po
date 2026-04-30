@@ -14,11 +14,11 @@ msgstr ""
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:3
 msgid ""
 "<a id=\"managing-growing-projects-with-packages-crates-and-modules\"></a>"
-msgstr ""
+msgstr "<a id=\"managing-growing-projects-with-packages-crates-and-modules\">"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:5
 msgid "Packages, Crates, and Modules"
-msgstr ""
+msgstr "包、箱子和模块"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:7
 msgid ""
@@ -27,6 +27,9 @@ msgid ""
 "distinct features, you’ll clarify where to find code that implements a "
 "particular feature and where to go to change how a feature works."
 msgstr ""
+"在编写大型程序时，组织代码会变得越来越重要。通过将相关的功能进行分组，并将具"
+"有不同功能的代码分开，你可以明确知道在哪里可以找到实现特定功能的代码，以及在"
+"哪里可以修改某个功能的运作方式。"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:12
 msgid ""
@@ -40,6 +43,12 @@ msgid ""
 "we’ll cover in [“Cargo Workspaces”](ch14-03-cargo-workspaces.html)<!-- "
 "ignore --> in Chapter 14."
 msgstr ""
+"到目前为止，我们编写的程序都集中在一个文件中的一个模块中。随着项目的增长，你"
+"应该将代码拆分成多个模块，然后再分别放入多个文件中。一个包可以包含多个二进制"
+"文件，并且可以选择性地包含一个库文件。随着包的发展，你可以将部分内容提取出"
+"来，形成独立的外部依赖项。本章将介绍所有这些技术。对于由相互关联的部分组成的"
+"非常大的项目来说，这种方法非常有用。那些共同发展的包，Cargo提供了工作区功能，"
+"我们将在[第14章](ch14-03-cargo-workspaces.html) “Cargo工作区”部分进行介绍。"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:21
 msgid ""
@@ -51,6 +60,11 @@ msgid ""
 "details that you reserve the right to change. This is another way to limit "
 "the amount of detail you have to keep in your head."
 msgstr ""
+"我们还将讨论封装实现细节的方法，这样你就可以在更高层次上重复使用代码：一旦你"
+"实现了某个操作，其他代码可以通过其公共接口调用你的代码，而无需了解该实现的具"
+"体工作原理。编写代码的方式决定了哪些部分是公开的，可供其他代码使用的，哪些部"
+"分是私有的实现细节，只有你才有权对其进行修改。这是另一种减少需要记住的细节数"
+"量的方法。"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:29
 msgid ""
@@ -63,6 +77,11 @@ msgid ""
 "items with the same name in the same scope; tools are available to resolve "
 "name conflicts."
 msgstr ""
+"一个相关的概念是作用域：代码编写所处的嵌套环境中有一系列被定义为“在作用域"
+"内”的名称。在读取、编写和编译代码时，程序员和编译器需要知道某个特定位置的某个"
+"名称指的是变量、函数、结构体、枚举、模块、常量还是其他元素，以及该元素的含"
+"义。可以创建不同的作用域，并改变哪些名称处于作用域内或不在作用域内。在同一个"
+"作用域中不能有两个具有相同名称的元素。有工具可以用来解决名称冲突的问题。"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:37
 msgid ""
@@ -71,26 +90,29 @@ msgid ""
 "private, and what names are in each scope in your programs. These features, "
 "sometimes collectively referred to as the _module system_, include:"
 msgstr ""
+"Rust拥有许多功能，可以帮助你管理代码的组织结构，包括哪些细节是公开的，哪些细"
+"节是私有的，以及程序中各个作用域中使用了哪些名称。这些功能有时被统称为“模块系"
+"统”："
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:42
 msgid ""
 "**Packages**: A Cargo feature that lets you build, test, and share crates"
-msgstr ""
+msgstr "**包**：Cargo中的一个功能，允许您构建、测试和共享库文件"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:43
 msgid "**Crates**: A tree of modules that produces a library or executable"
-msgstr ""
+msgstr "**库**：由多个模块组成的集合，最终生成库或可执行文件"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:44
 msgid ""
 "**Modules and use**: Let you control the organization, scope, and privacy of "
 "paths"
-msgstr ""
+msgstr "**模块与路径管理**：允许您控制模块的组织方式、作用域以及路径的隐私设置"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:46
 msgid ""
 "**Paths**: A way of naming an item, such as a struct, function, or module"
-msgstr ""
+msgstr "**路径**：用于命名项目的一种方式，例如结构体、函数或模块"
 
 #: src/ch07-00-managing-growing-projects-with-packages-crates-and-modules.md:48
 msgid ""
@@ -99,3 +121,6 @@ msgid ""
 "solid understanding of the module system and be able to work with scopes "
 "like a pro!"
 msgstr ""
+"在本章中，我们将介绍所有这些功能，讨论它们如何相互作用，并说明如何使用这些功"
+"能来管理作用域。到本章结束时，你应该对模块系统有扎实的理解，并且能够像专业人"
+"士一样处理作用域问题！"

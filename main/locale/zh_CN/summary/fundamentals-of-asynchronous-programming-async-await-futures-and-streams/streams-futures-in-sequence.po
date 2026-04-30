@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/ch17-04-streams.md:5
 msgid "Streams: Futures in Sequence"
-msgstr ""
+msgstr "流：序列中的未来值"
 
 #: src/ch17-04-streams.md:7
 msgid ""

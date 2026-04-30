@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch06-03-if-let.md:1
 msgid "Concise Control Flow with `if let` and `let...else`"
-msgstr ""
+msgstr "使用`if let`和`let...else`实现简洁的控制流"
 
 #: src/ch06-03-if-let.md:3
 msgid ""

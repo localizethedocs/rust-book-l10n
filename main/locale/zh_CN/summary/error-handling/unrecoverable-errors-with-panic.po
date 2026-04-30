@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:1
 msgid "Unrecoverable Errors with `panic!`"
-msgstr ""
+msgstr "使用`panic!`处理无法恢复的错误"
 
 #: src/ch09-01-unrecoverable-errors-with-panic.md:3
 msgid ""

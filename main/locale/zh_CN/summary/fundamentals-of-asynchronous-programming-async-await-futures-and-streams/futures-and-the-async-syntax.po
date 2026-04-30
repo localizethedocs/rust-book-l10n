@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch17-01-futures-and-syntax.md:1
 msgid "Futures and the Async Syntax"
-msgstr ""
+msgstr "未来值与异步语法"
 
 #: src/ch17-01-futures-and-syntax.md:3
 msgid ""

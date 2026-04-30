@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch14-03-cargo-workspaces.md:1
 msgid "Cargo Workspaces"
-msgstr ""
+msgstr "Cargo工作空间"
 
 #: src/ch14-03-cargo-workspaces.md:3
 msgid ""
@@ -53,7 +53,7 @@ msgstr ""
 
 #: src/ch14-03-cargo-workspaces.md:33 src/ch14-03-cargo-workspaces.md:113
 msgid "<span class=\"filename\">Filename: Cargo.toml</span>"
-msgstr ""
+msgstr "<span class=\"filename\">文件名：Cargo.toml</span>"
 
 #: src/ch14-03-cargo-workspaces.md:35
 msgid ""
@@ -257,6 +257,10 @@ msgid ""
 "rand = \"0.8.5\"\n"
 "```"
 msgstr ""
+"```toml\n"
+"[dependencies]\n"
+"rand = \"0.8.5\"\n"
+"```"
 
 #: src/ch14-03-cargo-workspaces.md:240
 msgid ""

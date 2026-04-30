@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch12-00-an-io-project.md:1
 msgid "An I/O Project: Building a Command Line Program"
-msgstr ""
+msgstr "一个I/O项目：构建命令行程序"
 
 #: src/ch12-00-an-io-project.md:3
 msgid ""
