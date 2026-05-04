@@ -26,6 +26,11 @@ msgid ""
 "don’t have to rely on the order of the data to specify or access the values "
 "of an instance."
 msgstr ""
+"结构体与元组类似，在[“元组类型”](ch03-02-data-types.html#the-tuple-type)<!--"
+"ignore -->这一节中有过讨论。两者都用于存储多个相关的数值。与元组一样，结构体"
+"的各个元素可以是不同的类型。但与元组不同的是，在结构体中，你需要为每个数据元"
+"素命名，这样就能明确其含义。这种命名方式使得结构体比元组更加灵活：你不必依赖"
+"数据的顺序来指定或访问实例中的值。"
 
 #: src/ch05-01-defining-structs.md:10
 msgid ""
@@ -35,6 +40,10 @@ msgid ""
 "names and types of the pieces of data, which we call _fields_. For example, "
 "Listing 5-1 shows a struct that stores information about a user account."
 msgstr ""
+"要定义一个结构体，我们需要输入关键字 `struct`，然后为整个结构体命名。结构体的"
+"名称应该能够描述被组合在一起的数据片段的重要性。接下来，在花括号内，我们需要"
+"定义这些数据的名称和类型，这些名称被称为 `_fields_`。例如，列表5-1展示了一个"
+"用于存储用户账户信息的结构体。"
 
 #: src/ch05-01-defining-structs.md:31
 msgid ""
@@ -49,20 +58,26 @@ msgid ""
 "values of the type. For example, we can declare a particular user as shown "
 "in Listing 5-2."
 msgstr ""
+"在定义了一个结构体之后，要使用该结构体，我们需要为该结构体的每个字段指定具体"
+"的值，从而创建一个该结构体的实例。创建实例的方法很简单：先说出该结构体的名"
+"称，然后加上包含键值对的花括号，其中键是字段的名称，值则是我们想要存储在这些"
+"字段中的数据。不必按照在结构体中声明的顺序来指定字段。换句话说，结构体的定义"
+"就像是一个通用的模板，而实例则是用具体的数据填充这个模板，从而创建出该类型的"
+"对象。例如，我们可以像清单5-2中所示，定义一个特定的用户。"
 
 #: src/ch05-01-defining-structs.md:54 src/ch05-01-defining-structs.md:82
 #: src/ch05-01-defining-structs.md:124 src/ch05-01-defining-structs.md:169
 #: src/ch05-01-defining-structs.md:211 src/ch05-01-defining-structs.md:246
 #: src/ch05-01-defining-structs.md:388
 msgid "\"someusername123\""
-msgstr ""
+msgstr "\"some username123\""
 
 #: src/ch05-01-defining-structs.md:55 src/ch05-01-defining-structs.md:83
 #: src/ch05-01-defining-structs.md:123 src/ch05-01-defining-structs.md:168
 #: src/ch05-01-defining-structs.md:210 src/ch05-01-defining-structs.md:245
 #: src/ch05-01-defining-structs.md:389
 msgid "\"someone@example.com\""
-msgstr ""
+msgstr "\"somone@example.com\""
 
 #: src/ch05-01-defining-structs.md:63
 msgid ""
@@ -72,10 +87,14 @@ msgid ""
 "a particular field. Listing 5-3 shows how to change the value in the `email` "
 "field of a mutable `User` instance."
 msgstr ""
+"要从一个结构体中获取特定的值，我们可以使用点符号。例如，要访问这个用户的电子"
+"邮件地址，我们可以使用 `user1.email`。如果该实例是可变的，我们可以通过使用点"
+"符号并将值赋给特定的字段来修改它。列表5-3展示了如何修改可变 `User` 实例中的 "
+"`email` 字段的值。"
 
 #: src/ch05-01-defining-structs.md:87
 msgid "\"anotheremail@example.com\""
-msgstr ""
+msgstr "\"anathmail@example.com\""
 
 #: src/ch05-01-defining-structs.md:93
 msgid ""
@@ -84,6 +103,9 @@ msgid ""
 "new instance of the struct as the last expression in the function body to "
 "implicitly return that new instance."
 msgstr ""
+"请注意，整个实例必须是可变的；Rust不允许我们只将某些字段标记为可变。与任何表"
+"达式一样，我们可以构造一个新的结构体实例，并将其作为函数体内的最后一个表达式"
+"来隐式返回该新实例。"
 
 #: src/ch05-01-defining-structs.md:98
 msgid ""
@@ -91,6 +113,9 @@ msgid ""
 "with the given email and username. The `active` field gets the value `true`, "
 "and the `sign_in_count` gets a value of `1`."
 msgstr ""
+"列表5-4展示了一个 `build_user` 函数，该函数返回一个 `User` 实例，该实例具有给"
+"定的电子邮件和用户名。`active` 字段获取值 `true`，而 `sign_in_count` 则获取"
+"值 `1`。"
 
 #: src/ch05-01-defining-structs.md:131
 msgid ""
@@ -100,12 +125,17 @@ msgid ""
 "each name would get even more annoying. Luckily, there’s a convenient "
 "shorthand!"
 msgstr ""
+"将函数的参数命名为与结构体字段相同的名称是合理的，但是需要重复使用 `email` "
+"和 `username` 这些字段名和变量确实有点麻烦。如果结构体有更多的字段，重复这些"
+"名称会更加令人烦恼。幸运的是，有一个方便的简写方式！"
 
 #: src/ch05-01-defining-structs.md:138
 msgid ""
 "<a id=\"using-the-field-init-shorthand-when-variables-and-fields-have-the-"
 "same-name\"></a>"
 msgstr ""
+"<a id=\"using-the-field-init-shorthand-when-variables-and-fields-have-the-"
+"same-name\"></a>"
 
 #: src/ch05-01-defining-structs.md:140
 msgid "Using the Field Init Shorthand"
@@ -118,6 +148,9 @@ msgid ""
 "`build_user` so that it behaves exactly the same but doesn’t have the "
 "repetition of `username` and `email`, as shown in Listing 5-5."
 msgstr ""
+"由于清单5-4中的参数名称和结构体字段名称完全相同，我们可以使用`_field init`简"
+"写语法来重写`build_user`，使其具有相同的行为，同时避免了`username`和`email`的"
+"重复代码，如清单5-5所示。"
 
 #: src/ch05-01-defining-structs.md:176
 msgid ""
@@ -127,16 +160,22 @@ msgid ""
 "and the `email` parameter have the same name, we only need to write `email` "
 "rather than `email: email`."
 msgstr ""
+"在这里，我们创建了一个新的 `User` 结构实例，该实例有一个名为 `email` 的字段。"
+"我们希望将 `email` 字段的值设置为 `build_user` 函数中 `email` 参数中的值。由"
+"于 `email` 字段和 `email` 参数具有相同的名称，因此我们只需要写 `email` 而不"
+"是 `email: email`。"
 
 #: src/ch05-01-defining-structs.md:184
 msgid ""
 "<a id=\"creating-instances-from-other-instances-with-struct-update-"
 "syntax\"></a>"
 msgstr ""
+"<a id=\"creating-instances-from-other-instances-with-struct-update-"
+"syntax\"></a>"
 
 #: src/ch05-01-defining-structs.md:186
 msgid "Creating Instances with Struct Update Syntax"
-msgstr ""
+msgstr "使用结构体更新语法创建实例"
 
 #: src/ch05-01-defining-structs.md:188
 msgid ""
@@ -144,6 +183,8 @@ msgid ""
 "the values from another instance of the same type, but changes some of them. "
 "You can do this using struct update syntax."
 msgstr ""
+"通常，创建一个包含另一个相同类型实例中的大部分值，但修改其中一些值的结构体实"
+"例是非常有用的。你可以使用结构体更新语法来实现这一点。"
 
 #: src/ch05-01-defining-structs.md:192
 msgid ""
@@ -152,6 +193,9 @@ msgid ""
 "`email` but otherwise use the same values from `user1` that we created in "
 "Listing 5-2."
 msgstr ""
+"首先，在列表5-6中，我们展示了如何以常规方式在 `user2` 中创建一个新的 `User` "
+"实例，而不使用更新语法。我们为 `email` 设置了一个新的值，但在其他方面仍然使用"
+"在列表5-2中创建的 `user1` 中的相同值。"
 
 #: src/ch05-01-defining-structs.md:207 src/ch05-01-defining-structs.md:242
 msgid "// --snip--\n"
@@ -161,7 +205,7 @@ msgstr ""
 
 #: src/ch05-01-defining-structs.md:219 src/ch05-01-defining-structs.md:252
 msgid "\"another@example.com\""
-msgstr ""
+msgstr "\"another@example.com\""
 
 #: src/ch05-01-defining-structs.md:227
 msgid ""
@@ -170,6 +214,8 @@ msgid ""
 "not explicitly set should have the same value as the fields in the given "
 "instance."
 msgstr ""
+"通过使用结构更新语法，我们可以用更少的代码实现相同的效果，如清单5-7所示。该语"
+"法 `..` 表示那些未被明确设置的字段应该具有与给定实例中字段相同的值。"
 
 #: src/ch05-01-defining-structs.md:260
 msgid ""
@@ -181,6 +227,11 @@ msgid ""
 "many fields as we want in any order, regardless of the order of the fields "
 "in the struct’s definition."
 msgstr ""
+"清单5-7中的代码还创建了一个在 `user2` 中的实例，该实例在 `email` 中有不同的"
+"值，但在 `username`、`active` 和 `sign_in_count` 字段中拥有与 `user1` 相同的"
+"数值。`..user1` 必须放在最后，以指定其余字段的值应从 `user1` 中对应的字段获"
+"取。不过，我们可以按照任意顺序为任意数量的字段指定值，而无需考虑结构体定义中"
+"字段的顺序。"
 
 #: src/ch05-01-defining-structs.md:268
 msgid ""
@@ -198,16 +249,28 @@ msgid ""
 "ignore --> section would apply. We can also still use `user1.email` in this "
 "example, because its value was not moved out of `user1`."
 msgstr ""
+"请注意，结构更新语法使用 `=` 作为赋值操作；这是因为它移动了数据，正如我们在"
+"[“变量与数据交互”](ch04-01-what-is-ownership.html#variables-and-data-"
+"interacting-with-move)<!-- ignore -->部分所看到的那样。在这个例子中，我们在创"
+"建 `user2` 之后不能再使用 `user1`，因为 `username` 字段中的 `String` 已经被移"
+"到了 `user2` 中。如果我们为 `email` 和 `username` 分别赋予了新的 `user2` 值，"
+"并且只使用了来自 `user1` 的 `active` 和 `sign_in_count` 值，那么即使在创建 "
+"`user2` 之后， `user1` 仍然有效。 `active` 和 `sign_in_count` 都是实现了 "
+"`Copy` 特性的类型，因此我们在[“仅栈式数据：复制”](ch04-01-what-is-ownership."
+"html#stack-only-data-copy)<!-- ignore -->部分讨论的行为仍然适用。在这个例子"
+"中，我们仍然可以使用 `user1.email`，因为它的数值并没有从 `user1` 中移出。"
 
 #: src/ch05-01-defining-structs.md:282
 msgid ""
 "<a id=\"using-tuple-structs-without-named-fields-to-create-different-"
 "types\"></a>"
 msgstr ""
+"<a id=\"using-tuple-structs-without-named-fields-to-create-different-"
+"types\"></a>"
 
 #: src/ch05-01-defining-structs.md:284
 msgid "Creating Different Types with Tuple Structs"
-msgstr ""
+msgstr "使用元组结构体创建不同类型的对象"
 
 #: src/ch05-01-defining-structs.md:286
 msgid ""
@@ -219,6 +282,10 @@ msgid ""
 "and when naming each field as in a regular struct would be verbose or "
 "redundant."
 msgstr ""
+"Rust还支持类似于元组的结构体，称为“元组结构体”。 元组结构体具有结构体名称所赋"
+"予的额外含义，但它们没有与字段相关联的名称；它们只是包含字段的类型。当您希望"
+"为整个元组指定一个名称，并且希望该元组与其他元组区分开来时，元组结构体非常有"
+"用。此外，当为每个字段命名时，如在普通结构体中那样做会显得冗长或多余。"
 
 #: src/ch05-01-defining-structs.md:293
 msgid ""
@@ -226,6 +293,9 @@ msgid ""
 "name followed by the types in the tuple. For example, here we define and use "
 "two tuple structs named `Color` and `Point`:"
 msgstr ""
+"要定义一个元组结构体，首先使用`struct`关键字，然后指定结构体名称，接着列出元"
+"组中的各个类型。例如，这里我们定义并使用了两个名为`Color`和`Point`的元组结构"
+"体。"
 
 #: src/ch05-01-defining-structs.md:311
 msgid ""
@@ -242,14 +312,21 @@ msgid ""
 "to destructure the values in the `origin` point into variables named `x`, "
 "`y`, and `z`."
 msgstr ""
+"请注意，`black`和`origin`的值是不同类型的，因为它们是不同元组结构体的实例。您"
+"定义的每个结构体都是独立的类型，即使结构体内部的字段可能具有相同的类型。例"
+"如，一个接受类型为`Color`参数的函数不能接受`Point`作为参数，尽管这两种类型都"
+"由三个`i32`值组成。否则，元组结构体实例与元组类似，您可以将其拆解为各个独立的"
+"元素，并且可以使用`.`后跟索引来访问单个值。与元组不同的是，元组结构体在拆分时"
+"需要为结构体类型命名。例如，我们会使用`let Point(x, y, z) = origin;`来将"
+"`origin`中的值拆解为名为`x`、`y`和`z`的变量。"
 
 #: src/ch05-01-defining-structs.md:325
 msgid "<a id=\"unit-like-structs-without-any-fields\"></a>"
-msgstr ""
+msgstr "<a id=\"unit-like-structs-without-any-fields\"></a>"
 
 #: src/ch05-01-defining-structs.md:327
 msgid "Defining Unit-Like Structs"
-msgstr ""
+msgstr "定义类似单位的结构体"
 
 #: src/ch05-01-defining-structs.md:329
 msgid ""
@@ -261,6 +338,11 @@ msgid ""
 "store in the type itself. We’ll discuss traits in Chapter 10. Here’s an "
 "example of declaring and instantiating a unit struct named `AlwaysEqual`:"
 msgstr ""
+"您还可以定义没有任何字段的结构体！这些结构体被称为“类似单位的结构体”，因为它"
+"们的行为类似于我们在[“元组类型”](ch03-02-data-types.html#the-tuple-type)<!-- "
+"ignore -->章节中提到的单位类型 `()`。当您需要在某个类型上实现某个特性，但该类"
+"型本身没有任何数据需要存储时，类似单位的结构体就非常有用。我们将在第十章中讨"
+"论特性。以下是一个声明并实例化名为 `AlwaysEqual` 的单位结构体的示例："
 
 #: src/ch05-01-defining-structs.md:349
 msgid ""
@@ -274,10 +356,17 @@ msgid ""
 "any data to implement that behavior! You’ll see in Chapter 10 how to define "
 "traits and implement them on any type, including unit-like structs."
 msgstr ""
+"要定义 `AlwaysEqual`，我们使用 `struct` 这个关键字，也就是我们想要的名称，然"
+"后加上分号。不需要使用花括号或圆括号！然后，我们可以以类似的方式在 `subject` "
+"变量中得到一个 `AlwaysEqual` 的实例，同样使用我们定义的名称，而不需要任何花括"
+"号或圆括号。想象一下，之后我们为这种类型实现了一些行为，使得每个 "
+"`AlwaysEqual` 的实例始终等于任何其他类型的实例，这样在测试时就能得到已知的结"
+"果。为了实现这种行为，我们不需要任何数据！在第十章中，你将看到如何定义特质，"
+"并如何在任何类型上实现它们，包括类似单元的结构体。"
 
 #: src/ch05-01-defining-structs.md:359
 msgid "Ownership of Struct Data"
-msgstr ""
+msgstr "结构数据的所有权"
 
 #: src/ch05-01-defining-structs.md:361
 msgid ""
@@ -286,6 +375,9 @@ msgid ""
 "because we want each instance of this struct to own all of its data and for "
 "that data to be valid for as long as the entire struct is valid."
 msgstr ""
+"在清单5-1中的结构定义中，我们使用了“owned `String`”类型，而不是“ `&str`”字符"
+"串切片类型。这是一个有意为之的选择，因为我们希望每个结构实例都能拥有其所有数"
+"据，并且这些数据在整个结构有效期间都是有效的。"
 
 #: src/ch05-01-defining-structs.md:366
 msgid ""
@@ -296,10 +388,14 @@ msgid ""
 "store a reference in a struct without specifying lifetimes, like the "
 "following in _src/main.rs_; this won’t work:"
 msgstr ""
+"结构也可以存储对其他对象所拥有的数据的引用，但这样做需要使用“_lifetimes_”这一"
+"Rust特性，我们将在第十章中详细讨论。Lifetimes确保结构所引用的数据在整个结构有"
+"效期间都是有效的。假设你在没有指定生命周期的情况下尝试在结构中存储引用，比如"
+"在*src/main.rs*中这样做，这是不会生效的： "
 
 #: src/ch05-01-defining-structs.md:397
 msgid "The compiler will complain that it needs lifetime specifiers:"
-msgstr ""
+msgstr "编译器会提示需要指定生命周期：  "
 
 #: src/ch05-01-defining-structs.md:399
 msgid ""
@@ -338,6 +434,40 @@ msgid ""
 "errors\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling structs v0.1.0 (file:///projects/structs)\n"
+"error[E0106]: missing lifetime specifier\n"
+" --> src/main.rs:3:15\n"
+"  |\n"
+"3 |     username: &str,\n"
+"  |               ^ expected named lifetime parameter\n"
+"  |\n"
+"help: consider introducing a named lifetime parameter\n"
+"  |\n"
+"1 ~ struct User<'a> {\n"
+"2 |     active: bool,\n"
+"3 ~     username: &'a str,\n"
+"  |\n"
+"\n"
+"error[E0106]: missing lifetime specifier\n"
+" --> src/main.rs:4:12\n"
+"  |\n"
+"4 |     email: &str,\n"
+"  |            ^ expected named lifetime parameter\n"
+"  |\n"
+"help: consider introducing a named lifetime parameter\n"
+"  |\n"
+"1 ~ struct User<'a> {\n"
+"2 |     active: bool,\n"
+"3 |     username: &str,\n"
+"4 ~     email: &'a str,\n"
+"  |\n"
+"\n"
+"For more information about this error, try `rustc --explain E0106`.\n"
+"error: could not compile `structs` (bin \"structs\") due to 2 previous "
+"errors\n"
+"```"
 
 #: src/ch05-01-defining-structs.md:433
 msgid ""
@@ -345,3 +475,5 @@ msgid ""
 "references in structs, but for now, we’ll fix errors like these using owned "
 "types like `String` instead of references like `&str`."
 msgstr ""
+"在第十章中，我们将讨论如何修复这些错误，以便可以在结构中存储引用。但现在，我"
+"们将使用“owned `String`”类型来修复这类错误，而不是使用“ `&str`”类型的引用。"

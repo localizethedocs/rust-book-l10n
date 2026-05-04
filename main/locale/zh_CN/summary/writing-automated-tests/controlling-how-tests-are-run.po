@@ -363,7 +363,7 @@ msgstr ""
 
 #: src/ch11-02-running-tests.md:306
 msgid "<span class=\"filename\">Filename: src/lib.rs</span>"
-msgstr ""
+msgstr "<span class=\"filename\">文件名: src/lib.rs</span>"
 
 #: src/ch11-02-running-tests.md:326
 msgid "// code that takes an hour to run\n"

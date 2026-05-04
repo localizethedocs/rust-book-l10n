@@ -16,10 +16,12 @@ msgid ""
 "<a id=\"turning-our-single-threaded-server-into-a-multithreaded-server\"></"
 "a> <a id=\"from-single-threaded-to-multithreaded-server\"></a>"
 msgstr ""
+"<a id=\"turning-our-single-threaded-server-into-a-multithreaded-server\"></"
+"a><a id=\"from-single-threaded-to-multithreaded-server\"></a>"
 
 #: src/ch21-02-multithreaded.md:6
 msgid "From a Single-Threaded to a Multithreaded Server"
-msgstr ""
+msgstr "从单线程到多线程服务器"
 
 #: src/ch21-02-multithreaded.md:8
 msgid ""
@@ -32,15 +34,21 @@ msgid ""
 "processed quickly. We’ll need to fix this, but first we’ll look at the "
 "problem in action."
 msgstr ""
+"目前，服务器会依次处理每个请求，这意味着直到第一个请求的处理完成之后，服务器"
+"才会处理第二个请求。如果服务器接收到的请求数量不断增加，这种串行处理方式会变"
+"得越来越不理想。如果服务器接收到需要长时间处理的请求，那么后续的请求将不得不"
+"等待该请求完成，即使这些新请求可以很快被处理。我们需要解决这个问题，但在那之"
+"前，我们先来看看实际情况。"
 
 #: src/ch21-02-multithreaded.md:18
 msgid ""
 "<a id=\"simulating-a-slow-request-in-the-current-server-implementation\"></a>"
 msgstr ""
+"<a id=\"simulating-a-slow-request-in-the-current-server-implementation\"></a>"
 
 #: src/ch21-02-multithreaded.md:20
 msgid "Simulating a Slow Request"
-msgstr ""
+msgstr "模拟慢速请求"
 
 #: src/ch21-02-multithreaded.md:22
 msgid ""
@@ -49,6 +57,9 @@ msgid ""
 "request to _/sleep_ with a simulated slow response that will cause the "
 "server to sleep for five seconds before responding."
 msgstr ""
+"我们将探讨一个处理速度较慢的请求如何影响对当前服务器实现的其他请求。清单 "
+"21-10 展示了如何处理对 _/sleep_ 的请求，该请求会模拟一个缓慢的响应，导致服务"
+"器在响应之前休眠五秒钟。"
 
 #: src/ch21-02-multithreaded.md:36 src/ch21-02-multithreaded.md:50
 #: src/ch21-02-multithreaded.md:64 src/ch21-02-multithreaded.md:486
@@ -70,46 +81,46 @@ msgstr ""
 #: src/ch21-02-multithreaded.md:40 src/ch21-02-multithreaded.md:175
 #: src/ch21-02-multithreaded.md:245 src/ch21-02-multithreaded.md:348
 msgid "\"127.0.0.1:7878\""
-msgstr ""
+msgstr "\"127.0.0.1:7878\""
 
 #: src/ch21-02-multithreaded.md:56 src/ch21-02-multithreaded.md:191
 #: src/ch21-02-multithreaded.md:262 src/ch21-02-multithreaded.md:365
 msgid "\"GET / HTTP/1.1\""
-msgstr ""
+msgstr " “GET / HTTP/1.1”"
 
 #: src/ch21-02-multithreaded.md:56 src/ch21-02-multithreaded.md:59
 #: src/ch21-02-multithreaded.md:191 src/ch21-02-multithreaded.md:194
 #: src/ch21-02-multithreaded.md:262 src/ch21-02-multithreaded.md:265
 #: src/ch21-02-multithreaded.md:365 src/ch21-02-multithreaded.md:368
 msgid "\"HTTP/1.1 200 OK\""
-msgstr ""
+msgstr "“HTTP/1.1 200 OK”"
 
 #: src/ch21-02-multithreaded.md:56 src/ch21-02-multithreaded.md:59
 #: src/ch21-02-multithreaded.md:191 src/ch21-02-multithreaded.md:194
 #: src/ch21-02-multithreaded.md:262 src/ch21-02-multithreaded.md:265
 #: src/ch21-02-multithreaded.md:365 src/ch21-02-multithreaded.md:368
 msgid "\"hello.html\""
-msgstr ""
+msgstr "“hello.html”"
 
 #: src/ch21-02-multithreaded.md:57 src/ch21-02-multithreaded.md:192
 #: src/ch21-02-multithreaded.md:263 src/ch21-02-multithreaded.md:366
 msgid "\"GET /sleep HTTP/1.1\""
-msgstr ""
+msgstr "\"GET /sleep HTTP/1.1\""
 
 #: src/ch21-02-multithreaded.md:61 src/ch21-02-multithreaded.md:196
 #: src/ch21-02-multithreaded.md:267 src/ch21-02-multithreaded.md:370
 msgid "\"HTTP/1.1 404 NOT FOUND\""
-msgstr ""
+msgstr "“HTTP/1.1 404 未找到”"
 
 #: src/ch21-02-multithreaded.md:61 src/ch21-02-multithreaded.md:196
 #: src/ch21-02-multithreaded.md:267 src/ch21-02-multithreaded.md:370
 msgid "\"404.html\""
-msgstr ""
+msgstr "“404.html”"
 
 #: src/ch21-02-multithreaded.md:70 src/ch21-02-multithreaded.md:203
 #: src/ch21-02-multithreaded.md:274 src/ch21-02-multithreaded.md:377
 msgid "\"{status_line}\\r\\nContent-Length: {length}\\r\\n\\r\\n{contents}\""
-msgstr ""
+msgstr "“{status_line}\\r\\n 内容长度：{length}\\r\\n\\r\\n{{contents}”"
 
 #: src/ch21-02-multithreaded.md:78
 msgid ""
@@ -118,6 +129,9 @@ msgid ""
 "string literal values; `match` doesn’t do automatic referencing and "
 "dereferencing, like the equality method does."
 msgstr ""
+"既然我们有了三种情况，我们就从 `if` 切换到 `match`。我们需要显式地匹配 "
+"`request_line` 的切片，以便与字符串字面量进行模式匹配；而 `match` 并不像相等"
+"性方法那样进行自动引用和解除引用操作。"
 
 #: src/ch21-02-multithreaded.md:83
 msgid ""
@@ -126,12 +140,17 @@ msgid ""
 "will sleep for five seconds before rendering the successful HTML page. The "
 "third arm is the same as the `else` block from Listing 21-9."
 msgstr ""
+"第一个分支与 Listing 21-9 中的 `if` 块相同。第二个分支匹配一个对 _/sleep_ 的"
+"请求。当接收到该请求时，服务器会休眠五秒钟，然后才渲染成功的 HTML 页面。第三"
+"个分支与 Listing 21-9 中的 `else` 块相同。"
 
 #: src/ch21-02-multithreaded.md:88
 msgid ""
 "You can see how primitive our server is: Real libraries would handle the "
 "recognition of multiple requests in a much less verbose way!"
 msgstr ""
+"你可以看到我们的服务器是多么的简陋：真正的库会以更简洁的方式来处理多个请求的"
+"识别问题！"
 
 #: src/ch21-02-multithreaded.md:91
 msgid ""
@@ -141,6 +160,10 @@ msgid ""
 "But if you enter _/sleep_ and then load _/_, you’ll see that _/_ waits until "
 "`sleep` has slept for its full five seconds before loading."
 msgstr ""
+"使用 `cargo run` 启动服务器。然后，打开两个浏览器窗口：一个用于 "
+"http://127.0.0.1:7878_，另一个用于 http://127.0.0.1:7878/sleep_。如果你像之前"
+"一样多次输入 _/_ URI，你会看到它能够快速响应。但是，如果你先输入 _/sleep_，然"
+"后再加载 _/_，你会发现 _//_ 会等待 `sleep` 完全睡五秒之后才会继续加载。"
 
 #: src/ch21-02-multithreaded.md:97
 msgid ""
@@ -148,10 +171,12 @@ msgid ""
 "behind a slow request, including using async as we did Chapter 17; the one "
 "we’ll implement is a thread pool."
 msgstr ""
+"我们有多种技术可以用来避免慢速请求导致请求积压，包括像第17章那样使用异步处"
+"理；我们将要实现的是线程池技术。"
 
 #: src/ch21-02-multithreaded.md:101
 msgid "Improving Throughput with a Thread Pool"
-msgstr ""
+msgstr "使用线程池提升吞吐量"
 
 #: src/ch21-02-multithreaded.md:103
 msgid ""
@@ -164,6 +189,11 @@ msgid ""
 "handle a new task. A thread pool allows you to process connections "
 "concurrently, increasing the throughput of your server."
 msgstr ""
+"线程池是一组已经创建并准备好处理任务的线程。当程序接收到新的任务时，它会将线"
+"程池中的一个线程分配给该任务，该线程将负责处理该任务。在第一个线程处理任务的"
+"过程中，线程池中的其余线程仍然可以处理其他任务。当第一个线程完成其任务后，它"
+"会返回到空闲线程池中，准备处理新的任务。线程池允许你同时处理多个任务，从而提"
+"高服务器的吞吐量。"
 
 #: src/ch21-02-multithreaded.md:112
 msgid ""
@@ -173,6 +203,9 @@ msgid ""
 "could wreak havoc by using up all our server’s resources and grinding the "
 "processing of requests to a halt."
 msgstr ""
+"我们将限制池中的线程数量，使其保持在较低水平，以此来防范DoS攻击。如果我们让程"
+"序在接收到每个请求时都创建一个新的线程，那么向我们的服务器发送1000万次请求的"
+"人可能会耗尽所有服务器资源，导致请求处理完全停止。"
 
 #: src/ch21-02-multithreaded.md:118
 msgid ""
@@ -186,6 +219,12 @@ msgid ""
 "requests can still back up in the queue, but we’ve increased the number of "
 "long-running requests we can handle before reaching that point."
 msgstr ""
+"与其创建无限数量的线程，不如限制线程的数量。等待的线程数量也是固定的。新产生"
+"的请求会被发送到这些线程中进行处理。线程池会维护一个请求队列。池中的每个线程"
+"会从队列中取出一个请求进行处理，然后向队列中请求另一个请求。通过这种设计，我"
+"们可以同时处理 _`N`_ 个请求，其中 _`N`_ 是线程的数量。如果每个线程都在处理一"
+"个耗时较长的请求，那么后续的请求仍然可以排队等待，但我们能够处理的耗时较长的"
+"请求数量已经增加了。"
 
 #: src/ch21-02-multithreaded.md:128
 msgid ""
@@ -196,6 +235,10 @@ msgid ""
 "implement them; with a low-level language like Rust, all of these options "
 "are possible."
 msgstr ""
+"这种技术只是提高网络服务器吞吐量方法的其中之一。你还可以尝试使用分叉/合并模"
+"型、单线程异步I/O模型和多线程异步I/O模型。如果你对这个话题感兴趣，可以阅读更"
+"多关于其他解决方案的内容，并尝试实现它们；使用像Rust这样的低级语言，所有这些"
+"选项都是可行的。"
 
 #: src/ch21-02-multithreaded.md:135
 msgid ""
@@ -206,6 +249,9 @@ msgid ""
 "functionality within that structure rather than implementing the "
 "functionality and then designing the public API."
 msgstr ""
+"在开始实现线程池之前，我们先来了解一下使用线程池应该是什么样的。在设计代码"
+"时，首先编写客户端接口可以帮助指导你的设计思路。编写代码的API，使其以你希望调"
+"用它的方式结构化；然后，在该结构内实现功能，而不是先实现功能后再设计公共API。"
 
 #: src/ch21-02-multithreaded.md:142
 msgid ""
@@ -216,15 +262,20 @@ msgid ""
 "that, however, we’ll explore the technique we’re not going to use as a "
 "starting point."
 msgstr ""
+"与我们在第12章中在项目中使用测试驱动开发的方式类似，我们在这里也会使用编译器"
+"驱动开发。我们将编写调用我们想要调用的函数的代码，然后通过分析编译器的错误信"
+"息来确定接下来需要修改哪些部分，以使代码能够正常工作。然而，在这样做之前，我"
+"们将先探讨一下我们不会使用的技术作为起点。"
 
 #: src/ch21-02-multithreaded.md:150
 msgid ""
 "<a id=\"code-structure-if-we-could-spawn-a-thread-for-each-request\"></a>"
 msgstr ""
+"<a id=\"code-structure-if-we-could-spawn-a-thread-for-each-request\"></a>"
 
 #: src/ch21-02-multithreaded.md:152
 msgid "Spawning a Thread for Each Request"
-msgstr ""
+msgstr "为每个请求创建一个线程"
 
 #: src/ch21-02-multithreaded.md:154
 msgid ""
@@ -235,12 +286,18 @@ msgid ""
 "we’ll add the thread pool as an improvement, and contrasting the two "
 "solutions will be easier."
 msgstr ""
+"首先，让我们探讨一下，如果我们的代码为每个连接都创建一个新的线程，那么代码会"
+"是什么样子。如前所述，由于可能存在无限创建线程的问题，这并不是我们的最终方"
+"案。不过，这确实是一个起点，可以帮助我们先实现一个功能完备的多线程服务器。之"
+"后，我们会引入线程池作为改进措施，这样对比这两种解决方案就会更加容易了。"
 
 #: src/ch21-02-multithreaded.md:160
 msgid ""
 "Listing 21-11 shows the changes to make to `main` to spawn a new thread to "
 "handle each stream within the `for` loop."
 msgstr ""
+"列表 21-11 展示了对“main”进行的修改，以生成一个新线程来处理“for”循环中的每个"
+"流。"
 
 #: src/ch21-02-multithreaded.md:211
 msgid ""
@@ -251,6 +308,10 @@ msgid ""
 "finish. However, as we mentioned, this will eventually overwhelm the system "
 "because you’d be making new threads without any limit."
 msgstr ""
+"正如你在第16章中学到的那样，`thread::spawn`会创建一个新的线程，然后在新线程中"
+"运行闭包中的代码。如果你运行这段代码，并在浏览器中加载_/sleep_，那么在另外两"
+"个浏览器标签页中加载_/_，你确实会看到对_/_的请求不必等待_/sleep_完成。然而，"
+"正如我们之前提到的，这样做最终会使系统不堪重负，因为你会无限制地创建新线程。"
 
 #: src/ch21-02-multithreaded.md:218
 msgid ""
@@ -259,15 +320,19 @@ msgid ""
 "the thread pool and think about how things would look different or the same "
 "with async."
 msgstr ""
+"你可能还记得第17章中的内容，这正是那种异步和等待技术发挥作用的场景！在构建线"
+"程池时，请记住这一点，并思考如果采用异步处理，情况会如何变化，或者仍然保持不"
+"变。"
 
 #: src/ch21-02-multithreaded.md:224
 msgid ""
 "<a id=\"creating-a-similar-interface-for-a-finite-number-of-threads\"></a>"
 msgstr ""
+"<a id=\"creating-a-similar-interface-for-a-finite-number-of-threads\"></a>"
 
 #: src/ch21-02-multithreaded.md:226
 msgid "Creating a Finite Number of Threads"
-msgstr ""
+msgstr "创建有限数量的线程"
 
 #: src/ch21-02-multithreaded.md:228
 msgid ""
@@ -276,6 +341,9 @@ msgid ""
 "uses our API. Listing 21-12 shows the hypothetical interface for a "
 "`ThreadPool` struct we want to use instead of `thread::spawn`."
 msgstr ""
+"我们希望我们的线程池能够以类似且熟悉的方式运行，这样在从线程切换到线程池时，"
+"不会对使用我们API的代码进行大的修改。列表21-12展示了我们希望使用的 "
+"`ThreadPool` 结构的假设性接口。"
 
 #: src/ch21-02-multithreaded.md:282
 msgid ""
@@ -287,16 +355,23 @@ msgid ""
 "to run. This code won’t yet compile, but we’ll try so that the compiler can "
 "guide us in how to fix it."
 msgstr ""
+"我们使用 `ThreadPool::new` 来创建一个具有可配置线程数的新线程池，在这个例子中"
+"是四个线程。然后，在 `for` 循环中， `pool.execute` 的接口与 `thread::spawn` "
+"类似，它接受一个闭包，该闭包指定了线程池应该为每个流运行。我们需要实现 `pool."
+"execute`，以便它能够接受这个闭包，并将其传递给线程池中的某个线程来运行。这段"
+"代码目前还不能编译，但我们会尝试编译，以便编译器能够指导我们如何修复它。"
 
 #: src/ch21-02-multithreaded.md:291
 msgid ""
 "<a id=\"building-the-threadpool-struct-using-compiler-driven-development\"></"
 "a>"
 msgstr ""
+"<a id=\"building-the-threadpool-struct-using-compiler-driven-development\"></"
+"a>"
 
 #: src/ch21-02-multithreaded.md:293
 msgid "Building `ThreadPool` Using Compiler-Driven Development"
-msgstr ""
+msgstr "使用编译器驱动的开发方式构建 `ThreadPool`"
 
 #: src/ch21-02-multithreaded.md:295
 msgid ""
@@ -304,6 +379,9 @@ msgid ""
 "compiler errors from `cargo check` to drive our development. Here is the "
 "first error we get:"
 msgstr ""
+"请对 Listing 21-12 中的代码进行以下修改，将其保存在 _src/main.rs_ 文件中。然"
+"后，我们可以利用 `cargo check` 产生的编译错误来指导我们的开发过程。这是我们遇"
+"到的第一个错误："
 
 #: src/ch21-02-multithreaded.md:299
 msgid ""
@@ -320,6 +398,18 @@ msgid ""
 "error: could not compile `hello` (bin \"hello\") due to 1 previous error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo check\n"
+"    Checking hello v0.1.0 (file:///projects/hello)\n"
+"error[E0433]: failed to resolve: use of undeclared type `ThreadPool`\n"
+"  --> src/main.rs:11:16\n"
+"   |\n"
+"11 |     let pool = ThreadPool::new(4);\n"
+"   |                ^^^^^^^^^^ use of undeclared type `ThreadPool`\n"
+"\n"
+"For more information about this error, try `rustc --explain E0433`.\n"
+"error: could not compile `hello` (bin \"hello\") due to 1 previous error\n"
+"```"
 
 #: src/ch21-02-multithreaded.md:312
 msgid ""
@@ -331,24 +421,34 @@ msgid ""
 "separate thread pool library for any work we want to do using a thread pool, "
 "not just for serving web requests."
 msgstr ""
+"太好了！这个错误告诉我们我们需要一个 `ThreadPool` 类型或模块，所以我们现在就"
+"创建一个。我们的 `ThreadPool` 实现将不受我们的网络服务器正在执行的工作类型的"
+"影响。因此，我们将 `hello`  crate 从二进制 crate 更改为库 crate，以便存放我们"
+"的 `ThreadPool` 实现。在改为库 crate 之后，我们还可以使用单独的线程池库来处理"
+"任何需要使用线程池的工作，而不仅仅是为了处理网络请求。"
 
 #: src/ch21-02-multithreaded.md:320
 msgid ""
 "Create a _src/lib.rs_ file that contains the following, which is the "
 "simplest definition of a `ThreadPool` struct that we can have for now:"
 msgstr ""
+"请创建一个 `_src/lib.rs` 文件，其中包含以下代码，这是目前我们能够定义的最简单"
+"的 `ThreadPool` 结构的定义："
 
 #: src/ch21-02-multithreaded.md:332
 msgid ""
 "Then, edit the _main.rs_ file to bring `ThreadPool` into scope from the "
 "library crate by adding the following code to the top of _src/main.rs_:"
 msgstr ""
+"然后，编辑 _main.rs_ 文件，将 `ThreadPool` 从 crate 库中引入，方法是在 _src/"
+"main.rs_ 文件的顶部添加以下代码："
 
 #: src/ch21-02-multithreaded.md:385
 msgid ""
 "This code still won’t work, but let’s check it again to get the next error "
 "that we need to address:"
 msgstr ""
+"这段代码仍然无法运行，但让我们再次检查一下，以找出我们需要解决的下一个错误："
 
 #: src/ch21-02-multithreaded.md:388
 msgid ""
@@ -367,6 +467,20 @@ msgid ""
 "error: could not compile `hello` (bin \"hello\") due to 1 previous error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo check\n"
+"    Checking hello v0.1.0 (file:///projects/hello)\n"
+"error[E0599]: no function or associated item named `new` found for struct "
+"`ThreadPool` in the current scope\n"
+"  --> src/main.rs:12:28\n"
+"   |\n"
+"12 |     let pool = ThreadPool::new(4);\n"
+"   |                            ^^^ function or associated item not found in "
+"`ThreadPool`\n"
+"\n"
+"For more information about this error, try `rustc --explain E0599`.\n"
+"error: could not compile `hello` (bin \"hello\") due to 1 previous error\n"
+"```"
 
 #: src/ch21-02-multithreaded.md:401
 msgid ""
@@ -376,6 +490,9 @@ msgid ""
 "`ThreadPool` instance. Let’s implement the simplest `new` function that will "
 "have those characteristics:"
 msgstr ""
+"这个错误表明，接下来我们需要为 `ThreadPool` 创建一个名为 ⊃`new` 的相关函数。"
+"我们还知道，⊃`new` 需要有一个参数，该参数能够接受 `4` 作为参数，并且应该返回"
+"一个 `ThreadPool` 实例。让我们来实现一个最简单的具有这些特性的 `new` 函数："
 
 #: src/ch21-02-multithreaded.md:421
 msgid ""
@@ -386,10 +503,14 @@ msgid ""
 "types.html#integer-types)<!--\n"
 "ignore --> section in Chapter 3."
 msgstr ""
+"我们选择 `usize` 作为 `size` 参数的类型，因为我们知道，线程数量为零是没有意义"
+"的。我们还知道，我们将使用 `4` 来表示线程集合中的元素数量，正如在第3章的 "
+"[“Integer Types”](ch03-02-data-types.html#integer-types)<!--ignore --> 部分所"
+"讨论的， `usize` 类型正是用于这个目的。"
 
 #: src/ch21-02-multithreaded.md:427
 msgid "Let’s check the code again:"
-msgstr ""
+msgstr "让我们再次检查这段代码："
 
 #: src/ch21-02-multithreaded.md:429
 msgid ""
@@ -407,6 +528,19 @@ msgid ""
 "error: could not compile `hello` (bin \"hello\") due to 1 previous error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo check\n"
+"    Checking hello v0.1.0 (file:///projects/hello)\n"
+"error[E0599]: no method named `execute` found for struct `ThreadPool` in the "
+"current scope\n"
+"  --> src/main.rs:17:14\n"
+"   |\n"
+"17 |         pool.execute(|| {\n"
+"   |         -----^^^^^^^ method not found in `ThreadPool`\n"
+"\n"
+"For more information about this error, try `rustc --explain E0599`.\n"
+"error: could not compile `hello` (bin \"hello\") due to 1 previous error\n"
+"```"
 
 #: src/ch21-02-multithreaded.md:442
 msgid ""
@@ -417,6 +551,11 @@ msgid ""
 "In addition, we’ll implement the `execute` function so that it takes the "
 "closure it’s given and gives it to an idle thread in the pool to run."
 msgstr ""
+"现在出现错误的原因是我们在 `ThreadPool` 上没有 `execute` 方法。回想一下在 "
+"[“创建有限数量的线程”](#creating-a-finite-number-of-threads)<!-- ignore --> "
+"部分的内容，我们决定让线程池具有类似于 `thread::spawn` 的接口。此外，我们还将"
+"实现 `execute` 函数，该函数接收给定的闭包，并将其分配给线程池中的空闲线程来运"
+"行。"
 
 #: src/ch21-02-multithreaded.md:449
 msgid ""
@@ -430,6 +569,12 @@ msgid ""
 "signature of `thread::spawn` has on its parameter. The documentation shows "
 "us the following:"
 msgstr ""
+"我们将在 `ThreadPool` 上定义 `execute` 方法，该方法接受一个闭包作为参数。回顾"
+"第13章中的 [“Moving Captured Values Out of Closures”][moving-out-of-"
+"closures]<!-- ignore -->，我们知道可以用三种不同的特征来接受闭包作为参数： "
+"`Fn`、 `FnMut` 和 `FnOnce`。我们需要决定在这里使用哪种类型的闭包。我们知道最"
+"终会采用类似于标准库 `thread::spawn` 的实现方式，因此我们可以查看 `thread::"
+"spawn` 的签名对其参数的限制。文档中提供了以下信息："
 
 #: src/ch21-02-multithreaded.md:466
 msgid ""
@@ -442,6 +587,11 @@ msgid ""
 "execute that request’s closure one time, which matches the `Once` in "
 "`FnOnce`."
 msgstr ""
+"在这里，我们关注的是 `F` 类型参数；而 `T` 类型参数则与返回值相关，我们并不关"
+"心这一点。我们可以看到， `spawn` 使用 `FnOnce` 作为 `F` 的特质绑定。这很可能"
+"正是我们所需要的，因为最终我们会将 `execute` 中得到的参数传递给 `spawn`。我们"
+"可以更有信心地认为 `FnOnce` 就是我们想要使用的特质，因为执行请求的任务只会执"
+"行一次该请求的闭包，这与 `Once` 在 `FnOnce` 中的行为是一致的。"
 
 #: src/ch21-02-multithreaded.md:474
 msgid ""
@@ -452,6 +602,11 @@ msgid ""
 "`execute` method on `ThreadPool` that will take a generic parameter of type "
 "`F` with these bounds:"
 msgstr ""
+"这种 `F` 类型参数还具有 `Send` 特征绑定和 `'static` 生命周期绑定，这在我们的"
+"场景中非常有用：我们需要 `Send` 来将闭包从一个线程转移到另一个线程，同时还需"
+"要 `'static`，因为我们不知道线程执行所需的时间。让我们在 `ThreadPool` 上创建"
+"一个 `execute` 方法，该方法将接受一个类型为 `F` 的通用参数，并且具有这些绑"
+"定："
 
 #: src/ch21-02-multithreaded.md:501
 msgid ""
@@ -460,6 +615,9 @@ msgid ""
 "function definitions, the return type can be omitted from the signature, but "
 "even if we have no parameters, we still need the parentheses."
 msgstr ""
+"我们仍然在 `FnOnce` 之后使用 `FnOnce`，因为 `FnOnce` 代表一个闭包，它不接受任"
+"何参数，并且返回单位类型 `()`。就像函数定义一样，返回类型可以从签名中省略，但"
+"即使我们没有参数，仍然需要括号。"
 
 #: src/ch21-02-multithreaded.md:506
 msgid ""
@@ -467,6 +625,8 @@ msgid ""
 "nothing, but we’re only trying to make our code compile. Let’s check it "
 "again:"
 msgstr ""
+"再次说明，这是 `execute` 方法的最简单实现：它实际上并没有做什么实质性的操作，"
+"但我们只是想让代码能够编译出来而已。让我们再检查一下吧："
 
 #: src/ch21-02-multithreaded.md:509
 msgid ""
@@ -476,6 +636,11 @@ msgid ""
 "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.24s\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo check\n"
+"    Checking hello v0.1.0 (file:///projects/hello)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.24s\n"
+"```"
 
 #: src/ch21-02-multithreaded.md:515
 msgid ""
@@ -484,6 +649,9 @@ msgid ""
 "of the chapter. Our library isn’t actually calling the closure passed to "
 "`execute` yet!"
 msgstr ""
+"它已经编译成功了！不过请注意，如果您尝试使用 `cargo run`，并在浏览器中发起请"
+"求，您将会看到我们在章节开头看到的那些错误。实际上，我们的库还没有调用传递给 "
+"`execute` 的闭包！"
 
 #: src/ch21-02-multithreaded.md:520
 msgid ""
@@ -494,16 +662,21 @@ msgid ""
 "start writing unit tests to check that the code compiles _and_ has the "
 "behavior we want."
 msgstr ""
+"注意：关于那些使用严格编译器的语言，比如Haskell和Rust，人们常说“如果代码能够"
+"编译出来，那就说明它是正确的”。不过，这句话并不适用于所有情况。我们的项目虽然"
+"能够编译出来，但实际上它根本没有任何功能！如果我们正在构建一个真正完整的项"
+"目，现在正是开始编写单元测试的时候，以验证代码不仅能够编译出来，而且其行为符"
+"合我们的期望。"
 
 #: src/ch21-02-multithreaded.md:527
 msgid ""
 "Consider: What would be different here if we were going to execute a future "
 "instead of a closure?"
-msgstr ""
+msgstr "请考虑：如果我们执行的是未来操作，而不是闭包操作，会有什么不同？"
 
 #: src/ch21-02-multithreaded.md:530
 msgid "Validating the Number of Threads in `new`"
-msgstr ""
+msgstr "验证 `new` 中线程的数量"
 
 #: src/ch21-02-multithreaded.md:532
 msgid ""
@@ -517,6 +690,12 @@ msgid ""
 "panic if it receives a zero by using the `assert!` macro, as shown in "
 "Listing 21-13."
 msgstr ""
+"我们并没有对 `new` 和 `execute` 参数做任何操作。让我们按照想要的行为来实现这"
+"些函数的主体部分。首先，让我们来思考一下 `new`。之前我们为 `size` 参数选择了"
+"一个无符号类型，因为拥有负数线程数是不可能的。同样地，拥有零线程数也是不合适"
+"的，不过零仍然是一个完全有效的 `usize`。我们将添加代码来检查 `size` 是否大于"
+"零，然后再返回 `ThreadPool` 的实例。如果使用 `assert!` 宏来接收零值，程序将会"
+"出现 panic 错误，如清单 21-13 所示。"
 
 #: src/ch21-02-multithreaded.md:547
 msgid ""
@@ -528,6 +707,13 @@ msgid ""
 "    ///\n"
 "    /// The `new` function will panic if the size is zero.\n"
 msgstr ""
+"/// Create a new ThreadPool.\n"
+"    ///\n"
+"    /// The size is the number of threads in the pool.\n"
+"    ///\n"
+"    /// # Panics\n"
+"    ///\n"
+"    /// The `new` function will panic if the size is zero.\n"
 
 #: src/ch21-02-multithreaded.md:571
 msgid ""
@@ -537,6 +723,10 @@ msgid ""
 "Chapter 14. Try running `cargo doc --open` and clicking the `ThreadPool` "
 "struct to see what the generated docs for `new` look like!"
 msgstr ""
+"我们还为我们的 `ThreadPool` 添加了一些文档说明，并使用了文档注释。请注意，我"
+"们遵循了良好的文档编写规范，添加了一个部分来指出我们的函数可能会陷入恐慌的情"
+"况，这一点在第14章中有详细讨论。尝试运行 `cargo doc --open`，并点击 "
+"`ThreadPool` 结构体，看看 `new` 生成的文档是什么样子吧！"
 
 #: src/ch21-02-multithreaded.md:577
 msgid ""
@@ -547,10 +737,15 @@ msgid ""
 "error. If you’re feeling ambitious, try to write a function named `build` "
 "with the following signature to compare with the `new` function:"
 msgstr ""
+"与其像这里那样添加 `assert!` 宏，我们不如将 `new` 改为 `build`，并像在 "
+"Listing 12-9 中的 I/O 项目中那样返回 `Result`，就像我们对 `Config::build` 所"
+"做的那样。但在这种情况下，我们决定尝试创建一个没有线程的线程池将是一个无法恢"
+"复的错误。如果你有雄心壮志，可以尝试编写一个名为 `build` 的函数，其签名如下，"
+"以便与 `new` 函数进行比较："
 
 #: src/ch21-02-multithreaded.md:588
 msgid "Creating Space to Store the Threads"
-msgstr ""
+msgstr "创建存储线程的空间"
 
 #: src/ch21-02-multithreaded.md:590
 msgid ""
@@ -559,6 +754,9 @@ msgid ""
 "struct before returning the struct. But how do we “store” a thread? Let’s "
 "take another look at the `thread::spawn` signature:"
 msgstr ""
+"现在我们已经有了一种方法来判断是否有足够数量的线程可以存储到该池中，那么我们"
+"就可以创建这些线程，并将它们存储到 `ThreadPool` 结构中，然后再返回这个结构。"
+"但是，我们该如何“存储”一个线程呢？让我们再仔细看看 `thread::spawn` 的签名："
 
 #: src/ch21-02-multithreaded.md:603
 msgid ""
@@ -567,6 +765,9 @@ msgid ""
 "In our case, the closures we’re passing to the thread pool will handle the "
 "connection and not return anything, so `T` will be the unit type `()`."
 msgstr ""
+"函数 `spawn` 返回一个 `JoinHandle<T>`，其中 `T` 是闭包返回的类型。让我们尝试"
+"使用 `JoinHandle` 看看会发生什么。在我们的例子中，我们传递给线程池的闭包将负"
+"责处理连接，并不会返回任何内容，因此 `T` 将是一个单位类型 `()`。"
 
 #: src/ch21-02-multithreaded.md:608
 msgid ""
@@ -576,13 +777,17 @@ msgid ""
 "of `size`, set up a `for` loop that will run some code to create the "
 "threads, and returned a `ThreadPool` instance containing them."
 msgstr ""
+"Listing 21-14 中的代码可以编译，但目前它并没有创建任何线程。我们修改了 "
+"`ThreadPool` 的定义，使其能够存储一个包含 `thread::JoinHandle<()>` 实例的向"
+"量，并为该向量分配了 `size` 的容量，同时设置了一个 `for` 循环来运行代码以创建"
+"线程，最后返回了一个包含这些线程的 `ThreadPool` 实例。"
 
 #: src/ch21-02-multithreaded.md:625 src/ch21-02-multithreaded.md:728
 #: src/ch21-02-multithreaded.md:837 src/ch21-02-multithreaded.md:904
 #: src/ch21-02-multithreaded.md:1025 src/ch21-02-multithreaded.md:1111
 #: src/ch21-02-multithreaded.md:1195 src/ch21-02-multithreaded.md:1355
 msgid "/// Create a new ThreadPool.\n"
-msgstr ""
+msgstr "///创建一个新的 ThreadPool。\n"
 
 #: src/ch21-02-multithreaded.md:626 src/ch21-02-multithreaded.md:628
 #: src/ch21-02-multithreaded.md:630 src/ch21-02-multithreaded.md:729
@@ -597,32 +802,32 @@ msgstr ""
 #: src/ch21-02-multithreaded.md:1200 src/ch21-02-multithreaded.md:1356
 #: src/ch21-02-multithreaded.md:1358 src/ch21-02-multithreaded.md:1360
 msgid "///\n"
-msgstr ""
+msgstr "///\n"
 
 #: src/ch21-02-multithreaded.md:627 src/ch21-02-multithreaded.md:730
 #: src/ch21-02-multithreaded.md:839 src/ch21-02-multithreaded.md:906
 #: src/ch21-02-multithreaded.md:1027 src/ch21-02-multithreaded.md:1113
 #: src/ch21-02-multithreaded.md:1197 src/ch21-02-multithreaded.md:1357
 msgid "/// The size is the number of threads in the pool.\n"
-msgstr ""
+msgstr "/// 大小是池中线程的数量。\n"
 
 #: src/ch21-02-multithreaded.md:629 src/ch21-02-multithreaded.md:732
 #: src/ch21-02-multithreaded.md:841 src/ch21-02-multithreaded.md:908
 #: src/ch21-02-multithreaded.md:1029 src/ch21-02-multithreaded.md:1115
 #: src/ch21-02-multithreaded.md:1199 src/ch21-02-multithreaded.md:1359
 msgid "/// # Panics\n"
-msgstr ""
+msgstr "/// # Panics\n"
 
 #: src/ch21-02-multithreaded.md:631 src/ch21-02-multithreaded.md:734
 #: src/ch21-02-multithreaded.md:843 src/ch21-02-multithreaded.md:910
 #: src/ch21-02-multithreaded.md:1031 src/ch21-02-multithreaded.md:1117
 #: src/ch21-02-multithreaded.md:1201 src/ch21-02-multithreaded.md:1361
 msgid "/// The `new` function will panic if the size is zero.\n"
-msgstr ""
+msgstr "/// 如果大小为零，“新”函数会慌乱。\n"
 
 #: src/ch21-02-multithreaded.md:638
 msgid "// create some threads and store them in the vector\n"
-msgstr ""
+msgstr "// 创建一些线程并存储在矢量中\n"
 
 #: src/ch21-02-multithreaded.md:655
 msgid ""
@@ -630,6 +835,8 @@ msgid ""
 "using `thread::JoinHandle` as the type of the items in the vector in "
 "`ThreadPool`."
 msgstr ""
+"我们在库代码中引入了 `std::thread`，因为我们使用 `thread::JoinHandle` 作为 "
+"`ThreadPool` 中向量的元素类型。"
 
 #: src/ch21-02-multithreaded.md:659
 msgid ""
@@ -640,20 +847,26 @@ msgid ""
 "doing this allocation up front is slightly more efficient than using `Vec::"
 "new`, which resizes itself as elements are inserted."
 msgstr ""
+"一旦接收到有效的尺寸，我们的 `ThreadPool` 会创建一个新的向量，该向量能够容纳 "
+"`size` 元素。 `with_capacity` 函数执行的任务与 `Vec::new` 相同，但有一个重要"
+"的区别：它会在向量中预先分配空间。因为我们知道需要在向量中存储 `size` 元素，"
+"所以这种预先分配空间的方式比在插入元素时动态调整大小的 `Vec::new` 更高效。"
 
 #: src/ch21-02-multithreaded.md:666
 msgid "When you run `cargo check` again, it should succeed."
-msgstr ""
+msgstr "当你再次运行 `cargo check` 时，应该会成功。"
 
 #: src/ch21-02-multithreaded.md:669
 msgid ""
 "<a id =\"a-worker-struct-responsible-for-sending-code-from-the-threadpool-to-"
 "a-thread\"></a>"
 msgstr ""
+"<a id =\"a-worker-struct-responsible-for-sending-code-from-the-threadpool-to-"
+"a-thread\"></a>"
 
 #: src/ch21-02-multithreaded.md:671
 msgid "Sending Code from the `ThreadPool` to a Thread"
-msgstr ""
+msgstr "将代码从 `ThreadPool` 发送到线程"
 
 #: src/ch21-02-multithreaded.md:673
 msgid ""
@@ -666,6 +879,11 @@ msgid ""
 "implementation of threads doesn’t include any way to do that; we have to "
 "implement it manually."
 msgstr ""
+"我们在 Listing 21-14 中的 `for` 循环中留下了一条关于线程创建的注释。在这里，"
+"我们将探讨如何实际创建线程。标准库提供了 `thread::spawn` 方法来创建线程，而 "
+"`thread::spawn` 则期望在线程创建后能够立即运行某些代码。然而，在我们的案例"
+"中，我们希望创建线程并让它们 _等待_ 稍后发送的代码。标准库对线程的实现并没有"
+"提供这样的功能；我们必须手动实现它。"
 
 #: src/ch21-02-multithreaded.md:682
 msgid ""
@@ -675,6 +893,9 @@ msgid ""
 "implementations. The `Worker` picks up code that needs to be run and runs "
 "the code in its thread."
 msgstr ""
+"我们将通过在`ThreadPool`和负责管理这种新行为的线程之间引入一种新的数据结构来"
+"实现这种行为。我们将这种数据结构称为_Worker_，这是池化实现中常用的术语。"
+"`Worker`负责获取需要运行的代码，并在其线程中执行这些代码。"
 
 #: src/ch21-02-multithreaded.md:688
 msgid ""
@@ -682,6 +903,8 @@ msgid ""
 "until orders come in from customers, and then they’re responsible for taking "
 "those orders and filling them."
 msgstr ""
+"想象一下餐厅厨房里的工作人员：他们等待顾客下单，然后负责处理这些订单并制作相"
+"应的菜肴。"
 
 #: src/ch21-02-multithreaded.md:692
 msgid ""
@@ -693,6 +916,11 @@ msgid ""
 "we can distinguish between the different instances of `Worker` in the pool "
 "when logging or debugging."
 msgstr ""
+"与其在线程池中存储一个 `JoinHandle<()>` 实例的向量，我们将存储 `Worker` 结构"
+"的实例。每个 `Worker` 将存储一个单独的 `JoinHandle<()>` 实例。然后，我们将在 "
+"`Worker` 上实现一个方法，该方法会接收一个用于执行的代码闭包，并将其发送到已经"
+"运行的线程中进行执行。此外，我们还会为每个 `Worker` 提供一个 `id`，以便在日志"
+"记录或调试时区分线程池中的不同 `Worker` 实例。"
 
 #: src/ch21-02-multithreaded.md:700
 msgid ""
@@ -700,14 +928,17 @@ msgid ""
 "We’ll implement the code that sends the closure to the thread after we have "
 "`Worker` set up in this way:"
 msgstr ""
+"这是当我们创建 `ThreadPool` 时将会发生的新过程。在通过这种方式设置 `Worker` "
+"之后，我们将实现将闭包发送到线程的代码："
 
 #: src/ch21-02-multithreaded.md:704
 msgid "Define a `Worker` struct that holds an `id` and a `JoinHandle<()>`."
 msgstr ""
+"定义一个 `Worker` 结构体，该结构体包含一个 `id` 和一个 `JoinHandle<()>`。"
 
 #: src/ch21-02-multithreaded.md:705
 msgid "Change `ThreadPool` to hold a vector of `Worker` instances."
-msgstr ""
+msgstr "将 `ThreadPool` 修改为包含一个 `Worker` 实例的向量。"
 
 #: src/ch21-02-multithreaded.md:706
 msgid ""
@@ -715,24 +946,30 @@ msgid ""
 "`Worker` instance that holds the `id` and a thread spawned with an empty "
 "closure."
 msgstr ""
+"定义一个 `Worker::new` 函数，该函数接受一个 `id` 数字，并返回一个 `Worker` 实"
+"例，该实例包含 `id`，并且该实例所生成的线程具有一个空的闭包。"
 
 #: src/ch21-02-multithreaded.md:709
 msgid ""
 "In `ThreadPool::new`, use the `for` loop counter to generate an `id`, create "
 "a new `Worker` with that `id`, and store the `Worker` in the vector."
 msgstr ""
+"在 `ThreadPool::new` 中，使用 `for` 循环计数器来生成一个 `id`，创建一个新的 "
+"`Worker` 使用该 `id`，并将 `Worker` 存储在该向量中。"
 
 #: src/ch21-02-multithreaded.md:712
 msgid ""
 "If you’re up for a challenge, try implementing these changes on your own "
 "before looking at the code in Listing 21-15."
 msgstr ""
+"如果你愿意接受挑战，请在查看 Listing 21-15 中的代码之前，尝试自己实现这些更"
+"改。"
 
 #: src/ch21-02-multithreaded.md:715
 msgid ""
 "Ready? Here is Listing 21-15 with one way to make the preceding "
 "modifications."
-msgstr ""
+msgstr "准备好了吗？以下是 Listing 21-15，它展示了进行上述修改的一种方法。"
 
 #: src/ch21-02-multithreaded.md:771
 msgid ""
@@ -742,6 +979,10 @@ msgid ""
 "argument to `Worker::new`, and we store each new `Worker` in the vector "
 "named `workers`."
 msgstr ""
+"我们将 `ThreadPool` 字段的名称从 `threads` 更改为 `workers`，因为现在它存储的"
+"是 `Worker` 实例，而不是 `JoinHandle<()>` 实例。我们在 `for` 循环中使用计数器"
+"作为 `Worker::new` 的参数，并将每个新的 `Worker` 存储在名为 `workers` 的向量"
+"中。"
 
 #: src/ch21-02-multithreaded.md:776
 msgid ""
@@ -752,6 +993,11 @@ msgid ""
 "`JoinHandle<()>` instance that is created by spawning a new thread using an "
 "empty closure."
 msgstr ""
+"外部代码（比如我们的服务器在`_src/main.rs_`中）不需要了解在`_src/main.rs_`中"
+"使用`_src/main.rs_`内定义的`_src/main.rs_`的实现细节。因此，我们将`_src/main."
+"rs_`中的`_src/main.rs_`定义为私有变量，同时将其函数也定义为私有函数。`_src/"
+"main.rs_`中的`_src/main.rs_`函数会使用我们提供的`_src/main.rs_`，并创建一个通"
+"过空闭包创建的新线程来生成的私有实例。"
 
 #: src/ch21-02-multithreaded.md:782
 msgid ""
@@ -764,6 +1010,12 @@ msgid ""
 "thread/struct.Builder.html#method.spawn)<!-- ignore --> method that returns "
 "`Result` instead."
 msgstr ""
+"注意：如果操作系统由于系统资源不足而无法创建线程，那么 `thread::spawn` 将会引"
+"发恐慌。这将导致整个服务器陷入恐慌状态，尽管某些线程的创建可能成功。为了简单"
+"起见，这种行为是可以接受的，但在实际的生产环境线程池实现中，你通常会使用 "
+"[`std::thread::Builder`](../std/thread/struct.Builder.html)<!-- ignore --> 及"
+"其返回 `Result` 的 [`spawn`](../std/thread/struct.Builder.html#method."
+"spawn)<!-- ignore --> 方法。"
 
 #: src/ch21-02-multithreaded.md:790
 msgid ""
@@ -772,10 +1024,13 @@ msgid ""
 "processing the closure that we get in `execute`. Let’s look at how to do "
 "that next."
 msgstr ""
+"这段代码将会被编译，并将存储我们作为参数传递给 `ThreadPool::new` 的 `Worker` "
+"实例的数量。但是，我们仍然没有处理在 `execute` 中得到的闭包。接下来，让我们看"
+"看如何解决这个问题。"
 
 #: src/ch21-02-multithreaded.md:794
 msgid "Sending Requests to Threads via Channels"
-msgstr ""
+msgstr "通过通道向线程发送请求"
 
 #: src/ch21-02-multithreaded.md:796
 msgid ""
@@ -784,6 +1039,9 @@ msgid ""
 "the `execute` method. But we need to give `thread::spawn` a closure to run "
 "when we create each `Worker` during the creation of the `ThreadPool`."
 msgstr ""
+"接下来我们要解决的问题是，给 `thread::spawn` 提供的闭包根本没有任何作用。目"
+"前，我们能够得到想要在 `execute` 方法中执行的闭包。但是，在创建 `ThreadPool` "
+"时，我们需要给 `thread::spawn` 一个闭包，以便在 `Worker` 被创建时运行。"
 
 #: src/ch21-02-multithreaded.md:801
 msgid ""
@@ -791,6 +1049,8 @@ msgid ""
 "from a queue held in the `ThreadPool` and send that code to its thread to "
 "run."
 msgstr ""
+"我们希望刚刚创建的 `Worker` 结构体能够从 `ThreadPool` 中持有的队列中获取要运"
+"行的代码，并将该代码发送到相应的线程中进行运行。"
 
 #: src/ch21-02-multithreaded.md:804
 msgid ""
@@ -800,32 +1060,36 @@ msgid ""
 "`ThreadPool` to the `Worker` instances, which will send the job to its "
 "thread. Here is the plan:"
 msgstr ""
+"我们在第16章中了解的通道——一种在两个线程之间进行通信的简单方式——非常适合这种"
+"应用场景。我们将使用通道作为任务队列，而 `execute` 会将任务从 `ThreadPool` 发"
+"送到 `Worker` 实例，后者会将任务分配给相应的线程进行处理。以下是具体的实施方"
+"案："
 
 #: src/ch21-02-multithreaded.md:809
 msgid "The `ThreadPool` will create a channel and hold on to the sender."
-msgstr ""
+msgstr "该 `ThreadPool` 会创建一个通道，并保留发送者信息。"
 
 #: src/ch21-02-multithreaded.md:810
 msgid "Each `Worker` will hold on to the receiver."
-msgstr ""
+msgstr "每个 `Worker` 会保留接收者信息。"
 
 #: src/ch21-02-multithreaded.md:811
 msgid ""
 "We’ll create a new `Job` struct that will hold the closures we want to send "
 "down the channel."
-msgstr ""
+msgstr "我们将创建一个新的 `Job` 结构，它将保持我们想要发送到频道的关闭状态。"
 
 #: src/ch21-02-multithreaded.md:813
 msgid ""
 "The `execute` method will send the job it wants to execute through the "
 "sender."
-msgstr ""
+msgstr "`execute`方法将通过发送者发送它想要执行的任务。"
 
 #: src/ch21-02-multithreaded.md:815
 msgid ""
 "In its thread, the `Worker` will loop over its receiver and execute the "
 "closures of any jobs it receives."
-msgstr ""
+msgstr "在线程中，`Worker`将在接收器上循环并关闭它收到的任何作业。"
 
 #: src/ch21-02-multithreaded.md:818
 msgid ""
@@ -834,12 +1098,17 @@ msgid ""
 "struct doesn’t hold anything for now but will be the type of item we’re "
 "sending down the channel."
 msgstr ""
+"让我们先在 `ThreadPool::new` 中创建一个频道，然后按住`ThreadPool` 实例中的发"
+"件人，正如在上架21-16中所显示的那样。 `Job`结构现在没有任何东西，但将是我们正"
+"在向频道发送的物品类型。"
 
 #: src/ch21-02-multithreaded.md:882
 msgid ""
 "In `ThreadPool::new`, we create our new channel and have the pool hold the "
 "sender. This will successfully compile."
 msgstr ""
+"在 `ThreadPool::new` 中，我们创建了新的通道，并让 pool 对象持有发送者。这样就"
+"能成功编译了。"
 
 #: src/ch21-02-multithreaded.md:885
 msgid ""
@@ -848,16 +1117,22 @@ msgid ""
 "that the `Worker` instances spawn, so we’ll reference the `receiver` "
 "parameter in the closure. The code in Listing 21-17 won’t quite compile yet."
 msgstr ""
+"让我们尝试将通道的接收者传递给每个 `Worker`，这样线程池在创建通道时就可以使用"
+"这个接收者。我们知道，我们希望在生成 `Worker` 实例的线程中使用这个接收者，因"
+"此我们将在闭包中引用 `receiver` 参数。Listing 21-17 中的代码目前还不能编译成"
+"功。"
 
 #: src/ch21-02-multithreaded.md:954
 msgid ""
 "We’ve made some small and straightforward changes: We pass the receiver into "
 "`Worker::new`, and then we use it inside the closure."
 msgstr ""
+"我们进行了一些简单直接的修改：我们将接收者传递给`Worker::new`，然后在闭包内部"
+"使用它。"
 
 #: src/ch21-02-multithreaded.md:957
 msgid "When we try to check this code, we get this error:"
-msgstr ""
+msgstr "当我们尝试检查这段代码时，出现了以下错误："
 
 #: src/ch21-02-multithreaded.md:959
 msgid ""
@@ -896,6 +1171,40 @@ msgid ""
 "error: could not compile `hello` (lib) due to 1 previous error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo check\n"
+"    Checking hello v0.1.0 (file:///projects/hello)\n"
+"error[E0382]: use of moved value: `receiver`\n"
+"  --> src/lib.rs:26:42\n"
+"   |\n"
+"21 |         let (sender, receiver) = mpsc::channel();\n"
+"   |                      -------- move occurs because `receiver` has type "
+"`std::sync::mpsc::Receiver<Job>`, which does not implement the `Copy` trait\n"
+"...\n"
+"25 |         for id in 0..size {\n"
+"   |         ----------------- inside of this loop\n"
+"26 |             workers.push(Worker::new(id, receiver));\n"
+"   |                                          ^^^^^^^^ value moved here, in "
+"previous iteration of loop\n"
+"   |\n"
+"note: consider changing this parameter type in method `new` to borrow "
+"instead if owning the value isn't necessary\n"
+"  --> src/lib.rs:47:33\n"
+"   |\n"
+"47 |     fn new(id: usize, receiver: mpsc::Receiver<Job>) -> Worker {\n"
+"   |        --- in this method       ^^^^^^^^^^^^^^^^^^^ this parameter "
+"takes ownership of the value\n"
+"help: consider moving the expression out of the loop so it is only moved "
+"once\n"
+"   |\n"
+"25 ~         let mut value = Worker::new(id, receiver);\n"
+"26 ~         for id in 0..size {\n"
+"27 ~             workers.push(value);\n"
+"   |\n"
+"\n"
+"For more information about this error, try `rustc --explain E0382`.\n"
+"error: could not compile `hello` (lib) due to 1 previous error\n"
+"```"
 
 #: src/ch21-02-multithreaded.md:989
 msgid ""
@@ -907,6 +1216,11 @@ msgid ""
 "one list of messages with multiple `Worker` instances such that each message "
 "gets processed once."
 msgstr ""
+"这段代码试图将 `receiver` 传递给多个 `Worker` 实例。这是不可行的，正如你在第"
+"16章《通道实现》中所了解的那样，Rust 提供的通道是多个 _生产者_，单个 _消费者"
+"_。这意味着我们不能通过克隆通道的接收端来修复这个问题。同时，我们也不希望向多"
+"个消费者发送多次消息；我们希望有一个消息列表，其中包含多个 `Worker` 实例，这"
+"样每条消息都能被处理一次。"
 
 #: src/ch21-02-multithreaded.md:997
 msgid ""
@@ -914,6 +1228,9 @@ msgid ""
 "`receiver`, so the threads need a safe way to share and modify `receiver`; "
 "otherwise, we might get race conditions (as covered in Chapter 16)."
 msgstr ""
+"此外，将某个任务从通道队列中移除会涉及到对`receiver`的修改，因此线程需要一种"
+"安全的方式来共享和修改`receiver`；否则，我们可能会遇到竞态条件（如第16章中所"
+"介绍的）。"
 
 #: src/ch21-02-multithreaded.md:1001
 msgid ""
@@ -924,6 +1241,10 @@ msgid ""
 "gets a job from the receiver at a time. Listing 21-18 shows the changes we "
 "need to make."
 msgstr ""
+"请回顾第16章中讨论的线程安全智能指针：用于在多个线程之间共享所有权，并允许线"
+"程修改值。为此，我们需要使用 `Arc<Mutex<T>>` 类型。 `Arc` 类型允许多个 "
+"`Worker` 实例共享接收者，而 `Mutex` 则确保一次只有一个 `Worker` 实例从接收者"
+"处获取数据。列表21-18展示了我们需要进行的修改。"
 
 #: src/ch21-02-multithreaded.md:1078
 msgid ""
@@ -931,14 +1252,17 @@ msgid ""
 "each new `Worker`, we clone the `Arc` to bump the reference count so that "
 "the `Worker` instances can share ownership of the receiver."
 msgstr ""
+"在 `ThreadPool::new` 中，我们将接收者放入 `Arc` 和 `Mutex` 中。对于每个新的 "
+"`Worker`，我们克隆 `Arc` 以增加引用计数，这样 `Worker` 实例就可以共享接收者的"
+"所有权。"
 
 #: src/ch21-02-multithreaded.md:1082
 msgid "With these changes, the code compiles! We’re getting there!"
-msgstr ""
+msgstr "经过这些修改后，代码已经可以编译了！我们即将成功！"
 
 #: src/ch21-02-multithreaded.md:1084
 msgid "Implementing the `execute` Method"
-msgstr ""
+msgstr "实现 `execute` 方法"
 
 #: src/ch21-02-multithreaded.md:1086
 msgid ""
@@ -949,6 +1273,11 @@ msgid ""
 "aliases)<!-- ignore --> section in Chapter 20, type aliases allow us to make "
 "long types shorter for ease of use. Look at Listing 21-19."
 msgstr ""
+"让我们最终在 \"ThreadPool\" 上实现 \"execute\" 方法。 我们还会将结构中的`Job`"
+"更改为一个特性对象的别名，这个特性对象持有`execute`所收到的关闭类型。 正如"
+"[“键入同义词和别名”](ch20-03-advanced-types.html#type-synonyms-and-type-"
+"aliases)<中所讨论的那样！ - 忽略 --> 第20章中的章节，类型别名允许我们缩短长型"
+"号以方便使用。 查看上架商品 21-19."
 
 #: src/ch21-02-multithreaded.md:1164
 msgid ""
@@ -961,6 +1290,11 @@ msgid ""
 "The reason we use `unwrap` is that we know the failure case won’t happen, "
 "but the compiler doesn’t know that."
 msgstr ""
+"在使用闭包创建新的 `Job` 实例之后，我们将该实例发送到通道的发送端。如果发送失"
+"败，我们会调用 `unwrap` 来处理这种情况。这种情况可能发生在我们停止所有线程执"
+"行的时候，也就是说，接收端不再接收新的消息。目前，我们无法停止线程的执行：只"
+"要线程池存在，我们的线程就会继续执行。我们使用 `unwrap` 的原因是我们知道这种"
+"失败情况不会发生，但编译器并不清楚这一点。"
 
 #: src/ch21-02-multithreaded.md:1173
 msgid ""
@@ -970,10 +1304,14 @@ msgid ""
 "the channel for a job and running the job when it gets one. Let’s make the "
 "change shown in Listing 21-20 to `Worker::new`."
 msgstr ""
+"但是，我们还没有完成！在 `Worker` 中，我们的闭包被传递给 `thread::spawn`，但"
+"它仍然只是_引用_通道的接收端。相反，我们需要让闭包永远循环下去，向通道的接收"
+"端请求任务，并在接收到任务时执行该任务。让我们在 Listing 21-20 中进行的修改，"
+"使其变为 `Worker::new`。"
 
 #: src/ch21-02-multithreaded.md:1241 src/ch21-02-multithreaded.md:1398
 msgid "\"Worker {id} got a job; executing.\""
-msgstr ""
+msgstr "“工人{id}找到工作了;执行。”"
 
 #: src/ch21-02-multithreaded.md:1254
 msgid ""
@@ -985,6 +1323,11 @@ msgid ""
 "to take. Feel free to change this `unwrap` to an `expect` with an error "
 "message that is meaningful to you."
 msgstr ""
+"首先，我们调用 `receiver` 来获取互斥锁，然后调用 `unwrap` 来处理任何错误。如"
+"果互斥锁处于 _中毒_ 状态，获取锁可能会失败。这种情况可能发生在其他线程在持有"
+"锁时没有释放锁的情况下导致自身 panic。在这种情况下，调用 `unwrap` 让该线程 "
+"panic 是正确的操作。你可以自由地将 `unwrap` 替换为 `expect`，并在其中添加对你"
+"有意义的错误信息。"
 
 #: src/ch21-02-multithreaded.md:1262
 msgid ""
@@ -993,6 +1336,9 @@ msgid ""
 "occur if the thread holding the sender has shut down, similar to how the "
 "`send` method returns `Err` if the receiver shuts down."
 msgstr ""
+"如果我们成功获得了互斥锁的锁定，就会调用 `recv` 来从通道中接收 `Job`。最后的 "
+"`unwrap` 可以处理这里可能出现的任何错误，这些错误可能发生在持有发送者的线程关"
+"闭时。类似于 `send` 方法在接收者关闭时返回 `Err` 的情况。"
 
 #: src/ch21-02-multithreaded.md:1267
 msgid ""
@@ -1000,12 +1346,15 @@ msgid ""
 "will wait until a job becomes available. The `Mutex<T>` ensures that only "
 "one `Worker` thread at a time is trying to request a job."
 msgstr ""
+"调用 `recv` 会阻塞线程，因此如果没有任务可用，当前线程将等待，直到有任务可用"
+"为止。 `Mutex<T>` 则确保一次只有一个 `Worker` 线程尝试请求任务。"
 
 #: src/ch21-02-multithreaded.md:1271
 msgid ""
 "Our thread pool is now in a working state! Give it a `cargo run` and make "
 "some requests:"
 msgstr ""
+"我们的线程池现在处于正常工作状态！给它施加 `cargo run` 并发起一些请求："
 
 #: src/ch21-02-multithreaded.md:1281
 msgid ""
@@ -1047,6 +1396,43 @@ msgid ""
 "Worker 2 got a job; executing.\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling hello v0.1.0 (file:///projects/hello)\n"
+"warning: field `workers` is never read\n"
+" --> src/lib.rs:7:5\n"
+"  |\n"
+"6 | pub struct ThreadPool {\n"
+"  |            ---------- field in this struct\n"
+"7 |     workers: Vec<Worker>,\n"
+"  |     ^^^^^^^\n"
+"  |\n"
+"  = note: `#[warn(dead_code)]` on by default\n"
+"\n"
+"warning: fields `id` and `thread` are never read\n"
+"  --> src/lib.rs:48:5\n"
+"   |\n"
+"47 | struct Worker {\n"
+"   |        ------ fields in this struct\n"
+"48 |     id: usize,\n"
+"   |     ^^\n"
+"49 |     thread: thread::JoinHandle<()>,\n"
+"   |     ^^^^^^\n"
+"\n"
+"warning: `hello` (lib) generated 2 warnings\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.91s\n"
+"     Running `target/debug/hello`\n"
+"Worker 0 got a job; executing.\n"
+"Worker 2 got a job; executing.\n"
+"Worker 1 got a job; executing.\n"
+"Worker 3 got a job; executing.\n"
+"Worker 0 got a job; executing.\n"
+"Worker 2 got a job; executing.\n"
+"Worker 1 got a job; executing.\n"
+"Worker 3 got a job; executing.\n"
+"Worker 0 got a job; executing.\n"
+"Worker 2 got a job; executing.\n"
+"```"
 
 #: src/ch21-02-multithreaded.md:1319
 msgid ""
@@ -1056,6 +1442,10 @@ msgid ""
 "_/sleep_, the server will be able to serve other requests by having another "
 "thread run them."
 msgstr ""
+"成功！我们现在拥有一个能够异步执行连接的线程池。创建的线程数量永远不会超过四"
+"个，因此如果服务器接收到大量请求，我们的系统也不会出现负载过重的情况。如果我"
+"们向 _/sleep_ 发起请求，服务器可以通过让另一个线程来处理这些请求来继续服务其"
+"他请求。"
 
 #: src/ch21-02-multithreaded.md:1325
 msgid ""
@@ -1064,6 +1454,9 @@ msgid ""
 "multiple instances of the same request sequentially for caching reasons. "
 "This limitation is not caused by our web server."
 msgstr ""
+"注意：如果您同时在多个浏览器窗口中打开 _/sleep_ 功能，它们可能会以每五秒一次"
+"的频率依次加载。某些网络浏览器出于缓存原因，会顺序执行同一请求的多个实例。这"
+"种限制并非由我们的网络服务器引起的。"
 
 #: src/ch21-02-multithreaded.md:1330
 msgid ""
@@ -1073,6 +1466,9 @@ msgid ""
 "method signatures be different, if at all? What parts of the code would stay "
 "the same?"
 msgstr ""
+"现在是一个很好的时机，让我们暂停一下，思考一下如果使用 futures 而不是闭包来完"
+"成任务的话，Listings 21-18、21-19 和 21-20 中的代码会有哪些不同。哪些类型会发"
+"生变化？方法签名会有什么不同，如果有的话？代码的哪些部分会保持不变？"
 
 #: src/ch21-02-multithreaded.md:1335
 msgid ""
@@ -1080,6 +1476,8 @@ msgid ""
 "might be wondering why we didn’t write the `Worker` thread code as shown in "
 "Listing 21-21."
 msgstr ""
+"在了解了第17章和第19章中的 `while let` 循环之后，你可能会想知道为什么我们没有"
+"像 Listing 21-21 中那样编写 `Worker` 线程代码。"
 
 #: src/ch21-02-multithreaded.md:1411
 msgid ""
@@ -1094,6 +1492,13 @@ msgid ""
 "being held longer than intended if we aren’t mindful of the lifetime of the "
 "`MutexGuard<T>`."
 msgstr ""
+"这段代码可以编译并运行，但并不能实现预期的线程处理行为：一个处理速度较慢的请"
+"求仍然会导致其他请求等待处理。原因有些微妙：这个 `Mutex` 结构体没有公开的 "
+"`unlock` 方法，因为锁的所有权是基于该 `MutexGuard<T>` 在 "
+"`LockResult<MutexGuard<T>>` 中的生命周期来决定的，而 `lock` 方法就返回在这个 "
+"`LockResult<MutexGuard<T>>` 中。在编译时，借用检查器可以强制执行这样的规则："
+"除非我们持有锁，否则不能访问由 `Mutex` 保护的资源。然而，如果我们不注意 "
+"`MutexGuard<T>` 的生命周期，这种实现也可能导致锁被持有的时间超过预期。"
 
 #: src/ch21-02-multithreaded.md:1422
 msgid ""
@@ -1105,3 +1510,8 @@ msgid ""
 "block. In Listing 21-21, the lock remains held for the duration of the call "
 "to `job()`, meaning other `Worker` instances cannot receive jobs."
 msgstr ""
+"列表 21-20 中使用“let job = receiver.lock（）.unwrap（）.recv（）.unwrap（）."
+"unwrap（）;”的代码之所以有效，是因为使用“let”时，等号右侧表达式中使用的任何临"
+"时值在“let”语句结束时会立即被删除。然而，'while let'（以及'if let'和'match'）"
+"直到关联块结束时才会丢弃临时值。在列表 21-21 中，锁定在调用“job（）”的整个过"
+"程中保持保持，意味着其他“Worker”实例无法接收任务。"

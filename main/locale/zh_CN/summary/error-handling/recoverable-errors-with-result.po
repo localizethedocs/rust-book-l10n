@@ -23,6 +23,10 @@ msgid ""
 "operation fails because the file doesn’t exist, you might want to create the "
 "file instead of terminating the process."
 msgstr ""
+"大多数错误并不严重到需要让程序完全停止运行。有时候，当一个函数出现错误时，其"
+"背后的原因通常是可以轻易理解的，并且可以做出相应的处理。例如，如果你尝试打开"
+"一个文件，但操作失败了，因为文件不存在，那么你可以选择创建这个文件，而不是终"
+"止程序。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:9
 msgid ""
@@ -31,6 +35,9 @@ msgid ""
 "ignore --> in Chapter 2 that the `Result` enum is defined as having two "
 "variants, `Ok` and `Err`, as follows:"
 msgstr ""
+"请回想一下在第2章中关于[“使用 `Result` 处理潜在故障”](ch02-00-guessing-game-"
+"tutorial.html#handling-potential-failure-with-result)<!--ignore -->的内容。其"
+"中， `Result` 枚举被定义为有两种变体： `Ok` 和 `Err`，具体如下所示："
 
 #: src/ch09-02-recoverable-errors-with-result.md:20
 msgid ""
@@ -43,12 +50,19 @@ msgid ""
 "defined on it in many different situations where the success value and error "
 "value we want to return may differ."
 msgstr ""
+"`T`和`E`是通用类型参数：我们将在第10章中更详细地讨论泛型。目前你需要知道的"
+"是，`T`代表了在`Ok`变体中成功情况下返回的值的类型，而`E`则代表了在`Err`变体失"
+"败情况下返回的错误值的类型。由于`Result`具有这些通用类型参数，因此我们可以在"
+"许多不同的情况下使用`Result`类型及其上定义的函数，这些情况下我们想要返回的成"
+"功值和错误值可能会有所不同。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:29
 msgid ""
 "Let’s call a function that returns a `Result` value because the function "
 "could fail. In Listing 9-3, we try to open a file."
 msgstr ""
+"我们称一个返回 `Result` 值的函数为“可能失败的函数”。在 Listing 9-3 中，我们尝"
+"试打开一个文件。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:38
 #: src/ch09-02-recoverable-errors-with-result.md:72
@@ -65,7 +79,7 @@ msgstr ""
 #: src/ch09-02-recoverable-errors-with-result.md:518
 #: src/ch09-02-recoverable-errors-with-result.md:636
 msgid "\"hello.txt\""
-msgstr ""
+msgstr "\"hello.txt\""
 
 #: src/ch09-02-recoverable-errors-with-result.md:44
 msgid ""
@@ -80,6 +94,13 @@ msgid ""
 "failed and at the same time give us either the file handle or error "
 "information. This information is exactly what the `Result` enum conveys."
 msgstr ""
+"`File::open` 的返回类型是一个 `Result<T, E>`。泛型参数 `T` 通过 `File::open` "
+"的实现来填充，该实现使用了成功值的类型 `std::fs::File`，而 `std::fs::File` 是"
+"一个文件句柄。错误值中使用的 `E` 的类型是 `std::io::Error`。这种返回类型意味"
+"着对 `File::open` 的调用可能会成功，并返回一个我们可以读取或写入的文件句柄。"
+"不过，函数调用也可能失败：例如，文件可能不存在，或者我们没有权限访问该文件。"
+"`File::open` 函数需要有一种方式来告诉我们它是成功还是失败，并且同时提供文件句"
+"柄或错误信息。这些信息正是 `Result` 枚举所传达的内容。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:55
 msgid ""
@@ -89,6 +110,10 @@ msgid ""
 "be an instance of `Err` that contains more information about the kind of "
 "error that occurred."
 msgstr ""
+"在 `File::open` 成功的情况下，变量 `greeting_file_result` 中的值将是一个包含"
+"文件句柄的 `Ok` 的实例。在 `File::open` 失败的情况下，变量 "
+"`greeting_file_result` 中的值将是一个包含有关发生错误类型更详细信息的 `Err` "
+"的实例。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:61
 msgid ""
@@ -97,12 +122,15 @@ msgid ""
 "handle the `Result` using a basic tool, the `match` expression that we "
 "discussed in Chapter 6."
 msgstr ""
+"我们需要在 Listing 9-3 中的代码中添加一些逻辑，以便根据 `File::open` 返回的值"
+"来执行不同的操作。Listing 9-4 展示了一种使用基本工具来处理 `Result` 的方法，"
+"这个工具就是我们在第 6 章中讨论过的 `match` 表达式。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:76
 #: src/ch09-02-recoverable-errors-with-result.md:140
 #: src/ch09-02-recoverable-errors-with-result.md:189
 msgid "\"Problem opening the file: {error:?}\""
-msgstr ""
+msgstr "\"打开文件时出现问题：{error:?}\""
 
 #: src/ch09-02-recoverable-errors-with-result.md:83
 msgid ""
@@ -110,6 +138,8 @@ msgid ""
 "been brought into scope by the prelude, so we don’t need to specify `Result::"
 "` before the `Ok` and `Err` variants in the `match` arms."
 msgstr ""
+"请注意，与 `Option` 枚举类似， `Result` 枚举及其变体也已经被引入到范围内，因"
+"此我们在 `match` 分支中不需要在 `Ok` 和 `Err` 变体之前指定 `Result::`。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:87
 msgid ""
@@ -118,6 +148,9 @@ msgid ""
 "`greeting_file`. After the `match`, we can use the file handle for reading "
 "or writing."
 msgstr ""
+"当结果为 `Ok` 时，这段代码会从 `Ok` 变体中返回内部的 `file` 值，然后将该文件"
+"句柄值赋给变量 `greeting_file`。在 `match` 之后，我们就可以使用这个文件句柄来"
+"进行读取或写入操作了。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:92
 msgid ""
@@ -126,6 +159,9 @@ msgid ""
 "If there’s no file named _hello.txt_ in our current directory and we run "
 "this code, we’ll see the following output from the `panic!` macro:"
 msgstr ""
+"`match`的另一个分支处理从`File::open`获取`Err`值的情况。在这个例子中，我们选"
+"择调用`panic!`宏。如果当前目录中没有名为_hello.txt_的文件，而我们运行这段代"
+"码，那么我们会看到`panic!`宏的输出如下："
 
 #: src/ch09-02-recoverable-errors-with-result.md:97
 msgid ""
@@ -142,14 +178,26 @@ msgid ""
 "backtrace\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling error-handling v0.1.0 (file:///projects/error-handling)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.73s\n"
+"     Running `target/debug/error-handling`\n"
+"\n"
+"thread 'main' panicked at src/main.rs:8:23:\n"
+"Problem opening the file: Os { code: 2, kind: NotFound, message: \"No such "
+"file or directory\" }\n"
+"note: run with `RUST_BACKTRACE=1` environment variable to display a "
+"backtrace\n"
+"```"
 
 #: src/ch09-02-recoverable-errors-with-result.md:108
 msgid "As usual, this output tells us exactly what has gone wrong."
-msgstr ""
+msgstr "像往常一样，这个输出准确地告诉我们出了什么问题。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:110
 msgid "Matching on Different Errors"
-msgstr ""
+msgstr "针对不同类型的错误进行匹配"
 
 #: src/ch09-02-recoverable-errors-with-result.md:112
 msgid ""
@@ -161,10 +209,15 @@ msgid ""
 "we still want the code to `panic!` in the same way it did in Listing 9-4. "
 "For this, we add an inner `match` expression, shown in Listing 9-5."
 msgstr ""
+"在清单9-4中的代码，无论`File::open`为何失败，都会继续执行`panic!`。然而，我们"
+"希望针对不同的失败原因采取不同的处理措施。如果`File::open`因为文件不存在而失"
+"败，我们希望创建该文件，并返回对新文件的句柄。如果`File::open`因为其他原因失"
+"败——例如，因为我们没有权限打开该文件——我们仍然希望代码以与清单9-4中相同的方式"
+"继续执行`panic!`。为此，我们在清单9-5中添加了一个内部`match`表达式。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:137
 msgid "\"Problem creating the file: {e:?}\""
-msgstr ""
+msgstr "\"创建文件时出现问题：{e:?}\""
 
 #: src/ch09-02-recoverable-errors-with-result.md:149
 msgid ""
@@ -177,6 +230,13 @@ msgid ""
 "indicates the file we’re trying to open doesn’t exist yet. So, we match on "
 "`greeting_file_result`, but we also have an inner match on `error.kind()`."
 msgstr ""
+"`File::open` 返回的值的类型是 `Err` 变体中的 `io::Error`，这是一个由标准库提"
+"供的结构体。该结构体包含一个方法 `kind`，我们可以通过调用这个方法来获取 `io::"
+"ErrorKind` 类型的值。枚举 `io::ErrorKind` 也是由标准库提供的，它包含了多种变"
+"体，用于表示 `io` 操作可能产生的不同类型的错误。我们想要使用的变体是 "
+"`ErrorKind::NotFound`，它表示我们试图打开的文件尚不存在。因此，我们会使用 "
+"`greeting_file_result` 来进行匹配，同时还会使用 `error.kind()` 来进行内部匹"
+"配。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:158
 msgid ""
@@ -188,10 +248,15 @@ msgid ""
 "message is printed. The second arm of the outer `match` stays the same, so "
 "the program panics on any error besides the missing file error."
 msgstr ""
+"我们想要在内部匹配中检查的条件，是 `error.kind()` 返回的值是否是 `NotFound` "
+"枚举中的 `ErrorKind` 变体。如果是的话，我们会尝试使用 `File::create` 来创建文"
+"件。然而，由于 `File::create` 也可能失败，因此我们需要在内部 `match` 表达式中"
+"添加第二个分支。当文件无法创建时，会打印出不同的错误信息。外部 `match` 的第二"
+"个分支保持不变，因此程序在除文件缺失错误之外的任何错误情况下都会崩溃。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:166
 msgid "Alternatives to Using `match` with `Result<T, E>`"
-msgstr ""
+msgstr "使用 `match` 和 `result<T, E> ` 的替代方法"
 
 #: src/ch09-02-recoverable-errors-with-result.md:168
 msgid ""
@@ -201,16 +266,20 @@ msgid ""
 "more concise than using `match` when handling `Result<T, E>` values in your "
 "code."
 msgstr ""
+"竟然有这么多 `match`！ `match` 表达式非常有用，但也很基础。在第13章中，你将学"
+"习闭包的概念，这些闭包可以与定义在 `Result<T, E>` 上的许多方法一起使用。在处"
+"理 `Result<T, E>` 值的代码中，使用闭包比使用 `match` 更简洁。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:173
 msgid ""
 "For example, here’s another way to write the same logic as shown in Listing "
 "9-5, this time using closures and the `unwrap_or_else` method:"
 msgstr ""
+"例如，以下是与清单9-5中相同的逻辑，这次使用了闭包和 `unwrap_or_else` 方法："
 
 #: src/ch09-02-recoverable-errors-with-result.md:186
 msgid "\"Problem creating the file: {error:?}\""
-msgstr ""
+msgstr "\"创建文件时出现问题：{error:?}\""
 
 #: src/ch09-02-recoverable-errors-with-result.md:195
 msgid ""
@@ -220,14 +289,18 @@ msgid ""
 "standard library documentation. Many more of these methods can clean up "
 "huge, nested `match` expressions when you’re dealing with errors."
 msgstr ""
+"虽然这段代码的行为与清单9-5相同，但它不包含任何 `match` 表达式，且阅读起来更"
+"清晰。在阅读完第13章后，请再回顾这个例子，并查阅标准库文档中关于 "
+"`unwrap_or_else` 方法的说明。在处理错误时，许多这类方法可以帮助你简化复杂的、"
+"嵌套的 `match` 表达式。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:203
 msgid "<a id=\"shortcuts-for-panic-on-error-unwrap-and-expect\"></a>"
-msgstr ""
+msgstr "<a id=\"shortcuts-for-panic-on-error-unwrap-and-expect\"></a>"
 
 #: src/ch09-02-recoverable-errors-with-result.md:205
 msgid "Shortcuts for Panic on Error"
-msgstr ""
+msgstr "错误处理时的快速退出选项"
 
 #: src/ch09-02-recoverable-errors-with-result.md:207
 msgid ""
@@ -240,12 +313,20 @@ msgid ""
 "`unwrap` will call the `panic!` macro for us. Here is an example of `unwrap` "
 "in action:"
 msgstr ""
+"使用 `match` 的效果还算不错，但它可能会显得有些冗长，而且并不总是能够很好地传"
+"达意图。 `Result<T, E>` 类型上有许多辅助方法，用于执行各种更具体的任务。 "
+"`unwrap` 方法是一个快捷方法，其实现方式与我们在清单 9-4 中编写的 `match` 表达"
+"式相同。如果 `Result` 的值是 `Ok` 的变体，那么 `unwrap` 将返回 `Ok` 内部的"
+"值。如果 `Result` 是 `Err` 的变体，那么 `unwrap` 会调用 `panic!` 宏。以下是 "
+"`unwrap` 的一个使用示例："
 
 #: src/ch09-02-recoverable-errors-with-result.md:227
 msgid ""
 "If we run this code without a _hello.txt_ file, we’ll see an error message "
 "from the `panic!` call that the `unwrap` method makes:"
 msgstr ""
+"如果我们在不提供 _hello.txt_ 文件的情况下运行这段代码，将会看到 `panic!` 方法"
+"调用时出现的错误信息："
 
 #: src/ch09-02-recoverable-errors-with-result.md:236
 msgid ""
@@ -255,6 +336,11 @@ msgid ""
 "message: \"No such file or directory\" }\n"
 "```"
 msgstr ""
+"```text\n"
+"thread 'main' panicked at src/main.rs:4:49:\n"
+"called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, "
+"message: \"No such file or directory\" }\n"
+"```"
 
 #: src/ch09-02-recoverable-errors-with-result.md:241
 msgid ""
@@ -263,10 +349,13 @@ msgid ""
 "messages can convey your intent and make tracking down the source of a panic "
 "easier. The syntax of `expect` looks like this:"
 msgstr ""
+"同样，`expect`方法还让我们能够选择`panic!`错误信息。使用`expect`而不是"
+"`unwrap`，并提供清晰的错误信息，可以传达你的意图，并使得追踪panic的来源变得更"
+"加容易。`expect`的语法如下所示："
 
 #: src/ch09-02-recoverable-errors-with-result.md:253
 msgid "\"hello.txt should be included in this project\""
-msgstr ""
+msgstr "\"hello.txt 应该包含在此项目中”"
 
 #: src/ch09-02-recoverable-errors-with-result.md:259
 msgid ""
@@ -275,6 +364,9 @@ msgid ""
 "`panic!` will be the parameter that we pass to `expect`, rather than the "
 "default `panic!` message that `unwrap` uses. Here’s what it looks like:"
 msgstr ""
+"我们使用 `expect` 的方式与 `unwrap` 相同：用于返回文件句柄或调用 `panic!` "
+"宏。 `expect` 在调用 `panic!` 时使用的错误消息，将是我们传递给 `expect` 的参"
+"数，而不是 `unwrap` 使用的默认 `panic!` 消息。具体格式如下："
 
 #: src/ch09-02-recoverable-errors-with-result.md:270
 msgid ""
@@ -284,6 +376,11 @@ msgid ""
 "message: \"No such file or directory\" }\n"
 "```"
 msgstr ""
+"```text\n"
+"thread 'main' panicked at src/main.rs:5:10:\n"
+"hello.txt should be included in this project: Os { code: 2, kind: NotFound, "
+"message: \"No such file or directory\" }\n"
+"```"
 
 #: src/ch09-02-recoverable-errors-with-result.md:275
 msgid ""
@@ -292,10 +389,13 @@ msgid ""
 "succeed. That way, if your assumptions are ever proven wrong, you have more "
 "information to use in debugging."
 msgstr ""
+"在高质量的生产代码中，大多数 Rust 开发者更倾向于使用 `expect` 而不是"
+"`unwrap`，并且会提供更多关于为什么这种操作总是会成功的上下文信息。这样，如果"
+"您的假设被证明是错误的，您就有更多的信息可用于调试。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:280
 msgid "Propagating Errors"
-msgstr ""
+msgstr "错误传播"
 
 #: src/ch09-02-recoverable-errors-with-result.md:282
 msgid ""
@@ -306,6 +406,10 @@ msgid ""
 "there might be more information or logic that dictates how the error should "
 "be handled than what you have available in the context of your code."
 msgstr ""
+"当函数的实现调用某个可能失败的操作时，与其在函数内部处理错误，不如将错误返回"
+"给调用代码，这样调用代码就可以自行决定如何处理该错误。这被称为“传播错误”，它"
+"赋予了调用代码更多的控制权，因为调用代码可能拥有更多关于如何处理错误的信息或"
+"逻辑，而这些信息或逻辑在函数的上下文中是无法获取的。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:289
 msgid ""
@@ -313,6 +417,8 @@ msgid ""
 "If the file doesn’t exist or can’t be read, this function will return those "
 "errors to the code that called the function."
 msgstr ""
+"例如，清单 9-6 展示了一个从文件中读取用户名的函数。如果文件不存在或无法读取，"
+"该函数会将这些错误返回给调用该函数的代码。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:322
 msgid ""
@@ -324,6 +430,11 @@ msgid ""
 "`T` has been filled in with the concrete type `String` and the generic type "
 "`E` has been filled in with the concrete type `io::Error`."
 msgstr ""
+"这个函数可以用更简洁的方式编写，但我们首先会手动完成大部分代码，以便探索错误"
+"处理的方式；最后，我们会展示更简洁的实现方法。首先，让我们看看这个函数的返回"
+"类型：`Result<String, io::Error>`。这意味着该函数返回的是一个类型为"
+"`Result<T, E>`的值，其中泛型参数`T`已经被具体类型`String`替代，而泛型类型`E`"
+"则被具体类型`io::Error`替代。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:330
 msgid ""
@@ -337,6 +448,13 @@ msgid ""
 "the operations we’re calling in this function’s body that might fail: the "
 "`File::open` function and the `read_to_string` method."
 msgstr ""
+"如果这个函数能够顺利执行，那么调用这个函数的代码将收到一个 `Ok` 类型的值，该"
+"值包含 `String` 信息——也就是这个函数从文件中读取到的 `username` 信息。如果这"
+"个函数遇到任何问题，调用代码的接收值将是一个 `Err` 类型的值，该值包含 `io::"
+"Error` 的实例，而 `io::Error` 会提供更多关于问题的详细信息。我们选择 `io::"
+"Error` 作为这个函数的返回类型，因为恰好这个类型就是我们在函数体内调用的两个可"
+"能失败的操作所返回的误差值的类型：即 `File::open` 函数和 `read_to_string` 方"
+"法。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:340
 msgid ""
@@ -349,6 +467,12 @@ msgid ""
 "pass the error value from `File::open`, now in the pattern variable `e`, "
 "back to the calling code as this function’s error value."
 msgstr ""
+"该函数的主体首先调用 `File::open` 函数。然后，我们处理 `Result` 的值，采用与 "
+"Listing 9-4 中的 `match` 类似的处理方式。如果 `File::open` 成功执行，那么模式"
+"变量 `file` 中的文件句柄就会成为可变变量 `username_file` 的值，函数将继续执"
+"行。在 `Err` 的情况下，我们不会调用 `panic!`，而是使用 `return` 关键字来提前"
+"结束函数的执行，并将 `File::open` 中的错误值现在存储在模式变量 `e` 中作为该函"
+"数的错误值返回给调用代码。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:349
 msgid ""
@@ -364,6 +488,14 @@ msgid ""
 "the return value of `File::open`. However, we don’t need to explicitly say "
 "`return`, because this is the last expression in the function."
 msgstr ""
+"因此，如果我们有一个在 `username_file` 中的文件句柄，那么该函数会创建一个新的"
+"变量 `username`，并在 `username_file` 中的文件句柄上调用 `read_to_string` 方"
+"法来读取文件的内容到 `username` 中。`read_to_string` 方法也会返回一个 "
+"`Result`，因为即使 `File::open` 成功执行，它也可能失败。所以，我们需要另一个 "
+"`match` 来处理这种情况：如果 `read_to_string` 成功执行，那么我们的函数就成功"
+"了，我们会从现在位于 `username` 中的文件中获取用户名，并将其封装在 `Ok` 中。"
+"如果 `read_to_string` 失败，我们会以与处理 `match` 时返回错误值相同的方式返回"
+"错误值。不过，我们不需要明确写出 `return`，因为这是函数的最后一个表达式。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:361
 msgid ""
@@ -376,20 +508,27 @@ msgid ""
 "calling code is actually trying to do, so we propagate all the success or "
 "error information upward for it to handle appropriately."
 msgstr ""
+"调用此代码的代码将会处理两种情况：一种是包含用户名的 `Ok` 值，另一种是包含 "
+"`io::Error` 值的 `Err` 值。具体如何处理这些值由调用该代码的代码来决定。如果调"
+"用代码得到了 `Err` 值，它可能会调用 `panic!` 从而导致程序崩溃，或者使用默认的"
+"用户名，或者从文件以外的其他来源获取用户名。由于我们对调用代码的实际意图了解"
+"不足，因此将所有成功或错误信息向上传递，以便其能够妥善处理。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:370
 msgid ""
 "This pattern of propagating errors is so common in Rust that Rust provides "
 "the question mark operator `?` to make this easier."
 msgstr ""
+"在Rust中，这种错误传播的模式非常常见，因此Rust提供了问号运算符 `?` 来简化这一"
+"情况。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:375
 msgid "<a id=\"a-shortcut-for-propagating-errors-the--operator\"></a>"
-msgstr ""
+msgstr "<a id=\"a-shortcut-for-propagating-errors-the--operator\"></a>"
 
 #: src/ch09-02-recoverable-errors-with-result.md:377
 msgid "The `?` Operator Shortcut"
-msgstr ""
+msgstr "`?` 运算符的快捷方式"
 
 #: src/ch09-02-recoverable-errors-with-result.md:379
 msgid ""
@@ -397,6 +536,8 @@ msgid ""
 "the same functionality as in Listing 9-6, but this implementation uses the `?"
 "` operator."
 msgstr ""
+"清单9-7展示了一个 `read_username_from_file` 的实现，其功能与清单9-6相同，但此"
+"实现使用了 `?` 运算符。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:403
 msgid ""
@@ -408,6 +549,10 @@ msgid ""
 "whole function as if we had used the `return` keyword so that the error "
 "value gets propagated to the calling code."
 msgstr ""
+"在 `Result` 值之后放置 `?`，其工作方式几乎与我们为处理 `Result` 值而定义的 "
+"`match` 表达式相同。  清单 9-6：如果 `Result` 的值为 `Ok`，则 `Ok` 内的值会被"
+"返回，程序将继续运行。如果值为 `Err`，则整个函数会返回 `Err`，就像我们使用了 "
+"`return` 关键字一样，这样错误值就会传播到调用代码的代码中。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:411
 msgid ""
@@ -421,6 +566,12 @@ msgid ""
 "represent all the ways a function might fail, even if parts might fail for "
 "many different reasons."
 msgstr ""
+"Listing 9-6 中的 `match` 表达式所做的事情，与 `?` 运算符所做的事情之间存在差"
+"异：那些被 `?` 运算符调用的错误值，会经过标准库中的 `From` 特质中定义的 "
+"`from` 函数进行处理。这个函数的作用是将一种类型的值转换为另一种类型的值。当 "
+"`?` 运算符调用 `from` 函数时，接收到的错误类型会被转换为当前函数返回类型中定"
+"义的错误类型。这一点在函数返回一种错误类型来表示函数可能出现的所有错误情况时"
+"非常有用，即使某些部分可能因为多种不同的原因而失败。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:421
 msgid ""
@@ -431,6 +582,10 @@ msgid ""
 "the body of `read_username_from_file` will call `from` and convert the error "
 "types without needing to add any more code to the function."
 msgstr ""
+"例如，我们可以将清单9-7中的`read_username_from_file`函数修改为返回我们自定义"
+"的error类型`OurError`。如果我们还定义`impl From<io::Error> for OurError`来从"
+"`io::Error`构造`OurError`的实例，那么`?`运算符在`read_username_from_file`的主"
+"体中将会调用`from`，从而将错误类型进行转换，而无需在函数中添加更多的代码。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:428
 msgid ""
@@ -440,6 +595,10 @@ msgid ""
 "and give any `Err` value to the calling code. The same thing applies to the "
 "`?` at the end of the `read_to_string` call."
 msgstr ""
+"在 Listing 9-7 的上下文中， `File::open` 调用末尾的 `Ok` 会将 `Ok` 内部的值返"
+"回给 `username_file` 变量。如果发生错误， `?` 运算符会在整个函数执行过程中提"
+"前终止，并将任何 `Err` 值返回给调用代码。同样的规则也适用于 `read_to_string` "
+"调用末尾的 `?`。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:434
 msgid ""
@@ -447,6 +606,8 @@ msgid ""
 "implementation simpler. We could even shorten this code further by chaining "
 "method calls immediately after the `?`, as shown in Listing 9-8."
 msgstr ""
+"`?`运算符消除了大量的样板代码，使得这个函数的实现更加简洁。我们甚至可以通过在"
+"`?`之后立即链接方法调用来进一步缩短代码，如清单9-8所示。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:459
 msgid ""
@@ -459,11 +620,17 @@ msgid ""
 "returning errors. The functionality is again the same as in Listing 9-6 and "
 "Listing 9-7; this is just a different, more ergonomic way to write it."
 msgstr ""
+"我们将新变量 `String` 的创建操作移到了函数的最开始部分；这部分并没有发生变"
+"化。我们没有创建变量 `username_file`，而是将 `read_to_string` 的调用直接链接"
+"到 `File::open(\"hello.txt\")?` 的结果上。在 `read_to_string` 的调用末尾仍然"
+"有一个 `?`，并且当两个 `File::open` 和 `read_to_string` 都成功时，我们仍然会"
+"返回一个包含 `username` 的 `Ok` 值，而不是返回错误。其功能与 Listing 9-6 和 "
+"Listing 9-7 中的功能相同；这只是另一种更易于使用的编写方式而已。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:468
 msgid ""
 "Listing 9-9 shows a way to make this even shorter using `fs::read_to_string`."
-msgstr ""
+msgstr "列表9-9展示了一种使用 `fs::read_to_string` 来使代码更简洁的方法。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:487
 msgid ""
@@ -474,14 +641,18 @@ msgid ""
 "read_to_string` doesn’t give us the opportunity to explain all the error "
 "handling, so we did it the longer way first."
 msgstr ""
+"将文件读取到字符串中是一个相当常见的操作，因此标准库提供了方便的 `fs::"
+"read_to_string` 函数，该函数可以打开文件、创建一个新的 `String`、读取文件的内"
+"容、将内容放入该 `String` 中，并返回结果。当然，使用 `fs::read_to_string` 并"
+"不能让我们详细解释所有的错误处理，所以我们先采用较长的方式来实现这个功能。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:496
 msgid "<a id=\"where-the--operator-can-be-used\"></a>"
-msgstr ""
+msgstr "<a id=\"where-the--operator-can-be-used\"></a>"
 
 #: src/ch09-02-recoverable-errors-with-result.md:498
 msgid "Where to Use the `?` Operator"
-msgstr ""
+msgstr "`?` 运算符的使用场景"
 
 #: src/ch09-02-recoverable-errors-with-result.md:500
 msgid ""
@@ -493,6 +664,10 @@ msgid ""
 "return arm returned an `Err(e)` value. The return type of the function has "
 "to be a `Result` so that it’s compatible with this `return`."
 msgstr ""
+"`?`运算符只能用于返回类型与`?`所作用的数值兼容的函数中。这是因为`?`运算符被定"
+"义为在函数外部提前返回数值，其方式与我们在第9-6节中定义的`match`表达式相同。"
+"在第9-6节中，`match`使用了`Result`数值，而提前返回的部分则返回了`Err(e)`数"
+"值。因此，函数的返回类型必须是`Result`类型，这样才能与`return`兼容。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:508
 msgid ""
@@ -500,6 +675,8 @@ msgid ""
 "operator in a `main` function with a return type that is incompatible with "
 "the type of the value we use `?` on."
 msgstr ""
+"在 Listing 9-10 中，我们将看到如果我们在一个返回类型与我们使用 `?` 操作数的类"
+"型不兼容的 `main` 函数中使用 `?` 运算符时，会遇到的错误。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:524
 msgid ""
@@ -508,6 +685,9 @@ msgid ""
 "return type of `()`, not `Result`. When we compile this code, we get the "
 "following error message:"
 msgstr ""
+"这段代码试图打开一个文件，但可能会失败。`?`运算符遵循由`File::open`返回的值，"
+"但是`main`函数的返回类型是`()`，而不是`Result`。当我们编译这段代码时，会收到"
+"以下错误信息："
 
 #: src/ch09-02-recoverable-errors-with-result.md:529
 msgid ""
@@ -537,6 +717,31 @@ msgid ""
 "previous error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling error-handling v0.1.0 (file:///projects/error-handling)\n"
+"error[E0277]: the `?` operator can only be used in a function that returns "
+"`Result` or `Option` (or another type that implements `FromResidual`)\n"
+" --> src/main.rs:4:48\n"
+"  |\n"
+"3 | fn main() {\n"
+"  | --------- this function should return `Result` or `Option` to accept `?"
+"`\n"
+"4 |     let greeting_file = File::open(\"hello.txt\")?;\n"
+"  |                                                ^ cannot use the `?` "
+"operator in a function that returns `()`\n"
+"  |\n"
+"help: consider adding return type\n"
+"  |\n"
+"3 ~ fn main() -> Result<(), Box<dyn std::error::Error>> {\n"
+"4 |     let greeting_file = File::open(\"hello.txt\")?;\n"
+"5 +     Ok(())\n"
+"  |\n"
+"\n"
+"For more information about this error, try `rustc --explain E0277`.\n"
+"error: could not compile `error-handling` (bin \"error-handling\") due to 1 "
+"previous error\n"
+"```"
 
 #: src/ch09-02-recoverable-errors-with-result.md:551
 msgid ""
@@ -544,6 +749,8 @@ msgid ""
 "function that returns `Result`, `Option`, or another type that implements "
 "`FromResidual`."
 msgstr ""
+"这个错误表明，我们只能在一个返回 `Result`、 `Option` 或实现了 `FromResidual` "
+"的其他类型的函数中使用 `?` 运算符。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:555
 msgid ""
@@ -553,6 +760,9 @@ msgid ""
 "choice is to use a `match` or one of the `Result<T, E>` methods to handle "
 "the `Result<T, E>` in whatever way is appropriate."
 msgstr ""
+"要修复这个错误，你有两个选择。第一个选择是更改函数的返回类型，使其与你在 `?` "
+"运算符上使用的数值兼容，只要没有限制阻止这一点。第二个选择是使用 `match` 或 "
+"`Result<T, E>` 中的某一种方法来以适当的方式处理 `Result<T, E>`。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:561
 msgid ""
@@ -566,22 +776,28 @@ msgid ""
 "function continues. Listing 9-11 has an example of a function that finds the "
 "last character of the first line in the given text."
 msgstr ""
+"错误信息还提到，`?`也可以与`Option<T>`的值一起使用。就像在`Result`上使用`?`一"
+"样，你只能在返回`Option`的函数中使用`?`和`Option`。当`?`运算符在`Option<T>`上"
+"被调用时，其行为类似于在`Result<T, E>`上被调用时的行为：如果值是`None`，那么"
+"`None`会在函数执行到那个点时提前返回。如果值是`Some`，那么`Some`内的数值就是"
+"表达式的结果，函数会继续执行。列表9-11中有一个示例，展示了如何找到给定文本中"
+"第一行的最后一个字符。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:580
 msgid "\"Hello, world\\nHow are you today?\""
-msgstr ""
+msgstr "\"你好，世界\\n你今天怎么办？\""
 
 #: src/ch09-02-recoverable-errors-with-result.md:581
 msgid "'d'"
-msgstr ""
+msgstr "'d'"
 
 #: src/ch09-02-recoverable-errors-with-result.md:584
 msgid "\"\""
-msgstr ""
+msgstr "\"\""
 
 #: src/ch09-02-recoverable-errors-with-result.md:585
 msgid "\"\\nhi\""
-msgstr ""
+msgstr "\"\\nhi\""
 
 #: src/ch09-02-recoverable-errors-with-result.md:591
 msgid ""
@@ -596,6 +812,12 @@ msgid ""
 "`next` will return a `Some` value containing a string slice of the first "
 "line in `text`."
 msgstr ""
+"这个函数返回 `Option<char>` ，因为它可能有一个字符，但也可能有这样的字符。 这"
+"个代码采用`text`字符串切片参数，并调用它上的 `lines`方法，该方法返回一个字符"
+"串里的线上的迭代器。 因为这个函数想要检查第一行，它在迭代器上调用`下一行'来从"
+"迭代器获得第一个值。 如果`text`是空字符串，那么这个调用`None`将返回，在这种情"
+"况下我们使用`？ 停止并返回 `Last_char_of_first_line` 。 如果`text`不是空字符"
+"串，`next`将返回一个包含`text`中第一行字符串分割的`有'值。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:601
 msgid ""
@@ -611,6 +833,14 @@ msgid ""
 "` operator on `Option`, we’d have to implement this logic using more method "
 "calls or a `match` expression."
 msgstr ""
+"`?` 摘取字符串分割，我们可以在那个字符串分割上调用 `chars` 来获得一个字符的迭"
+"代器。 我们对这第一行的最后一个字符感兴趣，所以我们调用 `last` 来返回迭代器中"
+"的最后一个项目。 这是一个 `Option` ，因为第一行可能是空字符串； 例如，如果"
+"`text`开头是空白行，但在其他行上有字符，例如`\"\\nhi`。 然而，如果在第一行上"
+"有最后一个字符，它将会在`某些'变量中返回它。 中间的`?`操作员让我们有一个简明"
+"的方式来表达这种逻辑，使我们能够在一行中执行这个函数。 如果我们不能在 "
+"\"Option\" 上使用 \"?\" 操作员，我们必须使用更多的方法调用或 \"匹配\" 表达式"
+"来实现这个逻辑。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:612
 msgid ""
@@ -621,6 +851,10 @@ msgid ""
 "versa; in those cases, you can use methods like the `ok` method on `Result` "
 "or the `ok_or` method on `Option` to do the conversion explicitly."
 msgstr ""
+"请注意，你可以在 `Result` 上使用 `?` 操作员返回的 `Result` 函数，并且你可以使"
+"用 `? 函数`Option`上的运算符, 返回`Option`, 但你不能混合和匹配。 `？ 运算符不"
+"会自动将 `Result` 转换为 `Option` ，反之亦然； 在这种情况下，您可以使用 "
+"`Result` 的 `ok` 方法或`Option` 的 `ok_or` 方法来明确进行转换。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:619
 msgid ""
@@ -629,6 +863,9 @@ msgid ""
 "program, and there are restrictions on what its return type can be for the "
 "program to behave as expected."
 msgstr ""
+"到目前为止，我们使用了所有`main`函数返回`()`。 `main`函数是特殊的，因为它是一"
+"个可执行程序的进出点， 而且它的返回类型会受到限制，使方案能够像预期的那样运"
+"作。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:624
 msgid ""
@@ -637,6 +874,9 @@ msgid ""
 "`Result<(), Box<dyn Error>>` and added a return value `Ok(())` to the end. "
 "This code will now compile."
 msgstr ""
+"幸运，`main` 也可以返回 `Result<(), E>`。 列表9-12的代码来自列表9-10，但我们"
+"已经将返回类型的 `main` 更改为 `Result<(), 框<dyn Error>>`，并在结尾添加了一"
+"个返回值 `Ok()` 。 此代码将被编译。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:644
 msgid ""
@@ -651,6 +891,13 @@ msgid ""
 "this signature will continue to be correct even if more code that returns "
 "other errors is added to the body of `main`."
 msgstr ""
+"`Box<dyn Error>`类型是一个特质对象，我们将在第18章的“使用特质对象来抽象共享行"
+"为[”部分中详细讨论\"](ch18-02-trait-objects.html#using-trait-objects-to-"
+"abstract-over-shared-behavior)<!-- ignore -->。目前，你可以将`Box<dyn Error>`"
+"理解为“任何类型的错误”。在`main`函数中对`Result`值使用`?`并指定错误类型为"
+"`Box<dyn Error>`是允许的，因为这允许任何`Err`值的提前返回。尽管这个`main`函数"
+"的主体只会返回类型为`std::io::Error`的错误，但通过指定`Box<dyn Error>`，即使"
+"有更多返回其他错误的代码被添加到`main`函数的主体中，这个签名仍然是正确的。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:654
 msgid ""
@@ -661,6 +908,11 @@ msgid ""
 "`0`, and programs that error return some integer other than `0`. Rust also "
 "returns integers from executables to be compatible with this convention."
 msgstr ""
+"当 `main` 函数返回 `Result<(), E>` 时，如果 `main` 返回 `Ok(())`，则执行程序"
+"将以 `0` 的值退出；如果 `main` 返回 `Err` 的值，则执行程序将以非零值退出。用 "
+"C 语言编写的执行程序在退出时返回整数：成功退出的程序返回整数 `0`，而发生错误"
+"的程序则返回除 `0` 之外的其他整数。Rust 也允许执行程序返回整数，以与这一惯例"
+"保持一致。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:661
 msgid ""
@@ -670,6 +922,10 @@ msgid ""
 "standard library documentation for more information on implementing the "
 "`Termination` trait for your own types."
 msgstr ""
+"`main` 函数可以返回任何实现了 [`std::process::Termination` 特质](../std/"
+"process/trait.Termination.html)<!-- ignore --> 的类型，该特质包含一个返回 "
+"`ExitCode` 的 `report` 函数。有关如何为您的类型实现 `Termination` 特质的更多"
+"信息，请参阅标准库文档。"
 
 #: src/ch09-02-recoverable-errors-with-result.md:667
 msgid ""
@@ -677,3 +933,5 @@ msgid ""
 "`Result`, let’s return to the topic of how to decide which is appropriate to "
 "use in which cases."
 msgstr ""
+"既然我们已经讨论了调用 `panic!` 或返回 `Result` 的细节，现在让我们回到如何决"
+"定在哪些情况下使用哪种方法的主题。"

@@ -24,6 +24,9 @@ msgid ""
 "_threads_. For example, a web server could have multiple threads so that it "
 "can respond to more than one request at the same time."
 msgstr ""
+"在大多数当前的操作系统中，执行程序的代码会在一个进程中运行，而操作系统会同时"
+"管理多个进程。在一个程序中，也可以有同时运行的独立部分。这些独立部分所运行的"
+"功能被称为“线程”。例如，一个Web服务器可以拥有多个线程，从而同时响应多个请求。"
 
 #: src/ch16-01-threads.md:10
 msgid ""
@@ -33,24 +36,27 @@ msgid ""
 "guarantee about the order in which parts of your code on different threads "
 "will run. This can lead to problems, such as:"
 msgstr ""
+"在程序中将计算任务拆分成多个线程来同时运行多个任务，可以提高性能，但这也会增"
+"加复杂性。由于线程可以同时运行，因此无法保证不同线程上的代码部分会以特定的顺"
+"序执行。这可能会导致一些问题，例如："
 
 #: src/ch16-01-threads.md:16
 msgid ""
 "Race conditions, in which threads are accessing data or resources in an "
 "inconsistent order"
-msgstr ""
+msgstr "竞争条件，即多个线程以不一致的顺序访问数据或资源"
 
 #: src/ch16-01-threads.md:18
 msgid ""
 "Deadlocks, in which two threads are waiting for each other, preventing both "
 "threads from continuing"
-msgstr ""
+msgstr "死锁，即两个线程相互等待，导致两个线程都无法继续执行"
 
 #: src/ch16-01-threads.md:20
 msgid ""
 "Bugs that only happen in certain situations and are hard to reproduce and "
 "fix reliably"
-msgstr ""
+msgstr "仅在某些特定情况下发生的错误，这些错误很难重现，也难以可靠地修复"
 
 #: src/ch16-01-threads.md:23
 msgid ""
@@ -59,6 +65,8 @@ msgid ""
 "requires a code structure that is different from that in programs running in "
 "a single thread."
 msgstr ""
+"Rust试图减轻使用线程带来的负面影响，但在多线程环境下编程仍然需要仔细考虑，并"
+"且需要一种与单线程程序不同的代码结构。"
 
 #: src/ch16-01-threads.md:28
 msgid ""
@@ -71,10 +79,15 @@ msgid ""
 "we will see in the next chapter, provides another approach to concurrency as "
 "well.)"
 msgstr ""
+"编程语言以几种不同的方式实现线程，许多操作系统还提供了API，让编程语言可以调用"
+"这些API来创建新的线程。Rust标准库采用了一种_1:1_的线程实现模型，即每个语言线"
+"程对应一个操作系统线程。还有一些库采用了其他线程实现模型，这些模型在权衡方面"
+"与1:1模型有所不同。（Rust的异步系统，我们将在下一章中介绍，也提供了一种实现并"
+"发的方法。）"
 
 #: src/ch16-01-threads.md:36
 msgid "Creating a New Thread with `spawn`"
-msgstr ""
+msgstr "使用 `spawn` 创建新线程"
 
 #: src/ch16-01-threads.md:38
 msgid ""
@@ -83,16 +96,19 @@ msgid ""
 "to run in the new thread. The example in Listing 16-1 prints some text from "
 "a main thread and other text from a new thread."
 msgstr ""
+"要创建一个新的线程，我们调用 `thread::spawn` 函数，并传递一个闭包（我们在第13"
+"章中讨论过闭包），该闭包包含我们希望在新线程中运行的代码。清单16-1中的示例从"
+"主线程打印一些文本，同时从新线程打印其他文本。"
 
 #: src/ch16-01-threads.md:52 src/ch16-01-threads.md:127
 #: src/ch16-01-threads.md:184
 msgid "\"hi number {i} from the spawned thread!\""
-msgstr ""
+msgstr "“嗨，号码{i}，来自生成帖！”"
 
 #: src/ch16-01-threads.md:58 src/ch16-01-threads.md:133
 #: src/ch16-01-threads.md:192
 msgid "\"hi number {i} from the main thread!\""
-msgstr ""
+msgstr "“主线的号码{i}！”"
 
 #: src/ch16-01-threads.md:66
 msgid ""
@@ -101,6 +117,8 @@ msgid ""
 "from this program might be a little different every time, but it will look "
 "similar to the following:"
 msgstr ""
+"注意，当 Rust 程序的主线程完成时，所有生成的线程都会被关闭，无论它们是否已经"
+"运行完毕。该程序的输出每次可能略有不同，但大致如下："
 
 #: src/ch16-01-threads.md:87
 msgid ""
@@ -112,6 +130,11 @@ msgid ""
 "in the code. And even though we told the spawned thread to print until `i` "
 "is `9`, it only got to `5` before the main thread shut down."
 msgstr ""
+"调用 `thread::sleep` 会迫使一个线程在短时间内停止执行，从而让另一个线程有机会"
+"运行。这些线程通常会轮流执行，但这并不保证一定会如此——这取决于你的操作系统如"
+"何调度线程。在这次运行中，主线程首先打印出了内容，尽管从子线程中执行的打印语"
+"句在代码中出现得更早。即使我们告诉子线程一直执行到 `i` 条件满足时再继续执行，"
+"但实际上它只执行到了 `5` 条件满足时，之后主线程就停止了执行。"
 
 #: src/ch16-01-threads.md:95
 msgid ""
@@ -119,14 +142,16 @@ msgid ""
 "any overlap, try increasing the numbers in the ranges to create more "
 "opportunities for the operating system to switch between the threads."
 msgstr ""
+"如果您运行这段代码时，只看到主线程的输出，或者看不到任何重叠现象，那么请尝试"
+"增加各个范围中的数值，从而为操作系统提供更多机会来在线程之间切换。"
 
 #: src/ch16-01-threads.md:101
 msgid "<a id=\"waiting-for-all-threads-to-finish-using-join-handles\"></a>"
-msgstr ""
+msgstr "<a id=\"waiting-for-all-threads-to-finish-using-join-handles\"></a>"
 
 #: src/ch16-01-threads.md:103
 msgid "Waiting for All Threads to Finish"
-msgstr ""
+msgstr "等待所有线程完成"
 
 #: src/ch16-01-threads.md:105
 msgid ""
@@ -135,6 +160,9 @@ msgid ""
 "on the order in which threads run, we also can’t guarantee that the spawned "
 "thread will get to run at all!"
 msgstr ""
+"在 Listing 16-1 中的代码，由于主线程的终止，大多数情况下都会提前终止子线程的"
+"运行。此外，由于无法保证线程运行的顺序，我们也无法保证子线程一定会有机会运"
+"行！"
 
 #: src/ch16-01-threads.md:110
 msgid ""
@@ -146,6 +174,11 @@ msgid ""
 "thread we created in Listing 16-1 and how to call `join` to make sure the "
 "spawned thread finishes before `main` exits."
 msgstr ""
+"我们可以通过将 `thread::spawn` 的返回值存储在一个变量中来解决子线程无法运行或"
+"提前终止的问题。 `thread::spawn` 的返回类型是 `JoinHandle<T>`。 "
+"`JoinHandle<T>` 是一个被拥有的值，当我们调用 `join` 方法时，会等待其子线程完"
+"成执行。清单 16-2 展示了如何使用清单 16-1 中创建的线程的 `JoinHandle<T>`，以"
+"及如何调用 `join` 来确保子线程在 `main` 退出之前完成执行。"
 
 #: src/ch16-01-threads.md:143
 msgid ""
@@ -155,6 +188,9 @@ msgid ""
 "call to `join` after the main thread’s `for` loop, running Listing 16-2 "
 "should produce output similar to this:"
 msgstr ""
+"在句柄上调用 `join` 会阻塞当前正在运行的线程，直到该句柄所代表的线程终止。阻"
+"塞一个线程意味着该线程无法执行任务或退出。由于我们将 `join` 的调用放在了主线"
+"程的 `for` 循环之后，因此运行 Listing 16-2 应该会产生类似以下的输出："
 
 #: src/ch16-01-threads.md:169
 msgid ""
@@ -162,28 +198,34 @@ msgid ""
 "the call to `handle.join()` and does not end until the spawned thread is "
 "finished."
 msgstr ""
+"这两个线程继续交替运行，但由于调用了 `handle.join()`，主线程会等待，直到子线"
+"程完成工作之后才会结束。"
 
 #: src/ch16-01-threads.md:172
 msgid ""
 "But let’s see what happens when we instead move `handle.join()` before the "
 "`for` loop in `main`, like this:"
 msgstr ""
+"但是，让我们看看当我们将 `handle.join()` 放在 `for` 循环之前的 `main` 中时会"
+"发生什么，就像这样："
 
 #: src/ch16-01-threads.md:200
 msgid ""
 "The main thread will wait for the spawned thread to finish and then run its "
 "`for` loop, so the output won’t be interleaved anymore, as shown here:"
 msgstr ""
+"主线程会等待被创建的线程完成，然后执行其`for`循环，因此输出将不再交错，如下所"
+"示："
 
 #: src/ch16-01-threads.md:223
 msgid ""
 "Small details, such as where `join` is called, can affect whether or not "
 "your threads run at the same time."
-msgstr ""
+msgstr "一些细节，比如 `join` 被称为什么，会影响你的线程是否能够同时运行。"
 
 #: src/ch16-01-threads.md:226
 msgid "Using `move` Closures with Threads"
-msgstr ""
+msgstr "在多线程中使用 `move` 闭包"
 
 #: src/ch16-01-threads.md:228
 msgid ""
@@ -195,6 +237,12 @@ msgid ""
 "--> in Chapter 13, we discussed `move` in the context of closures. Now we’ll "
 "concentrate more on the interaction between `move` and `thread::spawn`."
 msgstr ""
+"我们通常会使用 `move` 这个关键字来指代传递给 `thread::spawn` 的闭包。因为这"
+"样，闭包就会拥有从环境中获取的值的所有权，从而将这些值的所有权从一个线程转移"
+"到另一个线程。在第十三章的 [“Capturing References or Moving Ownership”]"
+"(ch13-01-closures.html#capturing-references-or-moving-ownership)<!-- ignore--"
+"> 中，我们讨论了 `move` 在闭包上下文中的使用。现在，我们将更专注于 `move` 和 "
+"`thread::spawn` 之间的交互关系。"
 
 #: src/ch16-01-threads.md:235
 msgid ""
@@ -205,11 +253,15 @@ msgid ""
 "shows an attempt to create a vector in the main thread and use it in the "
 "spawned thread. However, this won’t work yet, as you’ll see in a moment."
 msgstr ""
+"请注意，在 Listing 16-1 中，我们传递给 `thread::spawn` 的闭包没有任何参数：我"
+"们在子线程的代码中并没有使用主线程的任何数据。为了在子线程中使用主线程的数"
+"据，子线程中的闭包必须捕获所需的数值。Listing 16-3 展示了在主线程中创建一个向"
+"量并在子线程中使用的尝试。然而，这种方法目前是行不通的，您很快就会看到原因。"
 
 #: src/ch16-01-threads.md:251 src/ch16-01-threads.md:310
 #: src/ch16-01-threads.md:356
 msgid "\"Here's a vector: {v:?}\""
-msgstr ""
+msgstr "  “这里有个方向：{v:?}”"
 
 #: src/ch16-01-threads.md:260
 msgid ""
@@ -218,6 +270,9 @@ msgid ""
 "thread, we should be able to access `v` inside that new thread. But when we "
 "compile this example, we get the following error:"
 msgstr ""
+"闭包使用“v”，因此捕获“v”并将其纳入闭包环境。因为“thread：：spawn”在新线程中运"
+"行这个闭包，我们应该能在新线程中访问“v”。但当我们编译这个例子时，会出现以下错"
+"误："
 
 #: src/ch16-01-threads.md:265
 msgid ""
@@ -252,6 +307,36 @@ msgid ""
 "error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling threads v0.1.0 (file:///projects/threads)\n"
+"error[E0373]: closure may outlive the current function, but it borrows `v`, "
+"which is owned by the current function\n"
+" --> src/main.rs:6:32\n"
+"  |\n"
+"6 |     let handle = thread::spawn(|| {\n"
+"  |                                ^^ may outlive borrowed value `v`\n"
+"7 |         println!(\"Here's a vector: {v:?}\");\n"
+"  |                                     - `v` is borrowed here\n"
+"  |\n"
+"note: function requires argument type to outlive `'static`\n"
+" --> src/main.rs:6:18\n"
+"  |\n"
+"6 |       let handle = thread::spawn(|| {\n"
+"  |  __________________^\n"
+"7 | |         println!(\"Here's a vector: {v:?}\");\n"
+"8 | |     });\n"
+"  | |______^\n"
+"help: to force the closure to take ownership of `v` (and any other "
+"referenced variables), use the `move` keyword\n"
+"  |\n"
+"6 |     let handle = thread::spawn(move || {\n"
+"  |                                ++++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0373`.\n"
+"error: could not compile `threads` (bin \"threads\") due to 1 previous "
+"error\n"
+"```"
 
 #: src/ch16-01-threads.md:293
 msgid ""
@@ -260,16 +345,19 @@ msgid ""
 "problem: Rust can’t tell how long the spawned thread will run, so it doesn’t "
 "know whether the reference to `v` will always be valid."
 msgstr ""
+"Rust _推断_如何捕获'v'，因为'println！'只需要引用'v'，闭包尝试借用'v'。然而，"
+"有个问题：Rust 无法判断生成线程运行多久，所以它不知道对“v”的引用是否总是有"
+"效。"
 
 #: src/ch16-01-threads.md:298
 msgid ""
 "Listing 16-4 provides a scenario that’s more likely to have a reference to "
 "`v` that won’t be valid."
-msgstr ""
+msgstr "列表16-4提供了一个更有可能包含 `v` 的情境，但该引用将不会生效。"
 
 #: src/ch16-01-threads.md:313
 msgid "// oh no!\n"
-msgstr ""
+msgstr "// 哦不！\n"
 
 #: src/ch16-01-threads.md:321
 msgid ""
@@ -280,12 +368,17 @@ msgid ""
 "Then, when the spawned thread starts to execute, `v` is no longer valid, so "
 "a reference to it is also invalid. Oh no!"
 msgstr ""
+"如果Rust允许我们运行这段代码，那么生成的线程很可能会立即被放到后台，根本不会"
+"执行。生成的线程内部有一个对 `v` 的引用，但是主线程立即丢弃了 `v`，并使用了我"
+"们在第15章中讨论过的 `drop` 函数。因此，当生成的线程开始执行时， `v` 就不再有"
+"效了，所以对其的引用也就无效了。糟糕！"
 
 #: src/ch16-01-threads.md:328
 msgid ""
 "To fix the compiler error in Listing 16-3, we can use the error message’s "
 "advice:"
 msgstr ""
+"为了修复清单 16-3 中的编译器错误，我们可以使用错误信息的提示来解决问题。"
 
 #: src/ch16-01-threads.md:342
 msgid ""
@@ -294,6 +387,9 @@ msgid ""
 "that it should borrow the values. The modification to Listing 16-3 shown in "
 "Listing 16-5 will compile and run as we intend."
 msgstr ""
+"通过在闭包前添加 `move` 关键字，我们可以强制闭包自行负责其所使用的值，而不是"
+"让 Rust 自行推断应该借用这些值。如清单 16-5 所示，对清单 16-3 所做的修改将会"
+"按照我们的预期进行编译和运行。"
 
 #: src/ch16-01-threads.md:365
 msgid ""
@@ -304,6 +400,10 @@ msgid ""
 "into the closure’s environment, and we could no longer call `drop` on it in "
 "the main thread. We would get this compiler error instead:"
 msgstr ""
+"我们可能会想尝试同样的方法来修复列表 16-4 中主线程调用“drop”的代码，通"
+"过“move”闭包。然而，这个修正不会奏效，因为 16-4 号房源试图做的事情因其他原因"
+"被禁止。如果我们在闭包中添加“move”，就会将“v”移入闭包的环境，且在主线程中无法"
+"调用“drop”。我们会遇到编译器错误："
 
 #: src/ch16-01-threads.md:372
 msgid ""
@@ -338,6 +438,36 @@ msgid ""
 "error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling threads v0.1.0 (file:///projects/threads)\n"
+"error[E0382]: use of moved value: `v`\n"
+"  --> src/main.rs:10:10\n"
+"   |\n"
+" 4 |     let v = vec![1, 2, 3];\n"
+"   |         - move occurs because `v` has type `Vec<i32>`, which does not "
+"implement the `Copy` trait\n"
+" 5 |\n"
+" 6 |     let handle = thread::spawn(move || {\n"
+"   |                                ------- value moved into closure here\n"
+" 7 |         println!(\"Here's a vector: {v:?}\");\n"
+"   |                                     - variable moved due to use in "
+"closure\n"
+"...\n"
+"10 |     drop(v); // oh no!\n"
+"   |          ^ value used here after move\n"
+"   |\n"
+"help: consider cloning the value before moving it into the closure\n"
+"   |\n"
+" 6 ~     let value = v.clone();\n"
+" 7 ~     let handle = thread::spawn(move || {\n"
+" 8 ~         println!(\"Here's a vector: {value:?}\");\n"
+"   |\n"
+"\n"
+"For more information about this error, try `rustc --explain E0382`.\n"
+"error: could not compile `threads` (bin \"threads\") due to 1 previous "
+"error\n"
+"```"
 
 #: src/ch16-01-threads.md:400
 msgid ""
@@ -351,9 +481,16 @@ msgid ""
 "keyword overrides Rust’s conservative default of borrowing; it doesn’t let "
 "us violate the ownership rules."
 msgstr ""
+"Rust 的所有权规则又救了我们一命！我们在 Listing 16-3 的代码中出现错误，因为 "
+"Rust 比较保守，只借用了该线程的 'v'，这意味着主线程理论上可以使生成线程的引用"
+"失效。通过让 Rust 将 'v' 的所有权转移到生成线程，我们向 Rust 保证主线程不再使"
+"用 'v'。如果我们以同样方式更改 Listing 16-4，那么当我们在主线程中使用 'v' "
+"时，就会违反所有权规则。"
 
 #: src/ch16-01-threads.md:410
 msgid ""
 "Now that we’ve covered what threads are and the methods supplied by the "
 "thread API, let’s look at some situations in which we can use threads."
 msgstr ""
+"既然我们已经介绍了线程是什么以及线程 API 提供的方法，接下来让我们看看在哪些情"
+"况下可以使用线程。"

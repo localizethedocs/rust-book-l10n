@@ -24,12 +24,19 @@ msgid ""
 "called _poem.txt_ at the root level of your project, and enter the poem “I’m "
 "Nobody! Who are you?”"
 msgstr ""
+"现在，我们将为读取 `file_path` 参数中指定的文件添加功能。首先，我们需要一个示"
+"例文件来进行测试：我们将使用一个包含多行文本的文件，其中有一些重复的单词。列"
+"表 12-3 中有一段艾米莉·狄金森的诗，非常适合作为测试用。请在项目的根目录下创建"
+"一个名为 _poem.txt_ 的文件，并将这首诗“I’m Nobody! Who are you?”写入该文件"
+"中。"
 
 #: src/ch12-02-reading-a-file.md:26
 msgid ""
 "With the text in place, edit _src/main.rs_ and add code to read the file, as "
 "shown in Listing 12-4."
 msgstr ""
+"在文本准备就绪后，编辑 `_src/main.rs_` 文件，并添加如下代码来读取文件，如清"
+"单 12-4 所示。"
 
 #: src/ch12-02-reading-a-file.md:36
 msgid "// --snip--\n"
@@ -39,25 +46,27 @@ msgstr ""
 
 #: src/ch12-02-reading-a-file.md:42
 msgid "\"Searching for {query}\""
-msgstr ""
+msgstr "搜索 “{query}”"
 
 #: src/ch12-02-reading-a-file.md:43
 msgid "\"In file {file_path}\""
-msgstr ""
+msgstr "\"In file {file_path}\""
 
 #: src/ch12-02-reading-a-file.md:46
 msgid "\"Should have been able to read the file\""
-msgstr ""
+msgstr "\"应该能够读取文件\""
 
 #: src/ch12-02-reading-a-file.md:48
 msgid "\"With text:\\n{contents}\""
-msgstr ""
+msgstr "”With text:\\n{contents}“"
 
 #: src/ch12-02-reading-a-file.md:54
 msgid ""
 "First, we bring in a relevant part of the standard library with a `use` "
 "statement: We need `std::fs` to handle files."
 msgstr ""
+"首先，我们使用标准库中的相关部分，并附带一个 `use` 语句：我们需要 `std::fs` "
+"来处理文件。"
 
 #: src/ch12-02-reading-a-file.md:57
 msgid ""
@@ -65,6 +74,8 @@ msgid ""
 "opens that file, and returns a value of type `std::io::Result<String>` that "
 "contains the file’s contents."
 msgstr ""
+"在 `main` 中，新的语句 `fs::read_to_string` 会获取 `file_path` 的值，打开该文"
+"件，并返回一个类型为 `std::io::Result<String>` 的值，该值包含了该文件的内容。"
 
 #: src/ch12-02-reading-a-file.md:61
 msgid ""
@@ -72,6 +83,8 @@ msgid ""
 "value of `contents` after the file is read so that we can check that the "
 "program is working so far."
 msgstr ""
+"之后，我们再次添加一条临时的 `println!` 语句，该语句在文件读取后打印 "
+"`contents` 的值，这样我们就可以检查程序目前是否正常运行。"
 
 #: src/ch12-02-reading-a-file.md:65
 msgid ""
@@ -79,6 +92,8 @@ msgid ""
 "(because we haven’t implemented the searching part yet) and the _poem.txt_ "
 "file as the second argument:"
 msgstr ""
+"让我们使用任何字符串作为第一个命令行参数（因为我们还没有实现搜索部分），并将"
+"`_poem.txt_`文件作为第二个参数来运行这段代码："
 
 #: src/ch12-02-reading-a-file.md:69
 msgid ""
@@ -102,6 +117,25 @@ msgid ""
 "\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run -- the poem.txt\n"
+"   Compiling minigrep v0.1.0 (file:///projects/minigrep)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s\n"
+"     Running `target/debug/minigrep the poem.txt`\n"
+"Searching for the\n"
+"In file poem.txt\n"
+"With text:\n"
+"I'm nobody! Who are you?\n"
+"Are you nobody, too?\n"
+"Then there's a pair of us - don't tell!\n"
+"They'd banish us, you know.\n"
+"\n"
+"How dreary to be somebody!\n"
+"How public, like a frog\n"
+"To tell your name the livelong day\n"
+"To an admiring bog!\n"
+"\n"
+"```"
 
 #: src/ch12-02-reading-a-file.md:89
 msgid ""
@@ -115,3 +149,9 @@ msgid ""
 "on when developing a program because it’s much easier to refactor smaller "
 "amounts of code. We’ll do that next."
 msgstr ""
+"太好了！代码能够读取文件的内容并打印出来。不过代码中还有一些缺陷。目前，"
+"`main`这个函数承担了多个职责：通常来说，如果每个函数只负责一个功能，那么代码"
+"会更清晰、更易于维护。另一个问题是，我们并没有很好地处理错误。程序还很小，所"
+"以这些缺陷还不算大问题，但随着程序的扩展，修复这些缺陷就会变得更加困难。在开"
+"发程序时，尽早进行重构是一个很好的做法，因为这样更容易对少量代码进行重构。接"
+"下来我们就开始进行重构吧。"

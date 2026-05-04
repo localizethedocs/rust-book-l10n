@@ -29,6 +29,13 @@ msgid ""
 "Therefore, returning `Result` is a good default choice when you’re defining "
 "a function that might fail."
 msgstr ""
+"那么，如何决定何时调用 `panic!`，何时返回 `Result` 呢？当代码出现故障时，是无"
+"法恢复的。你可以为任何错误情况调用 `panic!`，无论是否有办法恢复，但这样你就代"
+"表调用代码来决定某种情况是无法恢复的。当你选择返回 `Result` 的值时，你为调用"
+"代码提供了选择的机会。调用代码可以选择以适合其情况的方式尝试恢复，或者决定在"
+"这种情况下 `Err` 的值是无法恢复的，从而可以调用 `panic!`，将你的可恢复错误转"
+"变为不可恢复的错误。因此，在定义可能失败的函数时，返回 `Result` 是一个很好的"
+"默认选择。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:14
 msgid ""
@@ -39,10 +46,14 @@ msgid ""
 "with some general guidelines on how to decide whether to panic in library "
 "code."
 msgstr ""
+"在示例、原型代码和测试等场景中，编写会导致程序崩溃的代码更为合适，而不是返回 "
+"`Result`。接下来，我们将探讨为什么如此做，并讨论那些编译器无法判断出失败是不"
+"可能的，但作为人类可以感知的情况。本章最后将提供一些关于如何在库代码中决定是"
+"否使用崩溃处理的通用指导原则。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:20
 msgid "Examples, Prototype Code, and Tests"
-msgstr ""
+msgstr "示例、 原型代码和测试"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:22
 msgid ""
@@ -52,6 +63,10 @@ msgid ""
 "meant as a placeholder for the way you’d want your application to handle "
 "errors, which can differ based on what the rest of your code is doing."
 msgstr ""
+"在编写示例来阐释某个概念时，如果包含了鲁棒性的错误处理代码，那么示例的清晰度"
+"就会降低。在示例中，调用像 `unwrap` 这样的方法会被视为一个占位符，用来表示应"
+"用程序处理错误的方式。实际上，错误处理的方式可能会因代码中其他部分的操作而有"
+"所不同。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:28
 msgid ""
@@ -60,6 +75,8 @@ msgid ""
 "leave clear markers in your code for when you’re ready to make your program "
 "more robust."
 msgstr ""
+"同样，当您在进行原型设计时，还不确定如何处理错误时，`unwrap`和`expect`方法非"
+"常实用。这些方法会在代码中留下明确的标记，以便您将来能够让程序更加健壮。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:33
 msgid ""
@@ -68,15 +85,19 @@ msgid ""
 "test is marked as a failure, calling `unwrap` or `expect` is exactly what "
 "should happen."
 msgstr ""
+"如果某个方法在测试中失败，你希望整个测试都失败，即使该方法并不是要测试的功"
+"能。因为`panic!`是用来标记测试失败的，所以调用`unwrap`或`expect`正是应该发生"
+"的情况。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:40
 msgid ""
 "<a id=\"cases-in-which-you-have-more-information-than-the-compiler\"></a>"
 msgstr ""
+"<a id=\"cases-in-which-you-have-more-information-than-the-compiler\"></a>"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:42
 msgid "When You Have More Information Than the Compiler"
-msgstr ""
+msgstr "当您拥有的信息比编译器所知道的更多时"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:44
 msgid ""
@@ -90,14 +111,20 @@ msgid ""
 "`expect` and document the reason you think you’ll never have an `Err` "
 "variant in the argument text. Here’s an example:"
 msgstr ""
+"在存在其他逻辑来确保 `Result` 会有一个 `Ok` 值的情况下，调用 `expect` 也是合"
+"适的。不过，这种逻辑并不是编译器能够理解的。你仍然需要处理 `Result` 这个值："
+"无论你调用的是什么操作，通常都有失败的可能性，尽管在你的特定情况下这种失败在"
+"逻辑上是不可能的。如果你通过手动检查代码来确保永远不会出现 `Err` 这种变体，那"
+"么调用 `expect` 并在文档中说明你认为永远不会出现 `Err` 这种变体的原因是完全可"
+"以接受的。以下是一个例子："
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:58
 msgid "\"127.0.0.1\""
-msgstr ""
+msgstr "\"127.0.0.1\""
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:60
 msgid "\"Hardcoded IP address should be valid\""
-msgstr ""
+msgstr "\"硬编码的 IP 地址应该是有效的”"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:64
 msgid ""
@@ -115,10 +142,19 @@ msgid ""
 "if, in the future, we need to get the IP address from some other source "
 "instead."
 msgstr ""
+"我们通过解析一个硬编码的字符串来创建一个 `IpAddr` 实例。我们可以看到 "
+"`127.0.0.1` 是一个有效的 IP 地址，因此在这里使用 `expect` 是可行的。然而，拥"
+"有一个硬编码且有效的字符串并不会改变 `parse` 方法的返回类型：我们仍然会得到一"
+"个 `Result` 值，而且编译器会要求我们像处理 `Err` 这种可能性一样来处理 "
+"`Result`，因为编译器没有足够的智能来识别这个字符串始终是一个有效的 IP 地址。"
+"如果 IP 地址字符串是由用户提供的，而不是硬编码到程序中，那么肯定会有失败的可"
+"能性，在这种情况下，我们当然希望以更稳健的方式来处理 `Result`。提及这个 IP 地"
+"址是硬编码的这一假设，会促使我们在将来需要从其他来源获取 IP 地址时，将 "
+"`expect` 更改为更好的错误处理代码。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:77
 msgid "Guidelines for Error Handling"
-msgstr ""
+msgstr "错误处理指南"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:79
 msgid ""
@@ -128,6 +164,9 @@ msgid ""
 "invalid values, contradictory values, or missing values are passed to your "
 "code—plus one or more of the following:"
 msgstr ""
+"建议在代码可能陷入不良状态时触发 panic 机制。在这种情况下，“不良状态”指的是某"
+"些假设、保证、契约或不变性被打破的情况，比如当无效值、矛盾的值或缺失的值被传"
+"递给代码时——此外还可能出现以下一种或多种情况："
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:85
 msgid ""
@@ -135,12 +174,16 @@ msgid ""
 "will likely happen occasionally, like a user entering data in the wrong "
 "format."
 msgstr ""
+"糟糕的状态是一种出乎意料的状况，而不是像用户以错误的格式输入数据这样的偶尔会"
+"发生的情况。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:88
 msgid ""
 "Your code after this point needs to rely on not being in this bad state, "
 "rather than checking for the problem at every step."
 msgstr ""
+"在此之后，你的代码需要依赖于不会进入这种糟糕的状态，而不是在每一步都检查是否"
+"存在问题。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:90
 msgid ""
@@ -149,6 +192,9 @@ msgid ""
 "Behavior as Types”](ch18-03-oo-design-patterns.html#encoding-states-and-"
 "behavior-as-types)<!-- ignore --> in Chapter 18."
 msgstr ""
+"你使用的类型并没有很好的方式来编码这些信息。我们将在第18章的[“将状态和行为编"
+"码为类型”](ch18-03-oo-design-patterns.html#encoding-states-and-behavior-as-"
+"types)<!-- ignore -->这一节中通过一个例子来说明我们的意思。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:94
 msgid ""
@@ -161,6 +207,12 @@ msgid ""
 "you’re calling external code that is out of your control and returns an "
 "invalid state that you have no way of fixing."
 msgstr ""
+"如果有人调用你的代码并传入一些没有意义的值，最好能返回一个错误，这样库的使用"
+"者就可以决定在这种情况下该怎么做。然而，在继续运行可能会带来安全隐患或损害的"
+"情况下，最好的选择可能是调用 `panic!`，并提醒使用你库的人注意他们代码中的错"
+"误，以便他们在开发过程中进行修复。同样，如果你调用的是外部代码，而这些代码不"
+"受你的控制，并且返回了无法修复的无效状态，那么调用 `panic!` 通常是一个合适的"
+"选择。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:103
 msgid ""
@@ -171,6 +223,10 @@ msgid ""
 "failure is an expected possibility that the calling code must decide how to "
 "handle."
 msgstr ""
+"然而，当故障是预期之中的时候，返回 `Result` 比调用 `panic!` 更为合适。例如，"
+"当解析器接收到损坏的数据，或者HTTP请求返回的状态表明已经达到了速率限制时。在"
+"这些情况下，返回 `Result` 意味着故障是一种预期中的可能性，调用代码必须自行决"
+"定如何处理。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:109
 msgid ""
@@ -190,6 +246,15 @@ msgid ""
 "code. Contracts for a function, especially when a violation will cause a "
 "panic, should be explained in the API documentation for the function."
 msgstr ""
+"当您的代码执行某个操作，而使用无效的值调用该操作可能会让用户面临风险时，您应"
+"该先验证这些值是否有效，如果无效则触发panic。这主要是出于安全考虑：尝试处理无"
+"效的数据可能会使代码暴露于漏洞风险之中。这也是为什么标准库会在您尝试进行越界"
+"内存访问时调用 `panic!`：试图访问不属于当前数据结构的内存是一种常见的安全问"
+"题。函数通常都有契约：只有当输入满足特定要求时，函数的行为才是可靠的。当违反"
+"契约时触发panic是合理的，因为契约违反总是表明调用方存在错误，而这不是调用代码"
+"需要显式处理的错误类型。实际上，调用代码没有合理的办法来恢复这种状况；需要由"
+"调用方的技术人员来修复代码。对于函数的契约，尤其是当违反契约会导致panic时，应"
+"该在该函数的API文档中进行说明。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:124
 msgid ""
@@ -207,14 +272,23 @@ msgid ""
 "integer type such as `u32`, which ensures that the parameter is never "
 "negative."
 msgstr ""
+"不过，如果在所有函数中都进行大量的错误检查，不仅会使得代码变得冗长且令人烦"
+"恼。幸运的是，你可以利用 Rust 的类型系统（以及编译器所进行的类型检查），来自"
+"动完成许多检查工作。如果你的函数有一个特定的类型作为参数，那么你可以按照自己"
+"的逻辑编写代码，而无需担心编译器已经确保了输入的值是有效的。例如，如果你使用"
+"的是类型而不是 `Option`，那么程序期望得到的是某种值，而不是空值。这样，你的代"
+"码就不需要处理 `Some` 和 `None` 这两种情况：它只需要处理一种存在有效值的情况"
+"即可。试图向函数传递空值的代码根本无法编译，因此函数在运行时无需检查这种情"
+"况。另一个例子是使用像 `u32` 这样的无符号整数类型，这种类型可以确保参数永远不"
+"会是负值。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:139
 msgid "<a id=\"creating-custom-types-for-validation\"></a>"
-msgstr ""
+msgstr "<a id=\"creating-custom-types-for-validation\"></a>"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:141
 msgid "Custom Types for Validation"
-msgstr ""
+msgstr "用于验证的自定义类型"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:143
 msgid ""
@@ -230,6 +304,13 @@ msgid ""
 "number that’s out of range versus when the user types, for example, letters "
 "instead."
 msgstr ""
+"让我们进一步利用 Rust 的类型系统来确保我们获得的是有效的数值，然后来看看如何"
+"创建用于验证的自定义类型。回想一下第 2 章中的“猜数游戏”，我们的代码要求用户猜"
+"测 1 到 100 之间的数字。在检查用户的猜测是否与我们的秘密数字匹配之前，我们从"
+"未验证过用户的猜测是否在范围内；我们只是验证了猜测的数值是否为正数。在这种情"
+"况下，后果并不严重：我们输出“太高”或“太低”仍然是正确的。但是，如果能引导用户"
+"做出有效的猜测，并且在用户输入超出范围的数字时与输入字母时采取不同的处理方"
+"式，那将是一个很好的改进。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:154
 msgid ""
@@ -237,6 +318,8 @@ msgid ""
 "`u32` to allow potentially negative numbers, and then add a check for the "
 "number being in range, like so:"
 msgstr ""
+"一种方法是将“guess”解析为 `i32`，而不仅仅是 `u32`，这样就能支持可能是负数的情"
+"况。然后，需要添加一个检查，确保该数字在指定范围内，具体做法如下："
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:166
 msgid "\"Guess the number!\""
@@ -259,7 +342,7 @@ msgstr "“未猜对”"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:187
 msgid "\"The secret number will be between 1 and 100.\""
-msgstr ""
+msgstr "“机密号码将介于 1 到 100之间。”"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:193
 msgid "\"Too small!\""
@@ -281,6 +364,10 @@ msgid ""
 "with the comparisons between `guess` and the secret number knowing that "
 "`guess` is between 1 and 100."
 msgstr ""
+"`if`表达式用于检查我们的数值是否超出了范围，并向用户提示存在的问题。之后会调"
+"用`continue`来开始循环的下一次迭代，并再次请求用户输入一个猜测值。在`if`表达"
+"式之后，我们可以继续比较`guess`与秘密数字之间的结果，同时知道`guess`的值应该"
+"在1到100之间。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:212
 msgid ""
@@ -289,6 +376,9 @@ msgid ""
 "functions with this requirement, having a check like this in every function "
 "would be tedious (and might impact performance)."
 msgstr ""
+"然而，这并不是理想的解决方案：如果程序必须仅处理1到100之间的数值，并且有许多"
+"函数都符合这一要求，那么在每个函数中都加入这样的检查将会非常繁琐（而且可能会"
+"影响性能）。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:217
 msgid ""
@@ -300,10 +390,15 @@ msgid ""
 "create an instance of `Guess` if the `new` function receives a value between "
 "1 and 100."
 msgstr ""
+"相反，我们可以在专门的模块中创建一个新的类型，并将验证功能放在一个函数中，用"
+"于创建该类型的实例，而不是在各处重复这些验证。这样，函数可以在其签名中使用新"
+"类型，并且可以放心地使用接收到的数值。列表9-13展示了一种定义 `Guess` 类型的方"
+"法，该类型只有在 `new` 函数接收到的数值在1到100之间时，才会创建 `Guess` 类型"
+"的实例。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:234
 msgid "\"Guess value must be between 1 and 100, got {value}.\""
-msgstr ""
+msgstr "\"猜测值必须介于1和100之间，得到{value}\"。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:248
 msgid ""
@@ -313,6 +408,10 @@ msgid ""
 "field named `value` that holds an `i32`. This is where the number will be "
 "stored."
 msgstr ""
+"请注意，*src/guessing_game.rs* 中的代码依赖于在 *src/lib.rs* 中添加了一个模块"
+"声明 `mod guessing_game;`，这一点我们在这里并未展示。在这个新模块的文件内，我"
+"们定义了一个名为 `Guess` 的结构体，该结构体有一个名为 `value` 的字段，该字段"
+"包含一个 `i32`。数字将被存储在这个字段中。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:254
 msgid ""
@@ -330,6 +429,15 @@ msgid ""
 "create in Chapter 14. If `value` does pass the test, we create a new `Guess` "
 "with its `value` field set to the `value` parameter and return the `Guess`."
 msgstr ""
+"然后，我们在 `Guess` 上实现了一个名为 `new` `Guess` 的关联函数，该函数会创建 "
+"`Guess` 的实例。 `new` 函数被定义为接受一个名为 `value` 的参数，该参数的类型"
+"为 `i32`，并且返回一个 `Guess`。 `new` 函数的主体部分会测试 `value`，确保其值"
+"在 1 到 100 之间。如果 `value` 未能通过此测试，我们将调用 `panic!`，这会提醒"
+"编写调用代码的程序员他们有一个需要修复的错误，因为在此范围之外使用 `value` 创"
+"建 `Guess` 会违反 `Guess::new` 所依赖的契约。 `Guess::new` 可能触发恐慌的条件"
+"应在其公开 API 文档中讨论；我们将在第 14 章中介绍文档编写规范，说明 API 文档"
+"中可能存在 `panic!` 的情况。如果 `value` 通过了测试，我们将创建一个新的 "
+"`Guess`，并将其 `value` 字段设置为 `value` 参数，然后返回 `Guess`。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:268
 msgid ""
@@ -344,6 +452,13 @@ msgid ""
 "there’s no way for a `Guess` to have a `value` that hasn’t been checked by "
 "the conditions in the `Guess::new` function."
 msgstr ""
+"接下来，我们实现了一个名为 `value` 的方法。该方法继承了 `self` 的功能，没有任"
+"何其他参数，并且返回一个 `i32`。这种方法有时被称为 _getter_，因为它的作用是从"
+"其字段中获取一些数据并返回。这个公共方法是必要的，因为 `Guess` 结构体中的 "
+"`value` 字段是私有的。确保 `value` 字段是私有的非常重要，这样使用 `Guess` 结"
+"构体的代码就无法直接设置 `value`。 `guessing_game` 模块之外的代码必须使用 "
+"`Guess::new` 函数来创建 `Guess` 的实例，从而确保没有 `Guess` 能够拥有未经 "
+"`Guess::new` 函数中条件检查的 `value`。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:279
 msgid ""
@@ -352,6 +467,8 @@ msgid ""
 "rather than an `i32` and wouldn’t need to do any additional checks in its "
 "body."
 msgstr ""
+"一个具有参数或仅返回1到100之间数字的函数，可以在其签名中声明它接受或返回一个 "
+"`Guess` 类型的参数或返回值，而不需要在其主体中进行任何额外的检查。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:283
 msgid "Summary"
@@ -369,6 +486,12 @@ msgid ""
 "in the appropriate situations will make your code more reliable in the face "
 "of inevitable problems."
 msgstr ""
+"Rust的错误处理功能旨在帮助你编写更健壮的代码。`panic!`宏表示你的程序处于无法"
+"处理的状态，它允许你让程序停止运行，而不是继续处理无效或错误的数值。`Result`"
+"枚举利用Rust的类型系统来表明某些操作可能会失败，但你的代码可以从中恢复。你可"
+"以使用`Result`来通知调用你的代码的代码，也需要处理可能出现的成功或失败情况。"
+"在适当的场景下使用`panic!`和`Result`，可以使你的代码在面临不可避免的问题时更"
+"加可靠。"
 
 #: src/ch09-03-to-panic-or-not-to-panic.md:294
 msgid ""
@@ -376,3 +499,5 @@ msgid ""
 "with the `Option` and `Result` enums, we’ll talk about how generics work and "
 "how you can use them in your code."
 msgstr ""
+"既然你已经了解了标准库如何使用 `Option` 和 `Result` 枚举类型来实现泛型，接下"
+"来我们将讨论泛型的工作原理，以及如何在你的代码中运用它们。"

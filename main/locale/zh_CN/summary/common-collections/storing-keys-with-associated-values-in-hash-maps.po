@@ -24,6 +24,10 @@ msgid ""
 "often use a different name, such as _hash_, _map_, _object_, _hash table_, "
 "_dictionary_, or _associative array_, just to name a few."
 msgstr ""
+"我们常见的数据结构之一就是哈希映射。这种数据结构将类型为 `K` 的键映射到类型"
+"为 `V` 的值上，具体实现是通过一个 _哈希函数_ 来决定的，该函数决定了键和值在内"
+"存中的存储方式。许多编程语言都支持这种数据结构，但它们通常使用不同的名称来指"
+"代它，比如 _哈希表_、_映射_、_对象_、_字典_或_关联数组_等。"
 
 #: src/ch08-03-hash-maps.md:10
 msgid ""
@@ -33,6 +37,10 @@ msgid ""
 "in which each key is a team’s name and the values are each team’s score. "
 "Given a team name, you can retrieve its score."
 msgstr ""
+"哈希映射在需要以非索引方式查找数据时非常有用，就像在向量中那样，但这里的键可"
+"以是任何类型。例如，在游戏中，你可以将每个队伍的得分存储在哈希映射中，其中每"
+"个键是队伍的名称，每个值则是该队伍的得分。给定一个队伍名称，你可以检索出该队"
+"伍的得分。"
 
 #: src/ch08-03-hash-maps.md:16
 msgid ""
@@ -41,10 +49,12 @@ msgid ""
 "standard library. As always, check the standard library documentation for "
 "more information."
 msgstr ""
+"在本节中，我们将介绍哈希映射的基本 API，但标准库在 `HashMap<K, V>` 上定义的函"
+"数中还隐藏着许多其他有用的功能。如常，如需更多信息，请查阅标准库的文档。"
 
 #: src/ch08-03-hash-maps.md:20
 msgid "Creating a New Hash Map"
-msgstr ""
+msgstr "创建新的哈希映射"
 
 #: src/ch08-03-hash-maps.md:22
 msgid ""
@@ -53,6 +63,9 @@ msgid ""
 "whose names are _Blue_ and _Yellow_. The Blue team starts with 10 points, "
 "and the Yellow team starts with 50."
 msgstr ""
+"创建空哈希映射的一种方法是使用 `new` 来添加元素，然后使用 `insert` 来添加更多"
+"元素。在 Listing 8-20 中，我们记录了两支队伍的分数，这两支队伍的名字分别是 "
+"_Blue_ 和 _Yellow_。蓝队以 10 分开始，黄队以 50 分开始。"
 
 #: src/ch08-03-hash-maps.md:35 src/ch08-03-hash-maps.md:66
 #: src/ch08-03-hash-maps.md:69 src/ch08-03-hash-maps.md:92
@@ -60,12 +73,12 @@ msgstr ""
 #: src/ch08-03-hash-maps.md:176 src/ch08-03-hash-maps.md:212
 #: src/ch08-03-hash-maps.md:215
 msgid "\"Blue\""
-msgstr ""
+msgstr "“蓝色”"
 
 #: src/ch08-03-hash-maps.md:36 src/ch08-03-hash-maps.md:67
 #: src/ch08-03-hash-maps.md:93 src/ch08-03-hash-maps.md:214
 msgid "\"Yellow\""
-msgstr ""
+msgstr "“黄色”"
 
 #: src/ch08-03-hash-maps.md:42
 msgid ""
@@ -75,6 +88,10 @@ msgid ""
 "automatically in the prelude. Hash maps also have less support from the "
 "standard library; there’s no built-in macro to construct them, for example."
 msgstr ""
+"请注意，我们需要先对标准库中的集合部分进行 `use` 操作，然后再处理 `HashMap`。"
+"在我们的三个常用集合中，这个集合使用频率最低，因此不会自动包含在序言中介绍的"
+"功能中。哈希映射在标准库中的支持也较少；例如，标准库中没有内置的宏可以用来创"
+"建哈希映射。"
 
 #: src/ch08-03-hash-maps.md:48
 msgid ""
@@ -83,16 +100,19 @@ msgid ""
 "are homogeneous: All of the keys must have the same type, and all of the "
 "values must have the same type."
 msgstr ""
+"与向量类似，哈希映射也将其数据存储在堆上。这种数据结构具有类型 `String` 的键"
+"和类型 `i32` 的值。与向量一样，哈希映射也是同质的：所有的键必须属于同一类型，"
+"所有的值也必须属于同一类型。"
 
 #: src/ch08-03-hash-maps.md:53
 msgid "Accessing Values in a Hash Map"
-msgstr ""
+msgstr "在哈希映射中访问值"
 
 #: src/ch08-03-hash-maps.md:55
 msgid ""
 "We can get a value out of the hash map by providing its key to the `get` "
 "method, as shown in Listing 8-21."
-msgstr ""
+msgstr "我们可以通过向 `get` 方法提供哈希图的键来获取其值，如清单8-21所示。"
 
 #: src/ch08-03-hash-maps.md:76
 msgid ""
@@ -103,28 +123,33 @@ msgid ""
 "`Option<i32>` rather than an `Option<&i32>`, then `unwrap_or` to set `score` "
 "to zero if `scores` doesn’t have an entry for the key."
 msgstr ""
+"在这里，`score`的值将与蓝队相关联，而结果将是`10`。`get`方法返回一个"
+"`Option<&V>`；如果哈希映射中没有该键的值，则`get`将返回`None`。这个程序通过调"
+"用`copied`来获取`Option<i32>`，而不是`Option<&i32>`，然后如果`scores`中没有该"
+"键的条目，则通过`unwrap_or`将`score`设置为零来处理`Option`。"
 
 #: src/ch08-03-hash-maps.md:83
 msgid ""
 "We can iterate over each key-value pair in a hash map in a similar manner as "
 "we do with vectors, using a `for` loop:"
 msgstr ""
+"我们可以以与处理向量类似的方式，使用 `for` 循环来遍历哈希映射中的每个键值对："
 
 #: src/ch08-03-hash-maps.md:96
 msgid "\"{key}: {value}\""
-msgstr ""
+msgstr "\"{key}: {value}\""
 
 #: src/ch08-03-hash-maps.md:101
 msgid "This code will print each pair in an arbitrary order:"
-msgstr ""
+msgstr "这段代码会以任意顺序打印每一对元素："
 
 #: src/ch08-03-hash-maps.md:110
 msgid "<a id=\"hash-maps-and-ownership\"></a>"
-msgstr ""
+msgstr "<a id=\"hash-maps-and-ownership\"></a>"
 
 #: src/ch08-03-hash-maps.md:112
 msgid "Managing Ownership in Hash Maps"
-msgstr ""
+msgstr "在哈希映射中管理所有权"
 
 #: src/ch08-03-hash-maps.md:114
 msgid ""
@@ -133,22 +158,29 @@ msgid ""
 "and the hash map will be the owner of those values, as demonstrated in "
 "Listing 8-22."
 msgstr ""
+"对于实现了 `Copy` 特性的类型，比如 `i32`，其值会被复制到哈希映射中。而对于像 "
+"`String` 这样的被拥有的类型，其值会被移动，而哈希映射将成为这些值的拥有者，如"
+"清单 8-22 所示。"
 
 #: src/ch08-03-hash-maps.md:124
 msgid "\"Favorite color\""
-msgstr ""
+msgstr "\"最喜欢的颜色\""
 
 #: src/ch08-03-hash-maps.md:129
 msgid ""
 "// field_name and field_value are invalid at this point, try using them and\n"
 "    // see what compiler error you get!\n"
 msgstr ""
+"// field_name 和 field_value 现在都无效了，试着用它们，\n"
+"// 看看编译器会出什么错误！\n"
 
 #: src/ch08-03-hash-maps.md:136
 msgid ""
 "We aren’t able to use the variables `field_name` and `field_value` after "
 "they’ve been moved into the hash map with the call to `insert`."
 msgstr ""
+"在通过调用 `insert` 将变量 `field_name` 和 `field_value` 移入哈希映射之后，我"
+"们无法再使用它们。"
 
 #: src/ch08-03-hash-maps.md:139
 msgid ""
@@ -159,10 +191,14 @@ msgid ""
 "syntax.html#validating-references-with-lifetimes)<!-- ignore --> in Chapter "
 "10."
 msgstr ""
+"如果我们向哈希映射中插入对值的引用，这些值并不会被移动到哈希映射中。引用所指"
+"向的值必须至少与哈希映射的存活时间一样长。我们将在第10章的[“利用生命周期验证"
+"引用”](ch10-03-lifetime-syntax.html#validating-references-with-"
+"lifetimes)<!-- ignore -->中进一步讨论这些问题。"
 
 #: src/ch08-03-hash-maps.md:145
 msgid "Updating a Hash Map"
-msgstr ""
+msgstr "更新哈希映射"
 
 #: src/ch08-03-hash-maps.md:147
 msgid ""
@@ -171,6 +207,8 @@ msgid ""
 "example, both the Blue team and the Yellow team could have the value `10` "
 "stored in the `scores` hash map)."
 msgstr ""
+"虽然键和值对的数量是可以增长的，但每个唯一的键一次只能关联一个值（反之亦然："
+"例如，Blue队和Yellow队都可以将值 `10` 存储在 `scores` 哈希表中）。"
 
 #: src/ch08-03-hash-maps.md:152
 msgid ""
@@ -181,10 +219,14 @@ msgid ""
 "if the key _doesn’t_ already have a value. Or you could combine the old "
 "value and the new value. Let’s look at how to do each of these!"
 msgstr ""
+"当你想要修改哈希映射中的数据时，你必须决定如何处理这样一种情况：某个键已经分"
+"配了一个值。你可以用新值替换旧值，完全忽略旧值。你也可以保留旧值，而不考虑新"
+"值，只有当键还没有值时才添加新值。或者，你可以同时保留旧值和新值。让我们来看"
+"看如何分别实现这些操作！"
 
 #: src/ch08-03-hash-maps.md:159
 msgid "Overwriting a Value"
-msgstr ""
+msgstr "覆盖一个值"
 
 #: src/ch08-03-hash-maps.md:161
 msgid ""
@@ -194,24 +236,27 @@ msgid ""
 "only contain one key-value pair because we’re inserting the value for the "
 "Blue team’s key both times."
 msgstr ""
+"如果我们向哈希映射中插入一个键和一个值，然后再插入同一个键但使用不同的值，那"
+"么该键对应的值将会被替换。尽管清单8-23中的代码两次调用了 `insert`，但由于我们"
+"两次都插入了蓝色队伍对应的键值对，因此哈希映射中只会包含一个键值对。"
 
 #: src/ch08-03-hash-maps.md:178 src/ch08-03-hash-maps.md:217
 msgid "\"{scores:?}\""
-msgstr ""
+msgstr "\"{分:?}\""
 
 #: src/ch08-03-hash-maps.md:184
 msgid ""
 "This code will print `{\"Blue\": 25}`. The original value of `10` has been "
 "overwritten."
-msgstr ""
+msgstr "这段代码将会输出 `{\"Blue\": 25}`。原本的 `10` 已经被覆盖了。"
 
 #: src/ch08-03-hash-maps.md:189
 msgid "<a id=\"only-inserting-a-value-if-the-key-has-no-value\"></a>"
-msgstr ""
+msgstr "<a id=\"only-inserting-a-value-if-the-key-has-no-value\"></a>"
 
 #: src/ch08-03-hash-maps.md:191
 msgid "Adding a Key and Value Only If a Key Isn’t Present"
-msgstr ""
+msgstr "仅在不存在某个键的情况下才添加该键及其对应的值"
 
 #: src/ch08-03-hash-maps.md:193
 msgid ""
@@ -220,6 +265,9 @@ msgid ""
 "in the hash map, the existing value should remain the way it is; if the key "
 "doesn’t exist, insert it and a value for it."
 msgstr ""
+"通常，我们会先检查哈希映射中是否存在某个特定的键以及该键对应的数值。然后根据"
+"以下情况采取相应的操作：如果键确实存在于哈希映射中，那么原有的数值保持不变；"
+"如果键不存在，则将其插入哈希映射，并为其分配一个数值。"
 
 #: src/ch08-03-hash-maps.md:198
 msgid ""
@@ -231,6 +279,11 @@ msgid ""
 "same for the Blue team. Using the `entry` API, the code looks like Listing "
 "8-24."
 msgstr ""
+"哈希映射有一个专门的API，名为 `entry`，它接受你想要检查的键作为参数。 "
+"`entry` 方法的返回值是一个枚举类型，名为 `Entry`，该枚举类型表示可能存在或不"
+"存在的值。假设我们想要检查Yellow团队对应的键是否有一个关联的值。如果不存在，"
+"我们就需要插入该值 `50`，同样地，Blue团队对应的键也需要进行相同的操作。使用 "
+"`entry` API，代码如下所示，如 Listing 8-24 所示。"
 
 #: src/ch08-03-hash-maps.md:223
 msgid ""
@@ -241,6 +294,10 @@ msgid ""
 "writing the logic ourselves and, in addition, plays more nicely with the "
 "borrow checker."
 msgstr ""
+"在 `Entry` 上定义的 `or_insert` 方法，如果对应的 `Entry` 键存在，则返回一个可"
+"变引用，指向该键的值；如果不存在，则将该参数作为该键的新值，并返回一个可变引"
+"用，指向这个新值。这种实现方式比我们自己编写逻辑要简洁得多，而且还能更好地与"
+"借用检查器协同工作。"
 
 #: src/ch08-03-hash-maps.md:229
 msgid ""
@@ -250,10 +307,13 @@ msgid ""
 "second call to `entry` will not change the hash map, because the Blue team "
 "already has the value `10`."
 msgstr ""
+"运行清单8-24中的代码将会打印出 `{\"Yellow\": 50, \"Blue\": 10}`。第一次调用 "
+"`entry` 会插入 Yellow 队的键，其值为 `50`，因为 Yellow 队还没有这个键的值。第"
+"二次调用 `entry` 并不会改变哈希映射，因为 Blue 队已经拥有值 `10`。"
 
 #: src/ch08-03-hash-maps.md:235
 msgid "Updating a Value Based on the Old Value"
-msgstr ""
+msgstr "根据旧值更新值"
 
 #: src/ch08-03-hash-maps.md:237
 msgid ""
@@ -264,14 +324,18 @@ msgid ""
 "we’ve seen that word. If it’s the first time we’ve seen a word, we’ll first "
 "insert the value `0`."
 msgstr ""
+"哈希映射的另一个常见用途是查找某个键对应的值，然后根据旧值对其进行更新。例"
+"如，清单8-25展示了用于计算某个文本中每个单词出现次数的代码。我们使用一个哈希"
+"映射，将单词作为键，并增加对应的值，以记录该单词出现的次数。如果这是我们第一"
+"次遇到某个单词，我们会先将其值设置为 `0`。"
 
 #: src/ch08-03-hash-maps.md:250
 msgid "\"hello world wonderful world\""
-msgstr ""
+msgstr "“你好的世界”"
 
 #: src/ch08-03-hash-maps.md:259
 msgid "\"{map:?}\""
-msgstr ""
+msgstr "“{地图:?}”"
 
 #: src/ch08-03-hash-maps.md:265
 msgid ""
@@ -280,6 +344,9 @@ msgid ""
 "[“Accessing Values in a Hash Map”](#accessing-values-in-a-hash-map)<!-- "
 "ignore --> that iterating over a hash map happens in an arbitrary order."
 msgstr ""
+"这段代码会输出 `{\"world\": 2, \"hello\": 1, \"wonderful\": 1}`。你可能会看到"
+"相同的键值对以不同的顺序出现：回想一下在[“在哈希映射中访问值”](#accessing-"
+"values-in-a-hash-map)<!-- ignore -->中的内容，哈希映射中的迭代顺序是随机的。"
 
 #: src/ch08-03-hash-maps.md:270
 msgid ""
@@ -291,10 +358,15 @@ msgid ""
 "The mutable reference goes out of scope at the end of the `for` loop, so all "
 "of these changes are safe and allowed by the borrowing rules."
 msgstr ""
+"`split_whitespace`方法返回一个迭代器，该迭代器遍历由空白字符分隔的`text`中的"
+"子切片。`or_insert`方法返回一个可变引用（`&mut V`），指向指定键对应的值。在这"
+"里，我们将这个可变引用存储在`count`变量中，因此要赋值给该值，必须先使用星号"
+"（`*`）来解引用`count`。这个可变引用在`for`循环结束时就会超出作用域，因此所有"
+"这些更改都是安全的，并且符合借用规则。"
 
 #: src/ch08-03-hash-maps.md:278
 msgid "Hashing Functions"
-msgstr ""
+msgstr "哈希函数"
 
 #: src/ch08-03-hash-maps.md:280
 msgid ""
@@ -311,12 +383,22 @@ msgid ""
 "(https://crates.io/)<!-- ignore --> has libraries shared by other Rust users "
 "that provide hashers implementing many common hashing algorithms."
 msgstr ""
+"默认情况下， `HashMap` 使用一种名为 _SipHash_ 的哈希函数，该函数能够抵抗涉及"
+"哈希表的拒绝服务(DoS)攻击[^siphash]<!-- ignore -->。这并不是最快的哈希算法，"
+"但为了提高安全性而不得不接受的性能下降是值得的。如果你对代码进行性能分析，发"
+"现默认的哈希函数对于你的需求来说速度太慢，那么你可以通过指定不同的哈希器来更"
+"换该函数。_哈希器_是一种实现了`BuildHasher` trait的类型。我们将在[第10章]"
+"(ch10-02-traits.html)<!-- ignore -->中讨论 trait 以及如何实现它们。你不必从零"
+"开始自己实现哈希器；[crates.io](https://crates.io/)<!-- ignore -->提供了许多"
+"其他 Rust 用户共享的库，这些库提供了实现多种常见哈希算法的哈希器。"
 
 #: src/ch08-03-hash-maps.md:293
 msgid ""
 "[https://en.wikipedia.org/wiki/SipHash](https://en.wikipedia.org/wiki/"
 "SipHash)"
 msgstr ""
+"[https://en.wikipedia.org/wiki/SipHash](https://en.wikipedia.org/wiki/"
+"SipHash)"
 
 #: src/ch08-03-hash-maps.md:295
 msgid "Summary"
@@ -328,6 +410,8 @@ msgid ""
 "necessary in programs when you need to store, access, and modify data. Here "
 "are some exercises you should now be equipped to solve:"
 msgstr ""
+"向量、字符串和哈希映射提供了在程序中存储、访问和修改数据所需的大量功能。以下"
+"是一些你现在应该能够解决的练习："
 
 #: src/ch08-03-hash-maps.md:301
 msgid ""
@@ -335,6 +419,8 @@ msgid ""
 "the value in the middle position) and mode (the value that occurs most "
 "often; a hash map will be helpful here) of the list."
 msgstr ""
+"给定一个整数列表，使用向量来返回该列表的中位数（排序后位于中间位置的值）和众"
+"数（出现次数最多的数值；这里使用哈希映射会非常有帮助）。"
 
 #: src/ch08-03-hash-maps.md:304
 msgid ""
@@ -343,6 +429,9 @@ msgid ""
 "that start with a vowel have _hay_ added to the end instead (_apple_ becomes "
 "_apple-hay_). Keep in mind the details about UTF-8 encoding!"
 msgstr ""
+"把字符串转换成猪拉丁语。每个词的第一个辅音被移到词尾，并加上_ay_，因此_first_"
+"变成_irst-fay_。以元音开头的词会在后加上_hay_（_apple_变成_apple-hay_）。请记"
+"住关于 UTF-8 编码的细节！"
 
 #: src/ch08-03-hash-maps.md:308
 msgid ""
@@ -352,15 +441,22 @@ msgid ""
 "all people in a department or all people in the company by department, "
 "sorted alphabetically."
 msgstr ""
+"使用哈希映射和向量，创建一个文本界面，允许用户将员工姓名添加到公司的某个部门"
+"中。例如，“将Sally添加到工程部”或“将Amir添加到销售部”。然后，允许用户按部门或"
+"公司名称的字母顺序，检索某个部门的所有人员或公司所有人员的列表。"
 
 #: src/ch08-03-hash-maps.md:314
 msgid ""
 "The standard library API documentation describes methods that vectors, "
 "strings, and hash maps have that will be helpful for these exercises!"
 msgstr ""
+"标准库API文档中描述了向量、字符串和哈希映射所具有的方法，这些方法对于完成这些"
+"练习非常有帮助！"
 
 #: src/ch08-03-hash-maps.md:317
 msgid ""
 "We’re getting into more complex programs in which operations can fail, so "
 "it’s a perfect time to discuss error handling. We’ll do that next!"
 msgstr ""
+"我们即将进入更复杂的程序，在这些程序中，操作可能会失败，因此现在是讨论错误处"
+"理的最佳时机。接下来我们将进行这方面的讨论！"

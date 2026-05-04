@@ -605,7 +605,7 @@ msgstr ""
 
 #: src/ch19-03-pattern-syntax.md:566 src/ch19-03-pattern-syntax.md:587
 msgid "\"Hello!\""
-msgstr ""
+msgstr "“你好！”"
 
 #: src/ch19-03-pattern-syntax.md:569 src/ch19-03-pattern-syntax.md:590
 msgid "\"found a string\""

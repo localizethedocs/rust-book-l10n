@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch06-02-match.md:3
 msgid "<a id=\"the-match-control-flow-operator\"></a>"
-msgstr ""
+msgstr "<a id=\"the-match-control-flow-operator\"></a>"
 
 #: src/ch06-02-match.md:5
 msgid "The `match` Control Flow Construct"
@@ -30,6 +30,11 @@ msgid ""
 "expressiveness of the patterns and the fact that the compiler confirms that "
 "all possible cases are handled."
 msgstr ""
+"Rust 拥有一个非常强大的控制流结构，称为 `match`。它允许你将一个值与一系列模式"
+"进行比较，然后根据匹配到的模式来执行相应的代码。这些模式可以包含字面值、变量"
+"名、通配符等多种元素；[第19章](ch19-00-patterns.html)<!-- ignore --> 详细介绍"
+"了各种模式及其功能。 `match` 的强大之处在于其模式的表达能力，以及编译器能够确"
+"保所有可能的情况都被处理。"
 
 #: src/ch06-02-match.md:16
 msgid ""
@@ -40,6 +45,9 @@ msgid ""
 "value “fits,” the value falls into the associated code block to be used "
 "during execution."
 msgstr ""
+"可以将 `match` 表达式想象成一个硬币分类机：硬币沿着一条带有不同大小孔洞的轨道"
+"下滑，每枚硬币会掉入第一个符合其尺寸的孔洞中。同样地，值也会通过 `match` 中的"
+"每个模式，当值符合某个模式时，它就会落入相应的代码块中，并在执行时被使用。"
 
 #: src/ch06-02-match.md:22
 msgid ""
@@ -48,6 +56,9 @@ msgid ""
 "counting machine, determines which coin it is and returns its value in "
 "cents, as shown in Listing 6-3."
 msgstr ""
+"说到硬币，我们就以 `match`! 为例来演示一下。我们可以编写一个函数，该函数接收"
+"一个未知的美国硬币，然后像计数机一样，确定硬币的种类，并返回其价值，以美分为"
+"单位，如清单 6-3 所示。"
 
 #: src/ch06-02-match.md:51
 msgid ""
@@ -58,6 +69,11 @@ msgid ""
 "evaluate to a Boolean value, but here it can be any type. The type of `coin` "
 "in this example is the `Coin` enum that we defined on the first line."
 msgstr ""
+"让我们来分析一下 `value_in_cents` 函数中的 `match` 部分。首先，我们看到的是 "
+"`match` 这个关键字，后面跟着一个表达式，在这个例子中，这个表达式就是值 "
+"`coin`。这看起来很类似于与 `if` 一起使用的条件表达式，但实际上有很大的区别："
+"在 `if` 中，条件需要被评估为一个布尔值，而在这里，条件可以是任何类型。在这个"
+"例子中， `coin` 的类型就是我们在第一行定义的 `Coin` 枚举类型。"
 
 #: src/ch06-02-match.md:58
 msgid ""
@@ -67,6 +83,10 @@ msgid ""
 "in this case is just the value `1`. Each arm is separated from the next with "
 "a comma."
 msgstr ""
+"接下来是 `match` 这个分支。一个分支包含两部分：一个模式和一些代码。这里的第一"
+"个分支有一个模式，即值 `Coin::Penny`，然后是一个 `=>` 运算符，用于分隔模式和"
+"要执行的代码。在这种情况下，代码就是值 `1`。每个分支通过逗号与下一个分支分隔"
+"开来。"
 
 #: src/ch06-02-match.md:63
 msgid ""
@@ -77,6 +97,10 @@ msgid ""
 "sorting machine. We can have as many arms as we need: In Listing 6-3, our "
 "`match` has four arms."
 msgstr ""
+"当 `match` 表达式执行时，它会依次将结果值与每个分支的模式进行比较。如果某个模"
+"式与值匹配，那么与该模式相关的代码就会被执行。如果某个模式与值不匹配，那么执"
+"行将继续到下一个分支，就像在硬币分类机中一样。我们可以根据需要设置任意多个分"
+"支：在 Listing 6-3 中，我们的 `match` 有四个分支。"
 
 #: src/ch06-02-match.md:69
 msgid ""
@@ -84,6 +108,8 @@ msgid ""
 "of the expression in the matching arm is the value that gets returned for "
 "the entire `match` expression."
 msgstr ""
+"与每个分支相关的代码都是一个表达式，而在匹配分支中该表达式的结果值，就是整个 "
+"`match` 表达式所返回的值。"
 
 #: src/ch06-02-match.md:73
 msgid ""
@@ -94,14 +120,18 @@ msgid ""
 "prints “Lucky penny!” every time the method is called with a `Coin::Penny`, "
 "but it still returns the last value of the block, `1`:"
 msgstr ""
+"如果匹配分支的代码较短，我们通常不会使用花括号。正如清单6-3所示，每个分支仅返"
+"回一个值。如果你想在匹配分支中运行多行代码，就必须使用花括号，而分支后面的逗"
+"号则不是必需的。例如，以下代码在每次方法被调用时都会打印“Lucky penny!”，但它"
+"仍然会返回该代码块中的最后一个值：1。"
 
 #: src/ch06-02-match.md:91
 msgid "\"Lucky penny!\""
-msgstr ""
+msgstr "\"Lucky penny!\""
 
 #: src/ch06-02-match.md:103
 msgid "Patterns That Bind to Values"
-msgstr ""
+msgstr "绑定到值的模式"
 
 #: src/ch06-02-match.md:105
 msgid ""
@@ -109,6 +139,8 @@ msgid ""
 "the values that match the pattern. This is how we can extract values out of "
 "enum variants."
 msgstr ""
+"Match Arms的另一个有用特性是，它们可以绑定到与模式匹配的值部分。通过这种方"
+"式，我们可以从枚举变体中提取出相应的值。"
 
 #: src/ch06-02-match.md:109
 msgid ""
@@ -119,10 +151,14 @@ msgid ""
 "to our `enum` by changing the `Quarter` variant to include a `UsState` value "
 "stored inside it, which we’ve done in Listing 6-4."
 msgstr ""
+"例如，让我们修改其中一个枚举变体，以在其内部存储数据。从1999年到2008年，美国"
+"为50个州各自铸造了不同设计的25美分硬币。没有其他硬币具有州特定的设计，因此只"
+"有25美分硬币具有这种额外价值。我们可以通过修改 `Quarter` 变体来添加这些信息，"
+"使其内部存储一个 `UsState` 值，正如我们在清单6-4中所做的那样。"
 
 #: src/ch06-02-match.md:119
 msgid "// so we can inspect the state in a minute\n"
-msgstr ""
+msgstr "// 所以我们一分钟后就能检查状态\n"
 
 #: src/ch06-02-match.md:123 src/ch06-02-match.md:153
 msgid "// --snip--\n"
@@ -137,6 +173,9 @@ msgid ""
 "the state associated with each quarter so that if it’s one our friend "
 "doesn’t have, they can add it to their collection."
 msgstr ""
+"让我们想象一个朋友正在尝试收集全部50个州造币券。当我们按照硬币类型整理零钱"
+"时，我们还会说出每个硬币所代表的州名，这样如果朋友没有这种硬币，他们就可以把"
+"它添加到他们的收藏中。"
 
 #: src/ch06-02-match.md:143
 msgid ""
@@ -145,10 +184,13 @@ msgid ""
 "`Coin::Quarter` matches, the `state` variable will bind to the value of that "
 "quarter’s state. Then, we can use `state` in the code for that arm, like so:"
 msgstr ""
+"在这段代码的匹配表达式中，我们在匹配 variant `Coin::Quarter` 值的模式中添加了"
+"一个名为 `state` 的变量。当匹配到 `Coin::Quarter` 时， `state` 变量将绑定到该"
+"季度的状态值。然后，我们可以在相应分支的代码中使用 `state`，如下所示："
 
 #: src/ch06-02-match.md:169
 msgid "\"State quarter from {state:?}!\""
-msgstr ""
+msgstr "状态季度来自 {state:?}!"
 
 #: src/ch06-02-match.md:180
 msgid ""
@@ -160,14 +202,20 @@ msgid ""
 "expression, thus getting the inner state value out of the `Coin` enum "
 "variant for `Quarter`."
 msgstr ""
+"如果我们称 `value_in_cents(Coin::Quarter(UsState::Alaska))` 为 `coin`，那么 "
+"`coin` 就相当于 `Coin::Quarter(UsState::Alaska)`。当我们比较这个值与各个匹配"
+"项时，直到遇到 `Coin::Quarter(state)` 之前，都没有匹配项能够匹配上。在到达 "
+"`Coin::Quarter(state)` 时， `state` 的绑定值就会变成 `UsState::Alaska`。然后"
+"我们可以在 `println!` 表达式中利用这个绑定值，从而获取 `Quarter` 中 `Coin` 枚"
+"举变体所对应的内部状态值。"
 
 #: src/ch06-02-match.md:189
 msgid "<a id=\"matching-with-optiont\"></a>"
-msgstr ""
+msgstr "<a id=\"matching-with-optiont\"></a>"
 
 #: src/ch06-02-match.md:191
 msgid "The `Option<T>` `match` Pattern"
-msgstr ""
+msgstr "`Option<T>` `match` 模式"
 
 #: src/ch06-02-match.md:194
 msgid ""
@@ -177,6 +225,10 @@ msgid ""
 "compare the variants of `Option<T>`, but the way the `match` expression "
 "works remains the same."
 msgstr ""
+"在上一节中，我们试图从使用 `Option<T>` 的 `Some` 情况中提取出 `T` 的值。同样"
+"地，我们也可以使用 `match` 来处理 `Option<T>`，就像我们对 `Coin` 枚举所做的那"
+"样！与其比较硬币，我们不如比较 `Option<T>` 的各种变体，不过 `match` 表达式的"
+"运作方式保持不变。"
 
 #: src/ch06-02-match.md:200
 msgid ""
@@ -185,12 +237,15 @@ msgid ""
 "the function should return the `None` value and not attempt to perform any "
 "operations."
 msgstr ""
+"假设我们想要编写一个函数，该函数接受一个 `Option<i32>` 参数。如果参数内部有"
+"值，则将该值加1。如果参数内部没有值，那么该函数应该返回 `None` 的值，并且不尝"
+"试执行任何操作。"
 
 #: src/ch06-02-match.md:205
 msgid ""
 "This function is very easy to write, thanks to `match`, and will look like "
 "Listing 6-5."
-msgstr ""
+msgstr "这个函数非常容易编写，多亏了 `match`，它的样子就像清单6-5所示。"
 
 #: src/ch06-02-match.md:227
 msgid ""
@@ -198,12 +253,15 @@ msgid ""
 "`plus_one(five)`, the variable `x` in the body of `plus_one` will have the "
 "value `Some(5)`. We then compare that against each match arm:"
 msgstr ""
+"让我们更详细地检查第一次执行 `plus_one` 的情况。 当我们调用 `plus_one(fiv)` "
+"时，`plus_one` 中的变量`x`将具有`有意义(5)` 的值。然后我们比较这个变量与每个"
+"匹配的装甲："
 
 #: src/ch06-02-match.md:246
 msgid ""
 "The `Some(5)` value doesn’t match the pattern `None`, so we continue to the "
 "next arm:"
-msgstr ""
+msgstr "`有些(5)`不匹配模式`None`，所以我们继续到下一个手臂："
 
 #: src/ch06-02-match.md:264
 msgid ""
@@ -212,12 +270,17 @@ msgid ""
 "in the match arm is then executed, so we add 1 to the value of `i` and "
 "create a new `Some` value with our total `6` inside."
 msgstr ""
+"`有些(5)`匹配`某些(i)`吗？它！我们有相同的变量。 `i`绑定到`有意义'中的值，所"
+"以`i`将获得`5`的值。 然后执行比赛臂中的代码， 所以我们在 i` 中添加了 1 个值，"
+"并且创建了一个新的 `有意义的值，我们的总值为 `6` 。"
 
 #: src/ch06-02-match.md:269
 msgid ""
 "Now let’s consider the second call of `plus_one` in Listing 6-5, where `x` "
 "is `None`. We enter the `match` and compare to the first arm:"
 msgstr ""
+"现在我们来看看名单6-5中的`plus_one`的第二次通话，`x`为`无'。我们输入`匹配`并"
+"比对第一个手臂："
 
 #: src/ch06-02-match.md:287
 msgid ""
@@ -225,6 +288,8 @@ msgid ""
 "`None` value on the right side of `=>`. Because the first arm matched, no "
 "other arms are compared."
 msgstr ""
+"它匹配！没有要添加的值，因此程序停止并返回`=>`右侧的`无'。 由于第一支手臂匹"
+"配，没有其他武器进行比较。"
 
 #: src/ch06-02-match.md:291
 msgid ""
@@ -234,10 +299,14 @@ msgid ""
 "but once you get used to it, you’ll wish you had it in all languages. It’s "
 "consistently a user favorite."
 msgstr ""
+"合并`匹配`和enums在许多情况下是有用的。 你会看到这个图案在Rust代码中很多: "
+"\"匹配\" 与一个枚举, 将变量绑定到数据内，然后执行基于它的代码。 最初，它有点"
+"棘手，但是一旦你被用了，你就会希望你能够用所有的语言做到。 这是一个收藏的用"
+"户。"
 
 #: src/ch06-02-match.md:297
 msgid "Matches Are Exhaustive"
-msgstr ""
+msgstr "比赛是完全的"
 
 #: src/ch06-02-match.md:299
 msgid ""
@@ -245,6 +314,8 @@ msgid ""
 "must cover all possibilities. Consider this version of our `plus_one` "
 "function, which has a bug and won’t compile:"
 msgstr ""
+"我们需要讨论的 `match` 的另一个方面：武器模式必须包含所有的可能性。 请考虑这"
+"个版本的我们的 `plus_one` 函数，这个函数有一个错误，将不会编译："
 
 #: src/ch06-02-match.md:317
 msgid ""
@@ -252,6 +323,8 @@ msgid ""
 "it’s a bug Rust knows how to catch. If we try to compile this code, we’ll "
 "get this error:"
 msgstr ""
+"我们没有处理 `None` 案件，所以这个代码会导致错误。 幸运的是，它是一个Bug "
+"Rust 知道如何捕获。如果我们尝试编译这个代码，我们会收到这个错误："
 
 #: src/ch06-02-match.md:321
 msgid ""
@@ -283,6 +356,33 @@ msgid ""
 "error: could not compile `enums` (bin \"enums\") due to 1 previous error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling enums v0.1.0 (file:///projects/enums)\n"
+"error[E0004]: non-exhaustive patterns: `None` not covered\n"
+" --> src/main.rs:3:15\n"
+"  |\n"
+"3 |         match x {\n"
+"  |               ^ pattern `None` not covered\n"
+"  |\n"
+"note: `Option<i32>` defined here\n"
+" --> /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/option."
+"rs:593:1\n"
+" ::: /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/option."
+"rs:597:5\n"
+"  |\n"
+"  = note: not covered\n"
+"  = note: the matched value is of type `Option<i32>`\n"
+"help: ensure that all possible cases are being handled by adding a match arm "
+"with a wildcard pattern or an explicit pattern as shown\n"
+"  |\n"
+"4 ~             Some(i) => Some(i + 1),\n"
+"5 ~             None => todo!(),\n"
+"  |\n"
+"\n"
+"For more information about this error, try `rustc --explain E0004`.\n"
+"error: could not compile `enums` (bin \"enums\") due to 1 previous error\n"
+"```"
 
 #: src/ch06-02-match.md:346
 msgid ""
@@ -294,10 +394,15 @@ msgid ""
 "might have null, thus making the billion-dollar mistake discussed earlier "
 "impossible."
 msgstr ""
+"你知道我们没有涵盖所有可能的情况，甚至知道我们忘记了哪种模式！ Rust 中的比赛"
+"是 _expave_: 我们必须用尽所有最后的可能性才能使代码有效。 特别是在 "
+"`Option<T>`的情况下，当Rust 阻止我们忘记明确处理`None`案例时， 它保护我们不要"
+"假定当我们可能有空时我们有价值，从而使早些时候讨论的数十亿美元的错误变得不可"
+"能。"
 
 #: src/ch06-02-match.md:353
 msgid "Catch-All Patterns and the `_` Placeholder"
-msgstr ""
+msgstr "全面捕捉模式和 `_` 占位符"
 
 #: src/ch06-02-match.md:355
 msgid ""
@@ -311,6 +416,12 @@ msgid ""
 "represented by functions without bodies because actually implementing them "
 "is out of scope for this example:"
 msgstr ""
+"使用枚举，我们也可以对几个特定值采取特别行动，但对所有其他值则采取一种默认行"
+"动。 想象一下我们正在执行一场游戏，如果你在一张冰卷上滚动3的话， 你的玩家没有"
+"移动，而是得到了一个漂亮的新帽子。 如果你滚动7个，你的玩家就会失去一个漂亮的"
+"帽子。 对于所有其他值，您的玩家移动游戏板上的空格数。 这是一个 `match` ，它实"
+"现了那个逻辑，其结果是舞蹈卷硬编码而不是随机的值。 和所有其他由没有机构的职能"
+"所代表的逻辑，因为实际执行它们是超出范围的，例如："
 
 #: src/ch06-02-match.md:380
 msgid ""
@@ -319,6 +430,9 @@ msgid ""
 "variable we’ve chosen to name `other`. The code that runs for the `other` "
 "arm uses the variable by passing it to the `move_player` function."
 msgstr ""
+"对于头两种武器，它们的模式是字母`3`和`7`。 对于覆盖所有其他可能值的最后一个手"
+"臂，模式是我们选择命名为“其他”的变量。 运行 `other` 臂的代码使用变量，将它传"
+"递到 `move_player` 函数。"
 
 #: src/ch06-02-match.md:385
 msgid ""
@@ -330,6 +444,11 @@ msgid ""
 "earlier, the other arms would never run, so Rust will warn us if we add arms "
 "after a catch-all!"
 msgstr ""
+"这个代码编译，即使我们还没有列出一个 `u8` 可能具有的所有值。 因为最后一个模式"
+"将匹配未具体列出的所有值。 这种包罗万象的模式满足了`匹配'必须详尽无遗的要"
+"求。 请注意，我们必须把包罗万象的武器放在最后，因为对模式的评价是正确的。 如"
+"果我们早些时候放下了包罗万象的武器，其他武器将永远不会运转。 这样，如果我们在"
+"抓获后添加武器，Rust 将会警告我们！"
 
 #: src/ch06-02-match.md:393
 msgid ""
@@ -338,6 +457,9 @@ msgid ""
 "matches any value and does not bind to that value. This tells Rust we aren’t "
 "going to use the value, so Rust won’t warn us about an unused variable."
 msgstr ""
+"Rust 还有一个模式，当我们想要捕捉所有但不想_use_the value in the catch-all "
+"pattern: `_` 是一种特殊模式，它与任何值相匹配，没有绑定到那个值。 这告诉Rust "
+"我们不会使用该值，因此Rust 不会就一个未使用的变量向我们发出警告。"
 
 #: src/ch06-02-match.md:398
 msgid ""
@@ -345,6 +467,9 @@ msgid ""
 "or a 7, you must roll again. We no longer need to use the catch-all value, "
 "so we can change our code to use `_` instead of the variable named `other`:"
 msgstr ""
+"让我们改变游戏规则：现在，如果你滚动了3或7个以外的其他东西，你必须重新滚动。 "
+"我们不再需要使用包罗万象的值，这样我们就可以更改我们的代码来使用`_` 而不是变"
+"量名为`other`"
 
 #: src/ch06-02-match.md:417
 msgid ""
@@ -352,6 +477,8 @@ msgid ""
 "explicitly ignoring all other values in the last arm; we haven’t forgotten "
 "anything."
 msgstr ""
+"这个例子也符合详尽无遗的要求，因为我们明确无视最后一支武器中的所有其他价值；"
+"我们没有忘记任何东西。"
 
 #: src/ch06-02-match.md:420
 msgid ""
@@ -361,6 +488,10 @@ msgid ""
 "[“The Tuple Type”](ch03-02-data-types.html#the-tuple-type)<!-- ignore --> "
 "section) as the code that goes with the `_` arm:"
 msgstr ""
+"末尾。 我们将再次更改游戏规则，以便如果你滚动3或7个以外的任何其他东西，你的轮"
+"转不会发生任何其他事情。 我们可以通过使用单位值来表达这一点(我们在[“Tuple "
+"Type”](ch03-02-data-types.html#the-tuple-type)<中提到的空管类型) ！ - 忽略 --"
+"> 节作为带有\"_\" 臂的代码："
 
 #: src/ch06-02-match.md:439
 msgid ""
@@ -368,6 +499,8 @@ msgid ""
 "value that doesn’t match a pattern in an earlier arm, and we don’t want to "
 "run any code in this case."
 msgstr ""
+"这里我们明确告诉你, 我们不会在早些时候的手臂中使用不匹配模式的任何其他值。 我"
+"们不想在此案中运行任何代码。"
 
 #: src/ch06-02-match.md:443
 msgid ""
@@ -376,3 +509,6 @@ msgid ""
 "the `if let` syntax, which can be useful in situations where the `match` "
 "expression is a bit wordy."
 msgstr ""
+"我们将在 [第19章] (ch19-00-patterns.html)<!-- 忽略--中包含更多关于模式和匹配"
+"的内容。 现在，我们将继续使用 \"如果我们的话\" 语法， 在`match`表达式变得有点"
+"单词的情况下，这可能是有用的。"
