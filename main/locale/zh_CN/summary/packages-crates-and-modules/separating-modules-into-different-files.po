@@ -21,6 +21,8 @@ msgid ""
 "file. When modules get large, you might want to move their definitions to a "
 "separate file to make the code easier to navigate."
 msgstr ""
+"到目前为止，本章中的所有例子都在一个文件中定义了多个模块。 当模块变大时，你可"
+"能想要移动他们的定义到一个单独的文件，以使代码更容易导航。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:7
 msgid ""
@@ -30,6 +32,9 @@ msgid ""
 "file is _src/lib.rs_, but this procedure also works with binary crates whose "
 "crate root file is _src/main.rs_."
 msgstr ""
+"例如，让我们从拥有多餐厅模块的列表7-17中的代码开始。 我们会将模块提取到文件，"
+"而不是将所有模块定义在crate root 文件中。 在这种情况下，crate root 文件是 "
+"_src/lib.rs_，但这个程序也适用于二进制crate root 文件是 _src/main.rs_。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:13
 msgid ""
@@ -39,6 +44,10 @@ msgid ""
 "code shown in Listing 7-21. Note that this won’t compile until we create the "
 "_src/front_of_house.rs_ file in Listing 7-22."
 msgstr ""
+"首先，我们会将 `front_of_house` 模块解压到自己的文件中。 移除`front_of_house`"
+"模块的大括号中的代码，只留下`mod front_of_house;`声明，以便_src/lib。 s_ 包含"
+"列表7-21中显示的代码。请注意，在我们创建列表7-22中的 _src/front_of_house.rs_"
+"文件之前，这将不会编译。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:33
 msgid ""
@@ -47,6 +56,9 @@ msgid ""
 "look in this file because it came across the module declaration in the crate "
 "root with the name `front_of_house`."
 msgstr ""
+"接下来, 将总括号中的代码放入一个名为_src/front_of_house.rs_的新文件中，如在列"
+"表7-22中所示。 编译器知道要在这个文件中看到，因为它以\"front_of_house\"的名称"
+"在crate root中发现模块声明。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:48
 msgid ""
@@ -60,6 +72,12 @@ msgid ""
 "other words, `mod` is _not_ an “include” operation that you may have seen in "
 "other programming languages."
 msgstr ""
+"请注意，您只需在模块树中使用 `mod` 声明一次加载文件。一旦编译器知道该文件是项"
+"目的一部分（并且由于您放置了 `mod` 语句，因此知道代码在模块树的哪个位置），项"
+"目中的其他文件就应该使用指向该文件声明的路径来引用该文件中的代码，这一点在"
+"[“在模块树中引用项的路径”](ch07-03-paths-for-referring-to-an-item-in-the-"
+"module-tree.html)<!-- ignore -->章节中有详细说明。换句话说，`mod` 并不是您在"
+"其他编程语言中可能见过的“包含”操作。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:57
 msgid ""
@@ -69,18 +87,25 @@ msgid ""
 "that will be named for its ancestors in the module tree, in this case _src/"
 "front_of_house_."
 msgstr ""
+"接下来，我们会将 `hosting` 模块提取到它自己的文件。 这个过程有点不同，因为"
+"`hosting` 是一个 `front_of_house` 的子模块，而不是根模块。 我们将把`主机'文件"
+"放置在模块树中为其祖先命名的新目录中，这里是_src/front_of_house_。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:62
 msgid ""
 "To start moving `hosting`, we change _src/front_of_house.rs_ to contain only "
 "the declaration of the `hosting` module:"
 msgstr ""
+"要开始移动 `hosting` ，我们将更改 _src/front_of_house.rs_仅包含 `hosting` 模"
+"块的声明："
 
 #: src/ch07-05-separating-modules-into-different-files.md:73
 msgid ""
 "Then, we create a _src/front_of_house_ directory and a _hosting.rs_ file to "
 "contain the definitions made in the `hosting` module:"
 msgstr ""
+"然后，我们创建一个 _src/front_of_house_directory 和 _hosting.rs_文件来包含在 "
+"\"hosting\" 模块中做出的定义："
 
 #: src/ch07-05-separating-modules-into-different-files.md:84
 msgid ""
@@ -90,10 +115,14 @@ msgid ""
 "compiler’s rules for which files to check for which modules’ code mean the "
 "directories and files more closely match the module tree."
 msgstr ""
+"如果我们把_hosting.rs_放置在 _src_目录中，编译器会期待_hosting。 s_code to "
+"be in a `hosting` module declared in the crate root and not declared as a "
+"subject of the `front_of_house` module. 编译器的规则是哪个文件来检查哪个模块"
+"的代码意味着目录和文件更接近模块树。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:90
 msgid "Alternate File Paths"
-msgstr ""
+msgstr "备用文件路径"
 
 #: src/ch07-05-separating-modules-into-different-files.md:92
 msgid ""
@@ -102,28 +131,33 @@ msgid ""
 "`front_of_house` declared in the crate root, the compiler will look for the "
 "module’s code in:"
 msgstr ""
+"到目前为止，我们已经覆盖了Rust 编译器使用的最特征的文件路径，但Rust 也支持较"
+"旧的文件路径风格。 对于在 crate root 中声明的名为 `front_of_house` 的模块，编"
+"译器将查找模块的代码："
 
 #: src/ch07-05-separating-modules-into-different-files.md:97
 msgid "_src/front_of_house.rs_ (what we covered)"
-msgstr ""
+msgstr "_src/front_of_house.rs_(涵盖内容)"
 
 #: src/ch07-05-separating-modules-into-different-files.md:98
 msgid "_src/front_of_house/mod.rs_ (older style, still supported path)"
-msgstr ""
+msgstr "_src/front_of_house/mod.rs_(旧样式，仍然支持路径)"
 
 #: src/ch07-05-separating-modules-into-different-files.md:100
 msgid ""
 "For a module named `hosting` that is a submodule of `front_of_house`, the "
 "compiler will look for the module’s code in:"
 msgstr ""
+"对于名为 `front_of_house` 的一个子模块的 `hosting` 模块，编译器将查找该模块的"
+"代码："
 
 #: src/ch07-05-separating-modules-into-different-files.md:103
 msgid "_src/front_of_house/hosting.rs_ (what we covered)"
-msgstr ""
+msgstr "_src/front_of_house/hosting.rs_(涵盖内容)"
 
 #: src/ch07-05-separating-modules-into-different-files.md:104
 msgid "_src/front_of_house/hosting/mod.rs_ (older style, still supported path)"
-msgstr ""
+msgstr "_src/front_of_house/hosting/mod.rs_(旧样式，仍然支持路径)"
 
 #: src/ch07-05-separating-modules-into-different-files.md:106
 msgid ""
@@ -131,6 +165,8 @@ msgid ""
 "Using a mix of both styles for different modules in the same project is "
 "allowed but might be confusing for people navigating your project."
 msgstr ""
+"如果你对同一个模块使用两种样式，你会遇到编译器错误。 允许在同一项目中使用不同"
+"模块的两种样式混合，但可能会对导航您的项目的人造成混淆。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:110
 msgid ""
@@ -138,6 +174,8 @@ msgid ""
 "project can end up with many files named _mod.rs_, which can get confusing "
 "when you have them open in your editor at the same time."
 msgstr ""
+"使用名为 _mod.rs_ 的文件样式的主要下方是你的项目最终可以用名为 _mod 的许多文"
+"件。 s_, 当你同时在你的编辑器中打开它们时会引起混淆。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:114
 msgid ""
@@ -147,6 +185,9 @@ msgid ""
 "files. This technique lets you move modules to new files as they grow in "
 "size."
 msgstr ""
+"我们已将每个模块的代码移动到一个单独的文件，模块树保持不变。 即使定义生活在不"
+"同的文件中，`eat_at_restant`中的函数调用将不会被任何修改。 这个技术让你能够将"
+"模块移动到新的文件，因为它们的大小越来越大。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:119
 msgid ""
@@ -156,6 +197,9 @@ msgid ""
 "looks in a file with the same name as the module for the code that goes into "
 "that module."
 msgstr ""
+"请注意，src/lib.rs_中的`pub use crate::front_of_house::hosting`语句并没有发生"
+"变化，`use`对编译成的文件也没有任何影响。`mod`关键字用于声明模块，Rust会查找"
+"与模块名称相同的文件来查找该模块中的代码。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:125
 msgid "Summary"
@@ -170,9 +214,16 @@ msgid ""
 "for multiple uses of the item in that scope. Module code is private by "
 "default, but you can make definitions public by adding the `pub` keyword."
 msgstr ""
+"Rust允许你将一个包拆分为多个子包，再将每个子包拆分为多个模块。这样，你就可以"
+"从一个模块引用另一个模块中定义的项。你可以通过指定绝对路径或相对路径来实现这"
+"一点。这些路径可以通过`use`语句引入作用域，这样你就可以在多个地方使用更短的路"
+"径来引用该项。默认情况下，模块代码是私有的，但你可以通过添加`pub`关键字来将其"
+"定义公开。"
 
 #: src/ch07-05-separating-modules-into-different-files.md:134
 msgid ""
 "In the next chapter, we’ll look at some collection data structures in the "
 "standard library that you can use in your neatly organized code."
 msgstr ""
+"在下一章中，我们将介绍一些标准库中的集合数据结构，这些数据结构可以让你在整洁"
+"的代码结构中加以使用。"

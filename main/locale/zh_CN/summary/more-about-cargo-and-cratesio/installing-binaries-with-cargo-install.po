@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch14-04-installing-binaries.md:3
 msgid "<a id=\"installing-binaries-from-cratesio-with-cargo-install\"></a>"
-msgstr ""
+msgstr "<a id=\"installing-binaries-from-cratesio-with-cargo-install\"></a>"
 
 #: src/ch14-04-installing-binaries.md:5
 msgid "Installing Binaries with `cargo install`"
@@ -32,6 +32,12 @@ msgid ""
 "Usually, crates have information in the README file about whether a crate is "
 "a library, has a binary target, or both."
 msgstr ""
+"`cargo install`命令允许你在本地安装和使用二进制包。这并不是为了替代系统包；而"
+"是为Rust开发者提供了一种方便的方式来安装那些在[crates.io](https://crates.io/)"
+"上分享的工具。请注意，你只能安装那些具有二进制目标的包。所谓“二进制目标”，指"
+"的是如果某个包有`src/main.rs`文件或指定了其他作为二进制目标的文件，那么就可以"
+"运行的程序。而“库目标”则不适合单独运行，但适合包含在其他程序中。通常，包在"
+"README文件中会说明该包是库还是具有二进制目标，或者两者都有。"
 
 #: src/ch14-04-installing-binaries.md:18
 msgid ""
@@ -41,6 +47,10 @@ msgid ""
 "that this directory is in your `$PATH` to be able to run programs you’ve "
 "installed with `cargo install`."
 msgstr ""
+"所有通过 `cargo install` 安装的二进制文件都存储在安装目录的 _bin_ 文件夹中。"
+"如果您是使用 _rustup.rs_ 来安装 Rust，并且没有进行任何自定义配置，那么这个目"
+"录将会是 *$HOME/.cargo/bin*。请确保这个目录在您的 `$PATH` 中，这样您才能运行"
+"通过 `cargo install` 安装的程序。"
 
 #: src/ch14-04-installing-binaries.md:24
 msgid ""
@@ -48,6 +58,8 @@ msgid ""
 "of the `grep` tool called `ripgrep` for searching files. To install "
 "`ripgrep`, we can run the following:"
 msgstr ""
+"例如，在第12章中我们提到，有一个名为 `ripgrep` 的 Rust 实现，它是一款用于文件"
+"搜索的工具。要安装 `ripgrep`，我们可以运行以下命令："
 
 #: src/ch14-04-installing-binaries.md:45
 msgid ""
@@ -57,3 +69,6 @@ msgid ""
 "then run `rg --help` and start using a faster, Rustier tool for searching "
 "files!"
 msgstr ""
+"输出的倒数第二行显示了已安装二进制文件的位置和名称，在 `ripgrep` 的情况下，就"
+"是 `rg`。只要安装目录位于你的 `$PATH` 中，正如之前提到的，你就可以运行 `rg --"
+"help`，从而使用一种更快速、更高效的 Rust 工具来搜索文件！"

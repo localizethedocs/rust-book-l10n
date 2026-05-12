@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch17-05-traits-for-async.md:3
 msgid "<a id=\"digging-into-the-traits-for-async\"></a>"
-msgstr ""
+msgstr "<a id=\"digging-into-the-traits-for-async\"></a>"
 
 #: src/ch17-05-traits-for-async.md:5
 msgid "A Closer Look at the Traits for Async"
@@ -30,26 +30,35 @@ msgid ""
 "we’ll dig in just enough to help in those scenarios, still leaving the "
 "_really_ deep dive for other documentation."
 msgstr ""
+"在整章内容中，我们多次使用了 `Future`、 `Stream` 和 `StreamExt` 这些特性。不"
+"过，到目前为止，我们并没有深入讨论它们的工作原理或它们之间的相互作用细节，这"
+"对于日常 Rust 编程来说已经足够了。不过，有时候你可能会遇到需要了解这些特性更"
+"多细节的情况，同时还需要了解 `Pin` 类型和 `Unpin` 特性。在这一部分中，我们将"
+"简要介绍这些细节，以帮助那些需要深入了解的情况，而更深入的内容则可以在其他文"
+"档中找到。"
 
 #: src/ch17-05-traits-for-async.md:18
 msgid "<a id=\"future\"></a>"
-msgstr ""
+msgstr "<a id=\"future\"></a>"
 
 #: src/ch17-05-traits-for-async.md:20
 msgid "The `Future` Trait"
-msgstr ""
+msgstr "特性 `Future`"
 
 #: src/ch17-05-traits-for-async.md:22
 msgid ""
 "Let’s start by taking a closer look at how the `Future` trait works. Here’s "
 "how Rust defines it:"
 msgstr ""
+"让我们先仔细看看 `Future` 这个特质是如何工作的。以下是 Rust 的定义方式："
 
 #: src/ch17-05-traits-for-async.md:36
 msgid ""
 "That trait definition includes a bunch of new types and also some syntax we "
 "haven’t seen before, so let’s walk through the definition piece by piece."
 msgstr ""
+"那个特性定义包含了一组新的类型，还有一些我们之前从未见过的语法。因此，让我们"
+"逐步解析这个定义。"
 
 #: src/ch17-05-traits-for-async.md:39
 msgid ""
@@ -61,6 +70,11 @@ msgid ""
 "`Context` in a moment. For now, let’s focus on what the method returns, the "
 "`Poll` type:"
 msgstr ""
+"首先， `Future` 的关联类型 `Output` 决定了未来的结果。这类似于 `Iterator` 特"
+"质下的 `Item` 关联类型。其次， `Future` 拥有一个 `poll` 方法，该方法需要一个"
+"特殊的 `Pin` 引用作为其 `self` 参数，以及一个对 `Context` 类型的可变引用，并"
+"且该方法返回一个 `Poll<Self::Output>`。我们稍后会进一步讨论 `Pin` 和 "
+"`Context`。目前，让我们先关注该方法返回的内容，即 `Poll` 类型："
 
 #: src/ch17-05-traits-for-async.md:53
 msgid ""
@@ -71,6 +85,10 @@ msgid ""
 "later. The `Ready` variant indicates that the `Future` has finished its work "
 "and the `T` value is available."
 msgstr ""
+"这种 `Poll` 类型与 `Option` 类似。它有一个具有特定值的变体，即 `Ready(T)`，还"
+"有一个没有该值的变体，即 `Pending`。不过， `Poll` 的含义与 `Option` 完全不"
+"同！ `Pending` 变体表示未来还有工作要做，因此调用者需要稍后再次检查。而 "
+"`Ready` 变体则表示 `Future` 已经完成了其工作，现在 `T` 的值就可以使用了。"
 
 #: src/ch17-05-traits-for-async.md:60
 msgid ""
@@ -81,6 +99,10 @@ msgid ""
 "explicitly in their documentation. This is similar to how `Iterator::next` "
 "behaves."
 msgstr ""
+"注意：很少需要直接调用 `poll`，但如果你确实需要这样做，请记住，对于大多数未来"
+"值，调用者不应在future返回 `Ready` 之后再次调用 `poll`。许多未来值在再次被查"
+"询时会引发异常。那些可以安全再次被查询的未来值会在其文档中明确说明这一点。这"
+"与 `Iterator::next` 的行为类似。"
 
 #: src/ch17-05-traits-for-async.md:66
 msgid ""
@@ -89,18 +111,21 @@ msgid ""
 "the page title for a single URL once it resolved, Rust compiles it into "
 "something kind of (although not exactly) like this:"
 msgstr ""
+"当你看到使用 `await` 的代码时，Rust 会在后台将其编译成调用 `poll` 的代码。如"
+"果你再看一下 Listing 17-4，在那里我们在一个 URL 解析完成后，会打印出对应的页"
+"面标题。Rust 会将其编译成类似这样的代码（虽然不完全相同）："
 
 #: src/ch17-05-traits-for-async.md:74 src/ch17-05-traits-for-async.md:92
 msgid "\"The title for {url} was {title}\""
-msgstr ""
+msgstr "\"The title for {url} was {title}\""
 
 #: src/ch17-05-traits-for-async.md:75 src/ch17-05-traits-for-async.md:93
 msgid "\"{url} had no title\""
-msgstr ""
+msgstr "\"{url} had no title\""
 
 #: src/ch17-05-traits-for-async.md:78
 msgid "// But what goes here?\n"
-msgstr ""
+msgstr "// 但这里是什么？\n"
 
 #: src/ch17-05-traits-for-async.md:83
 msgid ""
@@ -108,10 +133,12 @@ msgid ""
 "try again, and again, and again, until the future is finally ready. In other "
 "words, we need a loop:"
 msgstr ""
+"当未来仍然处于「`Pending`」状态时，我们应该怎么做呢？我们需要一种方法，可以一"
+"次又一次地尝试，直到未来最终准备好为止。换句话说，我们需要一个循环机制："
 
 #: src/ch17-05-traits-for-async.md:96
 msgid "// continue\n"
-msgstr ""
+msgstr "// 继续\n"
 
 #: src/ch17-05-traits-for-async.md:102
 msgid ""
@@ -122,6 +149,10 @@ msgid ""
 "As we’ve seen, that something is an async runtime, and this scheduling and "
 "coordination work is one of its main jobs."
 msgstr ""
+"如果Rust将其编译成这样的代码，那么每一个 `await` 都会造成阻塞——这与我们想要的"
+"完全相反！相反，Rust确保循环能够将控制权交给某个可以暂停当前任务、去处理其他"
+"任务，然后再重新检查这个任务的处理器。正如我们所看到的，那个处理器就是一个异"
+"步运行时，而这种调度和协调工作正是它的主要功能之一。"
 
 #: src/ch17-05-traits-for-async.md:109
 msgid ""
@@ -137,6 +168,15 @@ msgid ""
 "advances it when `poll` returns `Poll::Ready(Some(message))` or `Poll::"
 "Ready(None)`."
 msgstr ""
+"在 [“Sending Data Between Two Tasks Using Message Passing”](ch17-02-"
+"concurrency-with-async.md#sending-data-between-two-tasks-using-message-"
+"passing)<!-- ignore --> 这一部分中，我们描述了等待`rx.recv`的过程。`recv`调用"
+"会返回一个未来值，而等待这个未来值时，程序会对其进行查询。我们注意到，当通道"
+"关闭时，运行时会暂停这个未来值，直到它准备好为止，这可以通过`Some(message)`或"
+"`None`来实现。通过更深入地了解`Future`特性，特别是`Future::poll`，我们可以理"
+"解其工作原理。当`Poll::Pending`返回时，运行时就知道未来值尚未准备好。相反，当"
+"`poll`返回`Poll::Ready(Some(message))`或`Poll::Ready(None)`时，运行时就知道未"
+"来值已经准备好，并继续处理后续操作。"
 
 #: src/ch17-05-traits-for-async.md:120
 msgid ""
@@ -145,16 +185,21 @@ msgid ""
 "_polls_ each future it is responsible for, putting the future back to sleep "
 "when it is not yet ready."
 msgstr ""
+"关于运行时如何实现这一功能的具体细节超出了本书的范围，但关键在于理解 futures "
+"的基本机制：运行时会逐一查询它所负责的每个 future，当某个 future 尚未准备好"
+"时，就会将其重新置于睡眠状态。"
 
 #: src/ch17-05-traits-for-async.md:127
 msgid ""
 "<a id=\"pinning-and-the-pin-and-unpin-traits\"></a> <a id=\"the-pin-and-"
 "unpin-traits\"></a>"
 msgstr ""
+"<a id=\"pinning-and-the-pin-and-unpin-traits\"></a> <a id=\"the-pin-and-"
+"unpin-traits\"></a>"
 
 #: src/ch17-05-traits-for-async.md:130
 msgid "The `Pin` Type and the `Unpin` Trait"
-msgstr ""
+msgstr "`Pin` 类型和 `Unpin` 特性"
 
 #: src/ch17-05-traits-for-async.md:132
 msgid ""
@@ -165,10 +210,14 @@ msgid ""
 "futures into a vector and calls the `trpl::join_all` function instead, which "
 "won’t compile yet."
 msgstr ""
+"在清单17-13中，我们使用 `trpl::join!` 宏来等待三个未来值。然而，通常我们会有"
+"一个集合，比如一个向量，其中包含了一些在运行时才可知的未来值。让我们将清单"
+"17-13中的代码替换为清单17-23中的代码，这样就把这三个未来值放入了一个向量中，"
+"并调用了 `trpl::join_all` 函数。不过，目前这个代码还无法编译。"
 
 #: src/ch17-05-traits-for-async.md:141 src/ch17-05-traits-for-async.md:462
 msgid "// required for mdbook test\n"
-msgstr ""
+msgstr "// mdbook 测试所需的\n"
 
 #: src/ch17-05-traits-for-async.md:152 src/ch17-05-traits-for-async.md:478
 msgid "\"hi\""
@@ -176,19 +225,19 @@ msgstr "\"hi\""
 
 #: src/ch17-05-traits-for-async.md:153 src/ch17-05-traits-for-async.md:479
 msgid "\"from\""
-msgstr ""
+msgstr "\"from\""
 
 #: src/ch17-05-traits-for-async.md:154 src/ch17-05-traits-for-async.md:480
 msgid "\"the\""
-msgstr ""
+msgstr "“the”"
 
 #: src/ch17-05-traits-for-async.md:155 src/ch17-05-traits-for-async.md:481
 msgid "\"future\""
-msgstr ""
+msgstr "\"future\""
 
 #: src/ch17-05-traits-for-async.md:166 src/ch17-05-traits-for-async.md:493
 msgid "\"received '{value}'\""
-msgstr ""
+msgstr "\"received '{value}'\""
 
 #: src/ch17-05-traits-for-async.md:171 src/ch17-05-traits-for-async.md:465
 #: src/ch17-05-traits-for-async.md:476 src/ch17-05-traits-for-async.md:491
@@ -200,19 +249,19 @@ msgstr ""
 
 #: src/ch17-05-traits-for-async.md:173 src/ch17-05-traits-for-async.md:500
 msgid "\"more\""
-msgstr ""
+msgstr "\"more\""
 
 #: src/ch17-05-traits-for-async.md:174 src/ch17-05-traits-for-async.md:501
 msgid "\"messages\""
-msgstr ""
+msgstr "\"messages\""
 
 #: src/ch17-05-traits-for-async.md:175 src/ch17-05-traits-for-async.md:502
 msgid "\"for\""
-msgstr ""
+msgstr "“for ”"
 
 #: src/ch17-05-traits-for-async.md:176 src/ch17-05-traits-for-async.md:503
 msgid "\"you\""
-msgstr ""
+msgstr "\"you\""
 
 #: src/ch17-05-traits-for-async.md:195
 msgid ""
@@ -222,6 +271,10 @@ msgid ""
 "treat each of the anonymous futures produced by these types as the same "
 "type, because all of them implement the `Future` trait."
 msgstr ""
+"我们将每个未来时态都封装在一个 `Box` 中，从而将其转化为 _特质对象_，就像我们"
+"在第12章的“从 `run` 返回错误”部分所做的那样。（我们将在第18章中详细讨论特质对"
+"象。）使用特质对象可以让我们将这些类型产生的匿名未来时态视为同一种类型，因为"
+"所有这些未来时态都实现了 `Future` 特质。"
 
 #: src/ch17-05-traits-for-async.md:201
 msgid ""
@@ -232,6 +285,10 @@ msgid ""
 "can’t put two different handwritten structs in a `Vec`, you can’t mix "
 "compiler-generated enums."
 msgstr ""
+"这可能会让人感到惊讶。毕竟，所有的异步块都不会返回任何值，因此每个异步块都会"
+"产生一个 `Future<Output = ()>`。不过，请记住 `Future` 是一个特质，而且编译器"
+"会为每个异步块生成唯一的枚举类型，即使它们的输出类型相同。就像你不能将两个不"
+"同的结构体放入 `Vec` 中一样，你也不能混合使用编译器生成的枚举类型。"
 
 #: src/ch17-05-traits-for-async.md:208
 msgid ""
@@ -239,6 +296,8 @@ msgid ""
 "await the result. However, this doesn’t compile; here’s the relevant part of "
 "the error messages."
 msgstr ""
+"然后，我们将这些未来函数的集合传递给 `trpl::join_all` 函数，并等待结果。然"
+"而，这无法编译；以下是错误信息的相关部分。"
 
 #: src/ch17-05-traits-for-async.md:218
 msgid ""
@@ -266,6 +325,29 @@ msgid ""
 "   |        ^^^^^^ required by this bound in `JoinAll`\n"
 "```"
 msgstr ""
+"```text\n"
+"error[E0277]: `dyn Future<Output = ()>` cannot be unpinned\n"
+"  --> src/main.rs:48:33\n"
+"   |\n"
+"48 |         trpl::join_all(futures).await;\n"
+"   |                                 ^^^^^ the trait `Unpin` is not "
+"implemented for `dyn Future<Output = ()>`\n"
+"   |\n"
+"   = note: consider using the `pin!` macro\n"
+"           consider using `Box::pin` if you need to access the pinned value "
+"outside of the current scope\n"
+"   = note: required for `Box<dyn Future<Output = ()>>` to implement "
+"`Future`\n"
+"note: required by a bound in `futures_util::future::join_all::JoinAll`\n"
+"  --> file:///home/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/"
+"futures-util-0.3.30/src/future/join_all.rs:29:8\n"
+"   |\n"
+"27 | pub struct JoinAll<F>\n"
+"   |            ------- required by a bound in this struct\n"
+"28 | where\n"
+"29 |     F: Future,\n"
+"   |        ^^^^^^ required by this bound in `JoinAll`\n"
+"```"
 
 #: src/ch17-05-traits-for-async.md:238
 msgid ""
@@ -275,6 +357,10 @@ msgid ""
 "pinning is required because `dyn Future<Output = ()>` needs to implement the "
 "`Unpin` trait and it currently does not."
 msgstr ""
+"这条错误信息提示我们，应该使用 `pin!` 宏来固定这些值。这意味着需要将这些值放"
+"在 `Pin` 类型中，这样就能确保这些值在内存中不会被移动。错误信息指出，需要固定"
+"这些值是因为 `dyn Future<Output = ()>` 需要实现 `Unpin` 特性，而目前它还没有"
+"实现这一特性。"
 
 #: src/ch17-05-traits-for-async.md:244
 msgid ""
@@ -283,6 +369,9 @@ msgid ""
 "trait. Directly awaiting a future with `await` pins the future implicitly. "
 "That’s why we don’t need to use `pin!` everywhere we want to await futures."
 msgstr ""
+"函数 `trpl::join_all` 返回一个名为 `JoinAll` 的结构体。该结构体是一个泛型结"
+"构，其类型 `F` 被约束为必须实现 `Future` 特性。该函数还会隐式地等待一个带有 "
+"`await` 的将来时态。因此，我们不需要在需要等待将来时态的地方到处使用 `pin!`。"
 
 #: src/ch17-05-traits-for-async.md:249
 msgid ""
@@ -293,6 +382,10 @@ msgid ""
 "`Future` only if the `T` it wraps is a future that implements the `Unpin` "
 "trait."
 msgstr ""
+"不过，我们并不是直接等待未来的某个时间点。相反，我们通过将一系列未来时态对象"
+"传递给 `join_all` 函数，来构造一个新的未来时态对象 JoinAll。对于 `join_all` "
+"函数的签名要求，集合中的各个项目的类型都必须实现 `Future` 特质；而 `Box<T>` "
+"特质则只有在它所包裹的未来时态对象实现了 `Unpin` 特质的情况下才会被实现。"
 
 #: src/ch17-05-traits-for-async.md:255
 msgid ""
@@ -300,10 +393,12 @@ msgid ""
 "into how the `Future` trait actually works, in particular around pinning. "
 "Look again at the definition of the `Future` trait:"
 msgstr ""
+"这确实有很多需要理解的！为了真正理解它，让我们进一步探讨一下 `Future` trait "
+"的实际工作原理，特别是关于固定功能的部分。再看一下 `Future` trait 的定义："
 
 #: src/ch17-05-traits-for-async.md:266
 msgid "// Required method\n"
-msgstr ""
+msgstr "// 所需的方法\n"
 
 #: src/ch17-05-traits-for-async.md:271
 msgid ""
@@ -316,10 +411,15 @@ msgid ""
 "annotation for `self` works like type annotations for other function "
 "parameters but with two key differences:"
 msgstr ""
+"参数 `cx` 及其类型 `Context`，是运行时如何在实际中判断何时需要检查某个未来的"
+"关键所在，同时还能保持惰性。再次强调，其具体实现细节超出了本章的讨论范围，通"
+"常只有在编写自定义 `Future` 实现时才需要关注这一点。我们接下来将重点讨论 "
+"`self` 的类型，因为这是我们第一次看到 `self` 具有类型注释的方法。 `self` 的类"
+"型注释与其他函数参数的类型注释类似，但有两个关键区别："
 
 #: src/ch17-05-traits-for-async.md:280
 msgid "It tells Rust what type `self` must be for the method to be called."
-msgstr ""
+msgstr "它告诉Rust，为了使该方法能够被调用，类型必须满足 `self` 的条件。"
 
 #: src/ch17-05-traits-for-async.md:281
 msgid ""
@@ -327,6 +427,8 @@ msgid ""
 "is implemented, a reference or smart pointer to that type, or a `Pin` "
 "wrapping a reference to that type."
 msgstr ""
+"这个类型不能随便选择，而是仅限于实现该方法的类型本身，或者是对该类型的引用或"
+"智能指针，或者是一个包装了该类型引用的 `Pin`。"
 
 #: src/ch17-05-traits-for-async.md:285
 msgid ""
@@ -335,6 +437,9 @@ msgid ""
 "whether it is `Pending` or `Ready(Output)`, we need a `Pin`\\-wrapped "
 "mutable reference to the type."
 msgstr ""
+"我们将在 [Chapter 18](ch18-00-oop.html)<!-- ignore --> 中进一步了解这种语法。"
+"目前，我们只需要知道，如果我们想要查询一个未来值，以检查它是否为 `Pending` "
+"或 `Ready(Output)`，我们需要一个 `Pin` 包裹的可变引用来指向该类型。"
 
 #: src/ch17-05-traits-for-async.md:290
 msgid ""
@@ -346,6 +451,11 @@ msgid ""
 "it’s purely a tool the compiler can use to enforce constraints on pointer "
 "usage."
 msgstr ""
+"`Pin`是一种用于指针类型（如 `&`、`&mut`、`Box` 和 `Rc`）的封装工具。从技术上"
+"讲，`Pin`可以处理那些实现了 `Deref` 或 `DerefMut` 特性的类型，但实际上这等同"
+"于仅使用引用和智能指针来处理这些类型。`Pin`本身并不是一种指针，也没有像 `Rc` "
+"和 `Arc` 那样通过引用计数来维护自身状态；它纯粹是编译器用来强制约束指针使用的"
+"工具而已。"
 
 #: src/ch17-05-traits-for-async.md:297
 msgid ""
@@ -354,6 +464,10 @@ msgid ""
 "not `Pin`. So how exactly does `Pin` relate to `Unpin`, and why does "
 "`Future` need `self` to be in a `Pin` type to call `poll`?"
 msgstr ""
+"回想一下， `await` 是通过调用 `poll` 来实现的，这正好解释了我们之前看到的错误"
+"信息。不过，这里使用的是 `Unpin`，而不是 `Pin`。那么， `Pin` 究竟与 `Unpin` "
+"有什么关系呢？另外，为什么 `Future` 需要 `self` 处于 `Pin` 的类型中，才能调"
+"用 `poll` 呢？"
 
 #: src/ch17-05-traits-for-async.md:302
 msgid ""
@@ -367,6 +481,12 @@ msgid ""
 "be used in that section of the source code, whether by taking ownership of "
 "that data or by getting a mutable or immutable reference to it."
 msgstr ""
+"请记住，在本章前面的内容中提到过，一系列在异步代码中的`await`操作会被编译成一"
+"个状态机。编译器会确保该状态机遵循Rust中所有关于安全性的规则，包括借用和所有"
+"权方面的规则。为了实现这一点，Rust会分析在从一个`await`点到下一个`await`点或"
+"者异步代码块的末尾之间需要哪些数据。然后，Rust会在编译后的状态机中创建相应的"
+"状态。每个状态都会获得访问该部分代码中使用的数据的权限，这可以通过获取该数据"
+"的所有权，或者获得对该数据的可变或不可变引用来实现。"
 
 #: src/ch17-05-traits-for-async.md:312
 msgid ""
@@ -375,6 +495,9 @@ msgid ""
 "move around the future that corresponds to that block—like moving it into a "
 "`Vec` to pass to `join_all`—things get trickier."
 msgstr ""
+"到目前为止，一切正常：如果我们对某个异步块中的所有权或引用处理不当，借用检查"
+"器会给出提示。但是，当我们想要移动与那个块相对应的未来时——比如将其移动到 "
+"`Vec` 中，然后再传递给 `join_all`——情况就变得复杂了。"
 
 #: src/ch17-05-traits-for-async.md:317
 msgid ""
@@ -385,6 +508,10 @@ msgid ""
 "references to themselves in the fields of any given variant, as shown in the "
 "simplified illustration in Figure 17-4."
 msgstr ""
+"当我们移动一个未来值时——无论是将其放入数据结构中作为迭代器使用，还是将其从函"
+"数中返回——这实际上意味着移动 Rust 为我们创建的状态机。与 Rust 中的大多数其他"
+"类型不同，Rust 为异步块创建的未来值可能会在任何给定变体的字段中包含对自身的引"
+"用，如图 17-4 中的简化示意图所示。"
 
 #: src/ch17-05-traits-for-async.md:331
 msgid ""
@@ -397,6 +524,11 @@ msgid ""
 "important—thing, the computer is now free to reuse that memory for other "
 "purposes! You could end up reading completely unrelated data later."
 msgstr ""
+"不过，默认情况下，任何包含对自身引用的对象都是不可移动的，因为引用始终指向它"
+"们所引用的实际内存地址（参见图17-5）。如果你移动了数据结构本身，那么这些内部"
+"引用仍然会指向旧的位置。然而，那个内存地址现在已经无效了。一方面，当你对数据"
+"结构进行更改时，该地址的值不会得到更新。另一方面，更重要的是，计算机现在可以"
+"重新使用那块内存用于其他目的！之后你可能会读到完全无关的数据。"
 
 #: src/ch17-05-traits-for-async.md:348
 msgid ""
@@ -408,6 +540,10 @@ msgid ""
 "Rust’s borrow checker is for: in safe code, it prevents you from moving any "
 "item with an active reference to it."
 msgstr ""
+"理论上，Rust编译器可以在对象被移动时尝试更新所有对其的引用。但这可能会带来大"
+"量的性能开销，尤其是当需要更新大量的引用时。如果我们能够确保所涉及的数据结构"
+"在内存中不会移动，那么我们就无需更新任何引用了。这正是Rust的借用检查器的作"
+"用：在安全的代码中，它可以防止你移动有任何带有活动引用的对象。"
 
 #: src/ch17-05-traits-for-async.md:356
 msgid ""
@@ -416,6 +552,10 @@ msgid ""
 "Thus, if you have `Pin<Box<SomeType>>`, you actually pin the `SomeType` "
 "value, _not_ the `Box` pointer. Figure 17-6 illustrates this process."
 msgstr ""
+"`Pin` 在此基础上，为我们提供了所需的精确保障。当我们通过将指向某个值的指针包"
+"装在 `Pin` 中，来“固定”该值时，该指针就无法再移动了。因此，如果你拥有 "
+"`Pin<Box<SomeType>>`，那么你实际上固定的是 `SomeType` 的值，而不是 `Box` 的指"
+"针。图17-6展示了这一过程。"
 
 #: src/ch17-05-traits-for-async.md:369
 msgid ""
@@ -427,6 +567,11 @@ msgid ""
 "work out how you’d do this with a `Pin` wrapping a `Box`.) The key is that "
 "the self-referential type itself cannot move, because it is still pinned."
 msgstr ""
+"实际上，`Box`指针仍然可以自由移动。记住：我们关注的是确保最终被引用的数据保持"
+"不动。如果指针移动了，但它所指向的数据仍然位于同一个位置，就像图17-7所示，就"
+"不会出现任何问题。（作为一个独立的练习，可以查阅相关类型的文档以及`std::pin`"
+"模块，试着思考如何用`Pin`包裹`Box`来实现这一点。）关键在于，自引用类型本身不"
+"能移动，因为它仍然被固定住了。"
 
 #: src/ch17-05-traits-for-async.md:385
 msgid ""
@@ -442,6 +587,14 @@ msgid ""
 "that it’s fine to move items around in cases like this—and that’s where "
 "`Unpin` comes into play."
 msgstr ""
+"不过，大多数类型在移动时都是完全安全的，即使它们位于 `Pin` 指针之后。我们只有"
+"在遇到内部引用时才会需要考虑固定这些类型。像数字和布尔值这样的基本值是非常安"
+"全的，因为它们显然没有任何内部引用。在 Rust 中，大多数你常用的类型也是安全"
+"的。例如，你可以自由移动 `Vec`，无需担心任何问题。根据我们目前所见的情况，如"
+"果你有一个 `Pin<Vec<String>>`，那么你只能通过 `Pin` 提供的安全但有限制的 API "
+"来进行操作，尽管如果没有其他引用存在的话， `Vec<String>` 总是可以安全移动的。"
+"我们需要一种方式来告诉编译器，在这种情况下移动这些类型是完全可以的——这就是 "
+"`Unpin` 发挥作用的地方。"
 
 #: src/ch17-05-traits-for-async.md:397
 msgid ""
@@ -452,6 +605,10 @@ msgid ""
 "type does _not_ need to uphold any guarantees about whether the value in "
 "question can be safely moved."
 msgstr ""
+"`Unpin` 是一种标记特质，类似于我们在第16章中看到的 `Send` 和 `Sync` 特质。因"
+"此，它本身并没有任何功能。标记特质的存在只是为了告诉编译器，在特定上下文中使"
+"用实现了某个特质的类型是安全的。而 `Unpin` 则告诉编译器，某个类型**不需要**提"
+"供任何关于所讨论的值是否可以安全移动的保证。"
 
 #: src/ch17-05-traits-for-async.md:410
 msgid ""
@@ -463,6 +620,11 @@ msgid ""
 "_does_ need to uphold those guarantees to be safe whenever a pointer to that "
 "type is used in a `Pin`."
 msgstr ""
+"就像 `Send` 和 `Sync` 一样，编译器会自动为所有能够证明其安全的类型实现 "
+"`Unpin`。另一个特殊情况，类似于 `Send` 和 `Sync`，就是对于某些类型，无法实现 "
+"`Unpin`。这种情况的表示方法是 <code>impl !Unpin，用于 <em>SomeType</em></"
+"code>。而 <code><em>SomeType</em></code> 则指的是那种在 `Pin` 中使用指向该类"
+"型的指针时，必须确保安全的类型。"
 
 #: src/ch17-05-traits-for-async.md:417
 msgid ""
@@ -472,6 +634,10 @@ msgid ""
 "_only_ matters when you’re using a pinned pointer to that type like "
 "<code>Pin\\<&mut <em>SomeType</em>\\></code>."
 msgstr ""
+"换句话说，关于 `Pin` 和 `Unpin` 之间的关系，有两点需要注意。首先， `Unpin` "
+"是“正常”的情况，而 `!Unpin` 则是特殊情况。其次，当使用指向该类型的固定指针"
+"时，比如 <code>Pin<&mut<em>SomeType</em>></code>，那么类型是否实现了 `Unpin` "
+"或 `!Unpin` _仅_ 这一点的表现就变得非常重要了。"
 
 #: src/ch17-05-traits-for-async.md:423
 msgid ""
@@ -480,6 +646,9 @@ msgid ""
 "in Figure 17-8. However, `String` automatically implements `Unpin`, as do "
 "most other types in Rust."
 msgstr ""
+"具体来说，想象一下 `String`：它有一个长度，以及构成它的 Unicode 字符。我们可"
+"以像图 17-8 中所示，将 `String` 包裹在 `Pin` 中。然而， `String` 会自动实现 "
+"`Unpin` 的功能，Rust 中的大多数其他类型也是如此。"
 
 #: src/ch17-05-traits-for-async.md:436
 msgid ""
@@ -490,6 +659,10 @@ msgid ""
 "move around. That is precisely why it implements `Unpin` rather than `!"
 "Unpin`."
 msgstr ""
+"因此，我们可以执行那些如果由 `String` 实现的话就会被视为非法的操作。例如，可"
+"以在内存中完全相同的位置替换两个字符串，就像在图17-9中那样。这样做并不违反 "
+"`Pin` 的契约，因为 `String` 没有内部引用，因此无法被随意移动。这正是它采用 "
+"`Unpin` 而不是 `!Unpin` 的原因。"
 
 #: src/ch17-05-traits-for-async.md:450
 msgid ""
@@ -503,12 +676,20 @@ msgid ""
 "`pin!` macro where each of the three futures are defined and adjusting the "
 "trait object type."
 msgstr ""
+"现在我们已经了解到了关于 Listing 17-23 中那个 `join_all` 调用的错误。我们最初"
+"试图将异步块产生的未来值移动到 `Vec<Box<dyn Future<Output = ()>>>` 中，但正如"
+"我们所见，这些未来值可能包含内部引用，因此它们不会自动实现 `Unpin` 的功能。一"
+"旦我们将这些未来值固定下来，我们就可以将得到的 `Pin` 类型传递给 `Vec`，并且可"
+"以确信这些未来值中的底层数据不会被移动。Listing 17-24 展示了如何通过调用 "
+"`pin!` 宏来修复代码，该宏定义了三个未来值，并调整了 trait 对象类型。"
 
 #: src/ch17-05-traits-for-async.md:522
 msgid ""
 "This example now compiles and runs, and we could add or remove futures from "
 "the vector at runtime and join them all."
 msgstr ""
+"这个示例现在可以编译并运行了。我们可以在运行时向向量中添加或删除未来元素，然"
+"后将它们全部连接在一起。"
 
 #: src/ch17-05-traits-for-async.md:525
 msgid ""
@@ -517,6 +698,9 @@ msgid ""
 "code. When you see these traits in error messages, though, now you’ll have a "
 "better idea of how to fix your code!"
 msgstr ""
+"`Pin` 和 `Unpin` 主要用于构建底层库，或者当你在构建运行时本身时，而不是用于日"
+"常 Rust 代码编写。不过，当你在错误信息中看到这些特性时，你就更清楚如何修复你"
+"的代码了！"
 
 #: src/ch17-05-traits-for-async.md:530
 msgid ""
@@ -526,6 +710,9 @@ msgid ""
 "up most commonly in async Rust today, but every once in a while, you might "
 "see them in other contexts, too."
 msgstr ""
+"注意：这种 `Pin` 和 `Unpin` 的组合使得在 Rust 中安全地实现一系列复杂的类型成"
+"为可能。这些类型本身具有自引用特性，因此很难实现。需要 `Pin` 的类型在如今的异"
+"步 Rust 中最为常见，不过偶尔也会在其他上下文中出现。"
 
 #: src/ch17-05-traits-for-async.md:536
 msgid ""
@@ -533,6 +720,8 @@ msgid ""
 "to uphold, are covered extensively in the API documentation for `std::pin`, "
 "so if you’re interested in learning more, that’s a great place to start."
 msgstr ""
+"`Pin` 和 `Unpin` 的具体工作原理以及它们必须遵守的规则，都在 `std::pin` 的 "
+"API 文档中有详细说明。如果你有兴趣了解更多，那将是很好的起点。"
 
 #: src/ch17-05-traits-for-async.md:540
 msgid ""
@@ -543,10 +732,15 @@ msgid ""
 "[_Asynchronous Programming in Rust_](https://rust-lang.github.io/async-"
 "book/)."
 msgstr ""
+"如果你想要更详细地了解这些机制的工作原理，可以参考 [2](https://rust-lang."
+"github.io/async-book/02_execution/01_chapter.html)<!-- ignore --> 和 [4]"
+"(https://rust-lang.github.io/async-book/04_pinning/01_chapter.html)<!-- "
+"ignore --> 章节，以及 [_Asynchronous Programming in Rust_](https://rust-lang."
+"github.io/async-book/)的相关内容。"
 
 #: src/ch17-05-traits-for-async.md:545
 msgid "The `Stream` Trait"
-msgstr ""
+msgstr "特性 `Stream`"
 
 #: src/ch17-05-traits-for-async.md:547
 msgid ""
@@ -557,6 +751,11 @@ msgid ""
 "library as of this writing, but there _is_ a very common definition from the "
 "`futures` crate used throughout the ecosystem."
 msgstr ""
+"既然您已经更深入地了解了 `Future`、 `Pin` 和 `Unpin` 这些特质，那么我们可以把"
+"注意力转向 `Stream` 这个特质。正如您在本章前面所学到的，流与异步迭代器类似。"
+"不过，与 `Iterator` 和 `Future` 不同，截至本文撰写时， `Stream` 在标准库中并"
+"没有明确定义。但是， `futures` 这个包中有一个非常常见的定义，它被整个生态系统"
+"所采用。"
 
 #: src/ch17-05-traits-for-async.md:554
 msgid ""
@@ -568,6 +767,12 @@ msgid ""
 "that become ready over time, we define a `Stream` trait that puts those "
 "features together:"
 msgstr ""
+"在探讨如何将一个 `Stream` 特质与 `Iterator` 特质进行合并之前，我们先来回顾一"
+"下 `Iterator` 和 `Future` 特质的定义。从 `Iterator` 特质出发，我们得到了序列"
+"的概念：其 `next` 方法提供了一个 `Option<Self::Item>`。而从 `Future` 特质出"
+"发，我们得到了随时间逐渐准备好的概念：其 `poll` 方法提供了一个 `Poll<Self::"
+"Output>`。为了表示一系列随时间逐渐准备好的项目，我们定义了一个 `Stream` 特"
+"质，它将这些特性整合在一起。"
 
 #: src/ch17-05-traits-for-async.md:576
 msgid ""
@@ -576,6 +781,9 @@ msgid ""
 "may be zero to many items, and unlike `Future`, where there is always a "
 "single `Output`, even if it’s the unit type `()`."
 msgstr ""
+"`Stream` 这个特征定义了一个名为 `Item` 的相关类型，该类型用于描述由该流产生的"
+"项目的类型。这与 `Iterator` 类似，后者可能包含零个到多个项目；而 `Future` 则"
+"不同，因为 `Future` 总是包含一个单一的 `Output`，即使该类型是单位类型 `()`。"
 
 #: src/ch17-05-traits-for-async.md:581
 msgid ""
@@ -587,6 +795,11 @@ msgid ""
 "`Option`, because it needs to signal whether there are more messages, just "
 "as an iterator does."
 msgstr ""
+"`Stream`还定义了一个用于获取这些项的方法。我们将其称为`poll_next`，以便明确它"
+"采用与`Future::poll`相同的方式进行轮询，并且以与`Iterator::next`相同的方式生"
+"成一系列项。它的返回类型结合了`Poll`和`Option`的特点。外部类型是`Poll`，因为"
+"需要像检查未来值一样来确认其是否准备好。内部类型则是`Option`，因为它需要像迭"
+"代器那样来指示是否还有更多消息需要处理。"
 
 #: src/ch17-05-traits-for-async.md:589
 msgid ""
@@ -595,6 +808,9 @@ msgid ""
 "runtimes, so you can rely on it, and everything we cover next should "
 "generally apply!"
 msgstr ""
+"与这个定义非常相似的内容很可能会成为 Rust 标准库的一部分。与此同时，它也是大"
+"多数运行时工具集的一部分，因此你可以放心使用它。接下来我们介绍的内容通常都是"
+"适用的！"
 
 #: src/ch17-05-traits-for-async.md:593
 msgid ""
@@ -607,10 +823,16 @@ msgid ""
 "method. Using `await` is much nicer, though, and the `StreamExt` trait "
 "supplies the `next` method so we can do just that:"
 msgstr ""
+"在我们在 [“Streams: Futures in Sequence”](ch17-04-streams.html)<!--ignore --"
+"> 这一节中看到的例子中，我们并没有使用 `poll_next` 或 `Stream`，而是使用了 "
+"`next` 和 `StreamExt`。当然，我们也可以直接通过手写自己的 `Stream` 状态机来使"
+"用 `poll_next` API，或者直接使用 futures 的 `poll` 方法。不过，使用 `await` "
+"会更方便，而且 `StreamExt` 特质提供了 `next` 方法，这样我们就可以直接使用它"
+"了。"
 
 #: src/ch17-05-traits-for-async.md:618
 msgid "// other methods...\n"
-msgstr ""
+msgstr "// 其他方法...\n"
 
 #: src/ch17-05-traits-for-async.md:627
 msgid ""
@@ -618,6 +840,8 @@ msgid ""
 "different than this, because it supports versions of Rust that did not yet "
 "support using async functions in traits. As a result, it looks like this:"
 msgstr ""
+"注意：我们在本章前面使用的定义与现在的定义略有不同，因为当时的版本还不支持在"
+"特质中使用异步函数。因此，当时的定义是这样的："
 
 #: src/ch17-05-traits-for-async.md:635
 msgid ""
@@ -625,6 +849,8 @@ msgid ""
 "name the lifetime of the reference to `self` with `Next<'_, Self>`, so that "
 "`await` can work with this method."
 msgstr ""
+"而 `Next` 这种类型实际上实现了 `struct`，并且允许我们使用 `Future` 来命名对 "
+"`self` 的引用生命周期，从而让 `await` 能够使用这种方法。"
 
 #: src/ch17-05-traits-for-async.md:639
 msgid ""
@@ -634,6 +860,9 @@ msgid ""
 "to enable the community to iterate on convenience APIs without affecting the "
 "foundational trait."
 msgstr ""
+"`StreamExt` 这个特质也是所有与流相关的有趣方法的所在地。 `StreamExt` 会自动为"
+"每一个实现了 `Stream` 的类型而存在，但这些特质是分开定义的，目的是让社区能够"
+"在不影响基础特质的情况下，不断改进便捷的应用程序接口。"
 
 #: src/ch17-05-traits-for-async.md:645
 msgid ""
@@ -644,6 +873,10 @@ msgid ""
 "you _only_ have to implement `Stream`, and then anyone who uses your data "
 "type can use `StreamExt` and its methods with it automatically."
 msgstr ""
+"在 `trpl`  crate 中使用的 `StreamExt` 版本中，该 trait 不仅定义了 `next` 方"
+"法，还提供了 `next` 的默认实现，该实现能够正确处理调用 `Stream::poll_next` 的"
+"细节。这意味着，即使你需要自己编写流式数据类型的实现，也只需要实现 `Stream`，"
+"那么使用你定义的数据类型的任何人都可以自动地使用 `StreamExt` 及其方法。"
 
 #: src/ch17-05-traits-for-async.md:652
 msgid ""
@@ -651,3 +884,5 @@ msgid ""
 "To wrap up, let’s consider how futures (including streams), tasks, and "
 "threads all fit together!"
 msgstr ""
+"这就是我们关于这些特性中较低级别细节的全部内容了。最后，让我们来探讨一下未来"
+"（包括流）、任务以及线程是如何协同工作的！"

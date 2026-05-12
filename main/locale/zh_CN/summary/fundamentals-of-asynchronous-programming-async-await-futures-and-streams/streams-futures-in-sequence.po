@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch17-04-streams.md:3
 msgid "<a id=\"streams\"></a>"
-msgstr ""
+msgstr "<a id=\"streams\"></a>"
 
 #: src/ch17-04-streams.md:5
 msgid "Streams: Futures in Sequence"
@@ -35,6 +35,15 @@ msgid ""
 "running operations, or throttle user interface events to avoid doing "
 "needless work."
 msgstr ""
+"请回想一下，在本章的 [“Message Passing”](ch17-02-concurrency-with-async."
+"html#message-passing)<!-- ignore --> 部分中，我们是如何使用接收器来处理异步通"
+"道的。异步`recv`方法会随时间产生一系列数据项。这实际上是一种更为通用的模式，"
+"被称为“流”。许多概念都可以自然地以流的形式来表示：数据项在队列中依次被处理，"
+"当完整的数据集过大而无法存储在计算机内存中时，数据会分批从文件系统中获取，或"
+"者数据会通过网络随时间逐渐传输过来。由于流本质上是未来，因此我们可以将流与其"
+"他类型的未来进行结合，以创造有趣的效果。例如，我们可以批量处理事件，从而避免"
+"触发过多的网络调用；为长时间运行的操作设置超时时间；或者限制用户界面事件的触"
+"发频率，以避免不必要的操作。"
 
 #: src/ch17-04-streams.md:19
 msgid ""
@@ -53,6 +62,13 @@ msgid ""
 "broader: it provides the next item the way `Iterator` does, but "
 "asynchronously."
 msgstr ""
+"我们在第13章中讨论过Iterator trait时提到过一些内容，不过迭代器和异步通道接收"
+"器之间确实存在两个关键区别。第一个区别是时间上的差异：迭代器是同步的，而通道"
+"接收器则是异步的。第二个区别是API的设计差异。当直接处理 `Iterator` 时，我们调"
+"用的是其同步的 `next` 方法。而针对 `trpl::Receiver` 流，我们则调用了异步的 "
+"`recv` 方法。除此之外，这些API在功能上非常相似，这种相似性并非偶然。流其实是"
+"一种异步的迭代方式。虽然 `trpl::Receiver` 会专门等待接收消息，但通用流API的功"
+"能要广泛得多：它像 `Iterator` 一样提供下一个元素，但采用的是异步方式。"
 
 #: src/ch17-04-streams.md:32
 msgid ""
@@ -61,14 +77,17 @@ msgid ""
 "stream by calling its `next` method and then awaiting the output, as in "
 "Listing 17-21, which won’t compile yet."
 msgstr ""
+"在Rust中，迭代器和流之间的相似性意味着我们实际上可以从任何迭代器创建一个流。"
+"与迭代器一样，我们可以通过调用流的 `next` 方法来处理流，然后等待输出结果，就"
+"像在Listing 17-21中所做的那样。不过，目前这个代码还无法编译。"
 
 #: src/ch17-04-streams.md:40 src/ch17-04-streams.md:114
 msgid "// required for mdbook test\n"
-msgstr ""
+msgstr "// mdbook 测试所需的\n"
 
 #: src/ch17-04-streams.md:49 src/ch17-04-streams.md:126
 msgid "\"The value was: {value}\""
-msgstr ""
+msgstr "\"The value of x is: {value}\""
 
 #: src/ch17-04-streams.md:57
 msgid ""
@@ -77,12 +96,17 @@ msgid ""
 "stream using the `trpl::stream_from_iter` function. Next, we loop over the "
 "items in the stream as they arrive with the `while let` loop."
 msgstr ""
+"我们首先从一个数字数组开始，将其转换为迭代器，然后调用 `map` 函数来将所有数值"
+"翻倍。之后，我们使用 `trpl::stream_from_iter` 函数将迭代器转换为流。接下来，"
+"通过 `while let` 循环来遍历流中的各项元素。"
 
 #: src/ch17-04-streams.md:62
 msgid ""
 "Unfortunately, when we try to run the code, it doesn’t compile but instead "
 "reports that there’s no `next` method available:"
 msgstr ""
+"不幸的是，当我们尝试运行这段代码时，它无法编译，反而显示没有 `next` 这个方法"
+"的存在:"
 
 #: src/ch17-04-streams.md:95
 msgid ""
@@ -92,6 +116,10 @@ msgid ""
 "but it’s actually `StreamExt`. Short for _extension_, `Ext` is a common "
 "pattern in the Rust community for extending one trait with another."
 msgstr ""
+"正如这个输出所解释的，编译器出现错误的原因是，我们需要在作用域中使用正确的特"
+"质，才能使用 `next` 方法。根据我们目前的讨论，你可能会认为该特质应该是 "
+"`Stream`，但实际上它是 `StreamExt`。 `Ext` 是 _扩展_ 的缩写，在 Rust 社区中，"
+"这是一种常用的方法，用于通过一个特质来扩展另一个特质。"
 
 #: src/ch17-04-streams.md:101
 msgid ""
@@ -102,12 +130,19 @@ msgid ""
 "and `StreamExt` are not yet part of Rust’s standard library, but most "
 "ecosystem crates use similar definitions."
 msgstr ""
+"`Stream` trait 定义了一个低级别的接口，实际上结合了`Iterator`和`Future` trait"
+"的功能。`StreamExt`则提供了更高级别的API，这些API建立在`Stream`的基础上，包括"
+"`next`方法以及其他类似于`Iterator` trait所提供的实用方法。`Stream`和"
+"`StreamExt`目前尚未成为Rust标准库的一部分，但大多数生态系统库都采用了类似的定"
+"义。"
 
 #: src/ch17-04-streams.md:108
 msgid ""
 "The fix to the compiler error is to add a `use` statement for `trpl::"
 "StreamExt`, as in Listing 17-22."
 msgstr ""
+"解决编译错误的方法是在`trpl::StreamExt`语句中添加一个 `use`语句，如清单17-22"
+"所示。"
 
 #: src/ch17-04-streams.md:121
 msgid "// --snip--\n"
@@ -121,3 +156,6 @@ msgid ""
 "more, now that we have `StreamExt` in scope, we can use all of its utility "
 "methods, just as with iterators."
 msgstr ""
+"将所有这些部分组合在一起后，这段代码就按照我们的预期运行了！此外，现在我们已"
+"经在作用域中获得了 `StreamExt`，因此我们可以像使用迭代器一样使用它的所有实用"
+"方法。"

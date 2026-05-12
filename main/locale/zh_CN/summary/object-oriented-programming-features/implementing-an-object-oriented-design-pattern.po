@@ -24,6 +24,10 @@ msgid ""
 "post struct that has a field to hold its state, which will be a state object "
 "from the set “draft,” “review,” or “published.”"
 msgstr ""
+"_状态模式_是一种面向对象的设计模式。该模式的核心思想是我们定义了一个值可以拥"
+"有的状态集合。这些状态由一组_状态对象_来表示，值的的行为会根据其状态而变化。"
+"我们将通过一个博客文章结构的例子来详细说明这一模式，该结构包含一个字段来保存"
+"其状态，这个状态可以是“草稿”、“评审中”或“已发布”中的任何一种状态对象。"
 
 #: src/ch18-03-oo-design-patterns.md:10
 msgid ""
@@ -33,6 +37,9 @@ msgid ""
 "into another state. The value that holds a state object knows nothing about "
 "the different behavior of the states or when to transition between states."
 msgstr ""
+"这些状态对象具有共同的功能：在Rust中，我们通常使用结构体和技术特性，而不是对"
+"象和继承机制。每个状态对象都负责自己的行为，并负责决定何时切换到另一个状态。"
+"持有状态对象的值对状态的不同行为或何时在状态之间转换一无所知。"
 
 #: src/ch18-03-oo-design-patterns.md:16
 msgid ""
@@ -42,6 +49,9 @@ msgid ""
 "update the code inside one of the state objects to change its rules or "
 "perhaps add more state objects."
 msgstr ""
+"使用状态模式的优势在于，当程序的业务需求发生变化时，我们不需要修改持有状态的"
+"代码或使用该值的代码。我们只需要更新其中一个状态对象内部的代码，以改变其规"
+"则，或者可能增加更多的状态对象。"
 
 #: src/ch18-03-oo-design-patterns.md:22
 msgid ""
@@ -50,28 +60,32 @@ msgid ""
 "in Rust. Let’s dig in to incrementally implement a blog post workflow using "
 "the state pattern."
 msgstr ""
+"首先，我们将以更传统的面向对象方式来实现状态模式。然后，我们将在 Rust 中使用"
+"一种更自然的方法。让我们逐步使用状态模式来实现一篇博客文章的工作流程。"
 
 #: src/ch18-03-oo-design-patterns.md:27
 msgid "The final functionality will look like this:"
-msgstr ""
+msgstr "最终的功能将如下所示："
 
 #: src/ch18-03-oo-design-patterns.md:29
 msgid "A blog post starts as an empty draft."
-msgstr ""
+msgstr "一篇博客文章最初是一个空白的草稿。"
 
 #: src/ch18-03-oo-design-patterns.md:30
 msgid "When the draft is done, a review of the post is requested."
-msgstr ""
+msgstr "当草稿完成后，会请求对文章进行评审。"
 
 #: src/ch18-03-oo-design-patterns.md:31
 msgid "When the post is approved, it gets published."
-msgstr ""
+msgstr "当文章获得批准后，它就会被发布。"
 
 #: src/ch18-03-oo-design-patterns.md:32
 msgid ""
 "Only published blog posts return content to print so that unapproved posts "
 "can’t accidentally be published."
 msgstr ""
+"只有已发布的博客文章才会将内容返回到打印状态，这样那些未获批准的文章就不会意"
+"外地被发布。"
 
 #: src/ch18-03-oo-design-patterns.md:35
 msgid ""
@@ -79,14 +93,16 @@ msgid ""
 "we try to approve a draft blog post before we’ve requested a review, the "
 "post should remain an unpublished draft."
 msgstr ""
+"对帖子进行的任何其他修改都不会产生效果。例如，如果我们试图在请求审核之前就批"
+"准一篇草稿博客文章，那么该文章应该仍然是一个未发布的草稿。"
 
 #: src/ch18-03-oo-design-patterns.md:41
 msgid "<a id=\"a-traditional-object-oriented-attempt\"></a>"
-msgstr ""
+msgstr "<a id=\"a-traditional-object-oriented-attempt\"></a>"
 
 #: src/ch18-03-oo-design-patterns.md:43
 msgid "Attempting Traditional Object-Oriented Style"
-msgstr ""
+msgstr "尝试传统的面向对象风格"
 
 #: src/ch18-03-oo-design-patterns.md:45
 msgid ""
@@ -100,6 +116,11 @@ msgid ""
 "the trade-offs of designing Rust code differently than code in other "
 "languages."
 msgstr ""
+"解决同一个问题，有多种不同的代码结构方式，每种方式都有不同的权衡。本节的实现"
+"采用了传统的面向对象风格，这种风格在 Rust 中也是可以实现的，但并没有充分利用 "
+"Rust 的一些优势。稍后，我们将展示另一种解决方案，该方案仍然使用面向对象的设计"
+"模式，但其结构可能不太适合那些有面向对象编程经验的程序员。我们将对比这两种解"
+"决方案，以体验以不同于其他语言编写 Rust 代码所带来的权衡。"
 
 #: src/ch18-03-oo-design-patterns.md:54
 msgid ""
@@ -107,19 +128,22 @@ msgid ""
 "the API we’ll implement in a library crate named `blog`. This won’t compile "
 "yet because we haven’t implemented the `blog` crate."
 msgstr ""
+"清单18-11展示了这一工作流程的编码形式：这是我们将在名为 `blog` 的库 crate 中"
+"实现的 API 的一个使用示例。目前该代码还无法编译，因为我们还没有实现 `blog` 这"
+"个 crate。"
 
 #: src/ch18-03-oo-design-patterns.md:66 src/ch18-03-oo-design-patterns.md:73
 #: src/ch18-03-oo-design-patterns.md:788 src/ch18-03-oo-design-patterns.md:795
 #: src/ch18-03-oo-design-patterns.md:951 src/ch18-03-oo-design-patterns.md:957
 msgid "\"I ate a salad for lunch today\""
-msgstr ""
+msgstr "“今天我吃了一块食用午餐的沙滩”"
 
 #: src/ch18-03-oo-design-patterns.md:67 src/ch18-03-oo-design-patterns.md:70
 #: src/ch18-03-oo-design-patterns.md:244 src/ch18-03-oo-design-patterns.md:292
 #: src/ch18-03-oo-design-patterns.md:400 src/ch18-03-oo-design-patterns.md:630
 #: src/ch18-03-oo-design-patterns.md:789 src/ch18-03-oo-design-patterns.md:792
 msgid "\"\""
-msgstr ""
+msgstr "\"\""
 
 #: src/ch18-03-oo-design-patterns.md:79
 msgid ""
@@ -131,6 +155,11 @@ msgid ""
 "that a draft blog post returns an empty string from the `content` method, "
 "but we’re not going to write tests for this example."
 msgstr ""
+"我们希望允许用户使用 `Post::new` 创建一个新的草稿博客文章。我们还希望允许向博"
+"客文章中添加文本。如果我们试图在文章获得批准之前立即获取其内容，那么我们应该"
+"不会得到任何文本，因为文章仍然只是草稿状态。我们在代码中添加了 `assert_eq!` "
+"用于演示目的。一个很好的单元测试方法就是断言草稿博客文章在 `content` 方法中返"
+"回空字符串，但我们不会为这个例子编写测试。"
 
 #: src/ch18-03-oo-design-patterns.md:87
 msgid ""
@@ -139,6 +168,9 @@ msgid ""
 "post receives approval, it should get published, meaning the text of the "
 "post will be returned when `content` is called."
 msgstr ""
+"接下来，我们希望启用对帖子的审核请求，并且希望在等待审核期间，`content` 返回"
+"空字符串。当帖子获得批准时，它应该被发布，这意味着当调用 `content` 时，将会返"
+"回帖子的文本。"
 
 #: src/ch18-03-oo-design-patterns.md:92
 msgid ""
@@ -152,15 +184,21 @@ msgid ""
 "users can’t make a mistake with the states, such as publishing a post before "
 "it’s reviewed."
 msgstr ""
+"请注意，我们从这个包中唯一交互的类型是 `Post` 类型。这个类型将使用状态模式，"
+"并持有一个值，该值将代表帖子可能处于的三种状态之一——草稿、审核中或已发布。从"
+"一种状态切换到另一种状态将在 `Post` 类型内部进行内部管理。这些状态会根据库的"
+"用户对 `Post` 实例调用的方法而发生变化，但它们不必直接管理这些状态的变化。此"
+"外，用户不会在状态方面犯错，例如在未审核的情况下就发布帖子。"
 
 #: src/ch18-03-oo-design-patterns.md:103
 msgid ""
 "<a id=\"defining-post-and-creating-a-new-instance-in-the-draft-state\"></a>"
 msgstr ""
+"<a id=\"defining-post-and-creating-a-new-instance-in-the-draft-state\"></a>"
 
 #: src/ch18-03-oo-design-patterns.md:105
 msgid "Defining `Post` and Creating a New Instance"
-msgstr ""
+msgstr "定义 `Post` 并创建一个新的实例"
 
 #: src/ch18-03-oo-design-patterns.md:107
 msgid ""
@@ -171,6 +209,10 @@ msgid ""
 "`State` trait that will define the behavior that all state objects for a "
 "`Post` must have."
 msgstr ""
+"让我们开始实现这个库吧！我们知道我们需要一个公开的结构体，用来存储一些内容，"
+"因此我们将从定义这个结构体开始，并附带一个公开的函数，用来创建一个结构体实"
+"例，如清单18-12所示。我们还将创建一个私有的特质，用来定义所有状态对象必须具备"
+"的行为。"
 
 #: src/ch18-03-oo-design-patterns.md:114
 msgid ""
@@ -178,6 +220,9 @@ msgid ""
 "`Option<T>` in a private field named `state` to hold the state object. "
 "You’ll see why the `Option<T>` is necessary in a bit."
 msgstr ""
+"那么， `Post` 将在一个名为 `state` 的私有字段中保存 `Box<dyn State>` 的 "
+"trait 对象，该对象将用于保存状态对象。稍后你会明白为什么 `Option<T>` 是必需"
+"的。"
 
 #: src/ch18-03-oo-design-patterns.md:144
 msgid ""
@@ -187,6 +232,10 @@ msgid ""
 "methods, and we’ll start by defining just the `Draft` state because that is "
 "the state we want a post to start in."
 msgstr ""
+"The `State` trait定义了不同帖子状态共有的行为。状态对象分别为 `Draft`、 "
+"`PendingReview` 和 `Published`，它们都将实现 `State` trait。目前，这个trait还"
+"没有任何方法，我们将首先定义 `Draft` 状态，因为这就是我们希望帖子开始所处的状"
+"态。"
 
 #: src/ch18-03-oo-design-patterns.md:150
 msgid ""
@@ -197,10 +246,15 @@ msgid ""
 "way to create a `Post` in any other state! In the `Post::new` function, we "
 "set the `content` field to a new, empty `String`."
 msgstr ""
+"当我们创建一个新的 `Post` 时，我们会将其 `state` 字段设置为一个 `Some` 值，该"
+"值会保持 `Box` 状态。这个 `Box` 指向一个新的 `Draft` 结构实例。这样，每当我们"
+"创建一个新的 `Post` 实例时，它都会以草稿状态开始。由于 `Post` 的 `state` 字段"
+"是私有的，因此无法以其他状态创建 `Post`！在 `Post::new` 函数中，我们将 "
+"`content` 字段设置为一个新的、空的 `String`。"
 
 #: src/ch18-03-oo-design-patterns.md:157
 msgid "Storing the Text of the Post Content"
-msgstr ""
+msgstr "存储帖子内容文本"
 
 #: src/ch18-03-oo-design-patterns.md:159
 msgid ""
@@ -212,6 +266,11 @@ msgid ""
 "pretty straightforward, so let’s add the implementation in Listing 18-13 to "
 "the `impl Post` block."
 msgstr ""
+"我们在 Listing 18-11 中看到，我们希望能够调用一个名为 `add_text` 的方法，并传"
+"递一个 `&str` 参数，该参数将被作为博客帖子的文本内容。我们通过定义一个方法来"
+"实现这一功能，而不是将 `content` 字段暴露为 `pub`。这样，之后我们可以实现一个"
+"方法来控制 `content` 字段的数据如何被读取。`add_text` 方法非常简单，因此让我"
+"们在 Listing 18-13 中添加该方法的实现到 `impl Post` 块中。"
 
 #: src/ch18-03-oo-design-patterns.md:176 src/ch18-03-oo-design-patterns.md:231
 #: src/ch18-03-oo-design-patterns.md:279 src/ch18-03-oo-design-patterns.md:387
@@ -234,14 +293,19 @@ msgid ""
 "interact with the `state` field at all, but it is part of the behavior we "
 "want to support."
 msgstr ""
+"该方法接受一个可变的引用到 `self`，因为我们正在修改在 `add_text` 上调用的 "
+"`Post` 实例。然后我们在 `String` 中调用 `push_str`，并将 `text` 参数传递给 "
+"add 函数，以添加到保存的 `content` 中。这种行为并不依赖于帖子的状态，因此它不"
+"属于状态模式的一部分。 `add_text` 方法根本不与 `state` 字段交互，但它是我们想"
+"要支持的行为的一部分。"
 
 #: src/ch18-03-oo-design-patterns.md:208
 msgid "<a id=\"ensuring-the-content-of-a-draft-post-is-empty\"></a>"
-msgstr ""
+msgstr "<a id=\"ensuring-the-content-of-a-draft-post-is-empty\"></a>"
 
 #: src/ch18-03-oo-design-patterns.md:210
 msgid "Ensuring That the Content of a Draft Post Is Empty"
-msgstr ""
+msgstr "确保草稿帖子内容为空"
 
 #: src/ch18-03-oo-design-patterns.md:212
 msgid ""
@@ -255,22 +319,32 @@ msgid ""
 "in the draft state, so the post content should always be empty. Listing "
 "18-14 shows this placeholder implementation."
 msgstr ""
+"即使我们调用了 `add_text` 并向我们的帖子添加了一些内容，我们仍然希望 "
+"`content` 方法返回一个空字符串切片，因为帖子仍处于草稿状态，正如清单 18-11 中"
+"的第一个 `assert_eq!` 所示。目前，让我们用最简单的方式来实现 `content` 方法："
+"始终返回一个空字符串切片。一旦我们能够改变帖子的状态以便发布，我们就会修改这"
+"一点。到目前为止，帖子只能处于草稿状态，因此帖子内容应该始终为空。清单 18-14 "
+"展示了这个占位符实现。"
 
 #: src/ch18-03-oo-design-patterns.md:257
 msgid ""
 "With this added `content` method, everything in Listing 18-11 through the "
 "first `assert_eq!` works as intended."
 msgstr ""
+"通过添加这个 `content` 方法，列表 18-11 中从第一个 `assert_eq!` 开始的所有内"
+"容都能按照预期正常工作。"
 
 #: src/ch18-03-oo-design-patterns.md:262
 msgid ""
 "<a id=\"requesting-a-review-of-the-post-changes-its-state\"></a> <a "
 "id=\"requesting-a-review-changes-the-posts-state\"></a>"
 msgstr ""
+"<a id=\"requesting-a-review-of-the-post-changes-its-state\"></a> <a "
+"id=\"requesting-a-review-changes-the-posts-state\"></a>"
 
 #: src/ch18-03-oo-design-patterns.md:265
 msgid "Requesting a Review, Which Changes the Post’s State"
-msgstr ""
+msgstr "请求审核，这将改变帖子的状态"
 
 #: src/ch18-03-oo-design-patterns.md:267
 msgid ""
@@ -278,6 +352,8 @@ msgid ""
 "should change its state from `Draft` to `PendingReview`. Listing 18-15 shows "
 "this code."
 msgstr ""
+"接下来，我们需要添加功能来请求对帖子的审核，这将使帖子的状态从 `Draft` 变为 "
+"`PendingReview`。列表 18-15 展示了这一代码。"
 
 #: src/ch18-03-oo-design-patterns.md:325
 msgid ""
@@ -286,6 +362,10 @@ msgid ""
 "method on the current state of `Post`, and this second `request_review` "
 "method consumes the current state and returns a new state."
 msgstr ""
+"我们为 `Post` 提供了一个名为 `request_review` 的公共方法，该方法接受一个可变"
+"的引用到 `self`。然后，我们在 `Post` 的当前状态下调用一个内部的 "
+"`request_review` 方法，这个第二个 `request_review` 方法消耗当前的状态并返回一"
+"个新状态。"
 
 #: src/ch18-03-oo-design-patterns.md:330
 msgid ""
@@ -297,6 +377,12 @@ msgid ""
 "takes ownership of `Box<Self>`, invalidating the old state so that the state "
 "value of the `Post` can transform into a new state."
 msgstr ""
+"我们将 `State` 特性添加了一个 `request_review` 方法；所有实现了该特性的类型现"
+"在都需要实现 `request_review` 方法。  \n"
+"请注意，该方法的第一参数不再是 `self`、 `&self` 或 `&mut self`，而是 `self: "
+"Box<Self>`。这种语法意味着，只有当该类型被赋值给 `Box` 时，该方法才有效。这种"
+"语法会接管 `Box<Self>`，从而使旧的状态失效，使得 `Post` 的状态值能够转换为新"
+"的状态。"
 
 #: src/ch18-03-oo-design-patterns.md:338
 msgid ""
@@ -308,6 +394,11 @@ msgid ""
 "`state` value out of `Post` rather than borrowing it. Then, we’ll set the "
 "post’s `state` value to the result of this operation."
 msgstr ""
+"为了消耗旧的状态， `request_review` 方法需要获取该状态的值。这就是 `state` 字"
+"段中的 `Post` 发挥作用的地方：我们调用 `take` 方法来从 `state` 字段中提取 "
+"`Some` 值，并保留 `None` 在原位置。因为 Rust 不允许在结构体中存在未初始化的字"
+"段。这样，我们就可以将 `state` 值从 `Post` 中移出，而不是借用它。然后，我们"
+"将 post 的 `Option`0⊃ 值设置为这个操作的结果。"
 
 #: src/ch18-03-oo-design-patterns.md:346
 msgid ""
@@ -316,6 +407,9 @@ msgid ""
 "of the `state` value. This ensures that `Post` can’t use the old `state` "
 "value after we’ve transformed it into a new state."
 msgstr ""
+"我们需要暂时将 `state` 设置为 `None`，而不是直接使用像 `self.state = self."
+"state.request_review();` 这样的代码来获取 `state` 的值。这样做可以确保在我们"
+"将其转换为新状态之后， `Post` 无法使用旧的 `state` 值。"
 
 #: src/ch18-03-oo-design-patterns.md:351
 msgid ""
@@ -326,6 +420,11 @@ msgid ""
 "returns itself because when we request a review on a post already in the "
 "`PendingReview` state, it should stay in the `PendingReview` state."
 msgstr ""
+"方法 `request_review` 在 `Draft` 中返回一个新的、被装箱的 `PendingReview` 结"
+"构实例，该实例表示帖子等待审核时的状态。 `PendingReview` 结构实现了 "
+"`request_review` 方法，但并没有进行任何转换。相反，它返回自身，因为当我们请求"
+"对已经处于 `PendingReview` 状态的帖子进行审核时，该帖子应该保持 "
+"`PendingReview` 状态。"
 
 #: src/ch18-03-oo-design-patterns.md:358
 msgid ""
@@ -333,6 +432,8 @@ msgid ""
 "`request_review` method on `Post` is the same no matter its `state` value. "
 "Each state is responsible for its own rules."
 msgstr ""
+"现在我们可以开始看到状态模式的优势了：无论 `state` 的值为何，`Post` 上的 "
+"⊃`request_review` 方法都是相同的。每个状态都负责自己的规则。"
 
 #: src/ch18-03-oo-design-patterns.md:362
 msgid ""
@@ -341,16 +442,22 @@ msgid ""
 "the `Draft` state, but we want the same behavior in the `PendingReview` "
 "state. Listing 18-11 now works up to the second `assert_eq!` call!"
 msgstr ""
+"我们将保持 `Post` 中的 `content` 方法不变，该方法返回一个空字符串。现在，我们"
+"可以在 `PendingReview` 状态和 `Draft` 状态中都有一个 `Post`，但我们希望在 "
+"`PendingReview` 状态中也能实现同样的行为。现在，列表 18-11 可以正常工作，直到"
+"第二次调用 `assert_eq!`！"
 
 #: src/ch18-03-oo-design-patterns.md:369
 msgid ""
 "<a id=\"adding-the-approve-method-that-changes-the-behavior-of-content\"></"
 "a> <a id=\"adding-approve-to-change-the-behavior-of-content\"></a>"
 msgstr ""
+"<a id=\"adding-the-approve-method-that-changes-the-behavior-of-content\"></"
+"a> <a id=\"adding-approve-to-change-the-behavior-of-content\"></a>"
 
 #: src/ch18-03-oo-design-patterns.md:372
 msgid "Adding `approve` to Change `content`'s Behavior"
-msgstr ""
+msgstr "添加 `approve` 以改变 `content` 的行为"
 
 #: src/ch18-03-oo-design-patterns.md:374
 msgid ""
@@ -358,12 +465,16 @@ msgid ""
 "set `state` to the value that the current state says it should have when "
 "that state is approved, as shown in Listing 18-16."
 msgstr ""
+"The `approve`方法将与 `request_review`方法类似：它会将 `state`设置为当前状态"
+"在获得批准时应该具有的值，如清单18-16所示。"
 
 #: src/ch18-03-oo-design-patterns.md:462
 msgid ""
 "We add the `approve` method to the `State` trait and add a new struct that "
 "implements `State`, the `Published` state."
 msgstr ""
+"我们将 `State` 特性中的 `approve` 方法添加进来，并创建了一个新的结构体来实现 "
+"`State`，以及 `Published` 状态。"
 
 #: src/ch18-03-oo-design-patterns.md:465
 msgid ""
@@ -375,6 +486,12 @@ msgid ""
 "`approve` method, it returns itself because the post should stay in the "
 "`Published` state in those cases."
 msgstr ""
+"类似于 `request_review` 在 `PendingReview` 中的工作方式，如果我们调用 "
+"`approve` 方法在 `Draft` 上，它将没有任何效果，因为 `approve` 会返回 `self`。"
+"当我们调用 `approve` 在 `PendingReview` 上时，它会返回一个新的、封装的 "
+"`Published` 结构实例。`Published` 结构实现了 `State` 特征，对于 "
+"`request_review` 方法和 `approve` 方法，它都会返回自身，因为在这些情况下，状"
+"态应该保持在 `Published` 状态中。"
 
 #: src/ch18-03-oo-design-patterns.md:473
 msgid ""
@@ -383,6 +500,9 @@ msgid ""
 "we’re going to have the `Post` delegate to a `content` method defined on its "
 "`state`, as shown in Listing 18-17."
 msgstr ""
+"现在我们需要更新 `Post` 上的 `content` 方法。我们希望 `content` 返回的值依赖"
+"于 `Post` 的当前状态，因此我们将让 `Post` 委托执行在其 `state` 上定义的 "
+"`content` 方法，如清单 18-17 所示。"
 
 #: src/ch18-03-oo-design-patterns.md:561
 msgid ""
@@ -391,6 +511,9 @@ msgid ""
 "pass the post instance (that is, `self`) as an argument. Then, we return the "
 "value that’s returned from using the `content` method on the `state` value."
 msgstr ""
+"因为我们的目标是将所有这些规则保留在实现了 `State` 的结构中，所以我们会在 "
+"`state` 中的值上调用一个 `content` 方法，并将 `self` 作为该方法的参数。然后，"
+"我们返回在 `state` 值上使用 `content` 方法所得到的返回值。"
 
 #: src/ch18-03-oo-design-patterns.md:566
 msgid ""
@@ -401,6 +524,10 @@ msgid ""
 "get an error because we can’t move `state` out of the borrowed `&self` of "
 "the function parameter."
 msgstr ""
+"我们调用 `Option` 上的 `as_ref` 方法，是因为我们希望获得对 `Option` 中值的引"
+"用，而不是对该值的所有权。因为 `state` 是一个 `Option<Box<dyn State>>`，当我"
+"们调用 `as_ref` 时，会返回一个 `Option<&Box<dyn State>>`。如果我们不调用 "
+"`as_ref`，就会出错，因为我们无法将 `state` 移出函数参数所借用的 `&self`。"
 
 #: src/ch18-03-oo-design-patterns.md:572
 msgid ""
@@ -413,6 +540,12 @@ msgid ""
 "value is never possible, even though the compiler isn’t able to understand "
 "that."
 msgstr ""
+"然后我们调用 `unwrap` 方法，我们知道这个方法永远不会引发 panic，因为我们知道 "
+"`Post` 上的方法可以确保，当那些方法执行完毕时， `state` 总是会包含一个 "
+"`Some` 值。这是我们在第9章的 [“When You Have More Information Than the "
+"Compiler”](ch09-03-to-panic-or-not-to-panic.html#cases-in-which-you-have-"
+"more-information-than-the-compiler)<!-- ignore --> 部分讨论的情况之一，当时我"
+"们知道一个 `None` 值是不可能存在的，尽管编译器无法理解这一点。"
 
 #: src/ch18-03-oo-design-patterns.md:580
 msgid ""
@@ -423,6 +556,10 @@ msgid ""
 "and that is where we’ll put the logic for what content to return depending "
 "on which state we have, as shown in Listing 18-18."
 msgstr ""
+"此时，当我们对 `&Box<dyn State>` 调用 `content` 时，去引用强制操作将在 `&` "
+"和 `Box` 上生效，这样 `content` 方法最终就会在实现了 `State` trait 的类型上被"
+"调用。这意味着我们需要向 `State` trait 定义中添加 `content`，并且我们将在这里"
+"编写逻辑，来决定根据我们所拥有的状态返回什么内容，如清单 18-18 所示。"
 
 #: src/ch18-03-oo-design-patterns.md:680
 msgid ""
@@ -434,6 +571,11 @@ msgid ""
 "the `Post` is blurring the lines between the responsibility of `State` and "
 "the responsibility of `Post`."
 msgstr ""
+"我们为 `content` 方法添加了一个默认实现，该实现返回一个空的字符串切片。这意味"
+"着我们不需要在 `Draft` 和 `PendingReview` 结构体中实现 `content` 方法。"
+"`Published` 结构体将覆盖 `content` 方法，并返回 `post.content` 中的值。虽然这"
+"样做很方便，但让 `content` 方法来决定 `State` 的内容，实际上模糊了 `State` "
+"和 `Post` 之间的职责划分。"
 
 #: src/ch18-03-oo-design-patterns.md:688
 msgid ""
@@ -442,6 +584,9 @@ msgid ""
 "returning a reference to part of that `post`, so the lifetime of the "
 "returned reference is related to the lifetime of the `post` argument."
 msgstr ""
+"请注意，正如我们在第10章中讨论的那样，这个方法需要生命周期注释。我们接受一个 "
+"`post` 类型的引用作为参数，并返回一个 `post` 类型引用的部分，因此返回引用的生"
+"命周期与 `post` 参数的生命周期相关联。"
 
 #: src/ch18-03-oo-design-patterns.md:693
 msgid ""
@@ -450,10 +595,13 @@ msgid ""
 "rules lives in the state objects rather than being scattered throughout "
 "`Post`."
 msgstr ""
+"我们完成了——现在 Listing 18-11 中的所有内容都运行正常了！我们已经按照博客文章"
+"工作流程的规则实现了状态模式。与规则相关的逻辑存储在状态对象中，而不是分散在 "
+"`Post` 中。"
 
 #: src/ch18-03-oo-design-patterns.md:697
 msgid "Why Not An Enum?"
-msgstr ""
+msgstr "为什么不使用枚举？"
 
 #: src/ch18-03-oo-design-patterns.md:699
 msgid ""
@@ -464,14 +612,18 @@ msgid ""
 "need a `match` expression or similar to handle every possible variant. This "
 "could get more repetitive than this trait object solution."
 msgstr ""
+"你可能想知道为什么我们没有使用枚举来表示不同的状态。这确实是一个可能的解决方"
+"案；你可以尝试一下，然后比较最终的结果，看看哪个方案更适合你！使用枚举的一个"
+"缺点是，每个需要检查枚举值的位置都需要一个类似 `match` 的表达式来处理每一个可"
+"能的状态。这可能会比使用特征对象解决方案更加重复。"
 
 #: src/ch18-03-oo-design-patterns.md:708
 msgid "<a id=\"trade-offs-of-the-state-pattern\"></a>"
-msgstr ""
+msgstr "<a id=\"trade-offs-of-the-state-pattern\"></a>"
 
 #: src/ch18-03-oo-design-patterns.md:710
 msgid "Evaluating the State Pattern"
-msgstr ""
+msgstr "评估状态模式"
 
 #: src/ch18-03-oo-design-patterns.md:712
 msgid ""
@@ -482,6 +634,10 @@ msgid ""
 "to know the different ways a published post can behave: the implementation "
 "of the `State` trait on the `Published` struct."
 msgstr ""
+"我们已经证明了Rust能够实现面向对象的状态模式，从而将帖子在不同状态下的各种行"
+"为封装起来。`Post` trait上的方法并不了解这些行为的细节。由于我们的代码组织方"
+"式，我们只需要在一个地方就能了解发布后的帖子可能表现出的各种行为：即在"
+"`Published` struct上的`State` trait的实现。"
 
 #: src/ch18-03-oo-design-patterns.md:719
 msgid ""
@@ -492,6 +648,9 @@ msgid ""
 "places to understand all the implications of a post being in the published "
 "state."
 msgstr ""
+"如果我们创建一个不使用状态模式的替代实现，我们可能会在 `Post` 的方法中使用 "
+"`match` 表达式，甚至在 `main` 代码中检查帖子的状态，并在这些地方改变行为。这"
+"意味着我们需要查看多个地方，以理解帖子处于已发布状态所带来的所有影响。"
 
 #: src/ch18-03-oo-design-patterns.md:725
 msgid ""
@@ -500,6 +659,9 @@ msgid ""
 "to add a new struct and implement the trait methods on that one struct in "
 "one location."
 msgstr ""
+"使用状态模式时，`Post`方法和我们使用`Post`的地方不需要`match`表达式。要添加一"
+"个新的状态，我们只需要在一个地方添加一个新的结构体，并在该结构体上实现相关的"
+"特征方法。"
 
 #: src/ch18-03-oo-design-patterns.md:729
 msgid ""
@@ -507,18 +669,21 @@ msgid ""
 "functionality. To see the simplicity of maintaining code that uses the state "
 "pattern, try a few of these suggestions:"
 msgstr ""
+"使用状态模式来实现功能很容易扩展，从而添加更多功能。为了体验使用状态模式维护"
+"代码的简单性，可以试试以下建议："
 
 #: src/ch18-03-oo-design-patterns.md:733
 msgid ""
 "Add a `reject` method that changes the post’s state from `PendingReview` "
 "back to `Draft`."
 msgstr ""
+"添加一个 `reject` 方法，将帖子的状态从 `PendingReview` 更改为 `Draft`。"
 
 #: src/ch18-03-oo-design-patterns.md:735
 msgid ""
 "Require two calls to `approve` before the state can be changed to "
 "`Published`."
-msgstr ""
+msgstr "在状态可以更改为 `Published` 之前，需要调用两次 `approve`。"
 
 #: src/ch18-03-oo-design-patterns.md:736
 msgid ""
@@ -526,6 +691,8 @@ msgid ""
 "Hint: have the state object responsible for what might change about the "
 "content but not responsible for modifying the `Post`."
 msgstr ""
+"仅当帖子处于 `Draft` 状态时，才允许用户添加文本内容。提示：让负责处理内容变化"
+"的状态对象负责处理内容，但不负责修改 `Post`。"
 
 #: src/ch18-03-oo-design-patterns.md:740
 msgid ""
@@ -537,6 +704,11 @@ msgid ""
 "didn’t need to change with the addition of a new state, but that would mean "
 "switching to another design pattern."
 msgstr ""
+"状态模式的一个缺点是，由于各个状态实现了状态之间的转换，因此有些状态是相互关"
+"联的。如果我们再在 `PendingReview` 和 `Published` 之间添加另一个状态，比如 "
+"`Scheduled`，那么我们就不得不修改 `PendingReview` 中的代码，使其转换为 "
+"`Scheduled`。如果 `PendingReview` 在添加新状态后不需要进行任何修改的话，那么"
+"工作量会少一些，但这意味着我们需要切换到另一种设计模式。"
 
 #: src/ch18-03-oo-design-patterns.md:748
 msgid ""
@@ -548,6 +720,11 @@ msgid ""
 "return type isn’t known at compile time. (This is one of the dyn "
 "compatibility rules mentioned earlier.)"
 msgstr ""
+"另一个缺点是，我们重复了一些逻辑。为了消除这些重复，我们可能会尝试为 `State` "
+"特质上的`request_review` 和 `approve` 方法实现返回 `self` 的默认实现。然而，"
+"这样做是行不通的：当使用 `State` 作为特质对象时，该特质无法知道具体的 `self` "
+"会是什么，因此返回类型在编译时是不确定的。（这是之前提到的动态兼容性规则之"
+"一。）"
 
 #: src/ch18-03-oo-design-patterns.md:756
 msgid ""
@@ -560,6 +737,12 @@ msgid ""
 "eliminate the repetition (see the [“Macros”](ch20-05-macros.html#macros)<!-- "
 "ignore --> section in Chapter 20)."
 msgstr ""
+"其他重复包括在 `Post` 上对 `request_review` 和 `approve` 方法的类似实现。这两"
+"种方法都使用 `Option::take` 与 `Post` 的 `state` 字段，如果 `state` 是 "
+"`Some`，那么它们会委托给包装值的相同方法的实现，并将新值的 `state` 字段设置为"
+"该结果。如果我们有很多遵循这种模式的 `Post` 方法，我们可能会考虑定义一个宏来"
+"消除重复（参见第20章中的 [“Macros”](ch20-05-macros.html#macros)<!-- ignore --"
+"> 部分）。"
 
 #: src/ch18-03-oo-design-patterns.md:764
 msgid ""
@@ -568,10 +751,13 @@ msgid ""
 "as we could. Let’s look at some changes we can make to the `blog` crate that "
 "can make invalid states and transitions into compile-time errors."
 msgstr ""
+"通过严格按照面向对象语言的规范来实施状态模式，我们并没有充分利用 Rust 的优"
+"势。让我们来看看我们可以对 `blog` 这个库进行的一些修改，这些修改可以将无效的"
+"状态和转换转化为编译时错误。"
 
 #: src/ch18-03-oo-design-patterns.md:769
 msgid "Encoding States and Behavior as Types"
-msgstr ""
+msgstr "将编码状态和行为视为类型"
 
 #: src/ch18-03-oo-design-patterns.md:771
 msgid ""
@@ -582,10 +768,14 @@ msgid ""
 "attempts to use draft posts where only published posts are allowed by "
 "issuing a compiler error."
 msgstr ""
+"我们将向您展示如何重新思考状态模式，以获得不同的权衡。与其将状态和转换完全封"
+"装起来，使得外部代码无法了解它们，不如将状态编码为不同类型的对象。这样一来，"
+"Rust的类型检查系统将通过发出编译错误来阻止尝试使用只有已发布文章才被允许的草"
+"稿文章。"
 
 #: src/ch18-03-oo-design-patterns.md:778
 msgid "Let’s consider the first part of `main` in Listing 18-11:"
-msgstr ""
+msgstr "让我们来看一下清单18-11中 `main` 的第一部分："
 
 #: src/ch18-03-oo-design-patterns.md:801
 msgid ""
@@ -599,6 +789,12 @@ msgid ""
 "because that code won’t even compile. Listing 18-19 shows the definition of "
 "a `Post` struct and a `DraftPost` struct, as well as methods on each."
 msgstr ""
+"我们仍然允许在草稿状态下创建新帖子，使用 `Post::new` 方法。同时，我们还可以向"
+"帖子的内容中添加文本。不过，与草稿帖子相关的 `content` 方法将不再返回空字符"
+"串，而是根本不存在。这样一来，如果我们尝试获取草稿帖子的内容，将会出现编译器"
+"错误，提示该方法是不存在的。因此，在生产环境中，我们不可能不小心显示草稿帖子"
+"的内容，因为这样的代码根本无法编译。清单 18-19 展示了 `Post` 结构体和 "
+"`DraftPost` 结构体的定义，以及它们各自的方法。"
 
 #: src/ch18-03-oo-design-patterns.md:843
 msgid ""
@@ -608,6 +804,10 @@ msgid ""
 "The `Post` struct will represent a published post, and it has a `content` "
 "method that returns the `content`."
 msgstr ""
+"Both `Post` 和 `DraftPost` 结构体都有一个私有的 `content` 字段，用于存储博客"
+"文章文本。由于我们将状态的编码转移到了结构体的类型中，所以这些结构体不再拥有 "
+"`state` 字段。 `Post` 结构体将代表已发布的文章，并且它有一个 `content` 方法，"
+"该方法返回 `content`。"
 
 #: src/ch18-03-oo-design-patterns.md:849
 msgid ""
@@ -616,6 +816,9 @@ msgid ""
 "private and there aren’t any functions that return `Post`, it’s not possible "
 "to create an instance of `Post` right now."
 msgstr ""
+"我们仍然有一个 `Post::new` 函数，但它返回的不是 `Post` 的实例，而是 "
+"`DraftPost` 的实例。由于 `content` 是私有的，而且没有函数能够返回 `Post`，因"
+"此目前无法创建 `Post` 的实例。"
 
 #: src/ch18-03-oo-design-patterns.md:854
 msgid ""
@@ -625,12 +828,18 @@ msgid ""
 "posts, and draft posts don’t have their content available for display. Any "
 "attempt to get around these constraints will result in a compiler error."
 msgstr ""
+"这个 `DraftPost` 结构体有一个 `add_text` 方法，因此我们可以像以前一样向 "
+"`content` 中添加文本。但请注意， `DraftPost` 并没有定义 `content` 方法！所以"
+"现在程序确保所有帖子都以草稿状态开始，而草稿帖子的内容无法被显示。任何试图绕"
+"过这些限制的行为都会导致编译器错误。"
 
 #: src/ch18-03-oo-design-patterns.md:862
 msgid ""
 "<a id=\"implementing-transitions-as-transformations-into-different-types\"></"
 "a>"
 msgstr ""
+"<a id=\"implementing-transitions-as-transformations-into-different-types\"></"
+"a>"
 
 #: src/ch18-03-oo-design-patterns.md:864
 msgid ""
@@ -642,6 +851,11 @@ msgid ""
 "`PendingReviewPost` and defining an `approve` method on `PendingReviewPost` "
 "to return a `Post`, as shown in Listing 18-20."
 msgstr ""
+"那么，我们如何获得一篇已发布的帖子呢？我们希望实施这样的规则：一个草稿帖子在"
+"发布之前必须经过审核和批准。处于待审核状态的帖子仍然不应该显示任何内容。我们"
+"可以通过添加另一个结构体 `PendingReviewPost` 来实现这些约束，同时定义 "
+"`DraftPost` 上的 `request_review` 方法以返回 `PendingReviewPost`，并定义 "
+"`PendingReviewPost` 上的 `approve` 方法以返回 `Post`，如清单 18-20 所示。"
 
 #: src/ch18-03-oo-design-patterns.md:923
 msgid ""
@@ -658,6 +872,14 @@ msgid ""
 "on a `DraftPost`, we’ve now encoded the blog post workflow into the type "
 "system."
 msgstr ""
+"`request_review`和`approve`方法会接管`self`的所有权，从而消耗`DraftPost`和"
+"`PendingReviewPost`的实例，并将它们分别转换为`PendingReviewPost`和已发布的"
+"`Post`。这样一来，在调用`request_review`之后，就不会有任何剩余的`DraftPost`实"
+"例存在了。`PendingReviewPost`结构并没有定义任何`content`方法，因此尝试读取其"
+"内容会导致编译器错误，就像`DraftPost`一样。因为要获得一个具有`content`方法的"
+"已发布的`Post`实例，唯一的办法就是在`PendingReviewPost`上调用`approve`方法；"
+"而要获得一个`PendingReviewPost`，唯一的办法就是在`DraftPost`上调用"
+"`request_review`方法。现在，我们已经将博客文章的工作流程编码到了类型系统中。"
 
 #: src/ch18-03-oo-design-patterns.md:935
 msgid ""
@@ -669,6 +891,11 @@ msgid ""
 "them: We can’t compile code that tries to use the content of posts in those "
 "states any longer. The updated code in `main` is shown in Listing 18-21."
 msgstr ""
+"但是，我们也需要对 `main` 进行一些小的修改。`request_review` 和 `approve` 方"
+"法返回的是新的实例，而不是修改被调用的结构体，因此我们需要添加更多的 `let "
+"post =` 阴影赋值操作来保存返回的实例。此外，我们不能再对草稿和待审核帖子的内"
+"容进行空字符串的断言检查，实际上我们也不需要这样做：我们无法再编译那些试图使"
+"用这些状态下帖子内容的代码。更新后的代码在 `main` 中展示，如清单 18-21 所示。"
 
 #: src/ch18-03-oo-design-patterns.md:963
 msgid ""
@@ -681,6 +908,11 @@ msgid ""
 "display of the content of an unpublished post, will be discovered before "
 "they make it to production."
 msgstr ""
+"我们需要对 `main` 进行的一些修改，以重新分配 `post`，这意味着这种实现不再完全"
+"遵循面向对象的状态模式：状态之间的转换不再完全封装在 `Post` 实现内部。不过，"
+"我们的好处是，由于类型系统和在编译时进行的类型检查，无效的状态现在变得不可能"
+"出现！这确保了某些错误，比如显示未发布帖子的内容，能够在它们进入生产环境之前"
+"被发现。"
 
 #: src/ch18-03-oo-design-patterns.md:971
 msgid ""
@@ -689,6 +921,9 @@ msgid ""
 "version of the code. Note that some of the tasks might be completed already "
 "in this design."
 msgstr ""
+"请尝试按照本节开头的建议，在 `blog` crate 的基础上完成任务，正如清单 18-21 中"
+"所示。这样你可以了解这个代码版本的设计效果如何。请注意，有些任务可能在这个设"
+"计中已经完成了。"
 
 #: src/ch18-03-oo-design-patterns.md:976
 msgid ""
@@ -701,6 +936,11 @@ msgid ""
 "patterns won’t always be the best solution in Rust due to certain features, "
 "like ownership, that object-oriented languages don’t have."
 msgstr ""
+"我们已经看到，尽管 Rust 能够实现面向对象的设计模式，但还有其他模式，比如将状"
+"态编码到类型系统中，这些模式在 Rust 中也是可用的。这些模式有不同的权衡。虽然"
+"你可能对面向对象模式非常熟悉，但重新思考问题以利用 Rust 的特性会带来好处，比"
+"如能够在编译时避免一些错误。由于某些特性，比如所有权机制，面向对象模式并不总"
+"是在 Rust 中最佳的解决方案。"
 
 #: src/ch18-03-oo-design-patterns.md:985
 msgid "Summary"
@@ -718,6 +958,12 @@ msgid ""
 "always be the best way to take advantage of Rust’s strengths, but it is an "
 "available option."
 msgstr ""
+"无论你在阅读了这一章之后是否认为Rust是一种面向对象的语言，你现在都知道可以使"
+"用特征对象来获取Rust中的一些面向对象特性。动态调度可以为你的代码提供一定的灵"
+"活性，但代价是牺牲了一些运行时性能。你可以利用这种灵活性来实现有助于代码可维"
+"护性的面向对象模式。Rust还拥有其他特性，比如所有权，这些特性是面向对象语言所"
+"没有的。虽然面向对象模式并不总是利用Rust优势的最佳方式，但它确实是一个可行的"
+"选择。"
 
 #: src/ch18-03-oo-design-patterns.md:997
 msgid ""
@@ -725,3 +971,6 @@ msgid ""
 "enable lots of flexibility. We’ve looked at them briefly throughout the book "
 "but haven’t seen their full capability yet. Let’s go!"
 msgstr ""
+"接下来，我们将探讨模式这一特性，它是 Rust 的另一个功能，能够提供极大的灵活"
+"性。在本书中，我们只是简要地介绍了这一特性，但还没有完全领略到它的全部能力。"
+"那么，让我们开始吧！"

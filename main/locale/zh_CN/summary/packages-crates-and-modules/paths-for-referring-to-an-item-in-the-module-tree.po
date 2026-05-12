@@ -21,10 +21,12 @@ msgid ""
 "same way we use a path when navigating a filesystem. To call a function, we "
 "need to know its path."
 msgstr ""
+"在模块树中查找某个项的位置，我们可以使用与在文件系统中导航时相同的路径方式。"
+"要调用一个函数，我们需要了解它的路径。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:7
 msgid "A path can take two forms:"
-msgstr ""
+msgstr "路径可以有两种形式："
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:9
 msgid ""
@@ -32,18 +34,24 @@ msgid ""
 "from an external crate, the absolute path begins with the crate name, and "
 "for code from the current crate, it starts with the literal `crate`."
 msgstr ""
+"绝对路径是指从 crate 根目录开始的完整路径；对于来自外部 crate 的代码，绝对路"
+"径以 crate 名称开头；而对于来自当前 crate 的代码，则以字面量 `crate` 开头。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:12
 msgid ""
 "A _relative path_ starts from the current module and uses `self`, `super`, "
 "or an identifier in the current module."
 msgstr ""
+"相对路径则从当前模块开始，使用 `self`、 `super` 或当前模块中的标识符作为路径"
+"起点。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:15
 msgid ""
 "Both absolute and relative paths are followed by one or more identifiers "
 "separated by double colons (`::`)."
 msgstr ""
+"绝对路径和相对路径后面都跟着一个或多个标识符，这些标识符之间用双冒号分隔（`::"
+"`）。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:18
 msgid ""
@@ -52,6 +60,9 @@ msgid ""
 "`add_to_waitlist` function? Listing 7-3 contains Listing 7-1 with some of "
 "the modules and functions removed."
 msgstr ""
+"回到清单7-1，假设我们想要调用`add_to_waitlist`这个函数。这相当于在问："
+"`add_to_waitlist`函数的调用路径是什么？清单7-3包含了去掉了一些模块和函数的清"
+"单7-1。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:22
 msgid ""
@@ -60,6 +71,9 @@ msgid ""
 "correct, but there’s another problem remaining that will prevent this "
 "example from compiling as is. We’ll explain why in a bit."
 msgstr ""
+"我们将展示两种从新函数`eat_at_restaurant`中调用 `add_to_waitlist` 的方法，该"
+"函数定义在 crate 的根目录中。这两种路径都是正确的，但还有一个问题存在，这会使"
+"得这个示例无法按原样编译。我们会在稍后解释原因。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:27
 msgid ""
@@ -69,18 +83,22 @@ msgid ""
 "html#exposing-paths-with-the-pub-keyword)<!-- ignore --> section, we’ll go "
 "into more detail about `pub`."
 msgstr ""
+"`eat_at_restaurant`函数是我们库公共API的一部分，因此我们使用`pub`关键字来标识"
+"它。在[“使用`pub`关键字公开路径”](ch07-03-paths-for-referring-to-an-item-in-"
+"the-module-tree.html#exposing-paths-with-the-pub-keyword)<!-- ignore -->章节"
+"中，我们将详细介绍`pub`函数。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:41
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:161
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:236
 msgid "// Absolute path\n"
-msgstr ""
+msgstr "// Absolute path\n"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:44
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:164
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:239
 msgid "// Relative path\n"
-msgstr ""
+msgstr "// Relative path\n"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:51
 msgid ""
@@ -94,6 +112,12 @@ msgid ""
 "program; using the `crate` name to start from the crate root is like using `/"
 "` to start from the filesystem root in your shell."
 msgstr ""
+"在 `eat_at_restaurant` 中首次调用 `add_to_waitlist` 函数时，我们使用绝对路"
+"径。 `add_to_waitlist` 函数定义在同一 crate 中，与 `eat_at_restaurant` 相同，"
+"因此我们可以使用 `crate` 关键字来启动绝对路径。接着，我们依次包含各个模块，直"
+"到到达 `add_to_waitlist`。你可以想象一个具有相同结构的文件系统：我们会指定 `/"
+"front_of_house/hosting/add_to_waitlist` 路径来运行 `add_to_waitlist` 程序；使"
+"用 `crate` 从 crate 根开始，就像在 shell 中使用 `/` 从文件系统根开始一样。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:60
 msgid ""
@@ -104,6 +128,10 @@ msgid ""
 "add_to_waitlist`. Starting with a module name means that the path is "
 "relative."
 msgstr ""
+"在 `eat_at_restaurant` 中第二次调用 `add_to_waitlist` 时，我们使用相对路径。"
+"该路径以 `front_of_house` 开始，这是与 `eat_at_restaurant` 处于同一模块树级别"
+"的模块的名称。在文件系统中，这相当于使用路径 `front_of_house/hosting/"
+"add_to_waitlist`。以模块名称作为起点意味着路径是相对的。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:67
 msgid ""
@@ -120,12 +148,22 @@ msgid ""
 "because it’s more likely we’ll want to move code definitions and item calls "
 "independently of each other."
 msgstr ""
+"选择使用相对路径还是绝对路径，这取决于你的项目需求。如果你更倾向于将项目定义"
+"代码与使用该代码的代码分开或合并在一起，那么就需要做出相应的选择。例如，如果"
+"我们把 `front_of_house` 模块和 `eat_at_restaurant` 函数移入到名为 "
+"`customer_experience` 的模块中，那么就需要更新绝对路径为 `add_to_waitlist`，"
+"但相对路径仍然有效。然而，如果我们把 `eat_at_restaurant` 函数单独移入到名为 "
+"`dining` 的模块中，那么调用 `add_to_waitlist` 的绝对路径保持不变，但相对路径"
+"则需要更新。一般来说，我们更倾向于使用绝对路径，因为通常情况下，我们会希望将"
+"代码定义和项目调用分开进行。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:80
 msgid ""
 "Let’s try to compile Listing 7-3 and find out why it won’t compile yet! The "
 "errors we get are shown in Listing 7-4."
 msgstr ""
+"让我们尝试编译清单7-3，看看为什么它目前无法编译！我们得到的错误信息显示在清单"
+"7-4中。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:85
 msgid ""
@@ -166,6 +204,42 @@ msgid ""
 "error: could not compile `restaurant` (lib) due to 2 previous errors\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling restaurant v0.1.0 (file:///projects/restaurant)\n"
+"error[E0603]: module `hosting` is private\n"
+" --> src/lib.rs:9:28\n"
+"  |\n"
+"9 |     crate::front_of_house::hosting::add_to_waitlist();\n"
+"  |                            ^^^^^^^  --------------- function "
+"`add_to_waitlist` is not publicly re-exported\n"
+"  |                            |\n"
+"  |                            private module\n"
+"  |\n"
+"note: the module `hosting` is defined here\n"
+" --> src/lib.rs:2:5\n"
+"  |\n"
+"2 |     mod hosting {\n"
+"  |     ^^^^^^^^^^^\n"
+"\n"
+"error[E0603]: module `hosting` is private\n"
+"  --> src/lib.rs:12:21\n"
+"   |\n"
+"12 |     front_of_house::hosting::add_to_waitlist();\n"
+"   |                     ^^^^^^^  --------------- function `add_to_waitlist` "
+"is not publicly re-exported\n"
+"   |                     |\n"
+"   |                     private module\n"
+"   |\n"
+"note: the module `hosting` is defined here\n"
+"  --> src/lib.rs:2:5\n"
+"   |\n"
+" 2 |     mod hosting {\n"
+"   |     ^^^^^^^^^^^\n"
+"\n"
+"For more information about this error, try `rustc --explain E0603`.\n"
+"error: could not compile `restaurant` (lib) due to 2 previous errors\n"
+"```"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:122
 msgid ""
@@ -177,6 +251,11 @@ msgid ""
 "you want to make an item like a function or struct private, you put it in a "
 "module."
 msgstr ""
+"错误信息显示，模块 `hosting` 是私有的。换句话说，我们已经获得了 `hosting` 模"
+"块和 `add_to_waitlist` 函数的正确路径，但由于 Rust 无法访问这些私有部分，因此"
+"无法使用它们。在 Rust 中，所有项（函数、方法、结构体、枚举、模块和常量）默认"
+"都是对父模块私有的。如果你想将一个函数或结构体等项设为私有，就需要将其放在一"
+"个模块中。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:129
 msgid ""
@@ -188,6 +267,10 @@ msgid ""
 "restaurant: What goes on in there is private to restaurant customers, but "
 "office managers can see and do everything in the restaurant they operate."
 msgstr ""
+"父模块中的项不能使用子模块内部的私有项，但子模块中的项可以使用其祖先模块中的"
+"项。这是因为子模块会隐藏其实现细节，但子模块可以了解其被定义的环境。用比喻来"
+"说，可以把这些隐私规则想象成餐厅的后台操作：后台发生的事情对餐厅顾客来说是私"
+"密的，但办公室经理可以查看并操作餐厅内的所有事务。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:137
 msgid ""
@@ -197,10 +280,14 @@ msgid ""
 "does give you the option to expose inner parts of child modules’ code to "
 "outer ancestor modules by using the `pub` keyword to make an item public."
 msgstr ""
+"Rust选择以这种方式实现模块系统，这样隐藏内部实现细节就是默认设置。这样一来，"
+"你可以知道哪些内部代码部分可以修改，而不会破坏外部代码。不过，Rust确实提供了"
+"一种选项，即使用 `pub` 关键字来将子模块的内部代码部分暴露给外部祖先模块，从而"
+"将其设为公开项。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:143
 msgid "Exposing Paths with the `pub` Keyword"
-msgstr ""
+msgstr " 使用 `pub` 关键字公开路径"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:145
 msgid ""
@@ -209,17 +296,20 @@ msgid ""
 "have access to the `add_to_waitlist` function in the child module, so we "
 "mark the `hosting` module with the `pub` keyword, as shown in Listing 7-5."
 msgstr ""
+"让我们回到清单7-4中的错误，该错误告诉我们 `hosting` 模块是私有的。我们希望父"
+"模块中的 `eat_at_restaurant` 函数能够访问子模块中的 `add_to_waitlist` 函数，"
+"因此我们使用 `pub` 关键字来标记 `hosting` 模块，如清单7-5所示。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:158
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:233
 msgid "// -- snip --\n"
-msgstr ""
+msgstr "// -- snip --\n"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:171
 msgid ""
 "Unfortunately, the code in Listing 7-5 still results in compiler errors, as "
 "shown in Listing 7-6."
-msgstr ""
+msgstr "不幸的是，如清单7-6所示，清单7-5中的代码仍然会导致编译器错误。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:176
 msgid ""
@@ -254,6 +344,36 @@ msgid ""
 "error: could not compile `restaurant` (lib) due to 2 previous errors\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling restaurant v0.1.0 (file:///projects/restaurant)\n"
+"error[E0603]: function `add_to_waitlist` is private\n"
+"  --> src/lib.rs:10:37\n"
+"   |\n"
+"10 |     crate::front_of_house::hosting::add_to_waitlist();\n"
+"   |                                     ^^^^^^^^^^^^^^^ private function\n"
+"   |\n"
+"note: the function `add_to_waitlist` is defined here\n"
+"  --> src/lib.rs:3:9\n"
+"   |\n"
+" 3 |         fn add_to_waitlist() {}\n"
+"   |         ^^^^^^^^^^^^^^^^^^^^\n"
+"\n"
+"error[E0603]: function `add_to_waitlist` is private\n"
+"  --> src/lib.rs:13:30\n"
+"   |\n"
+"13 |     front_of_house::hosting::add_to_waitlist();\n"
+"   |                              ^^^^^^^^^^^^^^^ private function\n"
+"   |\n"
+"note: the function `add_to_waitlist` is defined here\n"
+"  --> src/lib.rs:3:9\n"
+"   |\n"
+" 3 |         fn add_to_waitlist() {}\n"
+"   |         ^^^^^^^^^^^^^^^^^^^^\n"
+"\n"
+"For more information about this error, try `rustc --explain E0603`.\n"
+"error: could not compile `restaurant` (lib) due to 2 previous errors\n"
+"```"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:209
 msgid ""
@@ -266,6 +386,12 @@ msgid ""
 "only making the module public; we need to go further and choose to make one "
 "or more of the items within the module public as well."
 msgstr ""
+"发生了什么？在 `mod hosting` 前面添加 `pub` 关键字后，该模块就变成了公开模"
+"块。通过这种修改，如果我们能够访问 `front_of_house`，那么我们也能够访问 "
+"`hosting`。但是 `hosting` 的内容仍然是私有的；将模块变为公开状态并不会使其内"
+"容变得公开。在模块上使用 `pub` 关键字，只是允许其祖先模块中的代码引用该模块，"
+"而不是访问其内部的代码。由于模块本质上是容器，仅仅将模块变为公开状态并不能起"
+"到太大作用；我们需要进一步采取措施，将模块内的一个或多个项也设置为公开状态。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:218
 msgid ""
@@ -273,12 +399,16 @@ msgid ""
 "private. The privacy rules apply to structs, enums, functions, and methods "
 "as well as modules."
 msgstr ""
+"清单 7-6 中的错误表明 `add_to_waitlist` 函数是私有的。隐私规则适用于结构体、"
+"枚举、函数、方法以及模块。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:222
 msgid ""
 "Let’s also make the `add_to_waitlist` function public by adding the `pub` "
 "keyword before its definition, as in Listing 7-7."
 msgstr ""
+"让我们通过在其定义前添加 `pub` 这个关键字，来将 `add_to_waitlist` 函数公开"
+"化，就像 Listing 7-7 中那样。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:246
 msgid ""
@@ -286,6 +416,9 @@ msgid ""
 "these paths in `eat_at_restaurant` with respect to the privacy rules, let’s "
 "look at the absolute and the relative paths."
 msgstr ""
+"现在代码可以编译了！为了理解为什么添加 `pub` 这个关键字可以让我们在 "
+"`eat_at_restaurant` 中使用这些路径，同时遵守隐私规则，让我们来看看绝对路径和"
+"相对路径的区别。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:250
 msgid ""
@@ -299,6 +432,14 @@ msgid ""
 "the `add_to_waitlist` function is marked with `pub`, and we can access its "
 "parent module, so this function call works!"
 msgstr ""
+"在绝对路径中，我们从 `crate` 开始，这是我们 crate 模块树的根节点。"
+"`front_of_house` 模块定义在 crate 的根目录下。而 `front_of_house` 并不是公共"
+"模块，因为 `eat_at_restaurant` 函数定义在与 `front_of_house` 相同的模块中（也"
+"就是说，`eat_at_restaurant` 和 `front_of_house` 是兄弟模块）。不过，我们可以"
+"从 `eat_at_restaurant` 中引用 `front_of_house`。接下来是标有 `pub` 的 "
+"`hosting` 模块。我们可以访问 `hosting` 的父模块，因此也可以访问 `hosting`。最"
+"后，`add_to_waitlist` 函数被标记为 `pub`，我们可以访问它的父模块，因此这个函"
+"数的调用是有效的！"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:260
 msgid ""
@@ -310,6 +451,11 @@ msgid ""
 "`hosting` and `add_to_waitlist` are marked with `pub`, the rest of the path "
 "works, and this function call is valid!"
 msgstr ""
+"在相对路径中，逻辑与绝对路径相同，唯一的区别在于第一步：路径不是从 crate 的根"
+"目录开始，而是从 `front_of_house` 开始。`front_of_house` 模块定义在同一模块"
+"内，与 `eat_at_restaurant` 相同，因此从定义 `eat_at_restaurant` 的模块开始的"
+"相对路径是有效的。此外，因为 `hosting` 和 `add_to_waitlist` 都被标记为 "
+"`pub`，所以路径的其余部分也是有效的，因此这个函数调用是有效的！"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:268
 msgid ""
@@ -321,10 +467,15 @@ msgid ""
 "scope of this book; if you’re interested in this topic, see [the Rust API "
 "Guidelines](https://rust-lang.github.io/api-guidelines/)."
 msgstr ""
+"如果您计划分享您的库 crate，以便其他项目可以使用您的代码，那么您的公共 API 就"
+"是您与 crate 用户之间的契约，它决定了他们如何与您的代码进行交互。在管理公共 "
+"API 的变更时，有许多需要考虑的因素，以便人们能够更轻松地依赖您的 crate。这些"
+"考虑因素超出了本书的范围；如果您对此感兴趣，请参考 [Rust API 指南](https://"
+"rust-lang.github.io/api-guidelines/)。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:275
 msgid "Best Practices for Packages with a Binary and a Library"
-msgstr ""
+msgstr "包含二进制文件和库包的最佳实践"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:277
 msgid ""
@@ -336,6 +487,11 @@ msgid ""
 "library crate. This lets other projects benefit from the most functionality "
 "that the package provides because the library crate’s code can be shared."
 msgstr ""
+"我们提到，一个包可以包含 _src/main.rs_ 形式的二进制 crate 根，以及 _src/lib."
+"rs_ 形式的库 crate 根。默认情况下，这两个 crate 都会使用相同的包名。通常，采"
+"用这种模式的包中，二进制 crate 只包含足够的代码来启动一个可执行文件，该可执行"
+"文件会调用库 crate 中定义的代码。这样，其他项目就可以充分利用该包提供的功能，"
+"因为库 crate 的代码可以被共享。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:285
 msgid ""
@@ -346,6 +502,10 @@ msgid ""
 "public API. This helps you design a good API; not only are you the author, "
 "but you’re also a client!"
 msgstr ""
+"模块树应该定义在 _src/lib.rs_ 中。然后，任何公开的内容都可以通过以包名开头的"
+"路径在二进制 crate 中使用。二进制 crate 就像完全独立的 crate 一样使用库 "
+"crate：它只能使用库 crate 中的公开 API。这有助于设计良好的 API；你不仅是包的"
+"作者，也是使用该包的客户！"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:292
 msgid ""
@@ -353,10 +513,12 @@ msgid ""
 "demonstrate this organizational practice with a command line program that "
 "will contain both a binary crate and a library crate."
 msgstr ""
+"在[第12章](ch12-00-an-io-project.html)中，我们将通过一个命令行程序来演示这种"
+"组织方式，该程序同时包含二进制 crate 和库 crate。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:296
 msgid "Starting Relative Paths with `super`"
-msgstr ""
+msgstr "使用 `super` 开始相对路径"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:298
 msgid ""
@@ -368,6 +530,11 @@ msgid ""
 "module tree easier when the module is closely related to the parent but the "
 "parent might be moved elsewhere in the module tree someday."
 msgstr ""
+"我们可以通过在路径开头使用 `super` 来构建从父模块开始的相对路径，而不是从当前"
+"模块或 crate 根目录开始。这类似于使用 `..` 语法来启动文件系统路径，表示进入父"
+"目录。使用 `super` 则允许我们引用一个我们知道存在于父模块中的项，这可以在模块"
+"与父模块关系紧密但父模块将来可能会移动到模块树的其他位置时，更轻松地重新安排"
+"模块结构。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:306
 msgid ""
@@ -377,6 +544,10 @@ msgid ""
 "the function `deliver_order` defined in the parent module by specifying the "
 "path to `deliver_order`, starting with `super`."
 msgstr ""
+"请参考清单7-8中的代码，该代码模拟了厨师修正错误订单后亲自将订单送到客户手中的"
+"情况。在 `back_of_house` 模块中定义的函数 `fix_incorrect_order`，通过指定路"
+"径 `deliver_order` 来调用在父模块中定义的函数 `deliver_order`，路径从 "
+"`super` 开始。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:329
 msgid ""
@@ -389,10 +560,16 @@ msgid ""
 "Therefore, we used `super` so that we’ll have fewer places to update code in "
 "the future if this code gets moved to a different module."
 msgstr ""
+"`fix_incorrect_order`函数位于`back_of_house`模块中，因此我们可以使用`super`来"
+"访问`back_of_house`的父模块，在这种情况下，父模块就是`crate`，即根模块。从那"
+"里，我们查找`deliver_order`并找到了它。成功！我们认为`back_of_house`模块和"
+"`deliver_order`函数很可能保持相同的关系，如果决定重新组织该包的模块结构，那么"
+"这两个模块就可以一起移动。因此，我们使用`super`，这样如果这段代码被移动到不同"
+"的模块中，将来更新代码的地方就会减少。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:338
 msgid "Making Structs and Enums Public"
-msgstr ""
+msgstr "将结构体与枚举类型公开化"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:340
 msgid ""
@@ -408,30 +585,39 @@ msgid ""
 "stock. The available fruit changes quickly, so customers can’t choose the "
 "fruit or even see which fruit they’ll get."
 msgstr ""
+"我们还可以使用 `pub` 来指定结构体和集合类型为公共类型。但是，在使用 `pub` 处"
+"理结构体和集合类型时，有一些额外的细节需要注意。如果在结构体定义之前使用 "
+"`pub`，那么该结构体会被设为公共类型，但结构体的字段仍然为私有类型。我们可以根"
+"据具体情况分别将每个字段设为公共类型或私有类型。在 Listing 7-9 中，我们定义了"
+"一个公共类型的 `back_of_house::Breakfast` 结构体，该结构体有一个公共类型的 "
+"`toast` 字段，但有一个私有类型的 `seasonal_fruit` 字段。这模拟了餐厅中的情"
+"况：顾客可以选择餐点附带的面包类型，而厨师则根据当季供应和库存情况来决定搭配"
+"的水果。可用的水果种类会很快发生变化，因此顾客无法选择水果，甚至无法看到他们"
+"将获得哪些水果。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:364
 msgid "\"peaches\""
-msgstr ""
+msgstr "\"peaches\""
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:371
 msgid "// Order a breakfast in the summer with Rye toast.\n"
-msgstr ""
+msgstr "// 夏天用雷伊玩具订购早餐。\n"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:372
 msgid "\"Rye\""
-msgstr ""
+msgstr "\"Rye\""
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:373
 msgid "// Change our mind about what bread we'd like.\n"
-msgstr ""
+msgstr "// 改变我们关于面包所喜欢的想法。\n"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:374
 msgid "\"Wheat\""
-msgstr ""
+msgstr "“Wheat”"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:375
 msgid "\"I'd like {} toast please\""
-msgstr ""
+msgstr "\"I'd like {} toast please\""
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:377
 msgid ""
@@ -439,6 +625,9 @@ msgid ""
 "    // to see or modify the seasonal fruit that comes with the meal.\n"
 "    // meal.seasonal_fruit = String::from(\"blueberries\");\n"
 msgstr ""
+"// The next line won't compile if we uncomment it; we're not allowed<br/>\n"
+"    // to see or modify the seasonal fruit that comes with the meal.<br/>\n"
+"    // meal.seasonal_fruit = String::from(&quot;blueberries&quot;);<br/>\n"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:385
 msgid ""
@@ -449,6 +638,10 @@ msgid ""
 "the line modifying the `seasonal_fruit` field value to see what error you "
 "get!"
 msgstr ""
+"因为在 `back_of_house::Breakfast` 结构体中的 `toast` 字段是公用的，所以在 "
+"`eat_at_restaurant` 中我们可以使用点符号来访问和读取 `toast` 字段。请注意，我"
+"们不能在 `eat_at_restaurant` 中使用 `seasonal_fruit` 字段，因为 "
+"`seasonal_fruit` 是私有的。试着取消注释那行代码，看看会收到什么错误！"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:391
 msgid ""
@@ -459,18 +652,27 @@ msgid ""
 "in `eat_at_restaurant`, because we couldn’t set the value of the private "
 "`seasonal_fruit` field in `eat_at_restaurant`."
 msgstr ""
+"另外，需要注意的是，由于 `back_of_house::Breakfast` 拥有一个私有字段，因此该"
+"结构体需要提供一个公共的关联函数，用于创建 `Breakfast` 的实例（我们在这里将其"
+"命名为 `summer`）。如果 `Breakfast` 没有这样的函数，我们就无法在 "
+"`eat_at_restaurant` 中创建 `Breakfast` 的实例，因为我们无法在 "
+"`eat_at_restaurant` 中设置私有字段 `seasonal_fruit` 的值。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:398
 msgid ""
 "In contrast, if we make an enum public, all of its variants are then public. "
 "We only need the `pub` before the `enum` keyword, as shown in Listing 7-10."
 msgstr ""
+"相比之下，如果我们将一个枚举变量设为公共变量，那么其所有的变体也都会成为公共"
+"变量。我们只需要在 `enum` 关键字之前加上 `pub`，如清单7-10所示。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:419
 msgid ""
 "Because we made the `Appetizer` enum public, we can use the `Soup` and "
 "`Salad` variants in `eat_at_restaurant`."
 msgstr ""
+"因为我们将 `Appetizer` 枚举公开化了，所以我们可以在 `eat_at_restaurant` 中使"
+"用 `Soup` 和 `Salad` 这两种变体。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:422
 msgid ""
@@ -480,6 +682,10 @@ msgid ""
 "without their fields being public, so struct fields follow the general rule "
 "of everything being private by default unless annotated with `pub`."
 msgstr ""
+"枚举类型除非其变体是公开的，否则并不十分有用；每次都需要为所有枚举变体添加 "
+"`pub` 的注释，这确实很麻烦。因此，枚举变体的默认值是公开的。而结构体在没有公"
+"开其字段的情况下通常很有用，所以结构体的字段默认都是私有的，除非被添加了 "
+"`pub` 的注释。"
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:428
 msgid ""
@@ -487,3 +693,5 @@ msgid ""
 "is our last module system feature: the `use` keyword. We’ll cover `use` by "
 "itself first, and then we’ll show how to combine `pub` and `use`."
 msgstr ""
+"还有另一种涉及 `pub` 的情况，这是我们尚未讨论的。那就是我们的最后一个模块系统"
+"特性：`use` 关键字。我们先单独介绍 `use`，然后再说明如何组合 `pub` 和 `use`。"

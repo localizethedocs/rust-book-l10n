@@ -22,6 +22,9 @@ msgid ""
 "You can provide an implementation for the `Drop` trait on any type, and that "
 "code can be used to release resources like files or network connections."
 msgstr ""
+"智能指针模式的第二个特性是`Drop'， 它允许您自定义值将超出范围时发生的事情。 "
+"您可以为任何类型的`Drop`特性提供一个实现。 并且该代码可以用来释放像文件或网络"
+"连接这样的资源。"
 
 #: src/ch15-03-drop.md:8
 msgid ""
@@ -30,6 +33,8 @@ msgid ""
 "smart pointer. For example, when a `Box<T>` is dropped, it will deallocate "
 "the space on the heap that the box points to."
 msgstr ""
+"我们正在智能指针中引入`Drop`，因为实现智能指针时几乎总是使用`Drop`特性的功"
+"能。 例如，当一个 `Box<T>` 被丢弃时，它将会使方框指向的堆中的空间被丢失。"
 
 #: src/ch15-03-drop.md:13
 msgid ""
@@ -43,6 +48,11 @@ msgid ""
 "program that an instance of a particular type is finished with—you still "
 "won’t leak resources!"
 msgstr ""
+"在某些语言中，对于某些类型， 程序员每次使用这些类型的实例完成时，都必须调用代"
+"码来释放内存或资源。 例子包括文件句柄、套接字和锁。如果程序员忘记，系统可能会"
+"被过载和崩溃。 在Rust中，您可以指定当值超出范围时运行特定的代码。 和编译器将"
+"自动插入此代码。 结果， 你不需要小心地将清理代码放在一个特定类型的实例完成的"
+"程序中 — — 你仍然不会泄露资源!"
 
 #: src/ch15-03-drop.md:22
 msgid ""
@@ -51,6 +61,9 @@ msgid ""
 "named `drop` that takes a mutable reference to `self`. To see when Rust "
 "calls `drop`, let’s implement `drop` with `println!` statements for now."
 msgstr ""
+"你指定了当一个值因实现`Drop`特性而超出范围时要运行的代码。 `Drop`特性要求你实"
+"现一个名为 `drop` 的方法，它需要一个可变的引用到 `self` 。 要看什么时候Rust "
+"调用 `drop`，让我们现在用 `println!` 语句实现 `drop` 。"
 
 #: src/ch15-03-drop.md:27
 msgid ""
@@ -58,22 +71,24 @@ msgid ""
 "functionality is that it will print `Dropping CustomSmartPointer!` when the "
 "instance goes out of scope, to show when Rust runs the `drop` method."
 msgstr ""
+"列出15-14显示一个 `CustomSmartPointer` 结构，这个结构的唯一自定义功能是打印`"
+"丢弃CustomSmartPointer! 当实例超出范围时，显示Rust 运行\"drop\" 方法的时间。"
 
 #: src/ch15-03-drop.md:40 src/ch15-03-drop.md:115 src/ch15-03-drop.md:180
 msgid "\"Dropping CustomSmartPointer with data `{}`!\""
-msgstr ""
+msgstr "\"丢弃自定义SmartPointer 使用数据\"{}\"!\""
 
 #: src/ch15-03-drop.md:46
 msgid "\"my stuff\""
-msgstr ""
+msgstr "\"my stuff\""
 
 #: src/ch15-03-drop.md:49
 msgid "\"other stuff\""
-msgstr ""
+msgstr "\"other stuff\""
 
 #: src/ch15-03-drop.md:51
 msgid "\"CustomSmartPointers created\""
-msgstr ""
+msgstr "\"CustomSmartPointers 创建\""
 
 #: src/ch15-03-drop.md:57
 msgid ""
@@ -84,6 +99,10 @@ msgid ""
 "to run when an instance of your type goes out of scope. We’re printing some "
 "text here to demonstrate visually when Rust will call `drop`."
 msgstr ""
+"`Drop`特性被包含在前列，所以我们不需要将其放入范围。 我们实现了 "
+"`CustomSmartPointer` 上的 `Drop` 特性并为调用 `println!` 方法提供了一个实"
+"现。 `drop` 方法的主体是当一个类型的实例超出范围时你想要运行的任何逻辑。 我们"
+"正在这里打印一些文本来直观展示当Rust 调用`drop`时的情况。"
 
 #: src/ch15-03-drop.md:64
 msgid ""
@@ -93,10 +112,14 @@ msgid ""
 "put in the `drop` method, printing our final message. Note that we didn’t "
 "need to call the `drop` method explicitly."
 msgstr ""
+"在 `main` 中，我们创建了两个实例 `CustomSmartPointer` ，然后打印 "
+"`CustomSmartPointers 创建` 。 在 `main`结束时，我们的 `CustomSmartPointer` 实"
+"例将超出范围。 和 Rust 将调用我们放在 \"drop\" 方法中的代码，打印我们的最后信"
+"息。 请注意，我们不需要明确调用 `drop` 方法。"
 
 #: src/ch15-03-drop.md:70
 msgid "When we run this program, we’ll see the following output:"
-msgstr ""
+msgstr "当我们运行这个程序时，我们将看到以下输出："
 
 #: src/ch15-03-drop.md:72
 msgid ""
@@ -110,6 +133,15 @@ msgid ""
 "Dropping CustomSmartPointer with data `my stuff`!\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling drop-example v0.1.0 (file:///projects/drop-example)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.60s\n"
+"     Running `target/debug/drop-example`\n"
+"CustomSmartPointers created\n"
+"Dropping CustomSmartPointer with data `other stuff`!\n"
+"Dropping CustomSmartPointer with data `my stuff`!\n"
+"```"
 
 #: src/ch15-03-drop.md:82
 msgid ""
@@ -120,10 +152,14 @@ msgid ""
 "usually you would specify the cleanup code that your type needs to run "
 "rather than a print message."
 msgstr ""
+"当我们的实例超出范围时，必须自动调用`drop`，调用我们指定的代码。 变量按其创建"
+"的相反顺序丢弃，所以`d`在`c`之前被丢弃。 这个示例的目的是为您提供一个 "
+"\"drop\" 方法如何工作的直观指南； 通常您会指定您类型需要运行的清理代码，而不"
+"是打印信息。"
 
 #: src/ch15-03-drop.md:91
 msgid "<a id=\"dropping-a-value-early-with-std-mem-drop\"></a>"
-msgstr ""
+msgstr "<a id=\"dropping-a-value-early-with-std-mem-drop\"></a>"
 
 #: src/ch15-03-drop.md:93
 msgid ""
@@ -138,28 +174,36 @@ msgid ""
 "standard library if you want to force a value to be dropped before the end "
 "of its scope."
 msgstr ""
+"不幸的是，禁用自动“删除”功能并不简单。通常不需要禁用“drop”；“Drop”特性的全部"
+"意义在于它是自动处理的。然而，偶尔你可能想早点清理一个值。一个例子是使用管理"
+"锁的智能指针时：您可能希望强制使用释放锁的“drop”方法，以便同一作用域中的其他"
+"代码可以获取锁。Rust不允许你手动调用`Drop`特性的`Drop`方法；相反，如果你想在"
+"值的作用域结束之前强制删除一个值，你必须调用标准库提供的`std:：mem:：drop`函"
+"数。"
 
 #: src/ch15-03-drop.md:103
 msgid ""
 "Trying to call the `Drop` trait’s `drop` method manually by modifying the "
 "`main` function from Listing 15-14 won’t work, as shown in Listing 15-15."
 msgstr ""
+"尝试手动调用 Drop` 特性的 `drop` 方法，修改列表15-14 中的 `main` 函数将无法工"
+"作，如在列表15-15 中所示。"
 
 #: src/ch15-03-drop.md:121 src/ch15-03-drop.md:186
 msgid "\"some data\""
-msgstr ""
+msgstr "“一些数据”"
 
 #: src/ch15-03-drop.md:123 src/ch15-03-drop.md:188
 msgid "\"CustomSmartPointer created\""
-msgstr ""
+msgstr "\"CustomSmartPointer已创建\""
 
 #: src/ch15-03-drop.md:125 src/ch15-03-drop.md:190
 msgid "\"CustomSmartPointer dropped before the end of main\""
-msgstr ""
+msgstr "\"CustomSmartPointer 在主页结束前掉落\""
 
 #: src/ch15-03-drop.md:131
 msgid "When we try to compile this code, we’ll get this error:"
-msgstr ""
+msgstr "当我们尝试编译这段代码时，会遇到这个错误："
 
 #: src/ch15-03-drop.md:133
 msgid ""
@@ -183,6 +227,25 @@ msgid ""
 "previous error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling drop-example v0.1.0 (file:///projects/drop-example)\n"
+"error[E0040]: explicit use of destructor method\n"
+"  --> src/main.rs:16:7\n"
+"   |\n"
+"16 |     c.drop();\n"
+"   |       ^^^^ explicit destructor calls not allowed\n"
+"   |\n"
+"help: consider using `drop` function\n"
+"   |\n"
+"16 -     c.drop();\n"
+"16 +     drop(c);\n"
+"   |\n"
+"\n"
+"For more information about this error, try `rustc --explain E0040`.\n"
+"error: could not compile `drop-example` (bin \"drop-example\") due to 1 "
+"previous error\n"
+"```"
 
 #: src/ch15-03-drop.md:152
 msgid ""
@@ -192,6 +255,9 @@ msgid ""
 "is analogous to a _constructor_, which creates an instance. The `drop` "
 "function in Rust is one particular destructor."
 msgstr ""
+"此错误消息指出，我们不允许明确调用 \"drop\"。 错误消息使用了 _destrator_这个"
+"术语，它是清除一个实例的函数的一般编程术语。 一个 _destrator_ 类似于 "
+"_constructor_, 它创建了一个实例。在 Rust 中的 `drop` 函数是一个特定的破坏器。"
 
 #: src/ch15-03-drop.md:158
 msgid ""
@@ -200,6 +266,8 @@ msgid ""
 "cause a double free error because Rust would be trying to clean up the same "
 "value twice."
 msgstr ""
+"不能让我们明确调用 `drop` ，因为Rust 仍然会在 `main` 的末尾自动调用 "
+"`drop` 。 这将造成双重免费错误，因为Rust 将尝试清理两次相同的值。"
 
 #: src/ch15-03-drop.md:162
 msgid ""
@@ -207,6 +275,8 @@ msgid ""
 "scope, and we can’t call the `drop` method explicitly. So, if we need to "
 "force a value to be cleaned up early, we use the `std::mem::drop` function."
 msgstr ""
+"当一个值超出作用域时，我们不能禁用自动插入“drop”，也不能显式调用“drop”方法。"
+"因此，如果我们需要强制提前清理一个值，我们可以使用`std::mem::drop`函数。"
 
 #: src/ch15-03-drop.md:166
 msgid ""
@@ -215,10 +285,13 @@ msgid ""
 "force-drop. The function is in the prelude, so we can modify `main` in "
 "Listing 15-15 to call the `drop` function, as shown in Listing 15-16."
 msgstr ""
+"`std::mem::drop`函数与`drop`特性中的`drop`方法不同。我们通过将要强制删除的值"
+"作为参数传递来称之为drop。该函数位于序言中，因此我们可以修改清单15-15中的"
+"`main`来调用`drop`函数，如清单15-16所示。"
 
 #: src/ch15-03-drop.md:196
 msgid "Running this code will print the following:"
-msgstr ""
+msgstr "运行这段代码会输出以下内容："
 
 #: src/ch15-03-drop.md:198
 msgid ""
@@ -232,6 +305,15 @@ msgid ""
 "CustomSmartPointer dropped before the end of main\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling drop-example v0.1.0 (file:///projects/drop-example)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.73s\n"
+"     Running `target/debug/drop-example`\n"
+"CustomSmartPointer created\n"
+"Dropping CustomSmartPointer with data `some data`!\n"
+"CustomSmartPointer dropped before the end of main\n"
+"```"
 
 #: src/ch15-03-drop.md:208
 msgid ""
@@ -240,6 +322,9 @@ msgid ""
 "before the end of main` text, showing that the `drop` method code is called "
 "to drop `c` at that point."
 msgstr ""
+"文本``Droping CustomSmartPointer with data `some data`! 打印在 "
+"`CustomSmartPointer 创建 `和 `CustomSmartPointer 在 main` 文本结束前丢弃之间"
+"的 `CustomSmartPointer '。 显示`drop`方法代码在那个时候被调用掉`c`。"
 
 #: src/ch15-03-drop.md:213
 msgid ""
@@ -249,6 +334,9 @@ msgid ""
 "system, you don’t have to remember to clean up, because Rust does it "
 "automatically."
 msgstr ""
+"您可以通过多种方式使用 Drop` 特性中指定的代码来进行清理：例如， 您可以使用它"
+"来创建您自己的内存分配器 ！ 使用 `Drop` 特性和 Rust's 所有权系统，你不必记住"
+"清理，因为Rust 会自动清理它。"
 
 #: src/ch15-03-drop.md:218
 msgid ""
@@ -257,6 +345,8 @@ msgid ""
 "references are always valid also ensures that `drop` gets called only once "
 "when the value is no longer being used."
 msgstr ""
+"您也不必担心意外清理仍在使用中的值所造成的问题：确保引用总是有效的所有权系统"
+"也确保只在不再使用值时调用 \"drop\" 。"
 
 #: src/ch15-03-drop.md:223
 msgid ""
@@ -264,3 +354,5 @@ msgid ""
 "pointers, let’s look at a few other smart pointers defined in the standard "
 "library."
 msgstr ""
+"现在我们已经检查了 `Box<T>` 和智能指针的一些特性， 让我们看看标准库中定义的其"
+"他几个智能指针。"

@@ -25,10 +25,14 @@ msgid ""
 "encapsulation, and inheritance. Let’s look at what each of those "
 "characteristics means and whether Rust supports it."
 msgstr ""
+"在编程社区中，对于一种语言必须具备哪些特性才能被视为面向对象语言，目前还没有"
+"达成共识。Rust受到了多种编程范式的启发，其中包括面向对象编程；例如，我们在第"
+"13章中探讨了源自函数式编程的特性。可以说，面向对象语言具有一些共同的特征——即"
+"对象、封装和继承。让我们来看看这些特征的具体含义，以及Rust是否支持这些特性。"
 
 #: src/ch18-01-what-is-oo.md:11
 msgid "Objects Contain Data and Behavior"
-msgstr ""
+msgstr "对象包含数据和行为"
 
 #: src/ch18-01-what-is-oo.md:13
 msgid ""
@@ -37,6 +41,9 @@ msgid ""
 "Wesley, 1994), colloquially referred to as _The Gang of Four_ book, is a "
 "catalog of object-oriented design patterns. It defines OOP in this way:"
 msgstr ""
+"埃里希·伽马、理查德·赫尔姆、拉尔夫·约翰逊和约翰·弗利西德斯所著的《设计模式："
+"可复用面向对象软件的要素》一书，由Addison-Wesley在1994年出版，通常被称为“四人"
+"组”著作。这本书系统地介绍了面向对象的设计模式，并这样定义面向对象编程："
 
 #: src/ch18-01-what-is-oo.md:18
 msgid ""
@@ -44,6 +51,8 @@ msgid ""
 "data and the procedures that operate on that data. The procedures are "
 "typically called **methods** or **operations**."
 msgstr ""
+"面向对象程序由对象组成。一个**对象**包含了数据以及操作这些数据的程序。这些程"
+"序通常被称为**方法**或**操作**。"
 
 #: src/ch18-01-what-is-oo.md:22
 msgid ""
@@ -52,10 +61,14 @@ msgid ""
 "and enums with methods aren’t _called_ objects, they provide the same "
 "functionality, according to the Gang of Four’s definition of objects."
 msgstr ""
+"根据这一定义，Rust是一种面向对象的语言：结构体（Structs）和枚举类型（Enums）"
+"都包含数据，而 `impl` 块则提供了对结构体与枚举类型的方法支持。尽管带有方法的"
+"结构体与枚举类型并不被称为“对象”，但根据“四人组”对对象的定义，它们确实具备了"
+"相同的功能。"
 
 #: src/ch18-01-what-is-oo.md:27
 msgid "Encapsulation That Hides Implementation Details"
-msgstr ""
+msgstr "隐藏实现细节的封装"
 
 #: src/ch18-01-what-is-oo.md:29
 msgid ""
@@ -67,6 +80,10 @@ msgid ""
 "enables the programmer to change and refactor an object’s internals without "
 "needing to change the code that uses the object."
 msgstr ""
+"与面向对象编程相关的另一个重要概念是_封装_，这意味着对象的实现细节对使用该对"
+"象的代码是不可访问的。因此，与对象交互的唯一方式是通过其公共API；使用该对象的"
+"代码不应能够直接访问对象的内部状态并修改数据或行为。这样，程序员可以在不改变"
+"使用该对象的代码的情况下，对对象的内部结构进行更改和重构。"
 
 #: src/ch18-01-what-is-oo.md:37
 msgid ""
@@ -80,6 +97,13 @@ msgid ""
 "`AveragedCollection` will cache the calculated average for us. Listing 18-1 "
 "has the definition of the `AveragedCollection` struct."
 msgstr ""
+"在第7章中，我们讨论了如何控制封装。我们可以使用 `pub` 这个关键字来决定代码中"
+"的哪些模块、类型、函数和方法应该是公开的，而其余内容则默认为私有。例如，我们"
+"可以定义一个结构体 `AveragedCollection`，该结构体包含一个字段，该字段存储一个"
+"由 `i32` 个值组成的向量。这个结构体还可以包含一个字段，该字段存储向量中各个值"
+"的平均值。这意味着，当需要时，不必每次都计算平均值。换句话说， "
+"`AveragedCollection` 会为我们缓存计算出的平均值。列表 18-1 中展示了这个结构"
+"体 `AveragedCollection` 的定义。"
 
 #: src/ch18-01-what-is-oo.md:58
 msgid ""
@@ -89,6 +113,10 @@ msgid ""
 "average is also updated. We do this by implementing `add`, `remove`, and "
 "`average` methods on the struct, as shown in Listing 18-2."
 msgstr ""
+"该结构体被标记为 `pub`，这样其他代码就可以使用它，但结构体内部的字段仍然是私"
+"有的。在这种情况下，这一点非常重要，因为我们希望确保每当列表中的值被添加或删"
+"除时，平均值也会随之更新。我们通过在结构体上实现 `add`、 `remove` 和 "
+"`average` 方法来实现这一点，如清单 18-2 所示。"
 
 #: src/ch18-01-what-is-oo.md:102
 msgid ""
@@ -98,6 +126,10 @@ msgid ""
 "method, the implementations of each call the private `update_average` method "
 "that handles updating the `average` field as well."
 msgstr ""
+"公共方法 `add`、 `remove` 和 `average` 是访问或修改 `AveragedCollection` 实例"
+"中数据的唯一方式。当使用 `add` 方法向 `list` 添加项目，或使用 `remove` 方法删"
+"除项目时，每种方法都会调用一个私有的 `update_average` 方法，该方法来更新 "
+"`average` 字段。"
 
 #: src/ch18-01-what-is-oo.md:108
 msgid ""
@@ -107,6 +139,10 @@ msgid ""
 "changes. The `average` method returns the value in the `average` field, "
 "allowing external code to read the `average` but not modify it."
 msgstr ""
+"我们将 `list` 和 `average` 字段设置为私有，这样外部代码就无法直接向 `list` 字"
+"段添加或删除元素；否则，当 `list` 发生变化时， `average` 字段可能会变得不同"
+"步。 `average` 方法返回 `average` 字段中的值，从而允许外部代码读取 `average` "
+"但不对其进行修改。"
 
 #: src/ch18-01-what-is-oo.md:114
 msgid ""
@@ -121,6 +157,12 @@ msgid ""
 "external code would likely have to change if it were modifying `list` "
 "directly."
 msgstr ""
+"因为我们已经封装了`AveragedCollection`结构的实现细节，所以将来我们可以轻松地"
+"修改某些方面，比如数据结构。例如，我们可以使用`HashSet<i32>`来代替`Vec<i32>`"
+"来定义`list`字段。只要`add`、`remove`和`average`公共方法的签名保持不变，那么"
+"使用`AveragedCollection`的代码就不需要进行任何修改。如果我们把`list`设为公共"
+"方法，情况就不一定如此了：`HashSet<i32>`和`Vec<i32>`在添加和删除项的方法上有"
+"所不同，因此如果外部代码直接修改`list`，那么代码显然也需要进行相应的修改。"
 
 #: src/ch18-01-what-is-oo.md:124
 msgid ""
@@ -128,10 +170,12 @@ msgid ""
 "oriented, then Rust meets that requirement. The option to use `pub` or not "
 "for different parts of code enables encapsulation of implementation details."
 msgstr ""
+"如果封装是判断一种语言是否为面向对象语言所必需的特性，那么Rust完全满足这一要"
+"求。允许在代码的不同部分使用 `pub` 或不使用它，从而实现了实现细节的封装。"
 
 #: src/ch18-01-what-is-oo.md:128
 msgid "Inheritance as a Type System and as Code Sharing"
-msgstr ""
+msgstr "继承作为类型系统以及代码共享"
 
 #: src/ch18-01-what-is-oo.md:130
 msgid ""
@@ -139,6 +183,8 @@ msgid ""
 "another object’s definition, thus gaining the parent object’s data and "
 "behavior without you having to define them again."
 msgstr ""
+"继承是一种机制，通过这种机制，一个对象可以从另一个对象的定义中继承元素，从而"
+"无需重新定义即可获得父对象的数据和行为。"
 
 #: src/ch18-01-what-is-oo.md:134
 msgid ""
@@ -146,6 +192,8 @@ msgid ""
 "such a language. There is no way to define a struct that inherits the parent "
 "struct’s fields and method implementations without using a macro."
 msgstr ""
+"如果某种语言必须拥有继承机制才能成为面向对象语言，那么Rust就不属于这类语言。"
+"如果不使用宏，就无法定义一个继承父结构字段和方法的结构体。"
 
 #: src/ch18-01-what-is-oo.md:138
 msgid ""
@@ -153,6 +201,8 @@ msgid ""
 "you can use other solutions in Rust, depending on your reason for reaching "
 "for inheritance in the first place."
 msgstr ""
+"不过，如果你已经习惯了在编程中使用继承机制，那么你可以根据最初使用继承的原"
+"因，在Rust中采用其他解决方案。"
 
 #: src/ch18-01-what-is-oo.md:142
 msgid ""
@@ -170,6 +220,13 @@ msgid ""
 "to a child class overriding the implementation of a method inherited from a "
 "parent class."
 msgstr ""
+"选择继承主要有两个原因。其一是为了代码的复用：你可以为某种类型实现特定的行"
+"为，而继承则使得你可以将这种实现复用到另一种类型上。在 Rust 代码中，可以通过"
+"默认特性方法实现来实现这一点。正如我们在 Listing 10-14 中看到的，当我们在 "
+"`Summary` 特性上添加了 `summarize` 方法的默认实现时，任何实现了 `Summary` 特"
+"性的类型都无需额外代码即可拥有 `summarize` 方法。这类似于父类实现了某个方法，"
+"而子类继承了该方法的实现。当我们实现 `Summary` 特性时，还可以覆盖 "
+"`summarize` 方法的默认实现，这类似于子类覆盖了从父类继承来的方法实现。"
 
 #: src/ch18-01-what-is-oo.md:155
 msgid ""
@@ -178,10 +235,13 @@ msgid ""
 "called _polymorphism_, which means that you can substitute multiple objects "
 "for each other at runtime if they share certain characteristics."
 msgstr ""
+"使用继承的另一个原因与类型系统有关：使得子类型可以在与父类型相同的位置被使"
+"用。这也被称为_多态性_，这意味着在运行时，如果多个对象具有某些共同特性，你可"
+"以将它们相互替换。"
 
 #: src/ch18-01-what-is-oo.md:160
 msgid "Polymorphism"
-msgstr ""
+msgstr "多态性"
 
 #: src/ch18-01-what-is-oo.md:162
 msgid ""
@@ -189,6 +249,8 @@ msgid ""
 "actually a more general concept that refers to code that can work with data "
 "of multiple types. For inheritance, those types are generally subclasses."
 msgstr ""
+"对许多人来说，多态性与继承是同义词。但实际上，多态性是一个更通用的概念，指的"
+"是能够处理多种类型数据的代码。在继承的情况下，这些类型通常是子类。"
 
 #: src/ch18-01-what-is-oo.md:166
 msgid ""
@@ -196,6 +258,8 @@ msgid ""
 "trait bounds to impose constraints on what those types must provide. This is "
 "sometimes called _bounded parametric polymorphism_."
 msgstr ""
+"而Rust则使用泛型来抽象出不同的可能类型，并通过特质约束来规定这些类型必须提供"
+"的功能。这种现象有时被称为“有界参数化多态性”。"
 
 #: src/ch18-01-what-is-oo.md:170
 msgid ""
@@ -209,6 +273,11 @@ msgid ""
 "subclass can only inherit from one class), further restricting the "
 "flexibility of a program’s design."
 msgstr ""
+"Rust选择了一种不同的权衡方式，即不提供继承机制。继承机制往往会导致不必要的代"
+"码重复。子类不应该总是继承父类的所有特性，但继承机制却会迫使子类这样做。这可"
+"能会降低程序的灵活性。此外，继承还会引入一种可能性，即调用那些没有意义或会导"
+"致错误的子类方法，因为这些方法并不适用于子类。另外，一些语言只允许_单一继承_"
+"（即子类只能从一个类继承），这进一步限制了程序的灵活性。"
 
 #: src/ch18-01-what-is-oo.md:180
 msgid ""
@@ -216,3 +285,5 @@ msgid ""
 "instead of inheritance to achieve polymorphism at runtime. Let’s look at how "
 "trait objects work."
 msgstr ""
+"基于这些原因，Rust采用了不同的方法，即使用特质对象来实现运行时多态性，而不是"
+"通过继承来实现。让我们来看看特质对象的工作原理。"

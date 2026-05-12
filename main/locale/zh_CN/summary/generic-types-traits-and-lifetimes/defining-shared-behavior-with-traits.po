@@ -13,7 +13,7 @@ msgstr ""
 
 #: src/ch10-02-traits.md:3
 msgid "<a id=\"traits-defining-shared-behavior\"></a>"
-msgstr ""
+msgstr "<a id=\"traits-defining-shared-behavior\"></a>"
 
 #: src/ch10-02-traits.md:5
 msgid "Defining Shared Behavior with Traits"
@@ -26,16 +26,20 @@ msgid ""
 "We can use _trait bounds_ to specify that a generic type can be any type "
 "that has certain behavior."
 msgstr ""
+"**特质**定义了某个特定类型所具有的功能，并且该类型可以与其他类型共享这些功"
+"能。我们可以使用特质来以抽象的方式定义共享的行为。我们还可以通过**特质边界**"
+"来指定一个泛型类型可以是任何具有特定行为的类型。"
 
 #: src/ch10-02-traits.md:12
 msgid ""
 "Note: Traits are similar to a feature often called _interfaces_ in other "
 "languages, although with some differences."
 msgstr ""
+"注意：特性与其他语言中常被称为“接口”的功能类似，尽管两者之间存在一些差异。"
 
 #: src/ch10-02-traits.md:15
 msgid "Defining a Trait"
-msgstr ""
+msgstr "定义特质"
 
 #: src/ch10-02-traits.md:17
 msgid ""
@@ -44,6 +48,9 @@ msgid ""
 "all of those types. Trait definitions are a way to group method signatures "
 "together to define a set of behaviors necessary to accomplish some purpose."
 msgstr ""
+"一个类型的行为指的是我们可以对该类型调用的方法。如果我们可以在所有这些类型上"
+"调用相同的方法，那么不同的类型就具有相同的行为。特质定义是一种将方法签名组合"
+"在一起的方式，以此来定义实现某种功能所需的一系列行为。"
 
 #: src/ch10-02-traits.md:22
 msgid ""
@@ -53,6 +60,9 @@ msgid ""
 "characters along with metadata that indicates whether it was a new post, a "
 "repost, or a reply to another post."
 msgstr ""
+"例如， 让我们说，我们有多个结构都有不同类型和数量的文本：`NewsArticle`结构'，"
+"它存放一个新闻故事存档于某个特定位置，一个可以存放的 `SocialPost` 。 最多280"
+"个字符和元数据表示它是一个新帖子，还是一个备份或是对另一个帖子的回复。"
 
 #: src/ch10-02-traits.md:28
 msgid ""
@@ -63,6 +73,10 @@ msgid ""
 "Listing 10-12 shows the definition of a public `Summary` trait that "
 "expresses this behavior."
 msgstr ""
+"我们想要创建一个名为 `aggregator` 的媒体聚合库，它能够显示可能存储在 "
+"`NewsArticle` 或 `SocialPost` 实例中的数据摘要。为此，我们需要每种类型的数据"
+"摘要，我们将通过调用实例上的 `summarize` 方法来获取这些摘要。列表 10-12 展示"
+"了实现这一行为的公共 `Summary` 特质的定义。"
 
 #: src/ch10-02-traits.md:45
 msgid ""
@@ -73,6 +87,11 @@ msgid ""
 "signatures that describe the behaviors of the types that implement this "
 "trait, which in this case is `fn summarize(&self) -> String`."
 msgstr ""
+"在这里，我们使用 `trait` 关键字来声明一个特质，然后是该特质的名称，在这个例子"
+"中是 `Summary`。我们还将该特质声明为 `pub`，这样依赖于这个 crate 的其他 "
+"crate 也可以使用这个特质，我们将在几个例子中看到这一点。在花括号内部，我们声"
+"明了描述实现这个特质类型的类型的行为的方法签名，在这个例子中是 `fn "
+"summarize(&self) -> String`。"
 
 #: src/ch10-02-traits.md:52
 msgid ""
@@ -82,16 +101,20 @@ msgid ""
 "will enforce that any type that has the `Summary` trait will have the method "
 "`summarize` defined with this signature exactly."
 msgstr ""
+"在方法签名之后，我们不使用花括号来提供实现，而是使用分号。每个实现此特性的类"
+"型都必须为该方法的内容提供自己的自定义行为。编译器会确保任何具有 `Summary` 特"
+"性的类型都会以这种签名来定义 `summarize` 方法。"
 
 #: src/ch10-02-traits.md:58
 msgid ""
 "A trait can have multiple methods in its body: The method signatures are "
 "listed one per line, and each line ends in a semicolon."
 msgstr ""
+"一个特质可以在其体内包含多个方法：这些方法签名每行一个，并且每行以分号结尾。"
 
 #: src/ch10-02-traits.md:61
 msgid "Implementing a Trait on a Type"
-msgstr ""
+msgstr "在类型上实现 trait"
 
 #: src/ch10-02-traits.md:63
 msgid ""
@@ -103,17 +126,22 @@ msgid ""
 "`summarize` as the username followed by the entire text of the post, "
 "assuming that the post content is already limited to 280 characters."
 msgstr ""
+"既然我们已经定义了 `Summary`trait 方法的期望签名，那么就可以在媒体聚合器中的"
+"类型上实现它了。列表 10-13 展示了在 `NewsArticle` 结构上的 `Summary` trait 的"
+"实现，该实现使用标题、作者和位置来创建 `summarize` 的返回值。对于 "
+"`SocialPost` 结构，我们定义 `summarize` 为用户名，后面跟着帖子的完整文本，前"
+"提是帖子的内容已经被限制在 280 个字符以内。"
 
 #: src/ch10-02-traits.md:87 src/ch10-02-traits.md:358 src/ch10-02-traits.md:501
 #: src/ch10-02-traits.md:561
 msgid "\"{}, by {} ({})\""
-msgstr ""
+msgstr "\"{}, by {} ({})\""
 
 #: src/ch10-02-traits.md:100 src/ch10-02-traits.md:204
 #: src/ch10-02-traits.md:371 src/ch10-02-traits.md:514
 #: src/ch10-02-traits.md:574
 msgid "\"{}: {}\""
-msgstr ""
+msgstr "\"{}: {}\""
 
 #: src/ch10-02-traits.md:107
 msgid ""
@@ -126,6 +154,11 @@ msgid ""
 "body with the specific behavior that we want the methods of the trait to "
 "have for the particular type."
 msgstr ""
+"在类型上实现 trait 与实现普通方法类似。不同之处在于，在 `impl` 之后，我们需要"
+"输入想要实现的 trait 名称，然后使用 `for` 关键字，接着指定想要为哪种类型实现"
+"该 trait 的类型名称。在 `impl` 块内，我们需要输入 trait 定义中定义的方法签"
+"名。不需要在每个签名后面加上分号，而是使用花括号来填写方法体，具体描述 trait "
+"的方法对于特定类型应有的行为。"
 
 #: src/ch10-02-traits.md:115
 msgid ""
@@ -136,26 +169,32 @@ msgid ""
 "as the types. Here’s an example of how a binary crate could use our "
 "`aggregator` library crate:"
 msgstr ""
+"现在，该库已经在 `NewsArticle` 和 `SocialPost` 上实现了 `Summary` trait。因"
+"此，使用该库的用户可以在 `NewsArticle` 和 `SocialPost` 的实例上调用 trait 方"
+"法，就像调用普通方法一样。唯一的区别是，用户必须同时将 trait 以及相关类型带入"
+"作用域。以下是一个示例，说明一个二进制 crate 如何使用我们的 `aggregator` 库："
 
 #: src/ch10-02-traits.md:127 src/ch10-02-traits.md:314
 #: src/ch10-02-traits.md:520 src/ch10-02-traits.md:593
 msgid "\"horse_ebooks\""
-msgstr ""
+msgstr "“horse_ebooks”"
 
 #: src/ch10-02-traits.md:129 src/ch10-02-traits.md:316
 #: src/ch10-02-traits.md:522 src/ch10-02-traits.md:595
 msgid "\"of course, as you probably already know, people\""
-msgstr ""
+msgstr "\"of course, as you probably already know, people\""
 
 #: src/ch10-02-traits.md:135 src/ch10-02-traits.md:322
 msgid "\"1 new post: {}\""
-msgstr ""
+msgstr "\"1 new post: {}\""
 
 #: src/ch10-02-traits.md:139
 msgid ""
 "This code prints `1 new post: horse_ebooks: of course, as you probably "
 "already know, people`."
 msgstr ""
+"这段代码会输出 `1 new post: horse_ebooks: of course, as you probably already "
+"know, people`。"
 
 #: src/ch10-02-traits.md:142
 msgid ""
@@ -169,6 +208,12 @@ msgid ""
 "implement `Summary` on `Vec<T>` in our `aggregator` crate because the trait "
 "`Summary` is local to our `aggregator` crate."
 msgstr ""
+"依靠`聚合器`crate 的其他crates 也可以将`Summary`特性放入其自身类型实现"
+"`Summary`的范围。 要注意的一个限制是，我们只能在特性或类型的情况下实现某一类"
+"型的特性。 或者这两者都是我们的箱子本地的。 例如， 我们可以在类似`SocialPost`"
+"的自定义类型上实现像`Display`一样的标准库特性作为我们`聚合器`crate 功能的一部"
+"分，因为`SocialPost`型号是我们`聚合器`的本地的。 我们也可以在`聚合器`中实现 "
+"`Summary` 在 `Vec<T>` 上的 `Summary` ，因为它是我们`聚合器`中的本地特性。"
 
 #: src/ch10-02-traits.md:152
 msgid ""
@@ -182,14 +227,20 @@ msgid ""
 "two crates could implement the same trait for the same type, and Rust "
 "wouldn’t know which implementation to use."
 msgstr ""
+"但是，我们无法在外部类型上实现外部特性。例如，我们无法在我们的 `aggregator` "
+"包中实现对 `Vec<T>` 的 `Display` trait，因为 `Display` 和 `Vec<T>` 都定义在标"
+"准库中，并不属于我们的 `aggregator` 包。这种限制是 _一致性_ 属性的一部分，更"
+"具体地说，就是 _孤儿规则_。这个规则之所以如此命名，是因为父类型并不存在。这一"
+"规则确保了其他人的代码不会破坏你的代码，反之亦然。如果没有这一规则，两个包可"
+"能会为同一个类型实现相同的特性，而 Rust 将无法判断应该使用哪个实现。"
 
 #: src/ch10-02-traits.md:164
 msgid "<a id=\"default-implementations\"></a>"
-msgstr ""
+msgstr "<a id=\"default-implementations\"></a>"
 
 #: src/ch10-02-traits.md:166
 msgid "Using Default Implementations"
-msgstr ""
+msgstr "使用默认实现"
 
 #: src/ch10-02-traits.md:168
 msgid ""
@@ -198,6 +249,9 @@ msgid ""
 "every type. Then, as we implement the trait on a particular type, we can "
 "keep or override each method’s default behavior."
 msgstr ""
+"有时候，为某个或某些方法在 trait 中设置默认行为会很有用，这样就不需要在每个类"
+"型上为所有方法都提供具体的实现。因此，当我们在一个特定类型上实现该 trait 时，"
+"我们可以保留或覆盖每个方法的默认行为。"
 
 #: src/ch10-02-traits.md:173
 msgid ""
@@ -205,16 +259,20 @@ msgid ""
 "the `Summary` trait instead of only defining the method signature, as we did "
 "in Listing 10-12."
 msgstr ""
+"在列表10-14中，我们为`Summary` trait的`summarize`方法指定了一个默认字符串，而"
+"不是像在列表10-12中那样只定义该方法签名。"
 
 #: src/ch10-02-traits.md:182
 msgid "\"(Read more...)\""
-msgstr ""
+msgstr "\"(Read more...)\""
 
 #: src/ch10-02-traits.md:211
 msgid ""
 "To use a default implementation to summarize instances of `NewsArticle`, we "
 "specify an empty `impl` block with `impl Summary for NewsArticle {}`."
 msgstr ""
+"为了使用默认实现来总结 `NewsArticle` 的实例，我们需要使用一个空的 `impl` 块，"
+"并附加 `impl Summary for NewsArticle {}`。"
 
 #: src/ch10-02-traits.md:214
 msgid ""
@@ -223,32 +281,37 @@ msgid ""
 "`NewsArticle` implements the `Summary` trait. As a result, we can still call "
 "the `summarize` method on an instance of `NewsArticle`, like this:"
 msgstr ""
+"尽管我们不再直接在 `NewsArticle` 上定义 `summarize` 方法，但我们提供了默认的"
+"实现，并明确指出 `NewsArticle` 实现了 `Summary` 特性。因此，我们仍然可以在 "
+"`NewsArticle` 的实例上调用 `summarize` 方法，就像这样："
 
 #: src/ch10-02-traits.md:224 src/ch10-02-traits.md:582
 msgid "\"Penguins win the Stanley Cup Championship!\""
-msgstr ""
+msgstr "\"Penguins win the Stanley Cup Championship!\""
 
 #: src/ch10-02-traits.md:225 src/ch10-02-traits.md:584
 msgid "\"Pittsburgh, PA, USA\""
-msgstr ""
+msgstr "\"Pittsburgh, PA, USA\""
 
 #: src/ch10-02-traits.md:226 src/ch10-02-traits.md:585
 msgid "\"Iceburgh\""
-msgstr ""
+msgstr "\"Iceburgh\""
 
 #: src/ch10-02-traits.md:228
 msgid ""
 "\"The Pittsburgh Penguins once again are the best \\\n"
 "             hockey team in the NHL.\""
 msgstr ""
+"\"The Pittsburgh Penguins once again are the best \\\n"
+"             hockey team in the NHL.\""
 
 #: src/ch10-02-traits.md:233
 msgid "\"New article available! {}\""
-msgstr ""
+msgstr "\"New article available! {}\""
 
 #: src/ch10-02-traits.md:237
 msgid "This code prints `New article available! (Read more...)`."
-msgstr ""
+msgstr "这段代码会输出 `New article available! (Read more...)`。"
 
 #: src/ch10-02-traits.md:239
 msgid ""
@@ -258,6 +321,9 @@ msgid ""
 "same as the syntax for implementing a trait method that doesn’t have a "
 "default implementation."
 msgstr ""
+"创建默认实现并不需要我们对清单10-13中 `Summary` 在 `SocialPost` 上的实现进行"
+"任何修改。因为覆盖默认实现的语法与实现没有默认实现的 trait 方法的语法是相同"
+"的。"
 
 #: src/ch10-02-traits.md:245
 msgid ""
@@ -269,20 +335,25 @@ msgid ""
 "required, and then define a `summarize` method that has a default "
 "implementation that calls the `summarize_author` method:"
 msgstr ""
+"如，我们可以定义 `Summary` 这个特质，使其包含一个需要实现的 "
+"`summarize_author` 方法，然后定义一个 `summarize` 方法，该方法的默认实现会调"
+"用 `summarize_author` 方法："
 
 #: src/ch10-02-traits.md:258 src/ch10-02-traits.md:284
 msgid "\"(Read more from {}...)\""
-msgstr ""
+msgstr "\"(Read more from {}...)\""
 
 #: src/ch10-02-traits.md:271 src/ch10-02-traits.md:297
 msgid "\"@{}\""
-msgstr ""
+msgstr "\"@{}\""
 
 #: src/ch10-02-traits.md:276
 msgid ""
 "To use this version of `Summary`, we only need to define `summarize_author` "
 "when we implement the trait on a type:"
 msgstr ""
+"要使用这个版本的 `Summary`，我们只需要在一个类型上实现该特质时定义 "
+"`summarize_author`："
 
 #: src/ch10-02-traits.md:302
 msgid ""
@@ -293,24 +364,28 @@ msgid ""
 "behavior of the `summarize` method without requiring us to write any more "
 "code. Here’s what that looks like:"
 msgstr ""
+"在我们定义了 `summarize_author` 之后，我们可以在 `SocialPost` 结构的实例上调"
+"用 `summarize`，而 `summarize` 的默认实现会调用我们提供的 `summarize_author` "
+"的定义。由于我们已经实现了 `summarize_author`，因此 `Summary` 特质为我们提供"
+"了 `summarize` 方法的行为，而无需我们编写更多的代码。以下是具体的实现方式："
 
 #: src/ch10-02-traits.md:326
 msgid "This code prints `1 new post: (Read more from @horse_ebooks...)`."
-msgstr ""
+msgstr "这段代码会输出 `1 new post: (Read more from @horse_ebooks...)`。"
 
 #: src/ch10-02-traits.md:328
 msgid ""
 "Note that it isn’t possible to call the default implementation from an "
 "overriding implementation of that same method."
-msgstr ""
+msgstr "请注意，无法从同一方法的覆盖实现中调用默认实现。"
 
 #: src/ch10-02-traits.md:333
 msgid "<a id=\"traits-as-parameters\"></a>"
-msgstr ""
+msgstr "<a id=\"traits-as-parameters\"></a>"
 
 #: src/ch10-02-traits.md:335
 msgid "Using Traits as Parameters"
-msgstr ""
+msgstr "将特质作为参数使用"
 
 #: src/ch10-02-traits.md:337
 msgid ""
@@ -322,10 +397,16 @@ msgid ""
 "implements the `Summary` trait. To do this, we use the `impl Trait` syntax, "
 "like this:"
 msgstr ""
+"现在您已经学会了如何定义和实现 trait，我们可以探讨如何利用 trait 来定义能够接"
+"受多种不同类型的数据的函数。在 Listing 10-13 中，我们将使用在 `NewsArticle` "
+"和 `SocialPost` 类型上实现的 `Summary` trait，来定义一个 `notify` 函数。该函"
+"数的功能是在其 `item` 参数上调用 `summarize` 方法，而 `item` 参数则是一个实现"
+"了 `Summary` trait 的类型。为了实现这一点，我们将使用 `impl Trait` 语法，如下"
+"所示："
 
 #: src/ch10-02-traits.md:376 src/ch10-02-traits.md:399
 msgid "\"Breaking news! {}\""
-msgstr ""
+msgstr "\"Breaking news! {}\""
 
 #: src/ch10-02-traits.md:380
 msgid ""
@@ -337,20 +418,27 @@ msgid ""
 "that calls the function with any other type, such as a `String` or an `i32`, "
 "won’t compile, because those types don’t implement `Summary`."
 msgstr ""
+"指定`item`参数的具体类型，而不是指定`imp`关键字和特性名称。 此参数接受实现指"
+"定特性的任何类型。 在 `notify`的正文中，我们可以调用来自`summary`特性的任何"
+"`item`方法，例如`summarize`。 我们可以调用 `notify` 并在任何情况下传递"
+"`NewsArticle` 或 `SocialPost` 。 调用函数的代码和任何其他类型，例如`String`或"
+"`i32`，将不会编译，因为这些类型不实现 `Summary`。"
 
 #: src/ch10-02-traits.md:390
 msgid "<a id=\"fixing-the-largest-function-with-trait-bounds\"></a>"
-msgstr ""
+msgstr "<a id=\"fixing-the-largest-function-with-trait-bounds\"></a>"
 
 #: src/ch10-02-traits.md:392
 msgid "Trait Bound Syntax"
-msgstr ""
+msgstr "特质绑定语法"
 
 #: src/ch10-02-traits.md:394
 msgid ""
 "The `impl Trait` syntax works for straightforward cases but is actually "
 "syntax sugar for a longer form known as a _trait bound_; it looks like this:"
 msgstr ""
+"`impl Trait`这种语法适用于简单的情况，但实际上它是更长形式的一种语法糖，被称"
+"为“特质绑定”。它的样子如下："
 
 #: src/ch10-02-traits.md:403
 msgid ""
@@ -358,6 +446,8 @@ msgid ""
 "more verbose. We place trait bounds with the declaration of the generic type "
 "parameter after a colon and inside angle brackets."
 msgstr ""
+"这种较长的形式与上一节中的示例相当，但内容更为详细。我们会在冒号之后，并将 "
+"trait 约束与泛型类型参数的声明放在尖括号内。"
 
 #: src/ch10-02-traits.md:407
 msgid ""
@@ -366,6 +456,9 @@ msgid ""
 "complexity in other cases. For example, we can have two parameters that "
 "implement `Summary`. Doing so with the `impl Trait` syntax looks like this:"
 msgstr ""
+"`impl Trait`语法在简单情况下非常方便，能够使得代码更加简洁。而在其他情况下，"
+"更完整的特征绑定语法则能够表达更复杂的逻辑。例如，我们可以有两个实现`Summary`"
+"的参数。使用`impl Trait`语法时，这样的实现看起来就像这样："
 
 #: src/ch10-02-traits.md:416
 msgid ""
@@ -374,6 +467,9 @@ msgid ""
 "`Summary`). If we want to force both parameters to have the same type, "
 "however, we must use a trait bound, like this:"
 msgstr ""
+"如果我们希望这个函数允许 `item1` 和 `item2` 拥有不同的类型（只要这两种类型都"
+"实现了 `Summary`），那么使用 `impl Trait` 是合适的。然而，如果我们希望强制两"
+"个参数具有相同的类型，那么我们必须使用 trait 绑定，如下所示："
 
 #: src/ch10-02-traits.md:425
 msgid ""
@@ -381,14 +477,16 @@ msgid ""
 "parameters constrains the function such that the concrete type of the value "
 "passed as an argument for `item1` and `item2` must be the same."
 msgstr ""
+"泛型类型 `T` 被指定为 `item1` 和 `item2` 的参数类型。这限制了函数的行为，使得"
+"作为 `item1` 和 `item2` 参数的具体类型必须相同。"
 
 #: src/ch10-02-traits.md:431
 msgid "<a id=\"specifying-multiple-trait-bounds-with-the--syntax\"></a>"
-msgstr ""
+msgstr "<a id=\"specifying-multiple-trait-bounds-with-the--syntax\"></a>"
 
 #: src/ch10-02-traits.md:433
 msgid "Multiple Trait Bounds with the `+` Syntax"
-msgstr ""
+msgstr "使用 `+` 语法定义多个 trait 边界"
 
 #: src/ch10-02-traits.md:435
 msgid ""
@@ -397,20 +495,25 @@ msgid ""
 "`notify` definition that `item` must implement both `Display` and `Summary`. "
 "We can do so using the `+` syntax:"
 msgstr ""
+"我们还可以指定多个特性约束。假设我们希望 `notify` 也能使用显示格式，同时 "
+"`item` 也能使用 `summarize`：我们可以在 `notify` 的定义中指定 `item` 必须同时"
+"实现 `Display` 和 `Summary`。我们可以使用 `+` 语法来实现这一点。"
 
 #: src/ch10-02-traits.md:444
 msgid "The `+` syntax is also valid with trait bounds on generic types:"
-msgstr ""
+msgstr "`+`语法在泛型类型的特征边界中也是有效的："
 
 #: src/ch10-02-traits.md:450
 msgid ""
 "With the two trait bounds specified, the body of `notify` can call "
 "`summarize` and use `{}` to format `item`."
 msgstr ""
+"在指定了这两个 trait 边界之后， `notify` 的主体可以调用 `summarize`，并且可以"
+"使用 `{}` 来格式化 `item`。"
 
 #: src/ch10-02-traits.md:453
 msgid "Clearer Trait Bounds with `where` Clauses"
-msgstr ""
+msgstr "使用 `where` 子句使 trait 边界更加清晰"
 
 #: src/ch10-02-traits.md:455
 msgid ""
@@ -421,10 +524,14 @@ msgid ""
 "Rust has alternate syntax for specifying trait bounds inside a `where` "
 "clause after the function signature. So, instead of writing this:"
 msgstr ""
+"使用过多的 trait 约束有其缺点。每个泛型类型都有自己对应的 trait 约束，因此具"
+"有多个泛型类型参数的函数会在函数名和参数列表之间包含大量的 trait 约束信息，这"
+"会使函数签名难以阅读。因此，Rust 提供了另一种语法，用于在函数签名之后的 "
+"`where` 子句中指定 trait 约束。所以，与其这样写："
 
 #: src/ch10-02-traits.md:466
 msgid "we can use a `where` clause, like this:"
-msgstr ""
+msgstr "我们可以使用一个 `where` 子句，就像这样："
 
 #: src/ch10-02-traits.md:478
 msgid ""
@@ -432,16 +539,20 @@ msgid ""
 "list, and return type are close together, similar to a function without lots "
 "of trait bounds."
 msgstr ""
+"这个函数的签名更加简洁：函数名、参数列表和返回类型紧密排列在一起，类似于没有"
+"大量特征限定的函数。"
 
 #: src/ch10-02-traits.md:482
 msgid "Returning Types That Implement Traits"
-msgstr ""
+msgstr "返回实现了特定特征的类型"
 
 #: src/ch10-02-traits.md:484
 msgid ""
 "We can also use the `impl Trait` syntax in the return position to return a "
 "value of some type that implements a trait, as shown here:"
 msgstr ""
+"我们还可以使用 `impl Trait` 语法在返回位置返回一个实现了某个 trait 的值，如下"
+"所示："
 
 #: src/ch10-02-traits.md:530
 msgid ""
@@ -451,6 +562,10 @@ msgid ""
 "`returns_summarizable` returns a `SocialPost`, but the code calling this "
 "function doesn’t need to know that."
 msgstr ""
+"通过使用 `impl Summary` 作为返回类型，我们指定了 `returns_summarizable` 函数"
+"返回一个实现了 `Summary` 特性的类型，但并未具体说明该类型的具体形式。在这种情"
+"况下， `returns_summarizable` 返回一个 `SocialPost`，但调用此函数的代码无需知"
+"道这一细节。"
 
 #: src/ch10-02-traits.md:536
 msgid ""
@@ -461,6 +576,10 @@ msgid ""
 "you concisely specify that a function returns some type that implements the "
 "`Iterator` trait without needing to write out a very long type."
 msgstr ""
+"仅通过函数实现的特质来指定返回类型的能力，在闭包和迭代器的上下文中特别有用。"
+"这些概念我们将在第13章中详细讨论。闭包和迭代器创建的类型只有编译器才知道，或"
+"者这些类型的指定非常冗长。`impl Trait`语法允许你简洁地指定一个函数返回实现了"
+"`Iterator`特质的某种类型，而无需写出非常冗长的类型说明。"
 
 #: src/ch10-02-traits.md:543
 msgid ""
@@ -468,12 +587,17 @@ msgid ""
 "For example, this code that returns either a `NewsArticle` or a `SocialPost` "
 "with the return type specified as `impl Summary` wouldn’t work:"
 msgstr ""
+"不过，只有当你返回单一类型时才能使用 `impl Trait`。例如，以下代码如果返回的"
+"是 `NewsArticle` 或 `SocialPost`，并且返回类型被指定为 `impl Summary`，那么这"
+"种代码是无效的。"
 
 #: src/ch10-02-traits.md:587
 msgid ""
 "\"The Pittsburgh Penguins once again are the best \\\n"
 "                 hockey team in the NHL.\""
 msgstr ""
+"\"The Pittsburgh Penguins once again are the best \\\n"
+"                 hockey team in the NHL.\""
 
 #: src/ch10-02-traits.md:604
 msgid ""
@@ -484,10 +608,14 @@ msgid ""
 "objects.html#using-trait-objects-to-abstract-over-shared-behavior)<!-- "
 "ignore --> section of Chapter 18."
 msgstr ""
+"由于编译器中对“impl Trait”语法的实现有限制，不允许返回“新闻文"
+"章”或“SocialPost”。我们将在第 18 章的[“利用特征对象抽象共享行为”]（ch18-02-"
+"trait-objects.html#using-trait-objects-to-abstract-over-shared-behavior）中讲"
+"解如何编写带有这种行为的函数<!--ignore ->部分。"
 
 #: src/ch10-02-traits.md:610
 msgid "Using Trait Bounds to Conditionally Implement Methods"
-msgstr ""
+msgstr "使用特质边界来条件性地实现方法"
 
 #: src/ch10-02-traits.md:612
 msgid ""
@@ -502,14 +630,21 @@ msgid ""
 "inner type `T` implements the `PartialOrd` trait that enables comparison "
 "_and_ the `Display` trait that enables printing."
 msgstr ""
+"通过使用带有 `impl` 块的特质绑定，该块使用了泛型类型参数，我们可以为实现了指"
+"定特质的类型有条件地实现方法。例如，在 Listing 10-15 中的 `Pair<T>` 类型总是"
+"会实现 `new` 函数，该函数会返回 `Pair<T>` 的新实例（回想一下第 5 章的 “方法语"
+"法” 部分，其中 `Self` 是 `impl` 块中类型的别名，在这种情况下就是 "
+"`Pair<T>`）。但在下一个 `impl` 块中， `Pair<T>` 只有在其内部类型 `T` 实现了允"
+"许比较的 `PartialOrd` 特质以及允许打印的 `Display` 特质时，才会实现 "
+"`cmp_display` 方法。"
 
 #: src/ch10-02-traits.md:641
 msgid "\"The largest member is x = {}\""
-msgstr ""
+msgstr "\"The largest member is x = {}\""
 
 #: src/ch10-02-traits.md:643
 msgid "\"The largest member is y = {}\""
-msgstr ""
+msgstr "\"The largest member is y = {}\""
 
 #: src/ch10-02-traits.md:651
 msgid ""
@@ -520,6 +655,10 @@ msgid ""
 "the `ToString` trait on any type that implements the `Display` trait. The "
 "`impl` block in the standard library looks similar to this code:"
 msgstr ""
+"我们还可以有条件地为一个实现了另一个特性的类型实现该特性。对于满足某个特性的"
+"任何类型，其上的特性实现被称为“泛化实现”，在Rust标准库中得到了广泛的应用。例"
+"如，标准库会在实现了`Display`特性的任何类型上实现`ToString`特性。标准库中的"
+"`impl`块看起来类似于以下代码："
 
 #: src/ch10-02-traits.md:660
 msgid "// --snip--\n"
@@ -534,12 +673,15 @@ msgid ""
 "implements the `Display` trait. For example, we can turn integers into their "
 "corresponding `String` values like this because integers implement `Display`:"
 msgstr ""
+"由于标准库提供了这种通用的实现，我们可以在任何实现了 `Display` 特性的类型上调"
+"用由 `ToString` 特性定义的 `to_string` 方法。例如，我们可以将整数转换为相应"
+"的 `String` 值，因为整数实现了 `Display` 特性。"
 
 #: src/ch10-02-traits.md:673
 msgid ""
 "Blanket implementations appear in the documentation for the trait in the "
 "“Implementors” section."
-msgstr ""
+msgstr "在文档的“Implementors”部分中，会看到关于该 trait 的通用实现。"
 
 #: src/ch10-02-traits.md:676
 msgid ""
@@ -555,3 +697,10 @@ msgid ""
 "already checked at compile time. Doing so improves performance without "
 "having to give up the flexibility of generics."
 msgstr ""
+"特质和特质边界让我们能够编写使用泛型类型参数的代码，从而减少重复代码，同时向"
+"编译器明确表明我们希望该泛型类型具有特定的行为。编译器可以利用特质边界的信息"
+"来确保所有在代码中使用的具体类型都表现出正确的行为。在动态类型语言中，如果我"
+"们对一个没有定义该方法的类型调用某个方法，那么在运行时就会出错。但Rust将这些"
+"错误提前到了编译时，这样我们就必须在代码运行之前就解决这些问题。此外，我们不"
+"必编写在运行时检查行为的代码，因为我们已经在编译时进行了检查。这样做可以提高"
+"性能，同时又不牺牲泛型的灵活性。"

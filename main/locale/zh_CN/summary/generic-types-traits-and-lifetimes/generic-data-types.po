@@ -22,10 +22,13 @@ msgid ""
 "Let’s first look at how to define functions, structs, enums, and methods "
 "using generics. Then, we’ll discuss how generics affect code performance."
 msgstr ""
+"我们使用泛型来为函数签名或结构体等元素定义规范，然后可以将这些定义应用于多种"
+"具体数据类型。首先，让我们看看如何使用泛型来定义函数、结构体、枚举和方法。接"
+"着，我们将讨论泛型对代码性能的影响。"
 
 #: src/ch10-01-syntax.md:8
 msgid "In Function Definitions"
-msgstr ""
+msgstr "在函数定义中"
 
 #: src/ch10-01-syntax.md:10
 msgid ""
@@ -35,6 +38,9 @@ msgid ""
 "provides more functionality to callers of our function while preventing code "
 "duplication."
 msgstr ""
+"在定义使用泛型的函数时，我们将泛型放在函数的签名中，而通常我们会在这里指定参"
+"数和返回值的数据类型。这样做可以使我们的代码更加灵活，为函数的调用者提供更多"
+"的功能，同时还能避免代码重复。"
 
 #: src/ch10-01-syntax.md:15
 msgid ""
@@ -42,6 +48,8 @@ msgid ""
 "that both find the largest value in a slice. We’ll then combine these into a "
 "single function that uses generics."
 msgstr ""
+"继续我们的 `largest` 函数，列表 10-4 展示了两个都能找到切片中最大值的函数。之"
+"后，我们将这两个函数合并成一个使用泛型的函数。"
 
 #: src/ch10-01-syntax.md:50 src/ch10-01-syntax.md:115
 msgid "\"The largest number is {result}\""
@@ -49,23 +57,23 @@ msgstr "“秘密号码是：{result}”"
 
 #: src/ch10-01-syntax.md:53 src/ch10-01-syntax.md:57 src/ch10-01-syntax.md:117
 msgid "'y'"
-msgstr ""
+msgstr "'y'"
 
 #: src/ch10-01-syntax.md:53 src/ch10-01-syntax.md:117
 msgid "'m'"
-msgstr ""
+msgstr "'m'"
 
 #: src/ch10-01-syntax.md:53 src/ch10-01-syntax.md:117
 msgid "'a'"
-msgstr ""
+msgstr "'a'"
 
 #: src/ch10-01-syntax.md:53 src/ch10-01-syntax.md:117
 msgid "'q'"
-msgstr ""
+msgstr "'q'"
 
 #: src/ch10-01-syntax.md:56 src/ch10-01-syntax.md:120
 msgid "\"The largest char is {result}\""
-msgstr ""
+msgstr "\"The largest char is {result}\""
 
 #: src/ch10-01-syntax.md:63
 msgid ""
@@ -75,6 +83,9 @@ msgid ""
 "eliminate the duplication by introducing a generic type parameter in a "
 "single function."
 msgstr ""
+"`largest_i32`函数是我们从清单10-3中提取出来的函数，它用于找出切片中最大的"
+"`i32`。`largest_char`函数则用于找出切片中最大的`char`。这两个函数的功能本质上"
+"是相同的，因此我们可以通过在单个函数中引入一个通用类型参数来消除重复代码。"
 
 #: src/ch10-01-syntax.md:68
 msgid ""
@@ -85,6 +96,10 @@ msgid ""
 "and Rust’s type-naming convention is UpperCamelCase. Short for _type_, `T` "
 "is the default choice of most Rust programmers."
 msgstr ""
+"为了在一个新的单一函数中参数化类型，我们需要为类型参数命名，就像为函数的值参"
+"数命名一样。你可以使用任何标识符作为类型参数名。不过，我们会使用 `T`，因为按"
+"照惯例，Rust 中的类型参数名通常很短，通常只有一个字母，而且 Rust 的类型命名惯"
+"例是 UpperCamelCase。 `T` 是大多数 Rust 程序员默认的命名方式。"
 
 #: src/ch10-01-syntax.md:75
 msgid ""
@@ -96,6 +111,10 @@ msgid ""
 "brackets, `<>`, between the name of the function and the parameter list, "
 "like this:"
 msgstr ""
+"当我们在函数体内使用参数时，必须在函数签名中声明该参数的名称，这样编译器才能"
+"明白这个名称的含义。同样地，当我们在函数签名中使用类型参数名称时，也必须在使"
+"用之前先声明该类型参数名称。为了定义泛型函数`largest`，我们需要在尖括号`<>`内"
+"声明类型名称，并将其放在函数名称和参数列表之间，如下所示："
 
 #: src/ch10-01-syntax.md:86
 msgid ""
@@ -104,6 +123,9 @@ msgid ""
 "values of type `T`. The `largest` function will return a reference to a "
 "value of the same type `T`."
 msgstr ""
+"我们将这个定义理解为：“函数 `largest` 是某种类型的泛化，即 `largest` 是某种类"
+"型下的通用函数。” 这个函数有一个名为 `list` 的参数，该参数是一个类型为 `T` 的"
+"值的切片。而 `largest` 函数将返回一个指向相同类型 `T` 的值的引用。"
 
 #: src/ch10-01-syntax.md:91
 msgid ""
@@ -112,10 +134,12 @@ msgid ""
 "the function with either a slice of `i32` values or `char` values. Note that "
 "this code won’t compile yet."
 msgstr ""
+"列表10-5展示了使用泛型数据类型时，`largest`函数的完整定义。该列表还展示了如何"
+"通过使用`i32`或`char`的值来调用这个函数。请注意，这段代码目前还无法编译。"
 
 #: src/ch10-01-syntax.md:126
 msgid "If we compile this code right now, we’ll get this error:"
-msgstr ""
+msgstr "如果我们现在编译这段代码，将会出现以下错误："
 
 #: src/ch10-01-syntax.md:128
 msgid ""
@@ -140,6 +164,26 @@ msgid ""
 "error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0369]: binary operation `>` cannot be applied to type `&T`\n"
+" --> src/main.rs:5:17\n"
+"  |\n"
+"5 |         if item > largest {\n"
+"  |            ---- ^ ------- &T\n"
+"  |            |\n"
+"  |            &T\n"
+"  |\n"
+"help: consider restricting type parameter `T` with trait `PartialOrd`\n"
+"  |\n"
+"1 | fn largest<T: std::cmp::PartialOrd>(list: &[T]) -> &T {\n"
+"  |             ++++++++++++++++++++++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0369`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
 
 #: src/ch10-01-syntax.md:148
 msgid ""
@@ -155,10 +199,17 @@ msgid ""
 "will then compile, because the standard library implements `PartialOrd` on "
 "both `i32` and `char`."
 msgstr ""
+"帮助文本中提到了`std::cmp::PartialOrd`，这是一种特质。我们将在下一节中讨论特"
+"质。目前，请注意这个错误表明`largest`的主体无法适用于`T`可能存在的所有类型。"
+"因为我们需要在主体中比较类型为`T`的值，所以我们只能使用那些值可以排序的类型。"
+"为了启用比较功能，标准库提供了`std::cmp::PartialOrd`特质，你可以将其应用于类"
+"型上（有关此特质的更多信息，请参见附录C）。为了修复清单10-5，我们可以按照帮助"
+"文本的建议，将适用于`T`的类型限制为那些实现了`PartialOrd`的类型。这样，清单就"
+"能成功编译了，因为标准库同时实现了`PartialOrd`在`i32`和`char`上。"
 
 #: src/ch10-01-syntax.md:159
 msgid "In Struct Definitions"
-msgstr ""
+msgstr "在结构体定义中"
 
 #: src/ch10-01-syntax.md:161
 msgid ""
@@ -166,6 +217,9 @@ msgid ""
 "fields using the `<>` syntax. Listing 10-6 defines a `Point<T>` struct to "
 "hold `x` and `y` coordinate values of any type."
 msgstr ""
+"我们还可以定义结构体，以便在其中一个或多个字段中使用泛型类型参数，使用 `<>` "
+"语法。列表 10-6 定义了一个 `Point<T>` 结构体，用于存储任何类型的 `x` 和 `y` "
+"坐标值。"
 
 #: src/ch10-01-syntax.md:181
 msgid ""
@@ -175,6 +229,9 @@ msgid ""
 "generic type in the struct definition where we would otherwise specify "
 "concrete data types."
 msgstr ""
+"结构定义中使用通用语法类似于函数定义中使用的语法。 首先，我们在结构名称之后声"
+"明方括号中的类型参数名称。 然后我们在结构定义中使用通用类型，否则我们将指定具"
+"体的数据类型。"
 
 #: src/ch10-01-syntax.md:186
 msgid ""
@@ -184,6 +241,10 @@ msgid ""
 "type may be. If we create an instance of a `Point<T>` that has values of "
 "different types, as in Listing 10-7, our code won’t compile."
 msgstr ""
+"注意，因为我们只使用一个通用类型来定义 `Point<T>`， 这个定义表示`Point<T>`结"
+"构是一般性的，超过了某种类型的`T`， 和字段`x` 和 `y` 都是同一类型的 _both_ ，"
+"不管该类型是什么。 如果我们创建一个 `Point<T>` 的实例，具有不同类型的值，如果"
+"在列表10-7中，我们的代码将不会被编译。"
 
 #: src/ch10-01-syntax.md:207
 msgid ""
@@ -192,6 +253,9 @@ msgid ""
 "of `Point<T>`. Then, when we specify `4.0` for `y`, which we’ve defined to "
 "have the same type as `x`, we’ll get a type mismatch error like this:"
 msgstr ""
+"在此示例中，当我们将整数值`5`分配给`x`时，， 我们让编译器知道通用类型`T`将是"
+"此实例的 `Point<T>`的整数。 然后，当我们为 `y` 指定了 `4.0` 的时候，我们被定"
+"义为 `x` 的类型，我们会遇到如下类型不匹配的错误："
 
 #: src/ch10-01-syntax.md:212
 msgid ""
@@ -210,6 +274,20 @@ msgid ""
 "error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0308]: mismatched types\n"
+" --> src/main.rs:7:38\n"
+"  |\n"
+"7 |     let wont_work = Point { x: 5, y: 4.0 };\n"
+"  |                                      ^^^ expected integer, found "
+"floating-point number\n"
+"\n"
+"For more information about this error, try `rustc --explain E0308`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
 
 #: src/ch10-01-syntax.md:225
 msgid ""
@@ -218,6 +296,9 @@ msgid ""
 "example, in Listing 10-8, we change the definition of `Point` to be generic "
 "over types `T` and `U` where `x` is of type `T` and `y` is of type `U`."
 msgstr ""
+"要定义一个 `Point` 结构，其中`x` 和 `y` 都是通用的，但可能有不同的类型，我们"
+"可以使用多个通用类型参数。 例如，在列表10-8中 我们修改`Point`的定义为通用型号"
+"`T`和`U`，而`x`的类型为`T`，`y`的类型为`U`。"
 
 #: src/ch10-01-syntax.md:247
 msgid ""
@@ -227,10 +308,13 @@ msgid ""
 "types in your code, it could indicate that your code needs restructuring "
 "into smaller pieces."
 msgstr ""
+"现在，所有形如 `Point` 的实例都是被允许的！你可以在一个定义中使用任意多的通用"
+"类型参数，但使用太多会导致代码难以阅读。如果你发现自己的代码中使用了大量的通"
+"用类型，那么可能需要对代码进行重构，将其拆分成更小的部分。"
 
 #: src/ch10-01-syntax.md:253
 msgid "In Enum Definitions"
-msgstr ""
+msgstr "在枚举定义中"
 
 #: src/ch10-01-syntax.md:255
 msgid ""
@@ -238,6 +322,8 @@ msgid ""
 "their variants. Let’s take another look at the `Option<T>` enum that the "
 "standard library provides, which we used in Chapter 6:"
 msgstr ""
+"就像我们对结构体所做的那样，我们也可以定义枚举来保存各种通用数据类型。让我们"
+"再看一下标准库提供的 `Option<T>` 枚举，我们在第6章中就已经使用过它了。"
 
 #: src/ch10-01-syntax.md:266
 msgid ""
@@ -248,12 +334,19 @@ msgid ""
 "concept of an optional value, and because `Option<T>` is generic, we can use "
 "this abstraction no matter what the type of the optional value is."
 msgstr ""
+"这个定义现在应该对你来说更有意义了。如你所见，``Option<T>`` 这个枚举类型是对 "
+"``T`` 的泛化，它有两个变体：``Some``，它只包含一个类型为 ``T`` 的值，以及另一"
+"个 ``None`` 变体，它不包含任何值。通过使用 ``Option<T>`` 这个枚举类型，我们可"
+"以表达一个可选值的抽象概念。由于 ``Option<T>`` 是泛化的，无论可选值的类型是什"
+"么，我们都可以使用这种抽象方式。"
 
 #: src/ch10-01-syntax.md:273
 msgid ""
 "Enums can use multiple generic types as well. The definition of the `Result` "
 "enum that we used in Chapter 9 is one example:"
 msgstr ""
+"枚举类型也可以使用多种泛型类型。我们在第9章中使用的 `Result` 枚举就是一个例"
+"子："
 
 #: src/ch10-01-syntax.md:283
 msgid ""
@@ -267,6 +360,12 @@ msgid ""
 "filled in with the type `std::io::Error` when there were problems opening "
 "the file."
 msgstr ""
+"`Result` 枚举类型适用于两种类型：`T` 和 `E`，并且有两个变体：`Ok`，它存储类型"
+"为 `T` 的值；以及 `Err`，它存储类型为 `E` 的值。这个定义使得我们可以在任何可"
+"能成功执行操作（返回某种类型为 `T` 的值）或可能失败（返回某种类型为 `E` 的错"
+"误）的情况下使用 `Result` 枚举类型。实际上，在 Listing 9-3 中，我们正是使用这"
+"种方式来打开文件的。当文件成功打开时，`T` 会被填充为类型为 `std::fs::File` 的"
+"值；而当文件打开出现问题时，`E` 会被填充为类型为 `std::io::Error` 的值。"
 
 #: src/ch10-01-syntax.md:292
 msgid ""
@@ -274,10 +373,12 @@ msgid ""
 "definitions that differ only in the types of the values they hold, you can "
 "avoid duplication by using generic types instead."
 msgstr ""
+"当你在代码中发现多个结构体或枚举定义，它们只是持有的值类型不同时，可以通过使"
+"用泛型类型来避免重复。"
 
 #: src/ch10-01-syntax.md:296
 msgid "In Method Definitions"
-msgstr ""
+msgstr "方法定义"
 
 #: src/ch10-01-syntax.md:298
 msgid ""
@@ -286,16 +387,21 @@ msgid ""
 "`Point<T>` struct we defined in Listing 10-6 with a method named `x` "
 "implemented on it."
 msgstr ""
+"我们可以像在第五章中那样，对结构体枚举实现方法，并且也可以在它们的定义中使用"
+"泛型类型。列表10-9展示了我们在列表10-6中定义的一个结构体 `Point<T>`，并在该结"
+"构体上实现了一个名为 `x` 的方法。"
 
 #: src/ch10-01-syntax.md:319 src/ch10-01-syntax.md:366
 msgid "\"p.x = {}\""
-msgstr ""
+msgstr "\"p.x = {}\""
 
 #: src/ch10-01-syntax.md:325
 msgid ""
 "Here, we’ve defined a method named `x` on `Point<T>` that returns a "
 "reference to the data in the field `x`."
 msgstr ""
+"在这里，我们定义了一个名为 `x` 的方法，在 `Point<T>` 上返回一个 `x` 字段中的"
+"数据。"
 
 #: src/ch10-01-syntax.md:328
 msgid ""
@@ -309,6 +415,12 @@ msgid ""
 "generic type, that method will be defined on any instance of the type, no "
 "matter what concrete type ends up substituting for the generic type."
 msgstr ""
+"请注意，我们必须在`imp`之后声明`T`，以便我们可以使用 `T`来指定我们正在执行"
+"`Point<T>`的方法。 在`imp`之后， `T`将`T`作为通用类型， Rust 可以识别`Point`"
+"中的角度括号中的类型是一个通用类型，而不是水泥类型。 我们可以选择一个不同于结"
+"构定义中声明的通用参数的名称。 但使用同一名称是常规的。 如果您在`imp`中写入了"
+"一个宣告一个通用类型的方法，该方法将被定义在类型的任何实例中， 不论哪种具体类"
+"型最终会替代通用类型。"
 
 #: src/ch10-01-syntax.md:338
 msgid ""
@@ -318,6 +430,9 @@ msgid ""
 "Listing 10-10, we use the concrete type `f32`, meaning we don’t declare any "
 "types after `impl`."
 msgstr ""
+"我们还可以在定义类型方法时具体规定对通用类型的限制。 例如，我们只能在 "
+"`Point<f32>` 实例上实现方法，而不能在 `Point<T>中实现任何普通类型的方法。 在"
+"列表10-10中，我们使用水泥类型 `f32`，意思是我们不在`默示'后声明任何类型。"
 
 #: src/ch10-01-syntax.md:372
 msgid ""
@@ -327,6 +442,9 @@ msgid ""
 "the point at coordinates (0.0, 0.0) and uses mathematical operations that "
 "are available only for floating-point types."
 msgstr ""
+"这个代码表示`Point<f32>`类型将有一个 `Distance_from_origin` 方法； `T`不是 "
+"`f32` 类型的 `Point<T>`的其他实例将无法定义此方法。 该方法测量我们的点距离坐"
+"标(0.0, 0) 并使用仅适用于浮点型号的数学操作。"
 
 #: src/ch10-01-syntax.md:378
 msgid ""
@@ -337,18 +455,22 @@ msgid ""
 "a new `Point` instance with the `x` value from the `self` `Point` (of type "
 "`X1`) and the `y` value from the passed-in `Point` (of type `Y2`)."
 msgstr ""
+"结构定义中的通用类型参数并不总是与你在同一结构中使用的方法签名相同。 列出"
+"10-11 使用`Point`结构`和`X2`和`Y2`的通用类型`X1`和`Y1`，用于`mixup`的签名，使"
+"示例更清晰。 这个方法创建了一个新的 `Point` 实例，其中有`self` (类型为 `X1`)"
+"和`y` (类型为 `Y2`)的`x`值。"
 
 #: src/ch10-01-syntax.md:404
 msgid "\"Hello\""
-msgstr ""
+msgstr "\"Hello\""
 
 #: src/ch10-01-syntax.md:404
 msgid "'c'"
-msgstr ""
+msgstr "'c'"
 
 #: src/ch10-01-syntax.md:408
 msgid "\"p3.x = {}, p3.y = {}\""
-msgstr ""
+msgstr "\"p3.x = {}, p3.y = {}\""
 
 #: src/ch10-01-syntax.md:414
 msgid ""
@@ -360,6 +482,11 @@ msgid ""
 "`p1`. The `p3` variable will have a `char` for `y` because `y` came from "
 "`p2`. The `println!` macro call will print `p3.x = 5, p3.y = c`."
 msgstr ""
+"在 `main` 中，我们定义了一个 `Point` 用于`x` （值`5`）和`y` （值`10.4`）的 "
+"`f64`。 `p2`变量是一个 `Point` 结构，其中有一个字符串分割为 `x` (值为 "
+"`Hello`) 和一个`char`(值为 `c`)。 在`p1`上调用`mixup`和`p2`的参数'可以让我们"
+"`p3`，它将有`i32`的`x`，因为`x`来自`p1`。 `p3`变量将有`y`的`char`，因为`y`来"
+"自`p2`。 `println!`macro调用将打印 `p3.x = 5, p3.y = c`。"
 
 #: src/ch10-01-syntax.md:422
 msgid ""
@@ -370,10 +497,14 @@ msgid ""
 "parameters `X2` and `Y2` are declared after `fn mixup` because they’re only "
 "relevant to the method."
 msgstr ""
+"这个示例的目的是为了表明一种情况，即某些通用参数是以`implication'声明的，某些"
+"参数是以方法定义声明的。 这里的通用参数`X1`和`Y1`是在`imp`之后申报的，因为它"
+"们与结构定义相同。 通用参数`X2`和`Y2`都是在 `fn mixup` 之后声明的，因为它们只"
+"与方法相关。"
 
 #: src/ch10-01-syntax.md:429
 msgid "Performance of Code Using Generics"
-msgstr ""
+msgstr "使用泛型代码的代码性能"
 
 #: src/ch10-01-syntax.md:431
 msgid ""
@@ -381,6 +512,8 @@ msgid ""
 "type parameters. The good news is that using generic types won’t make your "
 "program run any slower than it would with concrete types."
 msgstr ""
+"您可能在想使用通用类型参数时是否有运行时成本。 好消息是，使用通用类型不会使您"
+"的程序运行比具体类型的程序慢一些。"
 
 #: src/ch10-01-syntax.md:435
 msgid ""
@@ -392,12 +525,16 @@ msgid ""
 "looks at all the places where generic code is called and generates code for "
 "the concrete types the generic code is called with."
 msgstr ""
+"Rust 通过在编译时使用通用法实现代码的单个无主化。 _Monomorphization_ 是通过填"
+"写编译时使用的水泥类型将通用代码变成具体代码的过程。 在此过程中， 编译器与我"
+"们在列表10-5中创建通用函数的步骤相反：编译器查看调用通用代码的所有地方，并生"
+"成调用通用代码的水泥类型。"
 
 #: src/ch10-01-syntax.md:443
 msgid ""
 "Let’s look at how this works by using the standard library’s generic "
 "`Option<T>` enum:"
-msgstr ""
+msgstr "让我们通过使用标准库库的通用`选项<T>` 列举来看看这种方法是如何运作的："
 
 #: src/ch10-01-syntax.md:451
 msgid ""
@@ -408,12 +545,17 @@ msgid ""
 "into two definitions specialized to `i32` and `f64`, thereby replacing the "
 "generic definition with the specific ones."
 msgstr ""
+"当Rust 编译这个代码时，它执行单个无主化。 在这一过程中， 编译器读取了在 "
+"`Option<T>` 实例中使用的值，并且识别了两种类型的 `Option<T>`：一个是 `i32` ，"
+"另一个是 `f64` 。 因此，它将`备选案文<T>`的通用定义扩大为`i32`和`f64`'两个专"
+"门定义， 因此，用具体定义取代通用定义。"
 
 #: src/ch10-01-syntax.md:458
 msgid ""
 "The monomorphized version of the code looks similar to the following (the "
 "compiler uses different names than what we’re using here for illustration):"
 msgstr ""
+"单态化代码看起来类似于以下内容（编译器使用的名字与我们这里用的示例不同）："
 
 #: src/ch10-01-syntax.md:482
 msgid ""
@@ -424,3 +566,7 @@ msgid ""
 "definition by hand. The process of monomorphization makes Rust’s generics "
 "extremely efficient at runtime."
 msgstr ""
+"通用的 `Option<T>`将被编译器创建的具体定义所替代。因为Rust将泛型代码编译成每"
+"个实例都指定了类型的代码，所以我们使用泛型时不会产生运行时的成本。当代码运行"
+"时，它的执行方式与我们手动复制每个定义时完全相同。这种单态化过程使得Rust的泛"
+"型在运行时非常高效。"

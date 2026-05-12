@@ -447,10 +447,12 @@ msgid ""
 "Recall that we talked about string literals being stored inside the binary. "
 "Now that we know about slices, we can properly understand string literals:"
 msgstr ""
+"回顾我们已经谈论过的字符串文献存储在二进制文件中。既然我们知道切片，我们可以"
+"正确理解字符串文献："
 
 #: src/ch04-03-slices.md:370
 msgid "\"Hello, world!\""
-msgstr ""
+msgstr "“你好，世界！”"
 
 #: src/ch04-03-slices.md:373
 msgid ""
@@ -458,16 +460,20 @@ msgid ""
 "of the binary. This is also why string literals are immutable; `&str` is an "
 "immutable reference."
 msgstr ""
+"这里的`s`的类型是`&str`: 这是一个指向这个二进制程序的特定点的分割。 这也是为"
+"什么字符串的文字不可变；`&str`是不可变的引用。"
 
 #: src/ch04-03-slices.md:377
 msgid "String Slices as Parameters"
-msgstr ""
+msgstr "字符串切片作为参数"
 
 #: src/ch04-03-slices.md:379
 msgid ""
 "Knowing that you can take slices of literals and `String` values leads us to "
 "one more improvement on `first_word`, and that’s its signature:"
 msgstr ""
+"知道你可以拿起文字分割和 `String`的值会使我们在`first_word`上再有一个改进，并"
+"且它的签名："
 
 #: src/ch04-03-slices.md:386
 msgid ""
@@ -475,37 +481,39 @@ msgid ""
 "instead because it allows us to use the same function on both `&String` "
 "values and `&str` values."
 msgstr ""
+"一个经验丰富的Rustacean会写上列表4-9中显示的签名，因为它允许我们同时使用同一"
+"个函数在 `&String` 和 `&str` 两个值。"
 
 #: src/ch04-03-slices.md:408 src/ch04-03-slices.md:457
 msgid ""
 "// `first_word` works on slices of `String`s, whether partial or whole.\n"
-msgstr ""
+msgstr "// `first_word` 工作于`String`s的切片上，不论是局部的还是整个的，\n"
 
 #: src/ch04-03-slices.md:411
 msgid ""
 "// `first_word` also works on references to `String`s, which are equivalent\n"
-msgstr ""
+msgstr "// `first_word` 也适用于等于的 `String`s\n"
 
 #: src/ch04-03-slices.md:412
 msgid "// to whole slices of `String`s.\n"
-msgstr ""
+msgstr "// 整个`字符串'的切片.\n"
 
 #: src/ch04-03-slices.md:417
 msgid ""
 "// `first_word` works on slices of string literals, whether partial or\n"
-msgstr ""
+msgstr "// `first_word` 工作于字符串文字的切片上，不论是部分文字还是\n"
 
 #: src/ch04-03-slices.md:418
 msgid "// whole.\n"
-msgstr ""
+msgstr "// 整数。\n"
 
 #: src/ch04-03-slices.md:422
 msgid "// Because string literals *are* string slices already,\n"
-msgstr ""
+msgstr "// 因为字符串文本*为*字符串切片，\n"
 
 #: src/ch04-03-slices.md:423
 msgid "// this works too, without the slice syntax!\n"
-msgstr ""
+msgstr "// 这也能正常工作，没有切片语法！\n"
 
 #: src/ch04-03-slices.md:430
 msgid ""
@@ -516,6 +524,11 @@ msgid ""
 "html#using-deref-coercions-in-functions-and-methods)<!--\n"
 "ignore --> section of Chapter 15."
 msgstr ""
+"如果我们有一个字符串切片，我们可以直接传递它。 如果我们有一个 `String`，我们"
+"可以传递一个 `String` 的分割或对 `String` 的引用。 这种灵活性利用了取消胁迫，"
+"我们将在[“在函数和方法中使用Deref Coercions”](ch15-02-deref.html#using-deref-"
+"coercions-in-functions-and-methods)中包含的功能！ -\n"
+"忽略--> 第15章部分。"
 
 #: src/ch04-03-slices.md:436
 msgid ""
@@ -523,24 +536,32 @@ msgid ""
 "`String` makes our API more general and useful without losing any "
 "functionality:"
 msgstr ""
+"定义函数作为字符串切片，而不是引用`String`，使我们的 API 更加笼统和有用，同时"
+"又不会失去任何功能："
 
 #: src/ch04-03-slices.md:460
 msgid ""
 "// `first_word` also works on references to `String`s, which are equivalent\n"
 "    // to whole slices of `String`s.\n"
 msgstr ""
+"// `first_word` 也适用于对`String`s的引用，这些引用相当于\n"
+"    // 整个`String`s'的切片。\n"
 
 #: src/ch04-03-slices.md:466
 msgid ""
 "// `first_word` works on slices of string literals, whether partial or\n"
 "    // whole.\n"
 msgstr ""
+"//`first_word`处理字符串字面值的切片，无论是部分还是<br/>\n"
+"//整体。<br/>\n"
 
 #: src/ch04-03-slices.md:471
 msgid ""
 "// Because string literals *are* string slices already,\n"
 "    // this works too, without the slice syntax!\n"
 msgstr ""
+"// 因为字符串文本*已经是*字符串切片，\n"
+"    // 这也是有用的，没有分割语法！\n"
 
 #: src/ch04-03-slices.md:479
 msgid "Other Slices"

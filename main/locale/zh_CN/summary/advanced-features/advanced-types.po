@@ -117,9 +117,10 @@ msgid ""
 "is not a separate, new type. Values that have the type `Kilometers` will be "
 "treated the same as values of type `i32`:"
 msgstr ""
-"现在，别名`Kilometers`是`i32`的_同义词_；与我们在Listing 20-16中创建的"
-"`Millimeters`和`Meters`类型不同，`Kilometers`并不是一个独立的新型别称。具有"
-"`Kilometers`类型的值将被视为与`i32`类型的值相同:"
+"Now the alias `Kilometers` is a _synonym_ for `i32`; unlike the "
+"`Millimeters` and `Meters` types we created in Listing 20-16, `Kilometers` "
+"is not a separate, new type. Values that have the type `Kilometers` will be "
+"treated the same as values of type `i32`:"
 
 #: src/ch20-03-advanced-types.md:77
 msgid ""
@@ -305,9 +306,11 @@ msgid ""
 "arms must all return the same type. So, for example, the following code "
 "doesn’t work:"
 msgstr ""
-"在那个时候，我们省略了这段代码中的一些细节。在[第六章的“`match`控制流构造体]"
-"(ch06-02-match.html#the-match-control-flow-construct)”部分中，我们讨论了"
-"`match`中的各个分支必须返回相同的类型。因此，例如，下面的代码是无效的："
+"At the time, we skipped over some details in this code. In [“The `match` "
+"Control Flow Construct”](ch06-02-match.html#the-match-control-flow-"
+"construct)<!-- ignore --> section in Chapter 6, we discussed that `match` "
+"arms must all return the same type. So, for example, the following code "
+"doesn’t work:"
 
 #: src/ch20-03-advanced-types.md:284
 msgid "\"3\""
@@ -435,7 +438,7 @@ msgstr "Hello there!"
 
 #: src/ch20-03-advanced-types.md:370
 msgid "\"How's it going?\""
-msgstr "How's it going?"
+msgstr "How's it going？"
 
 #: src/ch20-03-advanced-types.md:374
 msgid ""

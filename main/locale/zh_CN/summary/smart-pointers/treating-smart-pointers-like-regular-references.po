@@ -17,6 +17,9 @@ msgid ""
 "trait\"></a> <a id=\"treating-smart-pointers-like-regular-references-with-"
 "deref\"></a>"
 msgstr ""
+"<a id=\"treating-smart-pointers-like-regular-references-with-the-deref-"
+"trait\"></a><a id=\"treating-smart-pointers-like-regular-references-with-"
+"deref\"></a>"
 
 #: src/ch15-02-deref.md:6
 msgid "Treating Smart Pointers Like Regular References"
@@ -30,6 +33,9 @@ msgid ""
 "can be treated like a regular reference, you can write code that operates on "
 "references and use that code with smart pointers too."
 msgstr ""
+"实现 `Deref` 特性可以让你自定义 _dereference 运算符_ `*` 的行为（不要与乘法或"
+"全局运算符混淆）。通过实现 `Deref`，使得智能指针可以像普通引用一样被处理，你"
+"就可以编写能够操作引用的代码，并且这些代码也可以与智能指针一起使用。"
 
 #: src/ch15-02-deref.md:14
 msgid ""
@@ -41,16 +47,23 @@ msgid ""
 "Then, we’ll look at Rust’s deref coercion feature and how it lets us work "
 "with either references or smart pointers."
 msgstr ""
+"首先，让我们看看解引用运算符是如何与普通引用协同工作的。接着，我们将尝试定义"
+"一个自定义类型，该类型的行为类似于 `Box<T>`，并了解为什么解引用运算符在我们新"
+"定义的类型上并不像引用那样工作。我们将探讨如何实现 `Deref` 特性，从而让智能指"
+"针能够以类似于引用的方式工作。最后，我们将了解 Rust 中的解引用强制转换功能，"
+"以及它如何让我们能够使用引用或智能指针。"
 
 #: src/ch15-02-deref.md:24
 msgid ""
 "<a id=\"following-the-pointer-to-the-value-with-the-dereference-operator\"></"
 "a> <a id=\"following-the-pointer-to-the-value\"></a>"
 msgstr ""
+"<a id=\"following-the-pointer-to-the-value-with-the-dereference-operator\"></"
+"a><a id=\"following-the-pointer-to-the-value\"></a>"
 
 #: src/ch15-02-deref.md:27
 msgid "Following the Reference to the Value"
-msgstr ""
+msgstr "跟随对值的引用"
 
 #: src/ch15-02-deref.md:29
 msgid ""
@@ -59,6 +72,9 @@ msgid ""
 "a reference to an `i32` value and then use the dereference operator to "
 "follow the reference to the value."
 msgstr ""
+"常规引用是一种指针类型，可以将指针视为指向其他地方存储的值的箭头。在 Listing "
+"15-6 中，我们创建了一个指向 `i32` 值的引用，然后使用解引用运算符来追踪该引用"
+"所指向的值。"
 
 #: src/ch15-02-deref.md:48
 msgid ""
@@ -69,12 +85,18 @@ msgid ""
 "compiler can compare the actual value. Once we dereference `y`, we have "
 "access to the integer value `y` is pointing to that we can compare with `5`."
 msgstr ""
+"变量 `x` 包含一个 `i32` 的值，该值又指向 `5`。我们将 `y` 设置为对 `x` 的引"
+"用。因此，我们可以断言 `x` 等于 `5`。然而，如果我们想对 `y` 中的值进行断言，"
+"我们必须使用 `*y` 来访问它指向的值（即进行解引用），这样编译器才能比较实际的"
+"值。一旦我们解引用了 `y`，我们就能访问 `y` 所指向的整数值，并将其与 `5` 进行"
+"比较。"
 
 #: src/ch15-02-deref.md:55
 msgid ""
 "If we tried to write `assert_eq!(5, y);` instead, we would get this "
 "compilation error:"
 msgstr ""
+"如果我们尝试使用 `assert_eq!(5, y);` 来编写代码，将会出现以下编译错误："
 
 #: src/ch15-02-deref.md:58
 msgid ""
@@ -97,6 +119,24 @@ msgid ""
 "previous error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling deref-example v0.1.0 (file:///projects/deref-example)\n"
+"error[E0277]: can't compare `{integer}` with `&{integer}`\n"
+" --> src/main.rs:6:5\n"
+"  |\n"
+"6 |     assert_eq!(5, y);\n"
+"  |     ^^^^^^^^^^^^^^^^ no implementation for `{integer} == &{integer}`\n"
+"  |\n"
+"  = help: the trait `PartialEq<&{integer}>` is not implemented for `{integer}"
+"`\n"
+"  = note: this error originates in the macro `assert_eq` (in Nightly builds, "
+"run with -Z macro-backtrace for more info)\n"
+"\n"
+"For more information about this error, try `rustc --explain E0277`.\n"
+"error: could not compile `deref-example` (bin \"deref-example\") due to 1 "
+"previous error\n"
+"```"
 
 #: src/ch15-02-deref.md:74
 msgid ""
@@ -104,10 +144,12 @@ msgid ""
 "different types. We must use the dereference operator to follow the "
 "reference to the value it’s pointing to."
 msgstr ""
+"不允许比较一个数字和对某个数字的引用，因为它们是不同的类型。我们必须使用去参"
+"照算子来跟踪指向它所指向的值。"
 
 #: src/ch15-02-deref.md:78
 msgid "Using `Box<T>` Like a Reference"
-msgstr ""
+msgstr "如何将 `Box<T>` 作为参考使用"
 
 #: src/ch15-02-deref.md:80
 msgid ""
@@ -116,6 +158,8 @@ msgid ""
 "functions in the same way as the dereference operator used on the reference "
 "in Listing 15-6."
 msgstr ""
+"我们可以将清单15-6中的代码重新编写，使用 `Box<T>` 代替引用；在清单15-7中用于 "
+"`Box<T>` 的解引用操作，其工作方式与在清单15-6中用于引用对象的解引用操作相同。"
 
 #: src/ch15-02-deref.md:99
 msgid ""
@@ -127,10 +171,14 @@ msgid ""
 "about `Box<T>` that enables us to use the dereference operator by defining "
 "our own box type."
 msgstr ""
+"Listing 15-7 和 Listing 15-6 的主要区别在于，这里我们把 'y' 设为指向复制值 "
+"'x' 的框实例，而不是指向 'x' 值的参考。在最后一个断言中，我们可以用去引用算子"
+"像当“y”作为引用时一样，跟踪盒子的指针。接下来，我们将探讨“Box”的特殊之处 "
+"<T>，使我们能够通过定义自己的盒类型来使用去引用算子。"
 
 #: src/ch15-02-deref.md:106
 msgid "Defining Our Own Smart Pointer"
-msgstr ""
+msgstr "定义我们自己的智能指针"
 
 #: src/ch15-02-deref.md:108
 msgid ""
@@ -139,6 +187,8 @@ msgid ""
 "from references by default. Then, we’ll look at how to add the ability to "
 "use the dereference operator."
 msgstr ""
+"让我们构建一个类似<T>标准库中“Box”类型的包装类型，体验智能指针类型默认表现与"
+"引用的不同。然后，我们将探讨如何添加使用去参照算子的功能。"
 
 #: src/ch15-02-deref.md:113
 msgid ""
@@ -147,6 +197,9 @@ msgid ""
 "heap. We are focusing this example on `Deref`, so where the data is actually "
 "stored is less important than the pointer-like behavior."
 msgstr ""
+"注意：我们即将构建的“MyBox<T>”类型和真正的“Box”有一个重大区别 <T>：我们的版本"
+"不会将数据存储在堆中。我们把这个例子重点放在“Deref”上，所以数据实际存储的位置"
+"不如指针类行为重要。"
 
 #: src/ch15-02-deref.md:118
 msgid ""
@@ -154,6 +207,8 @@ msgid ""
 "so Listing 15-8 defines a `MyBox<T>` type in the same way. We’ll also define "
 "a `new` function to match the `new` function defined on `Box<T>`."
 msgstr ""
+"“Box<T>”类型最终定义为一个元素的元组结构体，因此列表 15-8 也以同样的方式定义"
+"了“MyBox<T>”类型。我们还会定义一个“新”函数，以匹配“Box”上定义的“新”函数 <T>。"
 
 #: src/ch15-02-deref.md:138
 msgid ""
@@ -163,6 +218,10 @@ msgid ""
 "parameter of type `T` and returns a `MyBox` instance that holds the value "
 "passed in."
 msgstr ""
+"我们定义了一个名为 `MyBox` 的结构体，并声明了一个泛型参数 `T`，因为我们希望我"
+"们的类型能够容纳任何类型的值。 `MyBox` 是一个元组结构体，其中包含一个类型为 "
+"`T` 的元素。 `MyBox::new` 函数接受一个类型为 `T` 的参数，并返回一个包含传入值"
+"的 `MyBox` 实例。"
 
 #: src/ch15-02-deref.md:143
 msgid ""
@@ -171,10 +230,13 @@ msgid ""
 "The code in Listing 15-9 won’t compile, because Rust doesn’t know how to "
 "dereference `MyBox`."
 msgstr ""
+"让我们尝试在清单15-7中添加 `main` 函数到清单15-8中，并将其改为使用我们定义的 "
+"`MyBox<T>` 类型，而不是 `Box<T>` 类型。由于Rust无法引用 `MyBox`，因此清单15-9"
+"中的代码将无法编译。"
 
 #: src/ch15-02-deref.md:170
 msgid "Here’s the resultant compilation error:"
-msgstr ""
+msgstr "以下是由此产生的编译错误："
 
 #: src/ch15-02-deref.md:172
 msgid ""
@@ -192,6 +254,19 @@ msgid ""
 "previous error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling deref-example v0.1.0 (file:///projects/deref-example)\n"
+"error[E0614]: type `MyBox<{integer}>` cannot be dereferenced\n"
+"  --> src/main.rs:14:19\n"
+"   |\n"
+"14 |     assert_eq!(5, *y);\n"
+"   |                   ^^ can't be dereferenced\n"
+"\n"
+"For more information about this error, try `rustc --explain E0614`.\n"
+"error: could not compile `deref-example` (bin \"deref-example\") due to 1 "
+"previous error\n"
+"```"
 
 #: src/ch15-02-deref.md:185
 msgid ""
@@ -199,16 +274,20 @@ msgid ""
 "that ability on our type. To enable dereferencing with the `*` operator, we "
 "implement the `Deref` trait."
 msgstr ""
+"我们的“MyBox<T>”类型无法被取消引用，因为我们还没有在类型上实现该功能。为了实"
+"现用“*”算符的去引用，我们实现了“Deref”特征。"
 
 #: src/ch15-02-deref.md:191
 msgid ""
 "<a id=\"treating-a-type-like-a-reference-by-implementing-the-deref-trait\"></"
 "a>"
 msgstr ""
+"<a id=\"treating-a-type-like-a-reference-by-implementing-the-deref-trait\"></"
+"a>"
 
 #: src/ch15-02-deref.md:193
 msgid "Implementing the `Deref` Trait"
-msgstr ""
+msgstr "实现 `Deref` 特性"
 
 #: src/ch15-02-deref.md:195
 msgid ""
@@ -220,6 +299,11 @@ msgid ""
 "returns a reference to the inner data. Listing 15-10 contains an "
 "implementation of `Deref` to add to the definition of `MyBox<T>`."
 msgstr ""
+"正如在[“Implementing a Trait on a Type”]（ch10-02-traits.html#implementing-a-"
+"trait-on-a-type）中讨论的那样 <!--忽略第10章中的-->，实现一个特征时，我们需要"
+"为该特征所需的方法提供实现。标准库提供的“Deref”特性要求我们实现一个名"
+"为“deref”的方法，它借用“self”并返回内部数据的引用。列表 15-10 包含了“Deref”的"
+"实现，以补充“MyBox”的定义 <T>。"
 
 #: src/ch15-02-deref.md:234
 msgid ""
@@ -228,6 +312,9 @@ msgid ""
 "generic parameter, but you don’t need to worry about them for now; we’ll "
 "cover them in more detail in Chapter 20."
 msgstr ""
+"`type Target = T;`语法为`Deref`特质定义了一个关联类型，以便使用。关联类型是一"
+"种稍微不同的声明泛型参数的方式，但目前不必担心它们；我们将在第20章中更详细地"
+"介绍它们。"
 
 #: src/ch15-02-deref.md:239
 msgid ""
@@ -239,6 +326,11 @@ msgid ""
 "struct. The `main` function in Listing 15-9 that calls `*` on the `MyBox<T>` "
 "value now compiles, and the assertions pass!"
 msgstr ""
+"我们将 `deref` 方法的主体替换为 `&self.0`，这样 `deref` 就能返回对我们使用 "
+"`*` 操作符要访问的值的引用；回想一下第5章中关于“使用元组结构体创建不同类型”的"
+"内容[tuple-structs]<!--ignore -->，其中 `.0` 用于访问元组结构体中的第一个值。"
+"现在，列表15-9中的 `main` 函数能够调用 `*` 对 `MyBox<T>` 值进行操作，并且代码"
+"可以成功编译，所有的断言也都通过了！"
 
 #: src/ch15-02-deref.md:246
 msgid ""
@@ -247,12 +339,16 @@ msgid ""
 "type that implements `Deref` and call the `deref` method to get a reference "
 "that it knows how to dereference."
 msgstr ""
+"如果没有 `Deref` 特性，编译器只能解引用 `&` 类型的引用。而 `deref` 方法则使编"
+"译器能够获取任何实现了 `Deref` 类型的数值，并调用 `deref` 方法来获取一个可以"
+"解引用的引用。"
 
 #: src/ch15-02-deref.md:251
 msgid ""
 "When we entered `*y` in Listing 15-9, behind the scenes Rust actually ran "
 "this code:"
 msgstr ""
+"当我们在 Listing 15-9 中输入 `*y` 时，Rust 实际上在后台运行了以下代码："
 
 #: src/ch15-02-deref.md:258
 msgid ""
@@ -262,6 +358,9 @@ msgid ""
 "functions identically whether we have a regular reference or a type that "
 "implements `Deref`."
 msgstr ""
+"Rust 通过将 `*` 运算符替换为对 `deref` 方法的调用，然后再进行简单的解引用操"
+"作，这样我们就无需考虑是否需要调用 `deref` 方法了。这一特性使得我们可以编写出"
+"无论使用普通引用还是实现了 `Deref` 接口的类型，代码都能同样正常运行的程序。"
 
 #: src/ch15-02-deref.md:264
 msgid ""
@@ -273,6 +372,10 @@ msgid ""
 "value inside `MyBox<T>` in this case or in most cases where we use the "
 "dereference operator."
 msgstr ""
+"之所以 `deref` 方法返回的是对某个值的引用，而 `*(y.deref())` 方法外部的普通解"
+"引用操作仍然是必要的，这与所有权系统有关。如果 `deref` 方法直接返回该值，而不"
+"是返回对该值的引用，那么该值就会从 `self` 中移出。在这种情况下，或者在我们使"
+"用解引用操作符的大多数情况下，我们都不希望拥有 `MyBox<T>` 内部的值的所有权。"
 
 #: src/ch15-02-deref.md:271
 msgid ""
@@ -282,16 +385,21 @@ msgid ""
 "infinitely, we end up with data of type `i32`, which matches the `5` in "
 "`assert_eq!` in Listing 15-9."
 msgstr ""
+"请注意，`*`运算符被替换为对`deref`方法的调用，然后仅对`*`运算符进行一次调用，"
+"每次在代码中都使用`*`。由于`*`运算符的替换不会无限递归，最终我们得到的数据类"
+"型为`i32`，这与`assert_eq!`中的`5`相匹配。详见列表15-9。"
 
 #: src/ch15-02-deref.md:279
 msgid ""
 "<a id=\"implicit-deref-coercions-with-functions-and-methods\"></a> <a "
 "id=\"using-deref-coercions-in-functions-and-methods\"></a>"
 msgstr ""
+"<a id=\"implicit-deref-coercions-with-functions-and-methods\"></a><a "
+"id=\"using-deref-coercions-in-functions-and-methods\"></a>"
 
 #: src/ch15-02-deref.md:282
 msgid "Using Deref Coercion in Functions and Methods"
-msgstr ""
+msgstr "在函数和方法中使用去引用强制类型转换"
 
 #: src/ch15-02-deref.md:284
 msgid ""
@@ -306,6 +414,12 @@ msgid ""
 "definition. A sequence of calls to the `deref` method converts the type we "
 "provided into the type the parameter needs."
 msgstr ""
+"_解引用强制转换_将指向实现了 `Deref` 特征的类型的引用转换为指向另一个类型的引"
+"用。例如，解引用强制转换可以将 `&String` 转换为 `&str`，因为 `String` 实现了 "
+"`Deref` 特征，从而返回 `&str`。解引用强制转换是 Rust 对函数和方法参数进行的便"
+"捷操作，且仅适用于实现了 `Deref` 特征的类型。当我们将指向特定类型的引用作为参"
+"数传递给一个与函数或方法定义中的参数类型不匹配的函数或方法时，解引用强制转换"
+"会自动发生。对 `deref` 方法的连续调用会将我们提供的类型转换为参数所需的类型。"
 
 #: src/ch15-02-deref.md:294
 msgid ""
@@ -314,6 +428,9 @@ msgid ""
 "with `&` and `*`. The deref coercion feature also lets us write more code "
 "that can work for either references or smart pointers."
 msgstr ""
+"Rust 增加了解引用强制功能，这样编写函数和方法的程序员就不需要使用 `&` 和 `*` "
+"来添加如此多的显式引用和解引用操作。解引用强制功能还使我们能够编写更多适用于"
+"引用或智能指针的代码。"
 
 #: src/ch15-02-deref.md:299
 msgid ""
@@ -322,10 +439,13 @@ msgid ""
 "Listing 15-10. Listing 15-11 shows the definition of a function that has a "
 "string slice parameter."
 msgstr ""
+"为了看到去引用强制转换的实际应用，我们可以使用在清单15-8中定义的`MyBox<T>`类"
+"型，以及我们在清单15-10中添加的`Deref`的实现。清单15-11展示了一个具有字符串切"
+"片参数的函数的定义。"
 
 #: src/ch15-02-deref.md:308 src/ch15-02-deref.md:342 src/ch15-02-deref.md:387
 msgid "\"Hello, {name}!\""
-msgstr ""
+msgstr "\"Hello, {name}!\""
 
 #: src/ch15-02-deref.md:316
 msgid ""
@@ -334,10 +454,13 @@ msgid ""
 "`hello` with a reference to a value of type `MyBox<String>`, as shown in "
 "Listing 15-12."
 msgstr ""
+"我们可以将`hello`函数以字符串切片作为参数进行调用，例如`hello(\"Rust\");`。通"
+"过解引用强制操作，我们可以以`MyBox<String>`类型的引用来调用`hello`，如清单"
+"15-12所示。"
 
 #: src/ch15-02-deref.md:346 src/ch15-02-deref.md:391
 msgid "\"Rust\""
-msgstr ""
+msgstr "\"Rust\""
 
 #: src/ch15-02-deref.md:353
 msgid ""
@@ -349,6 +472,11 @@ msgid ""
 "is in the API documentation for `Deref`. Rust calls `deref` again to turn "
 "the `&String` into `&str`, which matches the `hello` function’s definition."
 msgstr ""
+"这里我们调用了“hello”函数，参数是“&m”，这是对“MyBox<String>”值的引用。因为我"
+"们在 15-10 号房源中对“MyBox”实现了“Deref”<T> 特性，Rust 可以通过<String>调"
+"用“deref”将“&MyBox”转换为“&String”。标准库在 'String' 上提供了 'Deref' 的实"
+"现，返回字符串切片，这在 'Deref' 的 API 文档中有说明。Rust 再次调用 'deref'，"
+"将 '&String' 转换为 '&str'，这与 'hello' 函数的定义相符。"
 
 #: src/ch15-02-deref.md:361
 msgid ""
@@ -356,6 +484,8 @@ msgid ""
 "Listing 15-13 instead of the code in Listing 15-12 to call `hello` with a "
 "value of type `&MyBox<String>`."
 msgstr ""
+"如果 Rust 没有实现 deref 强制，我们就得在 Listing 15-13 里写代码，而不是 "
+"Listing 15-12 里的代码，才能调用 'Hello' 类型为 '&MyBox<String>'。"
 
 #: src/ch15-02-deref.md:398
 msgid ""
@@ -365,6 +495,9 @@ msgid ""
 "is harder to read, write, and understand with all of these symbols involved. "
 "Deref coercion allows Rust to handle these conversions for us automatically."
 msgstr ""
+"“（*m）” 将“MyBox”去引用<String>为“字符串”。然后是“&”和“[..]取一个字符串切"
+"片，等于整个字符串，以匹配“hello”符号。没有 deref 强制的代码在涉及这些符号的"
+"情况下，更难读写和理解。Deref 强制允许 Rust 自动帮我们处理这些转换。"
 
 #: src/ch15-02-deref.md:404
 msgid ""
@@ -374,14 +507,17 @@ msgid ""
 "deref` needs to be inserted is resolved at compile time, so there is no "
 "runtime penalty for taking advantage of deref coercion!"
 msgstr ""
+"当“Deref”特征为相关类型定义后，Rust 会分析这些类型，并多次使用“Deref：:d "
+"eref”来获得与参数类型匹配的引用。编译时需要插入“Deref：:d eref”的次数会被解"
+"析，因此利用 deref 强制不会有运行时惩罚！"
 
 #: src/ch15-02-deref.md:412
 msgid "<a id=\"how-deref-coercion-interacts-with-mutability\"></a>"
-msgstr ""
+msgstr "<a id=\"how-deref-coercion-interacts-with-mutability\"></a>"
 
 #: src/ch15-02-deref.md:414
 msgid "Handling Deref Coercion with Mutable References"
-msgstr ""
+msgstr "处理可变引用的 Deref 强制"
 
 #: src/ch15-02-deref.md:416
 msgid ""
@@ -389,24 +525,26 @@ msgid ""
 "immutable references, you can use the `DerefMut` trait to override the `*` "
 "operator on mutable references."
 msgstr ""
+"类似于你用“Deref”特性覆盖不可变引用上的“*”操作符，你也可以用“DerefMut”特性覆"
+"盖可变引用上的“*”操作符。"
 
 #: src/ch15-02-deref.md:420
 msgid ""
 "Rust does deref coercion when it finds types and trait implementations in "
 "three cases:"
-msgstr ""
+msgstr "Rust 在三种情况下发现类型和特征实现时会进行强制拒绝："
 
 #: src/ch15-02-deref.md:423
 msgid "From `&T` to `&U` when `T: Deref<Target=U>`"
-msgstr ""
+msgstr "从 '&T' 到 '& U' 当 'T： Deref<Target=U>'"
 
 #: src/ch15-02-deref.md:424
 msgid "From `&mut T` to `&mut U` when `T: DerefMut<Target=U>`"
-msgstr ""
+msgstr "从 '&mut T' 到 '& mut U' 时，当 'T： DerefMut<Target=U>'"
 
 #: src/ch15-02-deref.md:425
 msgid "From `&mut T` to `&U` when `T: Deref<Target=U>`"
-msgstr ""
+msgstr "从 '&mut T' 变为 '& U'，当 'T： Deref<Target=U>'"
 
 #: src/ch15-02-deref.md:427
 msgid ""
@@ -416,6 +554,9 @@ msgid ""
 "second case states that the same deref coercion happens for mutable "
 "references."
 msgstr ""
+"前两种情况相同，只是后者实现了可变性。第一种情况是，如果你有一个 '& T'，而 "
+"'T' 将 'Deref' 实现到某种类型 'U'，那么你可以透明地得到一个 '& U'。第二种情况"
+"指出，同样的 deref 强制也发生在可变引用上。"
 
 #: src/ch15-02-deref.md:432
 msgid ""
@@ -431,3 +572,7 @@ msgid ""
 "can’t make the assumption that converting an immutable reference to a "
 "mutable reference is possible."
 msgstr ""
+"第三种情况更复杂：Rust 还会强制变变引用到不可变变。但反过来则是不可能的：不可"
+"变引用永远不会强制可变引用。由于借用规则，如果你有一个可变引用，这个可变引用"
+"必须是该数据的唯一引用（否则程序无法编译）。将一个可变引用转换为一个不可变引"
+"用永远不会违反借用规则。将不可变引用转换为可变引用"

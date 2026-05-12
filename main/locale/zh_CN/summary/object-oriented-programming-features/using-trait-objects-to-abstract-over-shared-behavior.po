@@ -15,6 +15,7 @@ msgstr ""
 msgid ""
 "<a id=\"using-trait-objects-that-allow-for-values-of-different-types\"></a>"
 msgstr ""
+"<a id=\"using-trait-objects-that-allow-for-values-of-different-types\"></a>"
 
 #: src/ch18-02-trait-objects.md:5
 msgid "Using Trait Objects to Abstract over Shared Behavior"
@@ -30,6 +31,11 @@ msgid ""
 "This is a perfectly good solution when our interchangeable items are a fixed "
 "set of types that we know when our code is compiled."
 msgstr ""
+"在第8章中，我们提到向量的一个局限性是它们只能存储单一类型的数据。我们在 "
+"Listing 8-9 中创建了一个解决方案，定义了一个 `SpreadsheetCell` 枚举类型，该枚"
+"举类型可以存储整数、浮点数以及文本。这意味着我们可以在每个单元格中存储不同类"
+"型的数据，同时仍然使向量能够表示一行的单元格。当我们的可互换项是一组固定的数"
+"据类型，并且我们知道代码在编译后的行为时，这是一个非常有效的解决方案。"
 
 #: src/ch18-02-trait-objects.md:15
 msgid ""
@@ -44,6 +50,13 @@ msgid ""
 "that can be drawn: For instance, one programmer might add an `Image`, and "
 "another might add a `SelectBox`."
 msgstr ""
+"然而，有时候我们希望我们的库用户能够扩展在特定情况下有效的类型集合。为了展示"
+"如何实现这一点，我们将创建一个示例图形用户界面工具，该工具会遍历一个项目列"
+"表，并对每个项目调用一个 `draw` 方法，将其绘制到屏幕上——这是图形用户界面工具"
+"中的一种常见技术。我们将创建一个名为 `gui` 的库 crate，其中包含图形用户界面库"
+"的结构。这个库可能会包含一些供人们使用的类型，例如 `Button` 或 `TextField`。"
+"此外，`gui` 用户还希望创建自己可以绘制的类型：例如，一位程序员可能会添加 "
+"`Image`，另一位程序员可能会添加 `SelectBox`。"
 
 #: src/ch18-02-trait-objects.md:26
 msgid ""
@@ -54,6 +67,10 @@ msgid ""
 "exactly what will happen when we call the `draw` method, just that the value "
 "will have that method available for us to call."
 msgstr ""
+"在编写这个库的时候，我们无法预知和定义所有其他程序员可能想要创建的类型。但我"
+"们确实知道， `gui` 需要跟踪许多不同类型的数值，并且需要对这些不同类型的数值分"
+"别调用 `draw` 方法。它不需要确切知道当我们调用 `draw` 方法时会发生什么，只需"
+"要知道该数值拥有可以调用的该方法即可。"
 
 #: src/ch18-02-trait-objects.md:33
 msgid ""
@@ -66,10 +83,16 @@ msgid ""
 "Rust doesn’t have inheritance, we need another way to structure the `gui` "
 "library to allow users to create new types compatible with the library."
 msgstr ""
+"为了在具有继承功能的语言中实现这一点，我们可以定义一个名为`Component`的类，该"
+"类包含一个名为`draw`的方法。其他类，如`Button`、`Image`和`SelectBox`，将继承"
+"自`Component`，从而继承`draw`方法。这些类可以各自覆盖`draw`方法，以定义它们自"
+"己的自定义行为。不过，该框架可以将所有类型视为`Component`实例，并调用`draw`方"
+"法。但由于Rust没有继承功能，我们需要另一种方式来构建`gui`库，以允许用户创建与"
+"库兼容的新类型。"
 
 #: src/ch18-02-trait-objects.md:42
 msgid "Defining a Trait for Common Behavior"
-msgstr ""
+msgstr "定义具有通用行为的特质"
 
 #: src/ch18-02-trait-objects.md:44
 msgid ""
@@ -89,6 +112,16 @@ msgid ""
 "trait. Consequently, we don’t need to know all the possible types at compile "
 "time."
 msgstr ""
+"为了实现我们想要`gui`的行为，我们将定义一个名叫`Draw`的特征，它将有一个叫"
+"`draw`的方法。 然后，我们可以定义一个带有特性对象的矢量。 一个_trait object_"
+"指向一个执行我们指定特性的类型的实例和一个用于在运行时查找该类型特性方法的"
+"表。 我们通过指定某种指针来创建一个特性对象，例如引用或一个 `Box<T>` 智能指"
+"针， 然后是`dyn`关键字，然后指定相关的特性。 (我们将谈论特征必须在[“动态化类"
+"型和`Sized`特性”](ch20-03-advanced-types.html#dynamically-sized-types-and-"
+"the-sized-trait)中使用指针的原因! - 忽略第20章中的“--”。 我们可以使用特性来代"
+"替一般或水泥类型。 在哪里我们使用特性对象， Rust's 类型系统将在编译时确保在此"
+"上下文中使用的任何值都会实现特性对象的特性。 因此，我们不需要在编译时了解所有"
+"可能的类型。"
 
 #: src/ch18-02-trait-objects.md:58
 msgid ""
@@ -101,12 +134,20 @@ msgid ""
 "aren’t as generally useful as objects in other languages: Their specific "
 "purpose is to allow abstraction across common behavior."
 msgstr ""
+"我们已经提到，在Rust中，我们避免将结构体（structs）和枚举（enums）称为“对"
+"象”，以将其与其他语言的“对象”区分开来。在结构体或枚举中，结构体字段中的数据和"
+"行为是分开的，而在其他语言中，数据和行为被合并为一个概念，通常被称为对象。与"
+"其他语言的“对象”相比，特质对象（trait objects）的不同之处在于，我们无法向特质"
+"对象添加数据。特质对象并不像其他语言的“对象”那样常用：它们的具体用途是允许对"
+"共同行为进行抽象处理。"
 
 #: src/ch18-02-trait-objects.md:67
 msgid ""
 "Listing 18-3 shows how to define a trait named `Draw` with one method named "
 "`draw`."
 msgstr ""
+"清单 18-3 展示了如何定义一个名为 `Draw` 的 trait，并为其定义了一个名为 "
+"`draw` 的方法。"
 
 #: src/ch18-02-trait-objects.md:80
 msgid ""
@@ -116,12 +157,18 @@ msgid ""
 "of type `Box<dyn Draw>`, which is a trait object; it’s a stand-in for any "
 "type inside a `Box` that implements the `Draw` trait."
 msgstr ""
+"这种语法结构应该与我们在第10章中关于如何定义特性的讨论很相似。接下来是一些新"
+"的语法结构：清单18-4定义了一个名为`Screen`的结构体，该结构体包含一个名为"
+"`components`的向量。这个向量的类型是`Box<dyn Draw>`，它是一个特性对象；它代表"
+"了在实现了`Draw`特性的`Box`中的任何类型。"
 
 #: src/ch18-02-trait-objects.md:100
 msgid ""
 "On the `Screen` struct, we’ll define a method named `run` that will call the "
 "`draw` method on each of its `components`, as shown in Listing 18-5."
 msgstr ""
+"在 `Screen` 结构体中，我们将定义一个名为 `run` 的方法，该方法会调用其每个 "
+"`components` 中的 `draw` 方法，如清单 18-5 所示。"
 
 #: src/ch18-02-trait-objects.md:125
 msgid ""
@@ -132,6 +179,10 @@ msgid ""
 "example, we could have defined the `Screen` struct using a generic type and "
 "a trait bound, as in Listing 18-6."
 msgstr ""
+"这与使用带有 trait 界限的泛型类型来定义结构体有所不同。泛型类型参数一次只能被"
+"替换为一种具体类型，而 trait 对象则允许在运行时用多种具体类型来替代 trait 对"
+"象。例如，我们可以使用一个泛型类型和一个 trait 界限来定义 `Screen` 结构体，"
+"如 Listing 18-6 所示。"
 
 #: src/ch18-02-trait-objects.md:157
 msgid ""
@@ -141,6 +192,9 @@ msgid ""
 "because the definitions will be monomorphized at compile time to use the "
 "concrete types."
 msgstr ""
+"这限制了我们只能使用具有类型为 `Button` 或 `TextField` 的组件列表的 `Screen` "
+"实例。如果你只能处理同质集合，那么使用泛型和特质约束更为理想，因为定义会在编"
+"译时被单态化，从而使用具体的类型。"
 
 #: src/ch18-02-trait-objects.md:162
 msgid ""
@@ -149,10 +203,13 @@ msgid ""
 "`Box<TextField>`. Let’s look at how this works, and then we’ll talk about "
 "the runtime performance implications."
 msgstr ""
+"另一方面，使用 trait 对象的方法时，一个 `Screen` 实例可以包含一个 `Vec<T>`，"
+"而 `Vec<T>` 又包含一个 `Box<Button>` 以及一个 `Box<TextField>`。让我们来看看"
+"这是如何工作的，然后我们再讨论一下对运行时性能的影响。"
 
 #: src/ch18-02-trait-objects.md:167
 msgid "Implementing the Trait"
-msgstr ""
+msgstr "实现特质"
 
 #: src/ch18-02-trait-objects.md:169
 msgid ""
@@ -163,10 +220,14 @@ msgid ""
 "like, a `Button` struct might have fields for `width`, `height`, and "
 "`label`, as shown in Listing 18-7."
 msgstr ""
+"现在，我们将添加一些实现了 `Draw` 特性的类型。我们将提供 `Button` 类型。需要"
+"注意的是，实际上实现一个 GUI 库超出了本书的范围，因此 `draw` 方法在其实现中并"
+"不会包含任何有用的功能。为了想象一下这个实现可能的样子，一个 `Button` 结构可"
+"能会包含 `width`、 `height` 和 `label` 字段，如清单 18-7 所示。"
 
 #: src/ch18-02-trait-objects.md:202
 msgid "// code to actually draw a button\n"
-msgstr ""
+msgstr "// 代码实际绘制按钮\n"
 
 #: src/ch18-02-trait-objects.md:209
 msgid ""
@@ -180,6 +241,13 @@ msgid ""
 "to what happens when a user clicks the button. These kinds of methods won’t "
 "apply to types like `TextField`."
 msgstr ""
+"在 `Button` 上的 `width`、 `height` 和 `label` 字段将与其他组件上的字段有所不"
+"同；例如，一个 `TextField` 类型可能包含相同的字段，同时还包含一个 "
+"`placeholder` 字段。我们想要在屏幕上显示的每种类型都会实现 `Draw` 特性，但在 "
+"`draw` 方法中会使用不同的代码来定义如何绘制该特定类型，正如 `Button` 在这里所"
+"做的（如前面提到的，没有实际的 GUI 代码）。例如， `Button` 类型可能还包含一"
+"个 `impl` 块，其中包含了与用户点击按钮时发生的事件相关的方法。这些方法并不适"
+"用于像 `TextField` 这样的类型。"
 
 #: src/ch18-02-trait-objects.md:219
 msgid ""
@@ -187,10 +255,13 @@ msgid ""
 "has `width`, `height`, and `options` fields, they would implement the `Draw` "
 "trait on the `SelectBox` type as well, as shown in Listing 18-8."
 msgstr ""
+"如果有人使用我们的库来实现一个具有 `width`、`height` 和 `options` 字段的 "
+"`Draw` 结构，那么他们还需要在 `SelectBox` 类型上实现 `Draw` 特性，如清单 "
+"18-8 所示。"
 
 #: src/ch18-02-trait-objects.md:236 src/ch18-02-trait-objects.md:264
 msgid "// code to actually draw a select box\n"
-msgstr ""
+msgstr "// 代码来实际绘制一个选择框\n"
 
 #: src/ch18-02-trait-objects.md:245
 msgid ""
@@ -200,22 +271,26 @@ msgid ""
 "then call the `run` method on the `Screen` instance, which will call `draw` "
 "on each of the components. Listing 18-9 shows this implementation."
 msgstr ""
+"我们的库的用户现在可以编写他们的 `main` 函数来创建一个 `Screen` 实例。对于该 "
+"`Screen` 实例，他们可以通过将 `SelectBox` 和 `Button` 分别放入 `Box<T>` 中，"
+"从而创建一个 trait 对象。然后，他们可以调用 `Screen` 实例上的 `run` 方法，该"
+"方法会分别调用每个组件上的 `draw`。清单 18-9 展示了这种实现。"
 
 #: src/ch18-02-trait-objects.md:277
 msgid "\"Yes\""
-msgstr ""
+msgstr "“Yes”"
 
 #: src/ch18-02-trait-objects.md:278
 msgid "\"Maybe\""
-msgstr ""
+msgstr "“可能”"
 
 #: src/ch18-02-trait-objects.md:279
 msgid "\"No\""
-msgstr ""
+msgstr "\"No\""
 
 #: src/ch18-02-trait-objects.md:285
 msgid "\"OK\""
-msgstr ""
+msgstr "\"OK\""
 
 #: src/ch18-02-trait-objects.md:296
 msgid ""
@@ -224,6 +299,9 @@ msgid ""
 "new type and draw it because `SelectBox` implements the `Draw` trait, which "
 "means it implements the `draw` method."
 msgstr ""
+"在编写这个库的时候，我们并不知道可能会有人添加`SelectBox`这种类型，但我们的"
+"`Screen`实现能够操作这种新类型并对其进行操作，因为`SelectBox`实现了`Draw`特"
+"征，这意味着它也实现了`draw`方法。"
 
 #: src/ch18-02-trait-objects.md:301
 msgid ""
@@ -238,6 +316,12 @@ msgid ""
 "`components` vector, we’ve defined `Screen` to need values that we can call "
 "the `draw` method on."
 msgstr ""
+"这个概念——只关注一个值所响应的消息，而不是该值的具体类型——类似于动态类型语言"
+"中的“鸭子类型”概念：如果某个对象的行为像鸭子，叫声也像鸭子，那么它就一定是鸭"
+"子！在清单18-5中实现 `run` 对 `Screen` 的操作时， `run` 不需要知道每个组件的"
+"具体类型。它不会检查某个组件是 `Button` 的实例还是 `SelectBox` 的实例，而只是"
+"调用组件上的 `draw` 方法。通过指定 `Box<dyn Draw>` 作为 `components` 向量中值"
+"的类型，我们定义了 `Screen`，使其需要的是我们可以调用 `draw` 方法的对象。"
 
 #: src/ch18-02-trait-objects.md:312
 msgid ""
@@ -248,21 +332,27 @@ msgid ""
 "won’t compile our code if the values don’t implement the traits that the "
 "trait objects need."
 msgstr ""
+"使用特质对象和Rust的类型系统来编写代码的优势在于，这与使用鸭子类型的方式类"
+"似。我们永远不必在运行时检查某个值是否实现了某个特定方法，也不必担心如果某个"
+"值没有实现某个方法而仍然调用该方法时会出现错误。如果某个值没有实现特质对象所"
+"需的特质，Rust不会编译我们的代码。"
 
 #: src/ch18-02-trait-objects.md:318
 msgid ""
 "For example, Listing 18-10 shows what happens if we try to create a `Screen` "
 "with a `String` as a component."
 msgstr ""
+"例如，清单 18-10 展示了如果我们尝试使用一个 `String` 作为组成部分来创建一个 "
+"`Screen` 会发生什么情况。"
 
 #: src/ch18-02-trait-objects.md:328
 msgid "\"Hi\""
-msgstr ""
+msgstr "\"Hi\""
 
 #: src/ch18-02-trait-objects.md:337
 msgid ""
 "We’ll get this error because `String` doesn’t implement the `Draw` trait:"
-msgstr ""
+msgstr "我们会遇到这个错误，因为`String`没有实现 `Draw` 特性："
 
 #: src/ch18-02-trait-objects.md:339
 msgid ""
@@ -283,6 +373,22 @@ msgid ""
 "error: could not compile `gui` (bin \"gui\") due to 1 previous error\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling gui v0.1.0 (file:///projects/gui)\n"
+"error[E0277]: the trait bound `String: Draw` is not satisfied\n"
+" --> src/main.rs:5:26\n"
+"  |\n"
+"5 |         components: vec![Box::new(String::from(\"Hi\"))],\n"
+"  |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Draw` "
+"is not implemented for `String`\n"
+"  |\n"
+"  = help: the trait `Draw` is implemented for `Button`\n"
+"  = note: required for the cast from `Box<String>` to `Box<dyn Draw>`\n"
+"\n"
+"For more information about this error, try `rustc --explain E0277`.\n"
+"error: could not compile `gui` (bin \"gui\") due to 1 previous error\n"
+"```"
 
 #: src/ch18-02-trait-objects.md:355
 msgid ""
@@ -290,14 +396,17 @@ msgid ""
 "we didn’t mean to pass and so should pass a different type, or we should "
 "implement `Draw` on `String` so that `Screen` is able to call `draw` on it."
 msgstr ""
+"这个错误告诉我们，要么我们传递给 `Screen` 的数据并非我们本意要传递的，因此应"
+"该传递另一种类型的数据；要么我们应该在 `String` 上实现 `Draw`，这样 `Screen` "
+"就能在 `draw` 上调用 `draw`。"
 
 #: src/ch18-02-trait-objects.md:361
 msgid "<a id=\"trait-objects-perform-dynamic-dispatch\"></a>"
-msgstr ""
+msgstr "<a id=\"trait-objects-perform-dynamic-dispatch\"></a>"
 
 #: src/ch18-02-trait-objects.md:363
 msgid "Performing Dynamic Dispatch"
-msgstr ""
+msgstr "执行动态调度"
 
 #: src/ch18-02-trait-objects.md:365
 msgid ""
@@ -313,6 +422,13 @@ msgid ""
 "dispatch cases, the compiler emits code that at runtime will know which "
 "method to call."
 msgstr ""
+"回顾[“使用泛型编写代码的性能”][(ch10-01-syntax.html#performance-of-code-"
+"using-generics)中的内容<!-- ignore -->在第10章中，我们讨论了编译器对泛型进行"
+"单态化处理的过程：编译器会为我们使用的具体类型生成非泛型的函数和方法实现，这"
+"些具体类型可以替代泛型类型。参数。通过单态化得到的代码会执行_静态调度_，这意"
+"味着在编译时编译器就能知道你正在调用哪个方法。这与_动态调度_不同，在动态调度"
+"中，编译器无法在编译时确定你正在调用哪个方法。在编译时，编译器会生成一些代"
+"码，这些代码在运行时能够知道应该调用哪个方法。"
 
 #: src/ch18-02-trait-objects.md:376
 msgid ""
@@ -331,3 +447,12 @@ msgid ""
 "code that we wrote in Listing 18-5 and were able to support in Listing 18-9, "
 "so it’s a trade-off to consider."
 msgstr ""
+"当我们使用特质对象时，Rust必须使用动态调度。编译器无法预知使用特质对象的代码"
+"中可能会用到哪些类型。因此，它不知道应该在哪种类型上调用哪种方法。相反，在运"
+"行时，Rust通过 trait 对象中的指针来确定应该调用哪种方法。这种查找过程会带来运"
+"行时的开销，而静态调度则不会产生这种开销。动态调度还阻止了编译器选择内联某个"
+"方法，这反过来又限制了某些优化。Rust有一些关于何时可以使用动态调度的规则，这"
+"些规则被称为“动态兼容性”。规则超出了本次讨论的范围，但您可以在[参考部分]"
+"(https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)中了"
+"解更多相关信息。<!-- ignore -->不过，我们在清单18-5中编写的代码中获得了额外的"
+"灵活性，并且能够在清单18-9中得到支持。因此，这是一个需要权衡的选择。"

@@ -23,6 +23,9 @@ msgid ""
 "on, and building those libraries. (We call the libraries that your code "
 "needs _dependencies_.)"
 msgstr ""
+"Cargo是Rust的构建系统和包管理器。大多数Rust开发者使用这个工具来管理他们的Rust"
+"项目，因为Cargo可以自动处理许多任务，比如编译代码、下载代码所依赖的库，以及编"
+"译这些库。（我们称代码所需的库为“依赖项”。）"
 
 #: src/ch01-03-hello-cargo.md:9
 msgid ""
@@ -32,6 +35,10 @@ msgid ""
 "write more complex Rust programs, you’ll add dependencies, and if you start "
 "a project using Cargo, adding dependencies will be much easier to do."
 msgstr ""
+"最简单的 Rust 程序，比如我们目前编写的那个程序，没有任何依赖项。如果我们使用 "
+"Cargo 来构建 “Hello, world!” 这个简单的项目，那么 Cargo 只会负责代码编译的部"
+"分工作。当你编写更复杂的 Rust 程序时，就需要添加依赖项。而如果你一开始就使用 "
+"Cargo 来构建项目，那么添加依赖项就会变得容易得多。"
 
 #: src/ch01-03-hello-cargo.md:15
 msgid ""
@@ -42,6 +49,10 @@ msgid ""
 "Rust through some other means, check whether Cargo is installed by entering "
 "the following in your terminal:"
 msgstr ""
+"因为绝大多数Rust项目都使用Cargo，所以本书的其余部分也假设您同样在使用Cargo。"
+"如果您使用了[“安装”](ch01-01-installation.html#installation)<!-- ignore -->章"
+"节中讨论的官方安装程序，那么Cargo会随Rust一起安装。如果您是通过其他方式安装"
+"Rust的，请通过终端输入以下命令来检查是否安装了Cargo："
 
 #: src/ch01-03-hello-cargo.md:26
 msgid ""
@@ -49,10 +60,12 @@ msgid ""
 "`command not found`, look at the documentation for your method of "
 "installation to determine how to install Cargo separately."
 msgstr ""
+"如果你看到版本号，那就说明你已经安装了！如果你看到错误，比如 `command not "
+"found`，请查阅相关安装方法的文档，了解如何单独安装 Cargo。"
 
 #: src/ch01-03-hello-cargo.md:30
 msgid "Creating a Project with Cargo"
-msgstr ""
+msgstr "使用 Cargo 创建项目"
 
 #: src/ch01-03-hello-cargo.md:32
 msgid ""
@@ -61,6 +74,9 @@ msgid ""
 "(or wherever you decided to store your code). Then, on any operating system, "
 "run the following:"
 msgstr ""
+"让我们使用 Cargo 创建一个新的项目，并看看它与我们原来的“Hello, world!”项目有"
+"何不同。回到你的 _projects_ 目录（或者你决定存储代码的任何位置）。然后，在任"
+"何操作系统上，运行以下命令："
 
 #: src/ch01-03-hello-cargo.md:42
 msgid ""
@@ -68,6 +84,8 @@ msgid ""
 "We’ve named our project _hello_cargo_, and Cargo creates its files in a "
 "directory of the same name."
 msgstr ""
+"第一个命令创建了一个名为`_hello_cargo_`的新目录和项目。我们将项目命名为"
+"`_hello_cargo_`，而Cargo会在同名目录中创建相关文件。"
 
 #: src/ch01-03-hello-cargo.md:46
 msgid ""
@@ -75,6 +93,9 @@ msgid ""
 "Cargo has generated two files and one directory for us: a _Cargo.toml_ file "
 "and a _src_ directory with a _main.rs_ file inside."
 msgstr ""
+"进入 _hello_cargo_ 目录，然后列出其中的文件。你会看到 Cargo 为我们生成了两个"
+"文件和一个目录：一个 _Cargo.toml_ 文件，以及一个包含 _main.rs_ 文件的 _src_ "
+"目录。"
 
 #: src/ch01-03-hello-cargo.md:50
 msgid ""
@@ -82,6 +103,9 @@ msgid ""
 "Git files won’t be generated if you run `cargo new` within an existing Git "
 "repository; you can override this behavior by using `cargo new --vcs=git`."
 msgstr ""
+"此外，系统还初始化了一个新的Git仓库，并附带了一个_.gitignore_文件。如果你在现"
+"有的Git仓库中运行 `cargo new`，就不会生成Git文件；你可以使用 `cargo new --"
+"vcs=git` 来覆盖这一行为。"
 
 #: src/ch01-03-hello-cargo.md:54
 msgid ""
@@ -89,12 +113,17 @@ msgid ""
 "use a different version control system or no version control system by using "
 "the `--vcs` flag. Run `cargo new --help` to see the available options."
 msgstr ""
+"注意：Git是一种常用的版本控制系统。你可以使用 `--vcs` 标志来将 `cargo new` 替"
+"换为其他版本控制系统，或者完全不使用版本控制系统。运行 `cargo new --help` 可"
+"以查看可用的选项。"
 
 #: src/ch01-03-hello-cargo.md:58
 msgid ""
 "Open _Cargo.toml_ in your text editor of choice. It should look similar to "
 "the code in Listing 1-2."
 msgstr ""
+"在您选择的文本编辑器中打开 _Cargo.toml_ 文件。它的样子应该与清单1-2中的代码类"
+"似。"
 
 #: src/ch01-03-hello-cargo.md:63
 msgid ""
@@ -107,12 +136,22 @@ msgid ""
 "[dependencies]\n"
 "```"
 msgstr ""
+"```toml\n"
+"[package]\n"
+"name = \"hello_cargo\"\n"
+"version = \"0.1.0\"\n"
+"edition = \"2024\"\n"
+"\n"
+"[dependencies]\n"
+"```"
 
 #: src/ch01-03-hello-cargo.md:74
 msgid ""
 "This file is in the [_TOML_](https://toml.io)<!-- ignore --> (_Tom’s "
 "Obvious, Minimal Language_) format, which is Cargo’s configuration format."
 msgstr ""
+"此文件采用 [_TOML_](https://toml.io)<!-- ignore --> (_Tom’s Obvious, Minimal "
+"Language_)格式，这是Cargo的配置文件格式。"
 
 #: src/ch01-03-hello-cargo.md:77
 msgid ""
@@ -120,6 +159,8 @@ msgid ""
 "following statements are configuring a package. As we add more information "
 "to this file, we’ll add other sections."
 msgstr ""
+"第一行，`[package]`，是一个章节标题，表示接下来的语句是用来配置一个包。随着我"
+"们向这个文件添加更多信息，我们会添加更多的章节。"
 
 #: src/ch01-03-hello-cargo.md:81
 msgid ""
@@ -128,6 +169,9 @@ msgid ""
 "We’ll talk about the `edition` key in [Appendix E](appendix-05-editions."
 "html)<!-- ignore -->."
 msgstr ""
+"接下来的三行设置了 Cargo 在编译程序时需要使用的配置信息：程序的名称、版本以及"
+"要使用的 Rust 版本。我们将在[附录 E](appendix-05-editions.html)中详细讨论 "
+"`edition` 这个关键参数。"
 
 #: src/ch01-03-hello-cargo.md:85
 msgid ""
@@ -137,10 +181,13 @@ msgid ""
 "in the first project in Chapter 2, so we’ll use this dependencies section "
 "then."
 msgstr ""
+"最后一行，`[dependencies]`，是一个用于列出项目依赖项的区域。在Rust中，代码包"
+"被称为_crates_。对于这个项目，我们不需要其他crates，但在第2章的第一个项目中会"
+"需要使用其他crates，所以届时我们会使用这个依赖项区域来列出它们。"
 
 #: src/ch01-03-hello-cargo.md:90
 msgid "Now open _src/main.rs_ and take a look:"
-msgstr ""
+msgstr "现在打开 _src/main.rs_ 文件，看看里面的内容："
 
 #: src/ch01-03-hello-cargo.md:92
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
@@ -148,7 +195,7 @@ msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
 #: src/ch01-03-hello-cargo.md:96
 msgid "\"Hello, world!\""
-msgstr ""
+msgstr "“你好，世界！”"
 
 #: src/ch01-03-hello-cargo.md:100
 msgid ""
@@ -158,6 +205,9 @@ msgid ""
 "directory, and we have a _Cargo.toml_ configuration file in the top "
 "directory."
 msgstr ""
+"Cargo为你生成了一个“Hello, world!”程序，就像我们在清单1-1中编写的那个程序一"
+"样！到目前为止，我们的项目与Cargo生成的项目之间的区别在于，Cargo将代码放置在"
+"了`_src_`目录下，而我们的项目则有一个位于顶层目录下的`_Cargo.toml_`配置文件。"
 
 #: src/ch01-03-hello-cargo.md:105
 msgid ""
@@ -167,6 +217,9 @@ msgid ""
 "helps you organize your projects. There’s a place for everything, and "
 "everything is in its place."
 msgstr ""
+"Cargo要求你的源文件必须位于`_src_`目录下。项目的最高层目录仅用于存放README文"
+"件、许可证信息、配置文件，以及所有与代码无关的其他文件。使用Cargo可以帮助你更"
+"好地组织项目。每个文件都有它自己的位置，所有东西都放在了正确的地方。"
 
 #: src/ch01-03-hello-cargo.md:111
 msgid ""
@@ -176,10 +229,14 @@ msgid ""
 "toml_ file. One easy way to get that _Cargo.toml_ file is to run `cargo "
 "init`, which will create it for you automatically."
 msgstr ""
+"如果你启动了一个不使用 Cargo 的项目，就像我们处理 “Hello, world!” 项目那样，"
+"你可以将其转换为一个使用 Cargo 的项目。将项目代码移动到 _src_ 目录中，并创建"
+"一个合适的 _Cargo.toml_ 文件。一个简单的方法就是运行 `cargo init`，它会自动为"
+"你创建这个 _Cargo.toml_ 文件。"
 
 #: src/ch01-03-hello-cargo.md:117
 msgid "Building and Running a Cargo Project"
-msgstr ""
+msgstr "构建并运行 Cargo 项目"
 
 #: src/ch01-03-hello-cargo.md:119
 msgid ""
@@ -187,6 +244,8 @@ msgid ""
 "program with Cargo! From your _hello_cargo_ directory, build your project by "
 "entering the following command:"
 msgstr ""
+"现在让我们看看，当我们使用 Cargo 构建并运行“Hello, world!”程序时，会发生什么"
+"变化！从你的 _hello_cargo_ 目录中，通过输入以下命令来构建你的项目："
 
 #: src/ch01-03-hello-cargo.md:123
 msgid ""
@@ -196,6 +255,11 @@ msgid ""
 "    Finished dev [unoptimized + debuginfo] target(s) in 2.85 secs\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)\n"
+"    Finished dev [unoptimized + debuginfo] target(s) in 2.85 secs\n"
+"```"
 
 #: src/ch01-03-hello-cargo.md:129
 msgid ""
@@ -204,6 +268,10 @@ msgid ""
 "directory. Because the default build is a debug build, Cargo puts the binary "
 "in a directory named _debug_. You can run the executable with this command:"
 msgstr ""
+"此命令会生成一个可执行文件，文件位于 _target/debug/hello_cargo_ 目录下（在"
+"Windows系统中为 _target\\debug\\hello_cargo.exe_），而不是当前目录中。由于默"
+"认构建方式为调试版本，因此Cargo会将二进制文件存放在名为 _debug_ 的目录下。你"
+"可以使用以下命令来运行这个可执行文件："
 
 #: src/ch01-03-hello-cargo.md:139
 msgid ""
@@ -214,6 +282,10 @@ msgid ""
 "file is a bit sparse. You won’t ever need to change this file manually; "
 "Cargo manages its contents for you."
 msgstr ""
+"如果一切顺利，`Hello, world!`应该会显示在终端上。首次运行`cargo build`时，"
+"Cargo也会在顶层创建一个新文件：_Cargo.lock_。这个文件记录了项目中依赖库的精确"
+"版本。由于这个项目没有依赖库，所以这个文件的内容相对简单。你无需手动修改这个"
+"文件，Cargo会自行管理其内容。"
 
 #: src/ch01-03-hello-cargo.md:146
 msgid ""
@@ -221,6 +293,9 @@ msgid ""
 "hello_cargo`, but we can also use `cargo run` to compile the code and then "
 "run the resultant executable all in one command:"
 msgstr ""
+"我们刚刚使用 `cargo build` 构建了一个项目，并使用 `./target/debug/"
+"hello_cargo` 运行它。不过，我们也可以使用 `cargo run` 来编译代码，然后一次性"
+"命令运行生成的可执行文件："
 
 #: src/ch01-03-hello-cargo.md:157
 msgid ""
@@ -228,6 +303,8 @@ msgid ""
 "build` and then use the whole path to the binary, so most developers use "
 "`cargo run`."
 msgstr ""
+"使用 `cargo run` 比需要记住运行 `cargo build` 然后再使用整个路径来访问二进制"
+"文件要方便得多，因此大多数开发者都选择使用 `cargo run`。"
 
 #: src/ch01-03-hello-cargo.md:161
 msgid ""
@@ -237,6 +314,9 @@ msgid ""
 "code, Cargo would have rebuilt the project before running it, and you would "
 "have seen this output:"
 msgstr ""
+"请注意，这次我们没有看到任何表明 Cargo 正在编译的输出信息。Cargo 判断文件没有"
+"发生变化，因此没有重新构建项目，而是直接运行了二进制文件。如果您修改了源代"
+"码，Cargo 会在运行之前重新构建项目，这时您就会看到这样的输出信息："
 
 #: src/ch01-03-hello-cargo.md:167
 msgid ""
@@ -248,12 +328,21 @@ msgid ""
 "Hello, world!\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)\n"
+"    Finished dev [unoptimized + debuginfo] target(s) in 0.33 secs\n"
+"     Running `target/debug/hello_cargo`\n"
+"Hello, world!\n"
+"```"
 
 #: src/ch01-03-hello-cargo.md:175
 msgid ""
 "Cargo also provides a command called `cargo check`. This command quickly "
 "checks your code to make sure it compiles but doesn’t produce an executable:"
 msgstr ""
+"Cargo还提供了一个名为`cargo check`的命令。这个命令可以快速检查你的代码，确保"
+"代码能够编译，但不会生成可执行文件："
 
 #: src/ch01-03-hello-cargo.md:178
 msgid ""
@@ -263,6 +352,11 @@ msgid ""
 "    Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo check\n"
+"   Checking hello_cargo v0.1.0 (file:///projects/hello_cargo)\n"
+"    Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs\n"
+"```"
 
 #: src/ch01-03-hello-cargo.md:184
 msgid ""
@@ -274,34 +368,43 @@ msgid ""
 "they write their program to make sure it compiles. Then, they run `cargo "
 "build` when they’re ready to use the executable."
 msgstr ""
+"为什么你不想要一个可执行文件呢？通常，使用 `cargo check` 比使用 `cargo "
+"build` 要快得多，因为 `cargo check` 可以跳过生成可执行文件的步骤。如果你在编"
+"写代码时不断检查自己的工作情况，使用 `cargo check` 可以加快进程，让你更快地知"
+"道项目是否仍在编译中！因此，许多 Rust 开发者在编写程序时会定期使用 `cargo "
+"check` 来确保程序能够成功编译。然后，当他们准备使用可执行文件时，就会使用 "
+"`cargo build`。"
 
 #: src/ch01-03-hello-cargo.md:192
 msgid "Let’s recap what we’ve learned so far about Cargo:"
-msgstr ""
+msgstr "让我们回顾一下到目前为止我们学到的关于 Cargo 的知识："
 
 #: src/ch01-03-hello-cargo.md:194
 msgid "We can create a project using `cargo new`."
-msgstr ""
+msgstr "我们可以使用 `cargo new` 来创建一个项目。"
 
 #: src/ch01-03-hello-cargo.md:195
 msgid "We can build a project using `cargo build`."
-msgstr ""
+msgstr "我们可以使用 `cargo build` 来构建项目。"
 
 #: src/ch01-03-hello-cargo.md:196
 msgid "We can build and run a project in one step using `cargo run`."
-msgstr ""
+msgstr "我们可以使用 `cargo run` 一步完成项目的构建和运行。"
 
 #: src/ch01-03-hello-cargo.md:197
 msgid ""
 "We can build a project without producing a binary to check for errors using "
 "`cargo check`."
 msgstr ""
+"我们可以使用 `cargo check` 来构建项目，而无需生成二进制文件以检查错误。"
 
 #: src/ch01-03-hello-cargo.md:199
 msgid ""
 "Instead of saving the result of the build in the same directory as our code, "
 "Cargo stores it in the _target/debug_ directory."
 msgstr ""
+"与将构建结果保存在与代码相同的目录中不同，Cargo 将其保存在 _target/debug_ 目"
+"录中。"
 
 #: src/ch01-03-hello-cargo.md:202
 msgid ""
@@ -309,10 +412,12 @@ msgid ""
 "matter which operating system you’re working on. So, at this point, we’ll no "
 "longer provide specific instructions for Linux and macOS versus Windows."
 msgstr ""
+"使用Cargo的另一个优势是，无论你使用的是哪种操作系统，相关的命令都是相同的。因"
+"此，目前我们不再为Linux和macOS与Windows提供具体的操作指南。"
 
 #: src/ch01-03-hello-cargo.md:206
 msgid "Building for Release"
-msgstr ""
+msgstr "为发布而构建"
 
 #: src/ch01-03-hello-cargo.md:208
 msgid ""
@@ -327,14 +432,22 @@ msgid ""
 "benchmarking your code’s running time, be sure to run `cargo build --"
 "release` and benchmark with the executable in _target/release_."
 msgstr ""
+"当您的项目终于准备好发布时，您可以使用 `cargo build --release` 命令来优化编"
+"译。该命令会生成 _target/release_ 目录下的可执行文件，而不是 _target/debug_ "
+"目录下的文件。优化可以使得您的 Rust 代码运行得更快，但开启优化后，程序编译所"
+"需的时间也会延长。这就是为什么存在两种不同的编译配置：一种用于开发阶段，此时"
+"您需要频繁地重新构建代码；另一种则用于生成最终版本的程序，这种版本不会反复重"
+"新构建，并且会尽可能快地运行。如果您正在对代码的运行时间进行性能测试，请务必"
+"使用 `cargo build --release` 命令，并将可执行文件放在 _target/release_ 目录下"
+"进行测试。"
 
 #: src/ch01-03-hello-cargo.md:220
 msgid "<a id=\"cargo-as-convention\"></a>"
-msgstr ""
+msgstr "<a id=\"cargo-as-convention\"></a>"
 
 #: src/ch01-03-hello-cargo.md:222
 msgid "Leveraging Cargo’s Conventions"
-msgstr ""
+msgstr "利用 Cargo 的约定"
 
 #: src/ch01-03-hello-cargo.md:224
 msgid ""
@@ -343,6 +456,9 @@ msgid ""
 "Once programs grow to multiple files or need a dependency, it’s much easier "
 "to let Cargo coordinate the build."
 msgstr ""
+"对于简单的项目来说，Cargo并没有比直接使用`rustc`提供更多的价值，但随着程序变"
+"得越来越复杂，Cargo的优势就显现出来了。一旦程序需要多个文件或者依赖其他库，让"
+"Cargo来协调构建过程会变得更加简单。"
 
 #: src/ch01-03-hello-cargo.md:229
 msgid ""
@@ -351,12 +467,16 @@ msgid ""
 "any existing projects, you can use the following commands to check out the "
 "code using Git, change to that project’s directory, and build:"
 msgstr ""
+"尽管 `hello_cargo` 这个项目很简单，但它现在使用了许多你在后续的 Rust 开发过程"
+"中会使用的工具。实际上，要处理任何现有的项目，你可以使用以下命令来检出代码："
+"使用 Git，进入该项目的目录，然后进行构建。"
 
 #: src/ch01-03-hello-cargo.md:240
 msgid ""
 "For more information about Cargo, check out [its documentation](https://doc."
 "rust-lang.org/cargo/)."
 msgstr ""
+"如需了解更多关于Cargo的信息，请查阅其文档。[Cargo文档](http://cargo.vc/)"
 
 #: src/ch01-03-hello-cargo.md:242
 msgid "Summary"
@@ -366,27 +486,27 @@ msgstr "摘要"
 msgid ""
 "You’re already off to a great start on your Rust journey! In this chapter, "
 "you learned how to:"
-msgstr ""
+msgstr "你的 Rust 学习之旅已经取得了良好的开端！在这一章中，你学习了如何："
 
 #: src/ch01-03-hello-cargo.md:247
 msgid "Install the latest stable version of Rust using `rustup`."
-msgstr ""
+msgstr "使用 `rustup` 安装最新稳定的 Rust 版本。"
 
 #: src/ch01-03-hello-cargo.md:248
 msgid "Update to a newer Rust version."
-msgstr ""
+msgstr "更新到更新的 Rust 版本。"
 
 #: src/ch01-03-hello-cargo.md:249
 msgid "Open locally installed documentation."
-msgstr ""
+msgstr "打开本地安装的文档。"
 
 #: src/ch01-03-hello-cargo.md:250
 msgid "Write and run a “Hello, world!” program using `rustc` directly."
-msgstr ""
+msgstr "直接使用 `rustc` 编写并运行 “Hello, world!” 程序。"
 
 #: src/ch01-03-hello-cargo.md:251
 msgid "Create and run a new project using the conventions of Cargo."
-msgstr ""
+msgstr "按照 Cargo 的规范创建并运行一个新项目。"
 
 #: src/ch01-03-hello-cargo.md:253
 msgid ""
@@ -395,3 +515,6 @@ msgid ""
 "program. If you would rather start by learning how common programming "
 "concepts work in Rust, see Chapter 3 and then return to Chapter 2."
 msgstr ""
+"现在是时候构建一个更完整的程序了，以便逐渐习惯阅读和理解Rust代码。因此，在第"
+"二章中，我们将开发一个猜谜游戏程序。如果你更愿意先了解常见的编程概念在Rust中"
+"的实现方式，可以先阅读第三章，然后再回到第二章。"

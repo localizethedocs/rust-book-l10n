@@ -23,6 +23,9 @@ msgid ""
 "(https://crates.io/)<!-- ignore --> distributes the source code of your "
 "packages, so it primarily hosts code that is open source."
 msgstr ""
+"我们使用了 [crates.io]（https://crates.io/） 的包作为项目的依赖，但你也可以通"
+"过发布自己的包与他人分享代码。[crates.io]（https://crates.io/）的箱子注册表分"
+"发包的源代码，所以它主要托管开源代码。"
 
 #: src/ch14-02-publishing-to-crates-io.md:9
 msgid ""
@@ -30,10 +33,12 @@ msgid ""
 "people to find and use. We’ll talk about some of these features next and "
 "then explain how to publish a package."
 msgstr ""
+"Rust和Cargo具有使人们更容易找到和使用您已发布的软件包的功能。 我们将在下面谈"
+"到其中一些功能，然后解释如何发布一个包。"
 
 #: src/ch14-02-publishing-to-crates-io.md:13
 msgid "Making Useful Documentation Comments"
-msgstr ""
+msgstr "编写有用的文档注释"
 
 #: src/ch14-02-publishing-to-crates-io.md:15
 msgid ""
@@ -46,6 +51,12 @@ msgid ""
 "public API items intended for programmers interested in knowing how to _use_ "
 "your crate as opposed to how your crate is _implemented_."
 msgstr ""
+"准确记录你的软件包的内容，可以帮助其他用户了解如何以及何时使用它们。因此，花"
+"时间编写文档是值得的。在第三章中，我们讨论了如何使用两个斜杠 `//` 来注释 "
+"Rust 代码。Rust 还有一种专门用于文档注释的注释类型，通常被称为“文档注释_”，这"
+"种注释会生成 HTML 文档。HTML 会显示那些用于公开 API 的文档注释的内容，这些 "
+"API 的目的是让程序员能够了解如何“使用”你的软件包，而不是了解你的软件包是如"
+"何“实现”的。"
 
 #: src/ch14-02-publishing-to-crates-io.md:24
 msgid ""
@@ -54,6 +65,9 @@ msgid ""
 "before the item they’re documenting. Listing 14-1 shows documentation "
 "comments for an `add_one` function in a crate named `my_crate`."
 msgstr ""
+"文档注释使用三个斜杠，即 `///`，而不是两个斜杠。同时，文档注释还支持 "
+"Markdown 格式标记来格式化文本。将文档注释放在它们所注释的项目之前即可。列表 "
+"14-1 展示了名为 `my_crate` 的包中一个 `add_one` 函数的文档注释示例。"
 
 #: src/ch14-02-publishing-to-crates-io.md:32
 msgid ""
@@ -68,6 +82,16 @@ msgid ""
 "/// assert_eq!(6, answer);\n"
 "/// ```\n"
 msgstr ""
+"/// Adds one to the number given.\n"
+"///\n"
+"/// # Examples\n"
+"///\n"
+"/// ```\n"
+"/// let arg = 5;\n"
+"/// let answer = my_crate::add_one(arg);\n"
+"///\n"
+"/// assert_eq!(6, answer);\n"
+"/// ```\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:49
 msgid ""
@@ -78,6 +102,10 @@ msgid ""
 "the `rustdoc` tool distributed with Rust and puts the generated HTML "
 "documentation in the _target/doc_ directory."
 msgstr ""
+"在这里，我们描述了 `add_one` 函数的功能，接着以 `Examples` 作为标题开始一个新"
+"章节，然后提供了如何使用 `add_one` 函数的代码示例。我们可以通过运行 `cargo "
+"doc` 来生成HTML文档。这个命令会调用随Rust一起提供的`rustdoc`工具，并将生成的"
+"HTML文档存放在 _target/doc_ 目录下。"
 
 #: src/ch14-02-publishing-to-crates-io.md:56
 msgid ""
@@ -87,16 +115,19 @@ msgid ""
 "`add_one` function and you’ll see how the text in the documentation comments "
 "is rendered, as shown in Figure 14-1."
 msgstr ""
+"为了方便起见，运行 `cargo doc --open` 将会生成当前 crate 的文档内容（以及所有"
+"依赖项的文档内容），并将结果在网页浏览器中打开。访问`add_one`函数，您可以看到"
+"文档注释中的文本是如何被渲染的，如图14-1所示。"
 
 #: src/ch14-02-publishing-to-crates-io.md:64
 msgid ""
 "<span class=\"caption\">Figure 14-1: The HTML documentation for the "
 "`add_one` function</span>"
-msgstr ""
+msgstr "<span class=“caption”>图 14-1：'add_one'函数的 HTML 文档</span>"
 
 #: src/ch14-02-publishing-to-crates-io.md:67
 msgid "Commonly Used Sections"
-msgstr ""
+msgstr "常用章节"
 
 #: src/ch14-02-publishing-to-crates-io.md:69
 msgid ""
@@ -104,6 +135,8 @@ msgid ""
 "section in the HTML with the title “Examples.” Here are some other sections "
 "that crate authors commonly use in their documentation:"
 msgstr ""
+"我们在 Listing 14-1 中使用了 `# Examples`  Markdown 标题来创建一个名为“示"
+"例”的章节。以下是 crate 作者在其文档中常用的其他章节类型："
 
 #: src/ch14-02-publishing-to-crates-io.md:73
 msgid ""
@@ -111,6 +144,8 @@ msgid ""
 "could panic. Callers of the function who don’t want their programs to panic "
 "should make sure they don’t call the function in these situations."
 msgstr ""
+"** panic 情况**：这些是指被记录的函数可能会陷入 panic 的情况。那些不希望自己"
+"的程序陷入 panic 的调用者，应该确保在这种情况下不要调用该函数。"
 
 #: src/ch14-02-publishing-to-crates-io.md:76
 msgid ""
@@ -119,6 +154,9 @@ msgid ""
 "returned can be helpful to callers so that they can write code to handle the "
 "different kinds of errors in different ways."
 msgstr ""
+"**错误**：如果该函数返回 `Result`，那么描述可能发生的错误类型以及可能导致这些"
+"错误的情况，对于调用者来说非常有帮助，这样他们就可以编写代码来应对不同类型的"
+"错误。"
 
 #: src/ch14-02-publishing-to-crates-io.md:80
 msgid ""
@@ -126,6 +164,9 @@ msgid ""
 "Chapter 20), there should be a section explaining why the function is unsafe "
 "and covering the invariants that the function expects callers to uphold."
 msgstr ""
+"**安全性**：如果该函数被安全地调用（我们在第20章中讨论了不安全性），那么应该"
+"有一个部分来解释为什么该函数是不安全的，并说明该函数期望调用者遵守哪些不变条"
+"件。"
 
 #: src/ch14-02-publishing-to-crates-io.md:84
 msgid ""
@@ -133,10 +174,12 @@ msgid ""
 "good checklist to remind you of the aspects of your code users will be "
 "interested in knowing about."
 msgstr ""
+"大多数文档注释并不需要所有这些部分，但这是一个很好的清单，可以提醒你用户感兴"
+"趣了解的代码相关方面。"
 
 #: src/ch14-02-publishing-to-crates-io.md:88
 msgid "Documentation Comments as Tests"
-msgstr ""
+msgstr "文档注释作为测试"
 
 #: src/ch14-02-publishing-to-crates-io.md:90
 msgid ""
@@ -149,6 +192,11 @@ msgid ""
 "the `add_one` function from Listing 14-1, we will see a section in the test "
 "results that looks like this:"
 msgstr ""
+"在文档注释中添加示例代码块可以帮助演示如何使用你的库，并且还有一个额外的好"
+"处：运行 `cargo test` 将会使文档中的代码示例作为测试运行！没有什么比带有示例"
+"的文档更好的了。但是，如果示例因为代码在编写文档后发生了变化而无法正常运行，"
+"那可就糟糕了。如果我们使用 Listing 14-1 中的 `add_one` 函数的文档来运行 "
+"`cargo test`，我们会看到测试结果中有一个这样的部分："
 
 #: src/ch14-02-publishing-to-crates-io.md:113
 msgid ""
@@ -156,14 +204,17 @@ msgid ""
 "` in the example panics, and run `cargo test` again, we’ll see that the doc "
 "tests catch that the example and the code are out of sync with each other!"
 msgstr ""
+"现在，如果我们修改函数或示例，使得在示例中出现的 `assert_eq!` 引发异常，然后"
+"再次运行 `cargo test`，我们会发现文档测试会捕获到示例和代码之间出现了不一致的"
+"问题！"
 
 #: src/ch14-02-publishing-to-crates-io.md:119
 msgid "<a id=\"commenting-contained-items\"></a>"
-msgstr ""
+msgstr "<a id=\"commenting-contained-items\"></a>"
 
 #: src/ch14-02-publishing-to-crates-io.md:121
 msgid "Contained Item Comments"
-msgstr ""
+msgstr "包含的项目注释"
 
 #: src/ch14-02-publishing-to-crates-io.md:123
 msgid ""
@@ -173,6 +224,9 @@ msgid ""
 "by convention) or inside a module to document the crate or the module as a "
 "whole."
 msgstr ""
+"这种文档注释的风格 `//!` 是将注释附加到包含这些注释的项目上，而不是附加在注释"
+"之后的项目上。我们通常将这些文档注释放在 crate 的根文件（按照惯例是 _src/lib."
+"rs_）中，或者放在某个模块中，以对整个 crate 或模块进行说明。"
 
 #: src/ch14-02-publishing-to-crates-io.md:128
 msgid ""
@@ -181,6 +235,8 @@ msgid ""
 "comments that start with `//!` to the beginning of the _src/lib.rs_ file, as "
 "shown in Listing 14-2."
 msgstr ""
+"例如，为了添加描述 `my_crate` 这个 crate 的功能的文档，我们需要在 _src/lib."
+"rs_ 文件的开头添加以 `//!` 开头的文档注释，如清单 14-2 所示。"
 
 #: src/ch14-02-publishing-to-crates-io.md:136
 msgid ""
@@ -189,39 +245,45 @@ msgid ""
 "//! `my_crate` is a collection of utilities to make performing certain\n"
 "//! calculations more convenient.\n"
 msgstr ""
+"//! # My Crate\n"
+"//!\n"
+"//! `my_crate` is a collection of utilities to make performing certain\n"
+"//! calculations more convenient.\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:140
 msgid ""
 "/// Adds one to the number given.\n"
 "// --snip--\n"
 msgstr ""
+"/// Adds one to the number given.\n"
+"// --snip--\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:143
 #: src/ch14-02-publishing-to-crates-io.md:145
 #: src/ch14-02-publishing-to-crates-io.md:149
 msgid "///\n"
-msgstr ""
+msgstr "///\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:144
 msgid "/// # Examples\n"
-msgstr ""
+msgstr "/// # Examples\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:146
 #: src/ch14-02-publishing-to-crates-io.md:151
 msgid "/// ```\n"
-msgstr ""
+msgstr "/// ```\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:147
 msgid "/// let arg = 5;\n"
-msgstr ""
+msgstr "/// let arg = 5;\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:148
 msgid "/// let answer = my_crate::add_one(arg);\n"
-msgstr ""
+msgstr "/// let answer = my_crate::add_one(arg);\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:150
 msgid "/// assert_eq!(6, answer);\n"
-msgstr ""
+msgstr "/// assert_eq!(6, answer);\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:159
 msgid ""
@@ -231,6 +293,10 @@ msgid ""
 "follows this comment. In this case, that item is the _src/lib.rs_ file, "
 "which is the crate root. These comments describe the entire crate."
 msgstr ""
+"请注意，最后一行之后没有任何以 `//!` 开头的代码。因为我们是以 `//!` 开始注释"
+"的，而不是 `///`。因此，我们记录的是包含这条注释的项目，而不是紧随这条注释之"
+"后的项目。在这种情况下，该项目就是 _src/lib.rs_ 文件，也就是 crate 的根目录。"
+"这些注释描述了整个 crate 的内容。"
 
 #: src/ch14-02-publishing-to-crates-io.md:165
 msgid ""
@@ -238,6 +304,8 @@ msgid ""
 "page of the documentation for `my_crate` above the list of public items in "
 "the crate, as shown in Figure 14-2."
 msgstr ""
+"当我们运行 `cargo doc --open` 时，这些注释将会显示在文档的首页上，位于 crate "
+"中公共项目的列表上方，如图 14-2 所示。"
 
 #: src/ch14-02-publishing-to-crates-io.md:169
 msgid ""
@@ -245,20 +313,23 @@ msgid ""
 "modules especially. Use them to explain the overall purpose of the container "
 "to help your users understand the crate’s organization."
 msgstr ""
+"在项目中的文档注释非常有用，尤其适用于描述 crate 和 module。使用这些注释来解"
+"释容器的整体目的，以帮助用户理解该 crate 的组织结构。"
 
 #: src/ch14-02-publishing-to-crates-io.md:175
 msgid ""
 "<span class=\"caption\">Figure 14-2: The rendered documentation for "
 "`my_crate`, including the comment describing the crate as a whole</span>"
 msgstr ""
+"<span>图14-2： `my_crate` 的渲染文档，其中包括对该包整体描述的注释</span>"
 
 #: src/ch14-02-publishing-to-crates-io.md:180
 msgid "<a id=\"exporting-a-convenient-public-api-with-pub-use\"></a>"
-msgstr ""
+msgstr "<a id=\"exporting-a-convenient-public-api-with-pub-use\"></a>"
 
 #: src/ch14-02-publishing-to-crates-io.md:182
 msgid "Exporting a Convenient Public API"
-msgstr ""
+msgstr "导出便捷的公共 API"
 
 #: src/ch14-02-publishing-to-crates-io.md:184
 msgid ""
@@ -267,6 +338,9 @@ msgid ""
 "you are and might have difficulty finding the pieces they want to use if "
 "your crate has a large module hierarchy."
 msgstr ""
+"在发布一个crate时，你的公共API的结构是一个重要的考虑因素。使用你的crate的人可"
+"能比你更不了解该API的结构，如果crate的模块层次结构过于复杂，他们可能会难以找"
+"到他们想要使用的部分。"
 
 #: src/ch14-02-publishing-to-crates-io.md:189
 msgid ""
@@ -280,6 +354,12 @@ msgid ""
 "my_crate::some_module::another_module::UsefulType;` rather than `use "
 "my_crate::UsefulType;`."
 msgstr ""
+"在第七章中，我们介绍了如何使用 `pub` 关键字将项设为公开，以及如何使用 `use` "
+"关键字将项引入某个作用域。然而，在开发 crate 时你觉得合适的结构，可能对你的用"
+"户来说并不方便。你可能希望将结构体按照多层层次结构来组织，但那些需要在层次结"
+"构深处使用你定义的类型的人可能会遇到难以找到该类型的问题。他们还可能因为需要"
+"输入 `use my_crate::some_module::another_module::UsefulType;` 而不是 `use "
+"my_crate::UsefulType;` 而感到烦恼。"
 
 #: src/ch14-02-publishing-to-crates-io.md:199
 msgid ""
@@ -290,6 +370,10 @@ msgid ""
 "exporting_ takes a public item in one location and makes it public in "
 "another location, as if it were defined in the other location instead."
 msgstr ""
+"好消息是，如果某个结构让其他用户难以使用，或者无法从其他库中使用，那么您不必"
+"重新调整内部组织结构。相反，您可以使用 `pub use` 将某些元素重新导出，从而创建"
+"一个与您的私有结构不同的公共结构。*重新导出*操作是将某个公共元素从一个位置导"
+"出到另一个位置，就好像该元素是在另一个位置定义的那样。"
 
 #: src/ch14-02-publishing-to-crates-io.md:206
 msgid ""
@@ -298,6 +382,10 @@ msgid ""
 "two enums named `PrimaryColor` and `SecondaryColor` and a `utils` module "
 "containing a function named `mix`, as shown in Listing 14-3."
 msgstr ""
+"例如，我们假设创建了一个名为 `art` 的库，用于建模艺术概念。在这个库中，有两个"
+"模块：一个 `kinds` 模块，其中包含两个枚举类型，分别命名为 `PrimaryColor` 和 "
+"`SecondaryColor`；另一个 `utils` 模块中包含一个名为 `mix` 的函数，如清单 "
+"14-3 所示。"
 
 #: src/ch14-02-publishing-to-crates-io.md:214
 #: src/ch14-02-publishing-to-crates-io.md:296
@@ -306,22 +394,27 @@ msgid ""
 "//!\n"
 "//! A library for modeling artistic concepts.\n"
 msgstr ""
+"//! # Art\n"
+"//!\n"
+"//! A library for modeling artistic concepts.\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:219
 #: src/ch14-02-publishing-to-crates-io.md:306
 msgid "/// The primary colors according to the RYB color model.\n"
-msgstr ""
+msgstr "/// 原色是根据 RYB 颜色模型来划分\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:226
 #: src/ch14-02-publishing-to-crates-io.md:313
 msgid "/// The secondary colors according to the RYB color model.\n"
-msgstr ""
+msgstr "/// 基于 RYB 颜色模型的次要颜色。\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:237
 msgid ""
 "/// Combines two primary colors in equal amounts to create\n"
 "    /// a secondary color.\n"
 msgstr ""
+"/// 混合两种主要颜色的数量相等以创建\n"
+"    //// 一种次要颜色。\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:240
 #: src/ch14-02-publishing-to-crates-io.md:305
@@ -336,13 +429,14 @@ msgstr ""
 msgid ""
 "Figure 14-3 shows what the front page of the documentation for this crate "
 "generated by `cargo doc` would look like."
-msgstr ""
+msgstr "图14-3展示了 `cargo doc` 这个 crate 的文档首页的样式。"
 
 #: src/ch14-02-publishing-to-crates-io.md:253
 msgid ""
 "<span class=\"caption\">Figure 14-3: The front page of the documentation for "
 "`art` that lists the `kinds` and `utils` modules</span>"
 msgstr ""
+"<span>图14-3： `art` 文档的首页，其中列出了 `kinds` 和 `utils` 模块</span>"
 
 #: src/ch14-02-publishing-to-crates-io.md:256
 msgid ""
@@ -350,6 +444,8 @@ msgid ""
 "front page, nor is the `mix` function. We have to click `kinds` and `utils` "
 "to see them."
 msgstr ""
+"请注意，`PrimaryColor`和`SecondaryColor`这两种类型并没有出现在主页上，同样，"
+"`mix`这个函数也没有被列出。我们必须点击`kinds`和`utils`才能看到它们。"
 
 #: src/ch14-02-publishing-to-crates-io.md:260
 msgid ""
@@ -358,6 +454,9 @@ msgid ""
 "that’s currently defined. Listing 14-4 shows an example of a crate that uses "
 "the `PrimaryColor` and `mix` items from the `art` crate."
 msgstr ""
+"另一个依赖此库的 crate 需要使用 `use` 语句，将 `art` 中的项引入作用域，并指定"
+"当前定义的模块结构。列表 14-4 展示了一个使用 `art` 库中的 `PrimaryColor` 和 "
+"`mix` 项的 crate 示例。"
 
 #: src/ch14-02-publishing-to-crates-io.md:280
 msgid ""
@@ -370,6 +469,11 @@ msgid ""
 "developers who use it have to figure out where to look, and must specify the "
 "module names in the `use` statements."
 msgstr ""
+"清单14-4中的代码作者使用了 `art` 这个 crate，他需要弄清楚 `PrimaryColor` 位"
+"于 `kinds` 模块中，而 `mix` 则位于 `utils` 模块中。 `art` crate 的模块结构对"
+"于使用 `art` crate 的开发者来说更为重要，而不是那些正在使用 `art` crate 的"
+"人。该模块结构并不包含任何有助于理解如何使用 `art` crate 的信息，反而会因为开"
+"发者需要自行确定查找位置，并且必须在 `use` 语句中指定模块名称而引发混乱。"
 
 #: src/ch14-02-publishing-to-crates-io.md:289
 msgid ""
@@ -377,14 +481,16 @@ msgid ""
 "`art` crate code in Listing 14-3 to add `pub use` statements to re-export "
 "the items at the top level, as shown in Listing 14-5."
 msgstr ""
+"为了从公共 API 中移除内部组织结构，我们可以修改清单 14-3 中的`art` crate 代"
+"码，添加 `pub use` 语句，以重新导出顶层级别的 items，如清单 14-5 所示。"
 
 #: src/ch14-02-publishing-to-crates-io.md:325
 msgid "/// Combines two primary colors in equal amounts to create\n"
-msgstr ""
+msgstr "/// 混合两种主要颜色，数量相等以创建\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:326
 msgid "/// a secondary color.\n"
-msgstr ""
+msgstr "/// 次要颜色。\n"
 
 #: src/ch14-02-publishing-to-crates-io.md:335
 msgid ""
@@ -393,12 +499,15 @@ msgid ""
 "the `PrimaryColor` and `SecondaryColor` types and the `mix` function easier "
 "to find."
 msgstr ""
+"`cargo doc` 为这个 crate 生成的 API 文档现在会在首页上列出并链接到各种重新导"
+"出内容，如图 14-4 所示。这样一来，`PrimaryColor`、`SecondaryColor` 类型以及 "
+"`mix` 函数就更容易被找到了。"
 
 #: src/ch14-02-publishing-to-crates-io.md:341
 msgid ""
 "<span class=\"caption\">Figure 14-4: The front page of the documentation for "
 "`art` that lists the re-exports</span>"
-msgstr ""
+msgstr "<span>图14-4： `art` 文档的首页，其中列出了重新导出内容</span>"
 
 #: src/ch14-02-publishing-to-crates-io.md:344
 msgid ""
@@ -406,6 +515,9 @@ msgid ""
 "Listing 14-3 as demonstrated in Listing 14-4, or they can use the more "
 "convenient structure in Listing 14-5, as shown in Listing 14-6."
 msgstr ""
+"`art` crate 的用户仍然可以像 Listing 14-4 中所示那样查看和使用 Listing 14-3 "
+"中的内部结构，或者他们可以使用 Listing 14-5 中更便捷的结构，如 Listing 14-6 "
+"所示。"
 
 #: src/ch14-02-publishing-to-crates-io.md:364
 msgid ""
@@ -415,6 +527,9 @@ msgid ""
 "definitions of a dependency in the current crate to make that crate's "
 "definitions part of your crate’s public API."
 msgstr ""
+"在存在许多嵌套模块的情况下，通过在顶层重新导出类型，使用 `pub use` 可以显著改"
+"善使用该包的人们的体验。 `pub use` 的另一个常见用途是重新导出当前包中依赖包的"
+"定义，从而使该依赖包的定义成为你包的公开 API 的一部分。"
 
 #: src/ch14-02-publishing-to-crates-io.md:370
 msgid ""
@@ -425,10 +540,14 @@ msgid ""
 "Look at some of the code of crates you’ve installed to see if their internal "
 "structure differs from their public API."
 msgstr ""
+"创建有用的公共API结构更像是一门艺术而非科学，你可以不断尝试以找到最适合用户的"
+"API。选择 `pub use` 可以让你在内部构建你的软件包时拥有更大的灵活性，并将这种"
+"内部结构与用户所看到的界面分离开来。你可以查看一些你已经安装过的软件包的代"
+"码，看看它们的内部结构是否与公共API有所不同。"
 
 #: src/ch14-02-publishing-to-crates-io.md:377
 msgid "Setting Up a Crates.io Account"
-msgstr ""
+msgstr "创建 Crates.io 账户"
 
 #: src/ch14-02-publishing-to-crates-io.md:379
 msgid ""
@@ -441,6 +560,12 @@ msgid ""
 "(https://crates.io/me/)<!-- ignore --> and retrieve your API key. Then, run "
 "the `cargo login` command and paste your API key when prompted, like this:"
 msgstr ""
+"在您能够发布任何 crate 之前，您需要先在[crates.io](https://crates.io/)上创建"
+"一个账户，并获取一个 API 令牌。为此，请访问[crates.io](https://crates.io/)的"
+"主页，并通过 GitHub 账户登录。（目前需要使用 GitHub 账户登录，但未来该网站可"
+"能会支持其他方式的账户创建方式。）登录后，请访问[https://crates.io/me/]"
+"(https://crates.io/me/)设置页面，获取您的 API 密钥。然后，运行 `cargo login` "
+"命令，并在提示时粘贴您的 API 密钥。"
 
 #: src/ch14-02-publishing-to-crates-io.md:393
 msgid ""
@@ -451,10 +576,14 @@ msgid ""
 "ignore\n"
 "-->."
 msgstr ""
+"此命令会将您的API令牌告知Cargo，并将其本地存储在_~/.cargo/credentials.toml_文"
+"件中。请注意，此令牌属于机密信息：切勿与任何人分享。如果您出于任何原因需要与"
+"他人共享该令牌，请立即撤销其权限，并在[crates.io](https://crates.io/)上生成新"
+"的令牌。"
 
 #: src/ch14-02-publishing-to-crates-io.md:399
 msgid "Adding Metadata to a New Crate"
-msgstr ""
+msgstr "为新的 crate 添加元数据"
 
 #: src/ch14-02-publishing-to-crates-io.md:401
 msgid ""
@@ -462,6 +591,8 @@ msgid ""
 "need to add some metadata in the `[package]` section of the crate’s _Cargo."
 "toml_ file."
 msgstr ""
+"假设你有一个想要发布的 crate。在发布之前，你需要在 crate 的 _Cargo.toml_ 文件"
+"的 `[package]` 部分中添加一些元数据。"
 
 #: src/ch14-02-publishing-to-crates-io.md:405
 msgid ""
@@ -474,6 +605,12 @@ msgid ""
 "name and edit the `name` field in the _Cargo.toml_ file under the "
 "`[package]` section to use the new name for publishing, like so:"
 msgstr ""
+"你的 crate 需要一个独特的名称。在本地开发 crate 时，你可以随意为其命名。不"
+"过，[crates.io](https://crates.io/)上的 crate 名称是按照先来先服务的原则进行"
+"分配的。一旦某个名称被占用，其他人就无法再使用该名称发布 crate 了。在尝试发"
+"布 crate 之前，请先搜索你想使用的名称。如果该名称已被占用，你需要另选一个名"
+"称，并编辑 _Cargo.toml_ 文件中的 `[package]` 部分的 `name` 字段，以便使用新的"
+"名称进行发布。"
 
 #: src/ch14-02-publishing-to-crates-io.md:414
 #: src/ch14-02-publishing-to-crates-io.md:452
@@ -488,12 +625,18 @@ msgid ""
 "name = \"guessing_game\"\n"
 "```"
 msgstr ""
+"```toml\n"
+"[package]\n"
+"name = \"guessing_game\"\n"
+"```"
 
 #: src/ch14-02-publishing-to-crates-io.md:421
 msgid ""
 "Even if you’ve chosen a unique name, when you run `cargo publish` to publish "
 "the crate at this point, you’ll get a warning and then an error:"
 msgstr ""
+"即使你选择了一个独特的名称，在运行 `cargo publish` 来发布这个软件包时，你会先"
+"收到一个警告，然后会遇到一个错误："
 
 #: src/ch14-02-publishing-to-crates-io.md:431
 msgid ""
@@ -514,6 +657,22 @@ msgid ""
 "configuring these fields\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo publish\n"
+"    Updating crates.io index\n"
+"warning: manifest has no description, license, license-file, documentation, "
+"homepage or repository.\n"
+"See https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata "
+"for more info.\n"
+"--snip--\n"
+"error: failed to publish to registry at https://crates.io\n"
+"\n"
+"Caused by:\n"
+"  the remote server responded with an error (status 400 Bad Request): "
+"missing or empty metadata fields: description, license. Please see https://"
+"doc.rust-lang.org/cargo/reference/manifest.html for more information on "
+"configuring these fields\n"
+"```"
 
 #: src/ch14-02-publishing-to-crates-io.md:443
 msgid ""
@@ -527,6 +686,13 @@ msgid ""
 "use for this value. For example, to specify that you’ve licensed your crate "
 "using the MIT License, add the `MIT` identifier:"
 msgstr ""
+"这会导致错误，因为你缺少一些关键信息：需要提供描述和许可证信息，这样人们就能"
+"知道你的软件包的功能以及他们可以在什么条件下使用它。在 _Cargo.toml_ 文件中，"
+"添加一段描述，内容只需一两句话即可，因为这段描述会与你的软件包一起出现在搜索"
+"结果中。对于 `license` 字段，你需要提供一个 _许可证标识符_ 值。Linux 基金会的"
+"软件包数据交换标准 [SPDX](https://spdx.org/licenses/)列出了可以用于此字段的标"
+"识符。例如，如果你想说明你使用 MIT 许可证来授权你的软件包，那么就需要添加 "
+"`MIT` 标识符。"
 
 #: src/ch14-02-publishing-to-crates-io.md:454
 msgid ""
@@ -536,6 +702,11 @@ msgid ""
 "license = \"MIT\"\n"
 "```"
 msgstr ""
+"```toml\n"
+"[package]\n"
+"name = \"guessing_game\"\n"
+"license = \"MIT\"\n"
+"```"
 
 #: src/ch14-02-publishing-to-crates-io.md:460
 msgid ""
@@ -544,6 +715,9 @@ msgid ""
 "and then use `license-file` to specify the name of that file instead of "
 "using the `license` key."
 msgstr ""
+"如果您想使用在 SPDX 中未出现的许可证，您需要将该许可证的文本放在一个文件中，"
+"并将该文件包含到您的项目中。然后，可以使用 `license-file` 来指定该文件的名"
+"称，而不是使用`license`键。"
 
 #: src/ch14-02-publishing-to-crates-io.md:465
 msgid ""
@@ -553,6 +727,10 @@ msgid ""
 "practice demonstrates that you can also specify multiple license identifiers "
 "separated by `OR` to have multiple licenses for your project."
 msgstr ""
+"关于哪种许可证适合您的项目，这方面的指导超出了本书的范围。Rust社区中的许多人"
+"都采用与Rust相同的许可证方式，即使用 `MIT OR Apache-2.0` 双重许可证。这种做法"
+"表明，您也可以使用 `OR` 来指定多个许可证标识符，从而为您的项目使用多个许可"
+"证。"
 
 #: src/ch14-02-publishing-to-crates-io.md:471
 msgid ""
@@ -560,6 +738,8 @@ msgid ""
 "_Cargo.toml_ file for a project that is ready to publish might look like "
 "this:"
 msgstr ""
+"一个具有独特名称的版本文件，加上你的描述以及许可证信息后，一个准备发布的项目"
+"的_Cargo.toml_文件可能如下所示："
 
 #: src/ch14-02-publishing-to-crates-io.md:476
 msgid ""
@@ -575,6 +755,17 @@ msgid ""
 "[dependencies]\n"
 "```"
 msgstr ""
+"```toml\n"
+"[package]\n"
+"name = \"guessing_game\"\n"
+"version = \"0.1.0\"\n"
+"edition = \"2024\"\n"
+"description = \"A fun game where you guess what number the computer has "
+"chosen.\"\n"
+"license = \"MIT OR Apache-2.0\"\n"
+"\n"
+"[dependencies]\n"
+"```"
 
 #: src/ch14-02-publishing-to-crates-io.md:487
 msgid ""
@@ -582,10 +773,12 @@ msgid ""
 "metadata you can specify to ensure that others can discover and use your "
 "crate more easily."
 msgstr ""
+"[Cargo的文档](https://doc.rust-lang.org/cargo/)中描述了其他可以指定的元数据，"
+"这些元数据有助于他人更轻松地发现和使用你的库。"
 
 #: src/ch14-02-publishing-to-crates-io.md:491
 msgid "Publishing to Crates.io"
-msgstr ""
+msgstr "发布到Crates.io"
 
 #: src/ch14-02-publishing-to-crates-io.md:493
 msgid ""
@@ -594,6 +787,9 @@ msgid ""
 "Publishing a crate uploads a specific version to [crates.io](https://crates."
 "io/)<!-- ignore --> for others to use."
 msgstr ""
+"现在你已经创建了一个账户，保存了你的API令牌，为你的包选择了名称，并指定了所需"
+"的元数据，那么你就已经准备好发布你的包了！发布包会将特定版本的文件上传到"
+"[crates.io](https://crates.io/)供其他人使用。"
 
 #: src/ch14-02-publishing-to-crates-io.md:498
 msgid ""
@@ -605,10 +801,14 @@ msgid ""
 "make fulfilling that goal impossible. However, there is no limit to the "
 "number of crate versions you can publish."
 msgstr ""
+"请注意，发布的版本是永久性的。该版本无法被覆盖，除非在某些特定情况下，否则代"
+"码也无法被删除。Crates.io的主要目标之一就是作为代码的永久存储库，这样所有依赖"
+"crates.io上的crates的项目都能继续正常运行。如果允许删除版本，那么实现这一目标"
+"就会变得不可能。不过，您可以发布任意数量的crates版本。"
 
 #: src/ch14-02-publishing-to-crates-io.md:506
 msgid "Run the `cargo publish` command again. It should succeed now:"
-msgstr ""
+msgstr "再次运行 `cargo publish` 命令。现在应该可以成功执行了："
 
 #: src/ch14-02-publishing-to-crates-io.md:514
 msgid ""
@@ -630,16 +830,35 @@ msgid ""
 "   Published guessing_game v0.1.0 at registry `crates-io`\n"
 "```"
 msgstr ""
+"```console\n"
+"$ cargo publish\n"
+"    Updating crates.io index\n"
+"   Packaging guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Packaged 6 files, 1.2KiB (895.0B compressed)\n"
+"   Verifying guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"   Compiling guessing_game v0.1.0\n"
+"(file:///projects/guessing_game/target/package/guessing_game-0.1.0)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.19s\n"
+"   Uploading guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Uploaded guessing_game v0.1.0 to registry `crates-io`\n"
+"note: waiting for `guessing_game v0.1.0` to be available at registry\n"
+"`crates-io`.\n"
+"You may press ctrl-c to skip waiting; the crate should be available "
+"shortly.\n"
+"   Published guessing_game v0.1.0 at registry `crates-io`\n"
+"```"
 
 #: src/ch14-02-publishing-to-crates-io.md:531
 msgid ""
 "Congratulations! You’ve now shared your code with the Rust community, and "
 "anyone can easily add your crate as a dependency of their project."
 msgstr ""
+"恭喜！你现在已经将你的代码分享给了Rust社区，任何人都可以轻松地将你的库作为依"
+"赖项添加到他们的项目中。"
 
 #: src/ch14-02-publishing-to-crates-io.md:534
 msgid "Publishing a New Version of an Existing Crate"
-msgstr ""
+msgstr "发布现有 crate 的新版本"
 
 #: src/ch14-02-publishing-to-crates-io.md:536
 msgid ""
@@ -649,16 +868,22 @@ msgid ""
 "decide what an appropriate next version number is, based on the kinds of "
 "changes you’ve made. Then, run `cargo publish` to upload the new version."
 msgstr ""
+"当你对你的项目进行了修改，并且准备发布一个新版本时，你需要修改 _Cargo.toml_ "
+"文件中指定的 `version` 值，然后重新发布。使用 [语义版本控制规则](https://"
+"semver.org/) 来决定基于你所做的修改，合适的下一个版本号是什么。之后，运行 "
+"`cargo publish` 来上传新版本。"
 
 #: src/ch14-02-publishing-to-crates-io.md:544
 msgid ""
 "<a id=\"removing-versions-from-cratesio-with-cargo-yank\"></a> <a "
 "id=\"deprecating-versions-from-cratesio-with-cargo-yank\"></a>"
 msgstr ""
+"<a id=\"removing-versions-from-cratesio-with-cargo-yank\"></a> <a "
+"id=\"deprecating-versions-from-cratesio-with-cargo-yank\"></a>"
 
 #: src/ch14-02-publishing-to-crates-io.md:547
 msgid "Deprecating Versions from Crates.io"
-msgstr ""
+msgstr "从Crates.io中移除不再使用的版本"
 
 #: src/ch14-02-publishing-to-crates-io.md:549
 msgid ""
@@ -667,6 +892,9 @@ msgid ""
 "crate version is broken for one reason or another. In such situations, Cargo "
 "supports yanking a crate version."
 msgstr ""
+"虽然无法删除某个包的先前版本，但可以阻止未来的项目将其作为新的依赖项添加。当"
+"某个包的版本因某种原因出现问题时，这一点非常有用。在这种情况下，Cargo支持将某"
+"个包的版本进行迁移。"
 
 #: src/ch14-02-publishing-to-crates-io.md:554
 msgid ""
@@ -676,6 +904,9 @@ msgid ""
 "break, and any future _Cargo.lock_ files generated will not use the yanked "
 "version."
 msgstr ""
+"**版本拉取**可以阻止新项目依赖该版本，同时允许所有依赖该版本的现有项目继续运"
+"行。本质上，版本拉取意味着所有包含`_Cargo.lock_`文件的项目都不会受到影响，而"
+"未来生成的`_Cargo.lock_`文件将不会使用拉取到的版本。"
 
 #: src/ch14-02-publishing-to-crates-io.md:559
 msgid ""
@@ -685,12 +916,18 @@ msgid ""
 "1.0.1 and we want to yank it, then we’d run the following in the project "
 "directory for `guessing_game`:"
 msgstr ""
+"要在之前已发布的 crate 的目录中下载某个版本，请在项目目录中运行 `cargo "
+"yank`，并指定想要下载的版本。例如，如果我们发布了一个名为 `guessing_game` 的 "
+"crate，其版本为 1.0.1，并且我们想要下载该版本，那么我们需要在项目目录中运行以"
+"下命令来获取 `guessing_game` 版本："
 
 #: src/ch14-02-publishing-to-crates-io.md:576
 msgid ""
 "By adding `--undo` to the command, you can also undo a yank and allow "
 "projects to start depending on a version again:"
 msgstr ""
+"通过在命令中添加 `--undo`，你还可以撤销一次复制操作，并允许项目根据版本的不同"
+"而重新开始："
 
 #: src/ch14-02-publishing-to-crates-io.md:585
 msgid ""
@@ -698,3 +935,5 @@ msgid ""
 "accidentally uploaded secrets. If that happens, you must reset those secrets "
 "immediately."
 msgstr ""
+"yank_do_not_删除任何代码。例如，它不能删除意外上传的秘密。如果发生这种情况，"
+"您必须立即重置这些秘密。"

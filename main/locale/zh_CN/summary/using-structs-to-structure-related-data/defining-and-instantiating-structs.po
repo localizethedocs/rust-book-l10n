@@ -139,7 +139,7 @@ msgstr ""
 
 #: src/ch05-01-defining-structs.md:140
 msgid "Using the Field Init Shorthand"
-msgstr ""
+msgstr "使用 Field Init 简写方式"
 
 #: src/ch05-01-defining-structs.md:142
 msgid ""

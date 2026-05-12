@@ -227,63 +227,63 @@ msgstr "以下这些关键字目前还没有任何功能，但被Rust保留，�
 
 #: src/appendix-01-keywords.md:69
 msgid "`abstract`"
-msgstr ""
+msgstr "`abstract`"
 
 #: src/appendix-01-keywords.md:70
 msgid "`become`"
-msgstr ""
+msgstr "`become`"
 
 #: src/appendix-01-keywords.md:71
 msgid "`box`"
-msgstr ""
+msgstr "`box`"
 
 #: src/appendix-01-keywords.md:72
 msgid "`do`"
-msgstr ""
+msgstr "`do`"
 
 #: src/appendix-01-keywords.md:73
 msgid "`final`"
-msgstr ""
+msgstr "`final`"
 
 #: src/appendix-01-keywords.md:74
 msgid "`gen`"
-msgstr ""
+msgstr "`gen`"
 
 #: src/appendix-01-keywords.md:75
 msgid "`macro`"
-msgstr ""
+msgstr "`macro`"
 
 #: src/appendix-01-keywords.md:76
 msgid "`override`"
-msgstr ""
+msgstr "`override`"
 
 #: src/appendix-01-keywords.md:77
 msgid "`priv`"
-msgstr ""
+msgstr "`priv`"
 
 #: src/appendix-01-keywords.md:78
 msgid "`try`"
-msgstr ""
+msgstr "`try`"
 
 #: src/appendix-01-keywords.md:79
 msgid "`typeof`"
-msgstr ""
+msgstr "`typeof`"
 
 #: src/appendix-01-keywords.md:80
 msgid "`unsized`"
-msgstr ""
+msgstr "`unsized`"
 
 #: src/appendix-01-keywords.md:81
 msgid "`virtual`"
-msgstr ""
+msgstr "`virtual`"
 
 #: src/appendix-01-keywords.md:82
 msgid "`yield`"
-msgstr ""
+msgstr "`yield`"
 
 #: src/appendix-01-keywords.md:84
 msgid "Raw Identifiers"
-msgstr ""
+msgstr "原始标识符"
 
 #: src/appendix-01-keywords.md:86
 msgid ""
@@ -321,11 +321,11 @@ msgstr ""
 
 #: src/appendix-01-keywords.md:122
 msgid "\"foo\""
-msgstr ""
+msgstr "\"foo\""
 
 #: src/appendix-01-keywords.md:122
 msgid "\"foobar\""
-msgstr ""
+msgstr "\"foobar\""
 
 #: src/appendix-01-keywords.md:126
 msgid ""
