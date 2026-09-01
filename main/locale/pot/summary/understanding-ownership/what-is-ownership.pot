@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2026-03-31T09:47:02Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -177,9 +177,9 @@ msgstr ""
 #: src/ch04-01-what-is-ownership.md:109 src/ch04-01-what-is-ownership.md:122
 #: src/ch04-01-what-is-ownership.md:167 src/ch04-01-what-is-ownership.md:181
 #: src/ch04-01-what-is-ownership.md:230 src/ch04-01-what-is-ownership.md:285
-#: src/ch04-01-what-is-ownership.md:354 src/ch04-01-what-is-ownership.md:420
-#: src/ch04-01-what-is-ownership.md:459 src/ch04-01-what-is-ownership.md:534
-#: src/ch04-01-what-is-ownership.md:578 src/ch04-01-what-is-ownership.md:625
+#: src/ch04-01-what-is-ownership.md:354 src/ch04-01-what-is-ownership.md:419
+#: src/ch04-01-what-is-ownership.md:458 src/ch04-01-what-is-ownership.md:533
+#: src/ch04-01-what-is-ownership.md:577 src/ch04-01-what-is-ownership.md:624
 msgid "\"hello\""
 msgstr ""
 
@@ -554,9 +554,6 @@ msgid ""
 "5 |     println!(\"{s1}, world!\");\n"
 "  |                ^^ value borrowed here after move\n"
 "  |\n"
-"  = note: this error originates in the macro `$crate::format_args_nl` which "
-"comes from the expansion of the macro `println` (in Nightly builds, run with "
-"-Z macro-backtrace for more info)\n"
 "help: consider cloning the value if the performance cost is acceptable\n"
 "  |\n"
 "3 |     let s2 = s1.clone();\n"
@@ -568,7 +565,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:388
+#: src/ch04-01-what-is-ownership.md:387
 msgid ""
 "If you’ve heard the terms _shallow copy_ and _deep copy_ while working with "
 "other languages, the concept of copying the pointer, length, and capacity "
@@ -578,7 +575,7 @@ msgid ""
 "`s1` was _moved_ into `s2`. So, what actually happens is shown in Figure 4-4."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:395
+#: src/ch04-01-what-is-ownership.md:394
 msgid ""
 "<img alt=\"Three tables: tables s1 and s2 representing those strings on the\n"
 "stack, respectively, and both pointing to the same string data on the heap.\n"
@@ -589,30 +586,30 @@ msgid ""
 "50%;\" />"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:401
+#: src/ch04-01-what-is-ownership.md:400
 msgid ""
 "<span class=\"caption\">Figure 4-4: The representation in memory after `s1` "
 "has been invalidated</span>"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:404
+#: src/ch04-01-what-is-ownership.md:403
 msgid ""
 "That solves our problem! With only `s2` valid, when it goes out of scope it "
 "alone will free the memory, and we’re done."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:407
+#: src/ch04-01-what-is-ownership.md:406
 msgid ""
 "In addition, there’s a design choice that’s implied by this: Rust will never "
 "automatically create “deep” copies of your data. Therefore, any _automatic_ "
 "copying can be assumed to be inexpensive in terms of runtime performance."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:411
+#: src/ch04-01-what-is-ownership.md:410
 msgid "Scope and Assignment"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:413
+#: src/ch04-01-what-is-ownership.md:412
 msgid ""
 "The inverse of this is true for the relationship between scoping, ownership, "
 "and memory being freed via the `drop` function as well. When you assign a "
@@ -620,15 +617,15 @@ msgid ""
 "the original value’s memory immediately. Consider this code, for example:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:421
+#: src/ch04-01-what-is-ownership.md:420
 msgid "\"ahoy\""
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:423
+#: src/ch04-01-what-is-ownership.md:422
 msgid "\"{s}, world!\""
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:427
+#: src/ch04-01-what-is-ownership.md:426
 msgid ""
 "We initially declare a variable `s` and bind it to a `String` with the value "
 "`\"hello\"`. Then, we immediately create a new `String` with the value "
@@ -637,7 +634,7 @@ msgid ""
 "data now:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:432
+#: src/ch04-01-what-is-ownership.md:431
 msgid ""
 "<img alt=\"One table representing the string value on the stack, pointing "
 "to\n"
@@ -647,28 +644,28 @@ msgid ""
 "src=\"img/trpl04-05.svg\" class=\"center\" style=\"width: 50%;\" />"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:437
+#: src/ch04-01-what-is-ownership.md:436
 msgid ""
 "<span class=\"caption\">Figure 4-5: The representation in memory after the "
 "initial value has been replaced in its entirety</span>"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:440
+#: src/ch04-01-what-is-ownership.md:439
 msgid ""
 "The original string thus immediately goes out of scope. Rust will run the "
 "`drop` function on it and its memory will be freed right away. When we print "
 "the value at the end, it will be `\"ahoy, world!\"`."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:446
+#: src/ch04-01-what-is-ownership.md:445
 msgid "<a id=\"ways-variables-and-data-interact-clone\"></a>"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:448
+#: src/ch04-01-what-is-ownership.md:447
 msgid "Variables and Data Interacting with Clone"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:450
+#: src/ch04-01-what-is-ownership.md:449
 msgid ""
 "If we _do_ want to deeply copy the heap data of the `String`, not just the "
 "stack data, we can use a common method called `clone`. We’ll discuss method "
@@ -676,48 +673,48 @@ msgid ""
 "programming languages, you’ve probably seen them before."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:455
+#: src/ch04-01-what-is-ownership.md:454
 msgid "Here’s an example of the `clone` method in action:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:462
+#: src/ch04-01-what-is-ownership.md:461
 msgid "\"s1 = {s1}, s2 = {s2}\""
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:466
+#: src/ch04-01-what-is-ownership.md:465
 msgid ""
 "This works just fine and explicitly produces the behavior shown in Figure "
 "4-3, where the heap data _does_ get copied."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:469
+#: src/ch04-01-what-is-ownership.md:468
 msgid ""
 "When you see a call to `clone`, you know that some arbitrary code is being "
 "executed and that code may be expensive. It’s a visual indicator that "
 "something different is going on."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:473
+#: src/ch04-01-what-is-ownership.md:472
 msgid "Stack-Only Data: Copy"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:475
+#: src/ch04-01-what-is-ownership.md:474
 msgid ""
 "There’s another wrinkle we haven’t talked about yet. This code using integers"
 "—part of which was shown in Listing 4-2—works and is valid:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:483
+#: src/ch04-01-what-is-ownership.md:482
 msgid "\"x = {x}, y = {y}\""
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:487
+#: src/ch04-01-what-is-ownership.md:486
 msgid ""
 "But this code seems to contradict what we just learned: We don’t have a call "
 "to `clone`, but `x` is still valid and wasn’t moved into `y`."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:490
+#: src/ch04-01-what-is-ownership.md:489
 msgid ""
 "The reason is that types such as integers that have a known size at compile "
 "time are stored entirely on the stack, so copies of the actual values are "
@@ -728,7 +725,7 @@ msgid ""
 "leave it out."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:497
+#: src/ch04-01-what-is-ownership.md:496
 msgid ""
 "Rust has a special annotation called the `Copy` trait that we can place on "
 "types that are stored on the stack, as integers are (we’ll talk more about "
@@ -738,7 +735,7 @@ msgid ""
 "variable."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:503
+#: src/ch04-01-what-is-ownership.md:502
 msgid ""
 "Rust won’t let us annotate a type with `Copy` if the type, or any of its "
 "parts, has implemented the `Drop` trait. If the type needs something special "
@@ -748,7 +745,7 @@ msgid ""
 "Traits”](appendix-03-derivable-traits.html)<!-- ignore --> in Appendix C."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:510
+#: src/ch04-01-what-is-ownership.md:509
 msgid ""
 "So, what types implement the `Copy` trait? You can check the documentation "
 "for the given type to be sure, but as a general rule, any group of simple "
@@ -757,33 +754,33 @@ msgid ""
 "that implement `Copy`:"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:516
+#: src/ch04-01-what-is-ownership.md:515
 msgid "All the integer types, such as `u32`."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:517
+#: src/ch04-01-what-is-ownership.md:516
 msgid "The Boolean type, `bool`, with values `true` and `false`."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:518
+#: src/ch04-01-what-is-ownership.md:517
 msgid "All the floating-point types, such as `f64`."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:519
+#: src/ch04-01-what-is-ownership.md:518
 msgid "The character type, `char`."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:520
+#: src/ch04-01-what-is-ownership.md:519
 msgid ""
 "Tuples, if they only contain types that also implement `Copy`. For example, "
 "`(i32, i32)` implements `Copy`, but `(i32, String)` does not."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:523
+#: src/ch04-01-what-is-ownership.md:522
 msgid "Ownership and Functions"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:525
+#: src/ch04-01-what-is-ownership.md:524
 msgid ""
 "The mechanics of passing a value to a function are similar to those when "
 "assigning a value to a variable. Passing a variable to a function will move "
@@ -791,60 +788,60 @@ msgid ""
 "annotations showing where variables go into and out of scope."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:534
+#: src/ch04-01-what-is-ownership.md:533
 msgid "// s comes into scope\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:536
+#: src/ch04-01-what-is-ownership.md:535
 msgid ""
 "// s's value moves into the function...\n"
 "                                    // ... and so is no longer valid here\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:539
+#: src/ch04-01-what-is-ownership.md:538
 msgid "// x comes into scope\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:541
+#: src/ch04-01-what-is-ownership.md:540
 msgid ""
 "// Because i32 implements the Copy trait,\n"
 "                                    // x does NOT move into the function,\n"
 "                                    // so it's okay to use x afterward.\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:545
+#: src/ch04-01-what-is-ownership.md:544
 msgid ""
 "// Here, x goes out of scope, then s. However, because s's value was moved,\n"
 "  // nothing special happens.\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:548 src/ch04-01-what-is-ownership.md:590
+#: src/ch04-01-what-is-ownership.md:547 src/ch04-01-what-is-ownership.md:589
 msgid "// some_string comes into scope\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:549
+#: src/ch04-01-what-is-ownership.md:548
 msgid "\"{some_string}\""
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:550
+#: src/ch04-01-what-is-ownership.md:549
 msgid ""
 "// Here, some_string goes out of scope and `drop` is called. The backing\n"
 "  // memory is freed.\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:553
+#: src/ch04-01-what-is-ownership.md:552
 msgid "// some_integer comes into scope\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:554
+#: src/ch04-01-what-is-ownership.md:553
 msgid "\"{some_integer}\""
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:555
+#: src/ch04-01-what-is-ownership.md:554
 msgid "// Here, some_integer goes out of scope. Nothing special happens.\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:560
+#: src/ch04-01-what-is-ownership.md:559
 msgid ""
 "If we tried to use `s` after the call to `takes_ownership`, Rust would throw "
 "a compile-time error. These static checks protect us from mistakes. Try "
@@ -852,73 +849,73 @@ msgid ""
 "and where the ownership rules prevent you from doing so."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:565
+#: src/ch04-01-what-is-ownership.md:564
 msgid "Return Values and Scope"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:567
+#: src/ch04-01-what-is-ownership.md:566
 msgid ""
 "Returning values can also transfer ownership. Listing 4-4 shows an example "
 "of a function that returns some value, with similar annotations as those in "
 "Listing 4-3."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:575
+#: src/ch04-01-what-is-ownership.md:574
 msgid ""
 "// gives_ownership moves its return\n"
 "                                       // value into s1\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:578
+#: src/ch04-01-what-is-ownership.md:577
 msgid "// s2 comes into scope\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:580
+#: src/ch04-01-what-is-ownership.md:579
 msgid ""
 "// s2 is moved into\n"
 "                                       // takes_and_gives_back, which also\n"
 "                                       // moves its return value into s3\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:583
+#: src/ch04-01-what-is-ownership.md:582
 msgid ""
 "// Here, s3 goes out of scope and is dropped. s2 was moved, so nothing\n"
 "  // happens. s1 goes out of scope and is dropped.\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:586
+#: src/ch04-01-what-is-ownership.md:585
 msgid ""
 "// gives_ownership will move its\n"
 "                                       // return value into the function\n"
 "                                       // that calls it\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:590
+#: src/ch04-01-what-is-ownership.md:589
 msgid "\"yours\""
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:592
+#: src/ch04-01-what-is-ownership.md:591
 msgid ""
 "// some_string is returned and\n"
 "                                       // moves out to the calling\n"
 "                                       // function\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:596
+#: src/ch04-01-what-is-ownership.md:595
 msgid "// This function takes a String and returns a String.\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:599
+#: src/ch04-01-what-is-ownership.md:598
 msgid ""
 "// a_string comes into\n"
 "    // scope\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:602
+#: src/ch04-01-what-is-ownership.md:601
 msgid "// a_string is returned and moves out to the calling function\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:608
+#: src/ch04-01-what-is-ownership.md:607
 msgid ""
 "The ownership of a variable follows the same pattern every time: Assigning a "
 "value to another variable moves it. When a variable that includes data on "
@@ -926,7 +923,7 @@ msgid ""
 "ownership of the data has been moved to another variable."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:613
+#: src/ch04-01-what-is-ownership.md:612
 msgid ""
 "While this works, taking ownership and then returning ownership with every "
 "function is a bit tedious. What if we want to let a function use a value but "
@@ -935,21 +932,21 @@ msgid ""
 "resulting from the body of the function that we might want to return as well."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:619
+#: src/ch04-01-what-is-ownership.md:618
 msgid ""
 "Rust does let us return multiple values using a tuple, as shown in Listing "
 "4-5."
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:629
+#: src/ch04-01-what-is-ownership.md:628
 msgid "\"The length of '{s2}' is {len}.\""
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:633
+#: src/ch04-01-what-is-ownership.md:632
 msgid "// len() returns the length of a String\n"
 msgstr ""
 
-#: src/ch04-01-what-is-ownership.md:641
+#: src/ch04-01-what-is-ownership.md:640
 msgid ""
 "But this is too much ceremony and a lot of work for a concept that should be "
 "common. Luckily for us, Rust has a feature for using a value without "

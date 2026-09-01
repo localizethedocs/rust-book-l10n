@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -233,7 +233,7 @@ msgid ""
 "detail later.)"
 msgstr ""
 
-#: src/ch01-01-installation.md:167
+#: src/ch01-01-installation.md:175
 msgid ""
 "This will cache the downloads for these packages so you will not need to "
 "download them later. Once you have run this command, you do not need to keep "

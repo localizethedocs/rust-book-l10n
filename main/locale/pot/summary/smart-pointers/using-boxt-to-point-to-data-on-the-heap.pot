@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -230,26 +230,13 @@ msgid ""
 "2 |     Cons(i32, Box<List>),\n"
 "  |               ++++    +\n"
 "\n"
-"error[E0391]: cycle detected when computing when `List` needs drop\n"
-" --> src/main.rs:1:1\n"
-"  |\n"
-"1 | enum List {\n"
-"  | ^^^^^^^^^\n"
-"  |\n"
-"  = note: ...which immediately requires computing when `List` needs drop "
-"again\n"
-"  = note: cycle used when computing whether `List` needs drop\n"
-"  = note: see https://rustc-dev-guide.rust-lang.org/overview.html#queries "
-"and https://rustc-dev-guide.rust-lang.org/query.html for more information\n"
-"\n"
-"Some errors have detailed explanations: E0072, E0391.\n"
-"For more information about an error, try `rustc --explain E0072`.\n"
-"error: could not compile `cons-list` (bin \"cons-list\") due to 2 previous "
-"errors\n"
+"For more information about this error, try `rustc --explain E0072`.\n"
+"error: could not compile `cons-list` (bin \"cons-list\") due to 1 previous "
+"error\n"
 "```"
 msgstr ""
 
-#: src/ch15-01-box.md:201
+#: src/ch15-01-box.md:190
 msgid ""
 "The error shows this type “has infinite size.” The reason is that we’ve "
 "defined `List` with a variant that is recursive: It holds another value of "
@@ -259,17 +246,17 @@ msgid ""
 "non-recursive type."
 msgstr ""
 
-#: src/ch15-01-box.md:207
+#: src/ch15-01-box.md:196
 msgid "Computing the Size of a Non-Recursive Type"
 msgstr ""
 
-#: src/ch15-01-box.md:209
+#: src/ch15-01-box.md:198
 msgid ""
 "Recall the `Message` enum we defined in Listing 6-2 when we discussed enum "
 "definitions in Chapter 6:"
 msgstr ""
 
-#: src/ch15-01-box.md:223
+#: src/ch15-01-box.md:212
 msgid ""
 "To determine how much space to allocate for a `Message` value, Rust goes "
 "through each of the variants to see which variant needs the most space. Rust "
@@ -279,7 +266,7 @@ msgid ""
 "space it would take to store the largest of its variants."
 msgstr ""
 
-#: src/ch15-01-box.md:230
+#: src/ch15-01-box.md:219
 msgid ""
 "Contrast this with what happens when Rust tries to determine how much space "
 "a recursive type like the `List` enum in Listing 15-2 needs. The compiler "
@@ -292,34 +279,34 @@ msgid ""
 "Figure 15-1."
 msgstr ""
 
-#: src/ch15-01-box.md:241
+#: src/ch15-01-box.md:230
 msgid ""
 "<span class=\"caption\">Figure 15-1: An infinite `List` consisting of "
 "infinite `Cons` variants</span>"
 msgstr ""
 
-#: src/ch15-01-box.md:246
+#: src/ch15-01-box.md:235
 msgid "<a id=\"using-boxt-to-get-a-recursive-type-with-a-known-size\"></a>"
 msgstr ""
 
-#: src/ch15-01-box.md:248
+#: src/ch15-01-box.md:237
 msgid "Getting a Recursive Type with a Known Size"
 msgstr ""
 
-#: src/ch15-01-box.md:250
+#: src/ch15-01-box.md:239
 msgid ""
 "Because Rust can’t figure out how much space to allocate for recursively "
 "defined types, the compiler gives an error with this helpful suggestion:"
 msgstr ""
 
-#: src/ch15-01-box.md:264
+#: src/ch15-01-box.md:253
 msgid ""
 "In this suggestion, _indirection_ means that instead of storing a value "
 "directly, we should change the data structure to store the value indirectly "
 "by storing a pointer to the value instead."
 msgstr ""
 
-#: src/ch15-01-box.md:268
+#: src/ch15-01-box.md:257
 msgid ""
 "Because a `Box<T>` is a pointer, Rust always knows how much space a `Box<T>` "
 "needs: A pointer’s size doesn’t change based on the amount of data it’s "
@@ -331,14 +318,14 @@ msgid ""
 "to one another rather than inside one another."
 msgstr ""
 
-#: src/ch15-01-box.md:277
+#: src/ch15-01-box.md:266
 msgid ""
 "We can change the definition of the `List` enum in Listing 15-2 and the "
 "usage of the `List` in Listing 15-3 to the code in Listing 15-5, which will "
 "compile."
 msgstr ""
 
-#: src/ch15-01-box.md:297
+#: src/ch15-01-box.md:286
 msgid ""
 "The `Cons` variant needs the size of an `i32` plus the space to store the "
 "box’s pointer data. The `Nil` variant stores no values, so it needs less "
@@ -349,13 +336,13 @@ msgid ""
 "15-2 shows what the `Cons` variant looks like now."
 msgstr ""
 
-#: src/ch15-01-box.md:307
+#: src/ch15-01-box.md:296
 msgid ""
 "<span class=\"caption\">Figure 15-2: A `List` that is not infinitely sized, "
 "because `Cons` holds a `Box`</span>"
 msgstr ""
 
-#: src/ch15-01-box.md:310
+#: src/ch15-01-box.md:299
 msgid ""
 "Boxes provide only the indirection and heap allocation; they don’t have any "
 "other special capabilities, like those we’ll see with the other smart "
@@ -365,7 +352,7 @@ msgid ""
 "use cases for boxes in Chapter 18."
 msgstr ""
 
-#: src/ch15-01-box.md:317
+#: src/ch15-01-box.md:306
 msgid ""
 "The `Box<T>` type is a smart pointer because it implements the `Deref` "
 "trait, which allows `Box<T>` values to be treated like references. When a "

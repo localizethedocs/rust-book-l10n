@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -89,8 +89,16 @@ msgid ""
 "  |\n"
 "  = help: the trait `PartialEq<&{integer}>` is not implemented for `{integer}"
 "`\n"
-"  = note: this error originates in the macro `assert_eq` (in Nightly builds, "
-"run with -Z macro-backtrace for more info)\n"
+"  = help: the following other types implement trait `PartialEq<Rhs>`:\n"
+"            f128\n"
+"            f16\n"
+"            f32\n"
+"            f64\n"
+"            i128\n"
+"            i16\n"
+"            i32\n"
+"            i64\n"
+"          and 8 others\n"
 "\n"
 "For more information about this error, try `rustc --explain E0277`.\n"
 "error: could not compile `deref-example` (bin \"deref-example\") due to 1 "
@@ -98,18 +106,18 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch15-02-deref.md:74
+#: src/ch15-02-deref.md:83
 msgid ""
 "Comparing a number and a reference to a number isn’t allowed because they’re "
 "different types. We must use the dereference operator to follow the "
 "reference to the value it’s pointing to."
 msgstr ""
 
-#: src/ch15-02-deref.md:78
+#: src/ch15-02-deref.md:87
 msgid "Using `Box<T>` Like a Reference"
 msgstr ""
 
-#: src/ch15-02-deref.md:80
+#: src/ch15-02-deref.md:89
 msgid ""
 "We can rewrite the code in Listing 15-6 to use a `Box<T>` instead of a "
 "reference; the dereference operator used on the `Box<T>` in Listing 15-7 "
@@ -117,7 +125,7 @@ msgid ""
 "in Listing 15-6."
 msgstr ""
 
-#: src/ch15-02-deref.md:99
+#: src/ch15-02-deref.md:108
 msgid ""
 "The main difference between Listing 15-7 and Listing 15-6 is that here we "
 "set `y` to be an instance of a box pointing to a copied value of `x` rather "
@@ -128,11 +136,11 @@ msgid ""
 "our own box type."
 msgstr ""
 
-#: src/ch15-02-deref.md:106
+#: src/ch15-02-deref.md:115
 msgid "Defining Our Own Smart Pointer"
 msgstr ""
 
-#: src/ch15-02-deref.md:108
+#: src/ch15-02-deref.md:117
 msgid ""
 "Let’s build a wrapper type similar to the `Box<T>` type provided by the "
 "standard library to experience how smart pointer types behave differently "
@@ -140,7 +148,7 @@ msgid ""
 "use the dereference operator."
 msgstr ""
 
-#: src/ch15-02-deref.md:113
+#: src/ch15-02-deref.md:122
 msgid ""
 "Note: There’s one big difference between the `MyBox<T>` type we’re about to "
 "build and the real `Box<T>`: Our version will not store its data on the "
@@ -148,14 +156,14 @@ msgid ""
 "stored is less important than the pointer-like behavior."
 msgstr ""
 
-#: src/ch15-02-deref.md:118
+#: src/ch15-02-deref.md:127
 msgid ""
 "The `Box<T>` type is ultimately defined as a tuple struct with one element, "
 "so Listing 15-8 defines a `MyBox<T>` type in the same way. We’ll also define "
 "a `new` function to match the `new` function defined on `Box<T>`."
 msgstr ""
 
-#: src/ch15-02-deref.md:138
+#: src/ch15-02-deref.md:147
 msgid ""
 "We define a struct named `MyBox` and declare a generic parameter `T` because "
 "we want our type to hold values of any type. The `MyBox` type is a tuple "
@@ -164,7 +172,7 @@ msgid ""
 "passed in."
 msgstr ""
 
-#: src/ch15-02-deref.md:143
+#: src/ch15-02-deref.md:152
 msgid ""
 "Let’s try adding the `main` function in Listing 15-7 to Listing 15-8 and "
 "changing it to use the `MyBox<T>` type we’ve defined instead of `Box<T>`. "
@@ -172,11 +180,11 @@ msgid ""
 "dereference `MyBox`."
 msgstr ""
 
-#: src/ch15-02-deref.md:170
+#: src/ch15-02-deref.md:179
 msgid "Here’s the resultant compilation error:"
 msgstr ""
 
-#: src/ch15-02-deref.md:172
+#: src/ch15-02-deref.md:181
 msgid ""
 "```console\n"
 "$ cargo run\n"
@@ -193,24 +201,24 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch15-02-deref.md:185
+#: src/ch15-02-deref.md:194
 msgid ""
 "Our `MyBox<T>` type can’t be dereferenced because we haven’t implemented "
 "that ability on our type. To enable dereferencing with the `*` operator, we "
 "implement the `Deref` trait."
 msgstr ""
 
-#: src/ch15-02-deref.md:191
+#: src/ch15-02-deref.md:200
 msgid ""
 "<a id=\"treating-a-type-like-a-reference-by-implementing-the-deref-trait\"></"
 "a>"
 msgstr ""
 
-#: src/ch15-02-deref.md:193
+#: src/ch15-02-deref.md:202
 msgid "Implementing the `Deref` Trait"
 msgstr ""
 
-#: src/ch15-02-deref.md:195
+#: src/ch15-02-deref.md:204
 msgid ""
 "As discussed in [“Implementing a Trait on a Type”](ch10-02-traits."
 "html#implementing-a-trait-on-a-type)<!-- ignore --> in Chapter 10, to "
@@ -221,7 +229,7 @@ msgid ""
 "implementation of `Deref` to add to the definition of `MyBox<T>`."
 msgstr ""
 
-#: src/ch15-02-deref.md:234
+#: src/ch15-02-deref.md:243
 msgid ""
 "The `type Target = T;` syntax defines an associated type for the `Deref` "
 "trait to use. Associated types are a slightly different way of declaring a "
@@ -229,7 +237,7 @@ msgid ""
 "cover them in more detail in Chapter 20."
 msgstr ""
 
-#: src/ch15-02-deref.md:239
+#: src/ch15-02-deref.md:248
 msgid ""
 "We fill in the body of the `deref` method with `&self.0` so that `deref` "
 "returns a reference to the value we want to access with the `*` operator; "
@@ -240,7 +248,7 @@ msgid ""
 "value now compiles, and the assertions pass!"
 msgstr ""
 
-#: src/ch15-02-deref.md:246
+#: src/ch15-02-deref.md:255
 msgid ""
 "Without the `Deref` trait, the compiler can only dereference `&` references. "
 "The `deref` method gives the compiler the ability to take a value of any "
@@ -248,13 +256,13 @@ msgid ""
 "that it knows how to dereference."
 msgstr ""
 
-#: src/ch15-02-deref.md:251
+#: src/ch15-02-deref.md:260
 msgid ""
 "When we entered `*y` in Listing 15-9, behind the scenes Rust actually ran "
 "this code:"
 msgstr ""
 
-#: src/ch15-02-deref.md:258
+#: src/ch15-02-deref.md:267
 msgid ""
 "Rust substitutes the `*` operator with a call to the `deref` method and then "
 "a plain dereference so that we don’t have to think about whether or not we "
@@ -263,7 +271,7 @@ msgid ""
 "implements `Deref`."
 msgstr ""
 
-#: src/ch15-02-deref.md:264
+#: src/ch15-02-deref.md:273
 msgid ""
 "The reason the `deref` method returns a reference to a value, and that the "
 "plain dereference outside the parentheses in `*(y.deref())` is still "
@@ -274,7 +282,7 @@ msgid ""
 "dereference operator."
 msgstr ""
 
-#: src/ch15-02-deref.md:271
+#: src/ch15-02-deref.md:280
 msgid ""
 "Note that the `*` operator is replaced with a call to the `deref` method and "
 "then a call to the `*` operator just once, each time we use a `*` in our "
@@ -283,17 +291,17 @@ msgid ""
 "`assert_eq!` in Listing 15-9."
 msgstr ""
 
-#: src/ch15-02-deref.md:279
+#: src/ch15-02-deref.md:288
 msgid ""
 "<a id=\"implicit-deref-coercions-with-functions-and-methods\"></a> <a "
 "id=\"using-deref-coercions-in-functions-and-methods\"></a>"
 msgstr ""
 
-#: src/ch15-02-deref.md:282
+#: src/ch15-02-deref.md:291
 msgid "Using Deref Coercion in Functions and Methods"
 msgstr ""
 
-#: src/ch15-02-deref.md:284
+#: src/ch15-02-deref.md:293
 msgid ""
 "_Deref coercion_ converts a reference to a type that implements the `Deref` "
 "trait into a reference to another type. For example, deref coercion can "
@@ -307,7 +315,7 @@ msgid ""
 "provided into the type the parameter needs."
 msgstr ""
 
-#: src/ch15-02-deref.md:294
+#: src/ch15-02-deref.md:303
 msgid ""
 "Deref coercion was added to Rust so that programmers writing function and "
 "method calls don’t need to add as many explicit references and dereferences "
@@ -315,7 +323,7 @@ msgid ""
 "that can work for either references or smart pointers."
 msgstr ""
 
-#: src/ch15-02-deref.md:299
+#: src/ch15-02-deref.md:308
 msgid ""
 "To see deref coercion in action, let’s use the `MyBox<T>` type we defined in "
 "Listing 15-8 as well as the implementation of `Deref` that we added in "
@@ -323,11 +331,11 @@ msgid ""
 "string slice parameter."
 msgstr ""
 
-#: src/ch15-02-deref.md:308 src/ch15-02-deref.md:342 src/ch15-02-deref.md:387
+#: src/ch15-02-deref.md:317 src/ch15-02-deref.md:351 src/ch15-02-deref.md:396
 msgid "\"Hello, {name}!\""
 msgstr ""
 
-#: src/ch15-02-deref.md:316
+#: src/ch15-02-deref.md:325
 msgid ""
 "We can call the `hello` function with a string slice as an argument, such as "
 "`hello(\"Rust\");`, for example. Deref coercion makes it possible to call "
@@ -335,11 +343,11 @@ msgid ""
 "Listing 15-12."
 msgstr ""
 
-#: src/ch15-02-deref.md:346 src/ch15-02-deref.md:391
+#: src/ch15-02-deref.md:355 src/ch15-02-deref.md:400
 msgid "\"Rust\""
 msgstr ""
 
-#: src/ch15-02-deref.md:353
+#: src/ch15-02-deref.md:362
 msgid ""
 "Here we’re calling the `hello` function with the argument `&m`, which is a "
 "reference to a `MyBox<String>` value. Because we implemented the `Deref` "
@@ -350,14 +358,14 @@ msgid ""
 "the `&String` into `&str`, which matches the `hello` function’s definition."
 msgstr ""
 
-#: src/ch15-02-deref.md:361
+#: src/ch15-02-deref.md:370
 msgid ""
 "If Rust didn’t implement deref coercion, we would have to write the code in "
 "Listing 15-13 instead of the code in Listing 15-12 to call `hello` with a "
 "value of type `&MyBox<String>`."
 msgstr ""
 
-#: src/ch15-02-deref.md:398
+#: src/ch15-02-deref.md:407
 msgid ""
 "The `(*m)` dereferences the `MyBox<String>` into a `String`. Then, the `&` "
 "and `[..]` take a string slice of the `String` that is equal to the whole "
@@ -366,7 +374,7 @@ msgid ""
 "Deref coercion allows Rust to handle these conversions for us automatically."
 msgstr ""
 
-#: src/ch15-02-deref.md:404
+#: src/ch15-02-deref.md:413
 msgid ""
 "When the `Deref` trait is defined for the types involved, Rust will analyze "
 "the types and use `Deref::deref` as many times as necessary to get a "
@@ -375,40 +383,40 @@ msgid ""
 "runtime penalty for taking advantage of deref coercion!"
 msgstr ""
 
-#: src/ch15-02-deref.md:412
+#: src/ch15-02-deref.md:421
 msgid "<a id=\"how-deref-coercion-interacts-with-mutability\"></a>"
 msgstr ""
 
-#: src/ch15-02-deref.md:414
+#: src/ch15-02-deref.md:423
 msgid "Handling Deref Coercion with Mutable References"
 msgstr ""
 
-#: src/ch15-02-deref.md:416
+#: src/ch15-02-deref.md:425
 msgid ""
 "Similar to how you use the `Deref` trait to override the `*` operator on "
 "immutable references, you can use the `DerefMut` trait to override the `*` "
 "operator on mutable references."
 msgstr ""
 
-#: src/ch15-02-deref.md:420
+#: src/ch15-02-deref.md:429
 msgid ""
 "Rust does deref coercion when it finds types and trait implementations in "
 "three cases:"
 msgstr ""
 
-#: src/ch15-02-deref.md:423
+#: src/ch15-02-deref.md:432
 msgid "From `&T` to `&U` when `T: Deref<Target=U>`"
 msgstr ""
 
-#: src/ch15-02-deref.md:424
+#: src/ch15-02-deref.md:433
 msgid "From `&mut T` to `&mut U` when `T: DerefMut<Target=U>`"
 msgstr ""
 
-#: src/ch15-02-deref.md:425
+#: src/ch15-02-deref.md:434
 msgid "From `&mut T` to `&U` when `T: Deref<Target=U>`"
 msgstr ""
 
-#: src/ch15-02-deref.md:427
+#: src/ch15-02-deref.md:436
 msgid ""
 "The first two cases are the same except that the second implements "
 "mutability. The first case states that if you have a `&T`, and `T` "
@@ -417,7 +425,7 @@ msgid ""
 "references."
 msgstr ""
 
-#: src/ch15-02-deref.md:432
+#: src/ch15-02-deref.md:441
 msgid ""
 "The third case is trickier: Rust will also coerce a mutable reference to an "
 "immutable one. But the reverse is _not_ possible: Immutable references will "
