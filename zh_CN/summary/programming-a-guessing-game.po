@@ -1,0 +1,1829 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch02-00-guessing-game-tutorial.md:1
+msgid "Programming a Guessing Game"
+msgstr "编程实现一个猜谜游戏"
+
+#: src/ch02-00-guessing-game-tutorial.md:3
+msgid ""
+"Let’s jump into Rust by working through a hands-on project together! This "
+"chapter introduces you to a few common Rust concepts by showing you how to "
+"use them in a real program. You’ll learn about `let`, `match`, methods, "
+"associated functions, external crates, and more! In the following chapters, "
+"we’ll explore these ideas in more detail. In this chapter, you’ll just "
+"practice the fundamentals."
+msgstr ""
+"让我们通过一起完成一个实践项目来开始学习Rust吧！这一章将通过展示如何在实际程"
+"序中使用一些常见的Rust概念，来引导您了解Rust的基础知识。您将学习到`let`、"
+"`match`、方法、关联函数、外部库等等。在接下来的章节中，我们将更详细地探讨这些"
+"概念。在这一章里，您只需练习基础内容即可。"
+
+#: src/ch02-00-guessing-game-tutorial.md:10
+msgid ""
+"We’ll implement a classic beginner programming problem: a guessing game. "
+"Here’s how it works: The program will generate a random integer between 1 "
+"and 100. It will then prompt the player to enter a guess. After a guess is "
+"entered, the program will indicate whether the guess is too low or too high. "
+"If the guess is correct, the game will print a congratulatory message and "
+"exit."
+msgstr ""
+"我们将实现一个经典的编程入门问题：猜数游戏。其运作方式如下：程序会生成一个1到"
+"100之间的随机整数。然后，程序会提示玩家输入一个猜测的数字。当玩家输入了一个猜"
+"测数字后，程序会指出这个猜测是太低还是太高。如果猜测正确，游戏会打印一条祝贺"
+"的消息并结束游戏。"
+
+#: src/ch02-00-guessing-game-tutorial.md:16
+msgid "Setting Up a New Project"
+msgstr "创建新项目"
+
+#: src/ch02-00-guessing-game-tutorial.md:18
+msgid ""
+"To set up a new project, go to the _projects_ directory that you created in "
+"Chapter 1 and make a new project using Cargo, like so:"
+msgstr ""
+"要创建一个新的项目，请进入在第1章中创建的`_projects_`目录，然后使用Cargo创建"
+"一个新的项目，具体步骤如下："
+
+#: src/ch02-00-guessing-game-tutorial.md:26
+msgid ""
+"The first command, `cargo new`, takes the name of the project "
+"(`guessing_game`) as the first argument. The second command changes to the "
+"new project’s directory."
+msgstr ""
+"第一个命令 ``cargo new``，将项目的名称（``guessing_game``）作为第一个参数。第"
+"二个命令则切换到新项目的目录。"
+
+#: src/ch02-00-guessing-game-tutorial.md:30
+msgid "Look at the generated _Cargo.toml_ file:"
+msgstr "请查看生成的_Cargo.toml_文件："
+
+#: src/ch02-00-guessing-game-tutorial.md:41
+#: src/ch02-00-guessing-game-tutorial.md:491
+msgid "<span class=\"filename\">Filename: Cargo.toml</span>"
+msgstr "<span class=\"filename\">文件名：Cargo.toml</span>"
+
+#: src/ch02-00-guessing-game-tutorial.md:43
+msgid ""
+"```toml\n"
+"[package]\n"
+"name = \"guessing_game\"\n"
+"version = \"0.1.0\"\n"
+"edition = \"2024\"\n"
+"\n"
+"[dependencies]\n"
+"```"
+msgstr ""
+"```toml\n"
+"[package]\n"
+"name = \"guessing_game\"\n"
+"version = \"0.1.0\"\n"
+"edition = \"2024\"\n"
+"\n"
+"[dependencies]\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:52
+msgid ""
+"As you saw in Chapter 1, `cargo new` generates a “Hello, world!” program for "
+"you. Check out the _src/main.rs_ file:"
+msgstr ""
+"如第1章所述，`cargo new`为你生成了一个“Hello, world!”程序。请查看`_src/main."
+"rs_`文件："
+
+#: src/ch02-00-guessing-game-tutorial.md:55
+#: src/ch02-00-guessing-game-tutorial.md:882
+#: src/ch02-00-guessing-game-tutorial.md:1006
+#: src/ch02-00-guessing-game-tutorial.md:1105
+msgid "<span class=\"filename\">Filename: src/main.rs</span>"
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
+
+#: src/ch02-00-guessing-game-tutorial.md:59
+msgid "\"Hello, world!\""
+msgstr "\"Hello, world!\""
+
+#: src/ch02-00-guessing-game-tutorial.md:63
+msgid ""
+"Now let’s compile this “Hello, world!” program and run it in the same step "
+"using the `cargo run` command:"
+msgstr ""
+"现在让我们编译这个“Hello, world!”程序，并使用`cargo run`命令在同一步骤中运行"
+"它。"
+
+#: src/ch02-00-guessing-game-tutorial.md:66
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.08s\n"
+"     Running `target/debug/guessing_game`\n"
+"Hello, world!\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.08s\n"
+"     Running `target/debug/guessing_game`\n"
+"Hello, world!\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:74
+msgid ""
+"The `run` command comes in handy when you need to rapidly iterate on a "
+"project, as we’ll do in this game, quickly testing each iteration before "
+"moving on to the next one."
+msgstr ""
+"当您需要快速迭代一个项目时，``run``命令就非常实用了。就像我们在这个游戏中所做"
+"的那样，我们可以快速测试每次迭代的结果，然后再进行下一次迭代。"
+
+#: src/ch02-00-guessing-game-tutorial.md:78
+msgid ""
+"Reopen the _src/main.rs_ file. You’ll be writing all the code in this file."
+msgstr "重新打开 _src/main.rs_ 文件。你需要在这个文件中编写所有的代码。"
+
+#: src/ch02-00-guessing-game-tutorial.md:80
+msgid "Processing a Guess"
+msgstr "处理猜测结果"
+
+#: src/ch02-00-guessing-game-tutorial.md:82
+msgid ""
+"The first part of the guessing game program will ask for user input, process "
+"that input, and check that the input is in the expected form. To start, "
+"we’ll allow the player to input a guess. Enter the code in Listing 2-1 into "
+"_src/main.rs_."
+msgstr ""
+"猜谜游戏程序的第一部分将要求用户输入，处理该输入，并检查输入是否符合预期格"
+"式。首先，我们将允许玩家输入一个猜测值。请将代码写入清单2-1中，并将其放在src/"
+"main.rs_文件中。"
+
+#: src/ch02-00-guessing-game-tutorial.md:93
+#: src/ch02-00-guessing-game-tutorial.md:118
+#: src/ch02-00-guessing-game-tutorial.md:148
+#: src/ch02-00-guessing-game-tutorial.md:172
+#: src/ch02-00-guessing-game-tutorial.md:197
+#: src/ch02-00-guessing-game-tutorial.md:262
+#: src/ch02-00-guessing-game-tutorial.md:315
+#: src/ch02-00-guessing-game-tutorial.md:403
+#: src/ch02-00-guessing-game-tutorial.md:672
+#: src/ch02-00-guessing-game-tutorial.md:770
+#: src/ch02-00-guessing-game-tutorial.md:891
+#: src/ch02-00-guessing-game-tutorial.md:1015
+#: src/ch02-00-guessing-game-tutorial.md:1114
+#: src/ch02-00-guessing-game-tutorial.md:1167
+#: src/ch02-00-guessing-game-tutorial.md:1277
+msgid "\"Guess the number!\""
+msgstr "“猜测数字！”"
+
+#: src/ch02-00-guessing-game-tutorial.md:95
+#: src/ch02-00-guessing-game-tutorial.md:120
+#: src/ch02-00-guessing-game-tutorial.md:150
+#: src/ch02-00-guessing-game-tutorial.md:174
+#: src/ch02-00-guessing-game-tutorial.md:199
+#: src/ch02-00-guessing-game-tutorial.md:264
+#: src/ch02-00-guessing-game-tutorial.md:317
+#: src/ch02-00-guessing-game-tutorial.md:405
+#: src/ch02-00-guessing-game-tutorial.md:678
+#: src/ch02-00-guessing-game-tutorial.md:776
+#: src/ch02-00-guessing-game-tutorial.md:897
+#: src/ch02-00-guessing-game-tutorial.md:1024
+#: src/ch02-00-guessing-game-tutorial.md:1121
+#: src/ch02-00-guessing-game-tutorial.md:1174
+#: src/ch02-00-guessing-game-tutorial.md:1282
+msgid "\"Please input your guess.\""
+msgstr "“请输入你的猜测。”"
+
+#: src/ch02-00-guessing-game-tutorial.md:101
+#: src/ch02-00-guessing-game-tutorial.md:126
+#: src/ch02-00-guessing-game-tutorial.md:156
+#: src/ch02-00-guessing-game-tutorial.md:180
+#: src/ch02-00-guessing-game-tutorial.md:205
+#: src/ch02-00-guessing-game-tutorial.md:270
+#: src/ch02-00-guessing-game-tutorial.md:323
+#: src/ch02-00-guessing-game-tutorial.md:332
+#: src/ch02-00-guessing-game-tutorial.md:411
+#: src/ch02-00-guessing-game-tutorial.md:684
+#: src/ch02-00-guessing-game-tutorial.md:782
+#: src/ch02-00-guessing-game-tutorial.md:905
+#: src/ch02-00-guessing-game-tutorial.md:1033
+#: src/ch02-00-guessing-game-tutorial.md:1127
+#: src/ch02-00-guessing-game-tutorial.md:1182
+#: src/ch02-00-guessing-game-tutorial.md:1288
+msgid "\"Failed to read line\""
+msgstr "“未猜对”"
+
+#: src/ch02-00-guessing-game-tutorial.md:103
+#: src/ch02-00-guessing-game-tutorial.md:128
+#: src/ch02-00-guessing-game-tutorial.md:158
+#: src/ch02-00-guessing-game-tutorial.md:182
+#: src/ch02-00-guessing-game-tutorial.md:207
+#: src/ch02-00-guessing-game-tutorial.md:272
+#: src/ch02-00-guessing-game-tutorial.md:325
+#: src/ch02-00-guessing-game-tutorial.md:413
+#: src/ch02-00-guessing-game-tutorial.md:686
+#: src/ch02-00-guessing-game-tutorial.md:784
+#: src/ch02-00-guessing-game-tutorial.md:909
+#: src/ch02-00-guessing-game-tutorial.md:1037
+#: src/ch02-00-guessing-game-tutorial.md:1131
+#: src/ch02-00-guessing-game-tutorial.md:1189
+#: src/ch02-00-guessing-game-tutorial.md:1295
+msgid "\"You guessed: {guess}\""
+msgstr "“你猜对了：{guess}”"
+
+#: src/ch02-00-guessing-game-tutorial.md:109
+msgid ""
+"This code contains a lot of information, so let’s go over it line by line. "
+"To obtain user input and then print the result as output, we need to bring "
+"the `io` input/output library into scope. The `io` library comes from the "
+"standard library, known as `std`:"
+msgstr ""
+"这段代码包含了大量的信息，因此让我们逐行进行解析。为了获取用户输入并将结果打"
+"印出来，我们需要将`io`这个输入/输出库引入到代码范围内。`io`这个库来自标准库，"
+"其来源为`std`："
+
+#: src/ch02-00-guessing-game-tutorial.md:132
+msgid ""
+"By default, Rust has a set of items defined in the standard library that it "
+"brings into the scope of every program. This set is called the _prelude_, "
+"and you can see everything in it [in the standard library documentation](../"
+"std/prelude/index.html)."
+msgstr ""
+"默认情况下，Rust 有一组定义在标准库中的项目，它将它带入每个程序的范围。 这个"
+"集叫做_prelude_，你可以在标准库文档中看到它的所有内容(../std/prelude/index."
+"html)。"
+
+#: src/ch02-00-guessing-game-tutorial.md:136
+msgid ""
+"If a type you want to use isn’t in the prelude, you have to bring that type "
+"into scope explicitly with a `use` statement. Using the `std::io` library "
+"provides you with a number of useful features, including the ability to "
+"accept user input."
+msgstr ""
+"如果您想要使用的类型不在预定义中，那么您必须通过使用 ``use`` 语句来明确将其引"
+"入作用域。使用 ``std::io`` 库可以为您提供许多有用的功能，包括接受用户输入的能"
+"力。"
+
+#: src/ch02-00-guessing-game-tutorial.md:141
+msgid ""
+"As you saw in Chapter 1, the `main` function is the entry point into the "
+"program:"
+msgstr "如第1章所述，`main`函数是程序的入口点："
+
+#: src/ch02-00-guessing-game-tutorial.md:162
+msgid ""
+"The `fn` syntax declares a new function; the parentheses, `()`, indicate "
+"there are no parameters; and the curly bracket, `{`, starts the body of the "
+"function."
+msgstr ""
+"`fn`语法用于声明一个新的函数；括号`()`表示该函数没有参数；而大括号`{`则标志着"
+"函数的主体部分。"
+
+#: src/ch02-00-guessing-game-tutorial.md:165
+msgid ""
+"As you also learned in Chapter 1, `println!` is a macro that prints a string "
+"to the screen:"
+msgstr ""
+"正如你在第1章中学习的那样，`println!`是一个宏，它可以将字符串打印到屏幕上："
+
+#: src/ch02-00-guessing-game-tutorial.md:186
+msgid ""
+"This code is printing a prompt stating what the game is and requesting input "
+"from the user."
+msgstr ""
+"这段代码会打印出一个提示框，告知用户正在玩什么游戏，并请求用户输入相关信息。"
+
+#: src/ch02-00-guessing-game-tutorial.md:189
+msgid "Storing Values with Variables"
+msgstr "使用变量存储值"
+
+#: src/ch02-00-guessing-game-tutorial.md:191
+msgid "Next, we’ll create a _variable_ to store the user input, like this:"
+msgstr "接下来，我们将创建一个变量来保存用户输入的内容，如下所示："
+
+#: src/ch02-00-guessing-game-tutorial.md:211
+msgid ""
+"Now the program is getting interesting! There’s a lot going on in this "
+"little line. We use the `let` statement to create the variable. Here’s "
+"another example:"
+msgstr ""
+"现在这个程序变得有趣了！在这行代码中发生了很多事情。我们使用`let`语句来创建变"
+"量。这里还有一个例子："
+
+#: src/ch02-00-guessing-game-tutorial.md:218
+msgid ""
+"This line creates a new variable named `apples` and binds it to the value "
+"`5`. In Rust, variables are immutable by default, meaning once we give the "
+"variable a value, the value won’t change. We’ll be discussing this concept "
+"in detail in the [“Variables and Mutability”](ch03-01-variables-and-"
+"mutability.html#variables-and-mutability)<!-- ignore --> section in Chapter "
+"3. To make a variable mutable, we add `mut` before the variable name:"
+msgstr ""
+"此行创建了一个名为“Appes”的新变量，并将其绑定到`5`的值。 在俄罗斯，变量默认是"
+"不可变的，意味着一旦我们给变量一个值，值就不会改变。 我们将在第3章[“变量和可"
+"变性”](ch03-01-variables-and-mutability.html#variables-and-mutability)<中详细"
+"讨论这个概念！-- ignore --> 部分。 为了使变量变异，我们在变量名称之前添加 "
+"\"mut\" ："
+
+#: src/ch02-00-guessing-game-tutorial.md:226
+msgid "// immutable\n"
+msgstr "// 不可变\n"
+
+#: src/ch02-00-guessing-game-tutorial.md:227
+msgid "// mutable\n"
+msgstr "// 可变\n"
+
+#: src/ch02-00-guessing-game-tutorial.md:230
+msgid ""
+"Note: The `//` syntax starts a comment that continues until the end of the "
+"line. Rust ignores everything in comments. We’ll discuss comments in more "
+"detail in [Chapter 3](ch03-04-comments.html)<!-- ignore -->."
+msgstr ""
+"注意：`//`语法用于开始一个注释，该注释会一直持续到行尾。Rust会忽略注释中的所"
+"有内容。我们将在[第3章](ch03-04-comments.html)中更详细地讨论注释。"
+
+#: src/ch02-00-guessing-game-tutorial.md:234
+msgid ""
+"Returning to the guessing game program, you now know that `let mut guess` "
+"will introduce a mutable variable named `guess`. The equal sign (`=`) tells "
+"Rust we want to bind something to the variable now. On the right of the "
+"equal sign is the value that `guess` is bound to, which is the result of "
+"calling `String::new`, a function that returns a new instance of a `String`. "
+"[`String`](../std/string/struct.String.html)<!-- ignore --> is a string type "
+"provided by the standard library that is a growable, UTF-8 encoded bit of "
+"text."
+msgstr ""
+"回到“猜测游戏”程序，现在你知道`let mut guess`将会引入一个名为`guess`的可变变"
+"量。等号(`=`)告诉Rust我们现在想要将某个值绑定到这个变量上。等号的右边是"
+"`guess`所绑定的值，这个值是通过调用`String::new`这个函数得到的，而`String::"
+"new`函数返回的是`String`的一个新实例。[`String`](../std/string/struct.String."
+"html)<!-- 忽略 --> 是由标准库提供的一种字符串类型，它是一种可增长的、采用"
+"UTF-8编码的文本片段"
+
+#: src/ch02-00-guessing-game-tutorial.md:242
+msgid ""
+"The `::` syntax in the `::new` line indicates that `new` is an associated "
+"function of the `String` type. An _associated function_ is a function that’s "
+"implemented on a type, in this case `String`. This `new` function creates a "
+"new, empty string. You’ll find a `new` function on many types because it’s a "
+"common name for a function that makes a new value of some kind."
+msgstr ""
+"在`::new`行中的`::`语法表明`new`是`String`类型的关联函数。所谓“关联函数”，指"
+"的是在某个类型上实现的函数，在本例中就是`String`。这个`new`函数创建一个新的空"
+"字符串。在许多类型中都可以找到`new`函数，因为它是一个常见的函数名称，用于创建"
+"某种类型的新值。"
+
+#: src/ch02-00-guessing-game-tutorial.md:248
+msgid ""
+"In full, the `let mut guess = String::new();` line has created a mutable "
+"variable that is currently bound to a new, empty instance of a `String`. "
+"Whew!"
+msgstr ""
+"完整来说，`let mut guess = String::new();`这一行创建了一个可变的变量，该变量"
+"目前绑定到一个新的、空的`String`实例上。真棒！"
+
+#: src/ch02-00-guessing-game-tutorial.md:251
+msgid "Receiving User Input"
+msgstr "接收用户输入"
+
+#: src/ch02-00-guessing-game-tutorial.md:253
+msgid ""
+"Recall that we included the input/output functionality from the standard "
+"library with `use std::io;` on the first line of the program. Now we’ll call "
+"the `stdin` function from the `io` module, which will allow us to handle "
+"user input:"
+msgstr ""
+"请记住，我们在程序的第一行使用了来自标准库的输入/输出功能，其中``use std::io;"
+"``被包含在代码中。现在，我们将调用来自``io``模块的``stdin``函数，这将使我们能"
+"够处理用户的输入。"
+
+#: src/ch02-00-guessing-game-tutorial.md:276
+msgid ""
+"If we hadn’t imported the `io` module with `use std::io;` at the beginning "
+"of the program, we could still use the function by writing this function "
+"call as `std::io::stdin`. The `stdin` function returns an instance of [`std::"
+"io::Stdin`](../std/io/struct.Stdin.html)<!-- ignore -->, which is a type "
+"that represents a handle to the standard input for your terminal."
+msgstr ""
+"如果我们没有在程序的开头导入`io`模块，并且没有使用`use std::io;`，那么我们仍"
+"然可以通过编写如下函数调用来使用该函数：`std::io::stdin`。`stdin`函数返回一个"
+"[`std::io::Stdin`](../std/io/struct.Stdin.html)<!-- ignore -->类型的实例，这"
+"个类型代表了一个用于访问终端标准输入的句柄。"
+
+#: src/ch02-00-guessing-game-tutorial.md:282
+msgid ""
+"Next, the line `.read_line(&mut guess)` calls the [`read_line`](../std/io/"
+"struct.Stdin.html#method.read_line)<!--\n"
+"ignore --> method on the standard input handle to get input from the user. "
+"We’re also passing `&mut guess` as the argument to `read_line` to tell it "
+"what string to store the user input in. The full job of `read_line` is to "
+"take whatever the user types into standard input and append that into a "
+"string (without overwriting its contents), so we therefore pass that string "
+"as an argument. The string argument needs to be mutable so that the method "
+"can change the string’s content."
+msgstr ""
+"接下来，行`.read_line(&mut guess)`调用了标准输入处理器的[`read_line`](../std/"
+"io/struct.Stdin.html#method.read_line)<!--ignore-->方法，以从用户那里获取输"
+"入。我们还将`&mut guess`作为参数传递给`read_line`，以指定存储用户输入的字符"
+"串。`read_line`的整个功能是将用户在标准输入中输入的内容提取出来，并将其附加到"
+"一个字符串中（而不会覆盖原有的内容），因此我们将这个字符串作为...参数。该字符"
+"串参数必须是可变的，这样该方法才能更改字符串的内容。"
+
+#: src/ch02-00-guessing-game-tutorial.md:291
+msgid ""
+"The `&` indicates that this argument is a _reference_, which gives you a way "
+"to let multiple parts of your code access one piece of data without needing "
+"to copy that data into memory multiple times. References are a complex "
+"feature, and one of Rust’s major advantages is how safe and easy it is to "
+"use references. You don’t need to know a lot of those details to finish this "
+"program. For now, all you need to know is that, like variables, references "
+"are immutable by default. Hence, you need to write `&mut guess` rather than "
+"`&guess` to make it mutable. (Chapter 4 will explain references more "
+"thoroughly.)"
+msgstr ""
+"`&`表示这个参数是一种“引用”，它允许你的代码中的多个部分访问同一份数据，而无需"
+"多次将这份数据复制到内存中。引用是一个复杂的特性，而Rust的一个主要优势就是使"
+"用引用非常安全且方便。完成这个程序时，你不需要了解太多相关的细节。目前，你只"
+"需要知道，就像变量一样，引用也是可以被使用的。默认情况下是不可变的。因此，要"
+"使它可变，你需要使用`&mut guess`而不是`&guess`。（第4章将更详细地解释引用。）"
+
+#: src/ch02-00-guessing-game-tutorial.md:303
+msgid "<a id=\"handling-potential-failure-with-the-result-type\"></a>"
+msgstr "<a id=\"handling-potential-failure-with-the-result-type\">"
+
+#: src/ch02-00-guessing-game-tutorial.md:305
+msgid "Handling Potential Failure with `Result`"
+msgstr "处理潜在的故障与`Result`"
+
+#: src/ch02-00-guessing-game-tutorial.md:307
+msgid ""
+"We’re still working on this line of code. We’re now discussing a third line "
+"of text, but note that it’s still part of a single logical line of code. The "
+"next part is this method:"
+msgstr ""
+"我们仍在处理这一行代码。我们现在正在讨论第三行文本，但请注意，它仍然属于同一"
+"逻辑代码行的一部分。接下来的部分是这个方法："
+
+#: src/ch02-00-guessing-game-tutorial.md:329
+msgid "We could have written this code as:"
+msgstr "我们可以将这段代码写成如下形式："
+
+#: src/ch02-00-guessing-game-tutorial.md:335
+msgid ""
+"However, one long line is difficult to read, so it’s best to divide it. It’s "
+"often wise to introduce a newline and other whitespace to help break up long "
+"lines when you call a method with the `.method_name()` syntax. Now let’s "
+"discuss what this line does."
+msgstr ""
+"不过，一长行文字很难阅读，因此最好将其分成多行。在调用带有 ``."
+"method_name()`` 语法的方法时，通常建议引入一个新行以及其他空白字符，以帮助分"
+"割长行。现在让我们来讨论这一行代码的作用。"
+
+#: src/ch02-00-guessing-game-tutorial.md:340
+msgid ""
+"As mentioned earlier, `read_line` puts whatever the user enters into the "
+"string we pass to it, but it also returns a `Result` value. [`Result`](../"
+"std/result/enum.Result.html)<!--\n"
+"ignore --> is an [_enumeration_](ch06-00-enums.html)<!-- ignore -->, often "
+"called an _enum_, which is a type that can be in one of multiple possible "
+"states. We call each possible state a _variant_."
+msgstr ""
+"如前所述，`read_line`会将用户输入的内容放入我们传递给它的字符串中，但它还会返"
+"回一个`Result`值。[`Result`](../std/result/enum.Result.html)<!--ignore -->是"
+"一个[_enumeration_](ch06-00-enums.html)<!--ignore -->类型，通常被称为_enum_，"
+"这是一种可以处于多种可能状态的类型。我们将每种可能的状态称为_variant_。"
+
+#: src/ch02-00-guessing-game-tutorial.md:346
+msgid ""
+"[Chapter 6](ch06-00-enums.html)<!-- ignore --> will cover enums in more "
+"detail. The purpose of these `Result` types is to encode error-handling "
+"information."
+msgstr ""
+"[第 6 章](ch06-00-enums.html)<!-- ignore --> 将会更详细地涵盖枚举。这些类型"
+"的 \"Result\" 类型的目的是编码错误处理信息。"
+
+#: src/ch02-00-guessing-game-tutorial.md:349
+msgid ""
+"`Result`’s variants are `Ok` and `Err`. The `Ok` variant indicates the "
+"operation was successful, and it contains the successfully generated value. "
+"The `Err` variant means the operation failed, and it contains information "
+"about how or why the operation failed."
+msgstr ""
+"`Result`的变量是 `Ok` 和 `Err`。`Ok` 变量表示操作成功，它包含成功生成的值。 "
+"`Err`变量是指操作失败，它包含操作失败的方式或原因。"
+
+#: src/ch02-00-guessing-game-tutorial.md:354
+msgid ""
+"Values of the `Result` type, like values of any type, have methods defined "
+"on them. An instance of `Result` has an [`expect` method](../std/result/enum."
+"Result.html#method.expect)<!-- ignore --> that you can call. If this "
+"instance of `Result` is an `Err` value, `expect` will cause the program to "
+"crash and display the message that you passed as an argument to `expect`. If "
+"the `read_line` method returns an `Err`, it would likely be the result of an "
+"error coming from the underlying operating system. If this instance of "
+"`Result` is an `Ok` value, `expect` will take the return value that `Ok` is "
+"holding and return just that value to you so that you can use it. In this "
+"case, that value is the number of bytes in the user’s input."
+msgstr ""
+"`Result`类型的数值，就像任何其他类型的数值一样，都有定义在其上的方法。"
+"`Result`的实例拥有一个[`expect`方法](../std/result/enum.Result.html#method."
+"expect)<!-- ignore -->，你可以调用这个方法来执行特定的操作。如果`Result`的实"
+"例是一个`Err`类型的值，那么`expect`会导致程序崩溃，并显示你作为参数传递给"
+"`expect`的消息。如果`read_line`方法返回一个`Err`类型的值，那么……这很可能是由"
+"底层操作系统出现的错误所导致的。如果`Result`这个实例是一个`Ok`的值，那么"
+"`expect`就会获取`Ok`所持有的返回值，并将其返回给你，以便你可以使用它。在这种"
+"情况下，该值就是用户输入内容的字节数。"
+
+#: src/ch02-00-guessing-game-tutorial.md:364
+msgid ""
+"If you don’t call `expect`, the program will compile, but you’ll get a "
+"warning:"
+msgstr "如果你不调用`expect`，程序将会编译成功，但你会收到一个警告："
+
+#: src/ch02-00-guessing-game-tutorial.md:366
+msgid ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"warning: unused `Result` that must be used\n"
+"  --> src/main.rs:10:5\n"
+"   |\n"
+"10 |     io::stdin().read_line(&mut guess);\n"
+"   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"
+"   |\n"
+"   = note: this `Result` may be an `Err` variant, which should be handled\n"
+"   = note: `#[warn(unused_must_use)]` on by default\n"
+"help: use `let _ = ...` to ignore the resulting value\n"
+"   |\n"
+"10 |     let _ = io::stdin().read_line(&mut guess);\n"
+"   |     +++++++\n"
+"\n"
+"warning: `guessing_game` (bin \"guessing_game\") generated 1 warning\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.59s\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"warning: unused `Result` that must be used\n"
+"  --> src/main.rs:10:5\n"
+"   |\n"
+"10 |     io::stdin().read_line(&mut guess);\n"
+"   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"
+"   |\n"
+"   = note: this `Result` may be an `Err` variant, which should be handled\n"
+"   = note: `#[warn(unused_must_use)]` on by default\n"
+"help: use `let _ = ...` to ignore the resulting value\n"
+"   |\n"
+"10 |     let _ = io::stdin().read_line(&mut guess);\n"
+"   |     +++++++\n"
+"\n"
+"warning: `guessing_game` (bin \"guessing_game\") generated 1 warning\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.59s\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:386
+msgid ""
+"Rust warns that you haven’t used the `Result` value returned from "
+"`read_line`, indicating that the program hasn’t handled a possible error."
+msgstr ""
+"Rust警告指出，您尚未使用从`read_line`返回的`Result`值，这表明程序尚未处理可能"
+"出现的错误。"
+
+#: src/ch02-00-guessing-game-tutorial.md:389
+msgid ""
+"The right way to suppress the warning is to actually write error-handling "
+"code, but in our case we just want to crash this program when a problem "
+"occurs, so we can use `expect`. You’ll learn about recovering from errors in "
+"[Chapter 9](ch09-02-recoverable-errors-with-result.html)<!-- ignore -->."
+msgstr ""
+"抑制警告的正确方法是实际编写错误处理代码，但在我们的案例中，我们只希望在出现"
+"问题时让程序崩溃，因此我们可以使用`expect`。关于如何从错误中恢复，您可以在[第"
+"9章](ch09-02-recoverable-errors-with-result.html)<!-- ignore -->中学习。"
+
+#: src/ch02-00-guessing-game-tutorial.md:394
+msgid "Printing Values with `println!` Placeholders"
+msgstr "使用 `println!` 占位符打印值"
+
+#: src/ch02-00-guessing-game-tutorial.md:396
+msgid ""
+"Aside from the closing curly bracket, there’s only one more line to discuss "
+"in the code so far:"
+msgstr "除了最后一个闭合的花括号之外，到目前为止代码中还有一行需要讨论"
+
+#: src/ch02-00-guessing-game-tutorial.md:417
+msgid ""
+"This line prints the string that now contains the user’s input. The `{}` set "
+"of curly brackets is a placeholder: Think of `{}` as little crab pincers "
+"that hold a value in place. When printing the value of a variable, the "
+"variable name can go inside the curly brackets. When printing the result of "
+"evaluating an expression, place empty curly brackets in the format string, "
+"then follow the format string with a comma-separated list of expressions to "
+"print in each empty curly bracket placeholder in the same order. Printing a "
+"variable and the result of an expression in one call to `println!` would "
+"look like this:"
+msgstr ""
+"这一行会打印出当前包含用户输入的字符串。`{}`中的花括号是一个占位符：可以将`{}"
+"`想象成用来固定值的“小蟹钳”。当打印变量的值时，变量名可以放在花括号内。而当打"
+"印表达式的结果时，需要在格式字符串中放入空的花括号，然后再用逗号分隔的列表形"
+"式列出要打印的表达式。以相同的顺序使用圆括号占位符。在一个调用`println!`时，"
+"同时打印一个变量和一个表达式的结果，看起来会像这样："
+
+#: src/ch02-00-guessing-game-tutorial.md:430
+msgid "\"x = {x} and y + 2 = {}\""
+msgstr "\"x = {x} and y + 2 = {}\""
+
+#: src/ch02-00-guessing-game-tutorial.md:433
+msgid "This code would print `x = 5 and y + 2 = 12`."
+msgstr "这段代码会打印出`x = 5 and y + 2 = 12`。"
+
+#: src/ch02-00-guessing-game-tutorial.md:435
+msgid "Testing the First Part"
+msgstr "测试第一部分"
+
+#: src/ch02-00-guessing-game-tutorial.md:437
+msgid ""
+"Let’s test the first part of the guessing game. Run it using `cargo run`:"
+msgstr "让我们来测试猜谜游戏的第一部分。使用 `cargo run` 来运行它。"
+
+#: src/ch02-00-guessing-game-tutorial.md:445
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.44s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"Please input your guess.\n"
+"6\n"
+"You guessed: 6\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.44s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"Please input your guess.\n"
+"6\n"
+"You guessed: 6\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:456
+msgid ""
+"At this point, the first part of the game is done: We’re getting input from "
+"the keyboard and then printing it."
+msgstr ""
+"目前，游戏的第一部分已经完成：我们正在从键盘接收输入，然后将其打印出来。"
+
+#: src/ch02-00-guessing-game-tutorial.md:459
+msgid "Generating a Secret Number"
+msgstr "生成秘密数字"
+
+#: src/ch02-00-guessing-game-tutorial.md:461
+msgid ""
+"Next, we need to generate a secret number that the user will try to guess. "
+"The secret number should be different every time so that the game is fun to "
+"play more than once. We’ll use a random number between 1 and 100 so that the "
+"game isn’t too difficult. Rust doesn’t yet include random number "
+"functionality in its standard library. However, the Rust team does provide a "
+"[`rand` crate](https://crates.io/crates/rand) with said functionality."
+msgstr ""
+"接下来，我们需要生成一个用户需要尝试猜测的秘密数字。这个秘密数字每次都应该不"
+"同，这样游戏就可以多次玩，而且每次都很有趣。我们将使用1到100之间的随机数字，"
+"这样游戏就不会太难。Rust的标准库目前还没有包含随机数生成功能。不过，Rust团队"
+"提供了一个名为[`rand`crate](https://crates.io/crates/rand)的库，其中包含了这"
+"个功能。"
+
+#: src/ch02-00-guessing-game-tutorial.md:469
+msgid "<a id=\"using-a-crate-to-get-more-functionality\"></a>"
+msgstr "<a id=\"using-a-crate-to-get-more-functionality\">"
+
+#: src/ch02-00-guessing-game-tutorial.md:471
+msgid "Increasing Functionality with a Crate"
+msgstr "通过Crate提升功能性"
+
+#: src/ch02-00-guessing-game-tutorial.md:473
+msgid ""
+"Remember that a crate is a collection of Rust source code files. The project "
+"we’ve been building is a binary crate, which is an executable. The `rand` "
+"crate is a library crate, which contains code that is intended to be used in "
+"other programs and can’t be executed on its own."
+msgstr ""
+"请记住，一个“crate”是一组Rust源代码文件的总和。我们正在构建的项目是一个二进制"
+"crate，即一个可执行的程序。而`rand`这个crate则是一个库crate，它包含的是那些旨"
+"在用于其他程序的代码，不能单独执行。"
+
+#: src/ch02-00-guessing-game-tutorial.md:478
+msgid ""
+"Cargo’s coordination of external crates is where Cargo really shines. Before "
+"we can write code that uses `rand`, we need to modify the _Cargo.toml_ file "
+"to include the `rand` crate as a dependency. Open that file now and add the "
+"following line to the bottom, beneath the `[dependencies]` section header "
+"that Cargo created for you. Be sure to specify `rand` exactly as we have "
+"here, with this version number, or the code examples in this tutorial may "
+"not work:"
+msgstr ""
+"Cargo在协调外部依赖库方面表现得非常出色。在我们能够编写使用`rand`的代码之前，"
+"我们需要修改_Cargo.toml_文件，将`rand`依赖项添加到文件中。现在打开该文件，在"
+"_Cargo为你创建的`[dependencies]`部分标题下方添加以下行。请确保严格按照这里的"
+"格式指定`rand`版本号，否则本教程中的代码示例可能无法正常运行。"
+
+#: src/ch02-00-guessing-game-tutorial.md:493
+msgid ""
+"```toml\n"
+"[dependencies]\n"
+"rand = \"0.8.5\"\n"
+"```"
+msgstr ""
+"```toml\n"
+"[dependencies]\n"
+"rand = \"0.8.5\"\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:498
+msgid ""
+"In the _Cargo.toml_ file, everything that follows a header is part of that "
+"section that continues until another section starts. In `[dependencies]`, "
+"you tell Cargo which external crates your project depends on and which "
+"versions of those crates you require. In this case, we specify the `rand` "
+"crate with the semantic version specifier `0.8.5`. Cargo understands "
+"[Semantic Versioning](http://semver.org)<!-- ignore --> (sometimes called "
+"_SemVer_), which is a standard for writing version numbers. The specifier "
+"`0.8.5` is actually shorthand for `^0.8.5`, which means any version that is "
+"at least 0.8.5 but below 0.9.0."
+msgstr ""
+"在_Cargo.toml_文件中，所有紧跟在头部之后的内容都属于同一部分，这部分会一直持"
+"续下去，直到出现另一个部分为止。在`[dependencies]`中，你可以告诉Cargo你的项目"
+"依赖哪些外部库，以及你需要这些库的哪个版本。在这个例子中，我们使用`0.8.5`这样"
+"的语义版本规范来指定`rand`这个库。Cargo支持[SemanticVersioning](http://"
+"semver.org)（有时被称为_SemVer_），这是一种……这是编写版本号的标准。标识符"
+"`0.8.5`实际上是`^0.8.5`的缩写，这意味着任何版本都必须是至少0.8.5但低于0.9.0的"
+"版本。"
+
+#: src/ch02-00-guessing-game-tutorial.md:508
+msgid ""
+"Cargo considers these versions to have public APIs compatible with version "
+"0.8.5, and this specification ensures that you’ll get the latest patch "
+"release that will still compile with the code in this chapter. Any version "
+"0.9.0 or greater is not guaranteed to have the same API as what the "
+"following examples use."
+msgstr ""
+"Cargo认为这些版本的公共API与0.8.5版本兼容，并且该规范确保您将获得最新的补丁版"
+"本，同时该版本仍然可以与本章中的代码进行编译。任何0.9.0或更高版本的API并不保"
+"证与以下示例中使用的API相同。"
+
+#: src/ch02-00-guessing-game-tutorial.md:514
+msgid ""
+"Now, without changing any of the code, let’s build the project, as shown in "
+"Listing 2-2."
+msgstr ""
+"现在，在不更改任何代码的情况下，让我们按照清单2-2所示的步骤来构建该项目。"
+
+#: src/ch02-00-guessing-game-tutorial.md:525
+msgid ""
+"```console\n"
+"$ cargo build\n"
+"  Updating crates.io index\n"
+"   Locking 15 packages to latest Rust 1.85.0 compatible versions\n"
+"    Adding rand v0.8.5 (available: v0.9.0)\n"
+" Compiling proc-macro2 v1.0.93\n"
+" Compiling unicode-ident v1.0.17\n"
+" Compiling libc v0.2.170\n"
+" Compiling cfg-if v1.0.0\n"
+" Compiling byteorder v1.5.0\n"
+" Compiling getrandom v0.2.15\n"
+" Compiling rand_core v0.6.4\n"
+" Compiling quote v1.0.38\n"
+" Compiling syn v2.0.98\n"
+" Compiling zerocopy-derive v0.7.35\n"
+" Compiling zerocopy v0.7.35\n"
+" Compiling ppv-lite86 v0.2.20\n"
+" Compiling rand_chacha v0.3.1\n"
+" Compiling rand v0.8.5\n"
+" Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"  Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.48s\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo build\n"
+"  Updating crates.io index\n"
+"   Locking 15 packages to latest Rust 1.85.0 compatible versions\n"
+"    Adding rand v0.8.5 (available: v0.9.0)\n"
+" Compiling proc-macro2 v1.0.93\n"
+" Compiling unicode-ident v1.0.17\n"
+" Compiling libc v0.2.170\n"
+" Compiling cfg-if v1.0.0\n"
+" Compiling byteorder v1.5.0\n"
+" Compiling getrandom v0.2.15\n"
+" Compiling rand_core v0.6.4\n"
+" Compiling quote v1.0.38\n"
+" Compiling syn v2.0.98\n"
+" Compiling zerocopy-derive v0.7.35\n"
+" Compiling zerocopy v0.7.35\n"
+" Compiling ppv-lite86 v0.2.20\n"
+" Compiling rand_chacha v0.3.1\n"
+" Compiling rand v0.8.5\n"
+" Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"  Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.48s\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:550
+msgid ""
+"You may see different version numbers (but they will all be compatible with "
+"the code, thanks to SemVer!) and different lines (depending on the operating "
+"system), and the lines may be in a different order."
+msgstr ""
+"您可能会看到不同的版本号（但由于SemVer的存在，所有这些版本号都与代码兼"
+"容！），以及不同的行号（这取决于操作系统），而且这些行号的顺序也可能不同。"
+
+#: src/ch02-00-guessing-game-tutorial.md:554
+msgid ""
+"When we include an external dependency, Cargo fetches the latest versions of "
+"everything that dependency needs from the _registry_, which is a copy of "
+"data from [Crates.io](https://crates.io/). Crates.io is where people in the "
+"Rust ecosystem post their open source Rust projects for others to use."
+msgstr ""
+"当我们引入一个外部依赖时，Cargo会从_注册中心_获取该依赖所需的所有最新版本。这"
+"个注册中心实际上是从[Crates.io](https://crates.io/)中获取的数据副本。Crates."
+"io是Rust生态系统中的平台，人们可以在这里发布他们的开源Rust项目，供其他人使"
+"用。"
+
+#: src/ch02-00-guessing-game-tutorial.md:559
+msgid ""
+"After updating the registry, Cargo checks the `[dependencies]` section and "
+"downloads any crates listed that aren’t already downloaded. In this case, "
+"although we only listed `rand` as a dependency, Cargo also grabbed other "
+"crates that `rand` depends on to work. After downloading the crates, Rust "
+"compiles them and then compiles the project with the dependencies available."
+msgstr ""
+"在更新注册表之后，Cargo会检查`[dependencies]`这一部分，并下载那些尚未下载的依"
+"赖库。在这种情况下，虽然我们只列出了`rand`作为依赖项，但Cargo还会下载其他由"
+"`rand`所依赖的库，以确保项目的正常运行。在下载完这些依赖库之后，Rust会对其进"
+"行编译，然后结合已下载的依赖库来编译整个项目。"
+
+#: src/ch02-00-guessing-game-tutorial.md:565
+msgid ""
+"If you immediately run `cargo build` again without making any changes, you "
+"won’t get any output aside from the `Finished` line. Cargo knows it has "
+"already downloaded and compiled the dependencies, and you haven’t changed "
+"anything about them in your _Cargo.toml_ file. Cargo also knows that you "
+"haven’t changed anything about your code, so it doesn’t recompile that "
+"either. With nothing to do, it simply exits."
+msgstr ""
+"如果你不做出任何修改就立即再次运行`cargo build`，那么除了`Finished`这一行之"
+"外，你将不会得到任何输出。Cargo知道它已经下载并编译了所有依赖项，而且你在"
+"`_Cargo.toml_`文件中也没有对它们进行任何修改。Cargo还知道你对代码本身也没有进"
+"行任何修改，因此也不会重新编译代码。由于无事可做，它只会直接退出。"
+
+#: src/ch02-00-guessing-game-tutorial.md:572
+msgid ""
+"If you open the _src/main.rs_ file, make a trivial change, and then save it "
+"and build again, you’ll only see two lines of output:"
+msgstr ""
+"如果你打开`_src/main.rs_`文件，进行一个简单的修改，然后保存并重新构建，你只会"
+"看到两行输出："
+
+#: src/ch02-00-guessing-game-tutorial.md:580
+msgid ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:586
+msgid ""
+"These lines show that Cargo only updates the build with your tiny change to "
+"the _src/main.rs_ file. Your dependencies haven’t changed, so Cargo knows it "
+"can reuse what it has already downloaded and compiled for those."
+msgstr ""
+"这几行代码表明，Cargo只会根据你对`src/main.rs`文件的微小修改来更新构建文件。"
+"你的依赖项没有发生变化，因此Cargo知道它可以重用已经下载并编译好的内容。"
+
+#: src/ch02-00-guessing-game-tutorial.md:591
+msgid "<a id=\"ensuring-reproducible-builds-with-the-cargo-lock-file\"></a>"
+msgstr "<a id=\"ensuring-reproducible-builds-with-the-cargo-lock-file\">"
+
+#: src/ch02-00-guessing-game-tutorial.md:593
+msgid "Ensuring Reproducible Builds"
+msgstr "确保可复现的构建过程"
+
+#: src/ch02-00-guessing-game-tutorial.md:595
+msgid ""
+"Cargo has a mechanism that ensures that you can rebuild the same artifact "
+"every time you or anyone else builds your code: Cargo will use only the "
+"versions of the dependencies you specified until you indicate otherwise. For "
+"example, say that next week version 0.8.6 of the `rand` crate comes out, and "
+"that version contains an important bug fix, but it also contains a "
+"regression that will break your code. To handle this, Rust creates the "
+"_Cargo.lock_ file the first time you run `cargo build`, so we now have this "
+"in the _guessing_game_ directory."
+msgstr ""
+"Cargo提供了一种机制，确保无论您还是其他人何时构建代码时，都能使用相同的依赖版"
+"本。Cargo只会使用您指定的依赖版本，直到您明确指示 otherwise。例如，假设下周 "
+"`rand` 这个包的 0.8.6 版本发布，该版本包含重要的漏洞修复，但同时也存在可能导"
+"致代码失效的回归问题。为了处理这种情况，Rust 会生成 _Cargo.lock_ 文件。运行"
+"`cargo build`的时间，现在这个文件已经存在于_guessing_game_directory_中。"
+
+#: src/ch02-00-guessing-game-tutorial.md:604
+msgid ""
+"When you build a project for the first time, Cargo figures out all the "
+"versions of the dependencies that fit the criteria and then writes them to "
+"the _Cargo.lock_ file. When you build your project in the future, Cargo will "
+"see that the _Cargo.lock_ file exists and will use the versions specified "
+"there rather than doing all the work of figuring out versions again. This "
+"lets you have a reproducible build automatically. In other words, your "
+"project will remain at 0.8.5 until you explicitly upgrade, thanks to the "
+"_Cargo.lock_ file. Because the _Cargo.lock_ file is important for "
+"reproducible builds, it’s often checked into source control with the rest of "
+"the code in your project."
+msgstr ""
+"当你首次构建项目时，Cargo会找出所有符合要求的依赖库的版本，并将它们写入"
+"_Cargo.lock_文件中。之后，当你再次构建项目时，Cargo会检测到_Cargo.lock_文件的"
+"存在，并会使用其中指定的版本，而无需再次去查找合适的版本。这样，你就可以实现"
+"可重复的构建过程。换句话说，你的项目将能够始终使用相同的版本进行构建。请保持"
+"在0.8.5版本，直到您明确进行升级为止，这要归功于_Cargo.lock_文件。由于_Cargo."
+"lock_文件对于可复现的构建非常重要，因此它通常会与项目中的其他代码一起被提交到"
+"源代码控制中。"
+
+#: src/ch02-00-guessing-game-tutorial.md:614
+msgid "Updating a Crate to Get a New Version"
+msgstr "更新箱子以获得新版本"
+
+#: src/ch02-00-guessing-game-tutorial.md:616
+msgid ""
+"When you _do_ want to update a crate, Cargo provides the command `update`, "
+"which will ignore the _Cargo.lock_ file and figure out all the latest "
+"versions that fit your specifications in _Cargo.toml_. Cargo will then write "
+"those versions to the _Cargo.lock_ file. Otherwise, by default, Cargo will "
+"only look for versions greater than 0.8.5 and less than 0.9.0. If the `rand` "
+"crate has released the two new versions 0.8.6 and 0.999.0, you would see the "
+"following if you ran `cargo update`:"
+msgstr ""
+"当你确实想要更新某个包时，Cargo提供了`update`命令，该命令会忽略_Cargo.lock_文"
+"件，并在_Cargo.toml_中查找符合你要求的所有最新版本。然后，Cargo会将这些版本写"
+"入_Cargo.lock_文件。否则，默认情况下，Cargo只会寻找大于0.8.5且小于0.9.0的版"
+"本。如果`rand`包发布了两个新版本0.8.6和0.999.0，你会看到如下情况：您运行了"
+"`cargo update`："
+
+#: src/ch02-00-guessing-game-tutorial.md:637
+msgid ""
+"Cargo ignores the 0.999.0 release. At this point, you would also notice a "
+"change in your _Cargo.lock_ file noting that the version of the `rand` crate "
+"you are now using is 0.8.6. To use `rand` version 0.999.0 or any version in "
+"the 0.999._x_ series, you’d have to update the _Cargo.toml_ file to look "
+"like this instead (don’t actually make this change because the following "
+"examples assume you’re using `rand` 0.8):"
+msgstr ""
+"Cargo忽略了0.999.0版本的发布。此时，您还会注意到_Cargo.lock_文件中的变化，显"
+"示当前使用的`rand`包的版本已变为0.8.6。若想使用`rand`的0.999.0版本或0.999._x_"
+"系列中的任何版本，则需要更新_Cargo.toml_文件，使其看起来像这样（但实际上不必"
+"进行此更改，因为以下示例假设您使用的是`rand` 0.8版本）。"
+
+#: src/ch02-00-guessing-game-tutorial.md:644
+msgid ""
+"```toml\n"
+"[dependencies]\n"
+"rand = \"0.999.0\"\n"
+"```"
+msgstr ""
+"```toml\n"
+"[dependencies]\n"
+"rand = \"0.999.0\"\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:649
+msgid ""
+"The next time you run `cargo build`, Cargo will update the registry of "
+"crates available and reevaluate your `rand` requirements according to the "
+"new version you have specified."
+msgstr ""
+"下次当你运行`cargo build`时，Cargo将会更新可用插件的注册表，并根据你指定的新"
+"版本重新评估你的`rand`需求。"
+
+#: src/ch02-00-guessing-game-tutorial.md:653
+msgid ""
+"There’s a lot more to say about [Cargo](https://doc.rust-lang.org/"
+"cargo/)<!-- ignore --> and [its ecosystem](https://doc.rust-lang.org/cargo/"
+"reference/publishing.html)<!-- ignore -->, which we’ll discuss in Chapter "
+"14, but for now, that’s all you need to know. Cargo makes it very easy to "
+"reuse libraries, so Rustaceans are able to write smaller projects that are "
+"assembled from a number of packages."
+msgstr ""
+"关于[Cargo](https://doc.rust-lang.org/cargo/)<!-- ignore -->以及其[生态系统]"
+"(https://doc.rust-lang.org/cargo/reference/publishing.html)<!-- ignore -->，"
+"还有很多内容需要讨论，我们将在第十四章中详细探讨。不过目前，这些就是你需要了"
+"解的全部内容。Cargo使得重用库变得非常容易，因此Rust开发者能够编写出由多个包组"
+"合而成的较小项目。"
+
+#: src/ch02-00-guessing-game-tutorial.md:659
+msgid "Generating a Random Number"
+msgstr "生成随机数字"
+
+#: src/ch02-00-guessing-game-tutorial.md:661
+msgid ""
+"Let’s start using `rand` to generate a number to guess. The next step is to "
+"update _src/main.rs_, as shown in Listing 2-3."
+msgstr ""
+"让我们开始使用 ``rand`` 来生成需要猜测的数字。下一步是更新 `_src/main.rs` 文"
+"件，如清单 2-3 所示。"
+
+#: src/ch02-00-guessing-game-tutorial.md:676
+#: src/ch02-00-guessing-game-tutorial.md:774
+#: src/ch02-00-guessing-game-tutorial.md:895
+#: src/ch02-00-guessing-game-tutorial.md:1021
+#: src/ch02-00-guessing-game-tutorial.md:1118
+#: src/ch02-00-guessing-game-tutorial.md:1171
+msgid "\"The secret number is: {secret_number}\""
+msgstr "“秘密号码是：{secret_number}”"
+
+#: src/ch02-00-guessing-game-tutorial.md:692
+msgid ""
+"First, we add the line `use rand::Rng;`. The `Rng` trait defines methods "
+"that random number generators implement, and this trait must be in scope for "
+"us to use those methods. Chapter 10 will cover traits in detail."
+msgstr ""
+"首先，我们添加了 ``use rand::Rng;`` 这一行。``Rng`` 这个特性定义了随机数生成"
+"器实现的方法，而要使用这些方法，就必须处于该特性的作用域内。第10章将详细介绍"
+"特性相关的内容。"
+
+#: src/ch02-00-guessing-game-tutorial.md:696
+msgid ""
+"Next, we’re adding two lines in the middle. In the first line, we call the "
+"`rand::thread_rng` function that gives us the particular random number "
+"generator we’re going to use: one that is local to the current thread of "
+"execution and is seeded by the operating system. Then, we call the "
+"`gen_range` method on the random number generator. This method is defined by "
+"the `Rng` trait that we brought into scope with the `use rand::Rng;` "
+"statement. The `gen_range` method takes a range expression as an argument "
+"and generates a random number in the range. The kind of range expression "
+"we’re using here takes the form `start..=end` and is inclusive on the lower "
+"and upper bounds, so we need to specify `1..=100` to request a number "
+"between 1 and 100."
+msgstr ""
+"接下来，我们在中间添加两行代码。在第一行中，我们调用了`rand::thread_rng`函"
+"数，该函数为我们提供了要使用的特定随机数生成器：这个生成器是局限于当前执行线"
+"程的，并且其种子是由操作系统设定的。然后，我们对随机数生成器调用了`gen_range`"
+"方法。这个方法是由`Rng`特性定义的，我们通过`use rand::Rng;`语句将其引入作用域"
+"中。`gen_range`方法接受一个范围表达式作为参数，并在该范围内生成一个随机数。我"
+"们在这里使用的范围表达式形式为`start..=end`，它包含下限和上限的值。因此，我们"
+"需要使用`1..=100`来请求一个介于1到100之间的随机数。"
+
+#: src/ch02-00-guessing-game-tutorial.md:707
+msgid ""
+"Note: You won’t just know which traits to use and which methods and "
+"functions to call from a crate, so each crate has documentation with "
+"instructions for using it. Another neat feature of Cargo is that running the "
+"`cargo doc --open` command will build documentation provided by all your "
+"dependencies locally and open it in your browser. If you’re interested in "
+"other functionality in the `rand` crate, for example, run `cargo doc --open` "
+"and click `rand` in the sidebar on the left."
+msgstr ""
+"注意：您将不仅仅知道应该使用哪些特性，以及从某个包中调用哪些方法或函数。因"
+"此，每个包都有关于如何使用该包的文档说明。Cargo的另一个优点在于，运行`cargo "
+"doc --open`命令可以本地生成所有依赖项的文档，并可以在浏览器中打开这些文档。如"
+"果您对`rand`这个包的其他功能感兴趣，可以运行`cargo doc --open`。> 在左侧的侧"
+"边栏中点击`rand`。"
+
+#: src/ch02-00-guessing-game-tutorial.md:715
+msgid ""
+"The second new line prints the secret number. This is useful while we’re "
+"developing the program to be able to test it, but we’ll delete it from the "
+"final version. It’s not much of a game if the program prints the answer as "
+"soon as it starts!"
+msgstr ""
+"第二行新内容会打印出秘密数字。在开发程序时，这样做有助于测试程序，但在最终版"
+"本中我们会将其删除。如果程序在启动时就直接打印出答案的话，那就不算真正的游戏"
+"了！"
+
+#: src/ch02-00-guessing-game-tutorial.md:720
+msgid "Try running the program a few times:"
+msgstr "请尝试多次运行该程序："
+
+#: src/ch02-00-guessing-game-tutorial.md:730
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.02s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"The secret number is: 7\n"
+"Please input your guess.\n"
+"4\n"
+"You guessed: 4\n"
+"\n"
+"$ cargo run\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.02s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"The secret number is: 83\n"
+"Please input your guess.\n"
+"5\n"
+"You guessed: 5\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.02s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"The secret number is: 7\n"
+"Please input your guess.\n"
+"4\n"
+"You guessed: 4\n"
+"\n"
+"$ cargo run\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.02s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"The secret number is: 83\n"
+"Please input your guess.\n"
+"5\n"
+"You guessed: 5\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:751
+msgid ""
+"You should get different random numbers, and they should all be numbers "
+"between 1 and 100. Great job!"
+msgstr ""
+"你应该会得到不同的随机数字，而且这些数字都应该介于1到100之间。干得真棒！"
+
+#: src/ch02-00-guessing-game-tutorial.md:754
+msgid "Comparing the Guess to the Secret Number"
+msgstr "将猜测的数字与秘密数字进行比较"
+
+#: src/ch02-00-guessing-game-tutorial.md:756
+msgid ""
+"Now that we have user input and a random number, we can compare them. That "
+"step is shown in Listing 2-4. Note that this code won’t compile just yet, as "
+"we will explain."
+msgstr ""
+"现在我们已经获得了用户的输入和一个随机数字，我们可以将它们进行比较。这一步骤"
+"在清单2-4中有所展示。请注意，目前这段代码可能无法编译，我们将在后面解释原因。"
+
+#: src/ch02-00-guessing-game-tutorial.md:769
+#: src/ch02-00-guessing-game-tutorial.md:899
+#: src/ch02-00-guessing-game-tutorial.md:1019
+#: src/ch02-00-guessing-game-tutorial.md:1026
+#: src/ch02-00-guessing-game-tutorial.md:1133
+#: src/ch02-00-guessing-game-tutorial.md:1178
+#: src/ch02-00-guessing-game-tutorial.md:1191
+msgid "// --snip--\n"
+msgstr ""
+"// --snip--\n"
+"——剪——\n"
+
+#: src/ch02-00-guessing-game-tutorial.md:787
+#: src/ch02-00-guessing-game-tutorial.md:912
+#: src/ch02-00-guessing-game-tutorial.md:1040
+#: src/ch02-00-guessing-game-tutorial.md:1136
+#: src/ch02-00-guessing-game-tutorial.md:1194
+#: src/ch02-00-guessing-game-tutorial.md:1298
+msgid "\"Too small!\""
+msgstr "“太小了！”"
+
+#: src/ch02-00-guessing-game-tutorial.md:788
+#: src/ch02-00-guessing-game-tutorial.md:913
+#: src/ch02-00-guessing-game-tutorial.md:1041
+#: src/ch02-00-guessing-game-tutorial.md:1137
+#: src/ch02-00-guessing-game-tutorial.md:1195
+#: src/ch02-00-guessing-game-tutorial.md:1299
+msgid "\"Too big!\""
+msgstr "“太大了！”"
+
+#: src/ch02-00-guessing-game-tutorial.md:789
+#: src/ch02-00-guessing-game-tutorial.md:914
+#: src/ch02-00-guessing-game-tutorial.md:1042
+#: src/ch02-00-guessing-game-tutorial.md:1139
+#: src/ch02-00-guessing-game-tutorial.md:1197
+#: src/ch02-00-guessing-game-tutorial.md:1301
+msgid "\"You win!\""
+msgstr "“你赢了！”"
+
+#: src/ch02-00-guessing-game-tutorial.md:796
+msgid ""
+"First, we add another `use` statement, bringing a type called `std::cmp::"
+"Ordering` into scope from the standard library. The `Ordering` type is "
+"another enum and has the variants `Less`, `Greater`, and `Equal`. These are "
+"the three outcomes that are possible when you compare two values."
+msgstr ""
+"首先，我们添加了另一个``use``语句，将一种名为``std::cmp::Ordering``的类型引入"
+"到标准库的作用域中。``Ordering``是一种枚举类型，包含三种变体：``Less``、"
+"``Greater``和``Equal``。当比较两个值时，这三种变体分别表示三种可能的结果。"
+
+#: src/ch02-00-guessing-game-tutorial.md:801
+msgid ""
+"Then, we add five new lines at the bottom that use the `Ordering` type. The "
+"`cmp` method compares two values and can be called on anything that can be "
+"compared. It takes a reference to whatever you want to compare with: Here, "
+"it’s comparing `guess` to `secret_number`. Then, it returns a variant of the "
+"`Ordering` enum we brought into scope with the `use` statement. We use a "
+"[`match`](ch06-02-match.html)<!-- ignore --> expression to decide what to do "
+"next based on which variant of `Ordering` was returned from the call to "
+"`cmp` with the values in `guess` and `secret_number`."
+msgstr ""
+"然后，我们在底部添加了五行新的代码，这些代码使用了`Ordering`类型。`cmp`方法可"
+"以比较两个值，并且可以在任何可以进行比较的对象上调用它。该方法需要一个引用，"
+"用来指定要比较的对象：在这里，就是比较`guess`和`secret_number`。最后，该方法"
+"返回`Ordering`枚举的一个变体，这个变体是通过`use`语句引入的。我们使用这个变体"
+"来实现我们的功能。[`match`](ch06-02-match.html)<!-- ignore --> 根据从`cmp`调"
+"用中返回的不同变体，结合`guess`和`secret_number`中的值，来决定接下来要执行的"
+"操作。"
+
+#: src/ch02-00-guessing-game-tutorial.md:810
+msgid ""
+"A `match` expression is made up of _arms_. An arm consists of a _pattern_ to "
+"match against, and the code that should be run if the value given to `match` "
+"fits that arm’s pattern. Rust takes the value given to `match` and looks "
+"through each arm’s pattern in turn. Patterns and the `match` construct are "
+"powerful Rust features: They let you express a variety of situations your "
+"code might encounter, and they make sure you handle them all. These features "
+"will be covered in detail in Chapter 6 and Chapter 19, respectively."
+msgstr ""
+"一个`match`表达式由多个“分支”组成。每个分支包含一个用于匹配的“模式”，以及当"
+"`match`传递的值符合该分支的模式时应该执行的代码。Rust会依次检查`match`所传递"
+"的值，并与每个分支的模式进行匹配。模式和`match`构造是Rust中非常强大的功能：它"
+"们使你能够表达各种情况。可能会遇到各种情况，而这些情况都会得到妥善处理。这些"
+"功能将在第6章和第19章中详细讨论。"
+
+#: src/ch02-00-guessing-game-tutorial.md:818
+msgid ""
+"Let’s walk through an example with the `match` expression we use here. Say "
+"that the user has guessed 50 and the randomly generated secret number this "
+"time is 38."
+msgstr ""
+"让我们通过一个例子来演示这里使用的`match`表达式。假设用户猜对了50，而这次随机"
+"生成的秘密数字是38。"
+
+#: src/ch02-00-guessing-game-tutorial.md:822
+msgid ""
+"When the code compares 50 to 38, the `cmp` method will return `Ordering::"
+"Greater` because 50 is greater than 38. The `match` expression gets the "
+"`Ordering::Greater` value and starts checking each arm’s pattern. It looks "
+"at the first arm’s pattern, `Ordering::Less`, and sees that the value "
+"`Ordering::Greater` does not match `Ordering::Less`, so it ignores the code "
+"in that arm and moves to the next arm. The next arm’s pattern is `Ordering::"
+"Greater`, which _does_ match `Ordering::Greater`! The associated code in "
+"that arm will execute and print `Too big!` to the screen. The `match` "
+"expression ends after the first successful match, so it won’t look at the "
+"last arm in this scenario."
+msgstr ""
+"当代码比较50与38时，`cmp`方法将返回`Ordering::Greater`，因为50大于38。`match`"
+"表达式获取`Ordering::Greater`的值，并开始检查每个分支的模式。它首先查看第一个"
+"分支的模式，即`Ordering::Less`，发现值`Ordering::Greater`与`Ordering::Less`不"
+"匹配，因此忽略该分支中的代码，并继续检查下一个分支。下一个分支的模式是……"
+"`Ordering::Greater`确实与`Ordering::Greater`相匹配！该分支中的相关代码将会执"
+"行，并将`Too big!`打印到屏幕上。`match`表达式在第一次成功匹配之后就会结束，因"
+"此在这种情况下，它不会考虑最后一个分支的情况。"
+
+#: src/ch02-00-guessing-game-tutorial.md:833
+msgid "However, the code in Listing 2-4 won’t compile yet. Let’s try it:"
+msgstr "然而，Listing 2-4中的代码目前无法编译。让我们尝试一下："
+
+#: src/ch02-00-guessing-game-tutorial.md:840
+msgid ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling libc v0.2.86\n"
+"   Compiling getrandom v0.2.2\n"
+"   Compiling cfg-if v1.0.0\n"
+"   Compiling ppv-lite86 v0.2.10\n"
+"   Compiling rand_core v0.6.2\n"
+"   Compiling rand_chacha v0.3.0\n"
+"   Compiling rand v0.8.5\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"error[E0308]: mismatched types\n"
+"  --> src/main.rs:23:21\n"
+"   |\n"
+"23 |     match guess.cmp(&secret_number) {\n"
+"   |                 --- ^^^^^^^^^^^^^^ expected `&String`, found `&{integer}"
+"`\n"
+"   |                 |\n"
+"   |                 arguments to this method are incorrect\n"
+"   |\n"
+"   = note: expected reference `&String`\n"
+"              found reference `&{integer}`\n"
+"note: method defined here\n"
+"  --> /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp."
+"rs:979:8\n"
+"\n"
+"For more information about this error, try `rustc --explain E0308`.\n"
+"error: could not compile `guessing_game` (bin \"guessing_game\") due to 1 "
+"previous error\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling libc v0.2.86\n"
+"   Compiling getrandom v0.2.2\n"
+"   Compiling cfg-if v1.0.0\n"
+"   Compiling ppv-lite86 v0.2.10\n"
+"   Compiling rand_core v0.6.2\n"
+"   Compiling rand_chacha v0.3.0\n"
+"   Compiling rand v0.8.5\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"error[E0308]: mismatched types\n"
+"  --> src/main.rs:23:21\n"
+"   |\n"
+"23 |     match guess.cmp(&secret_number) {\n"
+"   |                 --- ^^^^^^^^^^^^^^ expected `&String`, found `&{integer}"
+"`\n"
+"   |                 |\n"
+"   |                 arguments to this method are incorrect\n"
+"   |\n"
+"   = note: expected reference `&String`\n"
+"              found reference `&{integer}`\n"
+"note: method defined here\n"
+"  --> /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp."
+"rs:979:8\n"
+"\n"
+"For more information about this error, try `rustc --explain E0308`.\n"
+"error: could not compile `guessing_game` (bin \"guessing_game\") due to 1 "
+"previous error\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:867
+msgid ""
+"The core of the error states that there are _mismatched types_. Rust has a "
+"strong, static type system. However, it also has type inference. When we "
+"wrote `let mut guess = String::new()`, Rust was able to infer that `guess` "
+"should be a `String` and didn’t make us write the type. The `secret_number`, "
+"on the other hand, is a number type. A few of Rust’s number types can have a "
+"value between 1 and 100: `i32`, a 32-bit number; `u32`, an unsigned 32-bit "
+"number; `i64`, a 64-bit number; as well as others. Unless otherwise "
+"specified, Rust defaults to an `i32`, which is the type of `secret_number` "
+"unless you add type information elsewhere that would cause Rust to infer a "
+"different numerical type. The reason for the error is that Rust cannot "
+"compare a string and a number type."
+msgstr ""
+"错误核心指出存在“类型不匹配”的问题。Rust具有强大且静态的类型系统，但同时也支"
+"持类型推断功能。当我们编写`let mut guess = String::new()`时，Rust能够自动推断"
+"出`guess`应该是一个`String`类型，因此我们不需要手动指定类型。而"
+"`secret_number`则属于数字类型。Rust中的一些数字类型可以表示1到100之间的数值："
+"`i32`是一个32位数的数字；`u32`则是一个无符号的32位数。`i64`是一个64位数字，以"
+"及其他类型的数据。除非另有说明，Rust默认使用`i32`作为`secret_number`的类型，"
+"除非在其他地方添加了类型信息，导致Rust推断出不同的数值类型。出现错误的原因是"
+"Rust无法比较字符串和数值类型。"
+
+#: src/ch02-00-guessing-game-tutorial.md:878
+msgid ""
+"Ultimately, we want to convert the `String` the program reads as input into "
+"a number type so that we can compare it numerically to the secret number. We "
+"do so by adding this line to the `main` function body:"
+msgstr ""
+"最后， 我们想要将程序读取的输入的 `String` 转换成数字类型，以便我们能够在数字"
+"上将其与秘密数字进行比较。 我们这样做的方法是将此行添加到 `main` 函数机构："
+
+#: src/ch02-00-guessing-game-tutorial.md:907
+#: src/ch02-00-guessing-game-tutorial.md:922
+#: src/ch02-00-guessing-game-tutorial.md:1035
+#: src/ch02-00-guessing-game-tutorial.md:1129
+msgid "\"Please type a number!\""
+msgstr "请输入数字！"
+
+#: src/ch02-00-guessing-game-tutorial.md:919
+msgid "The line is:"
+msgstr "该行是："
+
+#: src/ch02-00-guessing-game-tutorial.md:925
+msgid ""
+"We create a variable named `guess`. But wait, doesn’t the program already "
+"have a variable named `guess`? It does, but helpfully Rust allows us to "
+"shadow the previous value of `guess` with a new one. _Shadowing_ lets us "
+"reuse the `guess` variable name rather than forcing us to create two unique "
+"variables, such as `guess_str` and `guess`, for example. We’ll cover this in "
+"more detail in [Chapter 3](ch03-01-variables-and-mutability."
+"html#shadowing)<!-- ignore -->, but for now, know that this feature is often "
+"used when you want to convert a value from one type to another type."
+msgstr ""
+"我们创建了一个名为`guess`的变量。但是，程序难道不已经有了一个名为`guess`的变"
+"量吗？确实如此，但Rust允许我们通过创建一个新的变量来遮蔽`guess`的先前值。这"
+"种“遮蔽”功能让我们能够重复使用`guess`这个变量名，而不需要创建两个唯一的变量，"
+"比如`guess_str`和`guess`。我们将在后续内容中更详细地介绍这一点。[第3章]"
+"(ch03-01-variables-and-mutability.html#shadowing)<!-- ignore -->，不过目前可"
+"以知道，这个功能通常在需要将一个类型的值转换为另一个类型时使用。"
+
+#: src/ch02-00-guessing-game-tutorial.md:933
+msgid ""
+"We bind this new variable to the expression `guess.trim().parse()`. The "
+"`guess` in the expression refers to the original `guess` variable that "
+"contained the input as a string. The `trim` method on a `String` instance "
+"will eliminate any whitespace at the beginning and end, which we must do "
+"before we can convert the string to a `u32`, which can only contain "
+"numerical data. The user must press <kbd>enter</kbd> to satisfy `read_line` "
+"and input their guess, which adds a newline character to the string. For "
+"example, if the user types <kbd>5</kbd> and presses <kbd>enter</kbd>, "
+"`guess` looks like this: `5\\n`. The `\\n` represents “newline.” (On "
+"Windows, pressing <kbd>enter</kbd> results in a carriage return and a "
+"newline, `\\r\\n`.) The `trim` method eliminates `\\n` or `\\r\\n`, "
+"resulting in just `5`."
+msgstr ""
+"我们将这个新变量绑定到表达式`guess.trim().parse()`上。表达式中的`guess`指的是"
+"原始的`guess`变量，该变量以字符串形式存储了输入数据。对`String`实例的`trim`方"
+"法会删除其开头和结尾处的空白字符，这是在进行字符串转换之前必须完成的步骤，因"
+"为之后字符串只能包含数值数据。用户需要按照指示进行操作。按下<kbd>enter</kbd>"
+"键以满足`read_line`的要求，并输入他们的猜测值，这样会在字符串中新增一个换行"
+"符。例如，如果用户输入<kbd>5</kbd>，然后按下<kbd>enter</kbd>，则`guess`会显示"
+"为`5\\n`。`\\n`表示“换行符”。在Windows系统中，按下<kbd>enter</kbd>会同时产生"
+"回车符和换行符，即`\\r\\n`。`trim`方法可以消除`\\n`或`\\r\\n`。在`5`内完成。"
+
+#: src/ch02-00-guessing-game-tutorial.md:945
+msgid ""
+"The [`parse` method on strings](../std/primitive.str.html#method.parse)<!-- "
+"ignore --> converts a string to another type. Here, we use it to convert "
+"from a string to a number. We need to tell Rust the exact number type we "
+"want by using `let guess: u32`. The colon (`:`) after `guess` tells Rust "
+"we’ll annotate the variable’s type. Rust has a few built-in number types; "
+"the `u32` seen here is an unsigned, 32-bit integer. It’s a good default "
+"choice for a small positive number. You’ll learn about other number types in "
+"[Chapter 3](ch03-02-data-types.html#integer-types)<!-- ignore -->."
+msgstr ""
+"[`parse`方法用于字符串][parse]<!-- 忽略 -->可以将字符串转换为另一种类型。在这"
+"里，我们使用它来将字符串转换为数字。我们需要通过`let guess: u32`告诉Rust我们"
+"想要的具体数字类型。在`guess`之后的冒号(`:`)告诉Rust我们将对变量的类型进行注"
+"解。Rust提供了一些内置的数字类型；这里看到的`u32`是一个无符号的32位整数。对于"
+"较小的正数来说，这是一个很好的默认选择。您可以在[第3章][整数]中了解其他类型的"
+"数字。"
+
+#: src/ch02-00-guessing-game-tutorial.md:953
+msgid ""
+"Additionally, the `u32` annotation in this example program and the "
+"comparison with `secret_number` means Rust will infer that `secret_number` "
+"should be a `u32` as well. So, now the comparison will be between two values "
+"of the same type!"
+msgstr ""
+"此外，在这个示例程序中，``u32``这个注释以及它与``secret_number``的比较意味着"
+"Rust会推断``secret_number``也应该是``u32``类型。因此，现在比较的将是两个相同"
+"类型的数值！"
+
+#: src/ch02-00-guessing-game-tutorial.md:958
+msgid ""
+"The `parse` method will only work on characters that can logically be "
+"converted into numbers and so can easily cause errors. If, for example, the "
+"string contained `A👍%`, there would be no way to convert that to a number. "
+"Because it might fail, the `parse` method returns a `Result` type, much as "
+"the `read_line` method does (discussed earlier in [“Handling Potential "
+"Failure with `Result`”](#handling-potential-failure-with-result)<!-- ignore "
+"-->). We’ll treat this `Result` the same way by using the `expect` method "
+"again. If `parse` returns an `Err` `Result` variant because it couldn’t "
+"create a number from the string, the `expect` call will crash the game and "
+"print the message we give it. If `parse` can successfully convert the string "
+"to a number, it will return the `Ok` variant of `Result`, and `expect` will "
+"return the number that we want from the `Ok` value."
+msgstr ""
+"`parse`方法仅适用于那些可以逻辑上转换为数字的角色，因此很容易导致错误。例如，"
+"如果字符串中包含`A👍%`，那么就无法将其转换为数字。由于可能会出现错误，`parse`"
+"方法会返回一个`Result`类型的值，这与`read_line`方法的返回值相同（之前在“处理"
+"潜在错误”部分已经讨论过）。“`Result`”](#处理潜在故障及结果)。我们将以同样的方"
+"式处理这个`Result`，再次使用`expect`方法。如果`parse`无法将字符串转换为数字，"
+"并且返回了`Err`的变体，那么`expect`的调用将会导致游戏崩溃，并打印出我们给出的"
+"消息。如果`parse`能够成功地将字符串转换为数字，它将返回……`Ok`是`Result`的变"
+"体，而`expect`则会从`Ok`值中返回我们想要的数值。"
+
+#: src/ch02-00-guessing-game-tutorial.md:971
+msgid "Let’s run the program now:"
+msgstr "让我们现在运行程序："
+
+#: src/ch02-00-guessing-game-tutorial.md:980
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"The secret number is: 58\n"
+"Please input your guess.\n"
+"  76\n"
+"You guessed: 76\n"
+"Too big!\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"The secret number is: 58\n"
+"Please input your guess.\n"
+"  76\n"
+"You guessed: 76\n"
+"Too big!\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:993
+msgid ""
+"Nice! Even though spaces were added before the guess, the program still "
+"figured out that the user guessed 76. Run the program a few times to verify "
+"the different behavior with different kinds of input: Guess the number "
+"correctly, guess a number that is too high, and guess a number that is too "
+"low."
+msgstr ""
+"很好！尽管在猜测之前添加了空格，程序仍然能够识别出用户猜的是76。请多次运行该"
+"程序，以验证不同输入情况下的行为：正确猜测数字、猜测过高的数字，以及猜测过低"
+"的数字。"
+
+#: src/ch02-00-guessing-game-tutorial.md:998
+msgid ""
+"We have most of the game working now, but the user can make only one guess. "
+"Let’s change that by adding a loop!"
+msgstr ""
+"目前大部分游戏功能已经可以正常运行了，但是用户只能进行一次猜测。让我们通过添"
+"加一个循环来解决这个问题吧！"
+
+#: src/ch02-00-guessing-game-tutorial.md:1001
+msgid "Allowing Multiple Guesses with Looping"
+msgstr "通过循环实现允许多次猜测"
+
+#: src/ch02-00-guessing-game-tutorial.md:1003
+msgid ""
+"The `loop` keyword creates an infinite loop. We’ll add a loop to give users "
+"more chances at guessing the number:"
+msgstr ""
+"``loop``这个关键字会导致无限循环。我们将添加一个循环，让用户有更多的机会来猜"
+"测数字："
+
+#: src/ch02-00-guessing-game-tutorial.md:1048
+msgid ""
+"As you can see, we’ve moved everything from the guess input prompt onward "
+"into a loop. Be sure to indent the lines inside the loop another four spaces "
+"each and run the program again. The program will now ask for another guess "
+"forever, which actually introduces a new problem. It doesn’t seem like the "
+"user can quit!"
+msgstr ""
+"如您所见，我们已经将所有内容从猜测输入提示处开始，转移到了一个循环中。请注"
+"意，循环内的每一行都要再缩进四个空格，然后再次运行程序。现在，程序会不断要求"
+"用户输入新的猜测值，这实际上引入了一个新的问题。看起来用户无法退出该程序！"
+
+#: src/ch02-00-guessing-game-tutorial.md:1053
+msgid ""
+"The user could always interrupt the program by using the keyboard shortcut "
+"<kbd>ctrl</kbd>\\-<kbd>C</kbd>. But there’s another way to escape this "
+"insatiable monster, as mentioned in the `parse` discussion in [“Comparing "
+"the Guess to the Secret Number”](#comparing-the-guess-to-the-secret-"
+"number)<!-- ignore -->: If the user enters a non-number answer, the program "
+"will crash. We can take advantage of that to allow the user to quit, as "
+"shown here:"
+msgstr ""
+"用户总是可以通过使用键盘快捷键 <kbd>ctrl</kbd>\\-<kbd>C</kbd>来中断程序。 但"
+"是还有另一种方法来逃避这个难以忍受的怪物，正如在`parse`的讨论中所提到的][将猜"
+"测与秘密号码比较”](#comparing-the-guess-to-the-secret-number)<! - 忽略 -->: "
+"如果用户输入非数字答案, 程序将崩溃。 我们可以利用这个机会让用户退出，如下所"
+"示："
+
+#: src/ch02-00-guessing-game-tutorial.md:1070
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"The secret number is: 59\n"
+"Please input your guess.\n"
+"45\n"
+"You guessed: 45\n"
+"Too small!\n"
+"Please input your guess.\n"
+"60\n"
+"You guessed: 60\n"
+"Too big!\n"
+"Please input your guess.\n"
+"59\n"
+"You guessed: 59\n"
+"You win!\n"
+"Please input your guess.\n"
+"quit\n"
+"\n"
+"thread 'main' panicked at src/main.rs:28:47:\n"
+"Please type a number!: ParseIntError { kind: InvalidDigit }\n"
+"note: run with `RUST_BACKTRACE=1` environment variable to display a "
+"backtrace\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"The secret number is: 59\n"
+"Please input your guess.\n"
+"45\n"
+"You guessed: 45\n"
+"Too small!\n"
+"Please input your guess.\n"
+"60\n"
+"You guessed: 60\n"
+"Too big!\n"
+"Please input your guess.\n"
+"59\n"
+"You guessed: 59\n"
+"You win!\n"
+"Please input your guess.\n"
+"quit\n"
+"\n"
+"thread 'main' panicked at src/main.rs:28:47:\n"
+"Please type a number!: ParseIntError { kind: InvalidDigit }\n"
+"note: run with `RUST_BACKTRACE=1` environment variable to display a "
+"backtrace\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:1097
+msgid ""
+"Typing `quit` will quit the game, but as you’ll notice, so will entering any "
+"other non-number input. This is suboptimal, to say the least; we want the "
+"game to also stop when the correct number is guessed."
+msgstr ""
+"输入 `quit` 将会退出游戏，但正如您会注意到的，输入任何其他非数字内容同样会导"
+"致游戏退出。这至少可以说是不理想的；我们希望在猜中正确的数字时，游戏也能停"
+"止。"
+
+#: src/ch02-00-guessing-game-tutorial.md:1101
+msgid "Quitting After a Correct Guess"
+msgstr "正确猜测后退出"
+
+#: src/ch02-00-guessing-game-tutorial.md:1103
+msgid ""
+"Let’s program the game to quit when the user wins by adding a `break` "
+"statement:"
+msgstr "让游戏程序在用户赢得胜利时通过添加 \"断线\" 语句来退出："
+
+#: src/ch02-00-guessing-game-tutorial.md:1147
+msgid ""
+"Adding the `break` line after `You win!` makes the program exit the loop "
+"when the user guesses the secret number correctly. Exiting the loop also "
+"means exiting the program, because the loop is the last part of `main`."
+msgstr ""
+"让我们在代码中加入一个 ``break`` 语句，这样当用户获胜时，游戏就会自动退出。"
+
+#: src/ch02-00-guessing-game-tutorial.md:1151
+msgid "Handling Invalid Input"
+msgstr "处理无效输入"
+
+#: src/ch02-00-guessing-game-tutorial.md:1153
+msgid ""
+"To further refine the game’s behavior, rather than crashing the program when "
+"the user inputs a non-number, let’s make the game ignore a non-number so "
+"that the user can continue guessing. We can do that by altering the line "
+"where `guess` is converted from a `String` to a `u32`, as shown in Listing "
+"2-5."
+msgstr ""
+"进一步完善游戏行为，而不是在用户输入非数字时崩溃程序， 让游戏忽略一个非数字，"
+"这样用户可以继续猜测。 我们可以通过将`猜ess`从`String`转换为`u32`的行变换成"
+"`u32`的方式来做到这一点，这在列表2-5中已经显示。"
+
+#: src/ch02-00-guessing-game-tutorial.md:1207
+msgid ""
+"We switch from an `expect` call to a `match` expression to move from "
+"crashing on an error to handling the error. Remember that `parse` returns a "
+"`Result` type and `Result` is an enum that has the variants `Ok` and `Err`. "
+"We’re using a `match` expression here, as we did with the `Ordering` result "
+"of the `cmp` method."
+msgstr ""
+"我们从 \"预期\" 调用到 \"匹配\" 表达式，来从崩溃到处理错误。 请记住，`parse` "
+"返回一个 `Result` 类型和 `Result` 是一个有变量`Ok` 和 `Err`的枚举。 我们在这"
+"里使用 `match` 表达式，就像我们使用 `cmp` 方法的 `Ordering` 结果一样。"
+
+#: src/ch02-00-guessing-game-tutorial.md:1213
+msgid ""
+"If `parse` is able to successfully turn the string into a number, it will "
+"return an `Ok` value that contains the resultant number. That `Ok` value "
+"will match the first arm’s pattern, and the `match` expression will just "
+"return the `num` value that `parse` produced and put inside the `Ok` value. "
+"That number will end up right where we want it in the new `guess` variable "
+"we’re creating."
+msgstr ""
+"如果`parse`能够成功地将字符串转换为数字，它将返回包含结果数字的`Ok`值。 那个"
+"`Ok`值将匹配第一个装甲的图案， 和 `match` 表达式只会返回`parse`生成并放入`Ok`"
+"值中的`num`值。 这个数字最终将会在我们正在创建的新的 `guess` 变量中找到它的位"
+"置。"
+
+#: src/ch02-00-guessing-game-tutorial.md:1219
+msgid ""
+"If `parse` is _not_ able to turn the string into a number, it will return an "
+"`Err` value that contains more information about the error. The `Err` value "
+"does not match the `Ok(num)` pattern in the first `match` arm, but it does "
+"match the `Err(_)` pattern in the second arm. The underscore, `_`, is a "
+"catch-all value; in this example, we’re saying we want to match all `Err` "
+"values, no matter what information they have inside them. So, the program "
+"will execute the second arm’s code, `continue`, which tells the program to "
+"go to the next iteration of the `loop` and ask for another guess. So, "
+"effectively, the program ignores all errors that `parse` might encounter!"
+msgstr ""
+"如果`parse` 是_not_ 能够将字符串转换为数字，它将返回包含更多有关错误信息的 "
+"`Err` 值。 `Err`值与第一个`匹配`参数中的`Ok(num)`模式不匹配，但它与第二个参数"
+"中的`Err(_)`模式匹配。 下划线`_`是一个包罗万象的值； 在这个例子中，我们说我们"
+"想匹配所有`错误'值，不管它们内有什么信息。 因此，程序将执行第二个arm的代码，"
+"`continue`， 这会告诉程序转到下一次循环的迭代，然后再来问问问答。 因此，该程"
+"序实际上忽略了所有“解析”可能产生的错误！"
+
+#: src/ch02-00-guessing-game-tutorial.md:1229
+msgid "Now everything in the program should work as expected. Let’s try it:"
+msgstr "现在程序中的所有内容都应该按照预期正常工作了。让我们试试看："
+
+#: src/ch02-00-guessing-game-tutorial.md:1240
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"The secret number is: 61\n"
+"Please input your guess.\n"
+"10\n"
+"You guessed: 10\n"
+"Too small!\n"
+"Please input your guess.\n"
+"99\n"
+"You guessed: 99\n"
+"Too big!\n"
+"Please input your guess.\n"
+"foo\n"
+"Please input your guess.\n"
+"61\n"
+"You guessed: 61\n"
+"You win!\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling guessing_game v0.1.0 (file:///projects/guessing_game)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s\n"
+"     Running `target/debug/guessing_game`\n"
+"Guess the number!\n"
+"The secret number is: 61\n"
+"Please input your guess.\n"
+"10\n"
+"You guessed: 10\n"
+"Too small!\n"
+"Please input your guess.\n"
+"99\n"
+"You guessed: 99\n"
+"Too big!\n"
+"Please input your guess.\n"
+"foo\n"
+"Please input your guess.\n"
+"61\n"
+"You guessed: 61\n"
+"You win!\n"
+"```"
+
+#: src/ch02-00-guessing-game-tutorial.md:1263
+msgid ""
+"Awesome! With one tiny final tweak, we will finish the guessing game. Recall "
+"that the program is still printing the secret number. That worked well for "
+"testing, but it ruins the game. Let’s delete the `println!` that outputs the "
+"secret number. Listing 2-6 shows the final code."
+msgstr ""
+"太棒了！只需再做一个小小的调整，我们就能完成这个“猜谜游戏”了。还记得，程序仍"
+"然在打印秘密数字。虽然这在测试时效果不错，但会破坏游戏的乐趣。让我们删除那个"
+"用于输出秘密数字的 `println!` 代码吧。清单 2-6 展示了最终的代码。"
+
+#: src/ch02-00-guessing-game-tutorial.md:1311
+msgid ""
+"At this point, you’ve successfully built the guessing game. Congratulations!"
+msgstr "此时，你已经成功构建了一个猜谜游戏。恭喜！"
+
+#: src/ch02-00-guessing-game-tutorial.md:1313
+msgid "Summary"
+msgstr "摘要"
+
+#: src/ch02-00-guessing-game-tutorial.md:1315
+msgid ""
+"This project was a hands-on way to introduce you to many new Rust concepts: "
+"`let`, `match`, functions, the use of external crates, and more. In the next "
+"few chapters, you’ll learn about these concepts in more detail. Chapter 3 "
+"covers concepts that most programming languages have, such as variables, "
+"data types, and functions, and shows how to use them in Rust. Chapter 4 "
+"explores ownership, a feature that makes Rust different from other "
+"languages. Chapter 5 discusses structs and method syntax, and Chapter 6 "
+"explains how enums work."
+msgstr ""
+"这个项目是一种实践性的方式，旨在让您了解许多新的Rust概念：`let`、`match`、函"
+"数、外部库的使用等等。在接下来的几章中，您将更详细地学习这些概念。第3章介绍了"
+"大多数编程语言都有的概念，如变量、数据类型和函数，并展示了如何在Rust中使用它"
+"们。第4章探讨了所有权这一特性，它使得Rust与其他语言有所不同。第5章……本文讨论"
+"了结构体和方法语法，第6章则解释了枚举类型的工作原理。"

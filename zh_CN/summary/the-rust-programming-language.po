@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/title-page.md:1
+msgid "The Rust Programming Language"
+msgstr "Rust 程序设计语言"
+
+#: src/title-page.md:3
+msgid ""
+"_by Steve Klabnik, Carol Nichols, and Chris Krycho, with contributions from "
+"the Rust Community_"
+msgstr ""
+"_由 Steve Klabnik、Carol Nichols 和 Chris Krycho 撰写，并得到了 Rust 社区的贡"
+"献_"
+
+#: src/title-page.md:6
+msgid ""
+"This version of the text assumes you’re using Rust 1.90.0 (released "
+"2025-09-18) or later with `edition = \"2024\"` in the _Cargo.toml_ file of "
+"all projects to configure them to use Rust 2024 Edition idioms. See the "
+"[“Installation” section of Chapter 1](ch01-01-installation.html)<!-- ignore "
+"--> for instructions on installing or updating Rust, and see [Appendix E]"
+"(appendix-05-editions.html)<!-- ignore --> for information on editions."
+msgstr ""
+"此版本的文本假设您正在使用 Rust 1.90.0（发布日期：2025-09-18）或更高版本。所"
+"有项目的 _Cargo.toml_ 文件中都应包含 `edition = \"2024\"`，以便配置它们使用 "
+"Rust 2024 版的语言惯用法。有关安装或更新 Rust 的说明，请参阅第1章的[“安装”部"
+"分](ch01-01-installation.html)<!-- ignore -->，有关版本的更多信息，请参阅[附"
+"录E](appendix-05-editions.html)<!-- ignore -->。"
+
+#: src/title-page.md:13
+msgid ""
+"The HTML format is available online at [https://doc.rust-lang.org/stable/"
+"book/](https://doc.rust-lang.org/stable/book/) and offline with "
+"installations of Rust made with `rustup`; run `rustup doc --book` to open."
+msgstr ""
+"HTML 格式可以在以下网址在线查看：[https://doc.rust-lang.org/stable/book/]"
+"(https://doc.rust-lang.org/stable/book/)。同时，通过安装了 `rustup` 的 Rust "
+"软件，也可以离线访问该文档。运行 `rustup doc --book` 即可打开。"
+
+#: src/title-page.md:18
+msgid ""
+"Several community [translations](appendix-06-translation.html) are also "
+"available."
+msgstr "还有一些社区提供的[翻译版本](appendix-06-translation.html)可供参考。"
+
+#: src/title-page.md:20
+msgid ""
+"This text is available in [paperback and ebook format from No Starch Press]"
+"(https://nostarch.com/rust-programming-language-3rd-edition)."
+msgstr ""
+"该内容也有由[ No Starch Press 出版的平装本和电子书格式](https://nostarch.com/"
+"rust-programming-language-3rd-edition)。"
+
+#: src/title-page.md:28
+msgid ""
+"**🚨 Want a more interactive learning experience? Try out a different "
+"version of the Rust Book, featuring: quizzes, highlighting, visualizations, "
+"and more**: <https://rust-book.cs.brown.edu>"
+msgstr ""
+"**🚨 想要更互动的学习体验吗？试试《Rust 手册》的另一个版本，该版本包含测验、"
+"高亮显示、可视化效果等功能**：<https://rust-book.cs.brown.edu>"

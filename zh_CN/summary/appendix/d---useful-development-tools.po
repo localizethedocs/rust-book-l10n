@@ -1,0 +1,289 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/appendix-04-useful-development-tools.md:1
+msgid "Appendix D: Useful Development Tools"
+msgstr "附录 D：实用开发工具"
+
+#: src/appendix-04-useful-development-tools.md:3
+msgid ""
+"In this appendix, we talk about some useful development tools that the Rust "
+"project provides. We’ll look at automatic formatting, quick ways to apply "
+"warning fixes, a linter, and integrating with IDEs."
+msgstr ""
+"在这个附录中，我们将讨论Rust项目提供的一些有用的开发工具。我们将探讨自动格式"
+"化功能、快速应用警告修复的方法、代码检查工具，以及与集成开发环境IDE的整合。"
+
+#: src/appendix-04-useful-development-tools.md:7
+msgid "Automatic Formatting with `rustfmt`"
+msgstr "使用 `rustfmt` 自动格式"
+
+#: src/appendix-04-useful-development-tools.md:9
+msgid ""
+"The `rustfmt` tool reformats your code according to the community code "
+"style. Many collaborative projects use `rustfmt` to prevent arguments about "
+"which style to use when writing Rust: Everyone formats their code using the "
+"tool."
+msgstr ""
+"`rustfmt`工具根据社区代码风格重新格式化你的代码。 许多协作项目使用 `rustfmt` "
+"来防止在编写Rus时使用哪种样式的参数：每个人都使用工具来格式化他们的代码。"
+
+#: src/appendix-04-useful-development-tools.md:13
+msgid ""
+"Rust installations include `rustfmt` by default, so you should already have "
+"the programs `rustfmt` and `cargo-fmt` on your system. These two commands "
+"are analogous to `rustc` and `cargo` in that `rustfmt` allows finer grained "
+"control and `cargo-fmt` understands conventions of a project that uses "
+"Cargo. To format any Cargo project, enter the following:"
+msgstr ""
+"Rust安装默认包含 `rustfmt` ，所以你的系统中已经有了 `rustfmt` 和 `cargo-fmt` "
+"程序。 这两个命令类似于`rustc`和`cargo`，因为`rustfmt`允许更精细的控制，而"
+"`cargo-fmt`则理解一个使用货物的项目的协议。 要格式化任何货物项目，请输入如"
+"下："
+
+#: src/appendix-04-useful-development-tools.md:23
+msgid ""
+"Running this command reformats all the Rust code in the current crate. This "
+"should only change the code style, not the code semantics. For more "
+"information on `rustfmt`, see [its documentation](https://github.com/rust-"
+"lang/rustfmt)."
+msgstr ""
+"运行此命令重新格式化当前箱子中的所有Rust代码。这只应更改代码样式，而不是代码"
+"语法。 关于`rustfmt`的更多信息，见[其文档](https://github.com/rust-lang/"
+"rustfmt)。"
+
+#: src/appendix-04-useful-development-tools.md:27
+msgid "Fix Your Code with `rustfix`"
+msgstr "用 `rustfix` 修复你的代码"
+
+#: src/appendix-04-useful-development-tools.md:29
+msgid ""
+"The `rustfix` tool is included with Rust installations and can automatically "
+"fix compiler warnings that have a clear way to correct the problem that’s "
+"likely what you want. You’ve probably seen compiler warnings before. For "
+"example, consider this code:"
+msgstr ""
+"\"rustfix\" 工具包含在Rust安装中，可以自动修复编译器警告，这些警告有一个清晰"
+"的方法来纠正你可能想要的问题。 您可能以前看到过编译器警告。例如，请考虑此代"
+"码："
+
+#: src/appendix-04-useful-development-tools.md:34
+#: src/appendix-04-useful-development-tools.md:74
+msgid "<span class=\"filename\">Filename: src/main.rs</span>"
+msgstr "<span class=\"filename\">文件名：src/main.rs</span>"
+
+#: src/appendix-04-useful-development-tools.md:39
+#: src/appendix-04-useful-development-tools.md:79
+msgid "\"{x}\""
+msgstr "\"{x}\""
+
+#: src/appendix-04-useful-development-tools.md:43
+msgid ""
+"Here, we’re defining the variable `x` as mutable, but we never actually "
+"mutate it. Rust warns us about that:"
+msgstr ""
+"在这里，我们将变量 ``x`` 定义为可变的，但实际上我们并没有对其进行任何修改。"
+"Rust会对此发出警告："
+
+#: src/appendix-04-useful-development-tools.md:46
+msgid ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling myprogram v0.1.0 (file:///projects/myprogram)\n"
+"warning: variable does not need to be mutable\n"
+" --> src/main.rs:2:9\n"
+"  |\n"
+"2 |     let mut x = 0;\n"
+"  |         ----^\n"
+"  |         |\n"
+"  |         help: remove this `mut`\n"
+"  |\n"
+"  = note: `#[warn(unused_mut)]` on by default\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo build\n"
+"   Compiling myprogram v0.1.0 (file:///projects/myprogram)\n"
+"warning: variable does not need to be mutable\n"
+" --> src/main.rs:2:9\n"
+"  |\n"
+"2 |     let mut x = 0;\n"
+"  |         ----^\n"
+"  |         |\n"
+"  |         help: remove this `mut`\n"
+"  |\n"
+"  = note: `#[warn(unused_mut)]` on by default\n"
+"```"
+
+#: src/appendix-04-useful-development-tools.md:60
+msgid ""
+"The warning suggests that we remove the `mut` keyword. We can automatically "
+"apply that suggestion using the `rustfix` tool by running the command `cargo "
+"fix`:"
+msgstr ""
+"该警告建议我们移除 ``mut`` 这个关键字。我们可以通过运行 `cargo fix` 命令来自"
+"动应用这一建议，使用 ``rustfix`` 工具来实现："
+
+#: src/appendix-04-useful-development-tools.md:64
+msgid ""
+"```console\n"
+"$ cargo fix\n"
+"    Checking myprogram v0.1.0 (file:///projects/myprogram)\n"
+"      Fixing src/main.rs (1 fix)\n"
+"    Finished dev [unoptimized + debuginfo] target(s) in 0.59s\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo fix\n"
+"    Checking myprogram v0.1.0 (file:///projects/myprogram)\n"
+"      Fixing src/main.rs (1 fix)\n"
+"    Finished dev [unoptimized + debuginfo] target(s) in 0.59s\n"
+"```"
+
+#: src/appendix-04-useful-development-tools.md:71
+msgid ""
+"When we look at _src/main.rs_ again, we’ll see that `cargo fix` has changed "
+"the code:"
+msgstr "当我们再次查看`_src/main.rs_`文件时，会发现`cargo fix`已经修改了代码："
+
+#: src/appendix-04-useful-development-tools.md:83
+msgid "The variable `x` is now immutable, and the warning no longer appears."
+msgstr "变量`x`现在是不可变的，警告不再出现。"
+
+#: src/appendix-04-useful-development-tools.md:85
+msgid ""
+"You can also use the `cargo fix` command to transition your code between "
+"different Rust editions. Editions are covered in [Appendix E](appendix-05-"
+"editions.md)<!--\n"
+"ignore -->."
+msgstr ""
+"您也可以使用 \"货物修复\" 命令在不同版本之间转换您的代码。 [附录E]"
+"(appendix-05-editions.md)<!--\n"
+"忽略-->中包含了版本。"
+
+#: src/appendix-04-useful-development-tools.md:89
+msgid "More Lints with Clippy"
+msgstr "更多与Clippy相关的功能"
+
+#: src/appendix-04-useful-development-tools.md:91
+msgid ""
+"The Clippy tool is a collection of lints to analyze your code so that you "
+"can catch common mistakes and improve your Rust code. Clippy is included "
+"with standard Rust installations."
+msgstr ""
+"Clippy工具是一系列用于分析代码的工具，可以帮助您发现常见的错误并改进您的Rust"
+"代码。Clippy是标准Rust安装程序的一部分。"
+
+#: src/appendix-04-useful-development-tools.md:95
+msgid "To run Clippy’s lints on any Cargo project, enter the following:"
+msgstr "要在任何Cargo项目中运行Clippy的lint工具，请输入以下命令："
+
+#: src/appendix-04-useful-development-tools.md:101
+msgid ""
+"For example, say you write a program that uses an approximation of a "
+"mathematical constant, such as pi, as this program does:"
+msgstr ""
+"例如，假设你编写了一个程序，该程序使用了数学常数如π的近似值，就像这个程序所做"
+"的那样："
+
+#: src/appendix-04-useful-development-tools.md:110
+#: src/appendix-04-useful-development-tools.md:142
+msgid "\"the area of the circle is {}\""
+msgstr "\"圆的区域是 {}\""
+
+#: src/appendix-04-useful-development-tools.md:116
+msgid "Running `cargo clippy` on this project results in this error:"
+msgstr "在该项目运行`cargo clippy`时出现了以下错误："
+
+#: src/appendix-04-useful-development-tools.md:118
+msgid ""
+"```text\n"
+"error: approximate value of `f{32, 64}::consts::PI` found\n"
+" --> src/main.rs:2:13\n"
+"  |\n"
+"2 |     let x = 3.1415;\n"
+"  |             ^^^^^^\n"
+"  |\n"
+"  = note: `#[deny(clippy::approx_constant)]` on by default\n"
+"  = help: consider using the constant directly\n"
+"  = help: for further information visit https://rust-lang.github.io/rust-"
+"clippy/master/index.html#approx_constant\n"
+"```"
+msgstr ""
+"```text\n"
+"error: approximate value of `f{32, 64}::consts::PI` found\n"
+" --> src/main.rs:2:13\n"
+"  |\n"
+"2 |     let x = 3.1415;\n"
+"  |             ^^^^^^\n"
+"  |\n"
+"  = note: `#[deny(clippy::approx_constant)]` on by default\n"
+"  = help: consider using the constant directly\n"
+"  = help: for further information visit https://rust-lang.github.io/rust-"
+"clippy/master/index.html#approx_constant\n"
+"```"
+
+#: src/appendix-04-useful-development-tools.md:130
+msgid ""
+"This error lets you know that Rust already has a more precise `PI` constant "
+"defined, and that your program would be more correct if you used the "
+"constant instead. You would then change your code to use the `PI` constant."
+msgstr ""
+"这个错误提示您，Rust已经定义了一个更精确的`PI`常量。如果您使用这个常量，程序"
+"将会更加正确。此时，您需要修改代码以使用`PI`常量。"
+
+#: src/appendix-04-useful-development-tools.md:134
+msgid ""
+"The following code doesn’t result in any errors or warnings from Clippy:"
+msgstr "以下代码不会引发Clippy的任何错误或警告："
+
+#: src/appendix-04-useful-development-tools.md:148
+msgid ""
+"For more information on Clippy, see [its documentation](https://github.com/"
+"rust-lang/rust-clippy)."
+msgstr ""
+"如需了解更多关于Clippy的信息，请参阅[其文档](https://github.com/rust-lang/"
+"rust-clippy)。"
+
+#: src/appendix-04-useful-development-tools.md:150
+msgid "IDE Integration Using `rust-analyzer`"
+msgstr "IDE 集成使用 `rust-analyzer`"
+
+#: src/appendix-04-useful-development-tools.md:152
+msgid ""
+"To help with IDE integration, the Rust community recommends using [`rust-"
+"analyzer`](https://rust-analyzer.github.io)<!-- ignore -->. This tool is a "
+"set of compiler-centric utilities that speak [Language Server Protocol]"
+"(http://langserver.org/)<!--\n"
+"ignore -->, which is a specification for IDEs and programming languages to "
+"communicate with each other. Different clients can use `rust-analyzer`, such "
+"as [the Rust analyzer plug-in for Visual Studio Code](https://marketplace."
+"visualstudio.com/items?itemName=rust-lang.rust-analyzer)."
+msgstr ""
+"为了帮助集成到IDE中，Rust社区建议使用(https://rust-analyzer.github.io)<!-- 忽"
+"略 -->。该工具是一组以编译器为中心的实用工具，它们遵循(http://langserver."
+"org/)<!-- 忽略 -->规范，这是一种用于指导IDE和编程语言之间通信的协议。不同的客"
+"户端可以使用`rust-analyzer`，例如适用于Visual Studio Code的Rust分析器插件"
+"(https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-"
+"analyzer)。"
+
+#: src/appendix-04-useful-development-tools.md:159
+msgid ""
+"Visit the `rust-analyzer` project’s [home page](https://rust-analyzer.github."
+"io)<!-- ignore --> for installation instructions, then install the language "
+"server support in your particular IDE. Your IDE will gain capabilities such "
+"as autocompletion, jump to definition, and inline errors."
+msgstr ""
+"请访问 `rust-analyzer` 项目的[主页](https://rust-analyzer.github.io)<!-- 忽"
+"略 -->，以获取安装说明。然后，在您特定的集成开发环境中安装语言服务器支持。您"
+"的集成开发环境将获得诸如自动完成、跳转到定义以及内联错误等功能。"

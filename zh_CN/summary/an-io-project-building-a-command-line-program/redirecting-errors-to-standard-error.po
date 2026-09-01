@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:3
+msgid ""
+"<a id=\"writing-error-messages-to-standard-error-instead-of-standard-"
+"output\"></a>"
+msgstr ""
+"<a id=\"writing-error-messages-to-standard-error-instead-of-standard-"
+"output\"></a>"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:5
+msgid "Redirecting Errors to Standard Error"
+msgstr "将错误重定向到标准错误流"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:7
+msgid ""
+"At the moment, we’re writing all of our output to the terminal using the "
+"`println!` macro. In most terminals, there are two kinds of output: "
+"_standard output_ (`stdout`) for general information and _standard error_ "
+"(`stderr`) for error messages. This distinction enables users to choose to "
+"direct the successful output of a program to a file but still print error "
+"messages to the screen."
+msgstr ""
+"目前，我们所有的输出都是使用`println!`宏写入终端的。在大多数终端中，输出分为"
+"两种类型：_标准输出_（`stdout`），用于显示一般信息；_标准错误_（`stderr`），"
+"用于显示错误信息。这种区分使得用户可以选择将程序的成功输出保存到文件中，同时"
+"仍然可以将错误信息打印到屏幕上。"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:14
+msgid ""
+"The `println!` macro is only capable of printing to standard output, so we "
+"have to use something else to print to standard error."
+msgstr ""
+"`println!`宏只能输出到标准输出，因此我们必须使用其他方式来将信息输出到标准错"
+"误流中。"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:17
+msgid "Checking Where Errors Are Written"
+msgstr "检查错误所在的位置"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:19
+msgid ""
+"First, let’s observe how the content printed by `minigrep` is currently "
+"being written to standard output, including any error messages we want to "
+"write to standard error instead. We’ll do that by redirecting the standard "
+"output stream to a file while intentionally causing an error. We won’t "
+"redirect the standard error stream, so any content sent to standard error "
+"will continue to display on the screen."
+msgstr ""
+"首先，让我们观察 `minigrep` 输出的内容是如何被写入标准输出流的，同时记录下我"
+"们想写入标准错误流的任何错误信息。我们可以通过将标准输出流重定向到文件来实现"
+"这一点，同时故意引发一个错误。不过，我们不会将标准错误流重定向，因此任何发送"
+"到标准错误流的内容仍然会显示在屏幕上。"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:26
+msgid ""
+"Command line programs are expected to send error messages to the standard "
+"error stream so that we can still see error messages on the screen even if "
+"we redirect the standard output stream to a file. Our program is not "
+"currently well behaved: We’re about to see that it saves the error message "
+"output to a file instead!"
+msgstr ""
+"命令行程序应该将错误信息发送到标准错误流，这样即使我们将标准输出流重定向到文"
+"件，我们仍然可以在屏幕上看到错误信息。不过，我们的程序目前表现不佳：我们即将"
+"发现它实际上是将错误信息输出保存到文件中了！"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:32
+msgid ""
+"To demonstrate this behavior, we’ll run the program with `>` and the file "
+"path, _output.txt_, that we want to redirect the standard output stream to. "
+"We won’t pass any arguments, which should cause an error:"
+msgstr ""
+"为了演示这种行为，我们将运行程序，并使用 `>` 以及我们想要将标准输出流重定向到"
+"的文件路径 output.txt_。我们不会传递任何参数，这应该会导致一个错误："
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:40
+msgid ""
+"The `>` syntax tells the shell to write the contents of standard output to "
+"_output.txt_ instead of the screen. We didn’t see the error message we were "
+"expecting printed to the screen, so that means it must have ended up in the "
+"file. This is what _output.txt_ contains:"
+msgstr ""
+"`>`语法告诉shell将标准输出内容写入到output.txt_文件中，而不是屏幕。我们没有看"
+"到预期的错误信息被显示到屏幕上，这意味着错误信息一定被存储在了文件中。下面就"
+"是output.txt_文件的内容："
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:49
+msgid ""
+"Yup, our error message is being printed to standard output. It’s much more "
+"useful for error messages like this to be printed to standard error so that "
+"only data from a successful run ends up in the file. We’ll change that."
+msgstr ""
+"是的，我们的错误信息被打印到标准输出上。对于这类错误信息来说，将其打印到标准"
+"错误输出会更实用，这样只有成功运行的数据才会被保存到文件中。我们会进行修改。"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:53
+msgid "Printing Errors to Standard Error"
+msgstr "将打印错误输出到标准错误日志中"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:55
+msgid ""
+"We’ll use the code in Listing 12-24 to change how error messages are "
+"printed. Because of the refactoring we did earlier in this chapter, all the "
+"code that prints error messages is in one function, `main`. The standard "
+"library provides the `eprintln!` macro that prints to the standard error "
+"stream, so let’s change the two places we were calling `println!` to print "
+"errors to use `eprintln!` instead."
+msgstr ""
+"我们将使用清单12-24中的代码来修改错误信息的显示方式。由于本章前面进行的重构，"
+"所有用于显示错误信息的代码都集中在一个函数中，即 `main` 函数。标准库提供了 "
+"`eprintln!` 宏，用于将错误信息输出到标准错误流中。因此，我们将调用 `println!"
+"` 的两个地方改为使用 `eprintln!` 来显示错误信息。"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:76
+msgid "\"Problem parsing arguments: {err}\""
+msgstr "“Problem parsing arguments: {err}”"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:81
+msgid "\"Application error: {e}\""
+msgstr "”Application error: {e}“"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:95
+msgid "\"not enough arguments\""
+msgstr "参数不足"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:101
+msgid "\"IGNORE_CASE\""
+msgstr "\"IGNORE_CASE\""
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:121
+msgid "\"{line}\""
+msgstr "”{line}“"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:130
+msgid ""
+"Let’s now run the program again in the same way, without any arguments and "
+"redirecting standard output with `>`:"
+msgstr ""
+"现在，让我们以同样的方式再次运行该程序，不要提供任何参数，并通过 `>` 将标准输"
+"出重定向："
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:138
+msgid ""
+"Now we see the error onscreen and _output.txt_ contains nothing, which is "
+"the behavior we expect of command line programs."
+msgstr ""
+"现在我们在屏幕上看到了错误，而`_output.txt_`文件中什么都没有，这正是我们对命"
+"令行程序所期望的行为。"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:141
+msgid ""
+"Let’s run the program again with arguments that don’t cause an error but "
+"still redirect standard output to a file, like so:"
+msgstr ""
+"让我们再次运行这个程序，这次使用不会导致错误的参数，同时仍然将标准输出重定向"
+"到文件中，如下所示："
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:148
+msgid ""
+"We won’t see any output to the terminal, and _output.txt_ will contain our "
+"results:"
+msgstr "我们将不会在终端看到任何输出，而`_output.txt_`文件将包含我们的结果："
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:151
+msgid "<span class=\"filename\">Filename: output.txt</span>"
+msgstr "<span class=\"filename\">文件名: output.txt</span>"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:158
+msgid ""
+"This demonstrates that we’re now using standard output for successful output "
+"and standard error for error output as appropriate."
+msgstr ""
+"这表明，我们现在使用标准输出来处理成功的结果，而适当使用标准错误来处理错误信"
+"息。"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:161
+msgid "Summary"
+msgstr "摘要"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:163
+msgid ""
+"This chapter recapped some of the major concepts you’ve learned so far and "
+"covered how to perform common I/O operations in Rust. By using command line "
+"arguments, files, environment variables, and the `eprintln!` macro for "
+"printing errors, you’re now prepared to write command line applications. "
+"Combined with the concepts in previous chapters, your code will be well "
+"organized, store data effectively in the appropriate data structures, handle "
+"errors nicely, and be well tested."
+msgstr ""
+"本章回顾了您迄今为止学习的一些重要概念，并介绍了如何在Rust中执行常见的I/O操"
+"作。通过使用命令行参数、文件、环境变量以及`eprintln!`宏来打印错误信息，您现在"
+"已经准备好编写命令行应用程序了。结合前几章中的概念，您的代码将能够很好地组"
+"织，数据将有效地存储在适当的数据结构中，错误处理也会更加完善，同时代码也会经"
+"过充分的测试。"
+
+#: src/ch12-06-writing-to-stderr-instead-of-stdout.md:171
+msgid ""
+"Next, we’ll explore some Rust features that were influenced by functional "
+"languages: closures and iterators."
+msgstr "接下来，我们将探讨一些受到函数式语言影响的Rust特性：闭包和迭代器。"
