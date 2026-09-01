@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -238,40 +238,40 @@ msgid ""
 "number being in range, like so:"
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:166
+#: src/ch09-03-to-panic-or-not-to-panic.md:167
 msgid "\"Guess the number!\""
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:171
-#: src/ch09-03-to-panic-or-not-to-panic.md:192
+#: src/ch09-03-to-panic-or-not-to-panic.md:172
+#: src/ch09-03-to-panic-or-not-to-panic.md:193
 msgid "// --snip--\n"
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:173
+#: src/ch09-03-to-panic-or-not-to-panic.md:174
 msgid "\"Please input your guess.\""
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:179
+#: src/ch09-03-to-panic-or-not-to-panic.md:180
 msgid "\"Failed to read line\""
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:187
+#: src/ch09-03-to-panic-or-not-to-panic.md:188
 msgid "\"The secret number will be between 1 and 100.\""
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:193
+#: src/ch09-03-to-panic-or-not-to-panic.md:194
 msgid "\"Too small!\""
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:194
+#: src/ch09-03-to-panic-or-not-to-panic.md:195
 msgid "\"Too big!\""
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:196
+#: src/ch09-03-to-panic-or-not-to-panic.md:197
 msgid "\"You win!\""
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:206
+#: src/ch09-03-to-panic-or-not-to-panic.md:207
 msgid ""
 "The `if` expression checks whether our value is out of range, tells the user "
 "about the problem, and calls `continue` to start the next iteration of the "
@@ -280,7 +280,7 @@ msgid ""
 "`guess` is between 1 and 100."
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:212
+#: src/ch09-03-to-panic-or-not-to-panic.md:213
 msgid ""
 "However, this is not an ideal solution: If it were absolutely critical that "
 "the program only operated on values between 1 and 100, and it had many "
@@ -288,7 +288,7 @@ msgid ""
 "would be tedious (and might impact performance)."
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:217
+#: src/ch09-03-to-panic-or-not-to-panic.md:218
 msgid ""
 "Instead, we can make a new type in a dedicated module and put the "
 "validations in a function to create an instance of the type rather than "
@@ -299,11 +299,11 @@ msgid ""
 "1 and 100."
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:234
+#: src/ch09-03-to-panic-or-not-to-panic.md:235
 msgid "\"Guess value must be between 1 and 100, got {value}.\""
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:248
+#: src/ch09-03-to-panic-or-not-to-panic.md:249
 msgid ""
 "Note that this code in _src/guessing_game.rs_ depends on adding a module "
 "declaration `mod guessing_game;` in _src/lib.rs_ that we haven’t shown here. "
@@ -312,7 +312,7 @@ msgid ""
 "stored."
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:254
+#: src/ch09-03-to-panic-or-not-to-panic.md:255
 msgid ""
 "Then, we implement an associated function named `new` on `Guess` that "
 "creates instances of `Guess` values. The `new` function is defined to have "
@@ -329,7 +329,7 @@ msgid ""
 "with its `value` field set to the `value` parameter and return the `Guess`."
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:268
+#: src/ch09-03-to-panic-or-not-to-panic.md:269
 msgid ""
 "Next, we implement a method named `value` that borrows `self`, doesn’t have "
 "any other parameters, and returns an `i32`. This kind of method is sometimes "
@@ -343,7 +343,7 @@ msgid ""
 "the conditions in the `Guess::new` function."
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:279
+#: src/ch09-03-to-panic-or-not-to-panic.md:280
 msgid ""
 "A function that has a parameter or returns only numbers between 1 and 100 "
 "could then declare in its signature that it takes or returns a `Guess` "
@@ -351,11 +351,11 @@ msgid ""
 "body."
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:283
+#: src/ch09-03-to-panic-or-not-to-panic.md:284
 msgid "Summary"
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:285
+#: src/ch09-03-to-panic-or-not-to-panic.md:286
 msgid ""
 "Rust’s error-handling features are designed to help you write more robust "
 "code. The `panic!` macro signals that your program is in a state it can’t "
@@ -368,7 +368,7 @@ msgid ""
 "of inevitable problems."
 msgstr ""
 
-#: src/ch09-03-to-panic-or-not-to-panic.md:294
+#: src/ch09-03-to-panic-or-not-to-panic.md:295
 msgid ""
 "Now that you’ve seen useful ways that the standard library uses generics "
 "with the `Option` and `Result` enums, we’ll talk about how generics work and "

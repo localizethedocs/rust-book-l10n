@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -329,31 +329,32 @@ msgstr ""
 
 #: src/ch03-02-data-types.md:135
 msgid ""
-"Wrap in all modes with the `wrapping_*` methods, such as `wrapping_add`."
+"Wrap in all compilation modes with the `wrapping_*` methods, such as "
+"`wrapping_add`."
 msgstr ""
 
-#: src/ch03-02-data-types.md:136
+#: src/ch03-02-data-types.md:137
 msgid ""
 "Return the `None` value if there is overflow with the `checked_*` methods."
 msgstr ""
 
-#: src/ch03-02-data-types.md:137
+#: src/ch03-02-data-types.md:138
 msgid ""
 "Return the value and a Boolean indicating whether there was overflow with "
 "the `overflowing_*` methods."
 msgstr ""
 
-#: src/ch03-02-data-types.md:139
+#: src/ch03-02-data-types.md:140
 msgid ""
 "Saturate at the value’s minimum or maximum values with the `saturating_*` "
 "methods."
 msgstr ""
 
-#: src/ch03-02-data-types.md:142
+#: src/ch03-02-data-types.md:143
 msgid "Floating-Point Types"
 msgstr ""
 
-#: src/ch03-02-data-types.md:144
+#: src/ch03-02-data-types.md:145
 msgid ""
 "Rust also has two primitive types for _floating-point numbers_, which are "
 "numbers with decimal points. Rust’s floating-point types are `f32` and "
@@ -362,36 +363,36 @@ msgid ""
 "capable of more precision. All floating-point types are signed."
 msgstr ""
 
-#: src/ch03-02-data-types.md:150
+#: src/ch03-02-data-types.md:151
 msgid "Here’s an example that shows floating-point numbers in action:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:152 src/ch03-02-data-types.md:171
-#: src/ch03-02-data-types.md:204 src/ch03-02-data-types.md:223
-#: src/ch03-02-data-types.md:260 src/ch03-02-data-types.md:272
-#: src/ch03-02-data-types.md:293 src/ch03-02-data-types.md:325
-#: src/ch03-02-data-types.md:384 src/ch03-02-data-types.md:405
+#: src/ch03-02-data-types.md:153 src/ch03-02-data-types.md:172
+#: src/ch03-02-data-types.md:205 src/ch03-02-data-types.md:224
+#: src/ch03-02-data-types.md:261 src/ch03-02-data-types.md:273
+#: src/ch03-02-data-types.md:294 src/ch03-02-data-types.md:326
+#: src/ch03-02-data-types.md:385 src/ch03-02-data-types.md:406
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
 msgstr ""
 
-#: src/ch03-02-data-types.md:156
+#: src/ch03-02-data-types.md:157
 msgid "// f64\n"
 msgstr ""
 
-#: src/ch03-02-data-types.md:158
+#: src/ch03-02-data-types.md:159
 msgid "// f32\n"
 msgstr ""
 
-#: src/ch03-02-data-types.md:162
+#: src/ch03-02-data-types.md:163
 msgid ""
 "Floating-point numbers are represented according to the IEEE-754 standard."
 msgstr ""
 
-#: src/ch03-02-data-types.md:164
+#: src/ch03-02-data-types.md:165
 msgid "Numeric Operations"
 msgstr ""
 
-#: src/ch03-02-data-types.md:166
+#: src/ch03-02-data-types.md:167
 msgid ""
 "Rust supports the basic mathematical operations you’d expect for all the "
 "number types: addition, subtraction, multiplication, division, and "
@@ -400,31 +401,31 @@ msgid ""
 "statement:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:175
+#: src/ch03-02-data-types.md:176
 msgid "// addition\n"
 msgstr ""
 
-#: src/ch03-02-data-types.md:178
+#: src/ch03-02-data-types.md:179
 msgid "// subtraction\n"
 msgstr ""
 
-#: src/ch03-02-data-types.md:181
+#: src/ch03-02-data-types.md:182
 msgid "// multiplication\n"
 msgstr ""
 
-#: src/ch03-02-data-types.md:184
+#: src/ch03-02-data-types.md:185
 msgid "// division\n"
 msgstr ""
 
-#: src/ch03-02-data-types.md:186
+#: src/ch03-02-data-types.md:187
 msgid "// Results in -1\n"
 msgstr ""
 
-#: src/ch03-02-data-types.md:188
+#: src/ch03-02-data-types.md:189
 msgid "// remainder\n"
 msgstr ""
 
-#: src/ch03-02-data-types.md:193
+#: src/ch03-02-data-types.md:194
 msgid ""
 "Each expression in these statements uses a mathematical operator and "
 "evaluates to a single value, which is then bound to a variable. [Appendix B]"
@@ -432,51 +433,51 @@ msgid ""
 "that Rust provides."
 msgstr ""
 
-#: src/ch03-02-data-types.md:198
+#: src/ch03-02-data-types.md:199
 msgid "The Boolean Type"
 msgstr ""
 
-#: src/ch03-02-data-types.md:200
+#: src/ch03-02-data-types.md:201
 msgid ""
 "As in most other programming languages, a Boolean type in Rust has two "
 "possible values: `true` and `false`. Booleans are one byte in size. The "
 "Boolean type in Rust is specified using `bool`. For example:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:210 src/ch03-02-data-types.md:228
+#: src/ch03-02-data-types.md:211 src/ch03-02-data-types.md:229
 msgid "// with explicit type annotation\n"
 msgstr ""
 
-#: src/ch03-02-data-types.md:214
+#: src/ch03-02-data-types.md:215
 msgid ""
 "The main way to use Boolean values is through conditionals, such as an `if` "
 "expression. We’ll cover how `if` expressions work in Rust in the [“Control "
 "Flow”](ch03-05-control-flow.html#control-flow)<!-- ignore --> section."
 msgstr ""
 
-#: src/ch03-02-data-types.md:218
+#: src/ch03-02-data-types.md:219
 msgid "The Character Type"
 msgstr ""
 
-#: src/ch03-02-data-types.md:220
+#: src/ch03-02-data-types.md:221
 msgid ""
 "Rust’s `char` type is the language’s most primitive alphabetic type. Here "
 "are some examples of declaring `char` values:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:227
+#: src/ch03-02-data-types.md:228
 msgid "'z'"
 msgstr ""
 
-#: src/ch03-02-data-types.md:228
+#: src/ch03-02-data-types.md:229
 msgid "'ℤ'"
 msgstr ""
 
-#: src/ch03-02-data-types.md:229
+#: src/ch03-02-data-types.md:230
 msgid "'😻'"
 msgstr ""
 
-#: src/ch03-02-data-types.md:233
+#: src/ch03-02-data-types.md:234
 msgid ""
 "Note that we specify `char` literals with single quotation marks, as opposed "
 "to string literals, which use double quotation marks. Rust’s `char` type is "
@@ -491,28 +492,28 @@ msgid ""
 "html#storing-utf-8-encoded-text-with-strings)<!-- ignore --> in Chapter 8."
 msgstr ""
 
-#: src/ch03-02-data-types.md:244
+#: src/ch03-02-data-types.md:245
 msgid "Compound Types"
 msgstr ""
 
-#: src/ch03-02-data-types.md:246
+#: src/ch03-02-data-types.md:247
 msgid ""
 "_Compound types_ can group multiple values into one type. Rust has two "
 "primitive compound types: tuples and arrays."
 msgstr ""
 
-#: src/ch03-02-data-types.md:249
+#: src/ch03-02-data-types.md:250
 msgid "The Tuple Type"
 msgstr ""
 
-#: src/ch03-02-data-types.md:251
+#: src/ch03-02-data-types.md:252
 msgid ""
 "A _tuple_ is a general way of grouping together a number of values with a "
 "variety of types into one compound type. Tuples have a fixed length: Once "
 "declared, they cannot grow or shrink in size."
 msgstr ""
 
-#: src/ch03-02-data-types.md:255
+#: src/ch03-02-data-types.md:256
 msgid ""
 "We create a tuple by writing a comma-separated list of values inside "
 "parentheses. Each position in the tuple has a type, and the types of the "
@@ -520,18 +521,18 @@ msgid ""
 "optional type annotations in this example:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:268
+#: src/ch03-02-data-types.md:269
 msgid ""
 "The variable `tup` binds to the entire tuple because a tuple is considered a "
 "single compound element. To get the individual values out of a tuple, we can "
 "use pattern matching to destructure a tuple value, like this:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:280
+#: src/ch03-02-data-types.md:281
 msgid "\"The value of y is: {y}\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:284
+#: src/ch03-02-data-types.md:285
 msgid ""
 "This program first creates a tuple and binds it to the variable `tup`. It "
 "then uses a pattern with `let` to take `tup` and turn it into three separate "
@@ -540,20 +541,20 @@ msgid ""
 "value of `y`, which is `6.4`."
 msgstr ""
 
-#: src/ch03-02-data-types.md:290
+#: src/ch03-02-data-types.md:291
 msgid ""
 "We can also access a tuple element directly by using a period (`.`) followed "
 "by the index of the value we want to access. For example:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:307
+#: src/ch03-02-data-types.md:308
 msgid ""
 "This program creates the tuple `x` and then accesses each element of the "
 "tuple using their respective indices. As with most programming languages, "
 "the first index in a tuple is 0."
 msgstr ""
 
-#: src/ch03-02-data-types.md:311
+#: src/ch03-02-data-types.md:312
 msgid ""
 "The tuple without any values has a special name, _unit_. This value and its "
 "corresponding type are both written `()` and represent an empty value or an "
@@ -561,24 +562,24 @@ msgid ""
 "don’t return any other value."
 msgstr ""
 
-#: src/ch03-02-data-types.md:316
+#: src/ch03-02-data-types.md:317
 msgid "The Array Type"
 msgstr ""
 
-#: src/ch03-02-data-types.md:318
+#: src/ch03-02-data-types.md:319
 msgid ""
 "Another way to have a collection of multiple values is with an _array_. "
 "Unlike a tuple, every element of an array must have the same type. Unlike "
 "arrays in some other languages, arrays in Rust have a fixed length."
 msgstr ""
 
-#: src/ch03-02-data-types.md:322
+#: src/ch03-02-data-types.md:323
 msgid ""
 "We write the values in an array as a comma-separated list inside square "
 "brackets:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:333
+#: src/ch03-02-data-types.md:334
 msgid ""
 "Arrays are useful when you want your data allocated on the stack, the same "
 "as the other types we have seen so far, rather than the heap (we will "
@@ -592,7 +593,7 @@ msgid ""
 "html)<!-- ignore --> discusses vectors in more detail."
 msgstr ""
 
-#: src/ch03-02-data-types.md:343
+#: src/ch03-02-data-types.md:344
 msgid ""
 "However, arrays are more useful when you know the number of elements will "
 "not need to change. For example, if you were using the names of the month in "
@@ -600,130 +601,130 @@ msgid ""
 "know it will always contain 12 elements:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"January\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"February\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"March\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"April\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"May\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"June\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"July\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:350
+#: src/ch03-02-data-types.md:351
 msgid "\"August\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:350
+#: src/ch03-02-data-types.md:351
 msgid "\"September\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:350
+#: src/ch03-02-data-types.md:351
 msgid "\"October\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:350
+#: src/ch03-02-data-types.md:351
 msgid "\"November\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:350
+#: src/ch03-02-data-types.md:351
 msgid "\"December\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:353
+#: src/ch03-02-data-types.md:354
 msgid ""
 "You write an array’s type using square brackets with the type of each "
 "element, a semicolon, and then the number of elements in the array, like so:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:360
+#: src/ch03-02-data-types.md:361
 msgid ""
 "Here, `i32` is the type of each element. After the semicolon, the number `5` "
 "indicates the array contains five elements."
 msgstr ""
 
-#: src/ch03-02-data-types.md:363
+#: src/ch03-02-data-types.md:364
 msgid ""
 "You can also initialize an array to contain the same value for each element "
 "by specifying the initial value, followed by a semicolon, and then the "
 "length of the array in square brackets, as shown here:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:371
+#: src/ch03-02-data-types.md:372
 msgid ""
 "The array named `a` will contain `5` elements that will all be set to the "
 "value `3` initially. This is the same as writing `let a = [3, 3, 3, 3, 3];` "
 "but in a more concise way."
 msgstr ""
 
-#: src/ch03-02-data-types.md:376
+#: src/ch03-02-data-types.md:377
 msgid "<a id=\"accessing-array-elements\"></a>"
 msgstr ""
 
-#: src/ch03-02-data-types.md:378
+#: src/ch03-02-data-types.md:379
 msgid "Array Element Access"
 msgstr ""
 
-#: src/ch03-02-data-types.md:380
+#: src/ch03-02-data-types.md:381
 msgid ""
 "An array is a single chunk of memory of a known, fixed size that can be "
 "allocated on the stack. You can access elements of an array using indexing, "
 "like this:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:395
+#: src/ch03-02-data-types.md:396
 msgid ""
 "In this example, the variable named `first` will get the value `1` because "
 "that is the value at index `[0]` in the array. The variable named `second` "
 "will get the value `2` from index `[1]` in the array."
 msgstr ""
 
-#: src/ch03-02-data-types.md:399
+#: src/ch03-02-data-types.md:400
 msgid "Invalid Array Element Access"
 msgstr ""
 
-#: src/ch03-02-data-types.md:401
+#: src/ch03-02-data-types.md:402
 msgid ""
 "Let’s see what happens if you try to access an element of an array that is "
 "past the end of the array. Say you run this code, similar to the guessing "
 "game in Chapter 2, to get an array index from the user:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:413
+#: src/ch03-02-data-types.md:414
 msgid "\"Please enter an array index.\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:419
+#: src/ch03-02-data-types.md:420
 msgid "\"Failed to read line\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:424
+#: src/ch03-02-data-types.md:425
 msgid "\"Index entered was not a number\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:428
+#: src/ch03-02-data-types.md:429
 msgid "\"The value of the element at index {index} is: {element}\""
 msgstr ""
 
-#: src/ch03-02-data-types.md:432
+#: src/ch03-02-data-types.md:433
 msgid ""
 "This code compiles successfully. If you run this code using `cargo run` and "
 "enter `0`, `1`, `2`, `3`, or `4`, the program will print out the "
@@ -731,7 +732,7 @@ msgid ""
 "number past the end of the array, such as `10`, you’ll see output like this:"
 msgstr ""
 
-#: src/ch03-02-data-types.md:449
+#: src/ch03-02-data-types.md:450
 msgid ""
 "The program resulted in a runtime error at the point of using an invalid "
 "value in the indexing operation. The program exited with an error message "
@@ -743,7 +744,7 @@ msgid ""
 "a user will enter when they run the code later."
 msgstr ""
 
-#: src/ch03-02-data-types.md:458
+#: src/ch03-02-data-types.md:459
 msgid ""
 "This is an example of Rust’s memory safety principles in action. In many low-"
 "level languages, this kind of check is not done, and when you provide an "

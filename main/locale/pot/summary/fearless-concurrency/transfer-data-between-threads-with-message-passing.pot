@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -104,8 +104,8 @@ msgid ""
 msgstr ""
 
 #: src/ch16-02-message-passing.md:85 src/ch16-02-message-passing.md:119
-#: src/ch16-02-message-passing.md:185 src/ch16-02-message-passing.md:253
-#: src/ch16-02-message-passing.md:326
+#: src/ch16-02-message-passing.md:185 src/ch16-02-message-passing.md:251
+#: src/ch16-02-message-passing.md:324
 msgid "\"hi\""
 msgstr ""
 
@@ -135,7 +135,7 @@ msgid ""
 msgstr ""
 
 #: src/ch16-02-message-passing.md:124 src/ch16-02-message-passing.md:191
-#: src/ch16-02-message-passing.md:266 src/ch16-02-message-passing.md:353
+#: src/ch16-02-message-passing.md:264 src/ch16-02-message-passing.md:351
 msgid "\"Got: {received}\""
 msgstr ""
 
@@ -225,10 +225,6 @@ msgid ""
 "   |                 --- value moved here\n"
 "10 |         println!(\"val is {val}\");\n"
 "   |                           ^^^ value borrowed here after move\n"
-"   |\n"
-"   = note: this error originates in the macro `$crate::format_args_nl` which "
-"comes from the expansion of the macro `println` (in Nightly builds, run with "
-"-Z macro-backtrace for more info)\n"
 "\n"
 "For more information about this error, try `rustc --explain E0382`.\n"
 "error: could not compile `message-passing` (bin \"message-passing\") due to "
@@ -236,7 +232,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch16-02-message-passing.md:223
+#: src/ch16-02-message-passing.md:221
 msgid ""
 "Our concurrency mistake has caused a compile-time error. The `send` function "
 "takes ownership of its parameter, and when the value is moved the receiver "
@@ -244,40 +240,40 @@ msgid ""
 "after sending it; the ownership system checks that everything is okay."
 msgstr ""
 
-#: src/ch16-02-message-passing.md:230
+#: src/ch16-02-message-passing.md:228
 msgid "<a id=\"sending-multiple-values-and-seeing-the-receiver-waiting\"></a>"
 msgstr ""
 
-#: src/ch16-02-message-passing.md:232
+#: src/ch16-02-message-passing.md:230
 msgid "Sending Multiple Values"
 msgstr ""
 
-#: src/ch16-02-message-passing.md:234
+#: src/ch16-02-message-passing.md:232
 msgid ""
 "The code in Listing 16-8 compiled and ran, but it didn’t clearly show us "
 "that two separate threads were talking to each other over the channel."
 msgstr ""
 
-#: src/ch16-02-message-passing.md:237
+#: src/ch16-02-message-passing.md:235
 msgid ""
 "In Listing 16-10, we’ve made some modifications that will prove the code in "
 "Listing 16-8 is running concurrently: The spawned thread will now send "
 "multiple messages and pause for a second between each message."
 msgstr ""
 
-#: src/ch16-02-message-passing.md:254 src/ch16-02-message-passing.md:327
+#: src/ch16-02-message-passing.md:252 src/ch16-02-message-passing.md:325
 msgid "\"from\""
 msgstr ""
 
-#: src/ch16-02-message-passing.md:255 src/ch16-02-message-passing.md:328
+#: src/ch16-02-message-passing.md:253 src/ch16-02-message-passing.md:326
 msgid "\"the\""
 msgstr ""
 
-#: src/ch16-02-message-passing.md:256 src/ch16-02-message-passing.md:329
+#: src/ch16-02-message-passing.md:254 src/ch16-02-message-passing.md:327
 msgid "\"thread\""
 msgstr ""
 
-#: src/ch16-02-message-passing.md:273
+#: src/ch16-02-message-passing.md:271
 msgid ""
 "This time, the spawned thread has a vector of strings that we want to send "
 "to the main thread. We iterate over them, sending each individually, and "
@@ -285,35 +281,35 @@ msgid ""
 "value of one second."
 msgstr ""
 
-#: src/ch16-02-message-passing.md:278
+#: src/ch16-02-message-passing.md:276
 msgid ""
 "In the main thread, we’re not calling the `recv` function explicitly "
 "anymore: Instead, we’re treating `rx` as an iterator. For each value "
 "received, we’re printing it. When the channel is closed, iteration will end."
 msgstr ""
 
-#: src/ch16-02-message-passing.md:282
+#: src/ch16-02-message-passing.md:280
 msgid ""
 "When running the code in Listing 16-10, you should see the following output "
 "with a one-second pause in between each line:"
 msgstr ""
 
-#: src/ch16-02-message-passing.md:296
+#: src/ch16-02-message-passing.md:294
 msgid ""
 "Because we don’t have any code that pauses or delays in the `for` loop in "
 "the main thread, we can tell that the main thread is waiting to receive "
 "values from the spawned thread."
 msgstr ""
 
-#: src/ch16-02-message-passing.md:302
+#: src/ch16-02-message-passing.md:300
 msgid "<a id=\"creating-multiple-producers-by-cloning-the-transmitter\"></a>"
 msgstr ""
 
-#: src/ch16-02-message-passing.md:304
+#: src/ch16-02-message-passing.md:302
 msgid "Creating Multiple Producers"
 msgstr ""
 
-#: src/ch16-02-message-passing.md:306
+#: src/ch16-02-message-passing.md:304
 msgid ""
 "Earlier we mentioned that `mpsc` was an acronym for _multiple producer, "
 "single consumer_. Let’s put `mpsc` to use and expand the code in Listing "
@@ -321,27 +317,27 @@ msgid ""
 "We can do so by cloning the transmitter, as shown in Listing 16-11."
 msgstr ""
 
-#: src/ch16-02-message-passing.md:319 src/ch16-02-message-passing.md:356
+#: src/ch16-02-message-passing.md:317 src/ch16-02-message-passing.md:354
 msgid "// --snip--\n"
 msgstr ""
 
-#: src/ch16-02-message-passing.md:340
+#: src/ch16-02-message-passing.md:338
 msgid "\"more\""
 msgstr ""
 
-#: src/ch16-02-message-passing.md:341
+#: src/ch16-02-message-passing.md:339
 msgid "\"messages\""
 msgstr ""
 
-#: src/ch16-02-message-passing.md:342
+#: src/ch16-02-message-passing.md:340
 msgid "\"for\""
 msgstr ""
 
-#: src/ch16-02-message-passing.md:343
+#: src/ch16-02-message-passing.md:341
 msgid "\"you\""
 msgstr ""
 
-#: src/ch16-02-message-passing.md:362
+#: src/ch16-02-message-passing.md:360
 msgid ""
 "This time, before we create the first spawned thread, we call `clone` on the "
 "transmitter. This will give us a new transmitter we can pass to the first "
@@ -350,11 +346,11 @@ msgid ""
 "receiver."
 msgstr ""
 
-#: src/ch16-02-message-passing.md:367
+#: src/ch16-02-message-passing.md:365
 msgid "When you run the code, your output should look something like this:"
 msgstr ""
 
-#: src/ch16-02-message-passing.md:384
+#: src/ch16-02-message-passing.md:382
 msgid ""
 "You might see the values in another order, depending on your system. This is "
 "what makes concurrency interesting as well as difficult. If you experiment "
@@ -362,7 +358,7 @@ msgid ""
 "each run will be more nondeterministic and create different output each time."
 msgstr ""
 
-#: src/ch16-02-message-passing.md:389
+#: src/ch16-02-message-passing.md:387
 msgid ""
 "Now that we’ve looked at how channels work, let’s look at a different method "
 "of concurrency."

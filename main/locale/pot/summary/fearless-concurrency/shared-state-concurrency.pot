@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -172,8 +172,8 @@ msgid ""
 "`Mutex<T>` and how Rust helps us use it correctly."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:140 src/ch16-03-shared-state.md:227
-#: src/ch16-03-shared-state.md:328
+#: src/ch16-03-shared-state.md:140 src/ch16-03-shared-state.md:219
+#: src/ch16-03-shared-state.md:320
 msgid "\"Result: {}\""
 msgstr ""
 
@@ -220,15 +220,6 @@ msgid ""
 "...\n"
 "21 |     println!(\"Result: {}\", *counter.lock().unwrap());\n"
 "   |                             ^^^^^^^ value borrowed here after move\n"
-"   |\n"
-"help: consider moving the expression out of the loop so it is only moved "
-"once\n"
-"   |\n"
-" 8 ~     let mut value = counter.lock();\n"
-" 9 ~     for _ in 0..10 {\n"
-"10 |         let handle = thread::spawn(move || {\n"
-"11 ~             let mut num = value.unwrap();\n"
-"   |\n"
 "\n"
 "For more information about this error, try `rustc --explain E0382`.\n"
 "error: could not compile `shared-state` (bin \"shared-state\") due to 1 "
@@ -236,7 +227,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch16-03-shared-state.md:190
+#: src/ch16-03-shared-state.md:182
 msgid ""
 "The error message states that the `counter` value was moved in the previous "
 "iteration of the loop. Rust is telling us that we can’t move the ownership "
@@ -244,11 +235,11 @@ msgid ""
 "the multiple-ownership method we discussed in Chapter 15."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:195
+#: src/ch16-03-shared-state.md:187
 msgid "Multiple Ownership with Multiple Threads"
 msgstr ""
 
-#: src/ch16-03-shared-state.md:197
+#: src/ch16-03-shared-state.md:189
 msgid ""
 "In Chapter 15, we gave a value to multiple owners by using the smart pointer "
 "`Rc<T>` to create a reference-counted value. Let’s do the same here and see "
@@ -256,13 +247,13 @@ msgid ""
 "clone the `Rc<T>` before moving ownership to the thread."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:233
+#: src/ch16-03-shared-state.md:225
 msgid ""
 "Once again, we compile and get... different errors! The compiler is teaching "
 "us a lot:"
 msgstr ""
 
-#: src/ch16-03-shared-state.md:236
+#: src/ch16-03-shared-state.md:228
 msgid ""
 "```console\n"
 "$ cargo run\n"
@@ -293,8 +284,8 @@ msgid ""
 "11 |         let handle = thread::spawn(move || {\n"
 "   |                                    ^^^^^^^\n"
 "note: required by a bound in `spawn`\n"
-"  --> /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/thread/"
-"mod.rs:723:1\n"
+"  --> /rustc/2d8144b7880597b6e6d3dfd63a9a9efae3f533d3/library/std/src/thread/"
+"functions.rs:125:0\n"
 "\n"
 "For more information about this error, try `rustc --explain E0277`.\n"
 "error: could not compile `shared-state` (bin \"shared-state\") due to 1 "
@@ -302,7 +293,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch16-03-shared-state.md:267
+#: src/ch16-03-shared-state.md:259
 msgid ""
 "Wow, that error message is very wordy! Here’s the important part to focus "
 "on: `` `Rc<Mutex<i32>>` cannot be sent between threads safely ``. The "
@@ -312,7 +303,7 @@ msgid ""
 "threads are meant for use in concurrent situations."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:274
+#: src/ch16-03-shared-state.md:266
 msgid ""
 "Unfortunately, `Rc<T>` is not safe to share across threads. When `Rc<T>` "
 "manages the reference count, it adds to the count for each call to `clone` "
@@ -324,11 +315,11 @@ msgid ""
 "that makes changes to the reference count in a thread-safe way."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:283
+#: src/ch16-03-shared-state.md:275
 msgid "Atomic Reference Counting with `Arc<T>`"
 msgstr ""
 
-#: src/ch16-03-shared-state.md:285
+#: src/ch16-03-shared-state.md:277
 msgid ""
 "Fortunately, `Arc<T>` _is_ a type like `Rc<T>` that is safe to use in "
 "concurrent situations. The _a_ stands for _atomic_, meaning it’s an "
@@ -339,7 +330,7 @@ msgid ""
 "that atomics work like primitive types but are safe to share across threads."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:293
+#: src/ch16-03-shared-state.md:285
 msgid ""
 "You might then wonder why all primitive types aren’t atomic and why standard "
 "library types aren’t implemented to use `Arc<T>` by default. The reason is "
@@ -349,18 +340,18 @@ msgid ""
 "enforce the guarantees atomics provide."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:300
+#: src/ch16-03-shared-state.md:292
 msgid ""
 "Let’s return to our example: `Arc<T>` and `Rc<T>` have the same API, so we "
 "fix our program by changing the `use` line, the call to `new`, and the call "
 "to `clone`. The code in Listing 16-15 will finally compile and run."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:334
+#: src/ch16-03-shared-state.md:326
 msgid "This code will print the following:"
 msgstr ""
 
-#: src/ch16-03-shared-state.md:344
+#: src/ch16-03-shared-state.md:336
 msgid ""
 "We did it! We counted from 0 to 10, which may not seem very impressive, but "
 "it did teach us a lot about `Mutex<T>` and thread safety. You could also use "
@@ -370,7 +361,7 @@ msgid ""
 "`Mutex<T>` to have each thread update the final result with its part."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:351
+#: src/ch16-03-shared-state.md:343
 msgid ""
 "Note that if you are doing simple numerical operations, there are types "
 "simpler than `Mutex<T>` types provided by the [`std::sync::atomic` module of "
@@ -380,15 +371,15 @@ msgid ""
 "concentrate on how `Mutex<T>` works."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:359
+#: src/ch16-03-shared-state.md:351
 msgid "<a id=\"similarities-between-refcelltrct-and-mutextarct\"></a>"
 msgstr ""
 
-#: src/ch16-03-shared-state.md:361
+#: src/ch16-03-shared-state.md:353
 msgid "Comparing `RefCell<T>`/`Rc<T>` and `Mutex<T>`/`Arc<T>`"
 msgstr ""
 
-#: src/ch16-03-shared-state.md:363
+#: src/ch16-03-shared-state.md:355
 msgid ""
 "You might have noticed that `counter` is immutable but that we could get a "
 "mutable reference to the value inside it; this means `Mutex<T>` provides "
@@ -397,7 +388,7 @@ msgid ""
 "we use `Mutex<T>` to mutate contents inside an `Arc<T>`."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:369
+#: src/ch16-03-shared-state.md:361
 msgid ""
 "Another detail to note is that Rust can’t protect you from all kinds of "
 "logic errors when you use `Mutex<T>`. Recall from Chapter 15 that using "
@@ -412,7 +403,7 @@ msgid ""
 "`Mutex<T>` and `MutexGuard` offers useful information."
 msgstr ""
 
-#: src/ch16-03-shared-state.md:381
+#: src/ch16-03-shared-state.md:373
 msgid ""
 "We’ll round out this chapter by talking about the `Send` and `Sync` traits "
 "and how we can use them with custom types."

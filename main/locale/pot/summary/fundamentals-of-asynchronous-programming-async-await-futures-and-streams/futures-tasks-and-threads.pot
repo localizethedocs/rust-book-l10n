@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,12 +17,11 @@ msgstr ""
 
 #: src/ch17-06-futures-tasks-threads.md:3
 msgid ""
-"As we saw in [Chapter 16](http://localhost:3000/ch16-00-concurrency."
-"html)<!-- ignore -->, threads provide one approach to concurrency. We’ve "
-"seen another approach in this chapter: using async with futures and streams. "
-"If you’re wondering when to choose one method over the other, the answer is: "
-"it depends! And in many cases, the choice isn’t threads _or_ async but "
-"rather threads _and_ async."
+"As we saw in [Chapter 16](ch16-00-concurrency.html)<!-- ignore -->, threads "
+"provide one approach to concurrency. We’ve seen another approach in this "
+"chapter: using async with futures and streams. If you’re wondering when to "
+"choose one method over the other, the answer is: it depends! And in many "
+"cases, the choice isn’t threads _or_ async but rather threads _and_ async."
 msgstr ""
 
 #: src/ch17-06-futures-tasks-threads.md:9

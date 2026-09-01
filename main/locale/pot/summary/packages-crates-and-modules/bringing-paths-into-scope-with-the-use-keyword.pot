@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -62,8 +62,7 @@ msgid ""
 "```console\n"
 "$ cargo build\n"
 "   Compiling restaurant v0.1.0 (file:///projects/restaurant)\n"
-"error[E0433]: failed to resolve: use of unresolved module or unlinked crate "
-"`hosting`\n"
+"error[E0433]: cannot find module or crate `hosting` in this scope\n"
 "  --> src/lib.rs:11:9\n"
 "   |\n"
 "11 |         hosting::add_to_waitlist();\n"
@@ -82,7 +81,8 @@ msgid ""
 "7 | use crate::front_of_house::hosting;\n"
 "  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"
 "  |\n"
-"  = note: `#[warn(unused_imports)]` on by default\n"
+"  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by "
+"default\n"
 "\n"
 "For more information about this error, try `rustc --explain E0433`.\n"
 "warning: `restaurant` (lib) generated 1 warning\n"
@@ -150,10 +150,10 @@ msgstr ""
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:171
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:197
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:202
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:348
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:351
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:389
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:391
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:350
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:352
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:392
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:394
 msgid "// --snip--\n"
 msgstr ""
 
@@ -243,61 +243,61 @@ msgid ""
 "we added this line to _Cargo.toml_:"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:276
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:278
 msgid ""
 "```toml\n"
-"rand = \"0.8.5\"\n"
+"rand = \"0.10.1\"\n"
 "```"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:282
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:284
 msgid ""
 "Adding `rand` as a dependency in _Cargo.toml_ tells Cargo to download the "
 "`rand` package and any dependencies from [crates.io](https://crates.io/) and "
 "make `rand` available to our project."
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:286
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:288
 msgid ""
 "Then, to bring `rand` definitions into the scope of our package, we added a "
 "`use` line starting with the name of the crate, `rand`, and listed the items "
 "we wanted to bring into scope. Recall that in [“Generating a Random Number”]"
 "(ch02-00-guessing-game-tutorial.html#generating-a-random-number)<!-- ignore "
-"--> in Chapter 2, we brought the `Rng` trait into scope and called the "
-"`rand::thread_rng` function:"
+"--> in Chapter 2, we brought items in the `rand::prelude` module into scope "
+"and called the `rand::rng` function:"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:298
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:355
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:395
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:300
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:358
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:398
 msgid "\"Guess the number!\""
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:302
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:359
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:399
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:304
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:362
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:402
 msgid "\"The secret number is: {secret_number}\""
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:304
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:361
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:401
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:306
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:364
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:404
 msgid "\"Please input your guess.\""
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:310
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:367
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:407
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:312
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:370
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:410
 msgid "\"Failed to read line\""
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:312
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:369
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:411
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:314
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:372
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:414
 msgid "\"You guessed: {guess}\""
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:316
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:318
 msgid ""
 "Members of the Rust community have made many packages available at [crates."
 "io](https://crates.io/), and pulling any of them into your package involves "
@@ -305,7 +305,7 @@ msgid ""
 "`use` to bring items from their crates into scope."
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:321
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:323
 msgid ""
 "Note that the standard `std` library is also a crate that’s external to our "
 "package. Because the standard library is shipped with the Rust language, we "
@@ -314,21 +314,21 @@ msgid ""
 "example, with `HashMap` we would use this line:"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:331
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:333
 msgid ""
 "This is an absolute path starting with `std`, the name of the standard "
 "library crate."
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:336
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:338
 msgid "<a id=\"using-nested-paths-to-clean-up-large-use-lists\"></a>"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:338
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:340
 msgid "Using Nested Paths to Clean Up `use` Lists"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:340
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:342
 msgid ""
 "If we’re using multiple items defined in the same crate or same module, "
 "listing each item on its own line can take up a lot of vertical space in our "
@@ -336,22 +336,22 @@ msgid ""
 "in Listing 2-4 bring items from `std` into scope:"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:372
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:414
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:375
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:417
 msgid "\"Too small!\""
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:373
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:415
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:376
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:418
 msgid "\"Too big!\""
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:374
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:416
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:377
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:419
 msgid "\"You win!\""
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:381
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:384
 msgid ""
 "Instead, we can use nested paths to bring the same items into scope in one "
 "line. We do this by specifying the common part of the path, followed by two "
@@ -359,18 +359,18 @@ msgid ""
 "differ, as shown in Listing 7-18."
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:409
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:412
 msgid "\"Please type a number!\""
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:423
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:426
 msgid ""
 "In bigger programs, bringing many items into scope from the same crate or "
 "module using nested paths can reduce the number of separate `use` statements "
 "needed by a lot!"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:427
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:430
 msgid ""
 "We can use a nested path at any level in a path, which is useful when "
 "combining two `use` statements that share a subpath. For example, Listing "
@@ -378,32 +378,32 @@ msgid ""
 "one that brings `std::io::Write` into scope."
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:441
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:444
 msgid ""
 "The common part of these two paths is `std::io`, and that’s the complete "
 "first path. To merge these two paths into one `use` statement, we can use "
 "`self` in the nested path, as shown in Listing 7-20."
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:453
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:456
 msgid "This line brings `std::io` and `std::io::Write` into scope."
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:457
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:460
 msgid "<a id=\"the-glob-operator\"></a>"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:459
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:462
 msgid "Importing Items with the Glob Operator"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:461
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:464
 msgid ""
 "If we want to bring _all_ public items defined in a path into scope, we can "
 "specify that path followed by the `*` glob operator:"
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:468
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:471
 msgid ""
 "This `use` statement brings all public items defined in `std::collections` "
 "into the current scope. Be careful when using the glob operator! Glob can "
@@ -415,7 +415,7 @@ msgid ""
 "for example."
 msgstr ""
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:476
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:479
 msgid ""
 "The glob operator is often used when testing to bring everything under test "
 "into the `tests` module; we’ll talk about that in [“How to Write Tests”]"

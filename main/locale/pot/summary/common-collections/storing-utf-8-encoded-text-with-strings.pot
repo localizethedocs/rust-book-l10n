@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -124,59 +124,59 @@ msgid ""
 "encoded data in them, as shown in Listing 8-14."
 msgstr ""
 
-#: src/ch08-02-strings.md:108 src/ch08-02-strings.md:334
-#: src/ch08-02-strings.md:355
+#: src/ch08-02-strings.md:108 src/ch08-02-strings.md:338
+#: src/ch08-02-strings.md:359
 msgid "\"السلام عليكم\""
 msgstr ""
 
-#: src/ch08-02-strings.md:109 src/ch08-02-strings.md:335
-#: src/ch08-02-strings.md:356
+#: src/ch08-02-strings.md:109 src/ch08-02-strings.md:339
+#: src/ch08-02-strings.md:360
 msgid "\"Dobrý den\""
 msgstr ""
 
-#: src/ch08-02-strings.md:110 src/ch08-02-strings.md:336
-#: src/ch08-02-strings.md:357
+#: src/ch08-02-strings.md:110 src/ch08-02-strings.md:340
+#: src/ch08-02-strings.md:361
 msgid "\"Hello\""
 msgstr ""
 
-#: src/ch08-02-strings.md:111 src/ch08-02-strings.md:337
-#: src/ch08-02-strings.md:358
+#: src/ch08-02-strings.md:111 src/ch08-02-strings.md:341
+#: src/ch08-02-strings.md:362
 msgid "\"שלום\""
 msgstr ""
 
-#: src/ch08-02-strings.md:112 src/ch08-02-strings.md:338
-#: src/ch08-02-strings.md:359
+#: src/ch08-02-strings.md:112 src/ch08-02-strings.md:342
+#: src/ch08-02-strings.md:363
 msgid "\"नमस्ते\""
 msgstr ""
 
-#: src/ch08-02-strings.md:113 src/ch08-02-strings.md:339
-#: src/ch08-02-strings.md:360
+#: src/ch08-02-strings.md:113 src/ch08-02-strings.md:343
+#: src/ch08-02-strings.md:364
 msgid "\"こんにちは\""
 msgstr ""
 
-#: src/ch08-02-strings.md:114 src/ch08-02-strings.md:340
-#: src/ch08-02-strings.md:361
+#: src/ch08-02-strings.md:114 src/ch08-02-strings.md:344
+#: src/ch08-02-strings.md:365
 msgid "\"안녕하세요\""
 msgstr ""
 
-#: src/ch08-02-strings.md:115 src/ch08-02-strings.md:341
-#: src/ch08-02-strings.md:362
+#: src/ch08-02-strings.md:115 src/ch08-02-strings.md:345
+#: src/ch08-02-strings.md:366
 msgid "\"你好\""
 msgstr ""
 
-#: src/ch08-02-strings.md:116 src/ch08-02-strings.md:342
-#: src/ch08-02-strings.md:363
+#: src/ch08-02-strings.md:116 src/ch08-02-strings.md:346
+#: src/ch08-02-strings.md:367
 msgid "\"Olá\""
 msgstr ""
 
-#: src/ch08-02-strings.md:117 src/ch08-02-strings.md:343
-#: src/ch08-02-strings.md:364 src/ch08-02-strings.md:377
-#: src/ch08-02-strings.md:450
+#: src/ch08-02-strings.md:117 src/ch08-02-strings.md:347
+#: src/ch08-02-strings.md:368 src/ch08-02-strings.md:381
+#: src/ch08-02-strings.md:454
 msgid "\"Здравствуйте\""
 msgstr ""
 
-#: src/ch08-02-strings.md:118 src/ch08-02-strings.md:344
-#: src/ch08-02-strings.md:365
+#: src/ch08-02-strings.md:118 src/ch08-02-strings.md:348
+#: src/ch08-02-strings.md:369
 msgid "\"Hola\""
 msgstr ""
 
@@ -408,9 +408,15 @@ msgid ""
 "  = note: you can use `.chars().nth()` or `.bytes().nth()`\n"
 "          for more information, see chapter 8 in The Book: <https://doc.rust-"
 "lang.org/book/ch08-02-strings.html#indexing-into-strings>\n"
-"  = help: the following other types implement trait `SliceIndex<T>`:\n"
-"            `usize` implements `SliceIndex<ByteStr>`\n"
-"            `usize` implements `SliceIndex<[T]>`\n"
+"help: `usize` implements trait `SliceIndex<T>`\n"
+" --> /rustc/2d8144b7880597b6e6d3dfd63a9a9efae3f533d3/library/core/src/slice/"
+"index.rs:214:0\n"
+"  |\n"
+"  = note: `SliceIndex<[T]>`\n"
+" --> /rustc/2d8144b7880597b6e6d3dfd63a9a9efae3f533d3/library/core/src/bstr/"
+"traits.rs:197:0\n"
+"  |\n"
+"  = note: `SliceIndex<ByteStr>`\n"
 "  = note: required for `String` to implement `Index<{integer}>`\n"
 "\n"
 "For more information about this error, try `rustc --explain E0277`.\n"
@@ -419,24 +425,24 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch08-02-strings.md:324
+#: src/ch08-02-strings.md:328
 msgid ""
 "The error tells the story: Rust strings don’t support indexing. But why not? "
 "To answer that question, we need to discuss how Rust stores strings in "
 "memory."
 msgstr ""
 
-#: src/ch08-02-strings.md:327
+#: src/ch08-02-strings.md:331
 msgid "Internal Representation"
 msgstr ""
 
-#: src/ch08-02-strings.md:329
+#: src/ch08-02-strings.md:333
 msgid ""
 "A `String` is a wrapper over a `Vec<u8>`. Let’s look at some of our properly "
 "encoded UTF-8 example strings from Listing 8-14. First, this one:"
 msgstr ""
 
-#: src/ch08-02-strings.md:348
+#: src/ch08-02-strings.md:352
 msgid ""
 "In this case, `len` will be `4`, which means the vector storing the string "
 "`\"Hola\"` is 4 bytes long. Each of these letters takes 1 byte when encoded "
@@ -444,7 +450,7 @@ msgid ""
 "string begins with the capital Cyrillic letter _Ze_, not the number 3):"
 msgstr ""
 
-#: src/ch08-02-strings.md:369
+#: src/ch08-02-strings.md:373
 msgid ""
 "If you were asked how long the string is, you might say 12. In fact, Rust’s "
 "answer is 24: That’s the number of bytes it takes to encode “Здравствуйте” "
@@ -454,7 +460,7 @@ msgid ""
 "invalid Rust code:"
 msgstr ""
 
-#: src/ch08-02-strings.md:381
+#: src/ch08-02-strings.md:385
 msgid ""
 "You already know that `answer` will not be `З`, the first letter. When "
 "encoded in UTF-8, the first byte of `З` is `208` and the second is `151`, so "
@@ -467,42 +473,42 @@ msgid ""
 "`104`, not `h`."
 msgstr ""
 
-#: src/ch08-02-strings.md:390
+#: src/ch08-02-strings.md:394
 msgid ""
 "The answer, then, is that to avoid returning an unexpected value and causing "
 "bugs that might not be discovered immediately, Rust doesn’t compile this "
 "code at all and prevents misunderstandings early in the development process."
 msgstr ""
 
-#: src/ch08-02-strings.md:396
+#: src/ch08-02-strings.md:400
 msgid "<a id=\"bytes-and-scalar-values-and-grapheme-clusters-oh-my\"></a>"
 msgstr ""
 
-#: src/ch08-02-strings.md:398
+#: src/ch08-02-strings.md:402
 msgid "Bytes, Scalar Values, and Grapheme Clusters"
 msgstr ""
 
-#: src/ch08-02-strings.md:400
+#: src/ch08-02-strings.md:404
 msgid ""
 "Another point about UTF-8 is that there are actually three relevant ways to "
 "look at strings from Rust’s perspective: as bytes, scalar values, and "
 "grapheme clusters (the closest thing to what we would call _letters_)."
 msgstr ""
 
-#: src/ch08-02-strings.md:404
+#: src/ch08-02-strings.md:408
 msgid ""
 "If we look at the Hindi word “नमस्ते” written in the Devanagari script, it is "
 "stored as a vector of `u8` values that looks like this:"
 msgstr ""
 
-#: src/ch08-02-strings.md:412
+#: src/ch08-02-strings.md:416
 msgid ""
 "That’s 18 bytes and is how computers ultimately store this data. If we look "
 "at them as Unicode scalar values, which are what Rust’s `char` type is, "
 "those bytes look like this:"
 msgstr ""
 
-#: src/ch08-02-strings.md:420
+#: src/ch08-02-strings.md:424
 msgid ""
 "There are six `char` values here, but the fourth and sixth are not letters: "
 "They’re diacritics that don’t make sense on their own. Finally, if we look "
@@ -510,21 +516,21 @@ msgid ""
 "letters that make up the Hindi word:"
 msgstr ""
 
-#: src/ch08-02-strings.md:425
+#: src/ch08-02-strings.md:429
 msgid ""
 "```text\n"
 "[\"न\", \"म\", \"स्\", \"ते\"]\n"
 "```"
 msgstr ""
 
-#: src/ch08-02-strings.md:429
+#: src/ch08-02-strings.md:433
 msgid ""
 "Rust provides different ways of interpreting the raw string data that "
 "computers store so that each program can choose the interpretation it needs, "
 "no matter what human language the data is in."
 msgstr ""
 
-#: src/ch08-02-strings.md:433
+#: src/ch08-02-strings.md:437
 msgid ""
 "A final reason Rust doesn’t allow us to index into a `String` to get a "
 "character is that indexing operations are expected to always take constant "
@@ -533,11 +539,11 @@ msgid ""
 "beginning to the index to determine how many valid characters there were."
 msgstr ""
 
-#: src/ch08-02-strings.md:439
+#: src/ch08-02-strings.md:443
 msgid "Slicing Strings"
 msgstr ""
 
-#: src/ch08-02-strings.md:441
+#: src/ch08-02-strings.md:445
 msgid ""
 "Indexing into a string is often a bad idea because it’s not clear what the "
 "return type of the string-indexing operation should be: a byte value, a "
@@ -546,27 +552,27 @@ msgid ""
 "specific."
 msgstr ""
 
-#: src/ch08-02-strings.md:446
+#: src/ch08-02-strings.md:450
 msgid ""
 "Rather than indexing using `[]` with a single number, you can use `[]` with "
 "a range to create a string slice containing particular bytes:"
 msgstr ""
 
-#: src/ch08-02-strings.md:455
+#: src/ch08-02-strings.md:459
 msgid ""
 "Here, `s` will be a `&str` that contains the first 4 bytes of the string. "
 "Earlier, we mentioned that each of these characters was 2 bytes, which means "
 "`s` will be `Зд`."
 msgstr ""
 
-#: src/ch08-02-strings.md:459
+#: src/ch08-02-strings.md:463
 msgid ""
 "If we were to try to slice only part of a character’s bytes with something "
 "like `&hello[0..1]`, Rust would panic at runtime in the same way as if an "
 "invalid index were accessed in a vector:"
 msgstr ""
 
-#: src/ch08-02-strings.md:463
+#: src/ch08-02-strings.md:467
 msgid ""
 "```console\n"
 "$ cargo run\n"
@@ -574,29 +580,29 @@ msgid ""
 "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s\n"
 "     Running `target/debug/collections`\n"
 "\n"
-"thread 'main' panicked at src/main.rs:4:19:\n"
-"byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2) of "
-"`Здравствуйте`\n"
+"thread 'main' (6017738) panicked at src/main.rs:4:19:\n"
+"end byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2 of "
+"string)\n"
 "note: run with `RUST_BACKTRACE=1` environment variable to display a "
 "backtrace\n"
 "```"
 msgstr ""
 
-#: src/ch08-02-strings.md:474
+#: src/ch08-02-strings.md:478
 msgid ""
 "You should use caution when creating string slices with ranges, because "
 "doing so can crash your program."
 msgstr ""
 
-#: src/ch08-02-strings.md:479
+#: src/ch08-02-strings.md:483
 msgid "<a id=\"methods-for-iterating-over-strings\"></a>"
 msgstr ""
 
-#: src/ch08-02-strings.md:481
+#: src/ch08-02-strings.md:485
 msgid "Iterating Over Strings"
 msgstr ""
 
-#: src/ch08-02-strings.md:483
+#: src/ch08-02-strings.md:487
 msgid ""
 "The best way to operate on pieces of strings is to be explicit about whether "
 "you want characters or bytes. For individual Unicode scalar values, use the "
@@ -604,39 +610,39 @@ msgid ""
 "of type `char`, and you can iterate over the result to access each element:"
 msgstr ""
 
-#: src/ch08-02-strings.md:489 src/ch08-02-strings.md:505
+#: src/ch08-02-strings.md:493 src/ch08-02-strings.md:509
 msgid "\"Зд\""
 msgstr ""
 
-#: src/ch08-02-strings.md:490
+#: src/ch08-02-strings.md:494
 msgid "\"{c}\""
 msgstr ""
 
-#: src/ch08-02-strings.md:494
+#: src/ch08-02-strings.md:498
 msgid "This code will print the following:"
 msgstr ""
 
-#: src/ch08-02-strings.md:501
+#: src/ch08-02-strings.md:505
 msgid ""
 "Alternatively, the `bytes` method returns each raw byte, which might be "
 "appropriate for your domain:"
 msgstr ""
 
-#: src/ch08-02-strings.md:506
+#: src/ch08-02-strings.md:510
 msgid "\"{b}\""
 msgstr ""
 
-#: src/ch08-02-strings.md:510
+#: src/ch08-02-strings.md:514
 msgid "This code will print the 4 bytes that make up this string:"
 msgstr ""
 
-#: src/ch08-02-strings.md:519
+#: src/ch08-02-strings.md:523
 msgid ""
 "But be sure to remember that valid Unicode scalar values may be made up of "
 "more than 1 byte."
 msgstr ""
 
-#: src/ch08-02-strings.md:522
+#: src/ch08-02-strings.md:526
 msgid ""
 "Getting grapheme clusters from strings, as with the Devanagari script, is "
 "complex, so this functionality is not provided by the standard library. "
@@ -644,15 +650,15 @@ msgid ""
 "this is the functionality you need."
 msgstr ""
 
-#: src/ch08-02-strings.md:529
+#: src/ch08-02-strings.md:533
 msgid "<a id=\"strings-are-not-so-simple\"></a>"
 msgstr ""
 
-#: src/ch08-02-strings.md:531
+#: src/ch08-02-strings.md:535
 msgid "Handling the Complexities of Strings"
 msgstr ""
 
-#: src/ch08-02-strings.md:533
+#: src/ch08-02-strings.md:537
 msgid ""
 "To summarize, strings are complicated. Different programming languages make "
 "different choices about how to present this complexity to the programmer. "
@@ -664,7 +670,7 @@ msgid ""
 "characters later in your development life cycle."
 msgstr ""
 
-#: src/ch08-02-strings.md:542
+#: src/ch08-02-strings.md:546
 msgid ""
 "The good news is that the standard library offers a lot of functionality "
 "built off the `String` and `&str` types to help handle these complex "
@@ -673,6 +679,6 @@ msgid ""
 "substituting parts of a string with another string."
 msgstr ""
 
-#: src/ch08-02-strings.md:548
+#: src/ch08-02-strings.md:552
 msgid "Let’s switch to something a bit less complex: hash maps!"
 msgstr ""

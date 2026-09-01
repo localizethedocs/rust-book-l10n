@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -156,7 +156,7 @@ msgstr ""
 msgid "In the _add_one/src/lib.rs_ file, let’s add an `add_one` function:"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:139 src/ch14-03-cargo-workspaces.md:312
+#: src/ch14-03-cargo-workspaces.md:139 src/ch14-03-cargo-workspaces.md:314
 msgid "<span class=\"filename\">Filename: add_one/src/lib.rs</span>"
 msgstr ""
 
@@ -246,19 +246,19 @@ msgid ""
 "Cargo.toml_ file so that we can use the `rand` crate in the `add_one` crate:"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:233
+#: src/ch14-03-cargo-workspaces.md:235
 msgid "<span class=\"filename\">Filename: add_one/Cargo.toml</span>"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:235
+#: src/ch14-03-cargo-workspaces.md:237
 msgid ""
 "```toml\n"
 "[dependencies]\n"
-"rand = \"0.8.5\"\n"
+"rand = \"0.10.1\"\n"
 "```"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:240
+#: src/ch14-03-cargo-workspaces.md:242
 msgid ""
 "We can now add `use rand;` to the _add_one/src/lib.rs_ file, and building "
 "the whole workspace by running `cargo build` in the _add_ directory will "
@@ -266,14 +266,14 @@ msgid ""
 "aren’t referring to the `rand` we brought into scope:"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:251
+#: src/ch14-03-cargo-workspaces.md:253
 msgid ""
 "```console\n"
 "$ cargo build\n"
 "    Updating crates.io index\n"
-"  Downloaded rand v0.8.5\n"
+"  Downloaded rand v0.10.1\n"
 "   --snip--\n"
-"   Compiling rand v0.8.5\n"
+"   Compiling rand v0.10.1\n"
 "   Compiling add_one v0.1.0 (file:///projects/add/add_one)\n"
 "warning: unused import: `rand`\n"
 " --> add_one/src/lib.rs:1:5\n"
@@ -281,7 +281,8 @@ msgid ""
 "1 | use rand;\n"
 "  |     ^^^^\n"
 "  |\n"
-"  = note: `#[warn(unused_imports)]` on by default\n"
+"  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by "
+"default\n"
 "\n"
 "warning: `add_one` (lib) generated 1 warning (run `cargo fix --lib -p "
 "add_one` to apply 1 suggestion)\n"
@@ -290,7 +291,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:271
+#: src/ch14-03-cargo-workspaces.md:273
 msgid ""
 "The top-level _Cargo.lock_ now contains information about the dependency of "
 "`add_one` on `rand`. However, even though `rand` is used somewhere in the "
@@ -300,7 +301,7 @@ msgid ""
 "error:"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:283
+#: src/ch14-03-cargo-workspaces.md:285
 msgid ""
 "```console\n"
 "$ cargo build\n"
@@ -314,7 +315,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:294
+#: src/ch14-03-cargo-workspaces.md:296
 msgid ""
 "To fix this, edit the _Cargo.toml_ file for the `adder` package and indicate "
 "that `rand` is a dependency for it as well. Building the `adder` package "
@@ -326,31 +327,31 @@ msgid ""
 "compatible with each other."
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:303
+#: src/ch14-03-cargo-workspaces.md:305
 msgid ""
 "If crates in the workspace specify incompatible versions of the same "
 "dependency, Cargo will resolve each of them but will still try to resolve as "
 "few versions as possible."
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:307
+#: src/ch14-03-cargo-workspaces.md:309
 msgid "Adding a Test to a Workspace"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:309
+#: src/ch14-03-cargo-workspaces.md:311
 msgid ""
 "For another enhancement, let’s add a test of the `add_one::add_one` function "
 "within the `add_one` crate:"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:330
+#: src/ch14-03-cargo-workspaces.md:332
 msgid ""
 "Now run `cargo test` in the top-level _add_ directory. Running `cargo test` "
 "in a workspace structured like this one will run the tests for all the "
 "crates in the workspace:"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:341
+#: src/ch14-03-cargo-workspaces.md:343
 msgid ""
 "```console\n"
 "$ cargo test\n"
@@ -383,7 +384,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:366
+#: src/ch14-03-cargo-workspaces.md:368
 msgid ""
 "The first section of the output shows that the `it_works` test in the "
 "`add_one` crate passed. The next section shows that zero tests were found in "
@@ -391,20 +392,20 @@ msgid ""
 "tests were found in the `add_one` crate."
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:371
+#: src/ch14-03-cargo-workspaces.md:373
 msgid ""
 "We can also run tests for one particular crate in a workspace from the top-"
 "level directory by using the `-p` flag and specifying the name of the crate "
 "we want to test:"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:398
+#: src/ch14-03-cargo-workspaces.md:400
 msgid ""
 "This output shows `cargo test` only ran the tests for the `add_one` crate "
 "and didn’t run the `adder` crate tests."
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:401
+#: src/ch14-03-cargo-workspaces.md:403
 msgid ""
 "If you publish the crates in the workspace to [crates.io](https://crates."
 "io/)<!-- ignore -->, each crate in the workspace will need to be published "
@@ -413,13 +414,13 @@ msgid ""
 "want to publish."
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:407
+#: src/ch14-03-cargo-workspaces.md:409
 msgid ""
 "For additional practice, add an `add_two` crate to this workspace in a "
 "similar way as the `add_one` crate!"
 msgstr ""
 
-#: src/ch14-03-cargo-workspaces.md:410
+#: src/ch14-03-cargo-workspaces.md:412
 msgid ""
 "As your project grows, consider using a workspace: It enables you to work "
 "with smaller, easier-to-understand components than one big blob of code. "

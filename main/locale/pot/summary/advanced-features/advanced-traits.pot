@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -515,30 +515,30 @@ msgstr ""
 
 #: src/ch20-02-advanced-traits.md:633 src/ch20-02-advanced-traits.md:637
 #: src/ch20-02-advanced-traits.md:665 src/ch20-02-advanced-traits.md:669
-#: src/ch20-02-advanced-traits.md:733 src/ch20-02-advanced-traits.md:737
+#: src/ch20-02-advanced-traits.md:743 src/ch20-02-advanced-traits.md:747
 msgid "\"{}\""
 msgstr ""
 
 #: src/ch20-02-advanced-traits.md:633 src/ch20-02-advanced-traits.md:637
 #: src/ch20-02-advanced-traits.md:665 src/ch20-02-advanced-traits.md:669
-#: src/ch20-02-advanced-traits.md:733 src/ch20-02-advanced-traits.md:737
+#: src/ch20-02-advanced-traits.md:743 src/ch20-02-advanced-traits.md:747
 msgid "\"*\""
 msgstr ""
 
 #: src/ch20-02-advanced-traits.md:634 src/ch20-02-advanced-traits.md:636
 #: src/ch20-02-advanced-traits.md:666 src/ch20-02-advanced-traits.md:668
-#: src/ch20-02-advanced-traits.md:734 src/ch20-02-advanced-traits.md:736
+#: src/ch20-02-advanced-traits.md:744 src/ch20-02-advanced-traits.md:746
 msgid "\"*{}*\""
 msgstr ""
 
 #: src/ch20-02-advanced-traits.md:634 src/ch20-02-advanced-traits.md:636
 #: src/ch20-02-advanced-traits.md:666 src/ch20-02-advanced-traits.md:668
-#: src/ch20-02-advanced-traits.md:734 src/ch20-02-advanced-traits.md:736
+#: src/ch20-02-advanced-traits.md:744 src/ch20-02-advanced-traits.md:746
 msgid "\" \""
 msgstr ""
 
 #: src/ch20-02-advanced-traits.md:635 src/ch20-02-advanced-traits.md:667
-#: src/ch20-02-advanced-traits.md:735
+#: src/ch20-02-advanced-traits.md:745
 msgid "\"* {output} *\""
 msgstr ""
 
@@ -571,9 +571,13 @@ msgid ""
 "  --> src/main.rs:20:23\n"
 "   |\n"
 "20 | impl OutlinePrint for Point {}\n"
-"   |                       ^^^^^ the trait `std::fmt::Display` is not "
-"implemented for `Point`\n"
+"   |                       ^^^^^ unsatisfied trait bound\n"
 "   |\n"
+"help: the trait `std::fmt::Display` is not implemented for `Point`\n"
+"  --> src/main.rs:15:1\n"
+"   |\n"
+"15 | struct Point {\n"
+"   | ^^^^^^^^^^^^\n"
 "note: required by a bound in `OutlinePrint`\n"
 "  --> src/main.rs:3:21\n"
 "   |\n"
@@ -585,9 +589,13 @@ msgid ""
 "  --> src/main.rs:24:7\n"
 "   |\n"
 "24 |     p.outline_print();\n"
-"   |       ^^^^^^^^^^^^^ the trait `std::fmt::Display` is not implemented "
-"for `Point`\n"
+"   |       ^^^^^^^^^^^^^ unsatisfied trait bound\n"
 "   |\n"
+"help: the trait `std::fmt::Display` is not implemented for `Point`\n"
+"  --> src/main.rs:15:1\n"
+"   |\n"
+"15 | struct Point {\n"
+"   | ^^^^^^^^^^^^\n"
 "note: required by a bound in `OutlinePrint::outline_print`\n"
 "  --> src/main.rs:3:21\n"
 "   |\n"
@@ -603,35 +611,35 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:723
+#: src/ch20-02-advanced-traits.md:733
 msgid ""
 "To fix this, we implement `Display` on `Point` and satisfy the constraint "
 "that `OutlinePrint` requires, like so:"
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:752
+#: src/ch20-02-advanced-traits.md:762
 msgid "\"({}, {})\""
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:764
+#: src/ch20-02-advanced-traits.md:774
 msgid ""
 "Then, implementing the `OutlinePrint` trait on `Point` will compile "
 "successfully, and we can call `outline_print` on a `Point` instance to "
 "display it within an outline of asterisks."
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:770
+#: src/ch20-02-advanced-traits.md:780
 msgid ""
 "<a id=\"using-the-newtype-pattern-to-implement-external-traits-on-external-"
 "types\"></a> <a id=\"using-the-newtype-pattern-to-implement-external-"
 "traits\"></a>"
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:773
+#: src/ch20-02-advanced-traits.md:783
 msgid "Implementing External Traits with the Newtype Pattern"
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:775
+#: src/ch20-02-advanced-traits.md:785
 msgid ""
 "In the [“Implementing a Trait on a Type”](ch10-02-traits.html#implementing-a-"
 "trait-on-a-type)<!--\n"
@@ -650,7 +658,7 @@ msgid ""
 "time."
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:788
+#: src/ch20-02-advanced-traits.md:798
 msgid ""
 "As an example, let’s say we want to implement `Display` on `Vec<T>`, which "
 "the orphan rule prevents us from doing directly because the `Display` trait "
@@ -659,27 +667,27 @@ msgid ""
 "on `Wrapper` and use the `Vec<T>` value, as shown in Listing 20-24."
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:803
+#: src/ch20-02-advanced-traits.md:813
 msgid "\"[{}]\""
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:803
+#: src/ch20-02-advanced-traits.md:813
 msgid "\", \""
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:808
+#: src/ch20-02-advanced-traits.md:818
 msgid "\"hello\""
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:808
+#: src/ch20-02-advanced-traits.md:818
 msgid "\"world\""
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:809
+#: src/ch20-02-advanced-traits.md:819
 msgid "\"w = {w}\""
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:815
+#: src/ch20-02-advanced-traits.md:825
 msgid ""
 "The implementation of `Display` uses `self.0` to access the inner `Vec<T>` "
 "because `Wrapper` is a tuple struct and `Vec<T>` is the item at index 0 in "
@@ -687,7 +695,7 @@ msgid ""
 "`Wrapper`."
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:819
+#: src/ch20-02-advanced-traits.md:829
 msgid ""
 "The downside of using this technique is that `Wrapper` is a new type, so it "
 "doesn’t have the methods of the value it’s holding. We would have to "
@@ -703,7 +711,7 @@ msgid ""
 "behavior—we would have to implement just the methods we do want manually."
 msgstr ""
 
-#: src/ch20-02-advanced-traits.md:831
+#: src/ch20-02-advanced-traits.md:841
 msgid ""
 "This newtype pattern is also useful even when traits are not involved. Let’s "
 "switch focus and look at some advanced ways to interact with Rust’s type "

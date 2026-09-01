@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,11 +57,11 @@ msgstr ""
 #: src/ch21-02-multithreaded.md:746 src/ch21-02-multithreaded.md:836
 #: src/ch21-02-multithreaded.md:857 src/ch21-02-multithreaded.md:903
 #: src/ch21-02-multithreaded.md:924 src/ch21-02-multithreaded.md:932
-#: src/ch21-02-multithreaded.md:1013 src/ch21-02-multithreaded.md:1024
-#: src/ch21-02-multithreaded.md:1048 src/ch21-02-multithreaded.md:1056
-#: src/ch21-02-multithreaded.md:1066 src/ch21-02-multithreaded.md:1104
-#: src/ch21-02-multithreaded.md:1110 src/ch21-02-multithreaded.md:1143
-#: src/ch21-02-multithreaded.md:1232 src/ch21-02-multithreaded.md:1391
+#: src/ch21-02-multithreaded.md:1007 src/ch21-02-multithreaded.md:1018
+#: src/ch21-02-multithreaded.md:1042 src/ch21-02-multithreaded.md:1050
+#: src/ch21-02-multithreaded.md:1060 src/ch21-02-multithreaded.md:1098
+#: src/ch21-02-multithreaded.md:1104 src/ch21-02-multithreaded.md:1137
+#: src/ch21-02-multithreaded.md:1226 src/ch21-02-multithreaded.md:1385
 msgid "// --snip--\n"
 msgstr ""
 
@@ -308,7 +308,7 @@ msgid ""
 "```console\n"
 "$ cargo check\n"
 "    Checking hello v0.1.0 (file:///projects/hello)\n"
-"error[E0433]: failed to resolve: use of undeclared type `ThreadPool`\n"
+"error[E0433]: cannot find type `ThreadPool` in this scope\n"
 "  --> src/main.rs:11:16\n"
 "   |\n"
 "11 |     let pool = ThreadPool::new(4);\n"
@@ -353,13 +353,13 @@ msgid ""
 "```console\n"
 "$ cargo check\n"
 "    Checking hello v0.1.0 (file:///projects/hello)\n"
-"error[E0599]: no function or associated item named `new` found for struct "
-"`ThreadPool` in the current scope\n"
+"error[E0599]: no associated function or constant named `new` found for "
+"struct `ThreadPool` in the current scope\n"
 "  --> src/main.rs:12:28\n"
 "   |\n"
 "12 |     let pool = ThreadPool::new(4);\n"
-"   |                            ^^^ function or associated item not found in "
-"`ThreadPool`\n"
+"   |                            ^^^ associated function or constant not "
+"found in `ThreadPool`\n"
 "\n"
 "For more information about this error, try `rustc --explain E0599`.\n"
 "error: could not compile `hello` (bin \"hello\") due to 1 previous error\n"
@@ -577,8 +577,8 @@ msgstr ""
 
 #: src/ch21-02-multithreaded.md:625 src/ch21-02-multithreaded.md:728
 #: src/ch21-02-multithreaded.md:837 src/ch21-02-multithreaded.md:904
-#: src/ch21-02-multithreaded.md:1025 src/ch21-02-multithreaded.md:1111
-#: src/ch21-02-multithreaded.md:1195 src/ch21-02-multithreaded.md:1355
+#: src/ch21-02-multithreaded.md:1019 src/ch21-02-multithreaded.md:1105
+#: src/ch21-02-multithreaded.md:1189 src/ch21-02-multithreaded.md:1349
 msgid "/// Create a new ThreadPool.\n"
 msgstr ""
 
@@ -588,33 +588,33 @@ msgstr ""
 #: src/ch21-02-multithreaded.md:838 src/ch21-02-multithreaded.md:840
 #: src/ch21-02-multithreaded.md:842 src/ch21-02-multithreaded.md:905
 #: src/ch21-02-multithreaded.md:907 src/ch21-02-multithreaded.md:909
-#: src/ch21-02-multithreaded.md:1026 src/ch21-02-multithreaded.md:1028
-#: src/ch21-02-multithreaded.md:1030 src/ch21-02-multithreaded.md:1112
-#: src/ch21-02-multithreaded.md:1114 src/ch21-02-multithreaded.md:1116
-#: src/ch21-02-multithreaded.md:1196 src/ch21-02-multithreaded.md:1198
-#: src/ch21-02-multithreaded.md:1200 src/ch21-02-multithreaded.md:1356
-#: src/ch21-02-multithreaded.md:1358 src/ch21-02-multithreaded.md:1360
+#: src/ch21-02-multithreaded.md:1020 src/ch21-02-multithreaded.md:1022
+#: src/ch21-02-multithreaded.md:1024 src/ch21-02-multithreaded.md:1106
+#: src/ch21-02-multithreaded.md:1108 src/ch21-02-multithreaded.md:1110
+#: src/ch21-02-multithreaded.md:1190 src/ch21-02-multithreaded.md:1192
+#: src/ch21-02-multithreaded.md:1194 src/ch21-02-multithreaded.md:1350
+#: src/ch21-02-multithreaded.md:1352 src/ch21-02-multithreaded.md:1354
 msgid "///\n"
 msgstr ""
 
 #: src/ch21-02-multithreaded.md:627 src/ch21-02-multithreaded.md:730
 #: src/ch21-02-multithreaded.md:839 src/ch21-02-multithreaded.md:906
-#: src/ch21-02-multithreaded.md:1027 src/ch21-02-multithreaded.md:1113
-#: src/ch21-02-multithreaded.md:1197 src/ch21-02-multithreaded.md:1357
+#: src/ch21-02-multithreaded.md:1021 src/ch21-02-multithreaded.md:1107
+#: src/ch21-02-multithreaded.md:1191 src/ch21-02-multithreaded.md:1351
 msgid "/// The size is the number of threads in the pool.\n"
 msgstr ""
 
 #: src/ch21-02-multithreaded.md:629 src/ch21-02-multithreaded.md:732
 #: src/ch21-02-multithreaded.md:841 src/ch21-02-multithreaded.md:908
-#: src/ch21-02-multithreaded.md:1029 src/ch21-02-multithreaded.md:1115
-#: src/ch21-02-multithreaded.md:1199 src/ch21-02-multithreaded.md:1359
+#: src/ch21-02-multithreaded.md:1023 src/ch21-02-multithreaded.md:1109
+#: src/ch21-02-multithreaded.md:1193 src/ch21-02-multithreaded.md:1353
 msgid "/// # Panics\n"
 msgstr ""
 
 #: src/ch21-02-multithreaded.md:631 src/ch21-02-multithreaded.md:734
 #: src/ch21-02-multithreaded.md:843 src/ch21-02-multithreaded.md:910
-#: src/ch21-02-multithreaded.md:1031 src/ch21-02-multithreaded.md:1117
-#: src/ch21-02-multithreaded.md:1201 src/ch21-02-multithreaded.md:1361
+#: src/ch21-02-multithreaded.md:1025 src/ch21-02-multithreaded.md:1111
+#: src/ch21-02-multithreaded.md:1195 src/ch21-02-multithreaded.md:1355
 msgid "/// The `new` function will panic if the size is zero.\n"
 msgstr ""
 
@@ -882,20 +882,13 @@ msgid ""
 "47 |     fn new(id: usize, receiver: mpsc::Receiver<Job>) -> Worker {\n"
 "   |        --- in this method       ^^^^^^^^^^^^^^^^^^^ this parameter "
 "takes ownership of the value\n"
-"help: consider moving the expression out of the loop so it is only moved "
-"once\n"
-"   |\n"
-"25 ~         let mut value = Worker::new(id, receiver);\n"
-"26 ~         for id in 0..size {\n"
-"27 ~             workers.push(value);\n"
-"   |\n"
 "\n"
 "For more information about this error, try `rustc --explain E0382`.\n"
 "error: could not compile `hello` (lib) due to 1 previous error\n"
 "```"
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:989
+#: src/ch21-02-multithreaded.md:983
 msgid ""
 "The code is trying to pass `receiver` to multiple `Worker` instances. This "
 "won’t work, as you’ll recall from Chapter 16: The channel implementation "
@@ -906,14 +899,14 @@ msgid ""
 "gets processed once."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:997
+#: src/ch21-02-multithreaded.md:991
 msgid ""
 "Additionally, taking a job off the channel queue involves mutating the "
 "`receiver`, so the threads need a safe way to share and modify `receiver`; "
 "otherwise, we might get race conditions (as covered in Chapter 16)."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1001
+#: src/ch21-02-multithreaded.md:995
 msgid ""
 "Recall the thread-safe smart pointers discussed in Chapter 16: To share "
 "ownership across multiple threads and allow the threads to mutate the value, "
@@ -923,22 +916,22 @@ msgid ""
 "need to make."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1078
+#: src/ch21-02-multithreaded.md:1072
 msgid ""
 "In `ThreadPool::new`, we put the receiver in an `Arc` and a `Mutex`. For "
 "each new `Worker`, we clone the `Arc` to bump the reference count so that "
 "the `Worker` instances can share ownership of the receiver."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1082
+#: src/ch21-02-multithreaded.md:1076
 msgid "With these changes, the code compiles! We’re getting there!"
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1084
+#: src/ch21-02-multithreaded.md:1078
 msgid "Implementing the `execute` Method"
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1086
+#: src/ch21-02-multithreaded.md:1080
 msgid ""
 "Let’s finally implement the `execute` method on `ThreadPool`. We’ll also "
 "change `Job` from a struct to a type alias for a trait object that holds the "
@@ -948,7 +941,7 @@ msgid ""
 "long types shorter for ease of use. Look at Listing 21-19."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1164
+#: src/ch21-02-multithreaded.md:1158
 msgid ""
 "After creating a new `Job` instance using the closure we get in `execute`, "
 "we send that job down the sending end of the channel. We’re calling `unwrap` "
@@ -960,7 +953,7 @@ msgid ""
 "but the compiler doesn’t know that."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1173
+#: src/ch21-02-multithreaded.md:1167
 msgid ""
 "But we’re not quite done yet! In the `Worker`, our closure being passed to "
 "`thread::spawn` still only _references_ the receiving end of the channel. "
@@ -969,11 +962,11 @@ msgid ""
 "change shown in Listing 21-20 to `Worker::new`."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1241 src/ch21-02-multithreaded.md:1398
+#: src/ch21-02-multithreaded.md:1235 src/ch21-02-multithreaded.md:1392
 msgid "\"Worker {id} got a job; executing.\""
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1254
+#: src/ch21-02-multithreaded.md:1248
 msgid ""
 "Here, we first call `lock` on the `receiver` to acquire the mutex, and then "
 "we call `unwrap` to panic on any errors. Acquiring a lock might fail if the "
@@ -984,7 +977,7 @@ msgid ""
 "message that is meaningful to you."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1262
+#: src/ch21-02-multithreaded.md:1256
 msgid ""
 "If we get the lock on the mutex, we call `recv` to receive a `Job` from the "
 "channel. A final `unwrap` moves past any errors here as well, which might "
@@ -992,20 +985,20 @@ msgid ""
 "`send` method returns `Err` if the receiver shuts down."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1267
+#: src/ch21-02-multithreaded.md:1261
 msgid ""
 "The call to `recv` blocks, so if there is no job yet, the current thread "
 "will wait until a job becomes available. The `Mutex<T>` ensures that only "
 "one `Worker` thread at a time is trying to request a job."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1271
+#: src/ch21-02-multithreaded.md:1265
 msgid ""
 "Our thread pool is now in a working state! Give it a `cargo run` and make "
 "some requests:"
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1281
+#: src/ch21-02-multithreaded.md:1275
 msgid ""
 "```console\n"
 "$ cargo run\n"
@@ -1046,7 +1039,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1319
+#: src/ch21-02-multithreaded.md:1313
 msgid ""
 "Success! We now have a thread pool that executes connections asynchronously. "
 "There are never more than four threads created, so our system won’t get "
@@ -1055,7 +1048,7 @@ msgid ""
 "thread run them."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1325
+#: src/ch21-02-multithreaded.md:1319
 msgid ""
 "Note: If you open _/sleep_ in multiple browser windows simultaneously, they "
 "might load one at a time in five-second intervals. Some web browsers execute "
@@ -1063,7 +1056,7 @@ msgid ""
 "This limitation is not caused by our web server."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1330
+#: src/ch21-02-multithreaded.md:1324
 msgid ""
 "This is a good time to pause and consider how the code in Listings 21-18, "
 "21-19, and 21-20 would be different if we were using futures instead of a "
@@ -1072,14 +1065,14 @@ msgid ""
 "the same?"
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1335
+#: src/ch21-02-multithreaded.md:1329
 msgid ""
 "After learning about the `while let` loop in Chapter 17 and Chapter 19, you "
 "might be wondering why we didn’t write the `Worker` thread code as shown in "
 "Listing 21-21."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1411
+#: src/ch21-02-multithreaded.md:1405
 msgid ""
 "This code compiles and runs but doesn’t result in the desired threading "
 "behavior: A slow request will still cause other requests to wait to be "
@@ -1093,7 +1086,7 @@ msgid ""
 "`MutexGuard<T>`."
 msgstr ""
 
-#: src/ch21-02-multithreaded.md:1422
+#: src/ch21-02-multithreaded.md:1416
 msgid ""
 "The code in Listing 21-20 that uses `let job = receiver.lock().unwrap()."
 "recv().unwrap();` works because with `let`, any temporary values used in the "

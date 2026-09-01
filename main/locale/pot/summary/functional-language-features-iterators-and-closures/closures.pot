@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -628,6 +628,10 @@ msgid ""
 "18 |         sort_operations.push(value);\n"
 "   |                              ^^^^^ `value` is moved here\n"
 "   |\n"
+"help: `Fn` and `FnMut` closures require captured values to be able to be "
+"consumed multiple times, but `FnOnce` closures may consume them only once\n"
+"  --> /rustc/2d8144b7880597b6e6d3dfd63a9a9efae3f533d3/library/alloc/src/"
+"slice.rs:249:11\n"
 "help: consider cloning the value if the performance cost is acceptable\n"
 "   |\n"
 "18 |         sort_operations.push(value.clone());\n"
@@ -639,7 +643,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch13-01-closures.md:636
+#: src/ch13-01-closures.md:638
 msgid ""
 "The error points to the line in the closure body that moves `value` out of "
 "the environment. To fix this, we need to change the closure body so that it "
@@ -651,11 +655,11 @@ msgid ""
 "therefore be called more than once."
 msgstr ""
 
-#: src/ch13-01-closures.md:665
+#: src/ch13-01-closures.md:667
 msgid "\"{list:#?}, sorted in {num_sort_operations} operations\""
 msgstr ""
 
-#: src/ch13-01-closures.md:671
+#: src/ch13-01-closures.md:673
 msgid ""
 "The `Fn` traits are important when defining or using functions or types that "
 "make use of closures. In the next section, we’ll discuss iterators. Many "

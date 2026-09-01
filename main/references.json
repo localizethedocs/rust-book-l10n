@@ -37,9 +37,9 @@
     "branch" : "main",
     "commit" : 
     {
-      "date" : "2026-02-03 10:19:04 -0500",
-      "hash" : "05d114287b7d6f6c9253d5242540f00fbd6172ab",
-      "title" : "Temporarily remove the link to `Drop::drop`"
+      "date" : "2026-07-13 19:25:25 -0600",
+      "hash" : "917544888a55e4da7109bdba8c88c893c0da70f4",
+      "title" : "Merge pull request #4754 from n1teshy/fix-async-typo"
     }
   },
   "type" : "branch",

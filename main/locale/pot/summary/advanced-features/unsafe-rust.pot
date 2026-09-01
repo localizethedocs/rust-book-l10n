@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -773,7 +773,7 @@ msgid ""
 "```console\n"
 "$ cargo +nightly miri run\n"
 "   Compiling unsafe-example v0.1.0 (file:///projects/unsafe-example)\n"
-"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.17s\n"
 "     Running `file:///home/.rustup/toolchains/nightly/bin/cargo-miri runner "
 "target/miri/debug/unsafe-example`\n"
 "warning: integer-to-pointer cast\n"
@@ -794,12 +794,9 @@ msgid ""
 "you are not relying on `with_exposed_provenance` semantics\n"
 "  = help: alternatively, `MIRIFLAGS=-Zmiri-permissive-provenance` disables "
 "this warning\n"
-"  = note: BACKTRACE:\n"
-"  = note: inside `main` at src/main.rs:5:13: 5:32\n"
 "\n"
-"error: Undefined Behavior: pointer not dereferenceable: pointer must be "
-"dereferenceable for 40000 bytes, but got 0x1234[noalloc] which is a dangling "
-"pointer (it has no provenance)\n"
+"error: Undefined Behavior: constructing invalid value of type &mut [i32]: "
+"encountered a dangling reference (0x1234[noalloc] has no provenance)\n"
 " --> src/main.rs:7:35\n"
 "  |\n"
 "7 |     let values: &[i32] = unsafe { slice::from_raw_parts_mut(r, "
@@ -811,8 +808,6 @@ msgid ""
 "operation, and caused Undefined Behavior\n"
 "  = help: see https://doc.rust-lang.org/nightly/reference/behavior-"
 "considered-undefined.html for further information\n"
-"  = note: BACKTRACE:\n"
-"  = note: inside `main` at src/main.rs:7:35: 7:70\n"
 "\n"
 "note: some details are omitted, run with `MIRIFLAGS=-Zmiri-backtrace=full` "
 "for a verbose backtrace\n"
@@ -822,7 +817,7 @@ msgid ""
 "```"
 msgstr ""
 
-#: src/ch20-01-unsafe-rust.md:699
+#: src/ch20-01-unsafe-rust.md:695
 msgid ""
 "Miri correctly warns us that we’re casting an integer to a pointer, which "
 "might be a problem, but Miri can’t determine whether a problem exists "
@@ -833,7 +828,7 @@ msgid ""
 "even make recommendations about how to fix errors."
 msgstr ""
 
-#: src/ch20-01-unsafe-rust.md:707
+#: src/ch20-01-unsafe-rust.md:703
 msgid ""
 "Miri doesn’t catch everything you might get wrong when writing unsafe code. "
 "Miri is a dynamic analysis tool, so it only catches problems with code that "
@@ -843,7 +838,7 @@ msgid ""
 "be unsound."
 msgstr ""
 
-#: src/ch20-01-unsafe-rust.md:713
+#: src/ch20-01-unsafe-rust.md:709
 msgid ""
 "Put another way: If Miri _does_ catch a problem, you know there’s a bug, but "
 "just because Miri _doesn’t_ catch a bug doesn’t mean there isn’t a problem. "
@@ -851,21 +846,21 @@ msgid ""
 "code in this chapter and see what it says!"
 msgstr ""
 
-#: src/ch20-01-unsafe-rust.md:718
+#: src/ch20-01-unsafe-rust.md:714
 msgid ""
 "You can learn more about Miri at [its GitHub repository](https://github.com/"
 "rust-lang/miri)."
 msgstr ""
 
-#: src/ch20-01-unsafe-rust.md:722
+#: src/ch20-01-unsafe-rust.md:718
 msgid "<a id=\"when-to-use-unsafe-code\"></a>"
 msgstr ""
 
-#: src/ch20-01-unsafe-rust.md:724
+#: src/ch20-01-unsafe-rust.md:720
 msgid "Using Unsafe Code Correctly"
 msgstr ""
 
-#: src/ch20-01-unsafe-rust.md:726
+#: src/ch20-01-unsafe-rust.md:722
 msgid ""
 "Using `unsafe` to use one of the five superpowers just discussed isn’t wrong "
 "or even frowned upon, but it is trickier to get `unsafe` code correct "
@@ -876,7 +871,7 @@ msgid ""
 "confident that the code you have written upholds Rust’s rules."
 msgstr ""
 
-#: src/ch20-01-unsafe-rust.md:734
+#: src/ch20-01-unsafe-rust.md:730
 msgid ""
 "For a much deeper exploration of how to work effectively with unsafe Rust, "
 "read Rust’s official guide for `unsafe`, [The Rustonomicon](https://doc.rust-"

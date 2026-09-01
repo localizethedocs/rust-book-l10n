@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-09-01T13:47:23Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -270,36 +270,40 @@ msgid ""
 "$ cargo run\n"
 "   Compiling gui v0.1.0 (file:///projects/gui)\n"
 "error[E0277]: the trait bound `String: Draw` is not satisfied\n"
-" --> src/main.rs:5:26\n"
-"  |\n"
-"5 |         components: vec![Box::new(String::from(\"Hi\"))],\n"
-"  |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Draw` "
+"  --> src/main.rs:5:26\n"
+"   |\n"
+" 5 |         components: vec![Box::new(String::from(\"Hi\"))],\n"
+"   |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Draw` "
 "is not implemented for `String`\n"
-"  |\n"
-"  = help: the trait `Draw` is implemented for `Button`\n"
-"  = note: required for the cast from `Box<String>` to `Box<dyn Draw>`\n"
+"   |\n"
+"help: the trait `Draw` is implemented for `Button`\n"
+"  --> src/lib.rs:23:1\n"
+"   |\n"
+"23 | impl Draw for Button {\n"
+"   | ^^^^^^^^^^^^^^^^^^^^\n"
+"   = note: required for the cast from `Box<String>` to `Box<dyn Draw>`\n"
 "\n"
 "For more information about this error, try `rustc --explain E0277`.\n"
 "error: could not compile `gui` (bin \"gui\") due to 1 previous error\n"
 "```"
 msgstr ""
 
-#: src/ch18-02-trait-objects.md:355
+#: src/ch18-02-trait-objects.md:359
 msgid ""
 "This error lets us know that either we’re passing something to `Screen` that "
 "we didn’t mean to pass and so should pass a different type, or we should "
 "implement `Draw` on `String` so that `Screen` is able to call `draw` on it."
 msgstr ""
 
-#: src/ch18-02-trait-objects.md:361
+#: src/ch18-02-trait-objects.md:365
 msgid "<a id=\"trait-objects-perform-dynamic-dispatch\"></a>"
 msgstr ""
 
-#: src/ch18-02-trait-objects.md:363
+#: src/ch18-02-trait-objects.md:367
 msgid "Performing Dynamic Dispatch"
 msgstr ""
 
-#: src/ch18-02-trait-objects.md:365
+#: src/ch18-02-trait-objects.md:369
 msgid ""
 "Recall in [“Performance of Code Using Generics”](ch10-01-syntax."
 "html#performance-of-code-using-generics)<!-- ignore --> in Chapter 10 our "
@@ -314,7 +318,7 @@ msgid ""
 "method to call."
 msgstr ""
 
-#: src/ch18-02-trait-objects.md:376
+#: src/ch18-02-trait-objects.md:380
 msgid ""
 "When we use trait objects, Rust must use dynamic dispatch. The compiler "
 "doesn’t know all the types that might be used with the code that’s using "
