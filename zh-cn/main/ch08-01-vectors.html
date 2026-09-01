@@ -1,0 +1,404 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>使用向量存储值列表 - The Rust Programming Language</title>
+
+
+        <!-- Custom HTML head -->
+        <script type="text/javascript" src="ltd-provenance.js"></script>
+        <script type="text/javascript" src="ltd-current.js"></script>
+        <script type="text/javascript" src="../../ltd-config.js"></script>
+        <script type="text/javascript" src="../../ltd-flyout.js"></script>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris-d33b75bf.css">
+        <link rel="stylesheet" href="theme/2018-edition-4e126c62.css">
+        <link rel="stylesheet" href="theme/semantic-notes-9b5766c0.css">
+        <link rel="stylesheet" href="theme/listing-cab26221.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-70ba3c6a.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-9b676236.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Rust Programming Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h2 id="使用向量存储值列表"><a class="header" href="#使用向量存储值列表">使用向量存储值列表</a></h2>
+<p>我们首先要探讨的收集类型是 <code>Vec&lt;T&gt;</code>，也被称为向量。向量允许你在单一数据结构中存储多个值，这些值在内存中会相邻排列。向量只能存储相同类型的值。当你有一个项目列表时，比如文件中的文本行或购物篮中的商品价格，使用向量会非常方便。</p>
+<h3 id="创建新的向量"><a class="header" href="#创建新的向量">创建新的向量</a></h3>
+<p>要创建一个新的、空的向量，我们可以调用 <code>Vec::new</code> 函数，如清单 8-1 所示。</p>
+<figure class="listing" id="listing-8-1">
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let v: Vec&lt;i32&gt; = Vec::new();
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-8-1">Listing 8-1</a>: Creating a new, empty vector to hold values of type <code>i32</code></figcaption>
+</figure>
+<p>请注意，我们在这里添加了一个类型注解。由于我们没有向这个向量中插入任何值，Rust并不知道我们打算存储的是哪种类型的元素。这是一个重要的点。向量是使用泛型实现的；我们将在第10章中介绍如何将自己的类型与泛型一起使用。目前，只需知道标准库提供的 <code>Vec&lt;T&gt;</code> 类型可以存储任何类型的元素。当我们创建一个向量来保存特定类型的元素时，可以在尖括号内指定该类型。在 Listing 8-1 中，我们告诉 Rust， <code>v</code> 中的 <code>Vec&lt;T&gt;</code> 将存储 <code>i32</code> 类型的元素。</p>
+<p>通常情况下，你会创建一个带有初始值的 <code>Vec&lt;T&gt;</code>，Rust 会自动推断出你想要存储的值的类型，因此很少需要手动指定这种类型注释。Rust 提供了方便的 <code>vec!</code> 宏，它可以创建一个新向量，用来存储你提供的数值。列表 8-2 创建了一个新的 <code>Vec&lt;i32&gt;</code>，它存储了 <code>1</code>、 <code>2</code> 和 <code>3</code> 这些数值。整数类型被设置为 <code>i32</code>，因为这是默认的整数类型，正如我们在第 3 章的 <a href="ch03-02-data-types.html#data-types">“数据类型”</a><!-- ignore --> 部分所讨论的那样。</p>
+<figure class="listing" id="listing-8-2">
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let v = vec![1, 2, 3];
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-8-2">Listing 8-2</a>: Creating a new vector containing values</figcaption>
+</figure>
+<p>因为我们已经赋予了 <code>i32</code> 的初始值，所以 Rust 可以推断出 <code>v</code> 的类型就是 <code>Vec&lt;i32&gt;</code>，因此类型注释并不是必需的。接下来，我们将探讨如何修改向量。</p>
+<h3 id="更新向量"><a class="header" href="#更新向量">更新向量</a></h3>
+<p>要创建一个向量，然后向其中添加元素，我们可以使用 <code>push</code> 方法，如清单 8-3 所示。</p>
+<figure class="listing" id="listing-8-3">
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let mut v = Vec::new();
+
+    v.push(5);
+    v.push(6);
+    v.push(7);
+    v.push(8);
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-8-3">Listing 8-3</a>: Using the <code>push</code> method to add values to a vector</figcaption>
+</figure>
+<p>与任何变量一样，如果我们想要改变其值，就需要使用 <code>mut</code> 关键字来使其变为可变的，这一点在第3章中有详细讨论。我们放在其中的数字都是 <code>i32</code> 类型的，而 Rust 会根据数据自动推断出这一点，因此我们不需要 <code>Vec&lt;i32&gt;</code> 注释。</p>
+<h3 id="向量的读取元素"><a class="header" href="#向量的读取元素">向量的读取元素</a></h3>
+<p>引用存储在向量中的值有两种方式：通过索引或使用 <code>get</code> 方法。在以下示例中，我们为这些函数返回的值的类型添加了注释，以便更清晰地理解。</p>
+<p>列表8-4展示了两种访问向量中值的方法，包括索引语法以及 <code>get</code> 方法。</p>
+<figure class="listing" id="listing-8-4">
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let v = vec![1, 2, 3, 4, 5];
+
+    let third: &amp;i32 = &amp;v[2];
+    println!("The third element is {third}");
+
+    let third: Option&lt;&amp;i32&gt; = v.get(2);
+    match third {
+        Some(third) =&gt; println!("The third element is {third}"),
+        None =&gt; println!(“没有第三个元素。”),
+    }
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-8-4">Listing 8-4</a>: Using indexing syntax and using the <code>get</code> method to access an item in a vector</figcaption>
+</figure>
+<p>请注意这里的几个细节。我们使用 <code>2</code> 的索引值来获取第三个元素，因为向量的索引是从零开始的。使用 <code>&amp;</code> 和 <code>[]</code> 可以让我们引用索引值对应的元素。当我们使用 <code>get</code> 方法，并将索引作为参数传递时，我们得到一个 <code>Option&lt;&amp;T&gt;</code>，然后我们可以用它来调用 <code>match</code>。</p>
+<p>Rust提供了这两种方式来引用元素，这样你就可以选择当尝试使用超出现有元素范围的索引值时程序的行为。例如，让我们看看当有一个包含五个元素的向量时，分别使用这两种技术来访问索引为100的元素会发生什么，如清单8-5所示。</p>
+<figure class="listing" id="listing-8-5">
+<pre class="playground"><code class="language-rust should_panic panics edition2024"><span class="boring">fn main() {
+</span>    let v = vec![1, 2, 3, 4, 5];
+
+    let does_not_exist = &amp;v[100];
+    let does_not_exist = v.get(100);
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-8-5">Listing 8-5</a>: Attempting to access the element at index 100 in a vector containing five elements</figcaption>
+</figure>
+<p>当我们运行这段代码时，第一个 <code>[]</code> 方法会导致程序崩溃，因为它引用了一个不存在的元素。这种方法最适合在希望程序在尝试访问向量末尾之外的元素时崩溃的情况下使用。</p>
+<p>当<code>get</code>方法接收到超出向量范围的索引时，它会返回<code>None</code>，而不会引发恐慌。如果你在正常情况下偶尔需要访问超出向量范围的元素，就可以使用这种方法。此时，你的代码需要包含逻辑来处理这两种情况，如第6章所述。例如，这个索引可能是由用户输入的数字。如果他们不小心输入了一个过大的数字，导致程序得到<code>None</code>的值，你可以告诉用户当前向量中有多少个元素，并给他们另一个机会输入一个有效的数值。这样比因为输入错误而导致程序崩溃要更用户友好！</p>
+<p>当程序拥有有效的引用时，借用检查器会执行所有权和借用规则（详见第4章），以确保该引用以及对该向量内容的任何其他引用都保持有效。请记住，同一作用域中不能同时存在可变引用和不可变引用这一规则。这一规则在清单8-6中得到了体现：我们持有一个对向量中第一个元素的不可变引用，并试图向向量的末尾添加元素。如果我们之后在函数中再次引用该元素，那么这个程序将无法正常运行。</p>
+<figure class="listing" id="listing-8-6">
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">fn main() {
+</span>    let mut v = vec![1, 2, 3, 4, 5];
+
+    let first = &amp;v[0];
+
+    v.push(6);
+
+    println!("The first element is: {first}");
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-8-6">Listing 8-6</a>: Attempting to add an element to a vector while holding a reference to an item</figcaption>
+</figure>
+<p>编译这段代码会导致以下错误：</p>
+<pre><code class="language-console">$ cargo run
+   Compiling collections v0.1.0 (file:///projects/collections)
+error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable
+ --&gt; src/main.rs:6:5
+  |
+4 |     let first = &amp;v[0];
+  |                  - immutable borrow occurs here
+5 |
+6 |     v.push(6);
+  |     ^^^^^^^^^ mutable borrow occurs here
+7 |
+8 |     println!("The first element is: {first}");
+  |                                      ----- immutable borrow later used here
+
+For more information about this error, try `rustc --explain E0502`.
+error: could not compile `collections` (bin "collections") due to 1 previous error
+</code></pre>
+<p>清单8-6中的代码看起来应该可以正常运行：为什么对向量中第一个元素的引用需要关心向量末尾的变化呢？这个错误是由于向量的工作原理导致的：因为向量在内存中是将元素并排存放的，所以向向量末尾添加新元素时，可能需要分配新的内存，并将旧元素复制到新的内存空间中。如果当前存储向量的内存不足以容纳所有元素，那么对第一个元素的引用就会指向已释放的内存。而借用规则可以防止程序陷入这种状况。</p>
+<section class="note" aria-role="note">
+<p>注意：有关 <code>Vec&lt;T&gt;</code> 类型的实现细节，请参阅<a href="../nomicon/vec/vec.html">《Rustonomicon》</a>。</p>
+</section>
+<h3 id="遍历向量中的值"><a class="header" href="#遍历向量中的值">遍历向量中的值</a></h3>
+<p>要依次访问向量中的每个元素，我们需要遍历所有元素，而不是使用索引来逐一访问。清单8-7展示了如何使用<code>for</code>循环来获取向量中每个元素的不可变引用，并对其进行打印。</p>
+<figure class="listing" id="listing-8-7">
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let v = vec![100, 32, 57];
+    for i in &amp;v {
+        println!("{i}");
+    }
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-8-7">Listing 8-7</a>: Printing each element in a vector by iterating over the elements using a <code>for</code> loop</figcaption>
+</figure>
+<p>我们还可以遍历可变向量中的每个元素的可变引用，以便对所有元素进行更改。清单8-8中的循环会将 <code>50</code> 添加到每个元素上。</p>
+<figure class="listing" id="listing-8-8">
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let mut v = vec![100, 32, 57];
+    for i in &amp;mut v {
+        *i += 50;
+    }
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-8-8">Listing 8-8</a>: Iterating over mutable references to elements in a vector</figcaption>
+</figure>
+<p>要更改可变引用所指向的值，我们必须使用<code>*</code>去解除引用操作，才能访问<code>i</code>中的值，然后再使用<code>+=</code>操作符。我们将在第15章的<a href="ch15-02-deref.html#following-the-pointer-to-the-value-with-the-dereference-operator">“解除对值的引用”</a><!-- ignore -->部分详细讨论解除引用操作。</p>
+<p>在向量上进行迭代时，无论是不可变还是可变的向量，都是安全的，因为存在借用检查器的规则。如果我们尝试在 Listing 8-7 和 Listing 8-8 中的循环体插入或删除元素，将会出现类似于 Listing 8-6 中代码所出现的编译器错误。循环体所引用的向量可以防止对整个向量同时进行修改。</p>
+<h3 id="使用枚举类型存储多种类型的数据"><a class="header" href="#使用枚举类型存储多种类型的数据">使用枚举类型存储多种类型的数据</a></h3>
+<p>向量只能存储相同类型的值。这可能会带来不便；当然也有需要存储不同类型元素的列表的情况。幸运的是，枚举的变体是在相同的枚举类型下定义的，因此当我们需要一种类型来表示不同类型的数据时，我们可以定义并使用枚举！</p>
+<p>例如，假设我们想要从电子表格中的某一行获取数据，该行中的某些列包含整数、浮点数以及字符串。我们可以定义一个枚举类型，其各个变体分别存储不同的数据类型，而所有枚举变体都被视为同一种类型。然后，我们可以创建一个向量来保存这个枚举类型，从而最终能够存储多种不同类型的数据。我们在清单8-9中展示了这一做法。</p>
+<figure class="listing" id="listing-8-9">
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    enum SpreadsheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+
+    let row = vec![
+        SpreadsheetCell::Int(3),
+        SpreadsheetCell::Text(String::from(“蓝色”)),
+        SpreadsheetCell::Float(10.12),
+    ];
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-8-9">Listing 8-9</a>: Defining an enum to store values of different types in one vector</figcaption>
+</figure>
+<p>Rust需要在编译时知道向量中将会包含哪些类型，这样它就能准确知道存储每个元素所需的堆内存大小。我们还必须明确说明这个向量允许包含哪些类型。如果Rust允许向量存储任何类型，那么其中一种或多种类型可能会导致对向量元素进行操作时出现错误。使用枚举加上<code>match</code>表达式意味着Rust会在编译时确保处理每一种可能的情况，正如第6章所讨论的那样。</p>
+<p>如果你不知道程序在运行时会获得哪些类型来存储在向量中，那么枚举技术将无法使用。相反，你可以使用一个特质对象，我们将在第18章中介绍这一点。</p>
+<p>既然我们已经讨论了一些使用向量的最常见方法，请务必查阅<a href="../std/vec/struct.Vec.html">API文档</a><!-- ignore -->，了解标准库中定义的所有有用方法。例如，除了 <code>push</code> 之外，还有一个 <code>pop</code> 方法可以移除并返回最后一个元素。</p>
+<h3 id="删除一个向量会同时删除其所有元素"><a class="header" href="#删除一个向量会同时删除其所有元素">删除一个向量会同时删除其所有元素</a></h3>
+<p>像其他 <code>struct</code> 一样，当向量离开其作用域时，它也会被释放，如清单 8-10 所示。</p>
+<figure class="listing" id="listing-8-10">
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    {
+        let v = vec![1, 2, 3, 4];
+
+        // 使用 v
+    } // &lt;- v goes out of scope and is freed here
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-8-10">Listing 8-10</a>: Showing where the vector and its elements are dropped</figcaption>
+</figure>
+<p>当向量被丢弃时，其所有内容也会一同被清除，这意味着它所持有的整数数据也会被释放。借用检查器会确保，对向量内容的任何引用仅在向量本身仍然有效的情况下才被使用。</p>
+<p>接下来，让我们来看看下一个集合类型： <code>String</code>!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch08-00-common-collections.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="ch08-02-strings.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch08-00-common-collections.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="ch08-02-strings.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="ferris-2317480c.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
