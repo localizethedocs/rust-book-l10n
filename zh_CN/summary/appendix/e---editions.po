@@ -1,0 +1,144 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/appendix-05-editions.md:1
+msgid "Appendix E: Editions"
+msgstr "附录E：版本信息"
+
+#: src/appendix-05-editions.md:3
+msgid ""
+"In Chapter 1, you saw that `cargo new` adds a bit of metadata to your _Cargo."
+"toml_ file about an edition. This appendix talks about what that means!"
+msgstr ""
+"在第1章中，您了解到 ``cargo new`` 会在您的_Cargo.toml_文件中添加一些关于版本"
+"的信息。本附录将详细解释这意味着什么！"
+
+#: src/appendix-05-editions.md:6
+msgid ""
+"The Rust language and compiler have a six-week release cycle, meaning users "
+"get a constant stream of new features. Other programming languages release "
+"larger changes less often; Rust releases smaller updates more frequently. "
+"After a while, all of these tiny changes add up. But from release to "
+"release, it can be difficult to look back and say, “Wow, between Rust 1.10 "
+"and Rust 1.31, Rust has changed a lot!”"
+msgstr ""
+"Rust语言和编译器有一个为期六周的发布周期，这意味着用户会不断获得新的功能。其"
+"他编程语言则更频繁地发布重大更新；而Rust则更频繁地发布小规模的更新。随着时间"
+"的推移，所有这些微小的变化最终会累积起来。但从一次发布到下一次发布之间，很难"
+"回头感慨：“哇，从Rust 1.10到Rust 1.31，Rust确实发生了很大的变化！”"
+
+#: src/appendix-05-editions.md:13
+msgid ""
+"Every three years or so, the Rust team produces a new Rust _edition_. Each "
+"edition brings together the features that have landed into a clear package "
+"with fully updated documentation and tooling. New editions ship as part of "
+"the usual six-week release process."
+msgstr ""
+"大约每三年左右，Rust团队会推出一个新的Rust版本。每个版本都会将那些已经明确打"
+"包的功能整合在一起，并提供完全更新的文档和工具支持。新版本的发布通常遵循六周"
+"周期的常规发布流程。"
+
+#: src/appendix-05-editions.md:18
+msgid "Editions serve different purposes for different people:"
+msgstr "不同版本对不同的人来说有着不同的作用："
+
+#: src/appendix-05-editions.md:20
+msgid ""
+"For active Rust users, a new edition brings together incremental changes "
+"into an easy-to-understand package."
+msgstr "对于活跃的 Rust 用户，新版本将递增变化汇集到易于理解的软件包。"
+
+#: src/appendix-05-editions.md:22
+msgid ""
+"For non-users, a new edition signals that some major advancements have "
+"landed, which might make Rust worth another look."
+msgstr ""
+"对于非使用者而言，新版本意味着一些重要的进展已经实现，这可能会让Rust变得值得"
+"再次关注。"
+
+#: src/appendix-05-editions.md:24
+msgid ""
+"For those developing Rust, a new edition provides a rallying point for the "
+"project as a whole."
+msgstr "对于正在开发Rust的人来说，新版本为整个项目提供了一个新的发展方向。"
+
+#: src/appendix-05-editions.md:27
+msgid ""
+"At the time of this writing, four Rust editions are available: Rust 2015, "
+"Rust 2018, Rust 2021, and Rust 2024. This book is written using Rust 2024 "
+"edition idioms."
+msgstr ""
+"在撰写本文时，有四种Rust版本可供选择：Rust 2015、Rust 2018、Rust 2021和Rust "
+"2024。本书采用Rust 2024版本的惯用法编写。"
+
+#: src/appendix-05-editions.md:31
+msgid ""
+"The `edition` key in _Cargo.toml_ indicates which edition the compiler "
+"should use for your code. If the key doesn’t exist, Rust uses `2015` as the "
+"edition value for backward compatibility reasons."
+msgstr ""
+"在_Cargo.toml_文件中，`edition`这个键表示编译器应该使用哪个版本来编译你的代"
+"码。如果这个键不存在，出于向后兼容性的原因，Rust会使用`2015`作为该版本的默认"
+"值。"
+
+#: src/appendix-05-editions.md:35
+msgid ""
+"Each project can opt in to an edition other than the default 2015 edition. "
+"Editions can contain incompatible changes, such as including a new keyword "
+"that conflicts with identifiers in code. However, unless you opt in to those "
+"changes, your code will continue to compile even as you upgrade the Rust "
+"compiler version you use."
+msgstr ""
+"每个项目都可以选择使用除默认版本2015之外的其他版本。这些版本可能包含不兼容的"
+"更改，例如引入与代码中标识符冲突的新关键字。但是，除非您同意这些更改，否则即"
+"使您升级了所使用的Rust编译器版本，您的代码仍然可以正常编译。"
+
+#: src/appendix-05-editions.md:41
+msgid ""
+"All Rust compiler versions support any edition that existed prior to that "
+"compiler’s release, and they can link crates of any supported editions "
+"together. Edition changes only affect the way the compiler initially parses "
+"code. Therefore, if you’re using Rust 2015 and one of your dependencies uses "
+"Rust 2018, your project will compile and be able to use that dependency. The "
+"opposite situation, where your project uses Rust 2018 and a dependency uses "
+"Rust 2015, works as well."
+msgstr ""
+"所有Rust编译器版本都支持在该编译器发布之前存在的任何版本，并且它们可以将任何"
+"受支持的版本的库链接在一起。版本的变化只会影响编译器对代码的解析方式。因此，"
+"如果你使用的是Rust 2015，而你的某个依赖项使用的是Rust 2018，那么你的项目仍然"
+"可以编译并通过该依赖项运行。相反的情况，即你的项目使用Rust 2018，而一个依赖项"
+"使用Rust 2015，同样也是可行的。"
+
+#: src/appendix-05-editions.md:49
+msgid ""
+"To be clear: Most features will be available on all editions. Developers "
+"using any Rust edition will continue to see improvements as new stable "
+"releases are made. However, in some cases, mainly when new keywords are "
+"added, some new features might only be available in later editions. You will "
+"need to switch editions if you want to take advantage of such features."
+msgstr ""
+"需要明确的是：大多数功能在所有版本中都可以使用。使用任何Rust版本的开发者将继"
+"续享受到随着新稳定版本的发布而带来的改进。然而，在某些情况下，尤其是在添加了"
+"新的关键字时，某些新功能可能仅适用于后续版本。如果您想利用这些功能，就需要切"
+"换版本。"
+
+#: src/appendix-05-editions.md:55
+msgid ""
+"For more details, see [_The Rust Edition Guide_](https://doc.rust-lang.org/"
+"stable/edition-guide). This is a complete book that enumerates the "
+"differences between editions and explains how to automatically upgrade your "
+"code to a new edition via `cargo fix`."
+msgstr ""
+"更多详情，请参阅[_Rust版指南_](https://doc.rust-lang.org/stable/edition-"
+"guide)。这是一本完整的书籍，详细介绍了各个版本之间的差异，并解释了如何通过"
+"`cargo fix`自动将代码升级到新版本。"

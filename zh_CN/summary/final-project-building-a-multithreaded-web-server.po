@@ -1,0 +1,105 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch21-00-final-project-a-web-server.md:1
+msgid "Final Project: Building a Multithreaded Web Server"
+msgstr "最终项目：构建多线程Web服务器"
+
+#: src/ch21-00-final-project-a-web-server.md:3
+msgid ""
+"It’s been a long journey, but we’ve reached the end of the book. In this "
+"chapter, we’ll build one more project together to demonstrate some of the "
+"concepts we covered in the final chapters, as well as recap some earlier "
+"lessons."
+msgstr ""
+"这是一段漫长的旅程，但我们已经走到了这本书的终点。在这一章中，我们将一起再完"
+"成一个项目，以演示我们在最后一章中讨论的一些概念，同时回顾一些之前的学习内"
+"容。"
+
+#: src/ch21-00-final-project-a-web-server.md:8
+msgid ""
+"For our final project, we’ll make a web server that says “Hello!” and looks "
+"like Figure 21-1 in a web browser."
+msgstr ""
+"在我们的最后一个项目中，我们将创建一个网页服务器，该服务器能够显示“Hello!”，"
+"并且看起来像图21-1在网页浏览器中的效果。"
+
+#: src/ch21-00-final-project-a-web-server.md:11
+msgid "Here is our plan for building the web server:"
+msgstr "以下是我们构建网络服务器的计划："
+
+#: src/ch21-00-final-project-a-web-server.md:13
+msgid "Learn a bit about TCP and HTTP."
+msgstr "了解一些TCP和HTTP的相关知识。"
+
+#: src/ch21-00-final-project-a-web-server.md:14
+msgid "Listen for TCP connections on a socket."
+msgstr "通过套接字监听TCP连接。"
+
+#: src/ch21-00-final-project-a-web-server.md:15
+msgid "Parse a small number of HTTP requests."
+msgstr "解析少量的HTTP请求。"
+
+#: src/ch21-00-final-project-a-web-server.md:16
+msgid "Create a proper HTTP response."
+msgstr "生成合适的HTTP响应。"
+
+#: src/ch21-00-final-project-a-web-server.md:17
+msgid "Improve the throughput of our server with a thread pool."
+msgstr "使用线程池提高服务器的吞吐量。"
+
+#: src/ch21-00-final-project-a-web-server.md:21
+msgid "<span class=\"caption\">Figure 21-1: Our final shared project</span>"
+msgstr "<span class=\"caption\">图21-1：我们最终的共享项目</span>"
+
+#: src/ch21-00-final-project-a-web-server.md:23
+msgid ""
+"Before we get started, we should mention two details. First, the method "
+"we’ll use won’t be the best way to build a web server with Rust. Community "
+"members have published a number of production-ready crates available at "
+"[crates.io](https://crates.io/) that provide more complete web server and "
+"thread pool implementations than we’ll build. However, our intention in this "
+"chapter is to help you learn, not to take the easy route. Because Rust is a "
+"systems programming language, we can choose the level of abstraction we want "
+"to work with and can go to a lower level than is possible or practical in "
+"other languages."
+msgstr ""
+"在开始之前，我们有两点需要说明。首先，我们使用的这种方法并不是用Rust构建Web服"
+"务器的最佳方式。社区成员已经发布了许多可在[crates.io](https://crates.io/)上找"
+"到的、适用于生产环境的库，这些库提供了比我们构建的更完整的Web服务器和线程池实"
+"现。然而，我们在本章的目的是帮助您学习，而不是提供捷径。因为Rust是一种在系统"
+"编程语言中，我们可以选择想要使用的抽象层次，并可以深入到比其他语言更低的层"
+"面。"
+
+#: src/ch21-00-final-project-a-web-server.md:33
+msgid ""
+"Second, we will not be using async and await here. Building a thread pool is "
+"a big enough challenge on its own, without adding in building an async "
+"runtime! However, we will note how async and await might be applicable to "
+"some of the same problems we will see in this chapter. Ultimately, as we "
+"noted back in Chapter 17, many async runtimes use thread pools for managing "
+"their work."
+msgstr ""
+"其次，我们在这里不会使用异步和等待机制。单独构建线程池就已经是一项相当大的挑"
+"战了，更不用说还要再加上一个异步运行时系统了！不过，我们会注意到异步和等待机"
+"制可能适用于本章中讨论的一些问题。最终，正如我们在第17章中提到的那样，许多异"
+"步运行时系统都使用线程池来管理它们的工作。"
+
+#: src/ch21-00-final-project-a-web-server.md:39
+msgid ""
+"We’ll therefore write the basic HTTP server and thread pool manually so that "
+"you can learn the general ideas and techniques behind the crates you might "
+"use in the future."
+msgstr ""
+"因此，我们将手动编写基本的HTTP服务器和线程池，这样你就可以了解将来可能会使用"
+"的这些工具背后的基本原理和技术。"

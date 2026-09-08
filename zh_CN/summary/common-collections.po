@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch08-00-common-collections.md:1
+msgid "Common Collections"
+msgstr "常见集合类型"
+
+#: src/ch08-00-common-collections.md:3
+msgid ""
+"Rust’s standard library includes a number of very useful data structures "
+"called _collections_. Most other data types represent one specific value, "
+"but collections can contain multiple values. Unlike the built-in array and "
+"tuple types, the data that these collections point to is stored on the heap, "
+"which means the amount of data does not need to be known at compile time and "
+"can grow or shrink as the program runs. Each kind of collection has "
+"different capabilities and costs, and choosing an appropriate one for your "
+"current situation is a skill you’ll develop over time. In this chapter, "
+"we’ll discuss three collections that are used very often in Rust programs:"
+msgstr ""
+"Rust的标准库中包含许多非常有用的数据结构，称为collections_。大多数其他数据类"
+"型只能表示单个值，而collections则可以包含多个值。与内置的数组和元组类型不同，"
+"这些collections所指向的数据存储在堆上，这意味着不需要在编译时知道数据的大小，"
+"并且随着程序的运行，数据量可以增长或缩小。每种collections都有不同的特性。能力"
+"和成本，以及选择适合当前情况的解决方案，是一项需要随着时间逐渐掌握的技能。在"
+"本章中，我们将讨论在Rust程序中经常使用的三种集合类型："
+
+#: src/ch08-00-common-collections.md:13
+msgid ""
+"A _vector_ allows you to store a variable number of values next to each "
+"other."
+msgstr "**向量**允许你将多个值并排存储在一起。"
+
+#: src/ch08-00-common-collections.md:14
+msgid ""
+"A _string_ is a collection of characters. We’ve mentioned the `String` type "
+"previously, but in this chapter, we’ll talk about it in depth."
+msgstr ""
+"**字符串**是由字符组成的集合。之前我们已经提到过``String``类型，但在本章中，"
+"我们将更深入地讨论它。"
+
+#: src/ch08-00-common-collections.md:16
+msgid ""
+"A _hash map_ allows you to associate a value with a specific key. It’s a "
+"particular implementation of the more general data structure called a _map_."
+msgstr ""
+"**哈希映射**允许你将某个值与特定的键关联起来。这是一种更通用的数据结构——即**"
+"映射**的具体实现方式。"
+
+#: src/ch08-00-common-collections.md:19
+msgid ""
+"To learn about the other kinds of collections provided by the standard "
+"library, see [the documentation](../std/collections/index.html)."
+msgstr ""
+"要了解标准库提供的其他类型收藏，请参阅[文档](../std/collections/index.html)。"
+
+#: src/ch08-00-common-collections.md:22
+msgid ""
+"We’ll discuss how to create and update vectors, strings, and hash maps, as "
+"well as what makes each special."
+msgstr ""
+"我们将讨论如何创建和更新向量、字符串以及哈希映射，同时也会探讨这些因素各自的"
+"特点。"

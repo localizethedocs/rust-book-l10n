@@ -1,0 +1,277 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch06-03-if-let.md:1
+msgid "Concise Control Flow with `if let` and `let...else`"
+msgstr "使用`if let`和`let...else`实现简洁的控制流"
+
+#: src/ch06-03-if-let.md:3
+msgid ""
+"The `if let` syntax lets you combine `if` and `let` into a less verbose way "
+"to handle values that match one pattern while ignoring the rest. Consider "
+"the program in Listing 6-6 that matches on an `Option<u8>` value in the "
+"`config_max` variable but only wants to execute code if the value is the "
+"`Some` variant."
+msgstr ""
+"`if let` 语法允许你将 `if` 和 `let` 结合起来，以一种更简洁的方式处理那些符合"
+"某个模式的值，同时忽略其余的值。请参考清单 6-6 中的程序，该程序会在 "
+"`config_max` 变量中查找符合 `Option<u8>` 的值，但只有当该值是 `Some` 变体时才"
+"会执行代码。"
+
+#: src/ch06-03-if-let.md:15 src/ch06-03-if-let.md:36
+msgid "\"The maximum is configured to be {max}\""
+msgstr "“最大值配置为{max}”"
+
+#: src/ch06-03-if-let.md:23
+msgid ""
+"If the value is `Some`, we print out the value in the `Some` variant by "
+"binding the value to the variable `max` in the pattern. We don’t want to do "
+"anything with the `None` value. To satisfy the `match` expression, we have "
+"to add `_ => ()` after processing just one variant, which is annoying "
+"boilerplate code to add."
+msgstr ""
+"如果值为 `Some`，我们通过将值绑定到模式中的变量 `max`，从而输出 `Some` 变体中"
+"的值。我们不想对 `None` 值进行任何操作。为了满足 `match` 表达式，我们需要在处"
+"理其中一个变体后添加 `_ =>\n"
+"()`，这会增加烦人的样板代码。"
+
+#: src/ch06-03-if-let.md:29
+msgid ""
+"Instead, we could write this in a shorter way using `if let`. The following "
+"code behaves the same as the `match` in Listing 6-6:"
+msgstr ""
+"相反，我们可以使用 `if let` 来更简洁地表达这一内容。以下代码与 Listing 6-6 中"
+"的 `match` 行为相同："
+
+#: src/ch06-03-if-let.md:41
+msgid ""
+"The syntax `if let` takes a pattern and an expression separated by an equal "
+"sign. It works the same way as a `match`, where the expression is given to "
+"the `match` and the pattern is its first arm. In this case, the pattern is "
+"`Some(max)`, and the `max` binds to the value inside the `Some`. We can then "
+"use `max` in the body of the `if let` block in the same way we used `max` in "
+"the corresponding `match` arm. The code in the `if let` block only runs if "
+"the value matches the pattern."
+msgstr ""
+"语法 `if let` 接受一个模式和一个由等号分隔的表达式。它的工作方式与 `match` 类"
+"似，其中表达式被传递给 `match`，而模式则是 `match` 的第一个分支。在这种情况"
+"下，模式是 `Some(max)`，而 `max` 则绑定到 `Some` 内部的值。然后，我们可以像"
+"在 `max` 中使用的那样，在 `if let` 块的主体中使用 `max`，就像在相应的 "
+"`match` 分支中使用的 `max` 一样。只有当值与模式匹配时， `if let` 块中的代码才"
+"会执行。"
+
+#: src/ch06-03-if-let.md:49
+msgid ""
+"Using `if let` means less typing, less indentation, and less boilerplate "
+"code. However, you lose the exhaustive checking `match` enforces that "
+"ensures that you aren’t forgetting to handle any cases. Choosing between "
+"`match` and `if let` depends on what you’re doing in your particular "
+"situation and whether gaining conciseness is an appropriate trade-off for "
+"losing exhaustive checking."
+msgstr ""
+"使用 `if let` 可以节省输入代码、减少缩进，并减少样板代码。不过，这种写法会失"
+"去详尽的检查功能，而 `match` 则能确保不会遗漏任何情况的处理。在 `match` 和 "
+"`if let` 之间选择，取决于你在特定情况下的具体需求，以及是否认为简洁性提升是牺"
+"牲详尽检查功能的合理权衡。"
+
+#: src/ch06-03-if-let.md:55
+msgid ""
+"In other words, you can think of `if let` as syntax sugar for a `match` that "
+"runs code when the value matches one pattern and then ignores all other "
+"values."
+msgstr ""
+"换句话说，你可以将 `if let` 视为一个 `match` 的语法糖，它会在某个值符合某个模"
+"式时执行代码，而忽略所有其他值。"
+
+#: src/ch06-03-if-let.md:58
+msgid ""
+"We can include an `else` with an `if let`. The block of code that goes with "
+"the `else` is the same as the block of code that would go with the `_` case "
+"in the `match` expression that is equivalent to the `if let` and `else`. "
+"Recall the `Coin` enum definition in Listing 6-4, where the `Quarter` "
+"variant also held a `UsState` value. If we wanted to count all non-quarter "
+"coins we see while also announcing the state of the quarters, we could do "
+"that with a `match` expression, like this:"
+msgstr ""
+"我们可以包含一个 `else`，并且还有一个 `if let`。与 `else` 一起出现的代码块，"
+"与 `_` 情况下的 `match` 表达式中的代码块是相同的，而 `match` 表达式则等同于 "
+"`if let` 和 `else`。请回想一下 Listing 6-4 中的 `Coin` 枚举定义，其中 "
+"`Quarter` 变体也持有一个 `UsState` 值。如果我们想要统计所有非 quarter 硬币的"
+"数量，同时告知 quarter 硬币的状态，我们可以使用 `match` 表达式来实现这一点："
+
+#: src/ch06-03-if-let.md:71 src/ch06-03-if-let.md:98 src/ch06-03-if-let.md:132
+#: src/ch06-03-if-let.md:181 src/ch06-03-if-let.md:236
+#: src/ch06-03-if-let.md:299
+msgid "// --snip--\n"
+msgstr ""
+"// --snip--\n"
+"——剪——\n"
+
+#: src/ch06-03-if-let.md:85 src/ch06-03-if-let.md:112
+msgid "\"State quarter from {state:?}!\""
+msgstr "状态季度来自 {state:?}!"
+
+#: src/ch06-03-if-let.md:91
+msgid "Or we could use an `if let` and `else` expression, like this:"
+msgstr "或者我们可以使用这样的`if let`和`else`表达式："
+
+#: src/ch06-03-if-let.md:119
+msgid "Staying on the “Happy Path” with `let...else`"
+msgstr "保持“幸福之路”上的`let...else`"
+
+#: src/ch06-03-if-let.md:121
+msgid ""
+"The common pattern is to perform some computation when a value is present "
+"and return a default value otherwise. Continuing with our example of coins "
+"with a `UsState` value, if we wanted to say something funny depending on how "
+"old the state on the quarter was, we might introduce a method on `UsState` "
+"to check the age of a state, like so:"
+msgstr ""
+"常见的模式是在某个值存在时执行某些计算，而在其他情况下返回默认值。以我们关于"
+"硬币的例子为例，如果某个硬币的`UsState`值为真，我们想根据硬币上的状态的年龄来"
+"输出一些有趣的信息，那么我们可以为`UsState`状态引入一个方法来检查该状态的年"
+"龄，如下所示："
+
+#: src/ch06-03-if-let.md:128 src/ch06-03-if-let.md:177
+#: src/ch06-03-if-let.md:232 src/ch06-03-if-let.md:295
+msgid "// so we can inspect the state in a minute\n"
+msgstr "// 所以我们一分钟后就能检查状态\n"
+
+#: src/ch06-03-if-let.md:140 src/ch06-03-if-let.md:189
+#: src/ch06-03-if-let.md:244 src/ch06-03-if-let.md:307
+msgid "// -- snip --\n"
+msgstr "// ——剪——\n"
+
+#: src/ch06-03-if-let.md:155 src/ch06-03-if-let.md:204
+#: src/ch06-03-if-let.md:264 src/ch06-03-if-let.md:325
+msgid "\"{state:?} is pretty old, for America!\""
+msgstr "\"{state:?} 对美国来说还很旧！\""
+
+#: src/ch06-03-if-let.md:157 src/ch06-03-if-let.md:206
+#: src/ch06-03-if-let.md:266 src/ch06-03-if-let.md:327
+msgid "\"{state:?} is relatively new.\""
+msgstr "\"{state:?} 比较新。\""
+
+#: src/ch06-03-if-let.md:166 src/ch06-03-if-let.md:215
+#: src/ch06-03-if-let.md:272 src/ch06-03-if-let.md:333
+msgid "\"{desc}\""
+msgstr "\"{desc}\""
+
+#: src/ch06-03-if-let.md:171
+msgid ""
+"Then, we might use `if let` to match on the type of coin, introducing a "
+"`state` variable within the body of the condition, as in Listing 6-7."
+msgstr ""
+"然后，我们可以使用 `if let` 来匹配硬币的类型，并在条件的主体中引入一个 "
+"`state` 变量，如清单 6-7 所示。"
+
+#: src/ch06-03-if-let.md:222
+msgid ""
+"That gets the job done, but it has pushed the work into the body of the `if "
+"let` statement, and if the work to be done is more complicated, it might be "
+"hard to follow exactly how the top-level branches relate. We could also take "
+"advantage of the fact that expressions produce a value either to produce the "
+"`state` from the `if let` or to return early, as in Listing 6-8. (You could "
+"do something similar with a `match`, too.)"
+msgstr ""
+"这种方法确实可以完成任务，但是它将代码块挤到了 `if let` 语句的主体部分。如果"
+"需要完成的工作更为复杂，那么很难准确理解各个顶层分支之间的关系。我们还可以利"
+"用表达式能够生成值的特点，从而生成 `state`，或者像 Listing 6-8 中那样提前返回"
+"结果。（对于 `match` 也可以采用类似的方法。）"
+
+#: src/ch06-03-if-let.md:279
+msgid ""
+"This is a bit annoying to follow in its own way, though! One branch of the "
+"`if let` produces a value, and the other one returns from the function "
+"entirely."
+msgstr ""
+"不过，这种处理方式确实有点麻烦！其中一个分支会返回一个值，而另一个分支则完全"
+"从函数中返回结果。"
+
+#: src/ch06-03-if-let.md:282
+msgid ""
+"To make this common pattern nicer to express, Rust has `let...else`. The "
+"`let...else` syntax takes a pattern on the left side and an expression on "
+"the right, very similar to `if let`, but it does not have an `if` branch, "
+"only an `else` branch. If the pattern matches, it will bind the value from "
+"the pattern in the outer scope. If the pattern does _not_ match, the program "
+"will flow into the `else` arm, which must return from the function."
+msgstr ""
+"为了使得这种常见的模式更易于表达，Rust提供了 `let...else` 这种语法。`let..."
+"else` 这种语法左边是一个模式，右边是一个表达式，与 `if let` 非常相似，但是 "
+"`let...else` 没有 `if` 这个分支，只有 `else` 这个分支。如果模式匹配，那么模式"
+"中的值将会被绑定到外部作用域中。如果模式不匹配，程序将会进入 `else` 这个分"
+"支，而该分支必须从函数中返回。"
+
+#: src/ch06-03-if-let.md:289
+msgid ""
+"In Listing 6-9, you can see how Listing 6-8 looks when using `let...else` in "
+"place of `if let`."
+msgstr ""
+"在 Listing 6-9 中，你可以看到当使用 `let...else` 代替 `if let` 时，Listing "
+"6-8 的显示效果。"
+
+#: src/ch06-03-if-let.md:340
+msgid ""
+"Notice that it stays on the “happy path” in the main body of the function "
+"this way, without having significantly different control flow for two "
+"branches the way the `if let` did."
+msgstr ""
+"请注意，通过这种方式，函数主体始终保持在“正常路径”上，两个分支的控制流程并没"
+"有发生显著的变化，这与 `if let` 的方式是一致的。"
+
+#: src/ch06-03-if-let.md:344
+msgid ""
+"If you have a situation in which your program has logic that is too verbose "
+"to express using a `match`, remember that `if let` and `let...else` are in "
+"your Rust toolbox as well."
+msgstr ""
+"如果你遇到这样的情况：你的程序中的逻辑过于冗长，无法用 `match` 来表达，那么请"
+"记住， `if let` 和 `let...else` 也是你的 Rust 工具箱中的工具。"
+
+#: src/ch06-03-if-let.md:348
+msgid "Summary"
+msgstr "摘要"
+
+#: src/ch06-03-if-let.md:350
+msgid ""
+"We’ve now covered how to use enums to create custom types that can be one of "
+"a set of enumerated values. We’ve shown how the standard library’s "
+"`Option<T>` type helps you use the type system to prevent errors. When enum "
+"values have data inside them, you can use `match` or `if let` to extract and "
+"use those values, depending on how many cases you need to handle."
+msgstr ""
+"我们现在已经了解了如何使用枚举来创建自定义类型，这些类型可以表示从一组枚举值"
+"中选择的一个值。我们还展示了标准库中的 `Option<T>` 类型如何帮助你利用类型系统"
+"来避免错误。当枚举值包含数据时，你可以根据需要处理的情况，使用 `match` 或 "
+"`if let` 来提取并使用这些数据。"
+
+#: src/ch06-03-if-let.md:356
+msgid ""
+"Your Rust programs can now express concepts in your domain using structs and "
+"enums. Creating custom types to use in your API ensures type safety: The "
+"compiler will make certain your functions only get values of the type each "
+"function expects."
+msgstr ""
+"现在，你的Rust程序可以使用结构体和数据类型来表达你所在领域中的概念。在API中创"
+"建自定义类型可以确保类型安全：编译器会确保你的函数只能接收每个函数所期望的类"
+"型的值。"
+
+#: src/ch06-03-if-let.md:361
+msgid ""
+"In order to provide a well-organized API to your users that is "
+"straightforward to use and only exposes exactly what your users will need, "
+"let’s now turn to Rust’s modules."
+msgstr ""
+"为了为用户提供一个组织良好的API，使其使用起来非常直观，并且只暴露用户真正需要"
+"的功能，现在让我们来了解一下Rust中的模块。"
