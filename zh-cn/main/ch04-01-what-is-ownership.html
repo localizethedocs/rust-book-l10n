@@ -1,0 +1,540 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>什么是所有权？ - The Rust Programming Language</title>
+
+
+        <!-- Custom HTML head -->
+        <script type="text/javascript" src="ltd-provenance.js"></script>
+        <script type="text/javascript" src="ltd-current.js"></script>
+        <script type="text/javascript" src="../../ltd-config.js"></script>
+        <script type="text/javascript" src="../../ltd-flyout.js"></script>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris-d33b75bf.css">
+        <link rel="stylesheet" href="theme/2018-edition-4e126c62.css">
+        <link rel="stylesheet" href="theme/semantic-notes-9b5766c0.css">
+        <link rel="stylesheet" href="theme/listing-cab26221.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-70ba3c6a.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-9b676236.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Rust Programming Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h2 id="什么是所有权"><a class="header" href="#什么是所有权">什么是所有权？</a></h2>
+<p><strong>所有权</strong>是一组规则，用于规范Rust程序如何管理内存。所有程序在运行时都必须管理其对计算机内存的使用方式。某些语言采用垃圾回收机制，会在程序运行过程中自动清理不再使用的内存；而在其他语言中，程序员必须主动分配和释放内存。Rust采用了第三种方法：通过一套由编译器进行验证的规则来管理内存的所有权。如果违反了这些规则，程序将无法编译。所有权的这些特性不会在程序运行时导致程序运行速度变慢。</p>
+<p>因为所有权对许多程序员来说是一个新的概念，所以需要一些时间来适应。好消息是，你越熟悉Rust以及所有权系统的规则，就越能自然而然地编写出安全且高效的代码。坚持下去吧！</p>
+<p>当你理解了所有权概念之后，你就能为理解让 Rust 如此独特的功能打下坚实的基础。在本章中，你将通过一些示例来学习所有权，这些示例的重点是一个非常常见的数据结构：字符串。</p>
+<section class="note" aria-role="note">
+<h3 id="栈和堆"><a class="header" href="#栈和堆">栈和堆</a></h3>
+<p>许多编程语言并不要求开发者经常考虑栈和堆的概念。但在像Rust这样的系统编程语言中，一个值是在栈上还是堆上，会影响到程序的运行方式以及为何需要做出某些决策。在本章的后面部分，将会详细讨论所有权与栈和堆的关系，因此这里先简单介绍一下相关知识。</p>
+<p>栈和堆都是运行时可供代码使用的内存部分，但它们的结构有所不同。栈按照添加值的顺序来存储数据，并按照相反的顺序删除数据。这种存储方式被称为“后进先出”（LIFO）。可以想象一个盘子堆：当你添加更多的盘子时，会把它们放在堆的顶端；当你需要一个盘子时，就从顶端取一个出来。如果从中间或底部添加或移除盘子，效果就会大打折扣！向栈中添加数据称为“将数据压入栈中”，而从栈中移除数据则称为“从栈中弹出数据”。所有存储在栈上的数据都必须具有已知的固定大小。而在编译时大小未知或可能发生变化的数据，则必须存储在堆上。</p>
+<p>堆的组织方式则相对松散一些：当你向堆中存储数据时，需要申请一定大小的空间。内存分配器会在堆中找到足够大的空闲空间，并将其标记为正在使用，然后返回一个“指针”，这个指针就是该位置的地址。这个过程被称为“在堆上分配内存”，有时也简称为“分配”。需要注意的是，指向堆的指针本身具有已知的固定大小，因此可以将指针存储在栈上，但当你需要实际的数据时，就必须通过指针来访问它。这就像在餐厅就座一样：当你进入餐厅时，需要告知服务员你的人数，然后服务员会为你找到一张合适的桌子。如果有人迟到，他们可以询问你的座位位置以便找到你。</p>
+<p>向栈中压入数据比在堆上分配数据要快，因为分配器不需要再搜索新的存储位置；数据总是存储在栈的顶端。相比之下，在堆上分配空间则需要更多的操作，因为分配器需要先找到足够大的空间来存放数据，然后再进行相关的管理操作。&gt; 分配。</p>
+<p>访问堆中的数据通常比访问栈中的数据要慢，因为需要通过一个指针来定位数据。现代处理器在内存中跳跃的次数越少，其运行速度就越快。继续这个类比，想象一家餐厅的服务器从多个桌子接收订单。最有效的方法是在处理一个桌子的订单之前，先处理另一个桌子的订单。而从桌子A获取一个订单，然后从桌子B获取一个订单，然后再从桌子A获取一个订单，最后从桌子B获取一个订单，这样的过程会慢得多。同样，如果处理器处理的数据彼此靠近（就像在栈上一样），那么它的工作效率会更高，而不是处理远离其他数据的数据（就像在堆上一样）。</p>
+<p>当你的代码调用一个函数时，被传递给函数的数据（可能包括指向堆中数据的指针）以及函数的局部变量都会被压入栈中。当函数执行完毕后，这些数据会被从栈中弹出。</p>
+<p>跟踪哪些代码部分使用了堆中的哪些数据，尽量减少堆中重复数据的数量，并清理未使用的数据，避免空间不足的问题，这些都是所有权机制需要解决的问题。一旦你理解了所有权机制，就不必经常考虑栈和堆了。但知道所有权的主要目的是为了管理堆中的数据，这有助于解释为什么堆的数据管理方式会如此运作。</p>
+</section>
+<h3 id="所有权规则"><a class="header" href="#所有权规则">所有权规则</a></h3>
+<p>首先，让我们来看看所有权规则。在通过示例来理解这些规则时，请记住这些规则：</p>
+<ul>
+<li>在Rust中，每个值都有一个_所有者_。</li>
+<li>一次只能有一个所有者。</li>
+<li>当所有者超出作用域时，该值将被丢弃。</li>
+</ul>
+<h3 id="变量作用域"><a class="header" href="#变量作用域">变量作用域</a></h3>
+<p>既然我们已经了解了基本的 Rust 语法，那么就不会在示例中包含所有的 <code>fn main() {</code> 代码了。因此，如果你正在跟随学习，请务必将下面的示例手动放在 <code>main</code> 函数内。这样一来，我们的示例就会更加简洁，我们可以专注于实际的内容，而不是那些样板代码。</p>
+<p>作为所有权的第一个例子，我们将看看一些变量的作用域。所谓“作用域”，指的是在程序中某个变量有效的范围。以以下变量为例：</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let s = "hello";
+<span class="boring">}</span></code></pre>
+<p>变量 <code>s</code> 指的是一个字符串字面量，该字符串的值被硬编码到程序的文本中。该变量从声明那一刻起一直有效，直到当前作用域的结束。列表4-1展示了一个程序，其中包含了注释，说明了变量 <code>s</code> 在程序中的有效范围。</p>
+<figure class="listing" id="listing-4-1">
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    {                      // 这里的 s 不成立，因为它还没有被声明
+        let s = "hello";   // 从此时起，s 有效
+
+        // 用 S 做点东西
+    }                      // 此范围现已结束，s 已不再有效
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-4-1">Listing 4-1</a>: A variable and the scope in which it is valid</figcaption>
+</figure>
+<p>换句话说，这里有两个重要的时间点：</p>
+<ul>
+<li>当 <code>s</code> 进入作用域时，它是有效的。</li>
+<li>它一直保持有效，直到它离开作用域。</li>
+</ul>
+<p>在这一点上，作用域与变量有效时间之间的关系与其他编程语言中的情况类似。现在，我们将在此基础上进一步学习，引入<code>String</code>这种类型。</p>
+<h3 id="string-类型"><a class="header" href="#string-类型"><code>String</code> 类型</a></h3>
+<p>为了说明所有权规则，我们需要一种比第3章<a href="ch03-02-data-types.html#data-types">“数据类型”</a><!-- ignore -->部分中讨论的更复杂的数据类型。之前讨论的类型都是已知大小的，可以存储在栈上，并在其作用域结束时从栈上弹出。此外，这些类型可以很容易地复制，以创建新的、独立的实例，以便在其他代码的不同作用域中需要使用相同的值。但我们现在想要研究的是存储在堆上的数据，以及Rust是如何知道何时清理这些数据的。<code>String</code>类型就是一个很好的例子。</p>
+<p>我们将重点讨论 <code>String</code> 中与所有权相关的部分。这些方面也适用于其他复杂的数据类型，无论是标准库提供的还是由用户自己创建的数据类型。关于 <code>String</code> 中与非所有权相关的方面，我们将在<a href="ch08-02-strings.html">第8章</a><!-- ignore -->中进行讨论。</p>
+<p>我们已经了解了字符串字面量，其中字符串值被硬编码到程序中。字符串字面量非常方便，但它们并不适用于所有需要使用文本的情况。其中一个原因是它们是不可变的。另一个原因是，在编写代码时，我们无法预知每个字符串值的具体情况：例如，如果我们想要接收用户输入并将其存储起来，该怎么办呢？正是为了这些情况，Rust提供了<code>String</code>类型。这种类型可以管理存储在堆上的数据，因此能够存储我们在编译时无法预知的文本量。你可以使用<code>from</code>函数从字符串字面量创建一个<code>String</code>类型，如下所示：</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let s = String::from("hello");
+<span class="boring">}</span></code></pre>
+<p>双冒号<code>::</code>运算符允许我们将这个特定的<code>from</code>函数命名空间放在<code>String</code>类型下，而不是使用某种像<code>string_from</code>这样的名称。我们将在第五章的<a href="ch05-03-method-syntax.html#methods">“Methods”</a><!--
+ignore -->部分进一步讨论这种语法，同时也会在第七章的<a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html">“Paths for Referring to an Item in the Module Tree”</a><!-- ignore -->部分介绍如何使用模块进行命名空间管理。</p>
+<p>这种字符串是可以被修改的：</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let mut s = String::from("hello");
+
+    s.push_str(“世界”); // push_str() 将一个字母附加到字符串
+
+    println!( “{s}”); // 这将打印`hello, world!`
+<span class="boring">}</span></code></pre>
+<p>那么，这里有什么区别呢？为什么 <code>String</code> 可以被修改，而字面量却不能呢？区别在于这两种类型在处理内存方面的方式不同。</p>
+<h3 id="内存与分配"><a class="header" href="#内存与分配">内存与分配</a></h3>
+<p>在字符串字面量的情况下，我们可以在编译时确定其内容，因此文本会被直接硬编码到最终的可执行文件中。这就是为什么字符串字面量既快速又高效的原因。不过，这些特性仅源于字符串字面量的不可变性。不幸的是，对于那些在编译时无法确定大小，并且在程序运行过程中可能会发生变化的内容，我们无法将整个内存块直接放入二进制文件中。</p>
+<p>在 <code>String</code> 类型中，为了支持可变的、可增长的文本数据，我们需要在堆上分配一定量内存，这部分内存的内容在编译时是未知的。这意味着：</p>
+<ul>
+<li>内存必须在运行时从内存分配器中请求。</li>
+<li>我们需要一种方式，在我们使用 <code>String</code> 结束后，将这部分内存返回给分配器。</li>
+</ul>
+<p>第一部分由我们来完成：当我们调用 <code>String::from</code> 时，其实现会请求所需的内存。这在各种编程语言中都是普遍存在的现象。</p>
+<p>不过，第二部分的情况有所不同。在那些拥有垃圾收集器的语言中，垃圾收集器会跟踪并清理不再被使用的内存，我们无需操心这个问题。而在大多数没有垃圾收集器的语言中，识别内存何时不再被使用，并调用代码来显式释放内存，就成为了我们的责任，就像我们请求分配内存一样。正确地执行这一操作历来都是一个棘手的编程问题。如果我们忽略了这一点，就会浪费内存。如果我们过早地释放内存，就会得到无效的变量。如果我们多次释放内存，那也是个错误。我们需要确保每一个 <code>allocate</code> 都对应一个确切的 <code>free</code>。</p>
+<p>Rust采取了不同的方式：一旦拥有该内存变量的变量超出作用域，内存就会自动被归还。下面是我们从Listing 4-1中得到的代码示例，其中使用了<code>String</code>而不是字符串字面量。</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    {
+        let s = String::from("hello"); // 从此时起，s 有效
+
+        // 用 S 做点东西
+    }                                  // 此范围现已结束，s 没有
+                                       // 更有效的
+<span class="boring">}</span></code></pre>
+<p>在某个自然的点上，我们可以将 <code>String</code> 需要的内存返还给分配器：即当 <code>s</code> 超出作用域时。当变量超出作用域时，Rust会为我们调用一个特殊函数。这个函数被称为 <code>drop</code>，而 <code>String</code> 的作者可以在这里编写代码来返还内存。Rust 会在闭合的括号处自动调用 <code>drop</code>。</p>
+<section class="note" aria-role="note">
+<p>注意：在C++中，这种在对象生命周期结束时释放资源的模式有时被称为“资源获取即初始化”（RAII）。如果你曾经使用过RAII模式，那么Rust中的<code>drop</code>函数对你来说应该很熟悉。</p>
+</section>
+<p>这种模式对Rust代码的编写方式产生了深远的影响。目前看来它可能很简单，但在更复杂的情况下，当我们需要多个变量共享堆上分配的数据时，代码的行为可能会出乎意料。现在让我们来探讨一下这些情况。</p>
+<!-- Old headings. Do not remove or links may break. -->
+<p><a id="ways-variables-and-data-interact-move"></a></p>
+<h4 id="变量与移动操作的数据交互"><a class="header" href="#变量与移动操作的数据交互">变量与移动操作的数据交互</a></h4>
+<p>在Rust中，多个变量可以以不同的方式与相同的数据进行交互。列表4-2展示了一个使用整数的示例。</p>
+<figure class="listing" id="listing-4-2">
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let x = 5;
+    let y = x;
+<span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-4-2">Listing 4-2</a>: Assigning the integer value of variable <code>x</code> to <code>y</code></figcaption>
+</figure>
+<p>我们可以推测这是在做什么：“将值 <code>5</code> 绑定到 <code>x</code>；然后，在 <code>x</code> 中复制该值，并将其绑定到 <code>y</code>。”现在，我们有两个变量，分别是 <code>x</code> 和 <code>y</code>，这两个变量的值都等于 <code>5</code>。确实如此，因为整数是具有已知固定大小的简单值，而这两个 <code>5</code> 值被推到了栈上。</p>
+<p>现在让我们来看看 <code>String</code> 版本：</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let s1 = String::from("hello");
+    let s2 = s1;
+<span class="boring">}</span></code></pre>
+<p>看起来非常相似，因此我们可以假设其运作方式应该是相同的：也就是说，第二行会复制 <code>s1</code> 中的值，并将其绑定到 <code>s2</code> 中。但实际上并非如此。</p>
+<p>请查看图4-1，了解 <code>String</code> 在覆盖层下发生了什么变化。一个 <code>String</code> 由三部分组成，如左侧所示：指向存储字符串内容的内存的指针、长度以及容量。这一组数据存储在栈上。右侧则是存储实际内容的堆内存。</p>
+<p><img alt="Two tables: the first table contains the representation of s1 on the
+stack, consisting of its length (5), capacity (5), and a pointer to the first
+value in the second table. The second table contains the representation of the
+string data on the heap, byte by byte." src="img/trpl04-01.svg" class="center" style="width: 50%;" /></p>
+<p>图4-1：内存中存储的<code>String</code>，其中包含了绑定在<code>"hello"</code>上的<code>s1</code>值</p>
+<p>“长度”指的是 <code>String</code> 的内容当前所使用的内存大小，以字节为单位。“容量”则是指<code>String</code>从分配器那里获得的总内存大小，同样以字节为单位。虽然长度与容量之间存在差异，但在这种上下文中并不重要，因此目前可以忽略容量这一参数。</p>
+<p>当我们把 <code>s1</code> 赋值给 <code>s2</code> 时， <code>String</code> 数据会被复制，也就是说，我们复制了栈上的指针、长度以及容量。但是，我们不会复制指针所指向的堆上的数据。换句话说，内存中的数据表示形式如图 4-2 所示。</p>
+<p><img alt="Three tables: tables s1 and s2 representing those strings on the
+stack, respectively, and both pointing to the same string data on the heap." src="img/trpl04-02.svg" class="center" style="width: 50%;" /></p>
+<p><span class="caption"> 图4-2：变量在内存中的表示形式 <code>s2</code> 该变量包含指向 <code>s1</code></span> 的指针、长度以及容量信息。</p>
+<p>这种表示方式并不像图4-3那样，而图4-3展示的是如果Rust同时复制堆数据时的内存状态。如果Rust采用这种方式，那么当堆上的数据量较大时，操作 <code>s2 = s1</code> 在运行性能方面可能会非常低效。</p>
+<p><img alt="Four tables: two tables representing the stack data for s1 and s2,
+and each points to its own copy of string data on the heap." src="img/trpl04-03.svg" class="center" style="width: 50%;" /></p>
+<p><span class="“caption”">图 4-3：如果 Rust 复制堆数据，’s2 = s1’可能发生的另一种情况</span></p>
+<p>之前我们提到过，当变量超出作用域时，Rust会自动调用 <code>drop</code> 函数，并清理该变量的堆内存。但是，图4-2显示，两个数据指针都指向同一个位置。这是一个问题：当 <code>s2</code> 和 <code>s1</code> 都超出作用域时，它们都会试图释放相同的内存。这种情况被称为“双重释放”错误，是我们之前提到的内存安全漏洞之一。多次释放内存可能会导致内存损坏，进而可能引发安全漏洞。</p>
+<p>为了确保内存安全，在 <code>let s2 = s1;</code> 这一行之后，Rust 认为 <code>s1</code> 不再有效。因此，当 <code>s1</code> 超出作用域时，Rust 不需要释放任何内存。请查看在 <code>s2</code> 创建之后尝试使用 <code>s1</code> 会发生什么；这是无法工作的。</p>
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">fn main() {
+</span>    let s1 = String::from("hello");
+    let s2 = s1;
+
+    println!(“{s1}，世界！”);
+<span class="boring">}</span></code></pre>
+<p>你会遇到这样的错误，因为Rust禁止你使用已被无效的引用。</p>
+<pre><code class="language-console">$ cargo run
+   Compiling ownership v0.1.0 (file:///projects/ownership)
+error[E0382]: borrow of moved value: `s1`
+ --&gt; src/main.rs:5:16
+  |
+2 |     let s1 = String::from("hello");
+  |         -- move occurs because `s1` has type `String`, which does not implement the `Copy` trait
+3 |     let s2 = s1;
+  |              -- value moved here
+4 |
+5 |     println!("{s1}, world!");
+  |                ^^ value borrowed here after move
+  |
+  = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: consider cloning the value if the performance cost is acceptable
+  |
+3 |     let s2 = s1.clone();
+  |                ++++++++
+
+For more information about this error, try `rustc --explain E0382`.
+error: could not compile `ownership` (bin "ownership") due to 1 previous error
+</code></pre>
+<p>如果你在其他语言编程时听说过“浅层复制”和“深层复制”这些术语，那么复制指针、长度以及容量而不复制数据这个概念，听起来就像是一种浅层复制。但实际上，由于Rust会失效第一个变量的值，因此这种操作被称为“移动”。在示例中，我们会说 <code>s1</code> 被“移动”到了 <code>s2</code> 中。那么，实际发生的情况如图4-4所示。</p>
+<p><img alt="Three tables: tables s1 and s2 representing those strings on the
+stack, respectively, and both pointing to the same string data on the heap.
+Table s1 is grayed out because s1 is no longer valid; only s2 can be used to
+access the heap data." src="img/trpl04-04.svg" class="center" style="width:
+50%;" /></p>
+<p><span class="“caption”">图 4-4：内存中的表示在’s1’之后已被无效</span>化</p>
+<p>这解决了我们的问题！只有 <code>s2</code> 是有效的，当它超出作用域时，它就能单独释放内存，我们就完成了。</p>
+<p>此外，这里还隐含了一个设计选择：Rust永远不会自动创建数据的“深度”副本。因此，任何自动复制操作在运行时性能方面可以被认为是不耗费资源的。</p>
+<h4 id="作用域与赋值"><a class="header" href="#作用域与赋值">作用域与赋值</a></h4>
+<p>对于通过 <code>drop</code> 函数释放内存、控制范围以及所有权之间的关系，情况也是类似的。当你将一个全新的值赋给一个现有的变量时，Rust 会立即调用 <code>drop</code> 函数来释放原始值所占用的内存。例如，考虑以下代码：</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let mut s = String::from("hello");
+    s = String::from(“ahoy”);
+
+    println!(“{s}，世界！”);
+<span class="boring">}</span></code></pre>
+<p>我们首先声明一个变量 <code>s</code>，并将其绑定到值为 <code>"hello"</code> 的 <code>String</code>。接着，我们立即创建一个新的 <code>String</code>，其值为 <code>"ahoy"</code>，并将其赋值给 <code>s</code>。此时，没有任何东西再指向堆中的原始值了。图 4-5 展示了当前栈和堆的数据结构：</p>
+<p><img alt="One table representing the string value on the stack, pointing to
+the second piece of string data (ahoy) on the heap, with the original string
+data (hello) grayed out because it cannot be accessed anymore." src="img/trpl04-05.svg" class="center" style="width: 50%;" /></p>
+<p><span class="“caption”">图 4-5：初始值被完全替换后的内存表示</span></p>
+<p>因此，原始字符串会立即超出作用域。Rust会立即执行 <code>drop</code> 函数，并且其内存也会立即被释放。当我们最后打印该值时，它将会变成 <code>"ahoy, world!"</code>。</p>
+<!-- Old headings. Do not remove or links may break. -->
+<p><a id="ways-variables-and-data-interact-clone"></a></p>
+<h4 id="变量与克隆数据的交互"><a class="header" href="#变量与克隆数据的交互">变量与克隆数据的交互</a></h4>
+<p>如果我们真的想要深度复制 <code>String</code> 的堆数据，而不仅仅是栈数据，我们可以使用一种常见的方法，叫做 <code>clone</code>。我们将在第五章中讨论这种方法的语法，但由于方法在许多编程语言中都是常见的特性，你可能之前就已经见过它们了。</p>
+<p>以下是 <code>clone</code> 方法的一个使用示例：</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let s1 = String::from("hello");
+    let s2 = s1.clone();
+
+    println!(“S1 = {s1}， s2 = {s2}”);
+<span class="boring">}</span></code></pre>
+<p>这个方式运行得很正常，并且确实实现了图4-3中所示的行为，其中堆数据确实被复制了。</p>
+<p>当你看到 <code>clone</code> 这样的调用时，就知道有一些任意的代码正在被执行，而且这些代码可能会消耗大量资源。这是一个直观的提示，表明有某些不同的事情正在发生。</p>
+<h4 id="仅栈数据复制"><a class="header" href="#仅栈数据复制">仅栈数据：复制</a></h4>
+<p>还有一个我们还没有讨论的细节。这段代码使用的是整数——其中一部分在清单4-2中展示过——它是有效且可以运行的。</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">fn main() {
+</span>    let x = 5;
+    let y = x;
+
+    println!(“x = {x}， y = {y}”);
+<span class="boring">}</span></code></pre>
+<p>但是这段代码似乎与我们刚刚学到的内容相矛盾：我们没有调用<code>clone</code>，而<code>x</code>仍然有效，并且没有被移动到<code>y</code>中。</p>
+<p>原因是，像整数这样的类型在编译时具有已知的大小，它们完全存储在栈上，因此复制实际值的过程非常快速。这意味着我们没有理由阻止 <code>x</code> 在创建变量 <code>y</code> 之后仍然有效。换句话说，在这里，深度复制和浅层复制之间没有区别，因此调用 <code>clone</code> 并不会与常规的浅层复制产生任何不同，所以我们可以省略这部分代码。</p>
+<p>Rust 有一个特殊的注解，叫做 <code>Copy</code> trait，我们可以将其应用于存储在栈上的类型。就像整数一样（我们将在<a href="ch10-02-traits.html">第10章</a><!-- ignore -->中详细讨论 trait 的更多内容）。如果一个类型实现了 <code>Copy</code> trait，那么使用该 trait 的变量不会移动，而是会被简单地复制，这样在赋值给另一个变量之后，这些变量仍然有效。</p>
+<p>如果某个类型或其任何组成部分实现了 <code>Drop</code> 特质，Rust 不会允许我们使用 <code>Copy</code> 注解该类型。如果某个类型在值超出作用域时需要特殊处理，并且我们为该类型添加了 <code>Copy</code> 注解，将会出现编译时错误。要了解如何为类型添加 <code>Copy</code> 注解以实现该特质，请参阅附录 C 中的 <a href="appendix-03-derivable-traits.html">“可推导的特质”</a><!-- ignore -->。</p>
+<p>那么，哪些类型实现了 <code>Copy</code> 特性呢？你可以查看相关类型的文档来确认，但一般来说，任何由简单标量值组成的组都可以实现 <code>Copy</code> 特性；而那些需要分配内存或属于某种资源类型的类型则无法实现 <code>Copy</code> 特性。以下是一些实现了 <code>Copy</code> 特性的类型：</p>
+<ul>
+<li>所有的整数类型，例如 <code>u32</code>。</li>
+<li>布尔类型， <code>bool</code>，其值为 <code>true</code> 和 <code>false</code>。</li>
+<li>所有的浮点类型，例如 <code>f64</code>。</li>
+<li>字符类型， <code>char</code>。</li>
+<li>元组，如果它们只包含也实现了 <code>Copy</code> 的类型。例如， <code>(i32, i32)</code> 实现了 <code>Copy</code>，但 <code>(i32, String)</code> 则没有。</li>
+</ul>
+<h3 id="所有权与函数"><a class="header" href="#所有权与函数">所有权与函数</a></h3>
+<p>将值传递给函数的机制与将值赋给变量时的机制类似。将变量传递给函数时，也会进行移动或复制操作，就像赋值时一样。列表4-3提供了一个示例，其中包含了一些注释，用来说明变量在何时进入和退出作用域。</p>
+<figure class="listing" id="listing-4-3">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024">fn main() {
+    let s = String::from("hello");  // s 进入范围
+
+    takes_ownership(s);             // s's value moves into the function...&lt;br/&gt;
+                                    // ... and so is no longer valid here&lt;br/&gt;
+
+    let x = 5;                      // x 进入范围
+
+    makes_copy(x);                  // Because i32 implements the Copy trait,&lt;br/&gt;
+                                    // x does NOT move into the function,&lt;br/&gt;
+                                    // so it's okay to use x afterward.&lt;br/&gt;
+
+} // 这里, x 超出范围, 然后是 s. 然而, 因为s的值被移动,
+  // 没有特殊发生.
+
+fn takes_ownership(some_string: String) { // 一些字符串进入范围
+    println!(“{some_string}”);
+} // 这里, 有些字符串超出了范围, 调用了 `drop` 。后台的
+  // 内存已被释放。
+
+fn makes_copy(some_integer: i32) { // 一些整数进入范围
+    println!(“{some_integer}”);
+} // 这里 some_integer 超出范围。没什么特别的事发生。</code></pre>
+<figcaption><a href="#listing-4-3">Listing 4-3</a>: Functions with ownership and scope annotated</figcaption>
+</figure>
+<p>如果我们尝试在调用 <code>takes_ownership</code> 之后使用 <code>s</code>，Rust 会抛出编译时错误。这些静态检查可以保护我们免受错误的侵害。试着在 <code>main</code> 中添加代码，该代码使用 <code>s</code> 和 <code>x</code>，以此来了解可以在哪些地方使用它们，以及所有权规则在哪些情况下禁止了这样的使用。</p>
+<h3 id="返回值与作用域"><a class="header" href="#返回值与作用域">返回值与作用域</a></h3>
+<p>返回值也可以转移所有权。列表4-4展示了一个函数返回某个值的例子，其注释与列表4-3中的注释类似。</p>
+<figure class="listing" id="listing-4-4">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024">fn main() {
+    let s1 = gives_ownership();        // 赋予所有权将其返回
+                                       // 值移动到 s1
+
+    let s2 = String::from("hello");    // s2 进入范围
+
+    let s3 = takes_and_gives_back(s2); // s2 已移动到
+                                       // takes_and_gives_back, 它也是
+                                       // 将其返回值移动到 s3
+} // Here, s3 goes out of scope and is dropped. s2 was moved, so nothing&lt;br/&gt;
+  // happens. s1 goes out of scope and is dropped.&lt;br/&gt;
+
+fn gives_ownership() -&gt; String {       // gives_ownership will move its&lt;br/&gt;
+                                       // return value into the function&lt;br/&gt;
+                                       // that calls it&lt;br/&gt;
+
+    let some_string = String::from(“你们”); // 一些字符串进入范围
+
+    some_string                        // some_string is returned and&lt;br/&gt;
+                                       // moves out to the calling&lt;br/&gt;
+                                       // function&lt;br/&gt;
+}
+
+// 此函数需要一个字符串并返回一个字符串。
+fn takes_and_gives_back(a_string: String) -&gt; String {
+    // a_string into
+    // scope
+
+    a_string  // a_string 返回并移出到调用函数
+}</code></pre>
+<figcaption><a href="#listing-4-4">Listing 4-4</a>: Transferring ownership of return values</figcaption>
+</figure>
+<p>变量的所有权始终遵循相同的模式：将值赋给另一个变量时，该变量就会失去对该值的所有权。当包含堆上数据的变量超出作用域时，除非将该数据的所有权转移给另一个变量，否则该数据会被 <code>drop</code> 回收。</p>
+<p>虽然这种方法可以工作，但是每次函数调用时都进行所有权转移并返还所有权确实有些繁琐。如果我们希望一个函数能够使用某个值，但不希望获得该值的所有权，那该怎么办呢？如果我们想要再次使用某个值，那么除了函数体内产生的数据之外，所有传递给函数的参数也都需要被返还，这确实很麻烦。</p>
+<p>Rust允许我们使用元组返回多个值，如清单4-5所示。</p>
+<figure class="listing" id="listing-4-5">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024">fn main() {
+    let s1 = String::from("hello");
+
+    let (s2, len) = calculate_length(s1);
+
+    println!(“'{s2}'的长度是{len}。”);
+}
+
+fn calculate_length(s: String) -&gt; (String, usize) {
+    let length = s.len(); // len() 返回字符串的长度
+
+    (s, length)
+}</code></pre>
+<figcaption><a href="#listing-4-5">Listing 4-5</a>: Returning ownership of parameters</figcaption>
+</figure>
+<p>但是，对于一个本应被普遍使用的概念来说，这种仪式性和工作量实在是太多了。幸运的是，Rust 有一个功能，可以让我们使用值而不需要转移所有权：引用。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch04-00-understanding-ownership.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="ch04-02-references-and-borrowing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch04-00-understanding-ownership.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="ch04-02-references-and-borrowing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="ferris-2317480c.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>泛型数据类型 - The Rust Programming Language</title>
+
+
+        <!-- Custom HTML head -->
+        <script type="text/javascript" src="ltd-provenance.js"></script>
+        <script type="text/javascript" src="ltd-current.js"></script>
+        <script type="text/javascript" src="../../ltd-config.js"></script>
+        <script type="text/javascript" src="../../ltd-flyout.js"></script>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris-d33b75bf.css">
+        <link rel="stylesheet" href="theme/2018-edition-4e126c62.css">
+        <link rel="stylesheet" href="theme/semantic-notes-9b5766c0.css">
+        <link rel="stylesheet" href="theme/listing-cab26221.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-70ba3c6a.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-9b676236.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Rust Programming Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h2 id="泛型数据类型"><a class="header" href="#泛型数据类型">泛型数据类型</a></h2>
+<p>我们使用泛型来为函数签名或结构体等元素定义规范，然后可以将这些定义应用于多种具体数据类型。首先，让我们看看如何使用泛型来定义函数、结构体、枚举和方法。接着，我们将讨论泛型对代码性能的影响。</p>
+<h3 id="在函数定义中"><a class="header" href="#在函数定义中">在函数定义中</a></h3>
+<p>在定义使用泛型的函数时，我们将泛型放在函数的签名中，而通常我们会在这里指定参数和返回值的数据类型。这样做可以使我们的代码更加灵活，为函数的调用者提供更多的功能，同时还能避免代码重复。</p>
+<p>继续我们的 <code>largest</code> 函数，列表 10-4 展示了两个都能找到切片中最大值的函数。之后，我们将这两个函数合并成一个使用泛型的函数。</p>
+<figure class="listing" id="listing-10-4">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024">fn largest_i32(list: &amp;[i32]) -&gt; &amp;i32 {
+    let mut largest = &amp;list[0];
+
+    for item in list {
+        if item &gt; largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn largest_char(list: &amp;[char]) -&gt; &amp;char {
+    let mut largest = &amp;list[0];
+
+    for item in list {
+        if item &gt; largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn main() {
+    let number_list = vec![34, 50, 25, 100, 65];
+
+    let result = largest_i32(&amp;number_list);
+    println!(“秘密号码是：{result}”);
+<span class="boring">    assert_eq!(*result, 100);
+</span>
+    let char_list = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest_char(&amp;char_list);
+    println!("The largest char is {result}");
+<span class="boring">    assert_eq!(*result, 'y');
+</span>}</code></pre>
+<figcaption><a href="#listing-10-4">Listing 10-4</a>: Two functions that differ only in their names and in the types in their signatures</figcaption>
+</figure>
+<p><code>largest_i32</code>函数是我们从清单10-3中提取出来的函数，它用于找出切片中最大的<code>i32</code>。<code>largest_char</code>函数则用于找出切片中最大的<code>char</code>。这两个函数的功能本质上是相同的，因此我们可以通过在单个函数中引入一个通用类型参数来消除重复代码。</p>
+<p>为了在一个新的单一函数中参数化类型，我们需要为类型参数命名，就像为函数的值参数命名一样。你可以使用任何标识符作为类型参数名。不过，我们会使用 <code>T</code>，因为按照惯例，Rust 中的类型参数名通常很短，通常只有一个字母，而且 Rust 的类型命名惯例是 UpperCamelCase。 <code>T</code> 是大多数 Rust 程序员默认的命名方式。</p>
+<p>当我们在函数体内使用参数时，必须在函数签名中声明该参数的名称，这样编译器才能明白这个名称的含义。同样地，当我们在函数签名中使用类型参数名称时，也必须在使用之前先声明该类型参数名称。为了定义泛型函数<code>largest</code>，我们需要在尖括号<code>&lt;&gt;</code>内声明类型名称，并将其放在函数名称和参数列表之间，如下所示：</p>
+<pre><code class="language-rust ignore">fn largest&lt;T&gt;(list: &amp;[T]) -&gt; &amp;T {</code></pre>
+<p>我们将这个定义理解为：“函数 <code>largest</code> 是某种类型的泛化，即 <code>largest</code> 是某种类型下的通用函数。” 这个函数有一个名为 <code>list</code> 的参数，该参数是一个类型为 <code>T</code> 的值的切片。而 <code>largest</code> 函数将返回一个指向相同类型 <code>T</code> 的值的引用。</p>
+<p>列表10-5展示了使用泛型数据类型时，<code>largest</code>函数的完整定义。该列表还展示了如何通过使用<code>i32</code>或<code>char</code>的值来调用这个函数。请注意，这段代码目前还无法编译。</p>
+<figure class="listing" id="listing-10-5">
+<span class="file-name">Filename: src/main.rs</span>
+<pre><code class="language-rust ignore does_not_compile">fn largest&lt;T&gt;(list: &amp;[T]) -&gt; &amp;T {
+    let mut largest = &amp;list[0];
+
+    for item in list {
+        if item &gt; largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn main() {
+    let number_list = vec![34, 50, 25, 100, 65];
+
+    let result = largest(&amp;number_list);
+    println!(“秘密号码是：{result}”);
+
+    let char_list = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest(&amp;char_list);
+    println!("The largest char is {result}");
+}</code></pre>
+<figcaption><a href="#listing-10-5">Listing 10-5</a>: The <code>largest</code> function using generic type parameters; this doesn’t compile yet</figcaption>
+</figure>
+<p>如果我们现在编译这段代码，将会出现以下错误：</p>
+<pre><code class="language-console">$ cargo run
+   Compiling chapter10 v0.1.0 (file:///projects/chapter10)
+error[E0369]: binary operation `&gt;` cannot be applied to type `&amp;T`
+ --&gt; src/main.rs:5:17
+  |
+5 |         if item &gt; largest {
+  |            ---- ^ ------- &amp;T
+  |            |
+  |            &amp;T
+  |
+help: consider restricting type parameter `T` with trait `PartialOrd`
+  |
+1 | fn largest&lt;T: std::cmp::PartialOrd&gt;(list: &amp;[T]) -&gt; &amp;T {
+  |             ++++++++++++++++++++++
+
+For more information about this error, try `rustc --explain E0369`.
+error: could not compile `chapter10` (bin "chapter10") due to 1 previous error
+</code></pre>
+<p>帮助文本中提到了<code>std::cmp::PartialOrd</code>，这是一种特质。我们将在下一节中讨论特质。目前，请注意这个错误表明<code>largest</code>的主体无法适用于<code>T</code>可能存在的所有类型。因为我们需要在主体中比较类型为<code>T</code>的值，所以我们只能使用那些值可以排序的类型。为了启用比较功能，标准库提供了<code>std::cmp::PartialOrd</code>特质，你可以将其应用于类型上（有关此特质的更多信息，请参见附录C）。为了修复清单10-5，我们可以按照帮助文本的建议，将适用于<code>T</code>的类型限制为那些实现了<code>PartialOrd</code>的类型。这样，清单就能成功编译了，因为标准库同时实现了<code>PartialOrd</code>在<code>i32</code>和<code>char</code>上。</p>
+<h3 id="在结构体定义中"><a class="header" href="#在结构体定义中">在结构体定义中</a></h3>
+<p>我们还可以定义结构体，以便在其中一个或多个字段中使用泛型类型参数，使用 <code>&lt;&gt;</code> 语法。列表 10-6 定义了一个 <code>Point&lt;T&gt;</code> 结构体，用于存储任何类型的 <code>x</code> 和 <code>y</code> 坐标值。</p>
+<figure class="listing" id="listing-10-6">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024">struct Point&lt;T&gt; {
+    x: T,
+    y: T,
+}
+
+fn main() {
+    let integer = Point { x: 5, y: 10 };
+    let float = Point { x: 1.0, y: 4.0 };
+}</code></pre>
+<figcaption><a href="#listing-10-6">Listing 10-6</a>: A <code>Point&lt;T&gt;</code> struct that holds <code>x</code> and <code>y</code> values of type <code>T</code></figcaption>
+</figure>
+<p>结构定义中使用通用语法类似于函数定义中使用的语法。 首先，我们在结构名称之后声明方括号中的类型参数名称。 然后我们在结构定义中使用通用类型，否则我们将指定具体的数据类型。</p>
+<p>注意，因为我们只使用一个通用类型来定义 <code>Point&lt;T&gt;</code>， 这个定义表示<code>Point&lt;T&gt;</code>结构是一般性的，超过了某种类型的<code>T</code>， 和字段<code>x</code> 和 <code>y</code> 都是同一类型的 <em>both</em> ，不管该类型是什么。 如果我们创建一个 <code>Point&lt;T&gt;</code> 的实例，具有不同类型的值，如果在列表10-7中，我们的代码将不会被编译。</p>
+<figure class="listing" id="listing-10-7">
+<span class="file-name">Filename: src/main.rs</span>
+<pre><code class="language-rust ignore does_not_compile">struct Point&lt;T&gt; {
+    x: T,
+    y: T,
+}
+
+fn main() {
+    let wont_work = Point { x: 5, y: 4.0 };
+}</code></pre>
+<figcaption><a href="#listing-10-7">Listing 10-7</a>: The fields <code>x</code> and <code>y</code> must be the same type because both have the same generic data type <code>T</code>.</figcaption>
+</figure>
+<p>在此示例中，当我们将整数值<code>5</code>分配给<code>x</code>时，， 我们让编译器知道通用类型<code>T</code>将是此实例的 <code>Point&lt;T&gt;</code>的整数。 然后，当我们为 <code>y</code> 指定了 <code>4.0</code> 的时候，我们被定义为 <code>x</code> 的类型，我们会遇到如下类型不匹配的错误：</p>
+<pre><code class="language-console">$ cargo run
+   Compiling chapter10 v0.1.0 (file:///projects/chapter10)
+error[E0308]: mismatched types
+ --&gt; src/main.rs:7:38
+  |
+7 |     let wont_work = Point { x: 5, y: 4.0 };
+  |                                      ^^^ expected integer, found floating-point number
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `chapter10` (bin "chapter10") due to 1 previous error
+</code></pre>
+<p>要定义一个 <code>Point</code> 结构，其中<code>x</code> 和 <code>y</code> 都是通用的，但可能有不同的类型，我们可以使用多个通用类型参数。 例如，在列表10-8中 我们修改<code>Point</code>的定义为通用型号<code>T</code>和<code>U</code>，而<code>x</code>的类型为<code>T</code>，<code>y</code>的类型为<code>U</code>。</p>
+<figure class="listing" id="listing-10-8">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024">struct Point&lt;T, U&gt; {
+    x: T,
+    y: U,
+}
+
+fn main() {
+    let both_integer = Point { x: 5, y: 10 };
+    let both_float = Point { x: 1.0, y: 4.0 };
+    let integer_and_float = Point { x: 5, y: 4.0 };
+}</code></pre>
+<figcaption><a href="#listing-10-8">Listing 10-8</a>: A <code>Point&lt;T, U&gt;</code> generic over two types so that <code>x</code> and <code>y</code> can be values of different types</figcaption>
+</figure>
+<p>现在，所有形如 <code>Point</code> 的实例都是被允许的！你可以在一个定义中使用任意多的通用类型参数，但使用太多会导致代码难以阅读。如果你发现自己的代码中使用了大量的通用类型，那么可能需要对代码进行重构，将其拆分成更小的部分。</p>
+<h3 id="在枚举定义中"><a class="header" href="#在枚举定义中">在枚举定义中</a></h3>
+<p>就像我们对结构体所做的那样，我们也可以定义枚举来保存各种通用数据类型。让我们再看一下标准库提供的 <code>Option&lt;T&gt;</code> 枚举，我们在第6章中就已经使用过它了。</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum Option&lt;T&gt; {
+    Some(T),
+    None,
+}
+<span class="boring">}</span></code></pre>
+<p>这个定义现在应该对你来说更有意义了。如你所见，<code>Option&lt;T&gt;</code> 这个枚举类型是对 <code>T</code> 的泛化，它有两个变体：<code>Some</code>，它只包含一个类型为 <code>T</code> 的值，以及另一个 <code>None</code> 变体，它不包含任何值。通过使用 <code>Option&lt;T&gt;</code> 这个枚举类型，我们可以表达一个可选值的抽象概念。由于 <code>Option&lt;T&gt;</code> 是泛化的，无论可选值的类型是什么，我们都可以使用这种抽象方式。</p>
+<p>枚举类型也可以使用多种泛型类型。我们在第9章中使用的 <code>Result</code> 枚举就是一个例子：</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum Result&lt;T, E&gt; {
+    Ok(T),
+    Err(E),
+}
+<span class="boring">}</span></code></pre>
+<p><code>Result</code> 枚举类型适用于两种类型：<code>T</code> 和 <code>E</code>，并且有两个变体：<code>Ok</code>，它存储类型为 <code>T</code> 的值；以及 <code>Err</code>，它存储类型为 <code>E</code> 的值。这个定义使得我们可以在任何可能成功执行操作（返回某种类型为 <code>T</code> 的值）或可能失败（返回某种类型为 <code>E</code> 的错误）的情况下使用 <code>Result</code> 枚举类型。实际上，在 Listing 9-3 中，我们正是使用这种方式来打开文件的。当文件成功打开时，<code>T</code> 会被填充为类型为 <code>std::fs::File</code> 的值；而当文件打开出现问题时，<code>E</code> 会被填充为类型为 <code>std::io::Error</code> 的值。</p>
+<p>当你在代码中发现多个结构体或枚举定义，它们只是持有的值类型不同时，可以通过使用泛型类型来避免重复。</p>
+<h3 id="方法定义"><a class="header" href="#方法定义">方法定义</a></h3>
+<p>我们可以像在第五章中那样，对结构体枚举实现方法，并且也可以在它们的定义中使用泛型类型。列表10-9展示了我们在列表10-6中定义的一个结构体 <code>Point&lt;T&gt;</code>，并在该结构体上实现了一个名为 <code>x</code> 的方法。</p>
+<figure class="listing" id="listing-10-9">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024">struct Point&lt;T&gt; {
+    x: T,
+    y: T,
+}
+
+impl&lt;T&gt; Point&lt;T&gt; {
+    fn x(&amp;self) -&gt; &amp;T {
+        &amp;self.x
+    }
+}
+
+fn main() {
+    let p = Point { x: 5, y: 10 };
+
+    println!("p.x = {}", p.x());
+}</code></pre>
+<figcaption><a href="#listing-10-9">Listing 10-9</a>: Implementing a method named <code>x</code> on the <code>Point&lt;T&gt;</code> struct that will return a reference to the <code>x</code> field of type <code>T</code></figcaption>
+</figure>
+<p>在这里，我们定义了一个名为 <code>x</code> 的方法，在 <code>Point&lt;T&gt;</code> 上返回一个 <code>x</code> 字段中的数据。</p>
+<p>请注意，我们必须在<code>imp</code>之后声明<code>T</code>，以便我们可以使用 <code>T</code>来指定我们正在执行<code>Point&lt;T&gt;</code>的方法。 在<code>imp</code>之后， <code>T</code>将<code>T</code>作为通用类型， Rust 可以识别<code>Point</code>中的角度括号中的类型是一个通用类型，而不是水泥类型。 我们可以选择一个不同于结构定义中声明的通用参数的名称。 但使用同一名称是常规的。 如果您在<code>imp</code>中写入了一个宣告一个通用类型的方法，该方法将被定义在类型的任何实例中， 不论哪种具体类型最终会替代通用类型。</p>
+<p>我们还可以在定义类型方法时具体规定对通用类型的限制。 例如，我们只能在 <code>Point&lt;f32&gt;</code> 实例上实现方法，而不能在 <code>Point&lt;T&gt;中实现任何普通类型的方法。 在列表10-10中，我们使用水泥类型 </code>f32<code>，意思是我们不在</code>默示’后声明任何类型。</p>
+<figure class="listing" id="listing-10-10">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">struct Point&lt;T&gt; {
+</span><span class="boring">    x: T,
+</span><span class="boring">    y: T,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;T&gt; Point&lt;T&gt; {
+</span><span class="boring">    fn x(&amp;self) -&gt; &amp;T {
+</span><span class="boring">        &amp;self.x
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Point&lt;f32&gt; {
+    fn distance_from_origin(&amp;self) -&gt; f32 {
+        (self.x.powi(2) + self.y.powi(2)).sqrt()
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let p = Point { x: 5, y: 10 };
+</span><span class="boring">
+</span><span class="boring">    println!("p.x = {}", p.x());
+</span><span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-10-10">Listing 10-10</a>: An <code>impl</code> block that only applies to a struct with a particular concrete type for the generic type parameter <code>T</code></figcaption>
+</figure>
+<p>这个代码表示<code>Point&lt;f32&gt;</code>类型将有一个 <code>Distance_from_origin</code> 方法； <code>T</code>不是 <code>f32</code> 类型的 <code>Point&lt;T&gt;</code>的其他实例将无法定义此方法。 该方法测量我们的点距离坐标(0.0, 0) 并使用仅适用于浮点型号的数学操作。</p>
+<p>结构定义中的通用类型参数并不总是与你在同一结构中使用的方法签名相同。 列出10-11 使用<code>Point</code>结构<code>和</code>X2<code>和</code>Y2<code>的通用类型</code>X1<code>和</code>Y1<code>，用于</code>mixup<code>的签名，使示例更清晰。 这个方法创建了一个新的 </code>Point<code> 实例，其中有</code>self<code>(类型为</code>X1<code>)和</code>y<code>(类型为</code>Y2<code>)的</code>x`值。</p>
+<figure class="listing" id="listing-10-11">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024">struct Point&lt;X1, Y1&gt; {
+    x: X1,
+    y: Y1,
+}
+
+impl&lt;X1, Y1&gt; Point&lt;X1, Y1&gt; {
+    fn mixup&lt;X2, Y2&gt;(self, other: Point&lt;X2, Y2&gt;) -&gt; Point&lt;X1, Y2&gt; {
+        Point {
+            x: self.x,
+            y: other.y,
+        }
+    }
+}
+
+fn main() {
+    let p1 = Point { x: 5, y: 10.4 };
+    let p2 = Point { x: "Hello", y: 'c' };
+
+    let p3 = p1.mixup(p2);
+
+    println!("p3.x = {}, p3.y = {}", p3.x, p3.y);
+}</code></pre>
+<figcaption><a href="#listing-10-11">Listing 10-11</a>: A method that uses generic types that are different from its struct’s definition</figcaption>
+</figure>
+<p>在 <code>main</code> 中，我们定义了一个 <code>Point</code> 用于<code>x</code> （值<code>5</code>）和<code>y</code> （值<code>10.4</code>）的 <code>f64</code>。 <code>p2</code>变量是一个 <code>Point</code> 结构，其中有一个字符串分割为 <code>x</code> (值为 <code>Hello</code>) 和一个<code>char</code>(值为 <code>c</code>)。 在<code>p1</code>上调用<code>mixup</code>和<code>p2</code>的参数’可以让我们<code>p3</code>，它将有<code>i32</code>的<code>x</code>，因为<code>x</code>来自<code>p1</code>。 <code>p3</code>变量将有<code>y</code>的<code>char</code>，因为<code>y</code>来自<code>p2</code>。 <code>println!</code>macro调用将打印 <code>p3.x = 5, p3.y = c</code>。</p>
+<p>这个示例的目的是为了表明一种情况，即某些通用参数是以<code>implication'声明的，某些参数是以方法定义声明的。 这里的通用参数</code>X1<code>和</code>Y1<code>是在</code>imp<code>之后申报的，因为它们与结构定义相同。 通用参数</code>X2<code>和</code>Y2<code>都是在 </code>fn mixup` 之后声明的，因为它们只与方法相关。</p>
+<h3 id="使用泛型代码的代码性能"><a class="header" href="#使用泛型代码的代码性能">使用泛型代码的代码性能</a></h3>
+<p>您可能在想使用通用类型参数时是否有运行时成本。 好消息是，使用通用类型不会使您的程序运行比具体类型的程序慢一些。</p>
+<p>Rust 通过在编译时使用通用法实现代码的单个无主化。 <em>Monomorphization</em> 是通过填写编译时使用的水泥类型将通用代码变成具体代码的过程。 在此过程中， 编译器与我们在列表10-5中创建通用函数的步骤相反：编译器查看调用通用代码的所有地方，并生成调用通用代码的水泥类型。</p>
+<p>让我们通过使用标准库库的通用<code>选项&lt;T&gt;</code> 列举来看看这种方法是如何运作的：</p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let integer = Some(5);
+let float = Some(5.0);
+<span class="boring">}</span></code></pre>
+<p>当Rust 编译这个代码时，它执行单个无主化。 在这一过程中， 编译器读取了在 <code>Option&lt;T&gt;</code> 实例中使用的值，并且识别了两种类型的 <code>Option&lt;T&gt;</code>：一个是 <code>i32</code> ，另一个是 <code>f64</code> 。 因此，它将<code>备选案文&lt;T&gt;</code>的通用定义扩大为<code>i32</code>和<code>f64</code>’两个专门定义， 因此，用具体定义取代通用定义。</p>
+<p>单态化代码看起来类似于以下内容（编译器使用的名字与我们这里用的示例不同）：</p>
+<figure class="listing">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024">enum Option_i32 {
+    Some(i32),
+    None,
+}
+
+enum Option_f64 {
+    Some(f64),
+    None,
+}
+
+fn main() {
+    let integer = Option_i32::Some(5);
+    let float = Option_f64::Some(5.0);
+}</code></pre>
+</figure>
+<p>通用的 <code>Option&lt;T&gt;</code>将被编译器创建的具体定义所替代。因为Rust将泛型代码编译成每个实例都指定了类型的代码，所以我们使用泛型时不会产生运行时的成本。当代码运行时，它的执行方式与我们手动复制每个定义时完全相同。这种单态化过程使得Rust的泛型在运行时非常高效。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch10-00-generics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="ch10-02-traits.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch10-00-generics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="ch10-02-traits.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="ferris-2317480c.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
