@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch01-00-getting-started.md:1
+msgid "Getting Started"
+msgstr "入门指南"
+
+#: src/ch01-00-getting-started.md:3
+msgid ""
+"Let’s start your Rust journey! There’s a lot to learn, but every journey "
+"starts somewhere. In this chapter, we’ll discuss:"
+msgstr ""
+"让我们开始你的Rust学习之旅吧！有很多东西需要了解，但每段旅程都始于某个地方。"
+"在这一章中，我们将讨论："
+
+#: src/ch01-00-getting-started.md:6
+msgid "Installing Rust on Linux, macOS, and Windows"
+msgstr "在Linux、macOS和Windows上安装Rust"
+
+#: src/ch01-00-getting-started.md:7
+msgid "Writing a program that prints `Hello, world!`"
+msgstr "编写一个程序来打印`Hello, world!`"
+
+#: src/ch01-00-getting-started.md:8
+msgid "Using `cargo`, Rust’s package manager and build system"
+msgstr "使用`cargo`，Rust的包管理器和构建系统"

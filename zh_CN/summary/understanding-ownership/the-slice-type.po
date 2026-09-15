@@ -1,0 +1,622 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch04-03-slices.md:1
+msgid "The Slice Type"
+msgstr "切片类型"
+
+#: src/ch04-03-slices.md:3
+msgid ""
+"_Slices_ let you reference a contiguous sequence of elements in a "
+"[collection](ch08-00-common-collections.md)<!-- ignore -->. A slice is a "
+"kind of reference, so it does not have ownership."
+msgstr ""
+"_Slices_允许你引用一个连续的元素序列，这个序列属于[集合](ch08-00-common-"
+"collections.md)<!-- 忽略 -->。Slice是一种引用方式，因此它不拥有所有权。"
+
+#: src/ch04-03-slices.md:7
+msgid ""
+"Here’s a small programming problem: Write a function that takes a string of "
+"words separated by spaces and returns the first word it finds in that "
+"string. If the function doesn’t find a space in the string, the whole string "
+"must be one word, so the entire string should be returned."
+msgstr ""
+"这里有一个简单的编程问题：编写一个函数，该函数接收一个由空格分隔的单词字符"
+"串，并返回该字符串中第一个找到的单词。如果函数在字符串中找不到空格，那么整个"
+"字符串应该被视为一个单词，因此应该返回整个字符串。"
+
+#: src/ch04-03-slices.md:12
+msgid ""
+"Note: For the purposes of introducing slices, we are assuming ASCII only in "
+"this section; a more thorough discussion of UTF-8 handling is in the "
+"[“Storing UTF-8 Encoded Text with Strings”](ch08-02-strings.html#storing-"
+"utf-8-encoded-text-with-strings)<!-- ignore --> section of Chapter 8."
+msgstr ""
+"注意：为了引入切片，我们仅假设本节使用 ASCII;关于 UTF-8 处理的更详细讨论见第 "
+"8 章[“存储带字符串的 UTF-8 编码文本”]（ch08-02-strings.html#storing-utf-8-"
+"encoded-text-with-strings）部分 <!--忽略->--部分。"
+
+#: src/ch04-03-slices.md:17
+msgid ""
+"Let’s work through how we’d write the signature of this function without "
+"using slices, to understand the problem that slices will solve:"
+msgstr ""
+"让我们来分析如何在不使用切片的情况下写出该函数的签名，以理解切片能解决的问"
+"题："
+
+#: src/ch04-03-slices.md:24
+msgid ""
+"The `first_word` function has a parameter of type `&String`. We don’t need "
+"ownership, so this is fine. (In idiomatic Rust, functions do not take "
+"ownership of their arguments unless they need to, and the reasons for that "
+"will become clear as we keep going.) But what should we return? We don’t "
+"really have a way to talk about _part_ of a string. However, we could return "
+"the index of the end of the word, indicated by a space. Let’s try that, as "
+"shown in Listing 4-7."
+msgstr ""
+"`first_word`函数的参数类型为`&String`。我们不需要拥有该参数的所有权，所以这样"
+"是可以的。（在Rust的惯用语法中，除非有必要，否则函数不会拥有其参数的所有权，"
+"这一点在我们继续阅读的过程中会逐渐明白。）但是，我们应该返回什么呢？实际上，"
+"我们无法以某种方式描述字符串的“部分”。不过，我们可以返回单词末尾的索引位置，"
+"这个位置通常由一个空格来表示。让我们尝试这样做，如清单4-7所示。"
+
+#: src/ch04-03-slices.md:38 src/ch04-03-slices.md:60 src/ch04-03-slices.md:78
+#: src/ch04-03-slices.md:112 src/ch04-03-slices.md:137
+#: src/ch04-03-slices.md:264 src/ch04-03-slices.md:309
+#: src/ch04-03-slices.md:397 src/ch04-03-slices.md:446
+msgid "b' '"
+msgstr "b' '"
+
+#: src/ch04-03-slices.md:51
+msgid ""
+"Because we need to go through the `String` element by element and check "
+"whether a value is a space, we’ll convert our `String` to an array of bytes "
+"using the `as_bytes` method."
+msgstr ""
+"因为我们需要逐个检查`String`元素，判断某个值是否为空格，所以我们将使用"
+"`as_bytes`方法将`String`转换为字节数组。"
+
+#: src/ch04-03-slices.md:71
+msgid ""
+"Next, we create an iterator over the array of bytes using the `iter` method:"
+msgstr "接下来，我们用“iter”方法在字节数组上创建一个迭代器："
+
+#: src/ch04-03-slices.md:89
+msgid ""
+"We’ll discuss iterators in more detail in [Chapter 13](ch13-02-iterators."
+"html)<!-- ignore -->. For now, know that `iter` is a method that returns "
+"each element in a collection and that `enumerate` wraps the result of `iter` "
+"and returns each element as part of a tuple instead. The first element of "
+"the tuple returned from `enumerate` is the index, and the second element is "
+"a reference to the element. This is a bit more convenient than calculating "
+"the index ourselves."
+msgstr ""
+"我们将在[第13章](ch13-02-iterators.html)中详细讨论迭代器。目前，请注意`iter`"
+"是一个方法，它返回集合中的每个元素；而`enumerate`则封装了`iter`的结果，并将每"
+"个元素作为元组的一部分返回。从`enumerate`返回的元组的第一个元素是索引，第二个"
+"元素则是对该元素的引用。这种方式比我们自己计算索引要方便得多。"
+
+#: src/ch04-03-slices.md:96
+msgid ""
+"Because the `enumerate` method returns a tuple, we can use patterns to "
+"destructure that tuple. We’ll be discussing patterns more in [Chapter 6]"
+"(ch06-02-match.html#patterns-that-bind-to-values)<!-- ignore -->. In the "
+"`for` loop, we specify a pattern that has `i` for the index in the tuple and "
+"`&item` for the single byte in the tuple. Because we get a reference to the "
+"element from `.iter().enumerate()`, we use `&` in the pattern."
+msgstr ""
+"因为`enumerate`方法返回一个元组，我们可以使用模式来解析这个元组。我们将在[第6"
+"章](ch06-02-match.html#patterns-that-bind-to-values)中进一步讨论模式。在`for`"
+"循环中，我们指定了一个模式，该模式使用`i`作为元组的索引，而使用`&item`来表示"
+"元组中的单个字节。由于我们从`.iter().enumerate()`获取了元素的引用，因此我们在"
+"模式中使用了`&`。"
+
+#: src/ch04-03-slices.md:103
+msgid ""
+"Inside the `for` loop, we search for the byte that represents the space by "
+"using the byte literal syntax. If we find a space, we return the position. "
+"Otherwise, we return the length of the string by using `s.len()`."
+msgstr ""
+"在`for`循环中，我们通过使用字节字面量语法来查找代表空格的字节。如果找到了空"
+"格，我们就返回该位置。否则，我们使用`s.len()`来返回字符串的长度。"
+
+#: src/ch04-03-slices.md:123
+msgid ""
+"We now have a way to find out the index of the end of the first word in the "
+"string, but there’s a problem. We’re returning a `usize` on its own, but "
+"it’s only a meaningful number in the context of the `&String`. In other "
+"words, because it’s a separate value from the `String`, there’s no guarantee "
+"that it will still be valid in the future. Consider the program in Listing "
+"4-8 that uses the `first_word` function from Listing 4-7."
+msgstr ""
+"我们现在有办法找出字符串中第一个单词的末尾索引，但存在一个问题。我们返回的是"
+"一个单独的`usize`值，然而这个值只有在`&String`的上下文中才具有实际意义。换句"
+"话说，由于它是一个与`String`不同的独立值，因此无法保证它在未来仍然有效。请参"
+"考清单4-8中的程序，该程序使用了来自清单4-7中的`first_word`函数。"
+
+#: src/ch04-03-slices.md:146 src/ch04-03-slices.md:187
+#: src/ch04-03-slices.md:318 src/ch04-03-slices.md:406
+#: src/ch04-03-slices.md:415 src/ch04-03-slices.md:455
+#: src/ch04-03-slices.md:464
+msgid "\"hello world\""
+msgstr "\"hello world\""
+
+#: src/ch04-03-slices.md:148
+msgid "// word will get the value 5\n"
+msgstr "// 单词会得到5的价值\n"
+
+#: src/ch04-03-slices.md:150
+msgid "// this empties the String, making it equal to \"\"\n"
+msgstr "//这会清空字符串，使其等于 “”\n"
+
+#: src/ch04-03-slices.md:152
+msgid ""
+"// word still has the value 5 here, but s no longer has any content that we\n"
+"    // could meaningfully use with the value 5, so word is now totally "
+"invalid!\n"
+msgstr ""
+"//Word 这里仍然有 5 的值，但 S 已经没有我们所拥有的内容了\n"
+"//可以有意义地与值5一起使用，所以单词现在完全无效！\n"
+
+#: src/ch04-03-slices.md:159
+msgid ""
+"This program compiles without any errors and would also do so if we used "
+"`word` after calling `s.clear()`. Because `word` isn’t connected to the "
+"state of `s` at all, `word` still contains the value `5`. We could use that "
+"value `5` with the variable `s` to try to extract the first word out, but "
+"this would be a bug because the contents of `s` have changed since we saved "
+"`5` in `word`."
+msgstr ""
+"这个程序没有任何错误，如果我们在调用 `s.clear()` 之后使用 `word` 的话，也会进"
+"行编译。 因为`word`根本没有连接到`s`的状态，`word`仍然包含`5`的值。 我们可以"
+"使用变量`5`来尝试提取第一个单词。 但这将是一个错误，因为我们在 `word` 中保存"
+"了 `5` 之后，`s` 的内容已经改变。"
+
+#: src/ch04-03-slices.md:165
+msgid ""
+"Having to worry about the index in `word` getting out of sync with the data "
+"in `s` is tedious and error-prone! Managing these indices is even more "
+"brittle if we write a `second_word` function. Its signature would have to "
+"look like this:"
+msgstr ""
+"在`word`中，必须担心索引与`s`中的数据不同步，这既繁琐又容易出错！如果我们编写"
+"`second_word`函数，管理这些索引会更加困难。该函数的签名必须如下所示："
+
+#: src/ch04-03-slices.md:173
+msgid ""
+"Now we’re tracking a starting _and_ an ending index, and we have even more "
+"values that were calculated from data in a particular state but aren’t tied "
+"to that state at all. We have three unrelated variables floating around that "
+"need to be kept in sync."
+msgstr ""
+"现在，我们跟踪了一个起始索引和一个结束索引，而且还有更多的值是从特定状态的数"
+"据中计算出来的，但这些值与那个状态完全无关。我们有三个不相关的变量在四处游"
+"荡，需要保持同步。"
+
+#: src/ch04-03-slices.md:178
+msgid "Luckily, Rust has a solution to this problem: string slices."
+msgstr "幸运的是，Rust有一个解决这个问题的方案：字符串切片。"
+
+#: src/ch04-03-slices.md:180
+msgid "String Slices"
+msgstr "字符串切片"
+
+#: src/ch04-03-slices.md:182
+msgid ""
+"A _string slice_ is a reference to a contiguous sequence of the elements of "
+"a `String`, and it looks like this:"
+msgstr "字符串切片是指对一个`String`中连续元素的引用，其形式如下："
+
+#: src/ch04-03-slices.md:194
+msgid ""
+"Rather than a reference to the entire `String`, `hello` is a reference to a "
+"portion of the `String`, specified in the extra `[0..5]` bit. We create "
+"slices using a range within square brackets by specifying `[starting_index.."
+"ending_index]`, where _`starting_index`_ is the first position in the slice "
+"and _`ending_index`_ is one more than the last position in the slice. "
+"Internally, the slice data structure stores the starting position and the "
+"length of the slice, which corresponds to _`ending_index`_ minus "
+"_`starting_index`_. So, in the case of `let world = &s[6..11];`, `world` "
+"would be a slice that contains a pointer to the byte at index 6 of `s` with "
+"a length value of `5`."
+msgstr ""
+"与其引用整个`String`，不如引用`hello`，它指的是`String`的一部分，这部分是通过"
+"额外的`[0..5]`位来指定的。我们使用方括号内的范围来创建切片，具体方法是指定"
+"`[starting_index..ending_index]`，其中_`starting_index`表示切片的起始位置，而"
+"_`ending_index`则比切片的最后一个位置多一个位置。在内部，切片数据结构会存储起"
+"始位置的数据。切片的长度等于`ending_index`减去`starting_index`。因此，在`let "
+"world = &s[6..11];`的情况下，`world`将是一个包含指向`s`中索引为6的字节的指针"
+"的切片，其长度值为`5`。"
+
+#: src/ch04-03-slices.md:205
+msgid "Figure 4-7 shows this in a diagram."
+msgstr "图4-7以图表的形式展示了这一内容。"
+
+#: src/ch04-03-slices.md:207
+msgid ""
+"<img alt=\"Three tables: a table representing the stack data of s, which "
+"points\n"
+"to the byte at index 0 in a table of the string data &quot;hello world&quot; "
+"on\n"
+"the heap. The third table represents the stack data of the slice world, "
+"which\n"
+"has a length value of 5 and points to byte 6 of the heap data table.\"\n"
+"src=\"img/trpl04-07.svg\" class=\"center\" style=\"width: 50%;\" />"
+msgstr ""
+"<img alt=\"Three tables: a table representing the stack data of s, which "
+"points\n"
+"to the byte at index 0 in a table of the string data &quot;hello world&quot; "
+"on\n"
+"the heap. The third table represents the stack data of the slice world, "
+"which\n"
+"has a length value of 5 and points to byte 6 of the heap data table.\"\n"
+"src=\"img/trpl04-07.svg\" class=\"center\" style=\"width: 50%;\" />"
+
+#: src/ch04-03-slices.md:213
+msgid ""
+"<span class=\"caption\">Figure 4-7: A string slice referring to part of a "
+"`String`</span>"
+msgstr ""
+"<span class=\"caption\">图4-7：一个字符串切片，指代`String`的一部分</span>"
+
+#: src/ch04-03-slices.md:216
+msgid ""
+"With Rust’s `..` range syntax, if you want to start at index 0, you can drop "
+"the value before the two periods. In other words, these are equal:"
+msgstr ""
+"在Rust的`..`范围语法中，如果你想从索引0开始，可以省略两个小数点之前的值。换句"
+"话说，这两个值是相等的："
+
+#: src/ch04-03-slices.md:220 src/ch04-03-slices.md:230
+#: src/ch04-03-slices.md:242
+msgid "\"hello\""
+msgstr "\"hello\""
+
+#: src/ch04-03-slices.md:226
+msgid ""
+"By the same token, if your slice includes the last byte of the `String`, you "
+"can drop the trailing number. That means these are equal:"
+msgstr ""
+"同样地，如果你的切片包含了`String`的最后一个字节，那么你可以省略后面的数字。"
+"这意味着这两者是相等的："
+
+#: src/ch04-03-slices.md:238
+msgid ""
+"You can also drop both values to take a slice of the entire string. So, "
+"these are equal:"
+msgstr ""
+"您还可以同时输入两个值，以提取整个字符串的一部分。所以，这两个值是相等的："
+
+#: src/ch04-03-slices.md:250
+msgid ""
+"Note: String slice range indices must occur at valid UTF-8 character "
+"boundaries. If you attempt to create a string slice in the middle of a "
+"multibyte character, your program will exit with an error."
+msgstr ""
+"注意：字符串切片的范围索引必须位于有效的UTF-8字符边界上。如果您尝试在多字节字"
+"符的中间位置进行字符串切片，程序将会因错误而退出。"
+
+#: src/ch04-03-slices.md:254
+msgid ""
+"With all this information in mind, let’s rewrite `first_word` to return a "
+"slice. The type that signifies “string slice” is written as `&str`:"
+msgstr ""
+"考虑到所有这些信息，让我们重新编写 `first_word`，使其返回一个切片。表示“字符"
+"串切片”的类型被定义为 `&str`："
+
+#: src/ch04-03-slices.md:277
+msgid ""
+"We get the index for the end of the word the same way we did in Listing 4-7, "
+"by looking for the first occurrence of a space. When we find a space, we "
+"return a string slice using the start of the string and the index of the "
+"space as the starting and ending indices."
+msgstr ""
+"我们获取单词末尾的索引的方式与清单4-7中相同，即通过查找第一个空格来实现。当找"
+"到空格时，我们使用字符串的起始位置和空格的位置作为起始和结束索引，返回一个字"
+"符串切片。"
+
+#: src/ch04-03-slices.md:282
+msgid ""
+"Now when we call `first_word`, we get back a single value that is tied to "
+"the underlying data. The value is made up of a reference to the starting "
+"point of the slice and the number of elements in the slice."
+msgstr ""
+"当我们调用`first_word`时，会得到一个与底层数据相关的单一值。这个值包含了切片"
+"起始点的引用以及切片中的元素数量。"
+
+#: src/ch04-03-slices.md:286
+msgid "Returning a slice would also work for a `second_word` function:"
+msgstr "返回切片同样适用于`second_word`这个函数："
+
+#: src/ch04-03-slices.md:292
+msgid ""
+"We now have a straightforward API that’s much harder to mess up because the "
+"compiler will ensure that the references into the `String` remain valid. "
+"Remember the bug in the program in Listing 4-8, when we got the index to the "
+"end of the first word but then cleared the string so our index was invalid? "
+"That code was logically incorrect but didn’t show any immediate errors. The "
+"problems would show up later if we kept trying to use the first word index "
+"with an emptied string. Slices make this bug impossible and let us know much "
+"sooner that we have a problem with our code. Using the slice version of "
+"`first_word` will throw a compile-time error:"
+msgstr ""
+"我们现在拥有一个非常简单的API，而且很难出错，因为编译器会确保对`String`的引用"
+"始终有效。还记得在清单4-8中的程序里出现的错误吗？当时，我们的索引指向了第一个"
+"单词的末尾，但随后又清除了字符串，导致索引变得无效。那段代码在逻辑上是不正确"
+"的，但当时并没有立即显示出任何错误。只有在我们继续尝试使用那个单词的索引时，"
+"问题才会显现出来。一个被清空了的字符串。使用切片会使得这个错误无法被检测到，"
+"并且能让我们更早地发现代码中存在问题。如果使用`first_word`的切片版本，将会引"
+"发编译时错误："
+
+#: src/ch04-03-slices.md:322
+msgid "// error!\n"
+msgstr "// 错误！\n"
+
+#: src/ch04-03-slices.md:324
+msgid "\"the first word is: {word}\""
+msgstr "\"the first word is: {word}\""
+
+#: src/ch04-03-slices.md:330
+msgid "Here’s the compiler error:"
+msgstr "这是编译器错误："
+
+#: src/ch04-03-slices.md:332
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling ownership v0.1.0 (file:///projects/ownership)\n"
+"error[E0502]: cannot borrow `s` as mutable because it is also borrowed as "
+"immutable\n"
+"  --> src/main.rs:18:5\n"
+"   |\n"
+"16 |     let word = first_word(&s);\n"
+"   |                           -- immutable borrow occurs here\n"
+"17 |\n"
+"18 |     s.clear(); // error!\n"
+"   |     ^^^^^^^^^ mutable borrow occurs here\n"
+"19 |\n"
+"20 |     println!(\"the first word is: {word}\");\n"
+"   |                                   ---- immutable borrow later used "
+"here\n"
+"\n"
+"For more information about this error, try `rustc --explain E0502`.\n"
+"error: could not compile `ownership` (bin \"ownership\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling ownership v0.1.0 (file:///projects/ownership)\n"
+"error[E0502]: cannot borrow `s` as mutable because it is also borrowed as "
+"immutable\n"
+"  --> src/main.rs:18:5\n"
+"   |\n"
+"16 |     let word = first_word(&s);\n"
+"   |                           -- immutable borrow occurs here\n"
+"17 |\n"
+"18 |     s.clear(); // error!\n"
+"   |     ^^^^^^^^^ mutable borrow occurs here\n"
+"19 |\n"
+"20 |     println!(\"the first word is: {word}\");\n"
+"   |                                   ---- immutable borrow later used "
+"here\n"
+"\n"
+"For more information about this error, try `rustc --explain E0502`.\n"
+"error: could not compile `ownership` (bin \"ownership\") due to 1 previous "
+"error\n"
+"```"
+
+#: src/ch04-03-slices.md:351
+msgid ""
+"Recall from the borrowing rules that if we have an immutable reference to "
+"something, we cannot also take a mutable reference. Because `clear` needs to "
+"truncate the `String`, it needs to get a mutable reference. The `println!` "
+"after the call to `clear` uses the reference in `word`, so the immutable "
+"reference must still be active at that point. Rust disallows the mutable "
+"reference in `clear` and the immutable reference in `word` from existing at "
+"the same time, and compilation fails. Not only has Rust made our API easier "
+"to use, but it has also eliminated an entire class of errors at compile time!"
+msgstr ""
+"回想一下借用规则：如果我们有一个不可变的引用，那么我们就不能同时拥有一个可变"
+"的引用。因为`clear`需要截断`String`，所以它必须获取一个可变的引用。在调用"
+"`clear`之后，`println!`使用了`word`中的引用，因此那个不可变的引用在那个时刻仍"
+"然应该是有效的。Rust不允许使用可变的引用。在`clear`中引用了`word`中的不可变引"
+"用，这两个引用同时存在时会导致编译失败。Rust不仅使我们的API更易于使用，还消除"
+"了在编译时出现的整类错误！"
+
+#: src/ch04-03-slices.md:362
+msgid "<a id=\"string-literals-are-slices\"></a>"
+msgstr "<a id=\"string-literals-are-slices\"></a>"
+
+#: src/ch04-03-slices.md:364
+msgid "String Literals as Slices"
+msgstr "字符串字面量作为切片"
+
+#: src/ch04-03-slices.md:366
+msgid ""
+"Recall that we talked about string literals being stored inside the binary. "
+"Now that we know about slices, we can properly understand string literals:"
+msgstr ""
+"回顾我们已经谈论过的字符串文献存储在二进制文件中。既然我们知道切片，我们可以"
+"正确理解字符串文献："
+
+#: src/ch04-03-slices.md:370
+msgid "\"Hello, world!\""
+msgstr "“你好，世界！”"
+
+#: src/ch04-03-slices.md:373
+msgid ""
+"The type of `s` here is `&str`: It’s a slice pointing to that specific point "
+"of the binary. This is also why string literals are immutable; `&str` is an "
+"immutable reference."
+msgstr ""
+"这里的`s`的类型是`&str`: 这是一个指向这个二进制程序的特定点的分割。 这也是为"
+"什么字符串的文字不可变；`&str`是不可变的引用。"
+
+#: src/ch04-03-slices.md:377
+msgid "String Slices as Parameters"
+msgstr "字符串切片作为参数"
+
+#: src/ch04-03-slices.md:379
+msgid ""
+"Knowing that you can take slices of literals and `String` values leads us to "
+"one more improvement on `first_word`, and that’s its signature:"
+msgstr ""
+"知道你可以拿起文字分割和 `String`的值会使我们在`first_word`上再有一个改进，并"
+"且它的签名："
+
+#: src/ch04-03-slices.md:386
+msgid ""
+"A more experienced Rustacean would write the signature shown in Listing 4-9 "
+"instead because it allows us to use the same function on both `&String` "
+"values and `&str` values."
+msgstr ""
+"一个经验丰富的Rustacean会写上列表4-9中显示的签名，因为它允许我们同时使用同一"
+"个函数在 `&String` 和 `&str` 两个值。"
+
+#: src/ch04-03-slices.md:408 src/ch04-03-slices.md:457
+msgid ""
+"// `first_word` works on slices of `String`s, whether partial or whole.\n"
+msgstr "// `first_word` 工作于`String`s的切片上，不论是局部的还是整个的，\n"
+
+#: src/ch04-03-slices.md:411
+msgid ""
+"// `first_word` also works on references to `String`s, which are equivalent\n"
+msgstr "// `first_word` 也适用于等于的 `String`s\n"
+
+#: src/ch04-03-slices.md:412
+msgid "// to whole slices of `String`s.\n"
+msgstr "// 整个`字符串'的切片.\n"
+
+#: src/ch04-03-slices.md:417
+msgid ""
+"// `first_word` works on slices of string literals, whether partial or\n"
+msgstr "// `first_word` 工作于字符串文字的切片上，不论是部分文字还是\n"
+
+#: src/ch04-03-slices.md:418
+msgid "// whole.\n"
+msgstr "// 整数。\n"
+
+#: src/ch04-03-slices.md:422
+msgid "// Because string literals *are* string slices already,\n"
+msgstr "// 因为字符串文本*为*字符串切片，\n"
+
+#: src/ch04-03-slices.md:423
+msgid "// this works too, without the slice syntax!\n"
+msgstr "// 这也能正常工作，没有切片语法！\n"
+
+#: src/ch04-03-slices.md:430
+msgid ""
+"If we have a string slice, we can pass that directly. If we have a `String`, "
+"we can pass a slice of the `String` or a reference to the `String`. This "
+"flexibility takes advantage of deref coercions, a feature we will cover in "
+"the [“Using Deref Coercions in Functions and Methods”](ch15-02-deref."
+"html#using-deref-coercions-in-functions-and-methods)<!--\n"
+"ignore --> section of Chapter 15."
+msgstr ""
+"如果我们有一个字符串切片，我们可以直接传递它。 如果我们有一个 `String`，我们"
+"可以传递一个 `String` 的分割或对 `String` 的引用。 这种灵活性利用了取消胁迫，"
+"我们将在[“在函数和方法中使用Deref Coercions”](ch15-02-deref.html#using-deref-"
+"coercions-in-functions-and-methods)中包含的功能！ -\n"
+"忽略--> 第15章部分。"
+
+#: src/ch04-03-slices.md:436
+msgid ""
+"Defining a function to take a string slice instead of a reference to a "
+"`String` makes our API more general and useful without losing any "
+"functionality:"
+msgstr ""
+"定义函数作为字符串切片，而不是引用`String`，使我们的 API 更加笼统和有用，同时"
+"又不会失去任何功能："
+
+#: src/ch04-03-slices.md:460
+msgid ""
+"// `first_word` also works on references to `String`s, which are equivalent\n"
+"    // to whole slices of `String`s.\n"
+msgstr ""
+"// `first_word` 也适用于对`String`s的引用，这些引用相当于\n"
+"    // 整个`String`s'的切片。\n"
+
+#: src/ch04-03-slices.md:466
+msgid ""
+"// `first_word` works on slices of string literals, whether partial or\n"
+"    // whole.\n"
+msgstr ""
+"//`first_word`处理字符串字面值的切片，无论是部分还是<br/>\n"
+"//整体。<br/>\n"
+
+#: src/ch04-03-slices.md:471
+msgid ""
+"// Because string literals *are* string slices already,\n"
+"    // this works too, without the slice syntax!\n"
+msgstr ""
+"// 因为字符串文本*已经是*字符串切片，\n"
+"    // 这也是有用的，没有分割语法！\n"
+
+#: src/ch04-03-slices.md:479
+msgid "Other Slices"
+msgstr "其他切片"
+
+#: src/ch04-03-slices.md:481
+msgid ""
+"String slices, as you might imagine, are specific to strings. But there’s a "
+"more general slice type too. Consider this array:"
+msgstr ""
+"正如您所想象的那样，字符串切片是特定于字符串的。不过，还有一种更通用的切片类"
+"型。考虑这个数组："
+
+#: src/ch04-03-slices.md:488
+msgid ""
+"Just as we might want to refer to part of a string, we might want to refer "
+"to part of an array. We’d do so like this:"
+msgstr ""
+"就像我们可能想要引用字符串的一部分一样，我们也可能会想要引用数组的一部分。我"
+"们可以这样做："
+
+#: src/ch04-03-slices.md:499
+msgid ""
+"This slice has the type `&[i32]`. It works the same way as string slices do, "
+"by storing a reference to the first element and a length. You’ll use this "
+"kind of slice for all sorts of other collections. We’ll discuss these "
+"collections in detail when we talk about vectors in Chapter 8."
+msgstr ""
+"这个切片的类型是 `&[i32]'。 它的工作方式与字符串切片相同，因为它储存了第一个"
+"元素和长度。 你将使用这种切片来进行其他收藏。 当我们在第8章中谈论矢量时，我们"
+"将详细讨论这些收藏。"
+
+#: src/ch04-03-slices.md:504
+msgid "Summary"
+msgstr "摘要"
+
+#: src/ch04-03-slices.md:506
+msgid ""
+"The concepts of ownership, borrowing, and slices ensure memory safety in "
+"Rust programs at compile time. The Rust language gives you control over your "
+"memory usage in the same way as other systems programming languages. But "
+"having the owner of data automatically clean up that data when the owner "
+"goes out of scope means you don’t have to write and debug extra code to get "
+"this control."
+msgstr ""
+"在Rust程序中，所有权、借用和切片的概念能够在编译时确保内存安全。Rust语言让你"
+"能够像其他系统编程语言一样控制自己的内存使用。但是，通过让数据的所有者在离开"
+"作用域时自动清理该数据，这意味着你不必编写额外的代码来实现这种控制。"
+
+#: src/ch04-03-slices.md:512
+msgid ""
+"Ownership affects how lots of other parts of Rust work, so we’ll talk about "
+"these concepts further throughout the rest of the book. Let’s move on to "
+"Chapter 5 and look at grouping pieces of data together in a `struct`."
+msgstr ""
+"所有权影响着Rust中许多其他部分的运作方式，因此我们在本书的其余部分会进一步讨"
+"论这些概念。接下来让我们进入第5章，了解如何将数据片段组合在一起，使用`struct`"
+"来实现这一点。"
