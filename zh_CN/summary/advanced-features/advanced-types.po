@@ -1,0 +1,554 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch20-03-advanced-types.md:1
+msgid "Advanced Types"
+msgstr "高级类型"
+
+#: src/ch20-03-advanced-types.md:3
+msgid ""
+"The Rust type system has some features that we’ve so far mentioned but "
+"haven’t yet discussed. We’ll start by discussing newtypes in general as we "
+"examine why they are useful as types. Then, we’ll move on to type aliases, a "
+"feature similar to newtypes but with slightly different semantics. We’ll "
+"also discuss the `!` type and dynamically sized types."
+msgstr ""
+"Rust的类型系统有一些我们之前提到但尚未详细讨论的特性。首先，我们将总体介绍新"
+"类型，探讨它们作为类型的实用性。接着，我们会讨论类型别名，这是一种与新类型类"
+"似但语义略有不同的特性。此外，我们还会讨论`!`类型以及动态大小的类型。"
+
+#: src/ch20-03-advanced-types.md:11
+msgid ""
+"<a id=\"using-the-newtype-pattern-for-type-safety-and-abstraction\"></a>"
+msgstr ""
+"<a id=\"using-the-newtype-pattern-for-type-safety-and-abstraction\"></a>"
+
+#: src/ch20-03-advanced-types.md:13
+msgid "Type Safety and Abstraction with the Newtype Pattern"
+msgstr "新类型模式的类型安全与抽象"
+
+#: src/ch20-03-advanced-types.md:15
+msgid ""
+"This section assumes you’ve read the earlier section [“Implementing External "
+"Traits with the Newtype Pattern”](ch20-02-advanced-traits.html#implementing-"
+"external-traits-with-the-newtype-pattern)<!-- ignore -->. The newtype "
+"pattern is also useful for tasks beyond those we’ve discussed so far, "
+"including statically enforcing that values are never confused and indicating "
+"the units of a value. You saw an example of using newtypes to indicate units "
+"in Listing 20-16: Recall that the `Millimeters` and `Meters` structs wrapped "
+"`u32` values in a newtype. If we wrote a function with a parameter of type "
+"`Millimeters`, we wouldn’t be able to compile a program that accidentally "
+"tried to call that function with a value of type `Meters` or a plain `u32`."
+msgstr ""
+"本节假设您已经阅读了前面的章节[“使用Newtype模式实现外部特性”](ch20-02-"
+"advanced-traits.html#implementing-external-traits-with-the-newtype-"
+"pattern)<!-- 忽略 -->。Newtype模式对于超出我们目前讨论范围的任务也非常有用，"
+"例如强制确保值不会被混淆，以及指定值的单位。您在Listing 20-16中看到了使用"
+"Newtype来表示单位的例子：请注意，`Millimeters`和`Meters`结构体包含了`u32`的"
+"值。在一个新类型中。如果我们编写一个函数，其参数类型为`Millimeters`，那么我们"
+"就无法编译出一个程序，该程序可能会错误地尝试使用类型为`Meters`或普通的`u32`的"
+"值来调用该函数。"
+
+#: src/ch20-03-advanced-types.md:25
+msgid ""
+"We can also use the newtype pattern to abstract away some implementation "
+"details of a type: The new type can expose a public API that is different "
+"from the API of the private inner type."
+msgstr ""
+"我们还可以使用新类型模式来抽象出某个类型的某些实现细节：新类型可以暴露出一个"
+"与私有内部类型不同的公共API。"
+
+#: src/ch20-03-advanced-types.md:29
+msgid ""
+"Newtypes can also hide internal implementation. For example, we could "
+"provide a `People` type to wrap a `HashMap<i32, String>` that stores a "
+"person’s ID associated with their name. Code using `People` would only "
+"interact with the public API we provide, such as a method to add a name "
+"string to the `People` collection; that code wouldn’t need to know that we "
+"assign an `i32` ID to names internally. The newtype pattern is a lightweight "
+"way to achieve encapsulation to hide implementation details, which we "
+"discussed in the [“Encapsulation that Hides Implementation Details”](ch18-01-"
+"what-is-oo.html#encapsulation-that-hides-implementation-details)<!-- ignore "
+"--> section in Chapter 18."
+msgstr ""
+"新类型还可以隐藏内部实现。例如，我们可以提供一个`People`类型来封装一个"
+"`HashMap<i32, String>`，该`HashMap<i32, String>`用于存储与人物姓名相关的ID。"
+"使用`People`的代码只会与我们提供的公共API进行交互，比如将姓名字符串添加到"
+"`People`集合中；这样的代码不需要知道我们会在内部为姓名分配`i32` ID。这种新类"
+"型的设计是一种实现封装的轻量级方式。为了隐藏实现细节，我们在第18章的[“封装以"
+"隐藏实现细节”](ch18-01-what-is-oo.html#encapsulation-that-hides-"
+"implementation-details)<!-- ignore -->章节中进行了讨论。"
+
+#: src/ch20-03-advanced-types.md:42
+msgid "<a id=\"creating-type-synonyms-with-type-aliases\"></a>"
+msgstr "<a id=\"creating-type-synonyms-with-type-aliases\"></a>"
+
+#: src/ch20-03-advanced-types.md:44
+msgid "Type Synonyms and Type Aliases"
+msgstr "类型同义词与类型别名"
+
+#: src/ch20-03-advanced-types.md:46
+msgid ""
+"Rust provides the ability to declare a _type alias_ to give an existing type "
+"another name. For this we use the `type` keyword. For example, we can create "
+"the alias `Kilometers` to `i32` like so:"
+msgstr ""
+"Rust提供了声明一个类型别名的功能，以便给现有的类型起另一个名字。为此，我们使"
+"用`type`这个关键字。例如，我们可以创建别名`Kilometers`来代表`i32`，如下所示："
+
+#: src/ch20-03-advanced-types.md:57 src/ch20-03-advanced-types.md:73
+msgid "\"x + y = {}\""
+msgstr "\"x + y = {}\""
+
+#: src/ch20-03-advanced-types.md:61
+msgid ""
+"Now the alias `Kilometers` is a _synonym_ for `i32`; unlike the "
+"`Millimeters` and `Meters` types we created in Listing 20-16, `Kilometers` "
+"is not a separate, new type. Values that have the type `Kilometers` will be "
+"treated the same as values of type `i32`:"
+msgstr ""
+"Now the alias `Kilometers` is a _synonym_ for `i32`; unlike the "
+"`Millimeters` and `Meters` types we created in Listing 20-16, `Kilometers` "
+"is not a separate, new type. Values that have the type `Kilometers` will be "
+"treated the same as values of type `i32`:"
+
+#: src/ch20-03-advanced-types.md:77
+msgid ""
+"Because `Kilometers` and `i32` are the same type, we can add values of both "
+"types and can pass `Kilometers` values to functions that take `i32` "
+"parameters. However, using this method, we don’t get the type-checking "
+"benefits that we get from the newtype pattern discussed earlier. In other "
+"words, if we mix up `Kilometers` and `i32` values somewhere, the compiler "
+"will not give us an error."
+msgstr ""
+"因为`Kilometers`和`i32`是同一类型的，我们可以同时使用这两种类型的值，并且可以"
+"将`Kilometers`的值传递给那些需要`i32`参数的函数。然而，使用这种方法，我们无法"
+"享受到之前讨论过的新类型模式所带来的类型检查优势。换句话说，如果我们在某些地"
+"方混淆了`Kilometers`和`i32`的值，编译器不会给我们报错。"
+
+#: src/ch20-03-advanced-types.md:84
+msgid ""
+"The main use case for type synonyms is to reduce repetition. For example, we "
+"might have a lengthy type like this:"
+msgstr ""
+"类型同义词的主要用法是减少重复。例如，我们可能有一个像这样的很长的类型："
+
+#: src/ch20-03-advanced-types.md:91
+msgid ""
+"Writing this lengthy type in function signatures and as type annotations all "
+"over the code can be tiresome and error-prone. Imagine having a project full "
+"of code like that in Listing 20-25."
+msgstr ""
+"在函数签名中写入这个冗长的类型，作为代码上的批注类型，可能是杂乱和错误的。 想"
+"象一个项目，像20-25上架时那样充满代码。"
+
+#: src/ch20-03-advanced-types.md:99 src/ch20-03-advanced-types.md:124
+msgid "\"hi\""
+msgstr "\"hi\""
+
+#: src/ch20-03-advanced-types.md:102 src/ch20-03-advanced-types.md:106
+#: src/ch20-03-advanced-types.md:127 src/ch20-03-advanced-types.md:131
+#: src/ch20-03-advanced-types.md:215 src/ch20-03-advanced-types.md:248
+#: src/ch20-03-advanced-types.md:261 src/ch20-03-advanced-types.md:412
+#: src/ch20-03-advanced-types.md:420 src/ch20-03-advanced-types.md:430
+msgid "// --snip--\n"
+msgstr ""
+"// --snip--\n"
+"——剪——\n"
+
+#: src/ch20-03-advanced-types.md:114
+msgid ""
+"A type alias makes this code more manageable by reducing the repetition. In "
+"Listing 20-26, we’ve introduced an alias named `Thunk` for the verbose type "
+"and can replace all uses of the type with the shorter alias `Thunk`."
+msgstr ""
+"类型别名通过减少重复代码来使代码更加易于管理。在列表20-26中，我们为冗长的类型"
+"引入了一个别名`Thunk`，并且可以将所有对该类型的引用替换为更简短的别名"
+"`Thunk`。"
+
+#: src/ch20-03-advanced-types.md:139
+msgid ""
+"This code is much easier to read and write! Choosing a meaningful name for a "
+"type alias can help communicate your intent as well (_thunk_ is a word for "
+"code to be evaluated at a later time, so it’s an appropriate name for a "
+"closure that gets stored)."
+msgstr ""
+"这段代码更容易阅读和理解！为类型别名选择一个有意义的名称，有助于传达你的意"
+"图。（_thunk_这个词表示代码将在稍后时间被评估，因此它是一个适合用于表示被存储"
+"的闭包的合适名称。）。"
+
+#: src/ch20-03-advanced-types.md:144
+msgid ""
+"Type aliases are also commonly used with the `Result<T, E>` type for "
+"reducing repetition. Consider the `std::io` module in the standard library. "
+"I/O operations often return a `Result<T, E>` to handle situations when "
+"operations fail to work. This library has a `std::io::Error` struct that "
+"represents all possible I/O errors. Many of the functions in `std::io` will "
+"be returning `Result<T, E>` where the `E` is `std::io::Error`, such as these "
+"functions in the `Write` trait:"
+msgstr ""
+"类型别名也常用于`Result<T, E>`类型，以减少重复代码。以标准库中的`std::io`模块"
+"为例，I/O操作通常会返回一个`Result<T, E>`来处理操作失败的情况。该库中有一个"
+"`std::io::Error`结构体，用于表示所有可能的I/O错误。在`std::io`中的许多函数都"
+"会返回`Result<T, E>`，其中`E`就是`std::io::Error`，比如这些函数中的`Write`特"
+"性："
+
+#: src/ch20-03-advanced-types.md:165
+msgid ""
+"The `Result<..., Error>` is repeated a lot. As such, `std::io` has this type "
+"alias declaration:"
+msgstr ""
+"`Result<..., Error>`被多次重复出现。因此，`std::io`有这样的类型别名声明："
+
+#: src/ch20-03-advanced-types.md:182
+msgid ""
+"Because this declaration is in the `std::io` module, we can use the fully "
+"qualified alias `std::io::Result<T>`; that is, a `Result<T, E>` with the `E` "
+"filled in as `std::io::Error`. The `Write` trait function signatures end up "
+"looking like this:"
+msgstr ""
+"因为这个声明位于`std::io`模块中，我们可以使用完全限定的别名`std::io::"
+"Result<T>`；也就是说，使用`Result<T, E>`，并将`E`填充为`std::io::Error`。"
+"`Write`特性函数的签名最终看起来像这样："
+
+#: src/ch20-03-advanced-types.md:201
+msgid ""
+"The type alias helps in two ways: It makes code easier to write _and_ it "
+"gives us a consistent interface across all of `std::io`. Because it’s an "
+"alias, it’s just another `Result<T, E>`, which means we can use any methods "
+"that work on `Result<T, E>` with it, as well as special syntax like the `?` "
+"operator."
+msgstr ""
+"这种类型别名有两个作用：它使得代码更易于编写，同时还能在整个`std::io`中提供一"
+"致的接口。由于它是一个别名，所以它只是另一个`Result<T, E>`而已。这意味着我们"
+"可以使用所有适用于`Result<T, E>`的方法，以及像`?`运算符这样的特殊语法。"
+
+#: src/ch20-03-advanced-types.md:206
+msgid "The Never Type That Never Returns"
+msgstr "永远不会返回的类型"
+
+#: src/ch20-03-advanced-types.md:208
+msgid ""
+"Rust has a special type named `!` that’s known in type theory lingo as the "
+"_empty type_ because it has no values. We prefer to call it the _never type_ "
+"because it stands in the place of the return type when a function will never "
+"return. Here is an example:"
+msgstr ""
+"Rust 有一种特殊的类型，名为 ``!``，在类型理论术语中被称为“空类型”，因为它没有"
+"任何值。我们更倾向于将其称为“永远类型”，因为当某个函数永远不返回值时，它就相"
+"当于返回类型的代表。以下是一个例子："
+
+#: src/ch20-03-advanced-types.md:220
+msgid ""
+"This code is read as “the function `bar` returns never.” Functions that "
+"return never are called _diverging functions_. We can’t create values of the "
+"type `!`, so `bar` can never possibly return."
+msgstr ""
+"这段代码的意思是“函数`bar`永远不返回任何值”。那些永远不返回值的函数被称为“发"
+"散函数”。我们无法创建类型为`!`的值，因此`bar`永远不可能返回任何值。"
+
+#: src/ch20-03-advanced-types.md:224
+msgid ""
+"But what use is a type you can never create values for? Recall the code from "
+"Listing 2-5, part of the number-guessing game; we’ve reproduced a bit of it "
+"here in Listing 20-27."
+msgstr ""
+"但是，一个永远无法创建值的类型有什么用呢？回想一下列表2-5中的代码，那是数字猜"
+"谜游戏的一部分；我们在列表20-27中复制了其中的一部分。"
+
+#: src/ch20-03-advanced-types.md:237
+msgid "\"Guess the number!\""
+msgstr "“猜测数字！”"
+
+#: src/ch20-03-advanced-types.md:241
+msgid "\"The secret number is: {secret_number}\""
+msgstr "“秘密号码是：{secret_number}”"
+
+#: src/ch20-03-advanced-types.md:244
+msgid "\"Please input your guess.\""
+msgstr "“请输入你的猜测。”"
+
+#: src/ch20-03-advanced-types.md:252
+msgid "\"Failed to read line\""
+msgstr "“未猜对”"
+
+#: src/ch20-03-advanced-types.md:259
+msgid "\"You guessed: {guess}\""
+msgstr "“你猜对了：{guess}”"
+
+#: src/ch20-03-advanced-types.md:264
+msgid "\"Too small!\""
+msgstr "“太小了！”"
+
+#: src/ch20-03-advanced-types.md:265
+msgid "\"Too big!\""
+msgstr "“太大了！”"
+
+#: src/ch20-03-advanced-types.md:267
+msgid "\"You win!\""
+msgstr "“你赢了！”"
+
+#: src/ch20-03-advanced-types.md:277
+msgid ""
+"At the time, we skipped over some details in this code. In [“The `match` "
+"Control Flow Construct”](ch06-02-match.html#the-match-control-flow-"
+"construct)<!-- ignore --> section in Chapter 6, we discussed that `match` "
+"arms must all return the same type. So, for example, the following code "
+"doesn’t work:"
+msgstr ""
+"At the time, we skipped over some details in this code. In [“The `match` "
+"Control Flow Construct”](ch06-02-match.html#the-match-control-flow-"
+"construct)<!-- ignore --> section in Chapter 6, we discussed that `match` "
+"arms must all return the same type. So, for example, the following code "
+"doesn’t work:"
+
+#: src/ch20-03-advanced-types.md:284
+msgid "\"3\""
+msgstr "\"3\""
+
+#: src/ch20-03-advanced-types.md:287
+msgid "\"hello\""
+msgstr "\"hello\""
+
+#: src/ch20-03-advanced-types.md:292
+msgid ""
+"The type of `guess` in this code would have to be an integer _and_ a string, "
+"and Rust requires that `guess` have only one type. So, what does `continue` "
+"return? How were we allowed to return a `u32` from one arm and have another "
+"arm that ends with `continue` in Listing 20-27?"
+msgstr ""
+"在这段代码中，`guess`的类型必须同时是整型和一个字符串类型。而Rust要求`guess`"
+"只能有一种类型。那么，`continue`到底返回了什么？我们如何能够从一个分支中返回"
+"`u32`，同时让另一个分支以`continue`结束呢？在列表20-27中可以看到这一点？"
+
+#: src/ch20-03-advanced-types.md:297
+msgid ""
+"As you might have guessed, `continue` has a `!` value. That is, when Rust "
+"computes the type of `guess`, it looks at both match arms, the former with a "
+"value of `u32` and the latter with a `!` value. Because `!` can never have a "
+"value, Rust decides that the type of `guess` is `u32`."
+msgstr ""
+"正如你可能已经猜到的那样，`continue`具有`!`的值。也就是说，当Rust计算`guess`"
+"的类型时，它会考虑两个匹配项：前者的值为`u32`，后者的值为`!`。由于`!`永远不可"
+"能有值，因此Rust认为`guess`的类型是`u32`。"
+
+#: src/ch20-03-advanced-types.md:302
+msgid ""
+"The formal way of describing this behavior is that expressions of type `!` "
+"can be coerced into any other type. We’re allowed to end this `match` arm "
+"with `continue` because `continue` doesn’t return a value; instead, it moves "
+"control back to the top of the loop, so in the `Err` case, we never assign a "
+"value to `guess`."
+msgstr ""
+"描述这种行为的正式方式是，类型为`!`的表达式可以被强制转换为任何其他类型。我们"
+"可以以`match`结束这个代码块，因为`continue`不会返回任何值；相反，它会将控制返"
+"回到循环的顶端。因此，在`Err`的情况下，我们永远不会向`guess`赋值。"
+
+#: src/ch20-03-advanced-types.md:308
+msgid ""
+"The never type is useful with the `panic!` macro as well. Recall the "
+"`unwrap` function that we call on `Option<T>` values to produce a value or "
+"panic with this definition:"
+msgstr ""
+"永不类型在“panic！”宏中也很有用。回想我们在“Option”值下调用的“展开”函数，<T> "
+"用来生成一个值或 Panic，定义如下："
+
+#: src/ch20-03-advanced-types.md:324
+msgid "\"called `Option::unwrap()` on a `None` value\""
+msgstr "“在'None'值上称为'Option：：unwrap（）'”"
+
+#: src/ch20-03-advanced-types.md:330
+msgid ""
+"In this code, the same thing happens as in the `match` in Listing 20-27: "
+"Rust sees that `val` has the type `T` and `panic!` has the type `!`, so the "
+"result of the overall `match` expression is `T`. This code works because "
+"`panic!` doesn’t produce a value; it ends the program. In the `None` case, "
+"we won’t be returning a value from `unwrap`, so this code is valid."
+msgstr ""
+"在这段代码中，发生的情况与列表20-27中的`match`相同：Rust会检测到`val`的类型为"
+"`T`，而`panic!`的类型为`!`。因此，整个`match`表达式的结果就是`T`。这段代码之"
+"所以有效，是因为`panic!`不会产生任何值；它只是终止了程序。在`None`的情况下，"
+"我们不会从`unwrap`返回任何值，所以这段代码是有效的。"
+
+#: src/ch20-03-advanced-types.md:336
+msgid "One final expression that has the type `!` is a loop:"
+msgstr "最后一个具有类型 `!` 的表达式是一个循环："
+
+#: src/ch20-03-advanced-types.md:340
+msgid "\"forever \""
+msgstr "“永远”"
+
+#: src/ch20-03-advanced-types.md:343
+msgid "\"and ever \""
+msgstr "“永远”"
+
+#: src/ch20-03-advanced-types.md:348
+msgid ""
+"Here, the loop never ends, so `!` is the value of the expression. However, "
+"this wouldn’t be true if we included a `break`, because the loop would "
+"terminate when it got to the `break`."
+msgstr ""
+"在这里，循环永远不会结束，所以`!`就是这个表达式的值。然而，如果我们包含"
+"`break`的话，情况就不一样了，因为循环会在到达`break`时终止。"
+
+#: src/ch20-03-advanced-types.md:352
+msgid "Dynamically Sized Types and the `Sized` Trait"
+msgstr "动态大小类型与`Sized`特性"
+
+#: src/ch20-03-advanced-types.md:354
+msgid ""
+"Rust needs to know certain details about its types, such as how much space "
+"to allocate for a value of a particular type. This leaves one corner of its "
+"type system a little confusing at first: the concept of _dynamically sized "
+"types_. Sometimes referred to as _DSTs_ or _unsized types_, these types let "
+"us write code using values whose size we can know only at runtime."
+msgstr ""
+"Rust需要了解其类型的某些细节，比如为特定类型的值分配多少内存。这使得其类型系"
+"统的某个方面在最初看起来有些混乱：即所谓的“动态大小类型”的概念。这类类型有时"
+"也被称为“DSTs”或“无大小类型”，它们允许我们使用在运行时才能确定大小的值来编写"
+"代码。"
+
+#: src/ch20-03-advanced-types.md:360
+msgid ""
+"Let’s dig into the details of a dynamically sized type called `str`, which "
+"we’ve been using throughout the book. That’s right, not `&str`, but `str` on "
+"its own, is a DST. In many cases, such as when storing text entered by a "
+"user, we can’t know how long the string is until runtime. That means we "
+"can’t create a variable of type `str`, nor can we take an argument of type "
+"`str`. Consider the following code, which does not work:"
+msgstr ""
+"让我们详细了解一下名为`str`的动态大小类型。我们在整本书中一直都在使用这个类"
+"型。没错，不是`&str`，而是单独的`str`。在许多情况下，比如存储用户输入的文本"
+"时，我们无法在运行时知道字符串的具体长度。这意味着我们无法创建类型为`str`的变"
+"量，也无法接受类型为`str`的参数。请看下面这段代码，它无法正常运行："
+
+#: src/ch20-03-advanced-types.md:369
+msgid "\"Hello there!\""
+msgstr "Hello there!"
+
+#: src/ch20-03-advanced-types.md:370
+msgid "\"How's it going?\""
+msgstr "How's it going？"
+
+#: src/ch20-03-advanced-types.md:374
+msgid ""
+"Rust needs to know how much memory to allocate for any value of a particular "
+"type, and all values of a type must use the same amount of memory. If Rust "
+"allowed us to write this code, these two `str` values would need to take up "
+"the same amount of space. But they have different lengths: `s1` needs 12 "
+"bytes of storage and `s2` needs 15. This is why it’s not possible to create "
+"a variable holding a dynamically sized type."
+msgstr ""
+"Rust需要知道为特定类型的任何值分配多少内存，并且所有该类型的值必须使用相同数"
+"量的内存。如果Rust允许我们这样编写代码，那么这两个`str`值的占用空间就会相同。"
+"但实际上它们有不同的长度：`s1`需要12个字节的存储空间，而`s2`则需要15个字节。"
+"这就是为什么无法创建一个存储动态大小类型的变量的原因。"
+
+#: src/ch20-03-advanced-types.md:381
+msgid ""
+"So, what do we do? In this case, you already know the answer: We make the "
+"type of `s1` and `s2` string slice (`&str`) rather than `str`. Recall from "
+"the [“String Slices”](ch04-03-slices.html#string-slices)<!-- ignore --> "
+"section in Chapter 4 that the slice data structure only stores the starting "
+"position and the length of the slice. So, although `&T` is a single value "
+"that stores the memory address of where the `T` is located, a string slice "
+"is _two_ values: the address of the `str` and its length. As such, we can "
+"know the size of a string slice value at compile time: It’s twice the length "
+"of a `usize`. That is, we always know the size of a string slice, no matter "
+"how long the string it refers to is. In general, this is the way in which "
+"dynamically sized types are used in Rust: They have an extra bit of metadata "
+"that stores the size of the dynamic information. The golden rule of "
+"dynamically sized types is that we must always put values of dynamically "
+"sized types behind a pointer of some kind."
+msgstr ""
+"那么，我们该怎么办呢？在这种情况下，你已经知道答案了：我们应该将typeof `s1`和"
+"`s2`转换为字符串切片(`&str`)，而不是`str`。回想一下第4章中的[“字符串切片”]"
+"(ch04-03-slices.html#string-slices)<!-- ignore -->部分，slice数据结构只存储切"
+"片的起始位置和长度。因此，尽管`&T`是一个单独的值，它实际上存储的是内存地址。"
+"在``T``的位置，字符串切片由两个值组成：``str``的地址以及它的长度。因此，我们"
+"可以在编译时知道字符串切片的大小：它是``usize``长度的两倍。也就是说，无论所引"
+"用的字符串有多长，我们总能知道字符串切片的大小。通常，Rust中动态大小的类型就"
+"是按照这种方式使用的：它们会有一段额外的元数据，用来存储动态大小的信息。信"
+"息。动态大小类型的黄金法则是，我们必须始终将动态大小类型的值存储在某个指针之"
+"后。"
+
+#: src/ch20-03-advanced-types.md:395
+msgid ""
+"We can combine `str` with all kinds of pointers: for example, `Box<str>` or "
+"`Rc<str>`. In fact, you’ve seen this before but with a different dynamically "
+"sized type: traits. Every trait is a dynamically sized type we can refer to "
+"by using the name of the trait. In the [“Using Trait Objects to Abstract "
+"over Shared Behavior”](ch18-02-trait-objects.html#using-trait-objects-to-"
+"abstract-over-shared-behavior)<!--\n"
+"ignore --> section in Chapter 18, we mentioned that to use traits as trait "
+"objects, we must put them behind a pointer, such as `&dyn Trait` or `Box<dyn "
+"Trait>` (`Rc<dyn Trait>` would work too)."
+msgstr ""
+"我们可以将`str`与各种指针结合使用：例如，`Box<str>`或`Rc<str>`。实际上，你之"
+"前已经见过这种情况，只不过当时使用的是一种动态大小的类型——特质。每个特质都是"
+"一种动态大小的类型，我们可以通过该特质的名称来引用它。在[\"第18章 使用特质对"
+"象来抽象共享行为\"](ch18-02-trait-objects.html#using-trait-objects-to-"
+"abstract-over-shared-behavior)这一节中，我们提到过如何将特质用作特质。在对象"
+"的情况下，我们必须将它们放在一个指针之后，例如 ``&dyn Trait`` 或者 "
+"`Box<dynTrait>` (`Rc<dyn  Trait>`) 也是可以的。"
+
+#: src/ch20-03-advanced-types.md:404
+msgid ""
+"To work with DSTs, Rust provides the `Sized` trait to determine whether or "
+"not a type’s size is known at compile time. This trait is automatically "
+"implemented for everything whose size is known at compile time. In addition, "
+"Rust implicitly adds a bound on `Sized` to every generic function. That is, "
+"a generic function definition like this:"
+msgstr ""
+"为了与数据类型结构 DSTs 进行交互，Rust提供了`Sized`特性，用于确定某个类型的尺"
+"寸是否在编译时已知。该特性会自动应用于所有在编译时已知其尺寸的类型。此外，"
+"Rust还会隐式地为每个泛型函数添加`Sized`的边界值。也就是说，像这样的泛型函数定"
+"义："
+
+#: src/ch20-03-advanced-types.md:416
+msgid "is actually treated as though we had written this:"
+msgstr "实际上是像我们写过这样："
+
+#: src/ch20-03-advanced-types.md:424
+msgid ""
+"By default, generic functions will work only on types that have a known size "
+"at compile time. However, you can use the following special syntax to relax "
+"this restriction:"
+msgstr ""
+"默认情况下，通用函数仅适用于在编译时已知大小的类型。但是，您可以使用以下特殊"
+"语法来放宽这一限制："
+
+#: src/ch20-03-advanced-types.md:434
+msgid ""
+"A trait bound on `?Sized` means “`T` may or may not be `Sized`,” and this "
+"notation overrides the default that generic types must have a known size at "
+"compile time. The `?Trait` syntax with this meaning is only available for "
+"`Sized`, not any other traits."
+msgstr ""
+"在 `?Sized` 上定义的特性表示“`T` 可能是也可能是不是 `Sized`”，这种表示方式覆"
+"盖了通用类型在编译时必须有已知大小的默认规定。具有这种含义的 `?Trait` 语法仅"
+"适用于 `Sized`，而不适用于其他任何特性。"
+
+#: src/ch20-03-advanced-types.md:439
+msgid ""
+"Also note that we switched the type of the `t` parameter from `T` to `&T`. "
+"Because the type might not be `Sized`, we need to use it behind some kind of "
+"pointer. In this case, we’ve chosen a reference."
+msgstr ""
+"另外需要注意的是，我们将`t`参数的类型从`T`更改为`&T`。由于该类型可能并不属于"
+"`Sized`类型，因此我们需要通过某种指针来引用它。在这种情况下，我们选择了使用引"
+"用方式。"
+
+#: src/ch20-03-advanced-types.md:443
+msgid "Next, we’ll talk about functions and closures!"
+msgstr "接下来，我们将讨论函数和闭包！"
