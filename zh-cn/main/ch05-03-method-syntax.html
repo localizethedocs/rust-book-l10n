@@ -1,0 +1,474 @@
+<!DOCTYPE HTML>
+<html lang="zh_CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>方法 - The Rust Programming Language</title>
+
+
+        <!-- Custom HTML head -->
+        <script type="text/javascript" src="ltd-provenance.js"></script>
+        <script type="text/javascript" src="ltd-current.js"></script>
+        <script type="text/javascript" src="../../ltd-config.js"></script>
+        <script type="text/javascript" src="../../ltd-flyout.js"></script>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris-d33b75bf.css">
+        <link rel="stylesheet" href="theme/2018-edition-4e126c62.css">
+        <link rel="stylesheet" href="theme/semantic-notes-9b5766c0.css">
+        <link rel="stylesheet" href="theme/listing-cab26221.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-70ba3c6a.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-9b676236.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Rust Programming Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h2 id="方法"><a class="header" href="#方法">方法</a></h2>
+<p>方法类似于函数：我们使用 <code>fn</code> 关键字和一个名称来声明它们，它们可以拥有参数和返回值，并且包含一些在从其他地方调用该方法时执行的代码。与函数不同的是，方法是在结构体（或枚举或特质对象中定义的，我们将在<a href="ch06-00-enums.html">第6章</a><!-- ignore -->和[第18章][(ch18-02-trait-objects.md)<!-- ignore -->中分别介绍）、以及特质对象的上下文中定义的。方法的第一个参数总是 <code>self</code>，这个参数代表了被调用方法的那个结构体的实例。</p>
+<!-- Old headings. Do not remove or links may break. -->
+<p><a id="defining-methods"></a></p>
+<h3 id="方法语法"><a class="header" href="#方法语法">方法语法</a></h3>
+<p>让我们修改那个包含 <code>Rectangle</code> 作为参数的 <code>area</code> 函数，而是在一个 <code>Rectangle</code> 结构上定义 <code>area</code> 方法，如清单 5-13 所示。</p>
+<figure class="listing" id="listing-5-13">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024">#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&amp;self) -&gt; u32 {
+        self.width * self.height
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!(
+        "矩形区域是 {} 平方像素。",
+        rect1.area()
+    );
+}</code></pre>
+<figcaption><a href="#listing-5-13">Listing 5-13</a>: Defining an <code>area</code> method on the <code>Rectangle</code> struct</figcaption>
+</figure>
+<p>为了在 <code>Rectangle</code> 的上下文中定义该函数，我们首先为 <code>Rectangle</code> 创建一个 <code>impl</code>（实现）块。这个 <code>impl</code> 块中的所有内容都将与 <code>Rectangle</code> 类型相关联。接着，我们将 <code>area</code> 函数放在 <code>impl</code> 的花括号中，并更改其第一个参数，使其变为 <code>self</code>，同时在整个函数体内也使用 <code>self</code> 作为参数。在 <code>main</code> 中，当我们调用 <code>area</code> 函数并将 <code>rect1</code> 作为参数传递时，我们可以使用 <em>方法语法</em> 来调用 <code>area</code> 方法，从而实现对 <code>Rectangle</code> 实例的访问。方法语法格式为：在实例后面加上一个点，然后依次是方法名、括号以及任何参数。</p>
+<p>在 <code>area</code> 的签名中，我们使用 <code>&amp;self</code> 而不是 <code>rectangle: &amp;Rectangle</code>。<code>&amp;self</code> 实际上是 <code>self: &amp;Self</code> 的缩写。在 <code>impl</code> 块中，类型 <code>Self</code> 是 <code>impl</code> 块所代表的类型的别名。方法必须在其第一个参数中有一个名为 <code>self</code> 的参数，该参数的类型为 <code>Self</code>。因此，Rust 允许你在第一个参数位置仅使用 <code>self</code> 作为缩写。请注意，我们仍然需要在 <code>self</code> 简写之前使用 <code>&amp;</code> 来表明该方法借用 <code>Self</code> 实例，就像我们在 <code>rectangle: &amp;Rectangle</code> 中所做的那样。方法可以拥有 <code>self</code>，不可变地借用 <code>self</code>，就像我们在这里所做的那样，或者可变地借用 <code>self</code>，就像它们可以处理任何其他参数一样。</p>
+<p>我们选择使用 <code>&amp;self</code> 的原因，与我们在函数版本中使用的 <code>&amp;Rectangle</code> 相同。我们的目的不是要拥有该实例的所有权，只是想读取结构体中的数据，而不是对其进行修改。如果我们希望改变调用该方法的实例，以便该方法能够执行特定的操作，那么我们会使用 <code>&amp;mut self</code> 作为第一个参数。不过，通常只有在某些方法中，才会使用 <code>self</code> 作为第一个参数，以便该方法能够拥有该实例的所有权。这种技术通常用于将 <code>self</code> 转换为其他形式，同时希望防止调用者在转换后继续使用原始实例。</p>
+<p>使用方法而非函数的主要原因，除了提供方法语法，并且不必在每个方法的签名中重复 <code>self</code> 类型之外，还有组织上的考虑。我们将能够使用某个类型实例的所有功能都放在一个 <code>impl</code> 块中，而不是让未来的代码使用者需要在我们提供的库的各个地方去寻找 <code>Rectangle</code> 的功能。</p>
+<p>请注意，我们可以选择让一个方法的名称与结构体中的一个字段相同。例如，我们可以在 <code>Rectangle</code> 上定义一个方法，该方法的名称也是<code>width</code>。</p>
+<figure class="listing">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">#[derive(Debug)]
+</span><span class="boring">struct Rectangle {
+</span><span class="boring">    width: u32,
+</span><span class="boring">    height: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Rectangle {
+    fn width(&amp;self) -&gt; bool {
+        self.width &gt; 0
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    if rect1.width() {
+        println!("矩形宽度非零。它是 {}", rect1.width);
+    }
+}</code></pre>
+</figure>
+<p>在这里，我们选择让 <code>width</code> 方法在实例的 <code>width</code> 字段中的值大于 <code>0</code> 时返回 <code>true</code>，而在值等于 <code>0</code> 时返回 <code>false</code>。我们可以在同一个名称的方法中使用同一个字段，用于任何目的。在 <code>main</code> 中，当我们用括号跟随 <code>rect1.width</code> 时，Rust 会知道我们指的是方法 <code>width</code>。而不使用括号时，Rust 会知道我们指的是字段 <code>width</code>。</p>
+<p>通常，但并非总是如此，当我们给一个方法命名与字段相同的名称时，我们希望该方法仅返回字段中的值，而不执行其他操作。这类方法被称为_获取器_。与某些其他语言不同，Rust并不会自动为结构体字段实现获取器功能。获取器非常有用，因为你可以将字段设为私有，而将方法设为公有，从而让该字段只能通过公共API进行只读访问。我们将在<a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html#exposing-paths-with-the-pub-keyword">第7章</a><!-- ignore -->中讨论什么是公有和私有，以及如何将字段或方法指定为公有或私有。</p>
+<section class="note" aria-role="note">
+<h3 id="--运算符在哪里"><a class="header" href="#--运算符在哪里"><code>-&gt;</code> 运算符在哪里？</a></h3>
+<p>在 C 和 C++ 中，有两种不同的运算符用于调用方法：如果你直接调用对象上的方法，则使用 <code>.</code>；如果你是通过指向对象的指针来调用方法，并且需要先解引用该指针，则使用 <code>-&gt;</code>。换句话说，如果 <code>object</code> 是一个指针，那么 <code>object-&gt;something()</code> 与 <code>(*object).something()</code> 类似。</p>
+<p>Rust 没有与 <code>-&gt;</code> 运算符相对应的功能；相反，Rust 有一个名为“自动引用和解引用”的特性。调用方法是 Rust 中少数几个具有这种特性的地方。</p>
+<p>其工作原理如下：当你使用 <code>object.something()</code> 调用方法时，Rust 会自动添加 <code>&amp;</code>、 <code>&amp;mut</code> 或 <code>*</code>，使得 <code>object</code> 与方法的签名相匹配。换句话说，以下两种方式是相同的：</p>
+<!-- CAN'T EXTRACT SEE BUG https://github.com/rust-lang/mdBook/issues/1127 -->
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">#[derive(Debug,Copy,Clone)]
+</span><span class="boring">struct Point {
+</span><span class="boring">    x: f64,
+</span><span class="boring">    y: f64,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Point {
+</span><span class="boring">   fn distance(&amp;self, other: &amp;Point) -&gt; f64 {
+</span><span class="boring">       let x_squared = f64::powi(other.x - self.x, 2);
+</span><span class="boring">       let y_squared = f64::powi(other.y - self.y, 2);
+</span><span class="boring">
+</span><span class="boring">       f64::sqrt(x_squared + y_squared)
+</span><span class="boring">   }
+</span><span class="boring">}
+</span><span class="boring">let p1 = Point { x: 0.0, y: 0.0 };
+</span><span class="boring">let p2 = Point { x: 5.0, y: 6.5 };
+</span>p1.distance(&amp;p2);
+(&amp;p1).distance(&amp;p2);
+<span class="boring">}</span></code></pre>
+<p>第一种方式看起来更简洁。这种自动引用行为之所以有效，是因为方法有一个明确的接收者——即 <code>self</code> 的类型。根据方法的接收者和名称，Rust 可以明确地判断该方法是进行读取操作（<code>&amp;self</code>）、修改操作（<code>&amp;mut self</code>）还是消费操作（<code>self</code>）。Rust 让方法的接收者具有隐式借用特性，这是使所有权机制在实际使用中更加便捷的一个重要因素。</p>
+</section>
+<h3 id="具有更多参数的方法"><a class="header" href="#具有更多参数的方法">具有更多参数的方法</a></h3>
+<p>让我们通过为 <code>Rectangle</code> 结构实现第二个方法来练习使用方法。这次，我们希望 <code>Rectangle</code> 结构的一个实例能够接受另一个 <code>Rectangle</code> 结构实例，并且如果第二个 <code>Rectangle</code> 结构能够完全容纳在 <code>self</code> 结构中（第一个 <code>Rectangle</code> 结构允许这种情况），则应该返回 <code>true</code>；否则，应该返回 <code>false</code>。也就是说，一旦我们定义了 <code>can_hold</code> 方法，我们就可以编写如清单 5-14 所示的程序。</p>
+<figure class="listing" id="listing-5-14">
+<span class="file-name">Filename: src/main.rs</span>
+<pre><code class="language-rust ignore">fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+    let rect2 = Rectangle {
+        width: 10,
+        height: 40,
+    };
+    let rect3 = Rectangle {
+        width: 60,
+        height: 45,
+    };
+
+    println!(“矩形1可以持有矩形2？{}”, rect1.can_hold(&amp;rect2));
+    println!(“矩形1可以持有矩形3吗？{}”, rect1.can_hold(&amp;rect3));
+}</code></pre>
+<figcaption><a href="#listing-5-14">Listing 5-14</a>: Using the as-yet-unwritten <code>can_hold</code> method</figcaption>
+</figure>
+<p>预期的输出结果如下：因为<code>rect2</code>的两个维度都小于<code>rect1</code>的维度，但是<code>rect3</code>的宽度大于<code>rect1</code>的宽度。</p>
+<pre><code class="language-text">Can rect1 hold rect2? true
+Can rect1 hold rect3? false
+</code></pre>
+<p>我们知道需要定义一个方法，因此它将会位于 <code>impl Rectangle</code> 块内。该方法的名称将是 <code>can_hold</code>，并且它将接收一个不可变的借用对象作为参数，这个参数来自另一个 <code>Rectangle</code>。我们可以通过查看调用该方法的代码来确定参数的类型：<code>rect1.can_hold(&amp;rect2)</code> 将传入 <code>&amp;rect2</code>，而 <code>&amp;rect2</code> 则是一个不可变的借用对象，这个借用对象被传递给 <code>rect2</code>，而 <code>rect2</code> 又是 <code>Rectangle</code> 的一个实例。这样做是有意义的，因为我们只需要读取 <code>rect2</code>（而不是写入，那样就需要一个可变的借用对象），同时我们希望 <code>main</code> 能够保留对 <code>rect2</code> 的所有权，这样在调用 <code>can_hold</code> 方法之后，我们仍然可以使用 <code>rect2</code>。<code>can_hold</code> 的返回值将是一个布尔值，而实现部分会检查 <code>self</code> 的宽度和高度是否大于另一个 <code>Rectangle</code> 的宽度和高度。让我们在 Listing 5-13 中的 <code>impl</code> 块中添加新的 <code>can_hold</code> 方法，如 Listing 5-15 所示。</p>
+<figure class="listing" id="listing-5-15">
+<span class="file-name">Filename: src/main.rs</span>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">#[derive(Debug)]
+</span><span class="boring">struct Rectangle {
+</span><span class="boring">    width: u32,
+</span><span class="boring">    height: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Rectangle {
+    fn area(&amp;self) -&gt; u32 {
+        self.width * self.height
+    }
+
+    fn can_hold(&amp;self, other: &amp;Rectangle) -&gt; bool {
+        self.width &gt; other.width &amp;&amp; self.height &gt; other.height
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let rect1 = Rectangle {
+</span><span class="boring">        width: 30,
+</span><span class="boring">        height: 50,
+</span><span class="boring">    };
+</span><span class="boring">    let rect2 = Rectangle {
+</span><span class="boring">        width: 10,
+</span><span class="boring">        height: 40,
+</span><span class="boring">    };
+</span><span class="boring">    let rect3 = Rectangle {
+</span><span class="boring">        width: 60,
+</span><span class="boring">        height: 45,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    println!(“矩形1可以持有矩形2？{}”, rect1.can_hold(&amp;rect2));
+</span><span class="boring">    println!(“矩形1可以持有矩形3吗？{}”, rect1.can_hold(&amp;rect3));
+</span><span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-5-15">Listing 5-15</a>: Implementing the <code>can_hold</code> method on <code>Rectangle</code> that takes another <code>Rectangle</code> instance as a parameter</figcaption>
+</figure>
+<p>当我们使用清单5-14中的<code>main</code>函数运行这段代码时，我们将得到期望的输出。方法可以接受多个参数，这些参数可以添加到<code>self</code>参数之后，并且这些参数的作用方式与函数中的参数相同。</p>
+<h3 id="相关函数"><a class="header" href="#相关函数">相关函数</a></h3>
+<p>在 <code>impl</code> 块中定义的所有函数都被称为_关联函数_，因为它们与以 <code>impl</code> 命名的类型相关联。我们可以定义那些没有 <code>self</code> 作为其第一个参数的关联函数（因此也不是方法），因为这些函数不需要该类型的实例来运作。我们已经使用过一个这样的函数：就是在 <code>String</code> 类型上定义的 <code>String::from</code> 函数。</p>
+<p>那些不是方法的关联函数，通常被用于创建结构体实例的构造函数中。这些函数通常被称为 <code>new</code>，不过 <code>new</code> 并不是一个特殊的名称，而且也没有被内置到语言中。例如，我们可以选择一个名为 <code>square</code> 的关联函数，该函数有一个维度参数，并将其用作宽度和高度，这样就能更容易地创建一个正方形 <code>Rectangle</code>，而不需要两次指定相同的数值。</p>
+<p><span class="filename">Filename: src/main.rs</span></p>
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">#[derive(Debug)]
+</span><span class="boring">struct Rectangle {
+</span><span class="boring">    width: u32,
+</span><span class="boring">    height: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Rectangle {
+    fn square(size: u32) -&gt; Self {
+        Self {
+            width: size,
+            height: size,
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let sq = Rectangle::square(3);
+</span><span class="boring">}</span></code></pre>
+<p>在函数返回类型和函数体内出现的 <code>Self</code> 关键字，实际上是 <code>impl</code> 关键字后所出现的类型的别名，在这种情况下，该类型就是 <code>Rectangle</code>。</p>
+<p>要调用这个关联函数，我们使用带有结构体名称的 <code>::</code> 语法；<code>let sq = Rectangle::square(3);</code> 就是一个例子。这个函数是由结构体来命名的：<code>::</code> 语法既用于关联函数，也用于由模块创建的名称空间。我们将在<a href="ch07-02-defining-modules-to-control-scope-and-privacy.html">第7章</a><!-- ignore -->中讨论模块。</p>
+<h3 id="多个-impl-块"><a class="header" href="#多个-impl-块">多个 <code>impl</code> 块</a></h3>
+<p>每个结构体可以包含多个 <code>impl</code> 块。例如，列表 5-15 与列表 5-16 中的代码是等效的，其中每个方法都位于自己的 <code>impl</code> 块中。</p>
+<figure class="listing" id="listing-5-16">
+<pre class="playground"><code class="language-rust edition2024"><span class="boring">#[derive(Debug)]
+</span><span class="boring">struct Rectangle {
+</span><span class="boring">    width: u32,
+</span><span class="boring">    height: u32,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Rectangle {
+    fn area(&amp;self) -&gt; u32 {
+        self.width * self.height
+    }
+}
+
+impl Rectangle {
+    fn can_hold(&amp;self, other: &amp;Rectangle) -&gt; bool {
+        self.width &gt; other.width &amp;&amp; self.height &gt; other.height
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let rect1 = Rectangle {
+</span><span class="boring">        width: 30,
+</span><span class="boring">        height: 50,
+</span><span class="boring">    };
+</span><span class="boring">    let rect2 = Rectangle {
+</span><span class="boring">        width: 10,
+</span><span class="boring">        height: 40,
+</span><span class="boring">    };
+</span><span class="boring">    let rect3 = Rectangle {
+</span><span class="boring">        width: 60,
+</span><span class="boring">        height: 45,
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    println!(“矩形1可以持有矩形2？{}”, rect1.can_hold(&amp;rect2));
+</span><span class="boring">    println!(“矩形1可以持有矩形3吗？{}”, rect1.can_hold(&amp;rect3));
+</span><span class="boring">}</span></code></pre>
+<figcaption><a href="#listing-5-16">Listing 5-16</a>: Rewriting Listing 5-15 using multiple <code>impl</code> blocks</figcaption>
+</figure>
+<p>在这里，没有必要将这些方法分开到多个 <code>impl</code> 块中，但这种语法是有效的。我们将在第十章中看到多个 <code>impl</code> 块的使用场景，届时我们会讨论泛型类型和特质。</p>
+<h2 id="摘要"><a class="header" href="#摘要">摘要</a></h2>
+<p>结构体允许你创建对特定领域有意义的自定义类型。通过使用结构体，你可以将相关的数据片段相互连接，并为每个数据片段命名，从而使代码更加清晰。在 <code>impl</code> 块中，你可以定义与类型相关的函数，而方法则是一种关联函数，它允许你指定结构体实例的行为。</p>
+<p>但是，结构体并不是创建自定义类型的唯一方式：让我们利用Rust的枚举功能，为你的工具箱增添另一种工具。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch05-02-example-structs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="ch06-00-enums.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch05-02-example-structs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="ch06-00-enums.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="ferris-2317480c.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
