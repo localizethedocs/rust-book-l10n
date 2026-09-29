@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch08-00-common-collections.md:1
+msgid "Common Collections"
+msgstr "常見集合"
+
+#: src/ch08-00-common-collections.md:3
+msgid ""
+"Rust’s standard library includes a number of very useful data structures "
+"called _collections_. Most other data types represent one specific value, "
+"but collections can contain multiple values. Unlike the built-in array and "
+"tuple types, the data that these collections point to is stored on the heap, "
+"which means the amount of data does not need to be known at compile time and "
+"can grow or shrink as the program runs. Each kind of collection has "
+"different capabilities and costs, and choosing an appropriate one for your "
+"current situation is a skill you’ll develop over time. In this chapter, "
+"we’ll discuss three collections that are used very often in Rust programs:"
+msgstr ""
+"Rust 的標準函式庫包含多種非常實用的資料結構，稱為 _集合_。其他大多數資料型別"
+"只代表單一的值，但集合可以包含多個值。不同於內建的陣列與元組型別，這些集合所"
+"指向的資料儲存在堆上，這表示資料量不必在編譯時就已知，並且可隨著程式執行而成"
+"長或縮小。每一種集合都有不同的能力與成本，選擇適合當前情境的集合是一項需要時"
+"間培養的技能。在本章中，我們會討論Rust 程式中很常使用的三種集合："
+
+#: src/ch08-00-common-collections.md:13
+msgid ""
+"A _vector_ allows you to store a variable number of values next to each "
+"other."
+msgstr "_向量_ 讓你可以將可變數量的值緊鄰地儲存在一起。"
+
+#: src/ch08-00-common-collections.md:14
+msgid ""
+"A _string_ is a collection of characters. We’ve mentioned the `String` type "
+"previously, but in this chapter, we’ll talk about it in depth."
+msgstr ""
+"_字串_ 是字元的集合。我們先前提過 `String` 型別，但在本章會深入討論它。"
+
+#: src/ch08-00-common-collections.md:16
+msgid ""
+"A _hash map_ allows you to associate a value with a specific key. It’s a "
+"particular implementation of the more general data structure called a _map_."
+msgstr ""
+"_雜湊表_ 讓你可以將某個值與特定鍵關聯起來。它是更一般資料結構 _映射_ 的一種具"
+"體實作。"
+
+#: src/ch08-00-common-collections.md:19
+msgid ""
+"To learn about the other kinds of collections provided by the standard "
+"library, see [the documentation](../std/collections/index.html)."
+msgstr ""
+"要了解標準函式庫提供的其他集合，請參考[文件](../std/collections/index.html)。"
+
+#: src/ch08-00-common-collections.md:22
+msgid ""
+"We’ll discuss how to create and update vectors, strings, and hash maps, as "
+"well as what makes each special."
+msgstr "我們會討論如何建立與更新向量、字串與雜湊表，以及各自的特色。"
