@@ -1,0 +1,848 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch08-02-strings.md:1
+msgid "Storing UTF-8 Encoded Text with Strings"
+msgstr "使用字符串存储UTF-8编码的文本"
+
+#: src/ch08-02-strings.md:3
+msgid ""
+"We talked about strings in Chapter 4, but we’ll look at them in more depth "
+"now. New Rustaceans commonly get stuck on strings for a combination of three "
+"reasons: Rust’s propensity for exposing possible errors, strings being a "
+"more complicated data structure than many programmers give them credit for, "
+"and UTF-8. These factors combine in a way that can seem difficult when "
+"you’re coming from other programming languages."
+msgstr ""
+"我们在第4章中讨论过字符串，但现在我们将更深入地探讨它们。新的Rust开发者常常在"
+"字符串方面遇到困难，原因主要有三个：Rust容易引入潜在错误，字符串是一种比许多"
+"程序员所认为的更复杂的数据结构，以及UTF-8编码问题。这些因素结合在一起，可能会"
+"让那些来自其他编程语言的人感到难以理解。"
+
+#: src/ch08-02-strings.md:10
+msgid ""
+"We discuss strings in the context of collections because strings are "
+"implemented as a collection of bytes, plus some methods to provide useful "
+"functionality when those bytes are interpreted as text. In this section, "
+"we’ll talk about the operations on `String` that every collection type has, "
+"such as creating, updating, and reading. We’ll also discuss the ways in "
+"which `String` is different from the other collections, namely, how indexing "
+"into a `String` is complicated by the differences between how people and "
+"computers interpret `String` data."
+msgstr ""
+"我们在集合的上下文中讨论字符串，因为字符串实际上是由字节组成的集合，同时还有"
+"一些方法用于在字节被解释为文本时提供有用的功能。在本节中，我们将讨论所有集合"
+"类型所拥有的操作，比如创建、更新和读取字符串。我们还将探讨`String`与其他集合"
+"的不同之处，即，由于人和计算机对`String`数据的解释方式不同，因此对`String`进"
+"行索引会变得复杂。"
+
+#: src/ch08-02-strings.md:21
+msgid "<a id=\"what-is-a-string\"></a>"
+msgstr "<a id=\"what-is-a-string\"></a>"
+
+#: src/ch08-02-strings.md:23
+msgid "Defining Strings"
+msgstr "定义字符串"
+
+#: src/ch08-02-strings.md:25
+msgid ""
+"We’ll first define what we mean by the term _string_. Rust has only one "
+"string type in the core language, which is the string slice `str` that is "
+"usually seen in its borrowed form, `&str`. In Chapter 4, we talked about "
+"string slices, which are references to some UTF-8 encoded string data stored "
+"elsewhere. String literals, for example, are stored in the program’s binary "
+"and are therefore string slices."
+msgstr ""
+"首先，我们来定义“字符串”这一术语的含义。在Rust的核心语言中，只有一种字符串类"
+"型，那就是通常被称为 `str` 的字符串切片类型，而它通常以 borrowed 的形式存在，"
+"即 `&str`。在第4章中，我们讨论过字符串切片，它们是对存储在其他地方的一些UTF-8"
+"编码字符串数据的引用。例如，字符串字面量实际上存储在程序的二进制文件中，因此"
+"也属于字符串切片的一种。"
+
+#: src/ch08-02-strings.md:32
+msgid ""
+"The `String` type, which is provided by Rust’s standard library rather than "
+"coded into the core language, is a growable, mutable, owned, UTF-8 encoded "
+"string type. When Rustaceans refer to “strings” in Rust, they might be "
+"referring to either the `String` or the string slice `&str` types, not just "
+"one of those types. Although this section is largely about `String`, both "
+"types are used heavily in Rust’s standard library, and both `String` and "
+"string slices are UTF-8 encoded."
+msgstr ""
+"`String`类型是由Rust的标准库提供的，而不是直接编码在核心语言中。它是一种可增"
+"长的、可变的、受所有权的管理、采用UTF-8编码的字符串类型。当Rust开发者在Rust中"
+"提到“字符串”时，他们可能指的是`String`类型或字符串切片`&str`类型，而不仅仅是"
+"其中的一种类型。虽然这一部分主要讨论的是`String`类型，但这两种类型在Rust的标"
+"准库中被广泛使用，而且`String`类型和字符串切片都是采用UTF-8编码的。"
+
+#: src/ch08-02-strings.md:40
+msgid "Creating a New String"
+msgstr "创建新的字符串"
+
+#: src/ch08-02-strings.md:42
+msgid ""
+"Many of the same operations available with `Vec<T>` are available with "
+"`String` as well because `String` is actually implemented as a wrapper "
+"around a vector of bytes with some extra guarantees, restrictions, and "
+"capabilities. An example of a function that works the same way with `Vec<T>` "
+"and `String` is the `new` function to create an instance, shown in Listing "
+"8-11."
+msgstr ""
+"许多在 `Vec<T>` 中可用的操作，同样也可以在 `String` 中使用。因为 `String` 实"
+"际上是一个围绕字节向量的封装层，它提供了一些额外的功能、限制和保证。一个在 "
+"`Vec<T>` 和 `String` 中工作方式相同的函数示例是 `new` 函数，该函数用于创建实"
+"例，如清单 8-11 所示。"
+
+#: src/ch08-02-strings.md:58
+msgid ""
+"This line creates a new, empty string called `s`, into which we can then "
+"load data. Often, we’ll have some initial data with which we want to start "
+"the string. For that, we use the `to_string` method, which is available on "
+"any type that implements the `Display` trait, as string literals do. Listing "
+"8-12 shows two examples."
+msgstr ""
+"这行代码创建了一个新的空字符串，名为 `s`，我们可以在这个字符串中加载数据。通"
+"常，我们会有一些初始数据，希望从这些数据开始构建字符串。为此，我们可以使用 "
+"`to_string` 方法，该方法适用于任何实现了 `Display` 特性的类型，就像字符串字面"
+"量一样。列表 8-12 展示了两个示例。"
+
+#: src/ch08-02-strings.md:68 src/ch08-02-strings.md:73
+#: src/ch08-02-strings.md:89
+msgid "\"initial contents\""
+msgstr "“初始内容”"
+
+#: src/ch08-02-strings.md:72
+msgid "// The method also works on a literal directly:\n"
+msgstr "// 这个方法也直接适用于文字：\n"
+
+#: src/ch08-02-strings.md:79
+msgid "This code creates a string containing `initial contents`."
+msgstr "这段代码创建了一个包含 `initial contents` 的字符串。"
+
+#: src/ch08-02-strings.md:81
+msgid ""
+"We can also use the function `String::from` to create a `String` from a "
+"string literal. The code in Listing 8-13 is equivalent to the code in "
+"Listing 8-12 that uses `to_string`."
+msgstr ""
+"我们还可以使用函数 `String::from` 来从一个字符串字面量中创建 `String`。列表 "
+"8-13 中的代码等同于使用 `to_string` 的列表 8-12 中的代码。"
+
+#: src/ch08-02-strings.md:95
+msgid ""
+"Because strings are used for so many things, we can use many different "
+"generic APIs for strings, providing us with a lot of options. Some of them "
+"can seem redundant, but they all have their place! In this case, `String::"
+"from` and `to_string` do the same thing, so which one you choose is a matter "
+"of style and readability."
+msgstr ""
+"由于字符串被用于许多不同的场景，我们可以为字符串使用许多不同的通用API，从而提"
+"供大量的选择。其中一些选项可能看起来有些冗余，但它们都有各自的作用！在这种情"
+"况下， `String::from` 和 `to_string` 的作用是相同的，因此选择哪一个取决于风格"
+"和可读性。"
+
+#: src/ch08-02-strings.md:101
+msgid ""
+"Remember that strings are UTF-8 encoded, so we can include any properly "
+"encoded data in them, as shown in Listing 8-14."
+msgstr ""
+"请记住，字符串都是用 UTF-8 编码的，因此我们可以在其中包含任何正确编码的数据，"
+"如清单 8-14 所示。"
+
+#: src/ch08-02-strings.md:108 src/ch08-02-strings.md:334
+#: src/ch08-02-strings.md:355
+msgid "\"السلام عليكم\""
+msgstr "\"السلام عليكم\""
+
+#: src/ch08-02-strings.md:109 src/ch08-02-strings.md:335
+#: src/ch08-02-strings.md:356
+msgid "\"Dobrý den\""
+msgstr "\"Dobrý den\""
+
+#: src/ch08-02-strings.md:110 src/ch08-02-strings.md:336
+#: src/ch08-02-strings.md:357
+msgid "\"Hello\""
+msgstr "\"Hello\""
+
+#: src/ch08-02-strings.md:111 src/ch08-02-strings.md:337
+#: src/ch08-02-strings.md:358
+msgid "\"שלום\""
+msgstr "\"שלום\""
+
+#: src/ch08-02-strings.md:112 src/ch08-02-strings.md:338
+#: src/ch08-02-strings.md:359
+msgid "\"नमस्ते\""
+msgstr "\"नमस्ते\""
+
+#: src/ch08-02-strings.md:113 src/ch08-02-strings.md:339
+#: src/ch08-02-strings.md:360
+msgid "\"こんにちは\""
+msgstr "\"こんにちは\""
+
+#: src/ch08-02-strings.md:114 src/ch08-02-strings.md:340
+#: src/ch08-02-strings.md:361
+msgid "\"안녕하세요\""
+msgstr "\"안녕하세요\""
+
+#: src/ch08-02-strings.md:115 src/ch08-02-strings.md:341
+#: src/ch08-02-strings.md:362
+msgid "\"你好\""
+msgstr "\"你好\""
+
+#: src/ch08-02-strings.md:116 src/ch08-02-strings.md:342
+#: src/ch08-02-strings.md:363
+msgid "\"Olá\""
+msgstr "\"Olá\""
+
+#: src/ch08-02-strings.md:117 src/ch08-02-strings.md:343
+#: src/ch08-02-strings.md:364 src/ch08-02-strings.md:377
+#: src/ch08-02-strings.md:450
+msgid "\"Здравствуйте\""
+msgstr "\"Здравствуйте\""
+
+#: src/ch08-02-strings.md:118 src/ch08-02-strings.md:344
+#: src/ch08-02-strings.md:365
+msgid "\"Hola\""
+msgstr "\"Hola\""
+
+#: src/ch08-02-strings.md:124
+msgid "All of these are valid `String` values."
+msgstr "所有这些都是有效的 `String` 值。"
+
+#: src/ch08-02-strings.md:126
+msgid "Updating a String"
+msgstr "更新字符串"
+
+#: src/ch08-02-strings.md:128
+msgid ""
+"A `String` can grow in size and its contents can change, just like the "
+"contents of a `Vec<T>`, if you push more data into it. In addition, you can "
+"conveniently use the `+` operator or the `format!` macro to concatenate "
+"`String` values."
+msgstr ""
+"A `String` 可以扩大规模，其内容也可以发生变化，就像 `Vec<T>` 的内容一样，如果"
+"你向其中添加更多数据。此外，你可以方便地使用 `+` 运算符或 `format!` 宏来连接 "
+"`String` 的值。"
+
+#: src/ch08-02-strings.md:134
+msgid "<a id=\"appending-to-a-string-with-push_str-and-push\"></a>"
+msgstr "<a id=\"appending-to-a-string-with-push_str-and-push\"></a>"
+
+#: src/ch08-02-strings.md:136
+msgid "Appending with `push_str` or `push`"
+msgstr "使用 `push_str` 或 `push` 进行追加操作"
+
+#: src/ch08-02-strings.md:138
+msgid ""
+"We can grow a `String` by using the `push_str` method to append a string "
+"slice, as shown in Listing 8-15."
+msgstr ""
+"我们可以使用 `push_str` 方法添加一个字符串切片，从而生成 `String`，如清单 "
+"8-15 所示。"
+
+#: src/ch08-02-strings.md:145 src/ch08-02-strings.md:161
+msgid "\"foo\""
+msgstr "\"foo\""
+
+#: src/ch08-02-strings.md:146 src/ch08-02-strings.md:162
+msgid "\"bar\""
+msgstr "\"bar\""
+
+#: src/ch08-02-strings.md:152
+msgid ""
+"After these two lines, `s` will contain `foobar`. The `push_str` method "
+"takes a string slice because we don’t necessarily want to take ownership of "
+"the parameter. For example, in the code in Listing 8-16, we want to be able "
+"to use `s2` after appending its contents to `s1`."
+msgstr ""
+"在这两行代码之后，`s`将包含`foobar`。`push_str`方法接受一个字符串切片，因为我"
+"们不一定想要拥有该参数。例如，在清单8-16中的代码中，我们希望在将内容追加到"
+"`s1`之后，能够使用`s2`。"
+
+#: src/ch08-02-strings.md:164
+msgid "\"s2 is {s2}\""
+msgstr "\"s2 is {s2}\""
+
+#: src/ch08-02-strings.md:170
+msgid ""
+"If the `push_str` method took ownership of `s2`, we wouldn’t be able to "
+"print its value on the last line. However, this code works as we’d expect!"
+msgstr ""
+"如果 `push_str` 方法取得了 `s2` 的所有权，那么我们就无法在最后一行打印出其值"
+"了。不过，这段代码仍然按照我们的预期正常工作！"
+
+#: src/ch08-02-strings.md:173
+msgid ""
+"The `push` method takes a single character as a parameter and adds it to the "
+"`String`. Listing 8-17 adds the letter _l_ to a `String` using the `push` "
+"method."
+msgstr ""
+"`push`方法接受一个字符作为参数，并将其添加到`String`中。列表8-17展示了如何使"
+"用`push`方法将字母_l_添加到`String`中。"
+
+#: src/ch08-02-strings.md:181
+msgid "\"lo\""
+msgstr "\"lo\""
+
+#: src/ch08-02-strings.md:182
+msgid "'l'"
+msgstr "'l'"
+
+#: src/ch08-02-strings.md:188
+msgid "As a result, `s` will contain `lol`."
+msgstr "因此，`s` 将包含 `lol`。"
+
+#: src/ch08-02-strings.md:192
+msgid "<a id=\"concatenation-with-the--operator-or-the-format-macro\"></a>"
+msgstr "<a id=\"concatenation-with-the--operator-or-the-format-macro\"></a>"
+
+#: src/ch08-02-strings.md:194
+msgid "Concatenating with `+` or `format!`"
+msgstr "使用 `+` 或 `format!` 进行连接"
+
+#: src/ch08-02-strings.md:196
+msgid ""
+"Often, you’ll want to combine two existing strings. One way to do so is to "
+"use the `+` operator, as shown in Listing 8-18."
+msgstr ""
+"通常，您会希望将两个现有的字符串合并在一起。其中一种方法是使用 `+` 运算符，如"
+"清单 8-18 所示。"
+
+#: src/ch08-02-strings.md:203
+msgid "\"Hello, \""
+msgstr "\"Hello, \""
+
+#: src/ch08-02-strings.md:204
+msgid "\"world!\""
+msgstr "“世界”"
+
+#: src/ch08-02-strings.md:205
+msgid "// note s1 has been moved here and can no longer be used\n"
+msgstr "// 便笺s1已被移动到此处，无法再使用\n"
+
+#: src/ch08-02-strings.md:211
+msgid ""
+"The string `s3` will contain `Hello, world!`. The reason `s1` is no longer "
+"valid after the addition, and the reason we used a reference to `s2`, has to "
+"do with the signature of the method that’s called when we use the `+` "
+"operator. The `+` operator uses the `add` method, whose signature looks "
+"something like this:"
+msgstr ""
+"字符串 `s3` 将包含 `Hello, world!`。之所以 `s1` 在添加后不再有效，而我们使用 "
+"`s2` 作为引用，是因为这与使用 `+` 运算符时调用的方法的签名有关。`+` 运算符使"
+"用的是 `add` 方法，其签名大致如下："
+
+#: src/ch08-02-strings.md:221
+msgid ""
+"In the standard library, you’ll see `add` defined using generics and "
+"associated types. Here, we’ve substituted in concrete types, which is what "
+"happens when we call this method with `String` values. We’ll discuss "
+"generics in Chapter 10. This signature gives us the clues we need in order "
+"to understand the tricky bits of the `+` operator."
+msgstr ""
+"在标准库中，你会看到 `add` 是通过泛型及相关类型来定义的。在这里，我们替换了具"
+"体类型，这就是当我们使用 `String` 的值调用此方法时会发生的情况。我们将在第10"
+"章讨论泛型。这个签名为我们理解 `+` 运算符的复杂部分提供了必要的线索。"
+
+#: src/ch08-02-strings.md:227
+msgid ""
+"First, `s2` has an `&`, meaning that we’re adding a reference of the second "
+"string to the first string. This is because of the `s` parameter in the "
+"`add` function: We can only add a string slice to a `String`; we can’t add "
+"two `String` values together. But wait—the type of `&s2` is `&String`, not "
+"`&str`, as specified in the second parameter to `add`. So, why does Listing "
+"8-18 compile?"
+msgstr ""
+"首先，`s2`有一个`&`，这意味着我们将第二个字符串的引用添加到第一个字符串中。这"
+"是因为`add`函数中包含了`s`参数：我们只能向`String`中添加字符串切片，而无法将"
+"两个`String`值合并在一起。但是等等——`&s2`的类型是`&String`，而不是`&str`，正"
+"如`add`的第二个参数所指定的那样。那么，为什么 Listing 8-18 能够编译呢？"
+
+#: src/ch08-02-strings.md:234
+msgid ""
+"The reason we’re able to use `&s2` in the call to `add` is that the compiler "
+"can coerce the `&String` argument into a `&str`. When we call the `add` "
+"method, Rust uses a deref coercion, which here turns `&s2` into `&s2[..]`. "
+"We’ll discuss deref coercion in more depth in Chapter 15. Because `add` does "
+"not take ownership of the `s` parameter, `s2` will still be a valid `String` "
+"after this operation."
+msgstr ""
+"我们能够在使用 `add` 时调用 `&s2` 的原因是，编译器可以将 `&String` 参数强制转"
+"换为 `&str`。当我们调用 `add` 方法时，Rust 会执行一种去引用转换，将 `&s2` 转"
+"换为 `&s2[..]`。我们将在第十五章中更深入地讨论去引用转换。因为 `add` 不会占"
+"用 `s` 参数的所有权，所以经过这个操作之后， `s2` 仍然是一个有效的 `String`。"
+
+#: src/ch08-02-strings.md:241
+msgid ""
+"Second, we can see in the signature that `add` takes ownership of `self` "
+"because `self` does _not_ have an `&`. This means `s1` in Listing 8-18 will "
+"be moved into the `add` call and will no longer be valid after that. So, "
+"although `let s3 = s1 + &s2;` looks like it will copy both strings and "
+"create a new one, this statement actually takes ownership of `s1`, appends a "
+"copy of the contents of `s2`, and then returns ownership of the result. In "
+"other words, it looks like it’s making a lot of copies, but it isn’t; the "
+"implementation is more efficient than copying."
+msgstr ""
+"其次，我们可以在签名中看到，`add`拥有`self`的所有权，因为`self`并没有`&`。这"
+"意味着清单8-18中的`s1`将被移动到`add`中，之后将不再有效。因此，虽然`let s3 = "
+"s1 + &s2;`看起来像是复制了两个字符串并创建一个新的字符串，但实际上它只是拥有"
+"`s1`的所有权，将`s2`的内容复制进去，然后返回结果的所有权。换句话说，它看起来"
+"像是做了很多复制操作，但实际上并非如此；这种实现方式比直接复制要高效得多。"
+
+#: src/ch08-02-strings.md:250
+msgid ""
+"If we need to concatenate multiple strings, the behavior of the `+` operator "
+"gets unwieldy:"
+msgstr "如果我们需要连接多个字符串，`+`运算符的行为就会变得难以处理："
+
+#: src/ch08-02-strings.md:255 src/ch08-02-strings.md:269
+msgid "\"tic\""
+msgstr "“tic”"
+
+#: src/ch08-02-strings.md:256 src/ch08-02-strings.md:270
+msgid "\"tac\""
+msgstr "“tac”"
+
+#: src/ch08-02-strings.md:257 src/ch08-02-strings.md:271
+msgid "\"toe\""
+msgstr "\"toe\""
+
+#: src/ch08-02-strings.md:259
+msgid "\"-\""
+msgstr "\"-\""
+
+#: src/ch08-02-strings.md:263
+msgid ""
+"At this point, `s` will be `tic-tac-toe`. With all of the `+` and `\"` "
+"characters, it’s difficult to see what’s going on. For combining strings in "
+"more complicated ways, we can instead use the `format!` macro:"
+msgstr ""
+"此时，`s`将变为`tic-tac-toe`。再加上所有`+`和`\"`字符，很难理解到底发生了什"
+"么。为了以更复杂的方式组合字符串，我们可以使用`format!`宏："
+
+#: src/ch08-02-strings.md:273
+msgid "\"{s1}-{s2}-{s3}\""
+msgstr "\"{s1}-{s2}-{s3}\""
+
+#: src/ch08-02-strings.md:277
+msgid ""
+"This code also sets `s` to `tic-tac-toe`. The `format!` macro works like "
+"`println!`, but instead of printing the output to the screen, it returns a "
+"`String` with the contents. The version of the code using `format!` is much "
+"easier to read, and the code generated by the `format!` macro uses "
+"references so that this call doesn’t take ownership of any of its parameters."
+msgstr ""
+"这段代码还将 `s` 设置为 `tic-tac-toe`。`format!` 宏的工作方式类似于`println!"
+"`，但它不是将输出打印到屏幕上，而是返回一个包含相应内容的`String`。使用 "
+"`format!` 的版本代码更容易阅读，而由 `format!` 宏生成的代码则使用引用机制，因"
+"此这种调用不会占用任何参数的所有权。"
+
+#: src/ch08-02-strings.md:283
+msgid "Indexing into Strings"
+msgstr "对字符串进行索引"
+
+#: src/ch08-02-strings.md:285
+msgid ""
+"In many other programming languages, accessing individual characters in a "
+"string by referencing them by index is a valid and common operation. "
+"However, if you try to access parts of a `String` using indexing syntax in "
+"Rust, you’ll get an error. Consider the invalid code in Listing 8-19."
+msgstr ""
+"在许多其他编程语言中，通过索引来访问字符串中的单个字符是一种有效且常见的操"
+"作。然而，如果在Rust中使用索引语法尝试访问某个子字符串的部分内容，将会出现错"
+"误。请参考清单8-19中的无效代码。"
+
+#: src/ch08-02-strings.md:294
+msgid "\"hi\""
+msgstr "\"hi\""
+
+#: src/ch08-02-strings.md:301
+msgid "This code will result in the following error:"
+msgstr "这段代码会导致以下错误："
+
+#: src/ch08-02-strings.md:303
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling collections v0.1.0 (file:///projects/collections)\n"
+"error[E0277]: the type `str` cannot be indexed by `{integer}`\n"
+" --> src/main.rs:3:16\n"
+"  |\n"
+"3 |     let h = s1[0];\n"
+"  |                ^ string indices are ranges of `usize`\n"
+"  |\n"
+"  = help: the trait `SliceIndex<str>` is not implemented for `{integer}`\n"
+"  = note: you can use `.chars().nth()` or `.bytes().nth()`\n"
+"          for more information, see chapter 8 in The Book: <https://doc.rust-"
+"lang.org/book/ch08-02-strings.html#indexing-into-strings>\n"
+"  = help: the following other types implement trait `SliceIndex<T>`:\n"
+"            `usize` implements `SliceIndex<ByteStr>`\n"
+"            `usize` implements `SliceIndex<[T]>`\n"
+"  = note: required for `String` to implement `Index<{integer}>`\n"
+"\n"
+"For more information about this error, try `rustc --explain E0277`.\n"
+"error: could not compile `collections` (bin \"collections\") due to 1 "
+"previous error\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling collections v0.1.0 (file:///projects/collections)\n"
+"error[E0277]: the type `str` cannot be indexed by `{integer}`\n"
+" --> src/main.rs:3:16\n"
+"  |\n"
+"3 |     let h = s1[0];\n"
+"  |                ^ string indices are ranges of `usize`\n"
+"  |\n"
+"  = help: the trait `SliceIndex<str>` is not implemented for `{integer}`\n"
+"  = note: you can use `.chars().nth()` or `.bytes().nth()`\n"
+"          for more information, see chapter 8 in The Book: <https://doc.rust-"
+"lang.org/book/ch08-02-strings.html#indexing-into-strings>\n"
+"  = help: the following other types implement trait `SliceIndex<T>`:\n"
+"            `usize` implements `SliceIndex<ByteStr>`\n"
+"            `usize` implements `SliceIndex<[T]>`\n"
+"  = note: required for `String` to implement `Index<{integer}>`\n"
+"\n"
+"For more information about this error, try `rustc --explain E0277`.\n"
+"error: could not compile `collections` (bin \"collections\") due to 1 "
+"previous error\n"
+"```"
+
+#: src/ch08-02-strings.md:324
+msgid ""
+"The error tells the story: Rust strings don’t support indexing. But why not? "
+"To answer that question, we need to discuss how Rust stores strings in "
+"memory."
+msgstr ""
+"这个错误揭示了这样一个事实：Rust中的字符串并不支持索引操作。但为什么会出现这"
+"种情况呢？要解答这个问题，我们需要探讨Rust是如何在内存中存储字符串的。"
+
+#: src/ch08-02-strings.md:327
+msgid "Internal Representation"
+msgstr "内部表示"
+
+#: src/ch08-02-strings.md:329
+msgid ""
+"A `String` is a wrapper over a `Vec<u8>`. Let’s look at some of our properly "
+"encoded UTF-8 example strings from Listing 8-14. First, this one:"
+msgstr ""
+"A `String` 是一个基于 `Vec<u8>` 的封装。让我们来看看清单8-14中一些正确编码的"
+"UTF-8 字符串。首先，这是其中一个例子："
+
+#: src/ch08-02-strings.md:348
+msgid ""
+"In this case, `len` will be `4`, which means the vector storing the string "
+"`\"Hola\"` is 4 bytes long. Each of these letters takes 1 byte when encoded "
+"in UTF-8. The following line, however, may surprise you (note that this "
+"string begins with the capital Cyrillic letter _Ze_, not the number 3):"
+msgstr ""
+"在这种情况下，`len`将会变成`4`，这意味着存储字符串`\"Hola\"`的向量长度为4字"
+"节。在UTF-8编码下，每个字符需要1字节来表示。不过，下面这一行可能会让你感到惊"
+"讶（请注意，这个字符串以大写西里尔字母_Ze_开头，而不是数字3）："
+
+#: src/ch08-02-strings.md:369
+msgid ""
+"If you were asked how long the string is, you might say 12. In fact, Rust’s "
+"answer is 24: That’s the number of bytes it takes to encode “Здравствуйте” "
+"in UTF-8, because each Unicode scalar value in that string takes 2 bytes of "
+"storage. Therefore, an index into the string’s bytes will not always "
+"correlate to a valid Unicode scalar value. To demonstrate, consider this "
+"invalid Rust code:"
+msgstr ""
+"如果你被问到字符串的长度，你可能会回答12。但实际上，Rust的答案是24：这是因为"
+"用UTF-8 编码“Здравствуйте”需要24个字节，因为字符串中的每个Unicode标量值都需要"
+"2个字节的存储空间。因此，字符串的字节索引并不总能与有效的Unicode标量值相对"
+"应。为了说明这一点，请看这段无效的Rust代码："
+
+#: src/ch08-02-strings.md:381
+msgid ""
+"You already know that `answer` will not be `З`, the first letter. When "
+"encoded in UTF-8, the first byte of `З` is `208` and the second is `151`, so "
+"it would seem that `answer` should in fact be `208`, but `208` is not a "
+"valid character on its own. Returning `208` is likely not what a user would "
+"want if they asked for the first letter of this string; however, that’s the "
+"only data that Rust has at byte index 0. Users generally don’t want the byte "
+"value returned, even if the string contains only Latin letters: If "
+"`&\"hi\"[0]` were valid code that returned the byte value, it would return "
+"`104`, not `h`."
+msgstr ""
+"您已经知道，`answer`并不等于`З`，第一个字符就是如此。在UTF-8编码中，`З`的第一"
+"个字节是`208`，第二个字节是`151`。因此，似乎`answer`实际上应该等于`208`，但是"
+"`208`本身并不是一个有效的字符。返回`208`可能并不是用户想要的结果，尤其是当他"
+"们请求这个字符串的第一个字符时；然而，这是Rust在字节索引0处唯一拥有的数据。通"
+"常，用户并不希望得到字节值的返回，即使字符串只包含拉丁字母。如果`&\"hi\"[0]`"
+"是一个有效的代码，它能够返回字节值的话，那么它将会返回`104`，而不是`h`。"
+
+#: src/ch08-02-strings.md:390
+msgid ""
+"The answer, then, is that to avoid returning an unexpected value and causing "
+"bugs that might not be discovered immediately, Rust doesn’t compile this "
+"code at all and prevents misunderstandings early in the development process."
+msgstr ""
+"因此，为了避免返回意外的值并导致可能不会被立即发现的错误，Rust根本不会编译这"
+"段代码，从而在开发过程的早期就避免了误解。"
+
+#: src/ch08-02-strings.md:396
+msgid "<a id=\"bytes-and-scalar-values-and-grapheme-clusters-oh-my\"></a>"
+msgstr "<a id=\"bytes-and-scalar-values-and-grapheme-clusters-oh-my\"></a>"
+
+#: src/ch08-02-strings.md:398
+msgid "Bytes, Scalar Values, and Grapheme Clusters"
+msgstr "字节、标量值以及图素簇"
+
+#: src/ch08-02-strings.md:400
+msgid ""
+"Another point about UTF-8 is that there are actually three relevant ways to "
+"look at strings from Rust’s perspective: as bytes, scalar values, and "
+"grapheme clusters (the closest thing to what we would call _letters_)."
+msgstr ""
+"关于UTF-8的另一个要点是，从Rust的角度来看，处理字符串实际上有三种相关方式：以"
+"字节为单位、作为标量值，以及以字符簇的形式（这最接近我们所说的“字母”）。"
+
+#: src/ch08-02-strings.md:404
+msgid ""
+"If we look at the Hindi word “नमस्ते” written in the Devanagari script, it is "
+"stored as a vector of `u8` values that looks like this:"
+msgstr ""
+"如果我们看一下用天城文书写的印地语单词“नमस्ते”，它会被存储为一个 `u8` 值的向"
+"量，看起来像这样："
+
+#: src/ch08-02-strings.md:412
+msgid ""
+"That’s 18 bytes and is how computers ultimately store this data. If we look "
+"at them as Unicode scalar values, which are what Rust’s `char` type is, "
+"those bytes look like this:"
+msgstr ""
+"这相当于18个字节，这也是计算机最终存储这些数据的方式。如果我们把它们视为"
+"Unicode标量值，也就是Rust的`char`类型所表示的，那么这些字节看起来就是这样的："
+
+#: src/ch08-02-strings.md:420
+msgid ""
+"There are six `char` values here, but the fourth and sixth are not letters: "
+"They’re diacritics that don’t make sense on their own. Finally, if we look "
+"at them as grapheme clusters, we’d get what a person would call the four "
+"letters that make up the Hindi word:"
+msgstr ""
+"这里共有六个 `char` 值，但第四个和第六个值并不是字母：它们实际上是用于标注的"
+"符号，单独来看是没有意义的。如果我们把它们视为字符群，那么就能得到人们所说的"
+"构成印地语单词的四个字母。"
+
+#: src/ch08-02-strings.md:425
+msgid ""
+"```text\n"
+"[\"न\", \"म\", \"स्\", \"ते\"]\n"
+"```"
+msgstr ""
+"```text\n"
+"[\"न\", \"म\", \"स्\", \"ते\"]\n"
+"```"
+
+#: src/ch08-02-strings.md:429
+msgid ""
+"Rust provides different ways of interpreting the raw string data that "
+"computers store so that each program can choose the interpretation it needs, "
+"no matter what human language the data is in."
+msgstr ""
+"Rust提供了多种方式来解释计算机存储的原始字符串数据，这样每个程序都可以选择自"
+"己需要的解释方式，无论这些数据使用的是哪种人类语言。"
+
+#: src/ch08-02-strings.md:433
+msgid ""
+"A final reason Rust doesn’t allow us to index into a `String` to get a "
+"character is that indexing operations are expected to always take constant "
+"time (O(1)). But it isn’t possible to guarantee that performance with a "
+"`String`, because Rust would have to walk through the contents from the "
+"beginning to the index to determine how many valid characters there were."
+msgstr ""
+"最后，Rust不允许我们对 `String` 进行索引以获取某个字符的原因在于，索引操作应"
+"该始终以常数时间（O(1)）完成。但是，对于 `String`，我们无法保证性能，因为Rust"
+"需要从头到尾遍历内容，以确定有多少个有效的字符。"
+
+#: src/ch08-02-strings.md:439
+msgid "Slicing Strings"
+msgstr "字符串切片"
+
+#: src/ch08-02-strings.md:441
+msgid ""
+"Indexing into a string is often a bad idea because it’s not clear what the "
+"return type of the string-indexing operation should be: a byte value, a "
+"character, a grapheme cluster, or a string slice. If you really need to use "
+"indices to create string slices, therefore, Rust asks you to be more "
+"specific."
+msgstr ""
+"对字符串进行索引通常不是一个好主意，因为不清楚字符串索引操作的返回类型应该是"
+"什么：是字节值、字符、字符簇，还是字符串切片。因此，如果你真的需要使用索引来"
+"创建字符串切片，Rust会要求你提供更具体的说明。"
+
+#: src/ch08-02-strings.md:446
+msgid ""
+"Rather than indexing using `[]` with a single number, you can use `[]` with "
+"a range to create a string slice containing particular bytes:"
+msgstr ""
+"与其使用 `[]` 来索引单个数字，不如使用 `[]` 并指定一个范围，从而创建一个包含"
+"特定字节的字符串切片："
+
+#: src/ch08-02-strings.md:455
+msgid ""
+"Here, `s` will be a `&str` that contains the first 4 bytes of the string. "
+"Earlier, we mentioned that each of these characters was 2 bytes, which means "
+"`s` will be `Зд`."
+msgstr ""
+"在这里，`s`将是一个包含字符串前4个字节的`&str`。之前我们提到过，这些字符每个"
+"都是2个字节，这意味着`s`将变成`Зд`。"
+
+#: src/ch08-02-strings.md:459
+msgid ""
+"If we were to try to slice only part of a character’s bytes with something "
+"like `&hello[0..1]`, Rust would panic at runtime in the same way as if an "
+"invalid index were accessed in a vector:"
+msgstr ""
+"如果我们试图仅使用类似`&hello[0..1]`的工具来分割字符的某些字节，Rust会在运行"
+"时引发panic，这就像在向量中访问了无效的索引一样："
+
+#: src/ch08-02-strings.md:463
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling collections v0.1.0 (file:///projects/collections)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s\n"
+"     Running `target/debug/collections`\n"
+"\n"
+"thread 'main' panicked at src/main.rs:4:19:\n"
+"byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2) of "
+"`Здравствуйте`\n"
+"note: run with `RUST_BACKTRACE=1` environment variable to display a "
+"backtrace\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling collections v0.1.0 (file:///projects/collections)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s\n"
+"     Running `target/debug/collections`\n"
+"\n"
+"thread 'main' panicked at src/main.rs:4:19:\n"
+"byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2) of "
+"`Здравствуйте`\n"
+"note: run with `RUST_BACKTRACE=1` environment variable to display a "
+"backtrace\n"
+"```"
+
+#: src/ch08-02-strings.md:474
+msgid ""
+"You should use caution when creating string slices with ranges, because "
+"doing so can crash your program."
+msgstr ""
+"在创建带有范围的字符串切片时，应该非常小心，因为这样做可能会导致程序崩溃。"
+
+#: src/ch08-02-strings.md:479
+msgid "<a id=\"methods-for-iterating-over-strings\"></a>"
+msgstr "<a id=\"methods-for-iterating-over-strings\"></a>"
+
+#: src/ch08-02-strings.md:481
+msgid "Iterating Over Strings"
+msgstr "遍历字符串"
+
+#: src/ch08-02-strings.md:483
+msgid ""
+"The best way to operate on pieces of strings is to be explicit about whether "
+"you want characters or bytes. For individual Unicode scalar values, use the "
+"`chars` method. Calling `chars` on “Зд” separates out and returns two values "
+"of type `char`, and you can iterate over the result to access each element:"
+msgstr ""
+"处理字符串的最佳方式是明确说明你是想要字符还是字节。对于单个Unicode标量值，可"
+"以使用`chars`方法。对“Зд”调用`chars`方法会将其拆分成两个类型为`char`的值，你"
+"可以遍历这个结果来访问每个元素："
+
+#: src/ch08-02-strings.md:489 src/ch08-02-strings.md:505
+msgid "\"Зд\""
+msgstr "\"Зд\""
+
+#: src/ch08-02-strings.md:490
+msgid "\"{c}\""
+msgstr "\"{c}\""
+
+#: src/ch08-02-strings.md:494
+msgid "This code will print the following:"
+msgstr "这段代码将输出以下内容："
+
+#: src/ch08-02-strings.md:501
+msgid ""
+"Alternatively, the `bytes` method returns each raw byte, which might be "
+"appropriate for your domain:"
+msgstr "或者，`bytes`方法会返回每个原始字节，这可能对你的领域来说比较合适："
+
+#: src/ch08-02-strings.md:506
+msgid "\"{b}\""
+msgstr "\"{b}\""
+
+#: src/ch08-02-strings.md:510
+msgid "This code will print the 4 bytes that make up this string:"
+msgstr "这段代码将输出构成这个字符串的4个字节："
+
+#: src/ch08-02-strings.md:519
+msgid ""
+"But be sure to remember that valid Unicode scalar values may be made up of "
+"more than 1 byte."
+msgstr "但请务必记住，有效的 Unicode 标量值可能由超过1个字节组成。"
+
+#: src/ch08-02-strings.md:522
+msgid ""
+"Getting grapheme clusters from strings, as with the Devanagari script, is "
+"complex, so this functionality is not provided by the standard library. "
+"Crates are available on [crates.io](https://crates.io/)<!-- ignore --> if "
+"this is the functionality you need."
+msgstr ""
+"从字符串中提取字符集群的过程与处理天城文一样复杂，因此标准库并不提供这一功"
+"能。如果你需要这个功能，可以在[crates.io](https://crates.io/)上找到相关的小"
+"包。"
+
+#: src/ch08-02-strings.md:529
+msgid "<a id=\"strings-are-not-so-simple\"></a>"
+msgstr "<a id=\"strings-are-not-so-simple\"></a>"
+
+#: src/ch08-02-strings.md:531
+msgid "Handling the Complexities of Strings"
+msgstr "处理字符串中的复杂性"
+
+#: src/ch08-02-strings.md:533
+msgid ""
+"To summarize, strings are complicated. Different programming languages make "
+"different choices about how to present this complexity to the programmer. "
+"Rust has chosen to make the correct handling of `String` data the default "
+"behavior for all Rust programs, which means programmers have to put more "
+"thought into handling UTF-8 data up front. This trade-off exposes more of "
+"the complexity of strings than is apparent in other programming languages, "
+"but it prevents you from having to handle errors involving non-ASCII "
+"characters later in your development life cycle."
+msgstr ""
+"总结来说，字符串处理非常复杂。不同的编程语言在处理这种复杂性时采取不同的方"
+"式。Rust选择将正确处理 `String` 数据作为所有Rust程序的默认行为，这意味着程序"
+"员在处理UTF-8数据时需要更加注意。这种权衡使得字符串处理的复杂性比其他编程语言"
+"更为明显，但它可以避免在开发周期后期处理非ASCII字符引发的错误。"
+
+#: src/ch08-02-strings.md:542
+msgid ""
+"The good news is that the standard library offers a lot of functionality "
+"built off the `String` and `&str` types to help handle these complex "
+"situations correctly. Be sure to check out the documentation for useful "
+"methods like `contains` for searching in a string and `replace` for "
+"substituting parts of a string with another string."
+msgstr ""
+"好消息是，标准库提供了许多基于 `String` 和 `&str` 类型的功能，以帮助正确处理"
+"这些复杂情况。请务必查阅相关文档，了解诸如 `contains` 用于字符串搜索的方法，"
+"以及 `replace` 用于用另一字符串替换字符串中部分内容的方法。"
+
+#: src/ch08-02-strings.md:548
+msgid "Let’s switch to something a bit less complex: hash maps!"
+msgstr "让我们来尝试一些稍微简单一些的东西：哈希映射！"

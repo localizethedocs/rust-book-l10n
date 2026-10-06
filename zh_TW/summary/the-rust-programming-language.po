@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/title-page.md:1
+msgid "The Rust Programming Language"
+msgstr "Rust 程式設計語言"
+
+#: src/title-page.md:3
+msgid ""
+"_by Steve Klabnik, Carol Nichols, and Chris Krycho, with contributions from "
+"the Rust Community_"
+msgstr ""
+"_由 Steve Klabnik、Carol Nichols 與 Chris Krycho，以及 Rust 社群的貢獻撰寫而"
+"成_"
+
+#: src/title-page.md:6
+msgid ""
+"This version of the text assumes you’re using Rust 1.90.0 (released "
+"2025-09-18) or later with `edition = \"2024\"` in the _Cargo.toml_ file of "
+"all projects to configure them to use Rust 2024 Edition idioms. See the "
+"[“Installation” section of Chapter 1](ch01-01-installation.html)<!-- ignore "
+"--> for instructions on installing or updating Rust, and see [Appendix E]"
+"(appendix-05-editions.html)<!-- ignore --> for information on editions."
+msgstr ""
+"本文此版本假設你使用 Rust 1.90.0（發佈於 2025-09-18）或更新版本，並在所有專案"
+"的 _Cargo.toml_ 檔案中設定 `edition = \"2024\"`，以使用 Rust 2024 版次的慣用"
+"法。安裝或更新 Rust 的說明請見[第 1 章的「安裝」](ch01-01-installation."
+"html)<!-- ignore -->，關於版次的資訊請見[附錄 E](appendix-05-editions."
+"html)<!-- ignore -->。"
+
+#: src/title-page.md:13
+msgid ""
+"The HTML format is available online at [https://doc.rust-lang.org/stable/"
+"book/](https://doc.rust-lang.org/stable/book/) and offline with "
+"installations of Rust made with `rustup`; run `rustup doc --book` to open."
+msgstr ""
+"HTML 版可在 [https://doc.rust-lang.org/stable/book/](https://doc.rust-lang."
+"org/stable/book/) 線上閱讀，也可在以 `rustup` 安裝 Rust 後離線閱讀；執行 "
+"`rustup doc --book` 即可開啟。"
+
+#: src/title-page.md:18
+msgid ""
+"Several community [translations](appendix-06-translation.html) are also "
+"available."
+msgstr "也提供多種社群[翻譯](appendix-06-translation.html)。"
+
+#: src/title-page.md:20
+msgid ""
+"This text is available in [paperback and ebook format from No Starch Press]"
+"(https://nostarch.com/rust-programming-language-3rd-edition)."
+msgstr ""
+"本書亦由 [No Starch Press 提供平裝與電子書版本](https://nostarch.com/rust-"
+"programming-language-3rd-edition)。"
+
+#: src/title-page.md:28
+msgid ""
+"**🚨 Want a more interactive learning experience? Try out a different "
+"version of the Rust Book, featuring: quizzes, highlighting, visualizations, "
+"and more**: <https://rust-book.cs.brown.edu>"
+msgstr ""
+"**🚨 想要更具互動性的學習體驗？試試看另一個版本的 Rust Book，包含：小測驗、標"
+"註、視覺化等功能**：<https://rust-book.cs.brown.edu>"

@@ -1,0 +1,421 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch17-03-more-futures.md:4
+msgid "<a id=\"yielding\"></a>"
+msgstr "<a id=\"yielding\"></a>"
+
+#: src/ch17-03-more-futures.md:6
+msgid "Yielding Control to the Runtime"
+msgstr "将控制权交给运行时"
+
+#: src/ch17-03-more-futures.md:8
+msgid ""
+"Recall from the [“Our First Async Program”](ch17-01-futures-and-syntax."
+"html#our-first-async-program)<!-- ignore --> section that at each await "
+"point, Rust gives a runtime a chance to pause the task and switch to another "
+"one if the future being awaited isn’t ready. The inverse is also true: Rust "
+"_only_ pauses async blocks and hands control back to a runtime at an await "
+"point. Everything between await points is synchronous."
+msgstr ""
+"回想一下在 [“Our First Async Program”](ch17-01-futures-and-syntax.html#our-"
+"first-async-program)<!-- ignore --> 这一节中提到的内容：在每一个等待点，Rust"
+"会让运行时有机会暂停任务，并切换到另一个任务，如果等待的未来结果尚未准备好。"
+"反之亦然：Rust只会暂停异步块，并在等待点将控制权返回给运行时。等待点之间的所"
+"有操作都是同步的。"
+
+#: src/ch17-03-more-futures.md:14
+msgid ""
+"That means if you do a bunch of work in an async block without an await "
+"point, that future will block any other futures from making progress. You "
+"may sometimes hear this referred to as one future _starving_ other futures. "
+"In some cases, that may not be a big deal. However, if you are doing some "
+"kind of expensive setup or long-running work, or if you have a future that "
+"will keep doing some particular task indefinitely, you’ll need to think "
+"about when and where to hand control back to the runtime."
+msgstr ""
+"这意味着，如果你在异步块中执行大量工作，而该异步块中没有使用 `await` 关键字，"
+"那么那个异步任务将会阻塞其他异步任务的执行。有时，这种情况被称为一个异步任"
+"务“饿死”其他异步任务。在某些情况下，这可能不是什么大问题。然而，如果你正在执"
+"行一些耗时的设置操作或需要长时间运行的任务，或者如果你有一个需要持续执行特定"
+"任务的异步任务，那么你就需要考虑何时以及将控制权交还给运行时。"
+
+#: src/ch17-03-more-futures.md:22
+msgid ""
+"Let’s simulate a long-running operation to illustrate the starvation "
+"problem, then explore how to solve it. Listing 17-14 introduces a `slow` "
+"function."
+msgstr ""
+"让我们模拟一个长时间运行的操作，以说明饥饿问题，然后探讨如何解决这个问题。列"
+"表17-14中介绍了一个 `slow` 函数。"
+
+#: src/ch17-03-more-futures.md:28 src/ch17-03-more-futures.md:57
+#: src/ch17-03-more-futures.md:134 src/ch17-03-more-futures.md:213
+#: src/ch17-03-more-futures.md:293 src/ch17-03-more-futures.md:335
+#: src/ch17-03-more-futures.md:376
+msgid "// required for mdbook test\n"
+msgstr "// mdbook 测试所需的\n"
+
+#: src/ch17-03-more-futures.md:34
+msgid "// We will call `slow` here later\n"
+msgstr "// We will call `slow` here later\n"
+
+#: src/ch17-03-more-futures.md:40 src/ch17-03-more-futures.md:88
+#: src/ch17-03-more-futures.md:172 src/ch17-03-more-futures.md:249
+msgid "\"'{name}' ran for {ms}ms\""
+msgstr "\"'{name}' ran for {ms}ms\""
+
+#: src/ch17-03-more-futures.md:46
+msgid ""
+"This code uses `std::thread::sleep` instead of `trpl::sleep` so that calling "
+"`slow` will block the current thread for some number of milliseconds. We can "
+"use `slow` to stand in for real-world operations that are both long-running "
+"and blocking."
+msgstr ""
+"这段代码使用 `std::thread::sleep` 而不是 `trpl::sleep`，这样调用 `slow` 会阻"
+"塞当前线程若干毫秒。我们可以使用 `slow` 来代表那些既耗时又会阻塞的实际操作。"
+
+#: src/ch17-03-more-futures.md:51
+msgid ""
+"In Listing 17-15, we use `slow` to emulate doing this kind of CPU-bound work "
+"in a pair of futures."
+msgstr ""
+"在 Listing 17-15 中，我们使用 `slow` 来模拟在一对未来任务中执行这种计算密集型"
+"工作。"
+
+#: src/ch17-03-more-futures.md:64 src/ch17-03-more-futures.md:143
+#: src/ch17-03-more-futures.md:220
+msgid "\"'a' started.\""
+msgstr "\"'a' started.\"。"
+
+#: src/ch17-03-more-futures.md:65 src/ch17-03-more-futures.md:66
+#: src/ch17-03-more-futures.md:67 src/ch17-03-more-futures.md:144
+#: src/ch17-03-more-futures.md:146 src/ch17-03-more-futures.md:148
+#: src/ch17-03-more-futures.md:221 src/ch17-03-more-futures.md:223
+#: src/ch17-03-more-futures.md:225
+msgid "\"a\""
+msgstr "\"a\""
+
+#: src/ch17-03-more-futures.md:69 src/ch17-03-more-futures.md:150
+#: src/ch17-03-more-futures.md:227
+msgid "\"'a' finished.\""
+msgstr "\"'a' finished.\"。"
+
+#: src/ch17-03-more-futures.md:73 src/ch17-03-more-futures.md:154
+#: src/ch17-03-more-futures.md:231
+msgid "\"'b' started.\""
+msgstr "\"'b' started.\"。"
+
+#: src/ch17-03-more-futures.md:74 src/ch17-03-more-futures.md:75
+#: src/ch17-03-more-futures.md:76 src/ch17-03-more-futures.md:77
+#: src/ch17-03-more-futures.md:155 src/ch17-03-more-futures.md:157
+#: src/ch17-03-more-futures.md:159 src/ch17-03-more-futures.md:161
+#: src/ch17-03-more-futures.md:232 src/ch17-03-more-futures.md:234
+#: src/ch17-03-more-futures.md:236 src/ch17-03-more-futures.md:238
+msgid "\"b\""
+msgstr "\"b\""
+
+#: src/ch17-03-more-futures.md:79 src/ch17-03-more-futures.md:163
+#: src/ch17-03-more-futures.md:240
+msgid "\"'b' finished.\""
+msgstr "\"'b' finished.\"。"
+
+#: src/ch17-03-more-futures.md:94
+msgid ""
+"Each future hands control back to the runtime only _after_ carrying out a "
+"bunch of slow operations. If you run this code, you will see this output:"
+msgstr ""
+"每个“未来”操作在执行一系列缓慢的操作之后，才会将控制权返回给运行时系统。如果"
+"你运行这段代码，将会看到这样的输出："
+
+#: src/ch17-03-more-futures.md:116
+msgid ""
+"As with Listing 17-5 where we used `trpl::select` to race futures fetching "
+"two URLs, `select` still finishes as soon as `a` is done. There’s no "
+"interleaving between the calls to `slow` in the two futures, though. The `a` "
+"future does all of its work until the `trpl::sleep` call is awaited, then "
+"the `b` future does all of its work until its own `trpl::sleep` call is "
+"awaited, and finally the `a` future completes. To allow both futures to make "
+"progress between their slow tasks, we need await points so we can hand "
+"control back to the runtime. That means we need something we can await!"
+msgstr ""
+"正如清单17-5所示，我们使用 `trpl::select` 来竞争获取两个URL的未来，而 "
+"`select` 在 `a` 完成后立即执行。不过，两个未来任务对 `slow` 的调用之间并没有"
+"进行任何交错。 `a` 未来任务会一直执行，直到等待 `trpl::sleep` 的调用；然后 "
+"`b` 未来任务会一直执行，直到等待自己的 `trpl::sleep` 调用；最后 `a` 未来任务"
+"才会完成。为了让这两个未来任务能够在它们缓慢的任务之间取得进展，我们需要等待"
+"点，这样我们就可以将控制权交还给运行时。这意味着我们需要某种可以等待的对象！"
+
+#: src/ch17-03-more-futures.md:125
+msgid ""
+"We can already see this kind of handoff happening in Listing 17-15: if we "
+"removed the `trpl::sleep` at the end of the `a` future, it would complete "
+"without the `b` future running _at all_. Let’s try using the `trpl::sleep` "
+"function as a starting point for letting operations switch off making "
+"progress, as shown in Listing 17-16."
+msgstr ""
+"在 Listing 17-15 中，我们已经可以看到这种切换现象：如果我们移除 `a` 语句末尾"
+"的 `trpl::sleep`，那么 `a` 的后续操作将能够正常完成，而 `b` 则根本不会被执"
+"行。让我们尝试使用 `trpl::sleep` 函数作为起点，让操作在进展过程中自动停止，"
+"如 Listing 17-16 所示。"
+
+#: src/ch17-03-more-futures.md:178
+msgid ""
+"We’ve added `trpl::sleep` calls with await points between each call to "
+"`slow`. Now the two futures’ work is interleaved:"
+msgstr ""
+"我们添加了 `trpl::sleep` 调用，并在每次调用之间加入了带有 await 点的 `slow`。"
+"现在，这两个未来的执行结果被交错处理了："
+
+#: src/ch17-03-more-futures.md:199
+msgid ""
+"The `a` future still runs for a bit before handing off control to `b`, "
+"because it calls `slow` before ever calling `trpl::sleep`, but after that "
+"the futures swap back and forth each time one of them hits an await point. "
+"In this case, we have done that after every call to `slow`, but we could "
+"break up the work in whatever way makes the most sense to us."
+msgstr ""
+"在将控制权交给 `b` 之前， `a` 仍然会运行一段时间，因为它在调用 `trpl::sleep` "
+"之前会先调用 `slow`。不过，一旦其中一个函数达到等待点，两个未来函数就会互相交"
+"换控制权。在这种情况下，我们在每次调用 `slow` 之后都会执行这一操作，但我们也"
+"可以以最合理的方式将工作分解开来。"
+
+#: src/ch17-03-more-futures.md:205
+msgid ""
+"We don’t really want to _sleep_ here, though: we want to make progress as "
+"fast as we can. We just need to hand back control to the runtime. We can do "
+"that directly, using the `trpl::yield_now` function. In Listing 17-17, we "
+"replace all those `trpl::sleep` calls with `trpl::yield_now`."
+msgstr ""
+"不过，我们其实并不想在这里“睡觉”：我们希望尽可能快地取得进展。我们只需要将控"
+"制权交还给运行时。我们可以直接使用 `trpl::yield_now` 这个函数来实现这一点。"
+"在 Listing 17-17 中，我们将所有 `trpl::sleep` 的调用都替换成了 `trpl::"
+"yield_now`。"
+
+#: src/ch17-03-more-futures.md:255
+msgid ""
+"This code is both clearer about the actual intent and can be significantly "
+"faster than using `sleep`, because timers such as the one used by `sleep` "
+"often have limits on how granular they can be. The version of `sleep` we are "
+"using, for example, will always sleep for at least a millisecond, even if we "
+"pass it a `Duration` of one nanosecond. Again, modern computers are _fast_: "
+"they can do a lot in one millisecond!"
+msgstr ""
+"这段代码在表达实际意图方面更加清晰，而且比使用 `sleep` 要快得多。因为像 "
+"`sleep` 所使用的计时器通常存在精度限制。例如，我们使用的 `sleep` 版本总是会至"
+"少休眠一毫秒，即使我们给它传递一个一纳秒的 `Duration`。再次强调，现代计算机非"
+"常快速：它们可以在一毫秒内完成大量操作！"
+
+#: src/ch17-03-more-futures.md:262
+msgid ""
+"This means that async can be useful even for compute-bound tasks, depending "
+"on what else your program is doing, because it provides a useful tool for "
+"structuring the relationships between different parts of the program (but at "
+"a cost of the overhead of the async state machine). This is a form of "
+"_cooperative multitasking_, where each future has the power to determine "
+"when it hands over control via await points. Each future therefore also has "
+"the responsibility to avoid blocking for too long. In some Rust-based "
+"embedded operating systems, this is the _only_ kind of multitasking!"
+msgstr ""
+"这意味着，即使对于计算密集型任务来说，异步功能也是有用的，这取决于程序还在执"
+"行哪些其他任务。因为异步功能为构建程序不同部分之间的关系提供了一种有用的工具"
+"（但会带来异步状态机带来的额外开销）。这是一种协作式多任务处理机制，其中每"
+"个“未来”都有能力决定何时通过`await`点移交控制权。因此，每个“未来”也有责任避免"
+"长时间阻塞。在一些基于Rust的嵌入式操作系统中，这种多任务处理方式是**唯一**的"
+"方式！"
+
+#: src/ch17-03-more-futures.md:271
+msgid ""
+"In real-world code, you won’t usually be alternating function calls with "
+"await points on every single line, of course. While yielding control in this "
+"way is relatively inexpensive, it’s not free. In many cases, trying to break "
+"up a compute-bound task might make it significantly slower, so sometimes "
+"it’s better for _overall_ performance to let an operation block briefly. "
+"Always measure to see what your code’s actual performance bottlenecks are. "
+"The underlying dynamic is important to keep in mind, though, if you _are_ "
+"seeing a lot of work happening in serial that you expected to happen "
+"concurrently!"
+msgstr ""
+"在现实世界的代码中，通常不会在每一行代码中都交替使用函数调用和`await`指令。虽"
+"然以这种方式让程序暂停控制相对成本较低，但并非完全免费。在许多情况下，试图将"
+"计算密集型任务拆分成多个部分可能会显著降低其执行速度。因此，有时为了提升整体"
+"性能，让某个操作暂时阻塞也是可行的。务必测量一下，了解代码中的实际性能瓶颈是"
+"什么。不过，如果你发现大量操作实际上是串行进行的，而原本期望它们是并发执行"
+"的，那么理解底层动态机制就非常重要了！"
+
+#: src/ch17-03-more-futures.md:280
+msgid "Building Our Own Async Abstractions"
+msgstr "构建我们自己的异步抽象层"
+
+#: src/ch17-03-more-futures.md:282
+msgid ""
+"We can also compose futures together to create new patterns. For example, we "
+"can build a `timeout` function with async building blocks we already have. "
+"When we’re done, the result will be another building block we could use to "
+"create still more async abstractions."
+msgstr ""
+"我们还可以将不同的未来函数组合在一起，以创建新的模式。例如，我们可以使用已经"
+"拥有的异步构建模块来构建一个 `timeout` 函数。完成之后，结果将成为一个新的构建"
+"模块，我们可以用它来创建更多的异步抽象结构。"
+
+#: src/ch17-03-more-futures.md:287
+msgid ""
+"Listing 17-18 shows how we would expect this `timeout` to work with a slow "
+"future."
+msgstr "列表17-18展示了在较慢的未来情况下，我们预期这个 `timeout` 会如何运作。"
+
+#: src/ch17-03-more-futures.md:301 src/ch17-03-more-futures.md:343
+#: src/ch17-03-more-futures.md:388
+msgid "\"Finally finished\""
+msgstr "\"Finally finished\""
+
+#: src/ch17-03-more-futures.md:305 src/ch17-03-more-futures.md:347
+#: src/ch17-03-more-futures.md:392
+msgid "\"Succeeded with '{message}'\""
+msgstr "\"Succeeded with '{message}'\""
+
+#: src/ch17-03-more-futures.md:307 src/ch17-03-more-futures.md:349
+#: src/ch17-03-more-futures.md:394
+msgid "\"Failed after {} seconds\""
+msgstr "\"Failed after {} seconds\""
+
+#: src/ch17-03-more-futures.md:316
+msgid ""
+"Let’s implement this! To begin, let’s think about the API for `timeout`:"
+msgstr "让我们来实现这个功能吧！首先，我们来思考一下 `timeout` 的 API 设计："
+
+#: src/ch17-03-more-futures.md:318
+msgid "It needs to be an async function itself so we can await it."
+msgstr "它必须是一个异步函数，这样我们才能对其进行等待操作。"
+
+#: src/ch17-03-more-futures.md:319
+msgid ""
+"Its first parameter should be a future to run. We can make it generic to "
+"allow it to work with any future."
+msgstr ""
+"它的第一个参数应该是一个未来值，用于执行操作。我们可以使这个参数具有通用性，"
+"以便它能够处理任何未来值。"
+
+#: src/ch17-03-more-futures.md:321
+msgid ""
+"Its second parameter will be the maximum time to wait. If we use a "
+"`Duration`, that will make it easy to pass along to `trpl::sleep`."
+msgstr ""
+"它的第二个参数将表示最大等待时间。如果我们使用 `Duration`，那么就可以很容易地"
+"将这个时间值传递给 `trpl::sleep`。"
+
+#: src/ch17-03-more-futures.md:323
+msgid ""
+"It should return a `Result`. If the future completes successfully, the "
+"`Result` will be `Ok` with the value produced by the future. If the timeout "
+"elapses first, the `Result` will be `Err` with the duration that the timeout "
+"waited for."
+msgstr ""
+"它应该返回一个 `Result`。如果未来值成功完成，那么 `Result` 将包含由未来值产生"
+"的数值。如果超时时间先到，那么 `Result` 将包含超时等待的时间长度。"
+
+#: src/ch17-03-more-futures.md:328
+msgid "Listing 17-19 shows this declaration."
+msgstr "列表17-19展示了这一声明。"
+
+#: src/ch17-03-more-futures.md:359
+msgid "// Here is where our implementation will go!\n"
+msgstr "// 这里是我们实现的地方！\n"
+
+#: src/ch17-03-more-futures.md:365
+msgid ""
+"That satisfies our goals for the types. Now let’s think about the _behavior_ "
+"we need: we want to race the future passed in against the duration. We can "
+"use `trpl::sleep` to make a timer future from the duration, and use `trpl::"
+"select` to run that timer with the future the caller passes in."
+msgstr ""
+"这满足了我们对这些类型的需求。现在让我们考虑一下我们需要的_行为_：我们希望将"
+"传入的未来值与持续时间进行比较。我们可以使用`trpl::sleep`来从持续时间中创建一"
+"个计时器未来，然后使用`trpl::select`来运行这个计时器，并将调用者传入的未来值"
+"作为参数传递给它。"
+
+#: src/ch17-03-more-futures.md:370
+msgid ""
+"In Listing 17-20, we implement `timeout` by matching on the result of "
+"awaiting `trpl::select`."
+msgstr "在 Listing 17-20 中，我们通过匹配 await 的结果来实现 `timeout`。"
+
+#: src/ch17-03-more-futures.md:381
+msgid "// --snip--\n"
+msgstr ""
+"// --snip--\n"
+"——剪——\n"
+
+#: src/ch17-03-more-futures.md:413
+msgid ""
+"The implementation of `trpl::select` is not fair: it always polls arguments "
+"in the order in which they are passed (other `select` implementations will "
+"randomly choose which argument to poll first). Thus, we pass `future_to_try` "
+"to `select` first so it gets a chance to complete even if `max_time` is a "
+"very short duration. If `future_to_try` finishes first, `select` will return "
+"`Left` with the output from `future_to_try`. If `timer` finishes first, "
+"`select` will return `Right` with the timer’s output of `()`."
+msgstr ""
+"`trpl::select` 的实现并不公平：它总是按照参数传递的顺序来轮询参数（而其他 "
+"`select` 的实现则会随机选择先轮询哪个参数）。因此，我们应该先向 "
+"`future_to_try` 传递 `select`，这样即使 `max_time` 的持续时间非常短，它也有机"
+"会完成任务。如果 `future_to_try` 先完成，那么 `select` 将会返回 `Left`，同时"
+"附带 `future_to_try` 的输出结果。如果 `timer` 先完成，那么 `select` 将会返回 "
+"`Right`，同时附带计时器的输出结果 `()`。"
+
+#: src/ch17-03-more-futures.md:421
+msgid ""
+"If the `future_to_try` succeeds and we get a `Left(output)`, we return "
+"`Ok(output)`. If the sleep timer elapses instead and we get a `Right(())`, "
+"we ignore the `()` with `_` and return `Err(max_time)` instead."
+msgstr ""
+"如果 `future_to_try` 成功执行，并且我们得到了 `Left(output)`，那么我们将返回 "
+"`Ok(output)`。如果 instead，睡眠计时器到期了，并且我们得到了 `Right(())`，那"
+"么我们将忽略 `()` 以及 `_`，而是返回 `Err(max_time)`。"
+
+#: src/ch17-03-more-futures.md:425
+msgid ""
+"With that, we have a working `timeout` built out of two other async helpers. "
+"If we run our code, it will print the failure mode after the timeout:"
+msgstr ""
+"就这样，我们实现了由两个异步辅助函数构成的 `timeout` 功能。如果我们运行这段代"
+"码，它会在超时后打印出失败模式："
+
+#: src/ch17-03-more-futures.md:432
+msgid ""
+"Because futures compose with other futures, you can build really powerful "
+"tools using smaller async building blocks. For example, you can use this "
+"same approach to combine timeouts with retries, and in turn use those with "
+"operations such as network calls (such as those in Listing 17-5)."
+msgstr ""
+"因为未来操作可以与其他未来操作组合在一起，所以你可以使用一些更简单的异步组件"
+"来构建非常强大的工具。例如，你可以采用同样的方法将超时机制与重试机制结合起"
+"来，进而将这些机制应用于网络调用等操作中（如清单17-5所示）。"
+
+#: src/ch17-03-more-futures.md:437
+msgid ""
+"In practice, you’ll usually work directly with `async` and `await`, and "
+"secondarily with functions such as `select` and macros such as the `join!` "
+"macro to control how the outermost futures are executed."
+msgstr ""
+"在实践中，你通常会直接使用 `async` 和 `await`，并借助 `select` 这样的函数以"
+"及 `join!` 这样的宏来控制最外层未来事件的执行方式。"
+
+#: src/ch17-03-more-futures.md:441
+msgid ""
+"We’ve now seen a number of ways to work with multiple futures at the same "
+"time. Up next, we’ll look at how we can work with multiple futures in a "
+"sequence over time with _streams_."
+msgstr ""
+"我们已经看到了多种同时处理多个未来时态的方法。接下来，我们将探讨如何利用 _流"
+"_ 来按时间顺序处理多个未来时态。"
