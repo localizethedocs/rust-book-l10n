@@ -37,9 +37,9 @@
     "branch" : "main",
     "commit" : 
     {
-      "date" : "2026-02-03 10:19:04 -0500",
-      "hash" : "05d114287b7d6f6c9253d5242540f00fbd6172ab",
-      "title" : "Temporarily remove the link to `Drop::drop`"
+      "date" : "2026-09-02 12:04:34 -0400",
+      "hash" : "1500248d8f230566e4ec9f27fcbb8fe9e2898ab1",
+      "title" : "Update to Rust 1.98"
     }
   },
   "type" : "branch",
