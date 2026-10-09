@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2026-03-31T09:47:02Z\n"
+"POT-Creation-Date: 2026-10-06T15:30:32Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -229,9 +229,9 @@ msgstr ""
 #: src/ch04-01-what-is-ownership.md:109 src/ch04-01-what-is-ownership.md:122
 #: src/ch04-01-what-is-ownership.md:167 src/ch04-01-what-is-ownership.md:181
 #: src/ch04-01-what-is-ownership.md:230 src/ch04-01-what-is-ownership.md:285
-#: src/ch04-01-what-is-ownership.md:354 src/ch04-01-what-is-ownership.md:420
-#: src/ch04-01-what-is-ownership.md:459 src/ch04-01-what-is-ownership.md:534
-#: src/ch04-01-what-is-ownership.md:578 src/ch04-01-what-is-ownership.md:625
+#: src/ch04-01-what-is-ownership.md:354 src/ch04-01-what-is-ownership.md:419
+#: src/ch04-01-what-is-ownership.md:458 src/ch04-01-what-is-ownership.md:533
+#: src/ch04-01-what-is-ownership.md:577 src/ch04-01-what-is-ownership.md:624
 msgid "\"hello\""
 msgstr "\"hello\""
 
@@ -718,9 +718,6 @@ msgid ""
 "5 |     println!(\"{s1}, world!\");\n"
 "  |                ^^ value borrowed here after move\n"
 "  |\n"
-"  = note: this error originates in the macro `$crate::format_args_nl` which "
-"comes from the expansion of the macro `println` (in Nightly builds, run with "
-"-Z macro-backtrace for more info)\n"
 "help: consider cloning the value if the performance cost is acceptable\n"
 "  |\n"
 "3 |     let s2 = s1.clone();\n"
@@ -731,35 +728,8 @@ msgid ""
 "error\n"
 "```"
 msgstr ""
-"```console\n"
-"$ cargo run\n"
-"   Compiling ownership v0.1.0 (file:///projects/ownership)\n"
-"error[E0382]: borrow of moved value: `s1`\n"
-" --> src/main.rs:5:16\n"
-"  |\n"
-"2 |     let s1 = String::from(\"hello\");\n"
-"  |         -- move occurs because `s1` has type `String`, which does not "
-"implement the `Copy` trait\n"
-"3 |     let s2 = s1;\n"
-"  |              -- value moved here\n"
-"4 |\n"
-"5 |     println!(\"{s1}, world!\");\n"
-"  |                ^^ value borrowed here after move\n"
-"  |\n"
-"  = note: this error originates in the macro `$crate::format_args_nl` which "
-"comes from the expansion of the macro `println` (in Nightly builds, run with "
-"-Z macro-backtrace for more info)\n"
-"help: consider cloning the value if the performance cost is acceptable\n"
-"  |\n"
-"3 |     let s2 = s1.clone();\n"
-"  |                ++++++++\n"
-"\n"
-"For more information about this error, try `rustc --explain E0382`.\n"
-"error: could not compile `ownership` (bin \"ownership\") due to 1 previous "
-"error\n"
-"```"
 
-#: src/ch04-01-what-is-ownership.md:388
+#: src/ch04-01-what-is-ownership.md:387
 msgid ""
 "If you’ve heard the terms _shallow copy_ and _deep copy_ while working with "
 "other languages, the concept of copying the pointer, length, and capacity "
@@ -773,7 +743,7 @@ msgstr ""
 "会失效第一个变量的值，因此这种操作被称为“移动”。在示例中，我们会说 `s1` 被“移"
 "动”到了 `s2` 中。那么，实际发生的情况如图4-4所示。"
 
-#: src/ch04-01-what-is-ownership.md:395
+#: src/ch04-01-what-is-ownership.md:394
 msgid ""
 "<img alt=\"Three tables: tables s1 and s2 representing those strings on the\n"
 "stack, respectively, and both pointing to the same string data on the heap.\n"
@@ -791,13 +761,13 @@ msgstr ""
 "style=\"width:\n"
 "50%;\" />"
 
-#: src/ch04-01-what-is-ownership.md:401
+#: src/ch04-01-what-is-ownership.md:400
 msgid ""
 "<span class=\"caption\">Figure 4-4: The representation in memory after `s1` "
 "has been invalidated</span>"
 msgstr "<span class=“caption”>图 4-4：内存中的表示在's1'之后已被无效</span>化"
 
-#: src/ch04-01-what-is-ownership.md:404
+#: src/ch04-01-what-is-ownership.md:403
 msgid ""
 "That solves our problem! With only `s2` valid, when it goes out of scope it "
 "alone will free the memory, and we’re done."
@@ -805,7 +775,7 @@ msgstr ""
 "这解决了我们的问题！只有 `s2` 是有效的，当它超出作用域时，它就能单独释放内"
 "存，我们就完成了。"
 
-#: src/ch04-01-what-is-ownership.md:407
+#: src/ch04-01-what-is-ownership.md:406
 msgid ""
 "In addition, there’s a design choice that’s implied by this: Rust will never "
 "automatically create “deep” copies of your data. Therefore, any _automatic_ "
@@ -814,11 +784,11 @@ msgstr ""
 "此外，这里还隐含了一个设计选择：Rust永远不会自动创建数据的“深度”副本。因此，"
 "任何自动复制操作在运行时性能方面可以被认为是不耗费资源的。"
 
-#: src/ch04-01-what-is-ownership.md:411
+#: src/ch04-01-what-is-ownership.md:410
 msgid "Scope and Assignment"
 msgstr "作用域与赋值"
 
-#: src/ch04-01-what-is-ownership.md:413
+#: src/ch04-01-what-is-ownership.md:412
 msgid ""
 "The inverse of this is true for the relationship between scoping, ownership, "
 "and memory being freed via the `drop` function as well. When you assign a "
@@ -829,15 +799,15 @@ msgstr ""
 "当你将一个全新的值赋给一个现有的变量时，Rust 会立即调用 `drop` 函数来释放原始"
 "值所占用的内存。例如，考虑以下代码："
 
-#: src/ch04-01-what-is-ownership.md:421
+#: src/ch04-01-what-is-ownership.md:420
 msgid "\"ahoy\""
 msgstr "“ahoy”"
 
-#: src/ch04-01-what-is-ownership.md:423
+#: src/ch04-01-what-is-ownership.md:422
 msgid "\"{s}, world!\""
 msgstr "“{s}，世界！”"
 
-#: src/ch04-01-what-is-ownership.md:427
+#: src/ch04-01-what-is-ownership.md:426
 msgid ""
 "We initially declare a variable `s` and bind it to a `String` with the value "
 "`\"hello\"`. Then, we immediately create a new `String` with the value "
@@ -849,7 +819,7 @@ msgstr ""
 "们立即创建一个新的 `String`，其值为 `\"ahoy\"`，并将其赋值给 `s`。此时，没有"
 "任何东西再指向堆中的原始值了。图 4-5 展示了当前栈和堆的数据结构："
 
-#: src/ch04-01-what-is-ownership.md:432
+#: src/ch04-01-what-is-ownership.md:431
 msgid ""
 "<img alt=\"One table representing the string value on the stack, pointing "
 "to\n"
@@ -865,13 +835,13 @@ msgstr ""
 "data (hello) grayed out because it cannot be accessed anymore.\"\n"
 "src=\"img/trpl04-05.svg\" class=\"center\" style=\"width: 50%;\" />"
 
-#: src/ch04-01-what-is-ownership.md:437
+#: src/ch04-01-what-is-ownership.md:436
 msgid ""
 "<span class=\"caption\">Figure 4-5: The representation in memory after the "
 "initial value has been replaced in its entirety</span>"
 msgstr "<span class=“caption”>图 4-5：初始值被完全替换后的内存表示</span>"
 
-#: src/ch04-01-what-is-ownership.md:440
+#: src/ch04-01-what-is-ownership.md:439
 msgid ""
 "The original string thus immediately goes out of scope. Rust will run the "
 "`drop` function on it and its memory will be freed right away. When we print "
@@ -880,15 +850,15 @@ msgstr ""
 "因此，原始字符串会立即超出作用域。Rust会立即执行 `drop` 函数，并且其内存也会"
 "立即被释放。当我们最后打印该值时，它将会变成 `\"ahoy, world!\"`。"
 
-#: src/ch04-01-what-is-ownership.md:446
+#: src/ch04-01-what-is-ownership.md:445
 msgid "<a id=\"ways-variables-and-data-interact-clone\"></a>"
 msgstr "<a id=\"ways-variables-and-data-interact-clone\"></a>"
 
-#: src/ch04-01-what-is-ownership.md:448
+#: src/ch04-01-what-is-ownership.md:447
 msgid "Variables and Data Interacting with Clone"
 msgstr "变量与克隆数据的交互"
 
-#: src/ch04-01-what-is-ownership.md:450
+#: src/ch04-01-what-is-ownership.md:449
 msgid ""
 "If we _do_ want to deeply copy the heap data of the `String`, not just the "
 "stack data, we can use a common method called `clone`. We’ll discuss method "
@@ -899,15 +869,15 @@ msgstr ""
 "种常见的方法，叫做 `clone`。我们将在第五章中讨论这种方法的语法，但由于方法在"
 "许多编程语言中都是常见的特性，你可能之前就已经见过它们了。"
 
-#: src/ch04-01-what-is-ownership.md:455
+#: src/ch04-01-what-is-ownership.md:454
 msgid "Here’s an example of the `clone` method in action:"
 msgstr "以下是 `clone` 方法的一个使用示例："
 
-#: src/ch04-01-what-is-ownership.md:462
+#: src/ch04-01-what-is-ownership.md:461
 msgid "\"s1 = {s1}, s2 = {s2}\""
 msgstr "“S1 = {s1}， s2 = {s2}”"
 
-#: src/ch04-01-what-is-ownership.md:466
+#: src/ch04-01-what-is-ownership.md:465
 msgid ""
 "This works just fine and explicitly produces the behavior shown in Figure "
 "4-3, where the heap data _does_ get copied."
@@ -915,7 +885,7 @@ msgstr ""
 "这个方式运行得很正常，并且确实实现了图4-3中所示的行为，其中堆数据确实被复制"
 "了。"
 
-#: src/ch04-01-what-is-ownership.md:469
+#: src/ch04-01-what-is-ownership.md:468
 msgid ""
 "When you see a call to `clone`, you know that some arbitrary code is being "
 "executed and that code may be expensive. It’s a visual indicator that "
@@ -924,11 +894,11 @@ msgstr ""
 "当你看到 `clone` 这样的调用时，就知道有一些任意的代码正在被执行，而且这些代码"
 "可能会消耗大量资源。这是一个直观的提示，表明有某些不同的事情正在发生。"
 
-#: src/ch04-01-what-is-ownership.md:473
+#: src/ch04-01-what-is-ownership.md:472
 msgid "Stack-Only Data: Copy"
 msgstr "仅栈数据：复制"
 
-#: src/ch04-01-what-is-ownership.md:475
+#: src/ch04-01-what-is-ownership.md:474
 msgid ""
 "There’s another wrinkle we haven’t talked about yet. This code using integers"
 "—part of which was shown in Listing 4-2—works and is valid:"
@@ -936,11 +906,11 @@ msgstr ""
 "还有一个我们还没有讨论的细节。这段代码使用的是整数——其中一部分在清单4-2中展示"
 "过——它是有效且可以运行的。"
 
-#: src/ch04-01-what-is-ownership.md:483
+#: src/ch04-01-what-is-ownership.md:482
 msgid "\"x = {x}, y = {y}\""
 msgstr "“x = {x}， y = {y}”"
 
-#: src/ch04-01-what-is-ownership.md:487
+#: src/ch04-01-what-is-ownership.md:486
 msgid ""
 "But this code seems to contradict what we just learned: We don’t have a call "
 "to `clone`, but `x` is still valid and wasn’t moved into `y`."
@@ -948,7 +918,7 @@ msgstr ""
 "但是这段代码似乎与我们刚刚学到的内容相矛盾：我们没有调用`clone`，而`x`仍然有"
 "效，并且没有被移动到`y`中。"
 
-#: src/ch04-01-what-is-ownership.md:490
+#: src/ch04-01-what-is-ownership.md:489
 msgid ""
 "The reason is that types such as integers that have a known size at compile "
 "time are stored entirely on the stack, so copies of the actual values are "
@@ -963,7 +933,7 @@ msgstr ""
 "效。换句话说，在这里，深度复制和浅层复制之间没有区别，因此调用 `clone` 并不会"
 "与常规的浅层复制产生任何不同，所以我们可以省略这部分代码。"
 
-#: src/ch04-01-what-is-ownership.md:497
+#: src/ch04-01-what-is-ownership.md:496
 msgid ""
 "Rust has a special annotation called the `Copy` trait that we can place on "
 "types that are stored on the stack, as integers are (we’ll talk more about "
@@ -978,7 +948,7 @@ msgstr ""
 "变量不会移动，而是会被简单地复制，这样在赋值给另一个变量之后，这些变量仍然有"
 "效。"
 
-#: src/ch04-01-what-is-ownership.md:503
+#: src/ch04-01-what-is-ownership.md:502
 msgid ""
 "Rust won’t let us annotate a type with `Copy` if the type, or any of its "
 "parts, has implemented the `Drop` trait. If the type needs something special "
@@ -993,7 +963,7 @@ msgstr ""
 "质，请参阅附录 C 中的 [“可推导的特质”](appendix-03-derivable-traits."
 "html)<!-- ignore -->。"
 
-#: src/ch04-01-what-is-ownership.md:510
+#: src/ch04-01-what-is-ownership.md:509
 msgid ""
 "So, what types implement the `Copy` trait? You can check the documentation "
 "for the given type to be sure, but as a general rule, any group of simple "
@@ -1006,23 +976,23 @@ msgstr ""
 "某种资源类型的类型则无法实现 `Copy` 特性。以下是一些实现了 `Copy` 特性的类"
 "型："
 
-#: src/ch04-01-what-is-ownership.md:516
+#: src/ch04-01-what-is-ownership.md:515
 msgid "All the integer types, such as `u32`."
 msgstr "所有的整数类型，例如 `u32`。"
 
-#: src/ch04-01-what-is-ownership.md:517
+#: src/ch04-01-what-is-ownership.md:516
 msgid "The Boolean type, `bool`, with values `true` and `false`."
 msgstr "布尔类型， `bool`，其值为 `true` 和 `false`。"
 
-#: src/ch04-01-what-is-ownership.md:518
+#: src/ch04-01-what-is-ownership.md:517
 msgid "All the floating-point types, such as `f64`."
 msgstr "所有的浮点类型，例如 `f64`。"
 
-#: src/ch04-01-what-is-ownership.md:519
+#: src/ch04-01-what-is-ownership.md:518
 msgid "The character type, `char`."
 msgstr "字符类型， `char`。"
 
-#: src/ch04-01-what-is-ownership.md:520
+#: src/ch04-01-what-is-ownership.md:519
 msgid ""
 "Tuples, if they only contain types that also implement `Copy`. For example, "
 "`(i32, i32)` implements `Copy`, but `(i32, String)` does not."
@@ -1030,11 +1000,11 @@ msgstr ""
 "元组，如果它们只包含也实现了 `Copy` 的类型。例如， `(i32, i32)` 实现了 "
 "`Copy`，但 `(i32, String)` 则没有。"
 
-#: src/ch04-01-what-is-ownership.md:523
+#: src/ch04-01-what-is-ownership.md:522
 msgid "Ownership and Functions"
 msgstr "所有权与函数"
 
-#: src/ch04-01-what-is-ownership.md:525
+#: src/ch04-01-what-is-ownership.md:524
 msgid ""
 "The mechanics of passing a value to a function are similar to those when "
 "assigning a value to a variable. Passing a variable to a function will move "
@@ -1045,11 +1015,11 @@ msgstr ""
 "移动或复制操作，就像赋值时一样。列表4-3提供了一个示例，其中包含了一些注释，用"
 "来说明变量在何时进入和退出作用域。"
 
-#: src/ch04-01-what-is-ownership.md:534
+#: src/ch04-01-what-is-ownership.md:533
 msgid "// s comes into scope\n"
 msgstr "// s 进入范围\n"
 
-#: src/ch04-01-what-is-ownership.md:536
+#: src/ch04-01-what-is-ownership.md:535
 msgid ""
 "// s's value moves into the function...\n"
 "                                    // ... and so is no longer valid here\n"
@@ -1058,11 +1028,11 @@ msgstr ""
 "                                    // ... and so is no longer valid here<br/"
 ">\n"
 
-#: src/ch04-01-what-is-ownership.md:539
+#: src/ch04-01-what-is-ownership.md:538
 msgid "// x comes into scope\n"
 msgstr "// x 进入范围\n"
 
-#: src/ch04-01-what-is-ownership.md:541
+#: src/ch04-01-what-is-ownership.md:540
 msgid ""
 "// Because i32 implements the Copy trait,\n"
 "                                    // x does NOT move into the function,\n"
@@ -1074,7 +1044,7 @@ msgstr ""
 "                                    // so it's okay to use x afterward.<br/"
 ">\n"
 
-#: src/ch04-01-what-is-ownership.md:545
+#: src/ch04-01-what-is-ownership.md:544
 msgid ""
 "// Here, x goes out of scope, then s. However, because s's value was moved,\n"
 "  // nothing special happens.\n"
@@ -1082,15 +1052,15 @@ msgstr ""
 "// 这里, x 超出范围, 然后是 s. 然而, 因为s的值被移动,\n"
 "  // 没有特殊发生.\n"
 
-#: src/ch04-01-what-is-ownership.md:548 src/ch04-01-what-is-ownership.md:590
+#: src/ch04-01-what-is-ownership.md:547 src/ch04-01-what-is-ownership.md:589
 msgid "// some_string comes into scope\n"
 msgstr "// 一些字符串进入范围\n"
 
-#: src/ch04-01-what-is-ownership.md:549
+#: src/ch04-01-what-is-ownership.md:548
 msgid "\"{some_string}\""
 msgstr "“{some_string}”"
 
-#: src/ch04-01-what-is-ownership.md:550
+#: src/ch04-01-what-is-ownership.md:549
 msgid ""
 "// Here, some_string goes out of scope and `drop` is called. The backing\n"
 "  // memory is freed.\n"
@@ -1098,19 +1068,19 @@ msgstr ""
 "// 这里, 有些字符串超出了范围, 调用了 `drop` 。后台的\n"
 "  // 内存已被释放。\n"
 
-#: src/ch04-01-what-is-ownership.md:553
+#: src/ch04-01-what-is-ownership.md:552
 msgid "// some_integer comes into scope\n"
 msgstr "// 一些整数进入范围\n"
 
-#: src/ch04-01-what-is-ownership.md:554
+#: src/ch04-01-what-is-ownership.md:553
 msgid "\"{some_integer}\""
 msgstr "“{some_integer}”"
 
-#: src/ch04-01-what-is-ownership.md:555
+#: src/ch04-01-what-is-ownership.md:554
 msgid "// Here, some_integer goes out of scope. Nothing special happens.\n"
 msgstr "// 这里 some_integer 超出范围。没什么特别的事发生。\n"
 
-#: src/ch04-01-what-is-ownership.md:560
+#: src/ch04-01-what-is-ownership.md:559
 msgid ""
 "If we tried to use `s` after the call to `takes_ownership`, Rust would throw "
 "a compile-time error. These static checks protect us from mistakes. Try "
@@ -1122,11 +1092,11 @@ msgstr ""
 "`s` 和 `x`，以此来了解可以在哪些地方使用它们，以及所有权规则在哪些情况下禁止"
 "了这样的使用。"
 
-#: src/ch04-01-what-is-ownership.md:565
+#: src/ch04-01-what-is-ownership.md:564
 msgid "Return Values and Scope"
 msgstr "返回值与作用域"
 
-#: src/ch04-01-what-is-ownership.md:567
+#: src/ch04-01-what-is-ownership.md:566
 msgid ""
 "Returning values can also transfer ownership. Listing 4-4 shows an example "
 "of a function that returns some value, with similar annotations as those in "
@@ -1135,7 +1105,7 @@ msgstr ""
 "返回值也可以转移所有权。列表4-4展示了一个函数返回某个值的例子，其注释与列表"
 "4-3中的注释类似。"
 
-#: src/ch04-01-what-is-ownership.md:575
+#: src/ch04-01-what-is-ownership.md:574
 msgid ""
 "// gives_ownership moves its return\n"
 "                                       // value into s1\n"
@@ -1143,11 +1113,11 @@ msgstr ""
 "// 赋予所有权将其返回\n"
 "                                       // 值移动到 s1\n"
 
-#: src/ch04-01-what-is-ownership.md:578
+#: src/ch04-01-what-is-ownership.md:577
 msgid "// s2 comes into scope\n"
 msgstr "// s2 进入范围\n"
 
-#: src/ch04-01-what-is-ownership.md:580
+#: src/ch04-01-what-is-ownership.md:579
 msgid ""
 "// s2 is moved into\n"
 "                                       // takes_and_gives_back, which also\n"
@@ -1157,7 +1127,7 @@ msgstr ""
 "                                       // takes_and_gives_back, 它也是\n"
 "                                       // 将其返回值移动到 s3\n"
 
-#: src/ch04-01-what-is-ownership.md:583
+#: src/ch04-01-what-is-ownership.md:582
 msgid ""
 "// Here, s3 goes out of scope and is dropped. s2 was moved, so nothing\n"
 "  // happens. s1 goes out of scope and is dropped.\n"
@@ -1165,7 +1135,7 @@ msgstr ""
 "// Here, s3 goes out of scope and is dropped. s2 was moved, so nothing<br/>\n"
 "  // happens. s1 goes out of scope and is dropped.<br/>\n"
 
-#: src/ch04-01-what-is-ownership.md:586
+#: src/ch04-01-what-is-ownership.md:585
 msgid ""
 "// gives_ownership will move its\n"
 "                                       // return value into the function\n"
@@ -1176,11 +1146,11 @@ msgstr ""
 ">\n"
 "                                       // that calls it<br/>\n"
 
-#: src/ch04-01-what-is-ownership.md:590
+#: src/ch04-01-what-is-ownership.md:589
 msgid "\"yours\""
 msgstr "“你们”"
 
-#: src/ch04-01-what-is-ownership.md:592
+#: src/ch04-01-what-is-ownership.md:591
 msgid ""
 "// some_string is returned and\n"
 "                                       // moves out to the calling\n"
@@ -1190,11 +1160,11 @@ msgstr ""
 "                                       // moves out to the calling<br/>\n"
 "                                       // function<br/>\n"
 
-#: src/ch04-01-what-is-ownership.md:596
+#: src/ch04-01-what-is-ownership.md:595
 msgid "// This function takes a String and returns a String.\n"
 msgstr "// 此函数需要一个字符串并返回一个字符串。\n"
 
-#: src/ch04-01-what-is-ownership.md:599
+#: src/ch04-01-what-is-ownership.md:598
 msgid ""
 "// a_string comes into\n"
 "    // scope\n"
@@ -1202,11 +1172,11 @@ msgstr ""
 "// a_string into\n"
 "    // scope\n"
 
-#: src/ch04-01-what-is-ownership.md:602
+#: src/ch04-01-what-is-ownership.md:601
 msgid "// a_string is returned and moves out to the calling function\n"
 msgstr "// a_string 返回并移出到调用函数\n"
 
-#: src/ch04-01-what-is-ownership.md:608
+#: src/ch04-01-what-is-ownership.md:607
 msgid ""
 "The ownership of a variable follows the same pattern every time: Assigning a "
 "value to another variable moves it. When a variable that includes data on "
@@ -1217,7 +1187,7 @@ msgstr ""
 "所有权。当包含堆上数据的变量超出作用域时，除非将该数据的所有权转移给另一个变"
 "量，否则该数据会被 `drop` 回收。"
 
-#: src/ch04-01-what-is-ownership.md:613
+#: src/ch04-01-what-is-ownership.md:612
 msgid ""
 "While this works, taking ownership and then returning ownership with every "
 "function is a bit tedious. What if we want to let a function use a value but "
@@ -1230,21 +1200,21 @@ msgstr ""
 "办呢？如果我们想要再次使用某个值，那么除了函数体内产生的数据之外，所有传递给"
 "函数的参数也都需要被返还，这确实很麻烦。"
 
-#: src/ch04-01-what-is-ownership.md:619
+#: src/ch04-01-what-is-ownership.md:618
 msgid ""
 "Rust does let us return multiple values using a tuple, as shown in Listing "
 "4-5."
 msgstr "Rust允许我们使用元组返回多个值，如清单4-5所示。"
 
-#: src/ch04-01-what-is-ownership.md:629
+#: src/ch04-01-what-is-ownership.md:628
 msgid "\"The length of '{s2}' is {len}.\""
 msgstr "“'{s2}'的长度是{len}。”"
 
-#: src/ch04-01-what-is-ownership.md:633
+#: src/ch04-01-what-is-ownership.md:632
 msgid "// len() returns the length of a String\n"
 msgstr "// len() 返回字符串的长度\n"
 
-#: src/ch04-01-what-is-ownership.md:641
+#: src/ch04-01-what-is-ownership.md:640
 msgid ""
 "But this is too much ceremony and a lot of work for a concept that should be "
 "common. Luckily for us, Rust has a feature for using a value without "
@@ -1252,3 +1222,60 @@ msgid ""
 msgstr ""
 "但是，对于一个本应被普遍使用的概念来说，这种仪式性和工作量实在是太多了。幸运"
 "的是，Rust 有一个功能，可以让我们使用值而不需要转移所有权：引用。"
+
+#~ msgid ""
+#~ "```console\n"
+#~ "$ cargo run\n"
+#~ "   Compiling ownership v0.1.0 (file:///projects/ownership)\n"
+#~ "error[E0382]: borrow of moved value: `s1`\n"
+#~ " --> src/main.rs:5:16\n"
+#~ "  |\n"
+#~ "2 |     let s1 = String::from(\"hello\");\n"
+#~ "  |         -- move occurs because `s1` has type `String`, which does not "
+#~ "implement the `Copy` trait\n"
+#~ "3 |     let s2 = s1;\n"
+#~ "  |              -- value moved here\n"
+#~ "4 |\n"
+#~ "5 |     println!(\"{s1}, world!\");\n"
+#~ "  |                ^^ value borrowed here after move\n"
+#~ "  |\n"
+#~ "  = note: this error originates in the macro `$crate::format_args_nl` "
+#~ "which comes from the expansion of the macro `println` (in Nightly builds, "
+#~ "run with -Z macro-backtrace for more info)\n"
+#~ "help: consider cloning the value if the performance cost is acceptable\n"
+#~ "  |\n"
+#~ "3 |     let s2 = s1.clone();\n"
+#~ "  |                ++++++++\n"
+#~ "\n"
+#~ "For more information about this error, try `rustc --explain E0382`.\n"
+#~ "error: could not compile `ownership` (bin \"ownership\") due to 1 "
+#~ "previous error\n"
+#~ "```"
+#~ msgstr ""
+#~ "```console\n"
+#~ "$ cargo run\n"
+#~ "   Compiling ownership v0.1.0 (file:///projects/ownership)\n"
+#~ "error[E0382]: borrow of moved value: `s1`\n"
+#~ " --> src/main.rs:5:16\n"
+#~ "  |\n"
+#~ "2 |     let s1 = String::from(\"hello\");\n"
+#~ "  |         -- move occurs because `s1` has type `String`, which does not "
+#~ "implement the `Copy` trait\n"
+#~ "3 |     let s2 = s1;\n"
+#~ "  |              -- value moved here\n"
+#~ "4 |\n"
+#~ "5 |     println!(\"{s1}, world!\");\n"
+#~ "  |                ^^ value borrowed here after move\n"
+#~ "  |\n"
+#~ "  = note: this error originates in the macro `$crate::format_args_nl` "
+#~ "which comes from the expansion of the macro `println` (in Nightly builds, "
+#~ "run with -Z macro-backtrace for more info)\n"
+#~ "help: consider cloning the value if the performance cost is acceptable\n"
+#~ "  |\n"
+#~ "3 |     let s2 = s1.clone();\n"
+#~ "  |                ++++++++\n"
+#~ "\n"
+#~ "For more information about this error, try `rustc --explain E0382`.\n"
+#~ "error: could not compile `ownership` (bin \"ownership\") due to 1 "
+#~ "previous error\n"
+#~ "```"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-10-06T15:30:32Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -78,8 +78,7 @@ msgid ""
 "```console\n"
 "$ cargo build\n"
 "   Compiling restaurant v0.1.0 (file:///projects/restaurant)\n"
-"error[E0433]: failed to resolve: use of unresolved module or unlinked crate "
-"`hosting`\n"
+"error[E0433]: cannot find module or crate `hosting` in this scope\n"
 "  --> src/lib.rs:11:9\n"
 "   |\n"
 "11 |         hosting::add_to_waitlist();\n"
@@ -98,7 +97,8 @@ msgid ""
 "7 | use crate::front_of_house::hosting;\n"
 "  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"
 "  |\n"
-"  = note: `#[warn(unused_imports)]` on by default\n"
+"  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by "
+"default\n"
 "\n"
 "For more information about this error, try `rustc --explain E0433`.\n"
 "warning: `restaurant` (lib) generated 1 warning\n"
@@ -106,36 +106,6 @@ msgid ""
 "warning emitted\n"
 "```"
 msgstr ""
-"```console\n"
-"$ cargo build\n"
-"   Compiling restaurant v0.1.0 (file:///projects/restaurant)\n"
-"error[E0433]: failed to resolve: use of unresolved module or unlinked crate "
-"`hosting`\n"
-"  --> src/lib.rs:11:9\n"
-"   |\n"
-"11 |         hosting::add_to_waitlist();\n"
-"   |         ^^^^^^^ use of unresolved module or unlinked crate `hosting`\n"
-"   |\n"
-"   = help: if you wanted to use a crate named `hosting`, use `cargo add "
-"hosting` to add it to your `Cargo.toml`\n"
-"help: consider importing this module through its public re-export\n"
-"   |\n"
-"10 +     use crate::hosting;\n"
-"   |\n"
-"\n"
-"warning: unused import: `crate::front_of_house::hosting`\n"
-" --> src/lib.rs:7:5\n"
-"  |\n"
-"7 | use crate::front_of_house::hosting;\n"
-"  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"
-"  |\n"
-"  = note: `#[warn(unused_imports)]` on by default\n"
-"\n"
-"For more information about this error, try `rustc --explain E0433`.\n"
-"warning: `restaurant` (lib) generated 1 warning\n"
-"error: could not compile `restaurant` (lib) due to 1 previous error; 1 "
-"warning emitted\n"
-"```"
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:95
 msgid ""
@@ -216,10 +186,10 @@ msgstr ""
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:171
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:197
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:202
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:348
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:351
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:389
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:391
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:350
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:352
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:392
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:394
 msgid "// --snip--\n"
 msgstr ""
 "// --snip--\n"
@@ -345,17 +315,14 @@ msgstr ""
 "取随机数。为了在项目中使用 `rand`，我们在 _Cargo.toml_ 文件中添加了如下一行代"
 "码："
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:276
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:278
 msgid ""
 "```toml\n"
-"rand = \"0.8.5\"\n"
+"rand = \"0.10.1\"\n"
 "```"
 msgstr ""
-"```toml\n"
-"rand = \"0.8.5\"\n"
-"```"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:282
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:284
 msgid ""
 "Adding `rand` as a dependency in _Cargo.toml_ tells Cargo to download the "
 "`rand` package and any dependencies from [crates.io](https://crates.io/) and "
@@ -364,51 +331,47 @@ msgstr ""
 "在_Cargo.toml_文件中添加`rand`作为依赖项，这样Cargo就会下载`rand`这个包以及来"
 "自[crates.io](https://crates.io/)的所有依赖项，并使`rand`对我们的项目可用。"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:286
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:288
 msgid ""
 "Then, to bring `rand` definitions into the scope of our package, we added a "
 "`use` line starting with the name of the crate, `rand`, and listed the items "
 "we wanted to bring into scope. Recall that in [“Generating a Random Number”]"
 "(ch02-00-guessing-game-tutorial.html#generating-a-random-number)<!-- ignore "
-"--> in Chapter 2, we brought the `Rng` trait into scope and called the "
-"`rand::thread_rng` function:"
+"--> in Chapter 2, we brought items in the `rand::prelude` module into scope "
+"and called the `rand::rng` function:"
 msgstr ""
-"然后，为了将 `rand` 定义纳入我们的包的范围，我们添加了一行代码：`use`，该代码"
-"以 crate 的名称 `rand` 开头，并列出了我们希望纳入范围的各项内容。回想一下，在"
-"第二章的 [“生成随机数”][rand]<!-- ignore --> 中，我们将 `Rng` 特质纳入了范"
-"围，并调用了 `rand::thread_rng` 函数。"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:298
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:355
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:395
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:300
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:358
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:398
 msgid "\"Guess the number!\""
 msgstr "“猜测数字！”"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:302
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:359
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:399
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:304
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:362
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:402
 msgid "\"The secret number is: {secret_number}\""
 msgstr "“秘密号码是：{secret_number}”"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:304
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:361
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:401
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:306
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:364
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:404
 msgid "\"Please input your guess.\""
 msgstr "“请输入你的猜测。”"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:310
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:367
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:407
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:312
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:370
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:410
 msgid "\"Failed to read line\""
 msgstr "“未猜对”"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:312
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:369
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:411
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:314
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:372
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:414
 msgid "\"You guessed: {guess}\""
 msgstr "“你猜对了：{guess}”"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:316
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:318
 msgid ""
 "Members of the Rust community have made many packages available at [crates."
 "io](https://crates.io/), and pulling any of them into your package involves "
@@ -419,7 +382,7 @@ msgstr ""
 "任何一个软件包添加到你的项目中，也需要遵循相同的步骤：在你的`Cargo.toml`文件"
 "中列出这些软件包，并使用`use`来将相关组件引入你的项目中。"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:321
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:323
 msgid ""
 "Note that the standard `std` library is also a crate that’s external to our "
 "package. Because the standard library is shipped with the Rust language, we "
@@ -432,21 +395,21 @@ msgstr ""
 "`use` 来引用它，以便将 `std` 中的内容引入我们的包中。例如，使用 `HashMap`，我"
 "们会这样使用："
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:331
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:333
 msgid ""
 "This is an absolute path starting with `std`, the name of the standard "
 "library crate."
 msgstr "这是一个绝对路径，以 `std` 开头，这是标准库的名称，即 crate。"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:336
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:338
 msgid "<a id=\"using-nested-paths-to-clean-up-large-use-lists\"></a>"
 msgstr "<a id=\"using-nested-paths-to-clean-up-large-use-lists\"></a>"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:338
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:340
 msgid "Using Nested Paths to Clean Up `use` Lists"
 msgstr "使用嵌套路径来清理 `use` 列表"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:340
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:342
 msgid ""
 "If we’re using multiple items defined in the same crate or same module, "
 "listing each item on its own line can take up a lot of vertical space in our "
@@ -457,22 +420,22 @@ msgstr ""
 "独的行上可能会占用大量的垂直空间。例如，在 Listing 2-4 中的这两个 `use` 语"
 "句，实际上将 `std` 中的项引入了作用域。"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:372
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:414
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:375
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:417
 msgid "\"Too small!\""
 msgstr "“太小了！”"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:373
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:415
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:376
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:418
 msgid "\"Too big!\""
 msgstr "“太大了！”"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:374
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:416
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:377
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:419
 msgid "\"You win!\""
 msgstr "“你赢了！”"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:381
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:384
 msgid ""
 "Instead, we can use nested paths to bring the same items into scope in one "
 "line. We do this by specifying the common part of the path, followed by two "
@@ -483,11 +446,11 @@ msgstr ""
 "共同部分，然后加上两个冒号，最后用大括号括起来，列出那些不同的路径部分，如清"
 "单7-18所示。"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:409
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:412
 msgid "\"Please type a number!\""
 msgstr "请输入数字！"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:423
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:426
 msgid ""
 "In bigger programs, bringing many items into scope from the same crate or "
 "module using nested paths can reduce the number of separate `use` statements "
@@ -496,7 +459,7 @@ msgstr ""
 "在更大的程序中，通过嵌套路径将多个项目从同一个 crate 或模块引入作用域，可以大"
 "大减少所需的多个 `use` 语句的数量！"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:427
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:430
 msgid ""
 "We can use a nested path at any level in a path, which is useful when "
 "combining two `use` statements that share a subpath. For example, Listing "
@@ -507,7 +470,7 @@ msgstr ""
 "常有用。例如，列表7-19展示了两个`use`语句：其中一个将`std::io`带入作用域，另"
 "一个则将`std::io::Write`带入作用域。"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:441
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:444
 msgid ""
 "The common part of these two paths is `std::io`, and that’s the complete "
 "first path. To merge these two paths into one `use` statement, we can use "
@@ -516,19 +479,19 @@ msgstr ""
 "这两条路径的共同部分是 `std::io`，这就是完整的第一条路径。为了将这两条路径合"
 "并成一条 `use` 语句，我们可以在嵌套路径中使用 `self`，如清单 7-20 所示。"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:453
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:456
 msgid "This line brings `std::io` and `std::io::Write` into scope."
 msgstr "这一行将 `std::io` 和 `std::io::Write` 引入到作用域中。"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:457
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:460
 msgid "<a id=\"the-glob-operator\"></a>"
 msgstr "<a id=\"the-glob-operator\"></a>"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:459
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:462
 msgid "Importing Items with the Glob Operator"
 msgstr "使用全局操作符导入项目"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:461
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:464
 msgid ""
 "If we want to bring _all_ public items defined in a path into scope, we can "
 "specify that path followed by the `*` glob operator:"
@@ -536,7 +499,7 @@ msgstr ""
 "如果我们想要将路径中定义的所有公共项引入作用域，我们可以在该路径后面加上 `*` "
 "全局操作符来表示。"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:468
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:471
 msgid ""
 "This `use` statement brings all public items defined in `std::collections` "
 "into the current scope. Be careful when using the glob operator! Glob can "
@@ -553,7 +516,7 @@ msgstr ""
 "会随之改变，这可能会导致在升级依赖项时出现编译错误。例如，如果依赖项在相同的"
 "作用域中添加了与你的定义同名的定义，就会出现这种情况。"
 
-#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:476
+#: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:479
 msgid ""
 "The glob operator is often used when testing to bring everything under test "
 "into the `tests` module; we’ll talk about that in [“How to Write Tests”]"
@@ -567,3 +530,90 @@ msgstr ""
 "tests)<!-- ignore -->章节中讨论这一点。glob运算符有时也被用作prelude模式的一"
 "部分：有关该模式的更多信息，请参见[标准库文档](../std/prelude/index."
 "html#other-preludes)<!-- ignore -->。"
+
+#~ msgid ""
+#~ "```console\n"
+#~ "$ cargo build\n"
+#~ "   Compiling restaurant v0.1.0 (file:///projects/restaurant)\n"
+#~ "error[E0433]: failed to resolve: use of unresolved module or unlinked "
+#~ "crate `hosting`\n"
+#~ "  --> src/lib.rs:11:9\n"
+#~ "   |\n"
+#~ "11 |         hosting::add_to_waitlist();\n"
+#~ "   |         ^^^^^^^ use of unresolved module or unlinked crate "
+#~ "`hosting`\n"
+#~ "   |\n"
+#~ "   = help: if you wanted to use a crate named `hosting`, use `cargo add "
+#~ "hosting` to add it to your `Cargo.toml`\n"
+#~ "help: consider importing this module through its public re-export\n"
+#~ "   |\n"
+#~ "10 +     use crate::hosting;\n"
+#~ "   |\n"
+#~ "\n"
+#~ "warning: unused import: `crate::front_of_house::hosting`\n"
+#~ " --> src/lib.rs:7:5\n"
+#~ "  |\n"
+#~ "7 | use crate::front_of_house::hosting;\n"
+#~ "  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"
+#~ "  |\n"
+#~ "  = note: `#[warn(unused_imports)]` on by default\n"
+#~ "\n"
+#~ "For more information about this error, try `rustc --explain E0433`.\n"
+#~ "warning: `restaurant` (lib) generated 1 warning\n"
+#~ "error: could not compile `restaurant` (lib) due to 1 previous error; 1 "
+#~ "warning emitted\n"
+#~ "```"
+#~ msgstr ""
+#~ "```console\n"
+#~ "$ cargo build\n"
+#~ "   Compiling restaurant v0.1.0 (file:///projects/restaurant)\n"
+#~ "error[E0433]: failed to resolve: use of unresolved module or unlinked "
+#~ "crate `hosting`\n"
+#~ "  --> src/lib.rs:11:9\n"
+#~ "   |\n"
+#~ "11 |         hosting::add_to_waitlist();\n"
+#~ "   |         ^^^^^^^ use of unresolved module or unlinked crate "
+#~ "`hosting`\n"
+#~ "   |\n"
+#~ "   = help: if you wanted to use a crate named `hosting`, use `cargo add "
+#~ "hosting` to add it to your `Cargo.toml`\n"
+#~ "help: consider importing this module through its public re-export\n"
+#~ "   |\n"
+#~ "10 +     use crate::hosting;\n"
+#~ "   |\n"
+#~ "\n"
+#~ "warning: unused import: `crate::front_of_house::hosting`\n"
+#~ " --> src/lib.rs:7:5\n"
+#~ "  |\n"
+#~ "7 | use crate::front_of_house::hosting;\n"
+#~ "  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"
+#~ "  |\n"
+#~ "  = note: `#[warn(unused_imports)]` on by default\n"
+#~ "\n"
+#~ "For more information about this error, try `rustc --explain E0433`.\n"
+#~ "warning: `restaurant` (lib) generated 1 warning\n"
+#~ "error: could not compile `restaurant` (lib) due to 1 previous error; 1 "
+#~ "warning emitted\n"
+#~ "```"
+
+#~ msgid ""
+#~ "```toml\n"
+#~ "rand = \"0.8.5\"\n"
+#~ "```"
+#~ msgstr ""
+#~ "```toml\n"
+#~ "rand = \"0.8.5\"\n"
+#~ "```"
+
+#~ msgid ""
+#~ "Then, to bring `rand` definitions into the scope of our package, we added "
+#~ "a `use` line starting with the name of the crate, `rand`, and listed the "
+#~ "items we wanted to bring into scope. Recall that in [“Generating a Random "
+#~ "Number”](ch02-00-guessing-game-tutorial.html#generating-a-random-"
+#~ "number)<!-- ignore --> in Chapter 2, we brought the `Rng` trait into "
+#~ "scope and called the `rand::thread_rng` function:"
+#~ msgstr ""
+#~ "然后，为了将 `rand` 定义纳入我们的包的范围，我们添加了一行代码：`use`，该"
+#~ "代码以 crate 的名称 `rand` 开头，并列出了我们希望纳入范围的各项内容。回想"
+#~ "一下，在第二章的 [“生成随机数”][rand]<!-- ignore --> 中，我们将 `Rng` 特质"
+#~ "纳入了范围，并调用了 `rand::thread_rng` 函数。"

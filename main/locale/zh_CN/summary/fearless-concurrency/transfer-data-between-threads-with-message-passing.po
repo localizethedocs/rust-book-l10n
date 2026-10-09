@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-10-06T15:30:33Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -138,8 +138,8 @@ msgstr ""
 "向另一个线程发送聊天消息。"
 
 #: src/ch16-02-message-passing.md:85 src/ch16-02-message-passing.md:119
-#: src/ch16-02-message-passing.md:185 src/ch16-02-message-passing.md:253
-#: src/ch16-02-message-passing.md:326
+#: src/ch16-02-message-passing.md:185 src/ch16-02-message-passing.md:251
+#: src/ch16-02-message-passing.md:324
 msgid "\"hi\""
 msgstr "\"hi\""
 
@@ -178,7 +178,7 @@ msgstr ""
 "水中捞出橡皮鸭，或者接收到一个聊天消息。"
 
 #: src/ch16-02-message-passing.md:124 src/ch16-02-message-passing.md:191
-#: src/ch16-02-message-passing.md:266 src/ch16-02-message-passing.md:353
+#: src/ch16-02-message-passing.md:264 src/ch16-02-message-passing.md:351
 msgid "\"Got: {received}\""
 msgstr "\"Got: {received}\""
 
@@ -289,40 +289,14 @@ msgid ""
 "   |                 --- value moved here\n"
 "10 |         println!(\"val is {val}\");\n"
 "   |                           ^^^ value borrowed here after move\n"
-"   |\n"
-"   = note: this error originates in the macro `$crate::format_args_nl` which "
-"comes from the expansion of the macro `println` (in Nightly builds, run with "
-"-Z macro-backtrace for more info)\n"
 "\n"
 "For more information about this error, try `rustc --explain E0382`.\n"
 "error: could not compile `message-passing` (bin \"message-passing\") due to "
 "1 previous error\n"
 "```"
 msgstr ""
-"```console\n"
-"$ cargo run\n"
-"   Compiling message-passing v0.1.0 (file:///projects/message-passing)\n"
-"error[E0382]: borrow of moved value: `val`\n"
-"  --> src/main.rs:10:27\n"
-"   |\n"
-" 8 |         let val = String::from(\"hi\");\n"
-"   |             --- move occurs because `val` has type `String`, which does "
-"not implement the `Copy` trait\n"
-" 9 |         tx.send(val).unwrap();\n"
-"   |                 --- value moved here\n"
-"10 |         println!(\"val is {val}\");\n"
-"   |                           ^^^ value borrowed here after move\n"
-"   |\n"
-"   = note: this error originates in the macro `$crate::format_args_nl` which "
-"comes from the expansion of the macro `println` (in Nightly builds, run with "
-"-Z macro-backtrace for more info)\n"
-"\n"
-"For more information about this error, try `rustc --explain E0382`.\n"
-"error: could not compile `message-passing` (bin \"message-passing\") due to "
-"1 previous error\n"
-"```"
 
-#: src/ch16-02-message-passing.md:223
+#: src/ch16-02-message-passing.md:221
 msgid ""
 "Our concurrency mistake has caused a compile-time error. The `send` function "
 "takes ownership of its parameter, and when the value is moved the receiver "
@@ -333,15 +307,15 @@ msgstr ""
 "数被移动时，接收者会接管该参数的所有权。这一机制确保了我们在发送参数后不会意"
 "外地再次使用该参数；所有权系统会确保所有操作都正常进行。"
 
-#: src/ch16-02-message-passing.md:230
+#: src/ch16-02-message-passing.md:228
 msgid "<a id=\"sending-multiple-values-and-seeing-the-receiver-waiting\"></a>"
 msgstr "<a id=\"sending-multiple-values-and-seeing-the-receiver-waiting\"></a>"
 
-#: src/ch16-02-message-passing.md:232
+#: src/ch16-02-message-passing.md:230
 msgid "Sending Multiple Values"
 msgstr "发送多个值"
 
-#: src/ch16-02-message-passing.md:234
+#: src/ch16-02-message-passing.md:232
 msgid ""
 "The code in Listing 16-8 compiled and ran, but it didn’t clearly show us "
 "that two separate threads were talking to each other over the channel."
@@ -349,7 +323,7 @@ msgstr ""
 "清单 16-8 中的代码已经编译并运行了，但它并没有清楚地显示出两个独立的线程正在"
 "通过通道进行通信。"
 
-#: src/ch16-02-message-passing.md:237
+#: src/ch16-02-message-passing.md:235
 msgid ""
 "In Listing 16-10, we’ve made some modifications that will prove the code in "
 "Listing 16-8 is running concurrently: The spawned thread will now send "
@@ -359,19 +333,19 @@ msgstr ""
 "是同时运行的：现在，新创建的线程会发送多个消息，并且在每个消息之间会暂停一秒"
 "钟。"
 
-#: src/ch16-02-message-passing.md:254 src/ch16-02-message-passing.md:327
+#: src/ch16-02-message-passing.md:252 src/ch16-02-message-passing.md:325
 msgid "\"from\""
 msgstr "\"从\""
 
-#: src/ch16-02-message-passing.md:255 src/ch16-02-message-passing.md:328
+#: src/ch16-02-message-passing.md:253 src/ch16-02-message-passing.md:326
 msgid "\"the\""
 msgstr "“the”"
 
-#: src/ch16-02-message-passing.md:256 src/ch16-02-message-passing.md:329
+#: src/ch16-02-message-passing.md:254 src/ch16-02-message-passing.md:327
 msgid "\"thread\""
 msgstr "\"线程\""
 
-#: src/ch16-02-message-passing.md:273
+#: src/ch16-02-message-passing.md:271
 msgid ""
 "This time, the spawned thread has a vector of strings that we want to send "
 "to the main thread. We iterate over them, sending each individually, and "
@@ -382,7 +356,7 @@ msgstr ""
 "行迭代，单独发送，通过调用 `thread::sleep` 函数和一个 `Duration` 值1秒来暂"
 "停。"
 
-#: src/ch16-02-message-passing.md:278
+#: src/ch16-02-message-passing.md:276
 msgid ""
 "In the main thread, we’re not calling the `recv` function explicitly "
 "anymore: Instead, we’re treating `rx` as an iterator. For each value "
@@ -391,13 +365,13 @@ msgstr ""
 "在主线程中，我们不再明确调用 `recv` 函数：相反，我们把`rx` 当作迭代器。 对于"
 "收到的每个值，我们正在打印它。当频道关闭时，迭代将结束。"
 
-#: src/ch16-02-message-passing.md:282
+#: src/ch16-02-message-passing.md:280
 msgid ""
 "When running the code in Listing 16-10, you should see the following output "
 "with a one-second pause in between each line:"
 msgstr "当在列表16-10中运行代码时，你应该看到以下输出在每行之间暂停1秒："
 
-#: src/ch16-02-message-passing.md:296
+#: src/ch16-02-message-passing.md:294
 msgid ""
 "Because we don’t have any code that pauses or delays in the `for` loop in "
 "the main thread, we can tell that the main thread is waiting to receive "
@@ -406,15 +380,15 @@ msgstr ""
 "因为我们没有任何代码暂停或延迟主线程中的`for` 循环， 我们可以说，主线程正在等"
 "待从生成线程接收值。"
 
-#: src/ch16-02-message-passing.md:302
+#: src/ch16-02-message-passing.md:300
 msgid "<a id=\"creating-multiple-producers-by-cloning-the-transmitter\"></a>"
 msgstr "<a id=\"creating-multiple-producers-by-cloning-the-transmitter\"></a>"
 
-#: src/ch16-02-message-passing.md:304
+#: src/ch16-02-message-passing.md:302
 msgid "Creating Multiple Producers"
 msgstr "创建多个生产者"
 
-#: src/ch16-02-message-passing.md:306
+#: src/ch16-02-message-passing.md:304
 msgid ""
 "Earlier we mentioned that `mpsc` was an acronym for _multiple producer, "
 "single consumer_. Let’s put `mpsc` to use and expand the code in Listing "
@@ -425,29 +399,29 @@ msgstr ""
 "运用`mpsc`这个缩写，并扩展清单16-10中的代码，以创建多个线程，这些线程都会向同"
 "一个接收器发送值。我们可以通过克隆发送器来实现这一点，如清单16-11所示。"
 
-#: src/ch16-02-message-passing.md:319 src/ch16-02-message-passing.md:356
+#: src/ch16-02-message-passing.md:317 src/ch16-02-message-passing.md:354
 msgid "// --snip--\n"
 msgstr ""
 "// --snip--\n"
 "——剪——\n"
 
-#: src/ch16-02-message-passing.md:340
+#: src/ch16-02-message-passing.md:338
 msgid "\"more\""
 msgstr "“更多”"
 
-#: src/ch16-02-message-passing.md:341
+#: src/ch16-02-message-passing.md:339
 msgid "\"messages\""
 msgstr "\"消息\""
 
-#: src/ch16-02-message-passing.md:342
+#: src/ch16-02-message-passing.md:340
 msgid "\"for\""
 msgstr "“适合”"
 
-#: src/ch16-02-message-passing.md:343
+#: src/ch16-02-message-passing.md:341
 msgid "\"you\""
 msgstr "“你”"
 
-#: src/ch16-02-message-passing.md:362
+#: src/ch16-02-message-passing.md:360
 msgid ""
 "This time, before we create the first spawned thread, we call `clone` on the "
 "transmitter. This will give us a new transmitter we can pass to the first "
@@ -459,11 +433,11 @@ msgstr ""
 "个新的传输器，可以传递给第一个子线程。我们将原来的传输器传递给第二个子线程。"
 "这样我们就有了两个线程，每个线程都会向同一个接收器发送不同的消息。"
 
-#: src/ch16-02-message-passing.md:367
+#: src/ch16-02-message-passing.md:365
 msgid "When you run the code, your output should look something like this:"
 msgstr "当你运行代码时，输出结果应该看起来像这样："
 
-#: src/ch16-02-message-passing.md:384
+#: src/ch16-02-message-passing.md:382
 msgid ""
 "You might see the values in another order, depending on your system. This is "
 "what makes concurrency interesting as well as difficult. If you experiment "
@@ -474,8 +448,55 @@ msgstr ""
 "难的原因。如果您尝试使用`thread::sleep`，并在不同的线程中赋予它不同的数值，那"
 "么每次运行的结果都会更加不可预测，从而产生不同的输出。"
 
-#: src/ch16-02-message-passing.md:389
+#: src/ch16-02-message-passing.md:387
 msgid ""
 "Now that we’ve looked at how channels work, let’s look at a different method "
 "of concurrency."
 msgstr "既然我们已经了解了通道的工作原理，现在让我们来看看另一种并发实现方式。"
+
+#~ msgid ""
+#~ "```console\n"
+#~ "$ cargo run\n"
+#~ "   Compiling message-passing v0.1.0 (file:///projects/message-passing)\n"
+#~ "error[E0382]: borrow of moved value: `val`\n"
+#~ "  --> src/main.rs:10:27\n"
+#~ "   |\n"
+#~ " 8 |         let val = String::from(\"hi\");\n"
+#~ "   |             --- move occurs because `val` has type `String`, which "
+#~ "does not implement the `Copy` trait\n"
+#~ " 9 |         tx.send(val).unwrap();\n"
+#~ "   |                 --- value moved here\n"
+#~ "10 |         println!(\"val is {val}\");\n"
+#~ "   |                           ^^^ value borrowed here after move\n"
+#~ "   |\n"
+#~ "   = note: this error originates in the macro `$crate::format_args_nl` "
+#~ "which comes from the expansion of the macro `println` (in Nightly builds, "
+#~ "run with -Z macro-backtrace for more info)\n"
+#~ "\n"
+#~ "For more information about this error, try `rustc --explain E0382`.\n"
+#~ "error: could not compile `message-passing` (bin \"message-passing\") due "
+#~ "to 1 previous error\n"
+#~ "```"
+#~ msgstr ""
+#~ "```console\n"
+#~ "$ cargo run\n"
+#~ "   Compiling message-passing v0.1.0 (file:///projects/message-passing)\n"
+#~ "error[E0382]: borrow of moved value: `val`\n"
+#~ "  --> src/main.rs:10:27\n"
+#~ "   |\n"
+#~ " 8 |         let val = String::from(\"hi\");\n"
+#~ "   |             --- move occurs because `val` has type `String`, which "
+#~ "does not implement the `Copy` trait\n"
+#~ " 9 |         tx.send(val).unwrap();\n"
+#~ "   |                 --- value moved here\n"
+#~ "10 |         println!(\"val is {val}\");\n"
+#~ "   |                           ^^^ value borrowed here after move\n"
+#~ "   |\n"
+#~ "   = note: this error originates in the macro `$crate::format_args_nl` "
+#~ "which comes from the expansion of the macro `println` (in Nightly builds, "
+#~ "run with -Z macro-backtrace for more info)\n"
+#~ "\n"
+#~ "For more information about this error, try `rustc --explain E0382`.\n"
+#~ "error: could not compile `message-passing` (bin \"message-passing\") due "
+#~ "to 1 previous error\n"
+#~ "```"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-10-06T15:30:32Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -283,7 +283,7 @@ msgstr ""
 "接，或者提前下载这些依赖项。要提前下载依赖项，你可以运行以下命令。（我们稍后"
 "会详细解释`cargo`是什么，以及这些命令各自的作用。）"
 
-#: src/ch01-01-installation.md:167
+#: src/ch01-01-installation.md:175
 msgid ""
 "This will cache the downloads for these packages so you will not need to "
 "download them later. Once you have run this command, you do not need to keep "

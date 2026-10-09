@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-10-06T15:30:32Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -159,59 +159,59 @@ msgstr ""
 "请记住，字符串都是用 UTF-8 编码的，因此我们可以在其中包含任何正确编码的数据，"
 "如清单 8-14 所示。"
 
-#: src/ch08-02-strings.md:108 src/ch08-02-strings.md:334
-#: src/ch08-02-strings.md:355
+#: src/ch08-02-strings.md:108 src/ch08-02-strings.md:338
+#: src/ch08-02-strings.md:359
 msgid "\"السلام عليكم\""
 msgstr "\"السلام عليكم\""
 
-#: src/ch08-02-strings.md:109 src/ch08-02-strings.md:335
-#: src/ch08-02-strings.md:356
+#: src/ch08-02-strings.md:109 src/ch08-02-strings.md:339
+#: src/ch08-02-strings.md:360
 msgid "\"Dobrý den\""
 msgstr "\"Dobrý den\""
 
-#: src/ch08-02-strings.md:110 src/ch08-02-strings.md:336
-#: src/ch08-02-strings.md:357
+#: src/ch08-02-strings.md:110 src/ch08-02-strings.md:340
+#: src/ch08-02-strings.md:361
 msgid "\"Hello\""
 msgstr "\"Hello\""
 
-#: src/ch08-02-strings.md:111 src/ch08-02-strings.md:337
-#: src/ch08-02-strings.md:358
+#: src/ch08-02-strings.md:111 src/ch08-02-strings.md:341
+#: src/ch08-02-strings.md:362
 msgid "\"שלום\""
 msgstr "\"שלום\""
 
-#: src/ch08-02-strings.md:112 src/ch08-02-strings.md:338
-#: src/ch08-02-strings.md:359
+#: src/ch08-02-strings.md:112 src/ch08-02-strings.md:342
+#: src/ch08-02-strings.md:363
 msgid "\"नमस्ते\""
 msgstr "\"नमस्ते\""
 
-#: src/ch08-02-strings.md:113 src/ch08-02-strings.md:339
-#: src/ch08-02-strings.md:360
+#: src/ch08-02-strings.md:113 src/ch08-02-strings.md:343
+#: src/ch08-02-strings.md:364
 msgid "\"こんにちは\""
 msgstr "\"こんにちは\""
 
-#: src/ch08-02-strings.md:114 src/ch08-02-strings.md:340
-#: src/ch08-02-strings.md:361
+#: src/ch08-02-strings.md:114 src/ch08-02-strings.md:344
+#: src/ch08-02-strings.md:365
 msgid "\"안녕하세요\""
 msgstr "\"안녕하세요\""
 
-#: src/ch08-02-strings.md:115 src/ch08-02-strings.md:341
-#: src/ch08-02-strings.md:362
+#: src/ch08-02-strings.md:115 src/ch08-02-strings.md:345
+#: src/ch08-02-strings.md:366
 msgid "\"你好\""
 msgstr "\"你好\""
 
-#: src/ch08-02-strings.md:116 src/ch08-02-strings.md:342
-#: src/ch08-02-strings.md:363
+#: src/ch08-02-strings.md:116 src/ch08-02-strings.md:346
+#: src/ch08-02-strings.md:367
 msgid "\"Olá\""
 msgstr "\"Olá\""
 
-#: src/ch08-02-strings.md:117 src/ch08-02-strings.md:343
-#: src/ch08-02-strings.md:364 src/ch08-02-strings.md:377
-#: src/ch08-02-strings.md:450
+#: src/ch08-02-strings.md:117 src/ch08-02-strings.md:347
+#: src/ch08-02-strings.md:368 src/ch08-02-strings.md:381
+#: src/ch08-02-strings.md:454
 msgid "\"Здравствуйте\""
 msgstr "\"Здравствуйте\""
 
-#: src/ch08-02-strings.md:118 src/ch08-02-strings.md:344
-#: src/ch08-02-strings.md:365
+#: src/ch08-02-strings.md:118 src/ch08-02-strings.md:348
+#: src/ch08-02-strings.md:369
 msgid "\"Hola\""
 msgstr "\"Hola\""
 
@@ -485,9 +485,15 @@ msgid ""
 "  = note: you can use `.chars().nth()` or `.bytes().nth()`\n"
 "          for more information, see chapter 8 in The Book: <https://doc.rust-"
 "lang.org/book/ch08-02-strings.html#indexing-into-strings>\n"
-"  = help: the following other types implement trait `SliceIndex<T>`:\n"
-"            `usize` implements `SliceIndex<ByteStr>`\n"
-"            `usize` implements `SliceIndex<[T]>`\n"
+"help: `usize` implements trait `SliceIndex<T>`\n"
+" --> /rustc/88d9e12ae178fab0fb5cc050a94da85685d449ea/library/core/src/slice/"
+"index.rs:179:0\n"
+"  |\n"
+"  = note: `SliceIndex<[T]>`\n"
+" --> /rustc/88d9e12ae178fab0fb5cc050a94da85685d449ea/library/core/src/bstr/"
+"traits.rs:197:0\n"
+"  |\n"
+"  = note: `SliceIndex<ByteStr>`\n"
 "  = note: required for `String` to implement `Index<{integer}>`\n"
 "\n"
 "For more information about this error, try `rustc --explain E0277`.\n"
@@ -495,30 +501,8 @@ msgid ""
 "previous error\n"
 "```"
 msgstr ""
-"```console\n"
-"$ cargo run\n"
-"   Compiling collections v0.1.0 (file:///projects/collections)\n"
-"error[E0277]: the type `str` cannot be indexed by `{integer}`\n"
-" --> src/main.rs:3:16\n"
-"  |\n"
-"3 |     let h = s1[0];\n"
-"  |                ^ string indices are ranges of `usize`\n"
-"  |\n"
-"  = help: the trait `SliceIndex<str>` is not implemented for `{integer}`\n"
-"  = note: you can use `.chars().nth()` or `.bytes().nth()`\n"
-"          for more information, see chapter 8 in The Book: <https://doc.rust-"
-"lang.org/book/ch08-02-strings.html#indexing-into-strings>\n"
-"  = help: the following other types implement trait `SliceIndex<T>`:\n"
-"            `usize` implements `SliceIndex<ByteStr>`\n"
-"            `usize` implements `SliceIndex<[T]>`\n"
-"  = note: required for `String` to implement `Index<{integer}>`\n"
-"\n"
-"For more information about this error, try `rustc --explain E0277`.\n"
-"error: could not compile `collections` (bin \"collections\") due to 1 "
-"previous error\n"
-"```"
 
-#: src/ch08-02-strings.md:324
+#: src/ch08-02-strings.md:328
 msgid ""
 "The error tells the story: Rust strings don’t support indexing. But why not? "
 "To answer that question, we need to discuss how Rust stores strings in "
@@ -527,11 +511,11 @@ msgstr ""
 "这个错误揭示了这样一个事实：Rust中的字符串并不支持索引操作。但为什么会出现这"
 "种情况呢？要解答这个问题，我们需要探讨Rust是如何在内存中存储字符串的。"
 
-#: src/ch08-02-strings.md:327
+#: src/ch08-02-strings.md:331
 msgid "Internal Representation"
 msgstr "内部表示"
 
-#: src/ch08-02-strings.md:329
+#: src/ch08-02-strings.md:333
 msgid ""
 "A `String` is a wrapper over a `Vec<u8>`. Let’s look at some of our properly "
 "encoded UTF-8 example strings from Listing 8-14. First, this one:"
@@ -539,7 +523,7 @@ msgstr ""
 "A `String` 是一个基于 `Vec<u8>` 的封装。让我们来看看清单8-14中一些正确编码的"
 "UTF-8 字符串。首先，这是其中一个例子："
 
-#: src/ch08-02-strings.md:348
+#: src/ch08-02-strings.md:352
 msgid ""
 "In this case, `len` will be `4`, which means the vector storing the string "
 "`\"Hola\"` is 4 bytes long. Each of these letters takes 1 byte when encoded "
@@ -550,7 +534,7 @@ msgstr ""
 "节。在UTF-8编码下，每个字符需要1字节来表示。不过，下面这一行可能会让你感到惊"
 "讶（请注意，这个字符串以大写西里尔字母_Ze_开头，而不是数字3）："
 
-#: src/ch08-02-strings.md:369
+#: src/ch08-02-strings.md:373
 msgid ""
 "If you were asked how long the string is, you might say 12. In fact, Rust’s "
 "answer is 24: That’s the number of bytes it takes to encode “Здравствуйте” "
@@ -564,7 +548,7 @@ msgstr ""
 "2个字节的存储空间。因此，字符串的字节索引并不总能与有效的Unicode标量值相对"
 "应。为了说明这一点，请看这段无效的Rust代码："
 
-#: src/ch08-02-strings.md:381
+#: src/ch08-02-strings.md:385
 msgid ""
 "You already know that `answer` will not be `З`, the first letter. When "
 "encoded in UTF-8, the first byte of `З` is `208` and the second is `151`, so "
@@ -583,7 +567,7 @@ msgstr ""
 "常，用户并不希望得到字节值的返回，即使字符串只包含拉丁字母。如果`&\"hi\"[0]`"
 "是一个有效的代码，它能够返回字节值的话，那么它将会返回`104`，而不是`h`。"
 
-#: src/ch08-02-strings.md:390
+#: src/ch08-02-strings.md:394
 msgid ""
 "The answer, then, is that to avoid returning an unexpected value and causing "
 "bugs that might not be discovered immediately, Rust doesn’t compile this "
@@ -592,15 +576,15 @@ msgstr ""
 "因此，为了避免返回意外的值并导致可能不会被立即发现的错误，Rust根本不会编译这"
 "段代码，从而在开发过程的早期就避免了误解。"
 
-#: src/ch08-02-strings.md:396
+#: src/ch08-02-strings.md:400
 msgid "<a id=\"bytes-and-scalar-values-and-grapheme-clusters-oh-my\"></a>"
 msgstr "<a id=\"bytes-and-scalar-values-and-grapheme-clusters-oh-my\"></a>"
 
-#: src/ch08-02-strings.md:398
+#: src/ch08-02-strings.md:402
 msgid "Bytes, Scalar Values, and Grapheme Clusters"
 msgstr "字节、标量值以及图素簇"
 
-#: src/ch08-02-strings.md:400
+#: src/ch08-02-strings.md:404
 msgid ""
 "Another point about UTF-8 is that there are actually three relevant ways to "
 "look at strings from Rust’s perspective: as bytes, scalar values, and "
@@ -609,7 +593,7 @@ msgstr ""
 "关于UTF-8的另一个要点是，从Rust的角度来看，处理字符串实际上有三种相关方式：以"
 "字节为单位、作为标量值，以及以字符簇的形式（这最接近我们所说的“字母”）。"
 
-#: src/ch08-02-strings.md:404
+#: src/ch08-02-strings.md:408
 msgid ""
 "If we look at the Hindi word “नमस्ते” written in the Devanagari script, it is "
 "stored as a vector of `u8` values that looks like this:"
@@ -617,7 +601,7 @@ msgstr ""
 "如果我们看一下用天城文书写的印地语单词“नमस्ते”，它会被存储为一个 `u8` 值的向"
 "量，看起来像这样："
 
-#: src/ch08-02-strings.md:412
+#: src/ch08-02-strings.md:416
 msgid ""
 "That’s 18 bytes and is how computers ultimately store this data. If we look "
 "at them as Unicode scalar values, which are what Rust’s `char` type is, "
@@ -626,7 +610,7 @@ msgstr ""
 "这相当于18个字节，这也是计算机最终存储这些数据的方式。如果我们把它们视为"
 "Unicode标量值，也就是Rust的`char`类型所表示的，那么这些字节看起来就是这样的："
 
-#: src/ch08-02-strings.md:420
+#: src/ch08-02-strings.md:424
 msgid ""
 "There are six `char` values here, but the fourth and sixth are not letters: "
 "They’re diacritics that don’t make sense on their own. Finally, if we look "
@@ -637,7 +621,7 @@ msgstr ""
 "符号，单独来看是没有意义的。如果我们把它们视为字符群，那么就能得到人们所说的"
 "构成印地语单词的四个字母。"
 
-#: src/ch08-02-strings.md:425
+#: src/ch08-02-strings.md:429
 msgid ""
 "```text\n"
 "[\"न\", \"म\", \"स्\", \"ते\"]\n"
@@ -647,7 +631,7 @@ msgstr ""
 "[\"न\", \"म\", \"स्\", \"ते\"]\n"
 "```"
 
-#: src/ch08-02-strings.md:429
+#: src/ch08-02-strings.md:433
 msgid ""
 "Rust provides different ways of interpreting the raw string data that "
 "computers store so that each program can choose the interpretation it needs, "
@@ -656,7 +640,7 @@ msgstr ""
 "Rust提供了多种方式来解释计算机存储的原始字符串数据，这样每个程序都可以选择自"
 "己需要的解释方式，无论这些数据使用的是哪种人类语言。"
 
-#: src/ch08-02-strings.md:433
+#: src/ch08-02-strings.md:437
 msgid ""
 "A final reason Rust doesn’t allow us to index into a `String` to get a "
 "character is that indexing operations are expected to always take constant "
@@ -668,11 +652,11 @@ msgstr ""
 "该始终以常数时间（O(1)）完成。但是，对于 `String`，我们无法保证性能，因为Rust"
 "需要从头到尾遍历内容，以确定有多少个有效的字符。"
 
-#: src/ch08-02-strings.md:439
+#: src/ch08-02-strings.md:443
 msgid "Slicing Strings"
 msgstr "字符串切片"
 
-#: src/ch08-02-strings.md:441
+#: src/ch08-02-strings.md:445
 msgid ""
 "Indexing into a string is often a bad idea because it’s not clear what the "
 "return type of the string-indexing operation should be: a byte value, a "
@@ -684,7 +668,7 @@ msgstr ""
 "什么：是字节值、字符、字符簇，还是字符串切片。因此，如果你真的需要使用索引来"
 "创建字符串切片，Rust会要求你提供更具体的说明。"
 
-#: src/ch08-02-strings.md:446
+#: src/ch08-02-strings.md:450
 msgid ""
 "Rather than indexing using `[]` with a single number, you can use `[]` with "
 "a range to create a string slice containing particular bytes:"
@@ -692,7 +676,7 @@ msgstr ""
 "与其使用 `[]` 来索引单个数字，不如使用 `[]` 并指定一个范围，从而创建一个包含"
 "特定字节的字符串切片："
 
-#: src/ch08-02-strings.md:455
+#: src/ch08-02-strings.md:459
 msgid ""
 "Here, `s` will be a `&str` that contains the first 4 bytes of the string. "
 "Earlier, we mentioned that each of these characters was 2 bytes, which means "
@@ -701,7 +685,7 @@ msgstr ""
 "在这里，`s`将是一个包含字符串前4个字节的`&str`。之前我们提到过，这些字符每个"
 "都是2个字节，这意味着`s`将变成`Зд`。"
 
-#: src/ch08-02-strings.md:459
+#: src/ch08-02-strings.md:463
 msgid ""
 "If we were to try to slice only part of a character’s bytes with something "
 "like `&hello[0..1]`, Rust would panic at runtime in the same way as if an "
@@ -710,7 +694,7 @@ msgstr ""
 "如果我们试图仅使用类似`&hello[0..1]`的工具来分割字符的某些字节，Rust会在运行"
 "时引发panic，这就像在向量中访问了无效的索引一样："
 
-#: src/ch08-02-strings.md:463
+#: src/ch08-02-strings.md:467
 msgid ""
 "```console\n"
 "$ cargo run\n"
@@ -718,42 +702,30 @@ msgid ""
 "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s\n"
 "     Running `target/debug/collections`\n"
 "\n"
-"thread 'main' panicked at src/main.rs:4:19:\n"
-"byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2) of "
-"`Здравствуйте`\n"
+"thread 'main' (6017738) panicked at src/main.rs:4:19:\n"
+"end byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2 of "
+"string)\n"
 "note: run with `RUST_BACKTRACE=1` environment variable to display a "
 "backtrace\n"
 "```"
 msgstr ""
-"```console\n"
-"$ cargo run\n"
-"   Compiling collections v0.1.0 (file:///projects/collections)\n"
-"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s\n"
-"     Running `target/debug/collections`\n"
-"\n"
-"thread 'main' panicked at src/main.rs:4:19:\n"
-"byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2) of "
-"`Здравствуйте`\n"
-"note: run with `RUST_BACKTRACE=1` environment variable to display a "
-"backtrace\n"
-"```"
 
-#: src/ch08-02-strings.md:474
+#: src/ch08-02-strings.md:478
 msgid ""
 "You should use caution when creating string slices with ranges, because "
 "doing so can crash your program."
 msgstr ""
 "在创建带有范围的字符串切片时，应该非常小心，因为这样做可能会导致程序崩溃。"
 
-#: src/ch08-02-strings.md:479
+#: src/ch08-02-strings.md:483
 msgid "<a id=\"methods-for-iterating-over-strings\"></a>"
 msgstr "<a id=\"methods-for-iterating-over-strings\"></a>"
 
-#: src/ch08-02-strings.md:481
+#: src/ch08-02-strings.md:485
 msgid "Iterating Over Strings"
 msgstr "遍历字符串"
 
-#: src/ch08-02-strings.md:483
+#: src/ch08-02-strings.md:487
 msgid ""
 "The best way to operate on pieces of strings is to be explicit about whether "
 "you want characters or bytes. For individual Unicode scalar values, use the "
@@ -764,39 +736,39 @@ msgstr ""
 "以使用`chars`方法。对“Зд”调用`chars`方法会将其拆分成两个类型为`char`的值，你"
 "可以遍历这个结果来访问每个元素："
 
-#: src/ch08-02-strings.md:489 src/ch08-02-strings.md:505
+#: src/ch08-02-strings.md:493 src/ch08-02-strings.md:509
 msgid "\"Зд\""
 msgstr "\"Зд\""
 
-#: src/ch08-02-strings.md:490
+#: src/ch08-02-strings.md:494
 msgid "\"{c}\""
 msgstr "\"{c}\""
 
-#: src/ch08-02-strings.md:494
+#: src/ch08-02-strings.md:498
 msgid "This code will print the following:"
 msgstr "这段代码将输出以下内容："
 
-#: src/ch08-02-strings.md:501
+#: src/ch08-02-strings.md:505
 msgid ""
 "Alternatively, the `bytes` method returns each raw byte, which might be "
 "appropriate for your domain:"
 msgstr "或者，`bytes`方法会返回每个原始字节，这可能对你的领域来说比较合适："
 
-#: src/ch08-02-strings.md:506
+#: src/ch08-02-strings.md:510
 msgid "\"{b}\""
 msgstr "\"{b}\""
 
-#: src/ch08-02-strings.md:510
+#: src/ch08-02-strings.md:514
 msgid "This code will print the 4 bytes that make up this string:"
 msgstr "这段代码将输出构成这个字符串的4个字节："
 
-#: src/ch08-02-strings.md:519
+#: src/ch08-02-strings.md:523
 msgid ""
 "But be sure to remember that valid Unicode scalar values may be made up of "
 "more than 1 byte."
 msgstr "但请务必记住，有效的 Unicode 标量值可能由超过1个字节组成。"
 
-#: src/ch08-02-strings.md:522
+#: src/ch08-02-strings.md:526
 msgid ""
 "Getting grapheme clusters from strings, as with the Devanagari script, is "
 "complex, so this functionality is not provided by the standard library. "
@@ -807,15 +779,15 @@ msgstr ""
 "能。如果你需要这个功能，可以在[crates.io](https://crates.io/)上找到相关的小"
 "包。"
 
-#: src/ch08-02-strings.md:529
+#: src/ch08-02-strings.md:533
 msgid "<a id=\"strings-are-not-so-simple\"></a>"
 msgstr "<a id=\"strings-are-not-so-simple\"></a>"
 
-#: src/ch08-02-strings.md:531
+#: src/ch08-02-strings.md:535
 msgid "Handling the Complexities of Strings"
 msgstr "处理字符串中的复杂性"
 
-#: src/ch08-02-strings.md:533
+#: src/ch08-02-strings.md:537
 msgid ""
 "To summarize, strings are complicated. Different programming languages make "
 "different choices about how to present this complexity to the programmer. "
@@ -831,7 +803,7 @@ msgstr ""
 "员在处理UTF-8数据时需要更加注意。这种权衡使得字符串处理的复杂性比其他编程语言"
 "更为明显，但它可以避免在开发周期后期处理非ASCII字符引发的错误。"
 
-#: src/ch08-02-strings.md:542
+#: src/ch08-02-strings.md:546
 msgid ""
 "The good news is that the standard library offers a lot of functionality "
 "built off the `String` and `&str` types to help handle these complex "
@@ -843,6 +815,80 @@ msgstr ""
 "这些复杂情况。请务必查阅相关文档，了解诸如 `contains` 用于字符串搜索的方法，"
 "以及 `replace` 用于用另一字符串替换字符串中部分内容的方法。"
 
-#: src/ch08-02-strings.md:548
+#: src/ch08-02-strings.md:552
 msgid "Let’s switch to something a bit less complex: hash maps!"
 msgstr "让我们来尝试一些稍微简单一些的东西：哈希映射！"
+
+#~ msgid ""
+#~ "```console\n"
+#~ "$ cargo run\n"
+#~ "   Compiling collections v0.1.0 (file:///projects/collections)\n"
+#~ "error[E0277]: the type `str` cannot be indexed by `{integer}`\n"
+#~ " --> src/main.rs:3:16\n"
+#~ "  |\n"
+#~ "3 |     let h = s1[0];\n"
+#~ "  |                ^ string indices are ranges of `usize`\n"
+#~ "  |\n"
+#~ "  = help: the trait `SliceIndex<str>` is not implemented for `{integer}`\n"
+#~ "  = note: you can use `.chars().nth()` or `.bytes().nth()`\n"
+#~ "          for more information, see chapter 8 in The Book: <https://doc."
+#~ "rust-lang.org/book/ch08-02-strings.html#indexing-into-strings>\n"
+#~ "  = help: the following other types implement trait `SliceIndex<T>`:\n"
+#~ "            `usize` implements `SliceIndex<ByteStr>`\n"
+#~ "            `usize` implements `SliceIndex<[T]>`\n"
+#~ "  = note: required for `String` to implement `Index<{integer}>`\n"
+#~ "\n"
+#~ "For more information about this error, try `rustc --explain E0277`.\n"
+#~ "error: could not compile `collections` (bin \"collections\") due to 1 "
+#~ "previous error\n"
+#~ "```"
+#~ msgstr ""
+#~ "```console\n"
+#~ "$ cargo run\n"
+#~ "   Compiling collections v0.1.0 (file:///projects/collections)\n"
+#~ "error[E0277]: the type `str` cannot be indexed by `{integer}`\n"
+#~ " --> src/main.rs:3:16\n"
+#~ "  |\n"
+#~ "3 |     let h = s1[0];\n"
+#~ "  |                ^ string indices are ranges of `usize`\n"
+#~ "  |\n"
+#~ "  = help: the trait `SliceIndex<str>` is not implemented for `{integer}`\n"
+#~ "  = note: you can use `.chars().nth()` or `.bytes().nth()`\n"
+#~ "          for more information, see chapter 8 in The Book: <https://doc."
+#~ "rust-lang.org/book/ch08-02-strings.html#indexing-into-strings>\n"
+#~ "  = help: the following other types implement trait `SliceIndex<T>`:\n"
+#~ "            `usize` implements `SliceIndex<ByteStr>`\n"
+#~ "            `usize` implements `SliceIndex<[T]>`\n"
+#~ "  = note: required for `String` to implement `Index<{integer}>`\n"
+#~ "\n"
+#~ "For more information about this error, try `rustc --explain E0277`.\n"
+#~ "error: could not compile `collections` (bin \"collections\") due to 1 "
+#~ "previous error\n"
+#~ "```"
+
+#~ msgid ""
+#~ "```console\n"
+#~ "$ cargo run\n"
+#~ "   Compiling collections v0.1.0 (file:///projects/collections)\n"
+#~ "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s\n"
+#~ "     Running `target/debug/collections`\n"
+#~ "\n"
+#~ "thread 'main' panicked at src/main.rs:4:19:\n"
+#~ "byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2) of "
+#~ "`Здравствуйте`\n"
+#~ "note: run with `RUST_BACKTRACE=1` environment variable to display a "
+#~ "backtrace\n"
+#~ "```"
+#~ msgstr ""
+#~ "```console\n"
+#~ "$ cargo run\n"
+#~ "   Compiling collections v0.1.0 (file:///projects/collections)\n"
+#~ "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s\n"
+#~ "     Running `target/debug/collections`\n"
+#~ "\n"
+#~ "thread 'main' panicked at src/main.rs:4:19:\n"
+#~ "byte index 1 is not a char boundary; it is inside 'З' (bytes 0..2) of "
+#~ "`Здравствуйте`\n"
+#~ "note: run with `RUST_BACKTRACE=1` environment variable to display a "
+#~ "backtrace\n"
+#~ "```"

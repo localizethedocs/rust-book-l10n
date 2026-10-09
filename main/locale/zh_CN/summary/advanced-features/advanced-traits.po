@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-10-06T15:30:33Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -703,30 +703,30 @@ msgstr ""
 
 #: src/ch20-02-advanced-traits.md:633 src/ch20-02-advanced-traits.md:637
 #: src/ch20-02-advanced-traits.md:665 src/ch20-02-advanced-traits.md:669
-#: src/ch20-02-advanced-traits.md:733 src/ch20-02-advanced-traits.md:737
+#: src/ch20-02-advanced-traits.md:743 src/ch20-02-advanced-traits.md:747
 msgid "\"{}\""
 msgstr "\"{}\""
 
 #: src/ch20-02-advanced-traits.md:633 src/ch20-02-advanced-traits.md:637
 #: src/ch20-02-advanced-traits.md:665 src/ch20-02-advanced-traits.md:669
-#: src/ch20-02-advanced-traits.md:733 src/ch20-02-advanced-traits.md:737
+#: src/ch20-02-advanced-traits.md:743 src/ch20-02-advanced-traits.md:747
 msgid "\"*\""
 msgstr "\"*\""
 
 #: src/ch20-02-advanced-traits.md:634 src/ch20-02-advanced-traits.md:636
 #: src/ch20-02-advanced-traits.md:666 src/ch20-02-advanced-traits.md:668
-#: src/ch20-02-advanced-traits.md:734 src/ch20-02-advanced-traits.md:736
+#: src/ch20-02-advanced-traits.md:744 src/ch20-02-advanced-traits.md:746
 msgid "\"*{}*\""
 msgstr "\"*{}*\""
 
 #: src/ch20-02-advanced-traits.md:634 src/ch20-02-advanced-traits.md:636
 #: src/ch20-02-advanced-traits.md:666 src/ch20-02-advanced-traits.md:668
-#: src/ch20-02-advanced-traits.md:734 src/ch20-02-advanced-traits.md:736
+#: src/ch20-02-advanced-traits.md:744 src/ch20-02-advanced-traits.md:746
 msgid "\" \""
 msgstr "\" \""
 
 #: src/ch20-02-advanced-traits.md:635 src/ch20-02-advanced-traits.md:667
-#: src/ch20-02-advanced-traits.md:735
+#: src/ch20-02-advanced-traits.md:745
 msgid "\"* {output} *\""
 msgstr "\"* {output} *\""
 
@@ -765,9 +765,13 @@ msgid ""
 "  --> src/main.rs:20:23\n"
 "   |\n"
 "20 | impl OutlinePrint for Point {}\n"
-"   |                       ^^^^^ the trait `std::fmt::Display` is not "
-"implemented for `Point`\n"
+"   |                       ^^^^^ unsatisfied trait bound\n"
 "   |\n"
+"help: the trait `std::fmt::Display` is not implemented for `Point`\n"
+"  --> src/main.rs:15:1\n"
+"   |\n"
+"15 | struct Point {\n"
+"   | ^^^^^^^^^^^^\n"
 "note: required by a bound in `OutlinePrint`\n"
 "  --> src/main.rs:3:21\n"
 "   |\n"
@@ -779,9 +783,13 @@ msgid ""
 "  --> src/main.rs:24:7\n"
 "   |\n"
 "24 |     p.outline_print();\n"
-"   |       ^^^^^^^^^^^^^ the trait `std::fmt::Display` is not implemented "
-"for `Point`\n"
+"   |       ^^^^^^^^^^^^^ unsatisfied trait bound\n"
 "   |\n"
+"help: the trait `std::fmt::Display` is not implemented for `Point`\n"
+"  --> src/main.rs:15:1\n"
+"   |\n"
+"15 | struct Point {\n"
+"   | ^^^^^^^^^^^^\n"
 "note: required by a bound in `OutlinePrint::outline_print`\n"
 "  --> src/main.rs:3:21\n"
 "   |\n"
@@ -796,45 +804,8 @@ msgid ""
 "previous errors\n"
 "```"
 msgstr ""
-"```console\n"
-"$ cargo run\n"
-"   Compiling traits-example v0.1.0 (file:///projects/traits-example)\n"
-"error[E0277]: `Point` doesn't implement `std::fmt::Display`\n"
-"  --> src/main.rs:20:23\n"
-"   |\n"
-"20 | impl OutlinePrint for Point {}\n"
-"   |                       ^^^^^ the trait `std::fmt::Display` is not "
-"implemented for `Point`\n"
-"   |\n"
-"note: required by a bound in `OutlinePrint`\n"
-"  --> src/main.rs:3:21\n"
-"   |\n"
-" 3 | trait OutlinePrint: fmt::Display {\n"
-"   |                     ^^^^^^^^^^^^ required by this bound in "
-"`OutlinePrint`\n"
-"\n"
-"error[E0277]: `Point` doesn't implement `std::fmt::Display`\n"
-"  --> src/main.rs:24:7\n"
-"   |\n"
-"24 |     p.outline_print();\n"
-"   |       ^^^^^^^^^^^^^ the trait `std::fmt::Display` is not implemented "
-"for `Point`\n"
-"   |\n"
-"note: required by a bound in `OutlinePrint::outline_print`\n"
-"  --> src/main.rs:3:21\n"
-"   |\n"
-" 3 | trait OutlinePrint: fmt::Display {\n"
-"   |                     ^^^^^^^^^^^^ required by this bound in "
-"`OutlinePrint::outline_print`\n"
-" 4 |     fn outline_print(&self) {\n"
-"   |        ------------- required by a bound in this associated function\n"
-"\n"
-"For more information about this error, try `rustc --explain E0277`.\n"
-"error: could not compile `traits-example` (bin \"traits-example\") due to 2 "
-"previous errors\n"
-"```"
 
-#: src/ch20-02-advanced-traits.md:723
+#: src/ch20-02-advanced-traits.md:733
 msgid ""
 "To fix this, we implement `Display` on `Point` and satisfy the constraint "
 "that `OutlinePrint` requires, like so:"
@@ -842,11 +813,11 @@ msgstr ""
 "为了解决这个问题，我们在 `Point` 上实现了 `Display`，并满足了 `OutlinePrint` "
 "所要求的约束条件。"
 
-#: src/ch20-02-advanced-traits.md:752
+#: src/ch20-02-advanced-traits.md:762
 msgid "\"({}, {})\""
 msgstr "\"({}, {})\""
 
-#: src/ch20-02-advanced-traits.md:764
+#: src/ch20-02-advanced-traits.md:774
 msgid ""
 "Then, implementing the `OutlinePrint` trait on `Point` will compile "
 "successfully, and we can call `outline_print` on a `Point` instance to "
@@ -855,7 +826,7 @@ msgstr ""
 "那么，在 `Point` 上实现 `OutlinePrint` 特质后，代码将会成功编译。然后我们可以"
 "在一个 `Point` 实例上调用 `outline_print`，从而在星号轮廓内显示它。"
 
-#: src/ch20-02-advanced-traits.md:770
+#: src/ch20-02-advanced-traits.md:780
 msgid ""
 "<a id=\"using-the-newtype-pattern-to-implement-external-traits-on-external-"
 "types\"></a> <a id=\"using-the-newtype-pattern-to-implement-external-"
@@ -865,11 +836,11 @@ msgstr ""
 "types\"></a><a id=\"using-the-newtype-pattern-to-implement-external-"
 "traits\"></a>"
 
-#: src/ch20-02-advanced-traits.md:773
+#: src/ch20-02-advanced-traits.md:783
 msgid "Implementing External Traits with the Newtype Pattern"
 msgstr "使用新类型模式实现外部特征"
 
-#: src/ch20-02-advanced-traits.md:775
+#: src/ch20-02-advanced-traits.md:785
 msgid ""
 "In the [“Implementing a Trait on a Type”](ch10-02-traits.html#implementing-a-"
 "trait-on-a-type)<!--\n"
@@ -898,7 +869,7 @@ msgstr ""
 "术语源自 Haskell 编程语言。使用这种模式并不会对运行性能产生任何影响，而且包装"
 "器类型在编译时会被省略。"
 
-#: src/ch20-02-advanced-traits.md:788
+#: src/ch20-02-advanced-traits.md:798
 msgid ""
 "As an example, let’s say we want to implement `Display` on `Vec<T>`, which "
 "the orphan rule prevents us from doing directly because the `Display` trait "
@@ -912,27 +883,27 @@ msgstr ""
 "然后，我们可以在 `Wrapper` 上实现 `Display`，并使用 `Vec<T>` 的值，如清单 "
 "20-24 所示。"
 
-#: src/ch20-02-advanced-traits.md:803
+#: src/ch20-02-advanced-traits.md:813
 msgid "\"[{}]\""
 msgstr "\"[{}]\""
 
-#: src/ch20-02-advanced-traits.md:803
+#: src/ch20-02-advanced-traits.md:813
 msgid "\", \""
 msgstr "\", \""
 
-#: src/ch20-02-advanced-traits.md:808
+#: src/ch20-02-advanced-traits.md:818
 msgid "\"hello\""
 msgstr "\"hello\""
 
-#: src/ch20-02-advanced-traits.md:808
+#: src/ch20-02-advanced-traits.md:818
 msgid "\"world\""
 msgstr "“世界”"
 
-#: src/ch20-02-advanced-traits.md:809
+#: src/ch20-02-advanced-traits.md:819
 msgid "\"w = {w}\""
 msgstr "\"w = {w}\""
 
-#: src/ch20-02-advanced-traits.md:815
+#: src/ch20-02-advanced-traits.md:825
 msgid ""
 "The implementation of `Display` uses `self.0` to access the inner `Vec<T>` "
 "because `Wrapper` is a tuple struct and `Vec<T>` is the item at index 0 in "
@@ -943,7 +914,7 @@ msgstr ""
 "构，而`Vec<T>`是该元组中的第一个元素。然后，我们可以在`Wrapper`上利用"
 "`Display`特质的功能。"
 
-#: src/ch20-02-advanced-traits.md:819
+#: src/ch20-02-advanced-traits.md:829
 msgid ""
 "The downside of using this technique is that `Wrapper` is a new type, so it "
 "doesn’t have the methods of the value it’s holding. We would have to "
@@ -968,7 +939,7 @@ msgstr ""
 "法——例如，为了限制``Wrapper``类型的特性——那么我们就必须手动实现我们真正需要的"
 "方法。"
 
-#: src/ch20-02-advanced-traits.md:831
+#: src/ch20-02-advanced-traits.md:841
 msgid ""
 "This newtype pattern is also useful even when traits are not involved. Let’s "
 "switch focus and look at some advanced ways to interact with Rust’s type "
@@ -976,3 +947,82 @@ msgid ""
 msgstr ""
 "这种新类型模式在不涉及特质的情况下也非常有用。让我们转移一下注意力，看看一些"
 "高级的方式来与Rust的类型系统进行交互。"
+
+#~ msgid ""
+#~ "```console\n"
+#~ "$ cargo run\n"
+#~ "   Compiling traits-example v0.1.0 (file:///projects/traits-example)\n"
+#~ "error[E0277]: `Point` doesn't implement `std::fmt::Display`\n"
+#~ "  --> src/main.rs:20:23\n"
+#~ "   |\n"
+#~ "20 | impl OutlinePrint for Point {}\n"
+#~ "   |                       ^^^^^ the trait `std::fmt::Display` is not "
+#~ "implemented for `Point`\n"
+#~ "   |\n"
+#~ "note: required by a bound in `OutlinePrint`\n"
+#~ "  --> src/main.rs:3:21\n"
+#~ "   |\n"
+#~ " 3 | trait OutlinePrint: fmt::Display {\n"
+#~ "   |                     ^^^^^^^^^^^^ required by this bound in "
+#~ "`OutlinePrint`\n"
+#~ "\n"
+#~ "error[E0277]: `Point` doesn't implement `std::fmt::Display`\n"
+#~ "  --> src/main.rs:24:7\n"
+#~ "   |\n"
+#~ "24 |     p.outline_print();\n"
+#~ "   |       ^^^^^^^^^^^^^ the trait `std::fmt::Display` is not implemented "
+#~ "for `Point`\n"
+#~ "   |\n"
+#~ "note: required by a bound in `OutlinePrint::outline_print`\n"
+#~ "  --> src/main.rs:3:21\n"
+#~ "   |\n"
+#~ " 3 | trait OutlinePrint: fmt::Display {\n"
+#~ "   |                     ^^^^^^^^^^^^ required by this bound in "
+#~ "`OutlinePrint::outline_print`\n"
+#~ " 4 |     fn outline_print(&self) {\n"
+#~ "   |        ------------- required by a bound in this associated "
+#~ "function\n"
+#~ "\n"
+#~ "For more information about this error, try `rustc --explain E0277`.\n"
+#~ "error: could not compile `traits-example` (bin \"traits-example\") due to "
+#~ "2 previous errors\n"
+#~ "```"
+#~ msgstr ""
+#~ "```console\n"
+#~ "$ cargo run\n"
+#~ "   Compiling traits-example v0.1.0 (file:///projects/traits-example)\n"
+#~ "error[E0277]: `Point` doesn't implement `std::fmt::Display`\n"
+#~ "  --> src/main.rs:20:23\n"
+#~ "   |\n"
+#~ "20 | impl OutlinePrint for Point {}\n"
+#~ "   |                       ^^^^^ the trait `std::fmt::Display` is not "
+#~ "implemented for `Point`\n"
+#~ "   |\n"
+#~ "note: required by a bound in `OutlinePrint`\n"
+#~ "  --> src/main.rs:3:21\n"
+#~ "   |\n"
+#~ " 3 | trait OutlinePrint: fmt::Display {\n"
+#~ "   |                     ^^^^^^^^^^^^ required by this bound in "
+#~ "`OutlinePrint`\n"
+#~ "\n"
+#~ "error[E0277]: `Point` doesn't implement `std::fmt::Display`\n"
+#~ "  --> src/main.rs:24:7\n"
+#~ "   |\n"
+#~ "24 |     p.outline_print();\n"
+#~ "   |       ^^^^^^^^^^^^^ the trait `std::fmt::Display` is not implemented "
+#~ "for `Point`\n"
+#~ "   |\n"
+#~ "note: required by a bound in `OutlinePrint::outline_print`\n"
+#~ "  --> src/main.rs:3:21\n"
+#~ "   |\n"
+#~ " 3 | trait OutlinePrint: fmt::Display {\n"
+#~ "   |                     ^^^^^^^^^^^^ required by this bound in "
+#~ "`OutlinePrint::outline_print`\n"
+#~ " 4 |     fn outline_print(&self) {\n"
+#~ "   |        ------------- required by a bound in this associated "
+#~ "function\n"
+#~ "\n"
+#~ "For more information about this error, try `rustc --explain E0277`.\n"
+#~ "error: could not compile `traits-example` (bin \"traits-example\") due to "
+#~ "2 previous errors\n"
+#~ "```"

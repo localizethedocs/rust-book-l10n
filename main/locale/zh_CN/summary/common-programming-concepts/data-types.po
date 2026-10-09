@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-10-06T15:30:32Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -396,31 +396,32 @@ msgstr "要明确处理溢出的可能性，您可以使用标准库提供的方
 
 #: src/ch03-02-data-types.md:135
 msgid ""
-"Wrap in all modes with the `wrapping_*` methods, such as `wrapping_add`."
-msgstr "使用 `wrapping_*` 方法折叠所有模式，如`wrapping_add` 。"
+"Wrap in all compilation modes with the `wrapping_*` methods, such as "
+"`wrapping_add`."
+msgstr ""
 
-#: src/ch03-02-data-types.md:136
+#: src/ch03-02-data-types.md:137
 msgid ""
 "Return the `None` value if there is overflow with the `checked_*` methods."
 msgstr "如果使用 `checked_*` 方法溢出则返回 `None` 值。"
 
-#: src/ch03-02-data-types.md:137
+#: src/ch03-02-data-types.md:138
 msgid ""
 "Return the value and a Boolean indicating whether there was overflow with "
 "the `overflowing_*` methods."
 msgstr "返回值和布尔值表示是否存在溢出与 `overflow_*` 方法的关系。"
 
-#: src/ch03-02-data-types.md:139
+#: src/ch03-02-data-types.md:140
 msgid ""
 "Saturate at the value’s minimum or maximum values with the `saturating_*` "
 "methods."
 msgstr "使用 `saturating_*` 方法在数值的最小值或最大值上饱和度。"
 
-#: src/ch03-02-data-types.md:142
+#: src/ch03-02-data-types.md:143
 msgid "Floating-Point Types"
 msgstr "浮点类型"
 
-#: src/ch03-02-data-types.md:144
+#: src/ch03-02-data-types.md:145
 msgid ""
 "Rust also has two primitive types for _floating-point numbers_, which are "
 "numbers with decimal points. Rust’s floating-point types are `f32` and "
@@ -432,36 +433,36 @@ msgstr ""
 "浮点型为“f32`”和“f64`”，分别为32比特和64比特。 默认类型是 `f64` ，因为在现代"
 "CPU中，它的速度与`f32` 大致相同，但能够更加精确。 所有浮点类型都已签名。"
 
-#: src/ch03-02-data-types.md:150
+#: src/ch03-02-data-types.md:151
 msgid "Here’s an example that shows floating-point numbers in action:"
 msgstr "这是一个显示浮点数的示例："
 
-#: src/ch03-02-data-types.md:152 src/ch03-02-data-types.md:171
-#: src/ch03-02-data-types.md:204 src/ch03-02-data-types.md:223
-#: src/ch03-02-data-types.md:260 src/ch03-02-data-types.md:272
-#: src/ch03-02-data-types.md:293 src/ch03-02-data-types.md:325
-#: src/ch03-02-data-types.md:384 src/ch03-02-data-types.md:405
+#: src/ch03-02-data-types.md:153 src/ch03-02-data-types.md:172
+#: src/ch03-02-data-types.md:205 src/ch03-02-data-types.md:224
+#: src/ch03-02-data-types.md:261 src/ch03-02-data-types.md:273
+#: src/ch03-02-data-types.md:294 src/ch03-02-data-types.md:326
+#: src/ch03-02-data-types.md:385 src/ch03-02-data-types.md:406
 msgid "<span class=\"filename\">Filename: src/main.rs</span>"
 msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
 
-#: src/ch03-02-data-types.md:156
+#: src/ch03-02-data-types.md:157
 msgid "// f64\n"
 msgstr "// f64\n"
 
-#: src/ch03-02-data-types.md:158
+#: src/ch03-02-data-types.md:159
 msgid "// f32\n"
 msgstr "// f32\n"
 
-#: src/ch03-02-data-types.md:162
+#: src/ch03-02-data-types.md:163
 msgid ""
 "Floating-point numbers are represented according to the IEEE-754 standard."
 msgstr "浮点数采用 IEEE-754 标准表示。"
 
-#: src/ch03-02-data-types.md:164
+#: src/ch03-02-data-types.md:165
 msgid "Numeric Operations"
 msgstr "数值运算"
 
-#: src/ch03-02-data-types.md:166
+#: src/ch03-02-data-types.md:167
 msgid ""
 "Rust supports the basic mathematical operations you’d expect for all the "
 "number types: addition, subtraction, multiplication, division, and "
@@ -473,31 +474,31 @@ msgstr ""
 "余。 整数除以零截断到最近的整数。下面的代码显示你如何在`let`语句中使用每个数"
 "字操作："
 
-#: src/ch03-02-data-types.md:175
+#: src/ch03-02-data-types.md:176
 msgid "// addition\n"
 msgstr "// 添加\n"
 
-#: src/ch03-02-data-types.md:178
+#: src/ch03-02-data-types.md:179
 msgid "// subtraction\n"
 msgstr "// 减去\n"
 
-#: src/ch03-02-data-types.md:181
+#: src/ch03-02-data-types.md:182
 msgid "// multiplication\n"
 msgstr "// 乘法\n"
 
-#: src/ch03-02-data-types.md:184
+#: src/ch03-02-data-types.md:185
 msgid "// division\n"
 msgstr "// 除法\n"
 
-#: src/ch03-02-data-types.md:186
+#: src/ch03-02-data-types.md:187
 msgid "// Results in -1\n"
 msgstr "// 在 -1\n"
 
-#: src/ch03-02-data-types.md:188
+#: src/ch03-02-data-types.md:189
 msgid "// remainder\n"
 msgstr "// 剩余的\n"
 
-#: src/ch03-02-data-types.md:193
+#: src/ch03-02-data-types.md:194
 msgid ""
 "Each expression in these statements uses a mathematical operator and "
 "evaluates to a single value, which is then bound to a variable. [Appendix B]"
@@ -508,11 +509,11 @@ msgstr ""
 "值随后会被一个变量。 [Appendix B](appendix-02-operators.md)<!-- 忽略 --> 包含"
 "Rust 提供的所有操作者列表。"
 
-#: src/ch03-02-data-types.md:198
+#: src/ch03-02-data-types.md:199
 msgid "The Boolean Type"
 msgstr "布尔类型"
 
-#: src/ch03-02-data-types.md:200
+#: src/ch03-02-data-types.md:201
 msgid ""
 "As in most other programming languages, a Boolean type in Rust has two "
 "possible values: `true` and `false`. Booleans are one byte in size. The "
@@ -521,11 +522,11 @@ msgstr ""
 "与大多数其他编程语言一样，Rust 中的布尔型有两个可能的值：`true`和`false`。 布"
 "尔值是大小上的一个字节。布尔值中的布尔类型使用\"bool\"。例如："
 
-#: src/ch03-02-data-types.md:210 src/ch03-02-data-types.md:228
+#: src/ch03-02-data-types.md:211 src/ch03-02-data-types.md:229
 msgid "// with explicit type annotation\n"
 msgstr "// 带有明确类型的批注\n"
 
-#: src/ch03-02-data-types.md:214
+#: src/ch03-02-data-types.md:215
 msgid ""
 "The main way to use Boolean values is through conditionals, such as an `if` "
 "expression. We’ll cover how `if` expressions work in Rust in the [“Control "
@@ -534,30 +535,30 @@ msgstr ""
 "使用布尔值的主要方式是通过条件，如`if` 表达式。 我们将在[“控制流程”](ch03-05-"
 "control-flow.html#control-flow)<!-- 忽略 --> 部分中的`if`表达式如何工作。"
 
-#: src/ch03-02-data-types.md:218
+#: src/ch03-02-data-types.md:219
 msgid "The Character Type"
 msgstr "字符类型"
 
-#: src/ch03-02-data-types.md:220
+#: src/ch03-02-data-types.md:221
 msgid ""
 "Rust’s `char` type is the language’s most primitive alphabetic type. Here "
 "are some examples of declaring `char` values:"
 msgstr ""
 "Rust's `char` 类型是语言最原始的字母类型。以下是一些申报`char` 值的例子："
 
-#: src/ch03-02-data-types.md:227
+#: src/ch03-02-data-types.md:228
 msgid "'z'"
 msgstr "'z'"
 
-#: src/ch03-02-data-types.md:228
+#: src/ch03-02-data-types.md:229
 msgid "'ℤ'"
 msgstr "“Z”"
 
-#: src/ch03-02-data-types.md:229
+#: src/ch03-02-data-types.md:230
 msgid "'😻'"
 msgstr "'😻'"
 
-#: src/ch03-02-data-types.md:233
+#: src/ch03-02-data-types.md:234
 msgid ""
 "Note that we specify `char` literals with single quotation marks, as opposed "
 "to string literals, which use double quotation marks. Rust’s `char` type is "
@@ -580,22 +581,22 @@ msgstr ""
 "(ch08-02-strings.html#storing-utf-8-encoded-text-with-strings)<!-- 忽略 -->在"
 "第8章中详细讨论这个主题。"
 
-#: src/ch03-02-data-types.md:244
+#: src/ch03-02-data-types.md:245
 msgid "Compound Types"
 msgstr "复合类型"
 
-#: src/ch03-02-data-types.md:246
+#: src/ch03-02-data-types.md:247
 msgid ""
 "_Compound types_ can group multiple values into one type. Rust has two "
 "primitive compound types: tuples and arrays."
 msgstr ""
 "_复数类型_可以将多个值分组为一个类型。必须有两个原始的复数类型：管和数组。"
 
-#: src/ch03-02-data-types.md:249
+#: src/ch03-02-data-types.md:250
 msgid "The Tuple Type"
 msgstr "元组类型"
 
-#: src/ch03-02-data-types.md:251
+#: src/ch03-02-data-types.md:252
 msgid ""
 "A _tuple_ is a general way of grouping together a number of values with a "
 "variety of types into one compound type. Tuples have a fixed length: Once "
@@ -604,7 +605,7 @@ msgstr ""
 "一个 _tuple_ 是一种将数值与各种类型组合成一个复合类型的一般方式。 小企鹅有固"
 "定的长度：一旦申报，他们就不能成长或缩小。"
 
-#: src/ch03-02-data-types.md:255
+#: src/ch03-02-data-types.md:256
 msgid ""
 "We create a tuple by writing a comma-separated list of values inside "
 "parentheses. Each position in the tuple has a type, and the types of the "
@@ -614,7 +615,7 @@ msgstr ""
 "我们通过在圆括号内写一个逗号分隔的值列表来创建一个管道。 管道中的每个位置都有"
 "一种类型，管道中不同值的类型不必相同。 我们在此示例中添加了可选类型注释："
 
-#: src/ch03-02-data-types.md:268
+#: src/ch03-02-data-types.md:269
 msgid ""
 "The variable `tup` binds to the entire tuple because a tuple is considered a "
 "single compound element. To get the individual values out of a tuple, we can "
@@ -623,11 +624,11 @@ msgstr ""
 "变量`tup` 绑定到整个管子，因为管子被视为一个复数元素。 要从管道中获取个别值，"
 "我们可以使用匹配模式来摧毁一个管状值，像这样："
 
-#: src/ch03-02-data-types.md:280
+#: src/ch03-02-data-types.md:281
 msgid "\"The value of y is: {y}\""
 msgstr "\"The value of x is: {y}\""
 
-#: src/ch03-02-data-types.md:284
+#: src/ch03-02-data-types.md:285
 msgid ""
 "This program first creates a tuple and binds it to the variable `tup`. It "
 "then uses a pattern with `let` to take `tup` and turn it into three separate "
@@ -639,7 +640,7 @@ msgstr ""
 "拍摄`tup` 并将其变成三个单独的变量：`x`、`y`和`z`。 这个叫做_destructuring_，"
 "因为它将单个管子分成三个部分。最后，程序会打印`y'的值，即`6.4'。"
 
-#: src/ch03-02-data-types.md:290
+#: src/ch03-02-data-types.md:291
 msgid ""
 "We can also access a tuple element directly by using a period (`.`) followed "
 "by the index of the value we want to access. For example:"
@@ -647,7 +648,7 @@ msgstr ""
 "我们还可以通过使用一段时间直接访问管道元素(`. 之后是我们想要访问的值的索引。"
 "例如："
 
-#: src/ch03-02-data-types.md:307
+#: src/ch03-02-data-types.md:308
 msgid ""
 "This program creates the tuple `x` and then accesses each element of the "
 "tuple using their respective indices. As with most programming languages, "
@@ -656,7 +657,7 @@ msgstr ""
 "这个程序创建了管道`x`，然后使用各自的指数访问管道的每个元素。 与大多数编程语"
 "言一样，导星中的第一个索引是0。"
 
-#: src/ch03-02-data-types.md:311
+#: src/ch03-02-data-types.md:312
 msgid ""
 "The tuple without any values has a special name, _unit_. This value and its "
 "corresponding type are both written `()` and represent an empty value or an "
@@ -666,11 +667,11 @@ msgstr ""
 "没有任何值的导管有一个特殊的名称，_unit_。 此值及其对应类型是写入的 `()` 并表"
 "示空值或空返回类型。 表达式如果不返回任何其他值，则隐含返回单位值。"
 
-#: src/ch03-02-data-types.md:316
+#: src/ch03-02-data-types.md:317
 msgid "The Array Type"
 msgstr "数组类型"
 
-#: src/ch03-02-data-types.md:318
+#: src/ch03-02-data-types.md:319
 msgid ""
 "Another way to have a collection of multiple values is with an _array_. "
 "Unlike a tuple, every element of an array must have the same type. Unlike "
@@ -679,13 +680,13 @@ msgstr ""
 "拥有多个数值集合的另一种方法是使用 _array_。 与管道不同，数组的每个元素必须具"
 "有相同的类型。 与某些其他语言的阵列不同，阵列的长度是固定的。"
 
-#: src/ch03-02-data-types.md:322
+#: src/ch03-02-data-types.md:323
 msgid ""
 "We write the values in an array as a comma-separated list inside square "
 "brackets:"
 msgstr "我们在一个数组中以逗号分隔的列表在方括号中写入值："
 
-#: src/ch03-02-data-types.md:333
+#: src/ch03-02-data-types.md:334
 msgid ""
 "Arrays are useful when you want your data allocated on the stack, the same "
 "as the other types we have seen so far, rather than the heap (we will "
@@ -706,7 +707,7 @@ msgstr ""
 "量，你应该使用向量。 [第8章](ch08-01-vectors.html)<!-- 忽略 --> 更详细地讨论"
 "矢量。"
 
-#: src/ch03-02-data-types.md:343
+#: src/ch03-02-data-types.md:344
 msgid ""
 "However, arrays are more useful when you know the number of elements will "
 "not need to change. For example, if you were using the names of the month in "
@@ -716,55 +717,55 @@ msgstr ""
 "然而，当你知道不需要改变元素的数量时，数组更有用。 例如，如果你在一个程序中使"
 "用月份的名称， 您可能会使用数组而不是矢量，因为您知道它将永远包含12个元素："
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"January\""
 msgstr "“1月”"
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"February\""
 msgstr "\"2月\""
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"March\""
 msgstr "“3月”"
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"April\""
 msgstr "“4月”"
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"May\""
 msgstr "\"5月\""
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"June\""
 msgstr "\"6月\""
 
-#: src/ch03-02-data-types.md:349
+#: src/ch03-02-data-types.md:350
 msgid "\"July\""
 msgstr "“7月”"
 
-#: src/ch03-02-data-types.md:350
+#: src/ch03-02-data-types.md:351
 msgid "\"August\""
 msgstr "“8月”"
 
-#: src/ch03-02-data-types.md:350
+#: src/ch03-02-data-types.md:351
 msgid "\"September\""
 msgstr "“9月”"
 
-#: src/ch03-02-data-types.md:350
+#: src/ch03-02-data-types.md:351
 msgid "\"October\""
 msgstr "\"10月\""
 
-#: src/ch03-02-data-types.md:350
+#: src/ch03-02-data-types.md:351
 msgid "\"November\""
 msgstr "\"11月\""
 
-#: src/ch03-02-data-types.md:350
+#: src/ch03-02-data-types.md:351
 msgid "\"December\""
 msgstr "\"12月\""
 
-#: src/ch03-02-data-types.md:353
+#: src/ch03-02-data-types.md:354
 msgid ""
 "You write an array’s type using square brackets with the type of each "
 "element, a semicolon, and then the number of elements in the array, like so:"
@@ -772,13 +773,13 @@ msgstr ""
 "你用方括号写入数组的类型，每个元素的类型， 一个分数, 然后是数组中的元素数量, "
 "像这样:"
 
-#: src/ch03-02-data-types.md:360
+#: src/ch03-02-data-types.md:361
 msgid ""
 "Here, `i32` is the type of each element. After the semicolon, the number `5` "
 "indicates the array contains five elements."
 msgstr "在这里，`i32`是每个元素的类型。在分号后，数字`5`表示数组包含五个元素。"
 
-#: src/ch03-02-data-types.md:363
+#: src/ch03-02-data-types.md:364
 msgid ""
 "You can also initialize an array to contain the same value for each element "
 "by specifying the initial value, followed by a semicolon, and then the "
@@ -787,7 +788,7 @@ msgstr ""
 "您也可以通过指定初始值初始化数组来包含每个元素的相同值。 接下来是分号，然后是"
 "方括号内的数组长度，如下所示："
 
-#: src/ch03-02-data-types.md:371
+#: src/ch03-02-data-types.md:372
 msgid ""
 "The array named `a` will contain `5` elements that will all be set to the "
 "value `3` initially. This is the same as writing `let a = [3, 3, 3, 3, 3];` "
@@ -796,15 +797,15 @@ msgstr ""
 "命名为`a`的数组将包含`5`元素，它们将被设置为初始值`3`。 这与写入 `let a = "
 "[3, 3, 3, 3, 3, 3, 3]; 等于更简洁。"
 
-#: src/ch03-02-data-types.md:376
+#: src/ch03-02-data-types.md:377
 msgid "<a id=\"accessing-array-elements\"></a>"
 msgstr "<a id=\"accessing-array-elements\"></a>"
 
-#: src/ch03-02-data-types.md:378
+#: src/ch03-02-data-types.md:379
 msgid "Array Element Access"
 msgstr "数组元素访问"
 
-#: src/ch03-02-data-types.md:380
+#: src/ch03-02-data-types.md:381
 msgid ""
 "An array is a single chunk of memory of a known, fixed size that can be "
 "allocated on the stack. You can access elements of an array using indexing, "
@@ -813,7 +814,7 @@ msgstr ""
 "数组是已知的固定大小的单个内存块，可分配在堆栈上。 您可以使用索引访问数组元"
 "素，如："
 
-#: src/ch03-02-data-types.md:395
+#: src/ch03-02-data-types.md:396
 msgid ""
 "In this example, the variable named `first` will get the value `1` because "
 "that is the value at index `[0]` in the array. The variable named `second` "
@@ -822,11 +823,11 @@ msgstr ""
 "在此示例中，命名为`first`的变量将得到`1`的值，因为这是数组中索引`[0]`的值。 "
 "命名为`second`的变量将在数组中从索引`[1]中得到`2`的值。"
 
-#: src/ch03-02-data-types.md:399
+#: src/ch03-02-data-types.md:400
 msgid "Invalid Array Element Access"
 msgstr "无效的数组元素访问"
 
-#: src/ch03-02-data-types.md:401
+#: src/ch03-02-data-types.md:402
 msgid ""
 "Let’s see what happens if you try to access an element of an array that is "
 "past the end of the array. Say you run this code, similar to the guessing "
@@ -836,23 +837,23 @@ msgstr ""
 "尾。 说您运行这个代码，类似于第2章中的猜测游戏，以便从用户那里获得一个数组索"
 "引："
 
-#: src/ch03-02-data-types.md:413
+#: src/ch03-02-data-types.md:414
 msgid "\"Please enter an array index.\""
 msgstr "\"请输入数组索引。\""
 
-#: src/ch03-02-data-types.md:419
+#: src/ch03-02-data-types.md:420
 msgid "\"Failed to read line\""
 msgstr "“未猜对”"
 
-#: src/ch03-02-data-types.md:424
+#: src/ch03-02-data-types.md:425
 msgid "\"Index entered was not a number\""
 msgstr "“输入的索引不是数字”"
 
-#: src/ch03-02-data-types.md:428
+#: src/ch03-02-data-types.md:429
 msgid "\"The value of the element at index {index} is: {element}\""
 msgstr "\"索引｛index｝处的元素值为：｛element｝\""
 
-#: src/ch03-02-data-types.md:432
+#: src/ch03-02-data-types.md:433
 msgid ""
 "This code compiles successfully. If you run this code using `cargo run` and "
 "enter `0`, `1`, `2`, `3`, or `4`, the program will print out the "
@@ -863,7 +864,7 @@ msgstr ""
 "`2`, `3`, 或 `4`, 程序将在该索引数组中打印相应的值。 如果你输入数组结束后的数"
 "字，如`10`，你会看到这样的输出："
 
-#: src/ch03-02-data-types.md:449
+#: src/ch03-02-data-types.md:450
 msgid ""
 "The program resulted in a runtime error at the point of using an invalid "
 "value in the indexing operation. The program exited with an error message "
@@ -880,7 +881,7 @@ msgstr ""
 "查必须在运行时进行，尤其是在这种情况下，因为编译器无法知道用户在稍后运行代码"
 "时可能会输入什么值。"
 
-#: src/ch03-02-data-types.md:458
+#: src/ch03-02-data-types.md:459
 msgid ""
 "This is an example of Rust’s memory safety principles in action. In many low-"
 "level languages, this kind of check is not done, and when you provide an "
@@ -894,3 +895,7 @@ msgstr ""
 "行，当你提供错误的索引时，可能会访问无效的内存。Rust通过立即终止程序来防止这"
 "种错误，而不是允许程序继续运行并访问内存。第9章将进一步讨论Rust的错误处理机"
 "制，以及如何编写既可读又安全的代码，避免程序崩溃或允许无效的内存访问。"
+
+#~ msgid ""
+#~ "Wrap in all modes with the `wrapping_*` methods, such as `wrapping_add`."
+#~ msgstr "使用 `wrapping_*` 方法折叠所有模式，如`wrapping_add` 。"

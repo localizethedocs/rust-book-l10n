@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: The Rust Programming Language\n"
-"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"POT-Creation-Date: 2026-10-06T15:30:32Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -209,7 +209,7 @@ msgstr "您的 _add_ 目录现在应该包含以下目录和文件："
 msgid "In the _add_one/src/lib.rs_ file, let’s add an `add_one` function:"
 msgstr "在 _add_one/src/lib.rs_ 文件中，让我们添加一个 `add_one` 函数："
 
-#: src/ch14-03-cargo-workspaces.md:139 src/ch14-03-cargo-workspaces.md:312
+#: src/ch14-03-cargo-workspaces.md:139 src/ch14-03-cargo-workspaces.md:314
 msgid "<span class=\"filename\">Filename: add_one/src/lib.rs</span>"
 msgstr "<span class=\"filename\"> 文件名: add_one/src/lib.rs</span>"
 
@@ -326,23 +326,19 @@ msgstr ""
 "容性。接下来，我们将`rand`包添加到_add_one/Cargo.toml_文件的`[dependencies]`"
 "部分中，这样我们就可以在`add_one`包中使用`rand`包了："
 
-#: src/ch14-03-cargo-workspaces.md:233
+#: src/ch14-03-cargo-workspaces.md:235
 msgid "<span class=\"filename\">Filename: add_one/Cargo.toml</span>"
 msgstr "<span class=\"filename\">文件名: add_one/Cargo.toml</span>"
 
-#: src/ch14-03-cargo-workspaces.md:235
+#: src/ch14-03-cargo-workspaces.md:237
 msgid ""
 "```toml\n"
 "[dependencies]\n"
-"rand = \"0.8.5\"\n"
+"rand = \"0.10.1\"\n"
 "```"
 msgstr ""
-"```toml\n"
-"[dependencies]\n"
-"rand = \"0.8.5\"\n"
-"```"
 
-#: src/ch14-03-cargo-workspaces.md:240
+#: src/ch14-03-cargo-workspaces.md:242
 msgid ""
 "We can now add `use rand;` to the _add_one/src/lib.rs_ file, and building "
 "the whole workspace by running `cargo build` in the _add_ directory will "
@@ -353,14 +349,14 @@ msgstr ""
 "下运行 `cargo build` 来构建整个工作区，从而引入并编译 `rand` 这个 crate。我们"
 "会收到一个警告，因为我们没有引用到已经引入范围内的 `rand`："
 
-#: src/ch14-03-cargo-workspaces.md:251
+#: src/ch14-03-cargo-workspaces.md:253
 msgid ""
 "```console\n"
 "$ cargo build\n"
 "    Updating crates.io index\n"
-"  Downloaded rand v0.8.5\n"
+"  Downloaded rand v0.10.1\n"
 "   --snip--\n"
-"   Compiling rand v0.8.5\n"
+"   Compiling rand v0.10.1\n"
 "   Compiling add_one v0.1.0 (file:///projects/add/add_one)\n"
 "warning: unused import: `rand`\n"
 " --> add_one/src/lib.rs:1:5\n"
@@ -368,7 +364,8 @@ msgid ""
 "1 | use rand;\n"
 "  |     ^^^^\n"
 "  |\n"
-"  = note: `#[warn(unused_imports)]` on by default\n"
+"  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by "
+"default\n"
 "\n"
 "warning: `add_one` (lib) generated 1 warning (run `cargo fix --lib -p "
 "add_one` to apply 1 suggestion)\n"
@@ -376,28 +373,8 @@ msgid ""
 "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.95s\n"
 "```"
 msgstr ""
-"```console\n"
-"$ cargo build\n"
-"    Updating crates.io index\n"
-"  Downloaded rand v0.8.5\n"
-"   --snip--\n"
-"   Compiling rand v0.8.5\n"
-"   Compiling add_one v0.1.0 (file:///projects/add/add_one)\n"
-"warning: unused import: `rand`\n"
-" --> add_one/src/lib.rs:1:5\n"
-"  |\n"
-"1 | use rand;\n"
-"  |     ^^^^\n"
-"  |\n"
-"  = note: `#[warn(unused_imports)]` on by default\n"
-"\n"
-"warning: `add_one` (lib) generated 1 warning (run `cargo fix --lib -p "
-"add_one` to apply 1 suggestion)\n"
-"   Compiling adder v0.1.0 (file:///projects/add/adder)\n"
-"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.95s\n"
-"```"
 
-#: src/ch14-03-cargo-workspaces.md:271
+#: src/ch14-03-cargo-workspaces.md:273
 msgid ""
 "The top-level _Cargo.lock_ now contains information about the dependency of "
 "`add_one` on `rand`. However, even though `rand` is used somewhere in the "
@@ -411,7 +388,7 @@ msgstr ""
 "使用它，除非我们同时将`rand`添加到它们的_Cargo.toml_文件中。例如，如果我们把"
 "`use rand;`添加到`adder`包对应的_adder/src/main.rs_文件中，就会出错："
 
-#: src/ch14-03-cargo-workspaces.md:283
+#: src/ch14-03-cargo-workspaces.md:285
 msgid ""
 "```console\n"
 "$ cargo build\n"
@@ -435,7 +412,7 @@ msgstr ""
 "  |     ^^^^ no external crate `rand`\n"
 "```"
 
-#: src/ch14-03-cargo-workspaces.md:294
+#: src/ch14-03-cargo-workspaces.md:296
 msgid ""
 "To fix this, edit the _Cargo.toml_ file for the `adder` package and indicate "
 "that `rand` is a dependency for it as well. Building the `adder` package "
@@ -452,7 +429,7 @@ msgstr ""
 "会确保使用 `rand` 包的每个包都使用相同的版本，从而节省空间并确保工作区中的各"
 "个包能够相互兼容。"
 
-#: src/ch14-03-cargo-workspaces.md:303
+#: src/ch14-03-cargo-workspaces.md:305
 msgid ""
 "If crates in the workspace specify incompatible versions of the same "
 "dependency, Cargo will resolve each of them but will still try to resolve as "
@@ -461,11 +438,11 @@ msgstr ""
 "如果工作区中的 crate 指定了同一依赖项的不兼容版本，Cargo 会分别处理这些版本，"
 "但会尽量只解析尽可能少的版本。"
 
-#: src/ch14-03-cargo-workspaces.md:307
+#: src/ch14-03-cargo-workspaces.md:309
 msgid "Adding a Test to a Workspace"
 msgstr "在工作区中添加测试"
 
-#: src/ch14-03-cargo-workspaces.md:309
+#: src/ch14-03-cargo-workspaces.md:311
 msgid ""
 "For another enhancement, let’s add a test of the `add_one::add_one` function "
 "within the `add_one` crate:"
@@ -473,7 +450,7 @@ msgstr ""
 "为了进一步改进，让我们在 `add_one` 这个 crate 中添加对 `add_one::add_one` 函"
 "数的测试："
 
-#: src/ch14-03-cargo-workspaces.md:330
+#: src/ch14-03-cargo-workspaces.md:332
 msgid ""
 "Now run `cargo test` in the top-level _add_ directory. Running `cargo test` "
 "in a workspace structured like this one will run the tests for all the "
@@ -482,7 +459,7 @@ msgstr ""
 "现在在顶级 _add_ 目录中运行 `cargo test`。在像这样的工作区中运行 `cargo "
 "test`，将会运行该工作区中所有 crate 的测试："
 
-#: src/ch14-03-cargo-workspaces.md:341
+#: src/ch14-03-cargo-workspaces.md:343
 msgid ""
 "```console\n"
 "$ cargo test\n"
@@ -544,7 +521,7 @@ msgstr ""
 "finished in 0.00s\n"
 "```"
 
-#: src/ch14-03-cargo-workspaces.md:366
+#: src/ch14-03-cargo-workspaces.md:368
 msgid ""
 "The first section of the output shows that the `it_works` test in the "
 "`add_one` crate passed. The next section shows that zero tests were found in "
@@ -555,7 +532,7 @@ msgstr ""
 "显示，在 `adder` 目录下没有发现任何测试。最后一部分则表明，在 `add_one` 目录"
 "下也没有发现任何文档测试。"
 
-#: src/ch14-03-cargo-workspaces.md:371
+#: src/ch14-03-cargo-workspaces.md:373
 msgid ""
 "We can also run tests for one particular crate in a workspace from the top-"
 "level directory by using the `-p` flag and specifying the name of the crate "
@@ -564,14 +541,14 @@ msgstr ""
 "我们还可以使用 `-p` 标志，从顶级目录开始，在工作区中测试某个特定的 crate，只"
 "需指定我们想要测试的 crate 的名称即可："
 
-#: src/ch14-03-cargo-workspaces.md:398
+#: src/ch14-03-cargo-workspaces.md:400
 msgid ""
 "This output shows `cargo test` only ran the tests for the `add_one` crate "
 "and didn’t run the `adder` crate tests."
 msgstr ""
 "该输出显示，只有针对 `add_one` 包进行了测试，而没有对 `adder` 包进行测试。"
 
-#: src/ch14-03-cargo-workspaces.md:401
+#: src/ch14-03-cargo-workspaces.md:403
 msgid ""
 "If you publish the crates in the workspace to [crates.io](https://crates."
 "io/)<!-- ignore -->, each crate in the workspace will need to be published "
@@ -583,7 +560,7 @@ msgstr ""
 "么工作区中的每个包都需要单独发布。就像`cargo test`一样，我们可以通过使用`-p`"
 "标志并指定要发布的包的名称来发布工作区中的特定包。"
 
-#: src/ch14-03-cargo-workspaces.md:407
+#: src/ch14-03-cargo-workspaces.md:409
 msgid ""
 "For additional practice, add an `add_two` crate to this workspace in a "
 "similar way as the `add_one` crate!"
@@ -591,7 +568,7 @@ msgstr ""
 "为了进行额外的练习，请以与添加 `add_one` crate 类似的方式，将 `add_two` "
 "crate 添加到这个工作区中！"
 
-#: src/ch14-03-cargo-workspaces.md:410
+#: src/ch14-03-cargo-workspaces.md:412
 msgid ""
 "As your project grows, consider using a workspace: It enables you to work "
 "with smaller, easier-to-understand components than one big blob of code. "
@@ -601,3 +578,57 @@ msgstr ""
 "随着你的项目不断发展，考虑使用工作区：它可以帮助你处理更小、更易于理解的代码"
 "组件，而不是一大块难以理解的代码。此外，将相关库放在一个工作区中，可以更容易"
 "地协调那些经常同时被修改的库。"
+
+#~ msgid ""
+#~ "```toml\n"
+#~ "[dependencies]\n"
+#~ "rand = \"0.8.5\"\n"
+#~ "```"
+#~ msgstr ""
+#~ "```toml\n"
+#~ "[dependencies]\n"
+#~ "rand = \"0.8.5\"\n"
+#~ "```"
+
+#~ msgid ""
+#~ "```console\n"
+#~ "$ cargo build\n"
+#~ "    Updating crates.io index\n"
+#~ "  Downloaded rand v0.8.5\n"
+#~ "   --snip--\n"
+#~ "   Compiling rand v0.8.5\n"
+#~ "   Compiling add_one v0.1.0 (file:///projects/add/add_one)\n"
+#~ "warning: unused import: `rand`\n"
+#~ " --> add_one/src/lib.rs:1:5\n"
+#~ "  |\n"
+#~ "1 | use rand;\n"
+#~ "  |     ^^^^\n"
+#~ "  |\n"
+#~ "  = note: `#[warn(unused_imports)]` on by default\n"
+#~ "\n"
+#~ "warning: `add_one` (lib) generated 1 warning (run `cargo fix --lib -p "
+#~ "add_one` to apply 1 suggestion)\n"
+#~ "   Compiling adder v0.1.0 (file:///projects/add/adder)\n"
+#~ "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.95s\n"
+#~ "```"
+#~ msgstr ""
+#~ "```console\n"
+#~ "$ cargo build\n"
+#~ "    Updating crates.io index\n"
+#~ "  Downloaded rand v0.8.5\n"
+#~ "   --snip--\n"
+#~ "   Compiling rand v0.8.5\n"
+#~ "   Compiling add_one v0.1.0 (file:///projects/add/add_one)\n"
+#~ "warning: unused import: `rand`\n"
+#~ " --> add_one/src/lib.rs:1:5\n"
+#~ "  |\n"
+#~ "1 | use rand;\n"
+#~ "  |     ^^^^\n"
+#~ "  |\n"
+#~ "  = note: `#[warn(unused_imports)]` on by default\n"
+#~ "\n"
+#~ "warning: `add_one` (lib) generated 1 warning (run `cargo fix --lib -p "
+#~ "add_one` to apply 1 suggestion)\n"
+#~ "   Compiling adder v0.1.0 (file:///projects/add/adder)\n"
+#~ "    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.95s\n"
+#~ "```"
