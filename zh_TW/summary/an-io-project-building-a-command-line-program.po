@@ -1,0 +1,118 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch12-00-an-io-project.md:1
+msgid "An I/O Project: Building a Command Line Program"
+msgstr "一個 I/O 專案：打造命令行程式"
+
+#: src/ch12-00-an-io-project.md:3
+msgid ""
+"This chapter is a recap of the many skills you’ve learned so far and an "
+"exploration of a few more standard library features. We’ll build a command "
+"line tool that interacts with file and command line input/output to practice "
+"some of the Rust concepts you now have under your belt."
+msgstr ""
+"本章將回顧你目前學到的許多技能，並探索一些標準函式庫的功能。我們會打造一個命"
+"令行工具，讓它與檔案及命令行輸入／輸出互動，以練習你已掌握的一些 Rust 概念。"
+
+#: src/ch12-00-an-io-project.md:8
+msgid ""
+"Rust’s speed, safety, single binary output, and cross-platform support make "
+"it an ideal language for creating command line tools, so for our project, "
+"we’ll make our own version of the classic command line search tool `grep` "
+"(**g**lobally search a **r**egular **e**xpression and **p**rint). In the "
+"simplest use case, `grep` searches a specified file for a specified string. "
+"To do so, `grep` takes as its arguments a file path and a string. Then, it "
+"reads the file, finds lines in that file that contain the string argument, "
+"and prints those lines."
+msgstr ""
+"Rust 的速度、安全性、單一可執行檔輸出，以及跨平台支援，使它成為建立命令行工具"
+"的理想語言。因此在這個專案中，我們會做出經典命令行搜尋工具 `grep`"
+"（**g**lobally search a **r**egular **e**xpression and **p**rint）的簡化版"
+"本。在最簡單的使用情境中，`grep` 會在指定檔案中搜尋指定字串。為此，`grep` 會"
+"以檔案路徑與字串作為引數，接著讀取檔案，找出包含該字串引數的每一行，並將這些"
+"行印出。"
+
+#: src/ch12-00-an-io-project.md:17
+msgid ""
+"Along the way, we’ll show how to make our command line tool use the terminal "
+"features that many other command line tools use. We’ll read the value of an "
+"environment variable to allow the user to configure the behavior of our "
+"tool. We’ll also print error messages to the standard error console stream "
+"(`stderr`) instead of standard output (`stdout`) so that, for example, the "
+"user can redirect successful output to a file while still seeing error "
+"messages onscreen."
+msgstr ""
+"在過程中，我們會示範如何讓命令行工具使用其他工具常見的終端機功能。我們會讀取"
+"環境變數的值，讓使用者可設定工具的行為。我們也會把錯誤訊息輸出到標準錯誤串流"
+"（`stderr`），而不是標準輸出（`stdout`），例如讓使用者可以把成功的輸出重新導"
+"向到檔案，同時仍能在螢幕上看到錯誤訊息。"
+
+#: src/ch12-00-an-io-project.md:24
+msgid ""
+"One Rust community member, Andrew Gallant, has already created a fully "
+"featured, very fast version of `grep`, called `ripgrep`. By comparison, our "
+"version will be fairly simple, but this chapter will give you some of the "
+"background knowledge you need to understand a real-world project such as "
+"`ripgrep`."
+msgstr ""
+"Rust 社群成員 Andrew Gallant 已經做出一個功能完整、非常快速的 `grep` 版本，名"
+"為 `ripgrep`。相較之下，我們的版本會相當簡單，但本章會提供你理解像 `ripgrep` "
+"這類真實世界專案所需的背景知識。"
+
+#: src/ch12-00-an-io-project.md:30
+msgid ""
+"Our `grep` project will combine a number of concepts you’ve learned so far:"
+msgstr "我們的 `grep` 專案會結合你至今學過的多項概念："
+
+#: src/ch12-00-an-io-project.md:32
+msgid ""
+"Organizing code ([Chapter 7](ch07-00-managing-growing-projects-with-packages-"
+"crates-and-modules.html)<!-- ignore -->)"
+msgstr ""
+"組織程式碼（[第 7 章](ch07-00-managing-growing-projects-with-packages-crates-"
+"and-modules.html)<!-- ignore -->）"
+
+#: src/ch12-00-an-io-project.md:33
+msgid ""
+"Using vectors and strings ([Chapter 8](ch08-00-common-collections.html)<!-- "
+"ignore -->)"
+msgstr ""
+"使用向量與字串（[第 8 章](ch08-00-common-collections.html)<!-- ignore -->）"
+
+#: src/ch12-00-an-io-project.md:34
+msgid ""
+"Handling errors ([Chapter 9](ch09-00-error-handling.html)<!-- ignore -->)"
+msgstr "處理錯誤（[第 9 章](ch09-00-error-handling.html)<!-- ignore -->）"
+
+#: src/ch12-00-an-io-project.md:35
+msgid ""
+"Using traits and lifetimes where appropriate ([Chapter 10](ch10-00-generics."
+"html)<!-- ignore -->)"
+msgstr ""
+"在適當的地方使用特徵與生命週期（[第 10 章](ch10-00-generics.html)<!-- ignore "
+"-->）"
+
+#: src/ch12-00-an-io-project.md:36
+msgid "Writing tests ([Chapter 11](ch11-00-testing.html)<!-- ignore -->)"
+msgstr "撰寫測試（[第 11 章](ch11-00-testing.html)<!-- ignore -->）"
+
+#: src/ch12-00-an-io-project.md:38
+msgid ""
+"We’ll also briefly introduce closures, iterators, and trait objects, which "
+"[Chapter 13](ch13-00-functional-features.html)<!-- ignore --> and [Chapter "
+"18](ch18-00-oop.html)<!-- ignore --> will cover in detail."
+msgstr ""
+"我們也會簡要介紹閉包、疊代器與特徵物件，而這些內容會在[第 13 章](ch13-00-"
+"functional-features.html)<!-- ignore -->與[第 18 章](ch18-00-oop.html)<!-- "
+"ignore -->中詳細說明。"

@@ -1,0 +1,1338 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch10-03-lifetime-syntax.md:1
+msgid "Validating References with Lifetimes"
+msgstr "使用生命周期验证引用"
+
+#: src/ch10-03-lifetime-syntax.md:3
+msgid ""
+"Lifetimes are another kind of generic that we’ve already been using. Rather "
+"than ensuring that a type has the behavior we want, lifetimes ensure that "
+"references are valid as long as we need them to be."
+msgstr ""
+"生命周期是另一种我们一直使用的通用机制。与其确保类型具有我们想要的行为，不如"
+"说生命周期的作用是确保引用在我们需要使用它们的整个期间都是有效的。"
+
+#: src/ch10-03-lifetime-syntax.md:7
+msgid ""
+"One detail we didn’t discuss in the [“References and Borrowing”](ch04-02-"
+"references-and-borrowing.html#references-and-borrowing)<!-- ignore --> "
+"section in Chapter 4 is that every reference in Rust has a lifetime, which "
+"is the scope for which that reference is valid. Most of the time, lifetimes "
+"are implicit and inferred, just like most of the time, types are inferred. "
+"We are only required to annotate types when multiple types are possible. In "
+"a similar way, we must annotate lifetimes when the lifetimes of references "
+"could be related in a few different ways. Rust requires us to annotate the "
+"relationships using generic lifetime parameters to ensure that the actual "
+"references used at runtime will definitely be valid."
+msgstr ""
+"在第4章的[“参考文献与借用”](ch04-02-references-and-borrowing.html#references-"
+"and-borrowing)<!-- ignore -->这一节中，我们没有讨论的一个细节是：在Rust中，每"
+"一个引用都有一个生命周期，这个生命周期就是该引用有效的范围。大多数情况下，生"
+"命周期是隐式的，由编译器推断出来，就像大多数情况下类型也是由编译器推断出来"
+"的。我们只需要对可能包含多种类型的类型进行注释。同样地，当引用的生命周期可能"
+"有多种不同的关联方式时，我们也必须对这些生命周期进行注释。Rust要求我们使用泛"
+"型生命周期参数来注释这些关系，以确保运行时实际使用的引用一定是有效的。"
+
+#: src/ch10-03-lifetime-syntax.md:18
+msgid ""
+"Annotating lifetimes is not even a concept most other programming languages "
+"have, so this is going to feel unfamiliar. Although we won’t cover lifetimes "
+"in their entirety in this chapter, we’ll discuss common ways you might "
+"encounter lifetime syntax so that you can get comfortable with the concept."
+msgstr ""
+"注释生命周期并不是其他大多数编程语言所拥有的概念，因此这会让人感到陌生。虽然"
+"在本章中我们不会全面介绍生命周期，但我们会讨论一些常见的生命周期语法，以便您"
+"能够熟悉这一概念。"
+
+#: src/ch10-03-lifetime-syntax.md:25
+msgid "<a id=\"preventing-dangling-references-with-lifetimes\"></a>"
+msgstr "<a id=\"preventing-dangling-references-with-lifetimes\"></a>"
+
+#: src/ch10-03-lifetime-syntax.md:27
+msgid "Dangling References"
+msgstr "悬空引用"
+
+#: src/ch10-03-lifetime-syntax.md:29
+msgid ""
+"The main aim of lifetimes is to prevent dangling references, which, if they "
+"were allowed to exist, would cause a program to reference data other than "
+"the data it’s intended to reference. Consider the program in Listing 10-16, "
+"which has an outer scope and an inner scope."
+msgstr ""
+"生命周期的主要目的就是防止悬空引用出现。如果允许悬空引用存在，那么程序就会引"
+"用到与其预期引用的数据不同的数据。请参考清单10-16中的程序，该程序包含一个外部"
+"作用域和一个内部作用域。"
+
+#: src/ch10-03-lifetime-syntax.md:45 src/ch10-03-lifetime-syntax.md:110
+#: src/ch10-03-lifetime-syntax.md:134
+msgid "\"r: {r}\""
+msgstr "\"r: {r}\""
+
+#: src/ch10-03-lifetime-syntax.md:51
+msgid ""
+"Note: The examples in Listings 10-16, 10-17, and 10-23 declare variables "
+"without giving them an initial value, so the variable name exists in the "
+"outer scope. At first glance, this might appear to be in conflict with Rust "
+"having no null values. However, if we try to use a variable before giving it "
+"a value, we’ll get a compile-time error, which shows that indeed Rust does "
+"not allow null values."
+msgstr ""
+"注意：在列表10-16、10-17和10-23中，变量都是在未赋予初始值的情况下声明的，因此"
+"变量名只存在于外部作用域中。乍一看，这似乎与Rust不允许使用null值的规定相矛"
+"盾。然而，如果我们试图在给变量赋值时使用它，将会出现编译时错误，这证明了Rust"
+"确实不允许使用null值。"
+
+#: src/ch10-03-lifetime-syntax.md:58
+msgid ""
+"The outer scope declares a variable named `r` with no initial value, and the "
+"inner scope declares a variable named `x` with the initial value of `5`. "
+"Inside the inner scope, we attempt to set the value of `r` as a reference to "
+"`x`. Then, the inner scope ends, and we attempt to print the value in `r`. "
+"This code won’t compile, because the value that `r` is referring to has gone "
+"out of scope before we try to use it. Here is the error message:"
+msgstr ""
+"外部作用域声明了一个名为 `r` 的变量，该变量没有初始值。内部作用域则声明了一个"
+"名为 `x` 的变量，其初始值为 `5`。在内部作用域中，我们尝试将 `r` 的值设置为对 "
+"`x` 的引用。之后，内部作用域结束，我们尝试打印 `r` 中的值。然而，这段代码无法"
+"编译，因为 `r` 所引用的变量在我们尝试使用它之前就已经超出了作用域。以下是错误"
+"信息："
+
+#: src/ch10-03-lifetime-syntax.md:65
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0597]: `x` does not live long enough\n"
+" --> src/main.rs:6:13\n"
+"  |\n"
+"5 |         let x = 5;\n"
+"  |             - binding `x` declared here\n"
+"6 |         r = &x;\n"
+"  |             ^^ borrowed value does not live long enough\n"
+"7 |     }\n"
+"  |     - `x` dropped here while still borrowed\n"
+"8 |\n"
+"9 |     println!(\"r: {r}\");\n"
+"  |                   - borrow later used here\n"
+"\n"
+"For more information about this error, try `rustc --explain E0597`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0597]: `x` does not live long enough\n"
+" --> src/main.rs:6:13\n"
+"  |\n"
+"5 |         let x = 5;\n"
+"  |             - binding `x` declared here\n"
+"6 |         r = &x;\n"
+"  |             ^^ borrowed value does not live long enough\n"
+"7 |     }\n"
+"  |     - `x` dropped here while still borrowed\n"
+"8 |\n"
+"9 |     println!(\"r: {r}\");\n"
+"  |                   - borrow later used here\n"
+"\n"
+"For more information about this error, try `rustc --explain E0597`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
+
+#: src/ch10-03-lifetime-syntax.md:85
+msgid ""
+"The error message says that the variable `x` “does not live long enough.” "
+"The reason is that `x` will be out of scope when the inner scope ends on "
+"line 7. But `r` is still valid for the outer scope; because its scope is "
+"larger, we say that it “lives longer.” If Rust allowed this code to work, "
+"`r` would be referencing memory that was deallocated when `x` went out of "
+"scope, and anything we tried to do with `r` wouldn’t work correctly. So, how "
+"does Rust determine that this code is invalid? It uses a borrow checker."
+msgstr ""
+"错误信息显示，变量 `x` 的生存期不够长。原因是当第7行内部作用域结束时， `x` 就"
+"会超出其作用域。但是 `r` 仍然在外部作用域中有效；由于其作用域更大，我们因此认"
+"为它“生存期更长”。如果Rust允许这段代码运行，那么 `r` 将会引用到 `x` 超出作用"
+"域时已经被释放的内存，这样一来，任何试图使用 `r` 的操作都将无法正确执行。那"
+"么，Rust是如何判断这段代码无效的呢？它使用了借用检查器。"
+
+#: src/ch10-03-lifetime-syntax.md:93
+msgid "The Borrow Checker"
+msgstr "借用检查器"
+
+#: src/ch10-03-lifetime-syntax.md:95
+msgid ""
+"The Rust compiler has a _borrow checker_ that compares scopes to determine "
+"whether all borrows are valid. Listing 10-17 shows the same code as Listing "
+"10-16 but with annotations showing the lifetimes of the variables."
+msgstr ""
+"Rust 编译器拥有一种“借用检查器”，该工具通过比较作用域来判断所有借用是否合法。"
+"列表 10-17 展示了与列表 10-16 相同的代码，但其中添加了注释来标明变量的生命周"
+"期。"
+
+#: src/ch10-03-lifetime-syntax.md:103
+msgid ""
+"// ---------+-- 'a\n"
+"                          //          |\n"
+msgstr ""
+"// ---------+-- 'a\n"
+"                          //          |\n"
+
+#: src/ch10-03-lifetime-syntax.md:105 src/ch10-03-lifetime-syntax.md:110
+msgid "//          |\n"
+msgstr "//          |\n"
+
+#: src/ch10-03-lifetime-syntax.md:106
+msgid "// -+-- 'b  |\n"
+msgstr "// -+-- 'b  |\n"
+
+#: src/ch10-03-lifetime-syntax.md:107
+msgid "//  |       |\n"
+msgstr "//  |       |\n"
+
+#: src/ch10-03-lifetime-syntax.md:108
+msgid ""
+"// -+       |\n"
+"                          //          |\n"
+msgstr ""
+"// + |\n"
+"                          // |\n"
+"// + |\n"
+"// |\n"
+
+#: src/ch10-03-lifetime-syntax.md:111
+msgid "// ---------+\n"
+msgstr "// ---------+\n"
+
+#: src/ch10-03-lifetime-syntax.md:116
+msgid ""
+"Here, we’ve annotated the lifetime of `r` with `'a` and the lifetime of `x` "
+"with `'b`. As you can see, the inner `'b` block is much smaller than the "
+"outer `'a` lifetime block. At compile time, Rust compares the size of the "
+"two lifetimes and sees that `r` has a lifetime of `'a` but that it refers to "
+"memory with a lifetime of `'b`. The program is rejected because `'b` is "
+"shorter than `'a`: The subject of the reference doesn’t live as long as the "
+"reference."
+msgstr ""
+"在这里，我们注明了 `r` 的生命值，和 `a` 和 `x` 的生存寿命。 正如你可以看到的"
+"那样，内部的 `b` 块比外部的 `a` 生命周期块小得多。 编译时间 Rust 比较两个生命"
+"周期的大小，看到`r`的寿命为`a`，但它指的是内存与`b`的寿命。 程序被拒绝，因为"
+"`b`短于`a`：只要参考，参考对象就不存在。"
+
+#: src/ch10-03-lifetime-syntax.md:123
+msgid ""
+"Listing 10-18 fixes the code so that it doesn’t have a dangling reference "
+"and it compiles without any errors."
+msgstr "列出10-18可以修正代码，避免有悬挂的引用，编译时没有错误。"
+
+#: src/ch10-03-lifetime-syntax.md:130
+msgid ""
+"// ----------+-- 'b\n"
+"                          //           |\n"
+msgstr ""
+"// ----------+-- 'b\n"
+"                          //           |\n"
+
+#: src/ch10-03-lifetime-syntax.md:132
+msgid ""
+"// --+-- 'a  |\n"
+"                          //   |       |\n"
+msgstr ""
+"// --+-- 'a  |\n"
+"                          //   |       |\n"
+
+#: src/ch10-03-lifetime-syntax.md:134
+msgid ""
+"//   |       |\n"
+"                          // --+       |\n"
+msgstr ""
+"//   |       |\n"
+"                          // --+       |\n"
+
+#: src/ch10-03-lifetime-syntax.md:136
+msgid "// ----------+\n"
+msgstr "// ----------+\n"
+
+#: src/ch10-03-lifetime-syntax.md:141
+msgid ""
+"Here, `x` has the lifetime `'b`, which in this case is larger than `'a`. "
+"This means `r` can reference `x` because Rust knows that the reference in "
+"`r` will always be valid while `x` is valid."
+msgstr ""
+"在这里，`x`有生命周期`'b`，在这种情况下，它大于`a`。 这意味着`r`可以引用`x`，"
+"因为Rust 知道`r`中的引用在`x`有效时将始终有效。"
+
+#: src/ch10-03-lifetime-syntax.md:145
+msgid ""
+"Now that you know where the lifetimes of references are and how Rust "
+"analyzes lifetimes to ensure that references will always be valid, let’s "
+"explore generic lifetimes in function parameters and return values."
+msgstr ""
+"既然你知道参考资料的使用期限在哪里，以及Rust 如何分析生命期，以确保参考资料始"
+"终是有效的， 让我们在函数参数和返回值中探索通用寿命。"
+
+#: src/ch10-03-lifetime-syntax.md:149
+msgid "Generic Lifetimes in Functions"
+msgstr "函数中的通用生命周期"
+
+#: src/ch10-03-lifetime-syntax.md:151
+msgid ""
+"We’ll write a function that returns the longer of two string slices. This "
+"function will take two string slices and return a single string slice. After "
+"we’ve implemented the `longest` function, the code in Listing 10-19 should "
+"print `The longest string is abcd`."
+msgstr ""
+"我们将编写一个函数，该函数返回两个字符串切片中较长的那个。这个函数会接收两个"
+"字符串切片，并返回一个新的字符串切片。在实现了 `longest` 函数之后，列表 "
+"10-19 中的代码应该能够输出 `The longest string is abcd`。"
+
+#: src/ch10-03-lifetime-syntax.md:160 src/ch10-03-lifetime-syntax.md:184
+#: src/ch10-03-lifetime-syntax.md:285 src/ch10-03-lifetime-syntax.md:451
+#: src/ch10-03-lifetime-syntax.md:481 src/ch10-03-lifetime-syntax.md:846
+msgid "\"abcd\""
+msgstr "\"abcd\""
+
+#: src/ch10-03-lifetime-syntax.md:161 src/ch10-03-lifetime-syntax.md:185
+#: src/ch10-03-lifetime-syntax.md:286 src/ch10-03-lifetime-syntax.md:348
+#: src/ch10-03-lifetime-syntax.md:382 src/ch10-03-lifetime-syntax.md:482
+#: src/ch10-03-lifetime-syntax.md:847
+msgid "\"xyz\""
+msgstr "\"xyz\""
+
+#: src/ch10-03-lifetime-syntax.md:164 src/ch10-03-lifetime-syntax.md:188
+#: src/ch10-03-lifetime-syntax.md:289 src/ch10-03-lifetime-syntax.md:350
+#: src/ch10-03-lifetime-syntax.md:385 src/ch10-03-lifetime-syntax.md:455
+#: src/ch10-03-lifetime-syntax.md:485 src/ch10-03-lifetime-syntax.md:854
+msgid "\"The longest string is {result}\""
+msgstr "\"The longest string is {result}\""
+
+#: src/ch10-03-lifetime-syntax.md:170
+msgid ""
+"Note that we want the function to take string slices, which are references, "
+"rather than strings, because we don’t want the `longest` function to take "
+"ownership of its parameters. Refer to [“String Slices as Parameters”]"
+"(ch04-03-slices.html#string-slices-as-parameters)<!-- ignore --> in Chapter "
+"4 for more discussion about why the parameters we use in Listing 10-19 are "
+"the ones we want."
+msgstr ""
+"注意到我们想要函数使用字符串切片，这些字符串是引用而不是字符串， 因为我们不想"
+"让'最长' 函数占据它的参数。 参见[“字符串切片作为参数”](ch04-03-slices."
+"html#string-slices-as-parameters)<! - 在第4章中忽略 --> 以便更多地讨论我们为"
+"什么在列表10-19中使用的参数是我们想要的。"
+
+#: src/ch10-03-lifetime-syntax.md:177
+msgid ""
+"If we try to implement the `longest` function as shown in Listing 10-20, it "
+"won’t compile."
+msgstr "如果我们尝试像清单10-20中那样实现 `longest` 函数，它将无法编译。"
+
+#: src/ch10-03-lifetime-syntax.md:198
+msgid "Instead, we get the following error that talks about lifetimes:"
+msgstr "相反，我们遇到了以下关于生命周期的错误："
+
+#: src/ch10-03-lifetime-syntax.md:200
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0106]: missing lifetime specifier\n"
+" --> src/main.rs:9:33\n"
+"  |\n"
+"9 | fn longest(x: &str, y: &str) -> &str {\n"
+"  |               ----     ----     ^ expected named lifetime parameter\n"
+"  |\n"
+"  = help: this function's return type contains a borrowed value, but the "
+"signature does not say whether it is borrowed from `x` or `y`\n"
+"help: consider introducing a named lifetime parameter\n"
+"  |\n"
+"9 | fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {\n"
+"  |           ++++     ++          ++          ++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0106`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0106]: missing lifetime specifier\n"
+" --> src/main.rs:9:33\n"
+"  |\n"
+"9 | fn longest(x: &str, y: &str) -> &str {\n"
+"  |               ----     ----     ^ expected named lifetime parameter\n"
+"  |\n"
+"  = help: this function's return type contains a borrowed value, but the "
+"signature does not say whether it is borrowed from `x` or `y`\n"
+"help: consider introducing a named lifetime parameter\n"
+"  |\n"
+"9 | fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {\n"
+"  |           ++++     ++          ++          ++\n"
+"\n"
+"For more information about this error, try `rustc --explain E0106`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
+
+#: src/ch10-03-lifetime-syntax.md:219
+msgid ""
+"The help text reveals that the return type needs a generic lifetime "
+"parameter on it because Rust can’t tell whether the reference being returned "
+"refers to `x` or `y`. Actually, we don’t know either, because the `if` block "
+"in the body of this function returns a reference to `x` and the `else` block "
+"returns a reference to `y`!"
+msgstr ""
+"帮助文本指出，返回类型需要一个通用的生命周期参数，因为Rust无法判断返回的引用"
+"是指向`x`还是`y`。实际上，我们也不知道具体的情况，因为该函数体内的`if`块返回"
+"的是指向`x`的引用，而`else`块则返回的是指向`y`的引用！"
+
+#: src/ch10-03-lifetime-syntax.md:225
+msgid ""
+"When we’re defining this function, we don’t know the concrete values that "
+"will be passed into this function, so we don’t know whether the `if` case or "
+"the `else` case will execute. We also don’t know the concrete lifetimes of "
+"the references that will be passed in, so we can’t look at the scopes as we "
+"did in Listings 10-17 and 10-18 to determine whether the reference we return "
+"will always be valid. The borrow checker can’t determine this either, "
+"because it doesn’t know how the lifetimes of `x` and `y` relate to the "
+"lifetime of the return value. To fix this error, we’ll add generic lifetime "
+"parameters that define the relationship between the references so that the "
+"borrow checker can perform its analysis."
+msgstr ""
+"在定义这个函数时，我们不知道会传递给这个函数的具体值，因此我们无法确定是执行 "
+"`if` 情况还是 `else` 情况。我们还不知道被传递的引用的具体生命周期，因此无法像"
+"在 Listing 10-17 和 Listing 10-18 中那样来查看作用域，以确定我们返回的引用是"
+"否始终有效。借用检查器也无法确定这一点，因为它不知道 `x` 和 `y` 的生命周期与"
+"返回值生命周期之间的关系。为了修复这个错误，我们将添加通用的生命周期参数，以"
+"定义引用之间的关系，这样借用检查器就可以进行其分析了。"
+
+#: src/ch10-03-lifetime-syntax.md:236
+msgid "Lifetime Annotation Syntax"
+msgstr "生命周期注解语法"
+
+#: src/ch10-03-lifetime-syntax.md:238
+msgid ""
+"Lifetime annotations don’t change how long any of the references live. "
+"Rather, they describe the relationships of the lifetimes of multiple "
+"references to each other without affecting the lifetimes. Just as functions "
+"can accept any type when the signature specifies a generic type parameter, "
+"functions can accept references with any lifetime by specifying a generic "
+"lifetime parameter."
+msgstr ""
+"生命周期注释并不会改变任何引用所存在的时长。相反，它们描述了多个引用之间的生"
+"命周期关系，而不会影响实际的生命周期。就像函数可以通过指定泛型类型参数来接受"
+"任何类型的参数一样，函数也可以通过指定泛型生命周期参数来接受具有任何生命周期"
+"的引用。"
+
+#: src/ch10-03-lifetime-syntax.md:244
+msgid ""
+"Lifetime annotations have a slightly unusual syntax: The names of lifetime "
+"parameters must start with an apostrophe (`'`) and are usually all lowercase "
+"and very short, like generic types. Most people use the name `'a` for the "
+"first lifetime annotation. We place lifetime parameter annotations after the "
+"`&` of a reference, using a space to separate the annotation from the "
+"reference’s type."
+msgstr ""
+"生命周期注释的语法有些特殊：生命周期参数的名称必须以撇号开头（`'`），并且通常"
+"都是小写，长度也很短，类似于泛型类型。大多数人会使用`'a`作为第一个生命周期注"
+"释。我们将生命周期参数注释放在引用符号`&`之后，并使用空格将注释与引用的类型分"
+"开。"
+
+#: src/ch10-03-lifetime-syntax.md:250
+msgid ""
+"Here are some examples—a reference to an `i32` without a lifetime parameter, "
+"a reference to an `i32` that has a lifetime parameter named `'a`, and a "
+"mutable reference to an `i32` that also has the lifetime `'a`:"
+msgstr ""
+"以下是一些示例——一个没有生命周期参数的 `i32`，一个带有名为 `'a` 的生命周期参"
+"数的 `i32`，以及一个可变引用，该引用也带有生命周期 `'a`。"
+
+#: src/ch10-03-lifetime-syntax.md:255
+msgid "// a reference\n"
+msgstr "// 参考\n"
+
+#: src/ch10-03-lifetime-syntax.md:256
+msgid "// a reference with an explicit lifetime\n"
+msgstr "// 具有明确生命周期的引用\n"
+
+#: src/ch10-03-lifetime-syntax.md:257
+msgid "// a mutable reference with an explicit lifetime\n"
+msgstr "// 一个可变的引用，带有明确的生存期\n"
+
+#: src/ch10-03-lifetime-syntax.md:260
+msgid ""
+"One lifetime annotation by itself doesn’t have much meaning, because the "
+"annotations are meant to tell Rust how generic lifetime parameters of "
+"multiple references relate to each other. Let’s examine how the lifetime "
+"annotations relate to each other in the context of the `longest` function."
+msgstr ""
+"单独来看，生命周期注解并没有太多意义，因为这些注解的目的是告诉Rust，多个引用"
+"所使用的泛型生命周期参数之间是如何相互关联的。让我们来探讨一下，在 `longest` "
+"函数的上下文中，这些生命周期注解是如何相互关联的。"
+
+#: src/ch10-03-lifetime-syntax.md:267
+msgid "<a id=\"lifetime-annotations-in-function-signatures\"></a>"
+msgstr "<a id=\"lifetime-annotations-in-function-signatures\"></a>"
+
+#: src/ch10-03-lifetime-syntax.md:269
+msgid "In Function Signatures"
+msgstr "函数签名说明"
+
+#: src/ch10-03-lifetime-syntax.md:271
+msgid ""
+"To use lifetime annotations in function signatures, we need to declare the "
+"generic lifetime parameters inside angle brackets between the function name "
+"and the parameter list, just as we did with generic type parameters."
+msgstr ""
+"要在函数签名中使用生命周期注解，我们需要在函数名称和参数列表之间，使用尖括号"
+"来声明泛型生命周期参数，就像我们处理泛型类型参数一样。"
+
+#: src/ch10-03-lifetime-syntax.md:275
+msgid ""
+"We want the signature to express the following constraint: The returned "
+"reference will be valid as long as both of the parameters are valid. This is "
+"the relationship between lifetimes of the parameters and the return value. "
+"We’ll name the lifetime `'a` and then add it to each reference, as shown in "
+"Listing 10-21."
+msgstr ""
+"我们希望该签名能够表达以下约束条件：只要两个参数都有效，返回的引用也一定是有"
+"效的。这就是参数生命周期与返回值生命周期之间的关系。我们将这种关系命名为"
+"`'a`，然后将其添加到每个引用中，如清单10-21所示。"
+
+#: src/ch10-03-lifetime-syntax.md:299
+msgid ""
+"This code should compile and produce the result we want when we use it with "
+"the `main` function in Listing 10-19."
+msgstr ""
+"当我们在 Listing 10-19 中使用`main`函数时，这段代码应该能够成功编译，并生成我"
+"们期望的结果。"
+
+#: src/ch10-03-lifetime-syntax.md:302
+msgid ""
+"The function signature now tells Rust that for some lifetime `'a`, the "
+"function takes two parameters, both of which are string slices that live at "
+"least as long as lifetime `'a`. The function signature also tells Rust that "
+"the string slice returned from the function will live at least as long as "
+"lifetime `'a`. In practice, it means that the lifetime of the reference "
+"returned by the `longest` function is the same as the smaller of the "
+"lifetimes of the values referred to by the function arguments. These "
+"relationships are what we want Rust to use when analyzing this code."
+msgstr ""
+"现在，函数签名告诉Rust：对于某个生命周期`'a`，该函数接受两个参数，这两个参数"
+"都是字符串切片，其长度至少与生命周期`'a`相同。函数签名还告诉Rust：从该函数返"
+"回的字符串切片的长度也至少与生命周期`'a`相同。实际上，这意味着由`longest`函数"
+"返回的引用的生命周期，与函数参数所引用的值的生命周期中较短的那个相同。这些关"
+"系正是我们希望Rust在分析这段代码时能够使用的。"
+
+#: src/ch10-03-lifetime-syntax.md:311
+msgid ""
+"Remember, when we specify the lifetime parameters in this function "
+"signature, we’re not changing the lifetimes of any values passed in or "
+"returned. Rather, we’re specifying that the borrow checker should reject any "
+"values that don’t adhere to these constraints. Note that the `longest` "
+"function doesn’t need to know exactly how long `x` and `y` will live, only "
+"that some scope can be substituted for `'a` that will satisfy this signature."
+msgstr ""
+"请记住，当我们在这个函数签名中指定生命周期参数时，我们并没有改变传入或返回的"
+"任何值的生命周期。相反，我们只是指定了借用检查器应该拒绝那些不符合这些约束值"
+"的变量。需要注意的是，`longest`这个函数不需要确切知道`x`和`y`会存在多久，它只"
+"需要知道有一些作用域可以替代`'a`，从而满足这个签名的要求。"
+
+#: src/ch10-03-lifetime-syntax.md:318
+msgid ""
+"When annotating lifetimes in functions, the annotations go in the function "
+"signature, not in the function body. The lifetime annotations become part of "
+"the contract of the function, much like the types in the signature. Having "
+"function signatures contain the lifetime contract means the analysis the "
+"Rust compiler does can be simpler. If there’s a problem with the way a "
+"function is annotated or the way it is called, the compiler errors can point "
+"to the part of our code and the constraints more precisely. If, instead, the "
+"Rust compiler made more inferences about what we intended the relationships "
+"of the lifetimes to be, the compiler might only be able to point to a use of "
+"our code many steps away from the cause of the problem."
+msgstr ""
+"在函数中标注生命周期时，这些标注应该放在函数签名中，而不是函数体内。生命周期"
+"的标注成为了函数契约的一部分，就像签名中的类型一样。如果函数签名包含了生命周"
+"期的约束信息，那么Rust编译器的分析就会更加简单。如果函数的标注方式或调用方式"
+"存在问题，编译器会给出具体的错误提示，从而更精确地指出问题的所在以及相关的约"
+"束条件。相反，如果Rust编译器能够更精确地推断出我们对于生命周期关系的意图，那"
+"么编译器可能只能指出代码中某个步骤的错误，而无法直接定位到问题的根源。"
+
+#: src/ch10-03-lifetime-syntax.md:329
+msgid ""
+"When we pass concrete references to `longest`, the concrete lifetime that is "
+"substituted for `'a` is the part of the scope of `x` that overlaps with the "
+"scope of `y`. In other words, the generic lifetime `'a` will get the "
+"concrete lifetime that is equal to the smaller of the lifetimes of `x` and "
+"`y`. Because we’ve annotated the returned reference with the same lifetime "
+"parameter `'a`, the returned reference will also be valid for the length of "
+"the smaller of the lifetimes of `x` and `y`."
+msgstr ""
+"当我们传递具体类型的引用给 `longest` 时，被替换的具体生命周期实际上是 `x` 的"
+"作用域中与 `y` 的作用域重叠的部分。换句话说，泛型生命周期 `'a` 将获得等于 "
+"`x` 和 `y` 中较短生命周期的那个生命周期。由于我们将返回的引用标注了相同的生命"
+"周期参数 `'a`，因此返回的引用在 `x` 和 `y` 中较短的生命周期持续时间内仍然有"
+"效。"
+
+#: src/ch10-03-lifetime-syntax.md:337
+msgid ""
+"Let’s look at how the lifetime annotations restrict the `longest` function "
+"by passing in references that have different concrete lifetimes. Listing "
+"10-22 is a straightforward example."
+msgstr ""
+"让我们看看生命周期注释是如何通过传入具有不同具体生命周期的引用来限制 "
+"`longest` 函数的。列表 10-22 就是一个简单的例子。"
+
+#: src/ch10-03-lifetime-syntax.md:345 src/ch10-03-lifetime-syntax.md:379
+msgid "\"long string is long\""
+msgstr "\"long string is long\""
+
+#: src/ch10-03-lifetime-syntax.md:361
+msgid ""
+"In this example, `string1` is valid until the end of the outer scope, "
+"`string2` is valid until the end of the inner scope, and `result` references "
+"something that is valid until the end of the inner scope. Run this code and "
+"you’ll see that the borrow checker approves; it will compile and print `The "
+"longest string is long string is long`."
+msgstr ""
+"在这个示例中，`string1`在外部作用域的末尾之前是有效的，`string2`在内部作用域"
+"的末尾之前是有效的，而`result`引用的是在内部作用域的末尾之前仍然有效的内容。"
+"运行这段代码后，你会看到借用检查器会批准该代码；程序会成功编译，并输出`The "
+"longest string is long string is long`。"
+
+#: src/ch10-03-lifetime-syntax.md:367
+msgid ""
+"Next, let’s try an example that shows that the lifetime of the reference in "
+"`result` must be the smaller lifetime of the two arguments. We’ll move the "
+"declaration of the `result` variable outside the inner scope but leave the "
+"assignment of the value to the `result` variable inside the scope with "
+"`string2`. Then, we’ll move the `println!` that uses `result` to outside the "
+"inner scope, after the inner scope has ended. The code in Listing 10-23 will "
+"not compile."
+msgstr ""
+"接下来，让我们来看一个例子，这个例子说明了在`result`中引用的对象的生命周期必"
+"须是两个参数中较短的一个。我们将`result`变量的声明移出内部作用域，而将"
+"`result`变量的值的赋值操作保留在`string2`的作用域内。然后，我们将使用`result`"
+"的`println!`移出内部作用域，但必须在内部作用域结束之后才进行这一操作。这样，"
+"Listing 10-23中的代码将无法编译。"
+
+#: src/ch10-03-lifetime-syntax.md:395
+msgid "When we try to compile this code, we get this error:"
+msgstr "当我们尝试编译这段代码时，会遇到这个错误："
+
+#: src/ch10-03-lifetime-syntax.md:397
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0597]: `string2` does not live long enough\n"
+" --> src/main.rs:6:44\n"
+"  |\n"
+"5 |         let string2 = String::from(\"xyz\");\n"
+"  |             ------- binding `string2` declared here\n"
+"6 |         result = longest(string1.as_str(), string2.as_str());\n"
+"  |                                            ^^^^^^^ borrowed value does "
+"not live long enough\n"
+"7 |     }\n"
+"  |     - `string2` dropped here while still borrowed\n"
+"8 |     println!(\"The longest string is {result}\");\n"
+"  |                                      ------ borrow later used here\n"
+"\n"
+"For more information about this error, try `rustc --explain E0597`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0597]: `string2` does not live long enough\n"
+" --> src/main.rs:6:44\n"
+"  |\n"
+"5 |         let string2 = String::from(\"xyz\");\n"
+"  |             ------- binding `string2` declared here\n"
+"6 |         result = longest(string1.as_str(), string2.as_str());\n"
+"  |                                            ^^^^^^^ borrowed value does "
+"not live long enough\n"
+"7 |     }\n"
+"  |     - `string2` dropped here while still borrowed\n"
+"8 |     println!(\"The longest string is {result}\");\n"
+"  |                                      ------ borrow later used here\n"
+"\n"
+"For more information about this error, try `rustc --explain E0597`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
+
+#: src/ch10-03-lifetime-syntax.md:416
+msgid ""
+"The error shows that for `result` to be valid for the `println!` statement, "
+"`string2` would need to be valid until the end of the outer scope. Rust "
+"knows this because we annotated the lifetimes of the function parameters and "
+"return values using the same lifetime parameter `'a`."
+msgstr ""
+"该错误表明，为了使 `result` 对 `println!` 语句有效，`string2` 需要在外部作用"
+"域的整个范围内都有效。Rust 能够识别这一点，因为我们使用了相同的生命周期参数 "
+"`'a` 来标注函数参数和返回值的生命周期。"
+
+#: src/ch10-03-lifetime-syntax.md:421
+msgid ""
+"As humans, we can look at this code and see that `string1` is longer than "
+"`string2`, and therefore, `result` will contain a reference to `string1`. "
+"Because `string1` has not gone out of scope yet, a reference to `string1` "
+"will still be valid for the `println!` statement. However, the compiler "
+"can’t see that the reference is valid in this case. We’ve told Rust that the "
+"lifetime of the reference returned by the `longest` function is the same as "
+"the smaller of the lifetimes of the references passed in. Therefore, the "
+"borrow checker disallows the code in Listing 10-23 as possibly having an "
+"invalid reference."
+msgstr ""
+"作为人类，我们可以观察这段代码，发现 `string1` 的长度比 `string2` 更长，因"
+"此，`result` 会包含对 `string1` 的引用。由于 `string1` 尚未超出作用域，因此"
+"对 `println!` 语句的引用仍然有效。然而，编译器无法确认这种引用是有效的。我们"
+"告诉 Rust，由 `longest` 函数返回的引用的生命周期与传入的引用的生命周期中较短"
+"的那个相同。因此，借用检查器不允许 Listing 10-23 中的代码存在无效的引用。"
+
+#: src/ch10-03-lifetime-syntax.md:430
+msgid ""
+"Try designing more experiments that vary the values and lifetimes of the "
+"references passed in to the `longest` function and how the returned "
+"reference is used. Make hypotheses about whether or not your experiments "
+"will pass the borrow checker before you compile; then, check to see if "
+"you’re right!"
+msgstr ""
+"请尝试设计更多的实验，这些实验会改变传递给 `longest` 函数的引用的数值和生命周"
+"期，以及返回的引用是如何被使用的。在编译之前，对实验是否能够通过借用检查器做"
+"出假设；然后，验证你的假设是否正确！"
+
+#: src/ch10-03-lifetime-syntax.md:437
+msgid "<a id=\"thinking-in-terms-of-lifetimes\"></a>"
+msgstr "<a id=\"thinking-in-terms-of-lifetimes\"></a>"
+
+#: src/ch10-03-lifetime-syntax.md:439
+msgid "Relationships"
+msgstr "关系"
+
+#: src/ch10-03-lifetime-syntax.md:441
+msgid ""
+"The way in which you need to specify lifetime parameters depends on what "
+"your function is doing. For example, if we changed the implementation of the "
+"`longest` function to always return the first parameter rather than the "
+"longest string slice, we wouldn’t need to specify a lifetime on the `y` "
+"parameter. The following code will compile:"
+msgstr ""
+"你需要指定生命周期参数的方式取决于你的函数所做的事情。例如，如果我们修改了"
+"`longest`函数的实现，使其总是返回第一个参数，而不是最长的字符串片段，那么我们"
+"就不需要在`y`参数上指定生命周期。以下代码可以成功编译："
+
+#: src/ch10-03-lifetime-syntax.md:452
+msgid "\"efghijklmnopqrstuvwxyz\""
+msgstr "“efghijklmnopqrstuvwxyz”"
+
+#: src/ch10-03-lifetime-syntax.md:465
+msgid ""
+"We’ve specified a lifetime parameter `'a` for the parameter `x` and the "
+"return type, but not for the parameter `y`, because the lifetime of `y` does "
+"not have any relationship with the lifetime of `x` or the return value."
+msgstr ""
+"我们已经为参数 `x` 和返回值指定了生命周期参数 `'a`，但并未为参数 `y` 指定生命"
+"周期参数，因为 `y` 的生命周期与 `x` 的生命周期或返回值没有任何关系。"
+
+#: src/ch10-03-lifetime-syntax.md:469
+msgid ""
+"When returning a reference from a function, the lifetime parameter for the "
+"return type needs to match the lifetime parameter for one of the parameters. "
+"If the reference returned does _not_ refer to one of the parameters, it must "
+"refer to a value created within this function. However, this would be a "
+"dangling reference because the value will go out of scope at the end of the "
+"function. Consider this attempted implementation of the `longest` function "
+"that won’t compile:"
+msgstr ""
+"当从函数中返回引用时，返回类型的生命周期参数需要与其中一个参数的生命周期参数"
+"相匹配。如果返回的引用并不指向任何一个参数，那么它必须指向在该函数内部创建的"
+"值。然而，这种引用被称为“悬空引用”，因为该值会在函数执行结束时超出作用域。请"
+"考虑以下无法编译的 `longest` 函数实现："
+
+#: src/ch10-03-lifetime-syntax.md:489
+msgid "\"really long string\""
+msgstr "\"really long string\""
+
+#: src/ch10-03-lifetime-syntax.md:496
+msgid ""
+"Here, even though we’ve specified a lifetime parameter `'a` for the return "
+"type, this implementation will fail to compile because the return value "
+"lifetime is not related to the lifetime of the parameters at all. Here is "
+"the error message we get:"
+msgstr ""
+"在这里，尽管我们为返回类型指定了生命周期参数 `'a`，但此实现仍然无法编译，因为"
+"返回值的生命周期与参数的生命周期完全无关。我们得到的错误信息如下："
+
+#: src/ch10-03-lifetime-syntax.md:501
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0515]: cannot return value referencing local variable `result`\n"
+"  --> src/main.rs:11:5\n"
+"   |\n"
+"11 |     result.as_str()\n"
+"   |     ------^^^^^^^^^\n"
+"   |     |\n"
+"   |     returns a value referencing data owned by the current function\n"
+"   |     `result` is borrowed here\n"
+"\n"
+"For more information about this error, try `rustc --explain E0515`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling chapter10 v0.1.0 (file:///projects/chapter10)\n"
+"error[E0515]: cannot return value referencing local variable `result`\n"
+"  --> src/main.rs:11:5\n"
+"   |\n"
+"11 |     result.as_str()\n"
+"   |     ------^^^^^^^^^\n"
+"   |     |\n"
+"   |     returns a value referencing data owned by the current function\n"
+"   |     `result` is borrowed here\n"
+"\n"
+"For more information about this error, try `rustc --explain E0515`.\n"
+"error: could not compile `chapter10` (bin \"chapter10\") due to 1 previous "
+"error\n"
+"```"
+
+#: src/ch10-03-lifetime-syntax.md:517
+msgid ""
+"The problem is that `result` goes out of scope and gets cleaned up at the "
+"end of the `longest` function. We’re also trying to return a reference to "
+"`result` from the function. There is no way we can specify lifetime "
+"parameters that would change the dangling reference, and Rust won’t let us "
+"create a dangling reference. In this case, the best fix would be to return "
+"an owned data type rather than a reference so that the calling function is "
+"then responsible for cleaning up the value."
+msgstr ""
+"问题在于 `result` 在 `longest` 函数的末尾超出了作用域范围，并被清理掉了。我们"
+"还试图从函数中返回对 `result` 的引用。我们无法指定能够改变这种悬空引用的生命"
+"周期参数，而Rust也不允许我们创建这样的悬空引用。在这种情况下，最好的解决办法"
+"是返回一个拥有所有权的数据类型，而不是引用，这样调用函数就负责清理该值了。"
+
+#: src/ch10-03-lifetime-syntax.md:525
+msgid ""
+"Ultimately, lifetime syntax is about connecting the lifetimes of various "
+"parameters and return values of functions. Once they’re connected, Rust has "
+"enough information to allow memory-safe operations and disallow operations "
+"that would create dangling pointers or otherwise violate memory safety."
+msgstr ""
+"归根结底，生命周期语法旨在连接函数各个参数和返回值的生命周期。一旦这些生命周"
+"期被正确连接，Rust就拥有足够的信息来执行内存安全操作，同时禁止那些会导致指针"
+"悬空或违反内存安全性的操作。"
+
+#: src/ch10-03-lifetime-syntax.md:532
+msgid "<a id=\"lifetime-annotations-in-struct-definitions\"></a>"
+msgstr "<a id=\"lifetime-annotations-in-struct-definitions\"></a>"
+
+#: src/ch10-03-lifetime-syntax.md:534
+msgid "In Struct Definitions"
+msgstr "在结构体定义中"
+
+#: src/ch10-03-lifetime-syntax.md:536
+msgid ""
+"So far, the structs we’ve defined all hold owned types. We can define "
+"structs to hold references, but in that case, we would need to add a "
+"lifetime annotation on every reference in the struct’s definition. Listing "
+"10-24 has a struct named `ImportantExcerpt` that holds a string slice."
+msgstr ""
+"到目前为止，我们所定义的结构体都包含拥有型数据。我们可以定义结构体来包含引"
+"用，但在这种情况下，我们需要在结构体定义中的每个引用上添加生命周期注解。列表"
+"10-24中有一个名为 `ImportantExcerpt` 的结构体，它包含一个字符串切片。"
+
+#: src/ch10-03-lifetime-syntax.md:549 src/ch10-03-lifetime-syntax.md:768
+#: src/ch10-03-lifetime-syntax.md:801
+msgid "\"Call me Ishmael. Some years ago...\""
+msgstr "\"Call me Ishmael. Some years ago...\""
+
+#: src/ch10-03-lifetime-syntax.md:550 src/ch10-03-lifetime-syntax.md:769
+#: src/ch10-03-lifetime-syntax.md:802
+msgid "'.'"
+msgstr "'.'"
+
+#: src/ch10-03-lifetime-syntax.md:559
+msgid ""
+"This struct has the single field `part` that holds a string slice, which is "
+"a reference. As with generic data types, we declare the name of the generic "
+"lifetime parameter inside angle brackets after the name of the struct so "
+"that we can use the lifetime parameter in the body of the struct definition. "
+"This annotation means an instance of `ImportantExcerpt` can’t outlive the "
+"reference it holds in its `part` field."
+msgstr ""
+"该结构体包含一个名为 `part` 的单个字段，该字段持有一个字符串切片，且这个字符"
+"串切片是一个引用。与通用数据类型类似，我们将通用生命周期参数的名称放在结构体"
+"名称的尖括号内，这样我们就可以在结构体定义的内部使用这个生命周期参数。这种注"
+"解意味着 `ImportantExcerpt` 的实例不会超出其在 `part` 字段中引用的对象的生命"
+"周期。"
+
+#: src/ch10-03-lifetime-syntax.md:566
+msgid ""
+"The `main` function here creates an instance of the `ImportantExcerpt` "
+"struct that holds a reference to the first sentence of the `String` owned by "
+"the variable `novel`. The data in `novel` exists before the "
+"`ImportantExcerpt` instance is created. In addition, `novel` doesn’t go out "
+"of scope until after the `ImportantExcerpt` goes out of scope, so the "
+"reference in the `ImportantExcerpt` instance is valid."
+msgstr ""
+"这里的 `main` 函数创建了一个 `ImportantExcerpt` 结构的实例，该实例持有一个对 "
+"`String` 中第一句话的引用，而 `String` 又由变量 `novel` 所拥有。`novel` 中的"
+"数据在 `ImportantExcerpt` 的实例创建之前就已经存在了。此外，`novel` 在 "
+"`ImportantExcerpt` 的实例离开作用域之前不会离开其作用域，因此 "
+"`ImportantExcerpt` 中的引用是有效的。"
+
+#: src/ch10-03-lifetime-syntax.md:573
+msgid "Lifetime Elision"
+msgstr "生命周期省略"
+
+#: src/ch10-03-lifetime-syntax.md:575
+msgid ""
+"You’ve learned that every reference has a lifetime and that you need to "
+"specify lifetime parameters for functions or structs that use references. "
+"However, we had a function in Listing 4-9, shown again in Listing 10-25, "
+"that compiled without lifetime annotations."
+msgstr ""
+"你已经了解到，每个引用都有一个生命周期，并且需要使用生命周期参数来指定那些使"
+"用引用的函数或结构体。然而，在清单4-9中有一个函数，其编译时并未添加生命周期注"
+"释，这一情况在清单10-25中再次展示。"
+
+#: src/ch10-03-lifetime-syntax.md:587
+msgid "b' '"
+msgstr "b' '"
+
+#: src/ch10-03-lifetime-syntax.md:596 src/ch10-03-lifetime-syntax.md:601
+msgid "\"hello world\""
+msgstr "\"hello world\""
+
+#: src/ch10-03-lifetime-syntax.md:598
+msgid "// first_word works on slices of `String`s\n"
+msgstr "// 第一个单词在字符串文字的切片上工作\n"
+
+#: src/ch10-03-lifetime-syntax.md:603
+msgid "// first_word works on slices of string literals\n"
+msgstr "// 第一个单词在字符串文字的切片上工作\n"
+
+#: src/ch10-03-lifetime-syntax.md:606
+msgid "// Because string literals *are* string slices already,\n"
+msgstr "// 因为字符串文本*为*字符串切片，\n"
+
+#: src/ch10-03-lifetime-syntax.md:607
+msgid "// this works too, without the slice syntax!\n"
+msgstr "// 这也能正常工作，没有切片语法！\n"
+
+#: src/ch10-03-lifetime-syntax.md:614
+msgid ""
+"The reason this function compiles without lifetime annotations is "
+"historical: In early versions (pre-1.0) of Rust, this code wouldn’t have "
+"compiled, because every reference needed an explicit lifetime. At that time, "
+"the function signature would have been written like this:"
+msgstr ""
+"这个函数能够编译而无需使用生命周期注释，这是出于历史原因：在Rust的早期版本"
+"（1.0之前），这样的代码是无法编译的，因为每一个引用都需要明确指定其生命周期。"
+"在那个时候，函数的签名会被这样编写："
+
+#: src/ch10-03-lifetime-syntax.md:623
+msgid ""
+"After writing a lot of Rust code, the Rust team found that Rust programmers "
+"were entering the same lifetime annotations over and over in particular "
+"situations. These situations were predictable and followed a few "
+"deterministic patterns. The developers programmed these patterns into the "
+"compiler’s code so that the borrow checker could infer the lifetimes in "
+"these situations and wouldn’t need explicit annotations."
+msgstr ""
+"在编写了大量的Rust代码之后，Rust团队发现，在某些特定情况下，Rust程序员会反复"
+"使用相同的生命周期注解。这些情况是可以预测的，并且遵循一些确定的模式。开发者"
+"将这些模式编入了编译器的代码中，这样借用检查器就可以在这些情况下推断出生命周"
+"期，而无需显式的注解。"
+
+#: src/ch10-03-lifetime-syntax.md:630
+msgid ""
+"This piece of Rust history is relevant because it’s possible that more "
+"deterministic patterns will emerge and be added to the compiler. In the "
+"future, even fewer lifetime annotations might be required."
+msgstr ""
+"这段Rust历史之所以重要，是因为可能会出现更多确定性模式，并且这些模式会被添加"
+"到编译器中。未来，可能只需要更少的生命周期注解了。"
+
+#: src/ch10-03-lifetime-syntax.md:634
+msgid ""
+"The patterns programmed into Rust’s analysis of references are called the "
+"_lifetime elision rules_. These aren’t rules for programmers to follow; "
+"they’re a set of particular cases that the compiler will consider, and if "
+"your code fits these cases, you don’t need to write the lifetimes explicitly."
+msgstr ""
+"在Rust中，用于分析引用模式的规则被称为“生命周期省略规则”。这些并不是程序员需"
+"要遵循的规则；它们是一组编译器会考虑的特定情况。如果你的代码符合这些情况，就"
+"不需要显式地声明生命周期。"
+
+#: src/ch10-03-lifetime-syntax.md:639
+msgid ""
+"The elision rules don’t provide full inference. If there is still ambiguity "
+"about what lifetimes the references have after Rust applies the rules, the "
+"compiler won’t guess what the lifetime of the remaining references should "
+"be. Instead of guessing, the compiler will give you an error that you can "
+"resolve by adding the lifetime annotations."
+msgstr ""
+"这些省略规则并不能提供完全的推理功能。如果在Rust应用这些规则之后，仍然存在关"
+"于引用所属生命周期的歧义，编译器不会猜测剩余引用的生命周期。相反，编译器会发"
+"出错误提示，你可以通过添加生命周期注释来解决问题。"
+
+#: src/ch10-03-lifetime-syntax.md:645
+msgid ""
+"Lifetimes on function or method parameters are called _input lifetimes_, and "
+"lifetimes on return values are called _output lifetimes_."
+msgstr ""
+"函数或方法参数上的生命周期被称为_输入生命周期_，而返回值上的生命周期则被称为_"
+"输出生命周期_。"
+
+#: src/ch10-03-lifetime-syntax.md:648
+msgid ""
+"The compiler uses three rules to figure out the lifetimes of the references "
+"when there aren’t explicit annotations. The first rule applies to input "
+"lifetimes, and the second and third rules apply to output lifetimes. If the "
+"compiler gets to the end of the three rules and there are still references "
+"for which it can’t figure out lifetimes, the compiler will stop with an "
+"error. These rules apply to `fn` definitions as well as `impl` blocks."
+msgstr ""
+"编译器使用三条规则来确定引用对象的生命周期，当没有明确的注释时。第一条规则适"
+"用于输入对象的生命周期，第二条和第三条规则适用于输出对象的生命周期。如果编译"
+"器执行完这三条规则后，仍然有一些引用对象的生命周期无法确定，那么编译器将会报"
+"错并停止执行。这些规则既适用于 `fn` 定义，也适用于 `impl` 块。"
+
+#: src/ch10-03-lifetime-syntax.md:655
+msgid ""
+"The first rule is that the compiler assigns a lifetime parameter to each "
+"parameter that’s a reference. In other words, a function with one parameter "
+"gets one lifetime parameter: `fn foo<'a>(x: &'a i32)`; a function with two "
+"parameters gets two separate lifetime parameters: `fn foo<'a, 'b>(x: &'a "
+"i32, y: &'b i32)`; and so on."
+msgstr ""
+"第一条规则是，编译器会为每个引用类型的参数分配一个生命周期参数。换句话说，一"
+"个只有一个参数的函数会得到一个生命周期参数：`fn foo<'a>(x: &'a i32)`；而一个"
+"有两个参数的函数则会得到两个独立的生命周期参数：`fn foo<'a, 'b>(x: &'a i32, "
+"y: &'b i32)`；以此类推。"
+
+#: src/ch10-03-lifetime-syntax.md:661
+msgid ""
+"The second rule is that, if there is exactly one input lifetime parameter, "
+"that lifetime is assigned to all output lifetime parameters: `fn foo<'a>(x: "
+"&'a i32) -> &'a i32`."
+msgstr ""
+"第二条规则是，如果输入生命周期参数恰好只有一个，那么该生命周期参数将被分配给"
+"所有输出生命周期参数： `fn foo<'a>(x: &'a i32) -> &'a i32`。"
+
+#: src/ch10-03-lifetime-syntax.md:665
+msgid ""
+"The third rule is that, if there are multiple input lifetime parameters, but "
+"one of them is `&self` or `&mut self` because this is a method, the lifetime "
+"of `self` is assigned to all output lifetime parameters. This third rule "
+"makes methods much nicer to read and write because fewer symbols are "
+"necessary."
+msgstr ""
+"第三条规则是：如果存在多个输入生命周期参数，但其中有一个是 `&self` 或 `&mut "
+"self`，因为这是一个方法，那么 `self` 的生命周期会被分配给所有输出生命周期参"
+"数。这条规则使得方法的读写更加简洁，因为需要的符号更少。"
+
+#: src/ch10-03-lifetime-syntax.md:670
+msgid ""
+"Let’s pretend we’re the compiler. We’ll apply these rules to figure out the "
+"lifetimes of the references in the signature of the `first_word` function in "
+"Listing 10-25. The signature starts without any lifetimes associated with "
+"the references:"
+msgstr ""
+"让我们假设自己是编译器。我们将应用这些规则来推断 Listing 10-25 中 "
+"`first_word` 函数中的引用的生命周期。该函数的签名开始时，与引用无关的生命周期"
+"信息并未出现："
+
+#: src/ch10-03-lifetime-syntax.md:679
+msgid ""
+"Then, the compiler applies the first rule, which specifies that each "
+"parameter gets its own lifetime. We’ll call it `'a` as usual, so now the "
+"signature is this:"
+msgstr ""
+"然后，编译器应用第一条规则，该规则规定每个参数都有自己的生命周期。我们像往常"
+"一样将其称为 `'a`，因此现在的签名就是 this:"
+
+#: src/ch10-03-lifetime-syntax.md:687
+msgid ""
+"The second rule applies because there is exactly one input lifetime. The "
+"second rule specifies that the lifetime of the one input parameter gets "
+"assigned to the output lifetime, so the signature is now this:"
+msgstr ""
+"第二条规则适用，因为输入的生命周期恰好只有一个。第二条规则规定，唯一一个输入"
+"参数的生命周期会被分配给输出生命周期，因此现在的签名是这样的："
+
+#: src/ch10-03-lifetime-syntax.md:695
+msgid ""
+"Now all the references in this function signature have lifetimes, and the "
+"compiler can continue its analysis without needing the programmer to "
+"annotate the lifetimes in this function signature."
+msgstr ""
+"现在，这个函数签名中的所有引用都有各自的生命周期，编译器可以继续进行解析，而"
+"无需程序员在函数签名中标注这些生命周期。"
+
+#: src/ch10-03-lifetime-syntax.md:699
+msgid ""
+"Let’s look at another example, this time using the `longest` function that "
+"had no lifetime parameters when we started working with it in Listing 10-20:"
+msgstr ""
+"让我们再看一个例子，这次使用的是 `longest` 函数。在我们在 Listing 10-20 中开"
+"始使用这个函数时，该函数并没有生命周期参数。"
+
+#: src/ch10-03-lifetime-syntax.md:706
+msgid ""
+"Let’s apply the first rule: Each parameter gets its own lifetime. This time "
+"we have two parameters instead of one, so we have two lifetimes:"
+msgstr ""
+"让我们应用第一条规则：每个参数都有自己的生命周期。这次我们有两个参数，而不是"
+"一个，因此我们有两个生命周期。"
+
+#: src/ch10-03-lifetime-syntax.md:713
+msgid ""
+"You can see that the second rule doesn’t apply, because there is more than "
+"one input lifetime. The third rule doesn’t apply either, because `longest` "
+"is a function rather than a method, so none of the parameters are `self`. "
+"After working through all three rules, we still haven’t figured out what the "
+"return type’s lifetime is. This is why we got an error trying to compile the "
+"code in Listing 10-20: The compiler worked through the lifetime elision "
+"rules but still couldn’t figure out all the lifetimes of the references in "
+"the signature."
+msgstr ""
+"可以看到，第二条规则并不适用，因为存在多个输入生命周期。第三条规则同样不适"
+"用，因为 `longest` 是一个函数而不是方法，因此没有任何参数的生命周期是 "
+"`self`。经过对三条规则的逐一分析后，我们仍然无法确定返回值的生命周期。这就是"
+"为什么在编译清单 10-20 中的代码时出现了错误：编译器虽然处理了生命周期省略规"
+"则，但仍然无法确定签名中引用的所有对象的生命周期。"
+
+#: src/ch10-03-lifetime-syntax.md:721
+msgid ""
+"Because the third rule really only applies in method signatures, we’ll look "
+"at lifetimes in that context next to see why the third rule means we don’t "
+"have to annotate lifetimes in method signatures very often."
+msgstr ""
+"因为第三条规则实际上只适用于方法签名，接下来我们将在那种情况下探讨生命周期，"
+"以了解为什么第三条规则意味着我们不必经常在方法签名中标注生命周期。"
+
+#: src/ch10-03-lifetime-syntax.md:727
+msgid "<a id=\"lifetime-annotations-in-method-definitions\"></a>"
+msgstr "<a id=\"lifetime-annotations-in-method-definitions\"></a>"
+
+#: src/ch10-03-lifetime-syntax.md:729
+msgid "In Method Definitions"
+msgstr "方法定义"
+
+#: src/ch10-03-lifetime-syntax.md:731
+msgid ""
+"When we implement methods on a struct with lifetimes, we use the same syntax "
+"as that of generic type parameters, as shown in Listing 10-11. Where we "
+"declare and use the lifetime parameters depends on whether they’re related "
+"to the struct fields or the method parameters and return values."
+msgstr ""
+"当我们在一个结构体上实现带有生命周期的方法时，我们使用与泛型类型参数相同的语"
+"法，如清单10-11所示。何时声明和使用生命周期参数，取决于这些参数是与结构体字段"
+"相关，还是与方法参数和返回值相关。"
+
+#: src/ch10-03-lifetime-syntax.md:736
+msgid ""
+"Lifetime names for struct fields always need to be declared after the `impl` "
+"keyword and then used after the struct’s name because those lifetimes are "
+"part of the struct’s type."
+msgstr ""
+"结构体字段的生命周期名称必须在 `impl` 关键字之后声明，并且必须在结构体名称之"
+"后使用，因为这些生命周期是结构体类型的一部分。"
+
+#: src/ch10-03-lifetime-syntax.md:740
+msgid ""
+"In method signatures inside the `impl` block, references might be tied to "
+"the lifetime of references in the struct’s fields, or they might be "
+"independent. In addition, the lifetime elision rules often make it so that "
+"lifetime annotations aren’t necessary in method signatures. Let’s look at "
+"some examples using the struct named `ImportantExcerpt` that we defined in "
+"Listing 10-24."
+msgstr ""
+"在 `impl` 块中的方法签名中，引用可能会与结构体字段中引用的对象的生命周期绑定"
+"在一起，也可能相互独立。此外，生命周期省略规则通常使得在方法签名中不需要使用"
+"生命周期注释。让我们来看一些使用我们在 Listing 10-24 中定义的名为 "
+"`ImportantExcerpt` 的结构的例子。"
+
+#: src/ch10-03-lifetime-syntax.md:746
+msgid ""
+"First, we’ll use a method named `level` whose only parameter is a reference "
+"to `self` and whose return value is an `i32`, which is not a reference to "
+"anything:"
+msgstr ""
+"首先，我们将使用一个名为 `level` 的方法，该方法的唯一参数是一个对`self`的引"
+"用，而其返回值是一个 `i32`，这个值并不指向任何东西。"
+
+#: src/ch10-03-lifetime-syntax.md:762 src/ch10-03-lifetime-syntax.md:795
+msgid "\"Attention please: {announcement}\""
+msgstr "\"Attention please: {announcement}\""
+
+#: src/ch10-03-lifetime-syntax.md:776
+msgid ""
+"The lifetime parameter declaration after `impl` and its use after the type "
+"name are required, but because of the first elision rule, we’re not required "
+"to annotate the lifetime of the reference to `self`."
+msgstr ""
+"在 `impl` 之后的生命周期参数声明以及类型名称之后的使用是必需的，但由于第一个"
+"省略规则的存在，我们不需要对 `self` 的引用生命周期进行注释。"
+
+#: src/ch10-03-lifetime-syntax.md:780
+msgid "Here is an example where the third lifetime elision rule applies:"
+msgstr "以下是一个适用第三生命周期省略规则的例子："
+
+#: src/ch10-03-lifetime-syntax.md:809
+msgid ""
+"There are two input lifetimes, so Rust applies the first lifetime elision "
+"rule and gives both `&self` and `announcement` their own lifetimes. Then, "
+"because one of the parameters is `&self`, the return type gets the lifetime "
+"of `&self`, and all lifetimes have been accounted for."
+msgstr ""
+"这里有两种输入生命周期，因此Rust会应用第一个生命周期省略规则，分别为 `&self` "
+"和 `announcement` 分配各自的生命周期。由于其中一个参数是 `&self`，所以返回类"
+"型的生命周期被设置为 `&self`。这样一来，所有的生命周期都得到了妥善处理。"
+
+#: src/ch10-03-lifetime-syntax.md:814
+msgid "The Static Lifetime"
+msgstr "静态生命周期"
+
+#: src/ch10-03-lifetime-syntax.md:816
+msgid ""
+"One special lifetime we need to discuss is `'static`, which denotes that the "
+"affected reference _can_ live for the entire duration of the program. All "
+"string literals have the `'static` lifetime, which we can annotate as "
+"follows:"
+msgstr ""
+"我们需要讨论的一个特殊生命周期是 `'static`，它表示受影响的引用可以在程序的整"
+"个运行期间存在。所有的字符串字面量都具有 `'static` 生命周期，我们可以这样标"
+"注："
+
+#: src/ch10-03-lifetime-syntax.md:821
+msgid "\"I have a static lifetime.\""
+msgstr "\"I have a static lifetime.\""
+
+#: src/ch10-03-lifetime-syntax.md:824
+msgid ""
+"The text of this string is stored directly in the program’s binary, which is "
+"always available. Therefore, the lifetime of all string literals is "
+"`'static`."
+msgstr ""
+"该字符串的文本直接存储在程序的二进制文件中，而该二进制文件始终是可用的。因"
+"此，所有字符串字面量的生命周期都是 `'static`。"
+
+#: src/ch10-03-lifetime-syntax.md:827
+msgid ""
+"You might see suggestions in error messages to use the `'static` lifetime. "
+"But before specifying `'static` as the lifetime for a reference, think about "
+"whether or not the reference you have actually lives the entire lifetime of "
+"your program, and whether you want it to. Most of the time, an error message "
+"suggesting the `'static` lifetime results from attempting to create a "
+"dangling reference or a mismatch of the available lifetimes. In such cases, "
+"the solution is to fix those problems, not to specify the `'static` lifetime."
+msgstr ""
+"您可能会在错误信息中看到建议使用 `'static` 生命周期。但在指定 `'static` 作为"
+"引用的生命周期之前，请考虑该引用是否真的需要贯穿整个程序的生命周期，以及您是"
+"否希望如此。大多数情况下，出现错误信息的提示是因为试图创建悬挂引用或存在可用"
+"的生命周期不匹配的情况。在这种情况下，解决方法是修复这些问题，而不是指定 "
+"`'static` 生命周期。"
+
+#: src/ch10-03-lifetime-syntax.md:837
+msgid ""
+"<a id=\"generic-type-parameters-trait-bounds-and-lifetimes-together\"></a>"
+msgstr ""
+"<a id=\"generic-type-parameters-trait-bounds-and-lifetimes-together\"></a>"
+
+#: src/ch10-03-lifetime-syntax.md:839
+msgid "Generic Type Parameters, Trait Bounds, and Lifetimes"
+msgstr "通用类型参数、特质边界与生命周期"
+
+#: src/ch10-03-lifetime-syntax.md:841
+msgid ""
+"Let’s briefly look at the syntax of specifying generic type parameters, "
+"trait bounds, and lifetimes all in one function!"
+msgstr ""
+"让我们简要看一下在一个函数中指定泛型类型参数、特质边界和生命周期的语法！"
+
+#: src/ch10-03-lifetime-syntax.md:852
+msgid "\"Today is someone's birthday!\""
+msgstr "\"Today is someone's birthday!\""
+
+#: src/ch10-03-lifetime-syntax.md:867
+msgid "\"Announcement! {ann}\""
+msgstr "\"Announcement! {ann}\""
+
+#: src/ch10-03-lifetime-syntax.md:872
+msgid ""
+"This is the `longest` function from Listing 10-21 that returns the longer of "
+"two string slices. But now it has an extra parameter named `ann` of the "
+"generic type `T`, which can be filled in by any type that implements the "
+"`Display` trait as specified by the `where` clause. This extra parameter "
+"will be printed using `{}`, which is why the `Display` trait bound is "
+"necessary. Because lifetimes are a type of generic, the declarations of the "
+"lifetime parameter `'a` and the generic type parameter `T` go in the same "
+"list inside the angle brackets after the function name."
+msgstr ""
+"这是来自清单10-21的`longest`函数，它返回两个字符串切片中较长的那个。但现在它"
+"增加了一个额外的参数`ann`，该参数属于泛型类型`T`。这个额外参数可以由任何实现"
+"了`Display`特性的类型来填充，具体细节由`where`条款规定。这个额外参数将通过`{}"
+"`进行打印，这就是为什么需要`Display`特性绑定。由于生命周期是一种泛型特性，因"
+"此生命周期参数`'a`和泛型类型参数`T`应该放在函数名称后面的方括号中的同一列表"
+"中。"
+
+#: src/ch10-03-lifetime-syntax.md:881
+msgid "Summary"
+msgstr "摘要"
+
+#: src/ch10-03-lifetime-syntax.md:883
+msgid ""
+"We covered a lot in this chapter! Now that you know about generic type "
+"parameters, traits and trait bounds, and generic lifetime parameters, you’re "
+"ready to write code without repetition that works in many different "
+"situations. Generic type parameters let you apply the code to different "
+"types. Traits and trait bounds ensure that even though the types are "
+"generic, they’ll have the behavior the code needs. You learned how to use "
+"lifetime annotations to ensure that this flexible code won’t have any "
+"dangling references. And all of this analysis happens at compile time, which "
+"doesn’t affect runtime performance!"
+msgstr ""
+"在本章中，我们讨论了很多内容！现在，既然你已经了解了泛型类型参数、特质和特质"
+"边界，以及泛型生命周期参数，那么你就能够编写出适用于多种不同情况的代码，而无"
+"需重复编写相同的代码。泛型类型参数使你能够将这些代码应用于不同的类型。特质和"
+"特质边界则确保，即使类型是泛型的，代码的行为仍然符合预期。你还学习了如何使用"
+"生命周期注解来确保这种灵活的代码不会产生悬空引用。而所有这些分析都在编译时完"
+"成，因此不会影响运行时的性能！"
+
+#: src/ch10-03-lifetime-syntax.md:892
+msgid ""
+"Believe it or not, there is much more to learn on the topics we discussed in "
+"this chapter: Chapter 18 discusses trait objects, which are another way to "
+"use traits. There are also more complex scenarios involving lifetime "
+"annotations that you will only need in very advanced scenarios; for those, "
+"you should read the [Rust Reference](../reference/trait-bounds.html). But "
+"next, you’ll learn how to write tests in Rust so that you can make sure your "
+"code is working the way it should."
+msgstr ""
+"信不信由你，关于本章讨论的话题还有很多值得学习的地方：第 18 章讨论了特质对"
+"象，这是一种使用特质的方式。还有更复杂的场景，涉及终身注释，只有在非常高级的"
+"场景下才需要;关于这些，你应该阅读[Rust Reference]（../reference/trait-bounds."
+"html）。但接下来，你将学习如何用 Rust 编写测试，以确保你的代码能正常运行。"

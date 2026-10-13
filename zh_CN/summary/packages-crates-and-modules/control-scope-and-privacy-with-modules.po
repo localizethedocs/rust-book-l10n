@@ -1,0 +1,301 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:3
+msgid "<a id=\"defining-modules-to-control-scope-and-privacy\"></a>"
+msgstr "<a id=\"defining-modules-to-control-scope-and-privacy\"></a>"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:5
+msgid "Control Scope and Privacy with Modules"
+msgstr "通过模块控制作用域和隐私性"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:7
+msgid ""
+"In this section, we’ll talk about modules and other parts of the module "
+"system, namely _paths_, which allow you to name items; the `use` keyword "
+"that brings a path into scope; and the `pub` keyword to make items public. "
+"We’ll also discuss the `as` keyword, external packages, and the glob "
+"operator."
+msgstr ""
+"在本节中，我们将讨论模块和模块系统的其他部分，即_paths_，允许您命名项目； 将"
+"路径带入范围的`use`关键词；以及`pub`关键词将项目公开。 我们还将讨论`as`关键"
+"词、外部包和手套操作员。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:12
+msgid "Modules Cheat Sheet"
+msgstr "模块速查表"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:14
+msgid ""
+"Before we get to the details of modules and paths, here we provide a quick "
+"reference on how modules, paths, the `use` keyword, and the `pub` keyword "
+"work in the compiler, and how most developers organize their code. We’ll be "
+"going through examples of each of these rules throughout this chapter, but "
+"this is a great place to refer to as a reminder of how modules work."
+msgstr ""
+"在我们了解模块和路径的细节之前，我们在这里提供了关于模块、路径如何的快速参"
+"考， `use`关键词和 `pub`关键词在编译器中工作，以及大多数开发者如何组织他们的"
+"代码。 我们将在整个本章中看到这些规则的例子， 但这是一个很好的地方，可以用来"
+"提醒我们模块是如何运作的。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:20
+msgid ""
+"**Start from the crate root**: When compiling a crate, the compiler first "
+"looks in the crate root file (usually _src/lib.rs_ for a library crate and "
+"_src/main.rs_ for a binary crate) for code to compile."
+msgstr ""
+"**从 crate root 开始**：编译时编译器在crate root 文件中首先看到(通常是 _src/"
+"lib)。 s_是要编译代码的库箱子和 _src/main.rs_是要编译的二进制箱子。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:23
+msgid ""
+"**Declaring modules**: In the crate root file, you can declare new modules; "
+"say you declare a “garden” module with `mod garden;`. The compiler will look "
+"for the module’s code in these places:"
+msgstr ""
+"**声明模块**：在crate root 文件中，你可以声明新模块；说你声明一个“花园”模块，"
+"使用 `mod 花园;` 。 编译器将在这些地方寻找该模块的代码："
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:26
+msgid ""
+"Inline, within curly brackets that replace the semicolon following `mod "
+"garden`"
+msgstr "内嵌，用来替换`mod garden`后面的分号"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:28
+msgid "In the file _src/garden.rs_"
+msgstr "在文件 _src/garden.rs_"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:29
+msgid "In the file _src/garden/mod.rs_"
+msgstr "在文件 _src/garden/mod.rs_中"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:30
+msgid ""
+"**Declaring submodules**: In any file other than the crate root, you can "
+"declare submodules. For example, you might declare `mod vegetables;` in _src/"
+"garden.rs_. The compiler will look for the submodule’s code within the "
+"directory named for the parent module in these places:"
+msgstr ""
+"**声明子模块**：在除crate root以外的任何文件中，您可以声明子模块。例如，您可"
+"以在_src/garden中声明`mod 蔬菜;` 。 s_。编译器将在这些地方的父模块命名目录中"
+"寻找子模块的代码："
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:34
+msgid ""
+"Inline, directly following `mod vegetables`, within curly brackets instead "
+"of the semicolon"
+msgstr "内联方式，即直接跟随 `mod vegetables`，在花括号内而不是分号位置"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:36
+msgid "In the file _src/garden/vegetables.rs_"
+msgstr "在文件 _src/garden/vegtables.rs_"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:37
+msgid "In the file _src/garden/vegetables/mod.rs_"
+msgstr "在文件 _src/garden/vegtables/mod.rs_中"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:38
+msgid ""
+"**Paths to code in modules**: Once a module is part of your crate, you can "
+"refer to code in that module from anywhere else in that same crate, as long "
+"as the privacy rules allow, using the path to the code. For example, an "
+"`Asparagus` type in the garden vegetables module would be found at `crate::"
+"garden::vegetables::Asparagus`."
+msgstr ""
+"**模块中代码的路径**：一旦一个模块成为你的 crate 的一部分，你就可以在同一 "
+"crate 的其他位置引用该模块中的代码，只要符合隐私规则，并且使用正确的代码路"
+"径。例如，在 garden vegetables 模块中定义的 `Asparagus` 类型，其路径为 "
+"`crate::garden::vegetables::Asparagus`。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:43
+msgid ""
+"**Private vs. public**: Code within a module is private from its parent "
+"modules by default. To make a module public, declare it with `pub mod` "
+"instead of `mod`. To make items within a public module public as well, use "
+"`pub` before their declarations."
+msgstr ""
+"**私有与公有**：默认情况下，模块内的代码对其父模块是私有的。要将一个模块设为"
+"公有，需要使用 `pub mod` 而不是 `mod` 进行声明。若要使公有模块中的项也变为公"
+"有，则需要在声明前使用 `pub`。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:47
+msgid ""
+"**The `use` keyword**: Within a scope, the `use` keyword creates shortcuts "
+"to items to reduce repetition of long paths. In any scope that can refer to "
+"`crate::garden::vegetables::Asparagus`, you can create a shortcut with `use "
+"crate::garden::vegetables::Asparagus;`, and from then on you only need to "
+"write `Asparagus` to make use of that type in the scope."
+msgstr ""
+"** `use` 关键字**：在作用域内， `use` 关键字可以创建快捷方式，以减少重复编写"
+"长路径。在任何可以引用 `crate::garden::vegetables::Asparagus` 的作用域中，都"
+"可以使用 `use crate::garden::vegetables::Asparagus;` 创建快捷方式，之后只需使"
+"用 `Asparagus` 即可在作用域内使用该类型。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:53
+msgid ""
+"Here, we create a binary crate named `backyard` that illustrates these "
+"rules. The crate’s directory, also named _backyard_, contains these files "
+"and directories:"
+msgstr ""
+"在这里，我们创建了一个名为 `backyard` 的二进制 crate，它展示了这些规则。这个 "
+"crate 的目录也命名为 _backyard_，其中包含以下文件和目录："
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:68
+msgid "The crate root file in this case is _src/main.rs_, and it contains:"
+msgstr "此处的 crate 根文件是 _src/main.rs_，它包含："
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:79
+msgid "\"I'm growing {plant:?}!\""
+msgstr "\"我正在成长{plant:?}!\""
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:85
+msgid ""
+"The `pub mod garden;` line tells the compiler to include the code it finds "
+"in _src/garden.rs_, which is:"
+msgstr "`pub mod garden;`行告诉编译器包含它在_src/garden.rs_中找到的代码："
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:96
+msgid ""
+"Here, `pub mod vegetables;` means the code in _src/garden/vegetables.rs_ is "
+"included too. That code is:"
+msgstr ""
+"在这里，`pub mod 蔬菜;` 是指_src/garden/egtables.rs_ 中的代码也包含在内。这个"
+"代码是："
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:104
+msgid ""
+"Now let’s get into the details of these rules and demonstrate them in action!"
+msgstr "现在让我们了解这些规则的细节并演示它们在操作中！"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:106
+msgid "Grouping Related Code in Modules"
+msgstr "在模块中分组相关代码"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:108
+msgid ""
+"_Modules_ let us organize code within a crate for readability and easy "
+"reuse. Modules also allow us to control the _privacy_ of items because code "
+"within a module is private by default. Private items are internal "
+"implementation details not available for outside use. We can choose to make "
+"modules and the items within them public, which exposes them to allow "
+"external code to use and depend on them."
+msgstr ""
+"_Modules_ 让我们在crate 内组织代码, 以便可读性和易于重新使用。 模块还允许我们"
+"控制项目的 _privacy_ ，因为模块中的代码默认是私有的。 私有项目是内部实现的详"
+"细信息，不供外部使用。 我们可以选择将模块及其内的项目公开发表，这使它们能够使"
+"用和依赖外部代码。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:115
+msgid ""
+"As an example, let’s write a library crate that provides the functionality "
+"of a restaurant. We’ll define the signatures of functions but leave their "
+"bodies empty to concentrate on the organization of the code rather than the "
+"implementation of a restaurant."
+msgstr ""
+"作为一个例子，让我们写一个提供餐馆功能的图书馆箱子。 我们将定义功能的签名，但"
+"是将其机构留空，以便集中精力组织守则，而不是实施餐馆。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:120
+msgid ""
+"In the restaurant industry, some parts of a restaurant are referred to as "
+"front of house and others as back of house. _Front of house_ is where "
+"customers are; this encompasses where the hosts seat customers, servers take "
+"orders and payment, and bartenders make drinks. _Back of house_ is where the "
+"chefs and cooks work in the kitchen, dishwashers clean up, and managers do "
+"administrative work."
+msgstr ""
+"在餐饮业，餐厅的某些部分被称为房顶，另一些则被称为房顶背部。 _居所前端_是客户"
+"所在的地方；这包括主机客户所在的地方，服务器接受订单和付款，以及酒吧做饮料。 "
+"回家是厨师和厨师在厨房工作，洗衣工清理，管理人员从事行政工作。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:127
+msgid ""
+"To structure our crate in this way, we can organize its functions into "
+"nested modules. Create a new library named `restaurant` by running `cargo "
+"new restaurant --lib`. Then, enter the code in Listing 7-1 into _src/lib.rs_ "
+"to define some modules and function signatures; this code is the front of "
+"house section."
+msgstr ""
+"为了以这种方式安排我们的十字架，我们可以将其功能组织成嵌套模块。 通过运行 "
+"\"货运新餐馆--lib\" 创建一个名为“餐馆”的新图书馆。 然后，在列表7-1中输入代码"
+"到 _src/lib.rs_ 来定义某些模块和函数签名；这个代码是房子区段的前面。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:155
+msgid ""
+"We define a module with the `mod` keyword followed by the name of the module "
+"(in this case, `front_of_house`). The body of the module then goes inside "
+"curly brackets. Inside modules, we can place other modules, as in this case "
+"with the modules `hosting` and `serving`. Modules can also hold definitions "
+"for other items, such as structs, enums, constants, traits, and as in "
+"Listing 7-1, functions."
+msgstr ""
+"我们定义一个模块与 `mod` 关键字，然后是模块名称(这里是 `front_of_house`)。 然"
+"后模块的正文放在大括号内。 在模块中，我们可以放置其它模块，如“主机”模块和“服"
+"务”模块。 模块还可以包含其他项目的定义，如结构、枚举、常性、特征，以及清单7-1"
+"中的功能。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:162
+msgid ""
+"By using modules, we can group related definitions together and name why "
+"they’re related. Programmers using this code can navigate the code based on "
+"the groups rather than having to read through all the definitions, making it "
+"easier to find the definitions relevant to them. Programmers adding new "
+"functionality to this code would know where to place the code to keep the "
+"program organized."
+msgstr ""
+"通过使用模块，我们可以将相关定义分组并命名为什么它们是相关的。 使用此代码的程"
+"序员可以浏览基于组的代码，而不必阅读所有定义， 使我们更容易找到与此相关的定"
+"义。 程序员在这个代码中添加新功能会知道在哪里放置代码来保持程序的组织。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:168
+msgid ""
+"Earlier, we mentioned that _src/main.rs_ and _src/lib.rs_ are called _crate "
+"roots_. The reason for their name is that the contents of either of these "
+"two files form a module named `crate` at the root of the crate’s module "
+"structure, known as the _module tree_."
+msgstr ""
+"早些时候，我们已经提到，_src/main.rs_ 和 _src/lib.rs_ 被称为_crate roots_。 "
+"其名称的原因是这两个文件中的任何一个文件的内容形成了一个模块，名为“crate`”，"
+"位于Crate模块结构的根目录下。 称为_module tree_。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:173
+msgid "Listing 7-2 shows the module tree for the structure in Listing 7-1."
+msgstr "列出7-2显示列表7-1中结构的模块树。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:191
+msgid ""
+"This tree shows how some of the modules nest inside other modules; for "
+"example, `hosting` nests inside `front_of_house`. The tree also shows that "
+"some modules are _siblings_, meaning they’re defined in the same module; "
+"`hosting` and `serving` are siblings defined within `front_of_house`. If "
+"module A is contained inside module B, we say that module A is the _child_ "
+"of module B and that module B is the _parent_ of module A. Notice that the "
+"entire module tree is rooted under the implicit module named `crate`."
+msgstr ""
+"这棵树展示了一些模块在其它模块中的排料；例如，`front_of_house`中的`hosting` "
+"嵌套。 树还显示某些模块是 _siblings_, 意思是在同一模块中定义它们; `hosting` "
+"和 `serving` 是在 `front_of_house` 中定义的兄弟姐妹。 如果模块A包含在模块B"
+"内， 我们说，模块A是模块B的儿童，而模块B是模块A的父母。 请注意，整个模块树都"
+"已经扎根于名为“crate”的隐含模块中。"
+
+#: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:199
+msgid ""
+"The module tree might remind you of the filesystem’s directory tree on your "
+"computer; this is a very apt comparison! Just like directories in a "
+"filesystem, you use modules to organize your code. And just like files in a "
+"directory, we need a way to find our modules."
+msgstr ""
+"模块树可能会提醒您您计算机上的文件系统目录树。这是一个非常恰当的比较！ 就像文"
+"件系统中的目录一样，您使用模块来组织代码。 就像目录中的文件一样，我们需要找到"
+"我们的模块。"

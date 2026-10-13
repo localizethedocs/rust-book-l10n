@@ -1,0 +1,83 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch03-04-comments.md:1
+msgid "Comments"
+msgstr "注释"
+
+#: src/ch03-04-comments.md:3
+msgid ""
+"All programmers strive to make their code easy to understand, but sometimes "
+"extra explanation is warranted. In these cases, programmers leave _comments_ "
+"in their source code that the compiler will ignore but that people reading "
+"the source code may find useful."
+msgstr ""
+"所有程序员都努力让他们的代码易于理解，但有时需要额外的解释。在这种情况下，程"
+"序员会在源代码中留下注释，这些注释会被编译器忽略，但阅读代码的人可能会觉得它"
+"们很有用。"
+
+#: src/ch03-04-comments.md:8
+msgid "Here’s a simple comment:"
+msgstr "以下是一个简单的注释："
+
+#: src/ch03-04-comments.md:11
+msgid "// hello, world\n"
+msgstr "// 你好, 世界\n"
+
+#: src/ch03-04-comments.md:14
+msgid ""
+"In Rust, the idiomatic comment style starts a comment with two slashes, and "
+"the comment continues until the end of the line. For comments that extend "
+"beyond a single line, you’ll need to include `//` on each line, like this:"
+msgstr ""
+"在Rust中，惯用的注释风格是用两个斜杠开始注释，然后继续书写直到行尾。如果注释"
+"需要跨越多行，那么需要在每一行都加上 `//`，如下所示："
+
+#: src/ch03-04-comments.md:19
+msgid ""
+"// So we're doing something complicated here, long enough that we need\n"
+"// multiple lines of comments to do it! Whew! Hopefully, this comment will\n"
+"// explain what's going on.\n"
+msgstr ""
+"//所以我们在这里做一些复杂的事情，时间足够长，我们需要\n"
+"//多行评论来做！呼！希望这条评论能\n"
+"//解释发生了什么。\n"
+
+#: src/ch03-04-comments.md:24
+msgid "Comments can also be placed at the end of lines containing code:"
+msgstr "在包含代码的行末尾也可以添加注释："
+
+#: src/ch03-04-comments.md:26 src/ch03-04-comments.md:37
+msgid "<span class=\"filename\">Filename: src/main.rs</span>"
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
+
+#: src/ch03-04-comments.md:30 src/ch03-04-comments.md:41
+msgid "// I'm feeling lucky today\n"
+msgstr "// 我今天感觉幸运了\n"
+
+#: src/ch03-04-comments.md:34
+msgid ""
+"But you’ll more often see them used in this format, with the comment on a "
+"separate line above the code it’s annotating:"
+msgstr ""
+"但是，你更经常会看到它们以这种格式使用，即注释位于代码上方的单独一行中，用来"
+"说明该代码的含义。"
+
+#: src/ch03-04-comments.md:46
+msgid ""
+"Rust also has another kind of comment, documentation comments, which we’ll "
+"discuss in the [“Publishing a Crate to Crates.io”](ch14-02-publishing-to-"
+"crates-io.html)<!-- ignore --> section of Chapter 14."
+msgstr ""
+"Rust还拥有另一种注释类型，即文档注释。我们将在第十四章的[“将包发布到Crates."
+"io”](ch14-02-publishing-to-crates-io.html)<!-- ignore -->部分中讨论这一内容。"
