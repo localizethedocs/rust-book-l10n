@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch20-00-advanced-features.md:1
+msgid "Advanced Features"
+msgstr "高级功能"
+
+#: src/ch20-00-advanced-features.md:3
+msgid ""
+"By now, you’ve learned the most commonly used parts of the Rust programming "
+"language. Before we do one more project, in Chapter 21, we’ll look at a few "
+"aspects of the language you might run into every once in a while but may not "
+"use every day. You can use this chapter as a reference for when you "
+"encounter any unknowns. The features covered here are useful in very "
+"specific situations. Although you might not reach for them often, we want to "
+"make sure you have a grasp of all the features Rust has to offer."
+msgstr ""
+"到目前为止，你已经了解了Rust编程语言中最常用的部分。在继续进行下一个项目之"
+"前，在第21章中，我们将探讨一些你可能会偶尔遇到但可能不会每天使用的语言特性。"
+"你可以将这一章作为遇到任何未知情况的参考。这里介绍的功能在非常特定的情况下非"
+"常有用。虽然你可能不会经常使用这些功能，但我们希望确保你完全掌握了Rust所提供"
+"的所有功能。"
+
+#: src/ch20-00-advanced-features.md:11
+msgid "In this chapter, we’ll cover:"
+msgstr "在本章中，我们将涵盖以下内容："
+
+#: src/ch20-00-advanced-features.md:13
+msgid ""
+"Unsafe Rust: How to opt out of some of Rust’s guarantees and take "
+"responsibility for manually upholding those guarantees"
+msgstr "不安全的 Rust：如何放弃 Rust 的一些保证，并负责手动维护这些保证"
+
+#: src/ch20-00-advanced-features.md:15
+msgid ""
+"Advanced traits: Associated types, default type parameters, fully qualified "
+"syntax, supertraits, and the newtype pattern in relation to traits"
+msgstr ""
+"高级特性：相关类型、默认类型参数、完全限定的语法、超特性以及与特性相关的新类"
+"型模式"
+
+#: src/ch20-00-advanced-features.md:17
+msgid ""
+"Advanced types: More about the newtype pattern, type aliases, the never "
+"type, and dynamically sized types"
+msgstr ""
+"高级类型：关于新类型模式的更多信息、类型别名、永不类型，以及动态大小的类型"
+
+#: src/ch20-00-advanced-features.md:19
+msgid ""
+"Advanced functions and closures: Function pointers and returning closures"
+msgstr "高级函数和闭包：函数指针和返回闭包"
+
+#: src/ch20-00-advanced-features.md:20
+msgid "Macros: Ways to define code that defines more code at compile time"
+msgstr "宏：在编译时定义更多代码的几种方式"
+
+#: src/ch20-00-advanced-features.md:22
+msgid ""
+"It’s a panoply of Rust features with something for everyone! Let’s dive in!"
+msgstr "这是一套涵盖多种 Rust 功能的工具集，适合各种需求！让我们开始吧！"

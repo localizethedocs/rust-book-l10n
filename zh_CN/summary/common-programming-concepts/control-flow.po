@@ -1,0 +1,886 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch03-05-control-flow.md:1
+msgid "Control Flow"
+msgstr "控制流"
+
+#: src/ch03-05-control-flow.md:3
+msgid ""
+"The ability to run some code depending on whether a condition is `true` and "
+"the ability to run some code repeatedly while a condition is `true` are "
+"basic building blocks in most programming languages. The most common "
+"constructs that let you control the flow of execution of Rust code are `if` "
+"expressions and loops."
+msgstr ""
+"根据条件是否为 `true` 来运行某些代码，以及在条件为 `true` 时重复运行某些代码"
+"的能力，是大多数编程语言的基本构建块。在 Rust 代码中，能够控制执行流程的最常"
+"见结构就是 `if` 表达式和循环。"
+
+#: src/ch03-05-control-flow.md:9
+msgid "`if` Expressions"
+msgstr "`if` 表达式"
+
+#: src/ch03-05-control-flow.md:11
+msgid ""
+"An `if` expression allows you to branch your code depending on conditions. "
+"You provide a condition and then state, “If this condition is met, run this "
+"block of code. If the condition is not met, do not run this block of code.”"
+msgstr ""
+"一个 `if` 表达式允许您根据条件来分支代码。您提供一个条件，然后声明：“如果这个"
+"条件满足，就运行这个代码块。如果条件不满足，则不要运行这个代码块。”"
+
+#: src/ch03-05-control-flow.md:15
+msgid ""
+"Create a new project called _branches_ in your _projects_ directory to "
+"explore the `if` expression. In the _src/main.rs_ file, input the following:"
+msgstr ""
+"在你的`_projects_`目录下创建一个新的项目，名为`_branches_`，以探索`if`表达"
+"式。在`_src/main.rs_`文件中，输入以下内容："
+
+#: src/ch03-05-control-flow.md:18 src/ch03-05-control-flow.md:86
+#: src/ch03-05-control-flow.md:121 src/ch03-05-control-flow.md:140
+#: src/ch03-05-control-flow.md:217 src/ch03-05-control-flow.md:274
+#: src/ch03-05-control-flow.md:541
+msgid "<span class=\"filename\">Filename: src/main.rs</span>"
+msgstr "<span class=\"filename\">Filename: src/main.rs</span>"
+
+#: src/ch03-05-control-flow.md:25 src/ch03-05-control-flow.md:65
+msgid "\"condition was true\""
+msgstr "“条件是真”"
+
+#: src/ch03-05-control-flow.md:27 src/ch03-05-control-flow.md:67
+msgid "\"condition was false\""
+msgstr "“条件是假的”"
+
+#: src/ch03-05-control-flow.md:32
+msgid ""
+"All `if` expressions start with the keyword `if`, followed by a condition. "
+"In this case, the condition checks whether or not the variable `number` has "
+"a value less than 5. We place the block of code to execute if the condition "
+"is `true` immediately after the condition inside curly brackets. Blocks of "
+"code associated with the conditions in `if` expressions are sometimes called "
+"_arms_, just like the arms in `match` expressions that we discussed in the "
+"[“Comparing the Guess to the Secret Number”](ch02-00-guessing-game-tutorial."
+"html#comparing-the-guess-to-the-secret-number)<!--\n"
+"ignore --> section of Chapter 2."
+msgstr ""
+"在 `if` 表达式中，所有表达式都以关键字 `if` 开头，随后是一个条件判断。在这种"
+"情况下，该条件用于检查变量 `number` 的值是否小于 5。如果条件满足，即 `true`，"
+"那么就会立即在花括号内执行相应的代码块。在 `if` 表达式中，与条件判断相关的代"
+"码块有时被称为 _arms_，就像我们在第 2 章的 [“比较猜测数与秘密数字”](ch02-00-"
+"guessing-game-tutorial.html#comparing-the-guess-to-the-secret-number)<!--\n"
+"ignore --> 部分所讨论的闭包一样。"
+
+#: src/ch03-05-control-flow.md:41
+msgid ""
+"Optionally, we can also include an `else` expression, which we chose to do "
+"here, to give the program an alternative block of code to execute should the "
+"condition evaluate to `false`. If you don’t provide an `else` expression and "
+"the condition is `false`, the program will just skip the `if` block and move "
+"on to the next bit of code."
+msgstr ""
+"此外，我们还可以包含一个 `else` 表达式，我们选择在这里使用这个表达，以便在条"
+"件评估为 `false` 时，程序可以执行另一个代码块。如果您不提供 `else` 表达式，而"
+"条件是 `false`，那么程序将跳过 `if` 块，直接继续执行下一段代码。"
+
+#: src/ch03-05-control-flow.md:47
+msgid "Try running this code; you should see the following output:"
+msgstr "请尝试运行这段代码；你应该会看到如下输出："
+
+#: src/ch03-05-control-flow.md:49
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s\n"
+"     Running `target/debug/branches`\n"
+"condition was true\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s\n"
+"     Running `target/debug/branches`\n"
+"condition was true\n"
+"```"
+
+#: src/ch03-05-control-flow.md:57
+msgid ""
+"Let’s try changing the value of `number` to a value that makes the condition "
+"`false` to see what happens:"
+msgstr ""
+"让我们尝试将 `number` 的值改为一个能使条件 `false` 成立的值，看看会发生什么："
+
+#: src/ch03-05-control-flow.md:72
+msgid "Run the program again, and look at the output:"
+msgstr "再次运行程序，然后查看输出结果："
+
+#: src/ch03-05-control-flow.md:74
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s\n"
+"     Running `target/debug/branches`\n"
+"condition was false\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s\n"
+"     Running `target/debug/branches`\n"
+"condition was false\n"
+"```"
+
+#: src/ch03-05-control-flow.md:82
+msgid ""
+"It’s also worth noting that the condition in this code _must_ be a `bool`. "
+"If the condition isn’t a `bool`, we’ll get an error. For example, try "
+"running the following code:"
+msgstr ""
+"同样值得注意的是，这段代码中的条件必须是一个 `bool`。如果条件不是 `bool`，我"
+"们将会收到错误。例如，尝试运行以下代码："
+
+#: src/ch03-05-control-flow.md:93
+msgid "\"number was three\""
+msgstr "“数字是三个”"
+
+#: src/ch03-05-control-flow.md:98
+msgid ""
+"The `if` condition evaluates to a value of `3` this time, and Rust throws an "
+"error:"
+msgstr "此时，`if`条件的取值为`3`，Rust会抛出错误："
+
+#: src/ch03-05-control-flow.md:101
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"error[E0308]: mismatched types\n"
+" --> src/main.rs:4:8\n"
+"  |\n"
+"4 |     if number {\n"
+"  |        ^^^^^^ expected `bool`, found integer\n"
+"\n"
+"For more information about this error, try `rustc --explain E0308`.\n"
+"error: could not compile `branches` (bin \"branches\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"error[E0308]: mismatched types\n"
+" --> src/main.rs:4:8\n"
+"  |\n"
+"4 |     if number {\n"
+"  |        ^^^^^^ expected `bool`, found integer\n"
+"\n"
+"For more information about this error, try `rustc --explain E0308`.\n"
+"error: could not compile `branches` (bin \"branches\") due to 1 previous "
+"error\n"
+"```"
+
+#: src/ch03-05-control-flow.md:114
+msgid ""
+"The error indicates that Rust expected a `bool` but got an integer. Unlike "
+"languages such as Ruby and JavaScript, Rust will not automatically try to "
+"convert non-Boolean types to a Boolean. You must be explicit and always "
+"provide `if` with a Boolean as its condition. If we want the `if` code block "
+"to run only when a number is not equal to `0`, for example, we can change "
+"the `if` expression to the following:"
+msgstr ""
+"这个错误表明，Rust期望得到一个 `bool` 类型的值，但实际上得到的是一个整数。与 "
+"Ruby 和 JavaScript 等语言不同，Rust 不会自动将非布尔类型转换为布尔类型。你必"
+"须明确指定，并且始终将 `if` 作为条件，并为其提供一个布尔类型的值。例如，如果"
+"我们希望 `if` 代码块仅在某个数字不等于 `0` 时运行，那么我们可以将 `if` 表达式"
+"修改为如下形式："
+
+#: src/ch03-05-control-flow.md:128
+msgid "\"number was something other than zero\""
+msgstr "“数字不是零的”"
+
+#: src/ch03-05-control-flow.md:133
+msgid "Running this code will print `number was something other than zero`."
+msgstr "运行这段代码将会输出 `number was something other than zero`。"
+
+#: src/ch03-05-control-flow.md:135
+msgid "Handling Multiple Conditions with `else if`"
+msgstr "使用 `else if` 处理多个条件"
+
+#: src/ch03-05-control-flow.md:137
+msgid ""
+"You can use multiple conditions by combining `if` and `else` in an `else if` "
+"expression. For example:"
+msgstr ""
+"您可以通过在 `else if` 表达式中组合 `if` 和 `else` 来使用多个条件。例如："
+
+#: src/ch03-05-control-flow.md:147
+msgid "\"number is divisible by 4\""
+msgstr "“数字是可划分的 4”"
+
+#: src/ch03-05-control-flow.md:149
+msgid "\"number is divisible by 3\""
+msgstr "“数字由3划分”"
+
+#: src/ch03-05-control-flow.md:151
+msgid "\"number is divisible by 2\""
+msgstr "“数字是可划分的 2”"
+
+#: src/ch03-05-control-flow.md:153
+msgid "\"number is not divisible by 4, 3, or 2\""
+msgstr "“数字不可用 4, 3 或 2 划分”"
+
+#: src/ch03-05-control-flow.md:158
+msgid ""
+"This program has four possible paths it can take. After running it, you "
+"should see the following output:"
+msgstr "这个程序有四种可能的执行路径。运行后，你应该看到以下输出："
+
+#: src/ch03-05-control-flow.md:161
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s\n"
+"     Running `target/debug/branches`\n"
+"number is divisible by 3\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s\n"
+"     Running `target/debug/branches`\n"
+"number is divisible by 3\n"
+"```"
+
+#: src/ch03-05-control-flow.md:169
+msgid ""
+"When this program executes, it checks each `if` expression in turn and "
+"executes the first body for which the condition evaluates to `true`. Note "
+"that even though 6 is divisible by 2, we don’t see the output `number is "
+"divisible by 2`, nor do we see the `number is not divisible by 4, 3, or 2` "
+"text from the `else` block. That’s because Rust only executes the block for "
+"the first `true` condition, and once it finds one, it doesn’t even check the "
+"rest."
+msgstr ""
+"当这个程序执行时，它会依次检查每一个 `if` 表达式，并执行第一个满足条件且值为 "
+"`true` 的主体。需要注意的是，尽管 6 可以被 2 整除，但我们并没有看到输出 "
+"`number is divisible by 2`，也没有看到来自 `else` 块的 `number is not "
+"divisible by 4, 3, or 2` 文本。这是因为 Rust 只会执行第一个 `true` 条件的块，"
+"一旦找到满足条件的条件，它就不会再检查其余的条件了。"
+
+#: src/ch03-05-control-flow.md:176
+msgid ""
+"Using too many `else if` expressions can clutter your code, so if you have "
+"more than one, you might want to refactor your code. Chapter 6 describes a "
+"powerful Rust branching construct called `match` for these cases."
+msgstr ""
+"使用过多的 `else if` 表达式会让代码变得混乱，因此如果你使用了多个这样的表达"
+"式，可能需要对代码进行重构。第6章介绍了一种强大的Rust分支构造方式，称为 "
+"`match`，适用于这种情况。"
+
+#: src/ch03-05-control-flow.md:180
+msgid "Using `if` in a `let` Statement"
+msgstr "在 `let` 语句中使用 `if`"
+
+#: src/ch03-05-control-flow.md:182
+msgid ""
+"Because `if` is an expression, we can use it on the right side of a `let` "
+"statement to assign the outcome to a variable, as in Listing 3-2."
+msgstr ""
+"因为 `if` 是一个表达式，我们可以在 `let` 语句的右侧使用它，将结果赋值给一个变"
+"量，如清单3-2所示。"
+
+#: src/ch03-05-control-flow.md:192 src/ch03-05-control-flow.md:225
+msgid "\"The value of number is: {number}\""
+msgstr "\"The value of x is: {number}\""
+
+#: src/ch03-05-control-flow.md:198
+msgid ""
+"The `number` variable will be bound to a value based on the outcome of the "
+"`if` expression. Run this code to see what happens:"
+msgstr ""
+"变量 `number` 将根据 `if` 表达式的结果来绑定一个值。运行这段代码来看看会发生"
+"什么："
+
+#: src/ch03-05-control-flow.md:201
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s\n"
+"     Running `target/debug/branches`\n"
+"The value of number is: 5\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s\n"
+"     Running `target/debug/branches`\n"
+"The value of number is: 5\n"
+"```"
+
+#: src/ch03-05-control-flow.md:209
+msgid ""
+"Remember that blocks of code evaluate to the last expression in them, and "
+"numbers by themselves are also expressions. In this case, the value of the "
+"whole `if` expression depends on which block of code executes. This means "
+"the values that have the potential to be results from each arm of the `if` "
+"must be the same type; in Listing 3-2, the results of both the `if` arm and "
+"the `else` arm were `i32` integers. If the types are mismatched, as in the "
+"following example, we’ll get an error:"
+msgstr ""
+"请记住，代码块的最终计算结果取决于其中最后一个表达式的值，而数字本身也是一种"
+"表达式。在这种情况下，整个 `if` 表达式的值取决于哪个代码块被执行。这意味着 "
+"`if` 的每个分支可能产生的结果必须是相同类型的。在 Listing 3-2 中， `if` 和 "
+"`else` 分支的结果都是 `i32` 整数类型。如果类型不匹配，就像下面的例子一样，就"
+"会出错。"
+
+#: src/ch03-05-control-flow.md:223
+msgid "\"six\""
+msgstr "“六”"
+
+#: src/ch03-05-control-flow.md:229
+msgid ""
+"When we try to compile this code, we’ll get an error. The `if` and `else` "
+"arms have value types that are incompatible, and Rust indicates exactly "
+"where to find the problem in the program:"
+msgstr ""
+"当我们尝试编译这段代码时，会遇到一个错误。`if`和`else`这两个分支中的值类型是"
+"不兼容的，Rust会明确指出问题所在的位置。"
+
+#: src/ch03-05-control-flow.md:233
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"error[E0308]: `if` and `else` have incompatible types\n"
+" --> src/main.rs:4:44\n"
+"  |\n"
+"4 |     let number = if condition { 5 } else { \"six\" };\n"
+"  |                                 -          ^^^^^ expected integer, found "
+"`&str`\n"
+"  |                                 |\n"
+"  |                                 expected because of this\n"
+"\n"
+"For more information about this error, try `rustc --explain E0308`.\n"
+"error: could not compile `branches` (bin \"branches\") due to 1 previous "
+"error\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling branches v0.1.0 (file:///projects/branches)\n"
+"error[E0308]: `if` and `else` have incompatible types\n"
+" --> src/main.rs:4:44\n"
+"  |\n"
+"4 |     let number = if condition { 5 } else { \"six\" };\n"
+"  |                                 -          ^^^^^ expected integer, found "
+"`&str`\n"
+"  |                                 |\n"
+"  |                                 expected because of this\n"
+"\n"
+"For more information about this error, try `rustc --explain E0308`.\n"
+"error: could not compile `branches` (bin \"branches\") due to 1 previous "
+"error\n"
+"```"
+
+#: src/ch03-05-control-flow.md:248
+msgid ""
+"The expression in the `if` block evaluates to an integer, and the expression "
+"in the `else` block evaluates to a string. This won’t work, because "
+"variables must have a single type, and Rust needs to know definitively at "
+"compile time what type the `number` variable is. Knowing the type of "
+"`number` lets the compiler verify the type is valid everywhere we use "
+"`number`. Rust wouldn’t be able to do that if the type of `number` was only "
+"determined at runtime; the compiler would be more complex and would make "
+"fewer guarantees about the code if it had to keep track of multiple "
+"hypothetical types for any variable."
+msgstr ""
+"`if`块中的表达式计算结果为整数，而`else`块中的表达式计算结果为字符串。这种写"
+"法是行不通的，因为变量必须具有单一类型，而Rust需要在编译时明确知道`number`变"
+"量的类型。了解`number`的类型可以让编译器验证`number`在任何地方使用的类型都是"
+"有效的。如果`number`的类型仅在运行时才确定，Rust就无法实现这一点；在这种情况"
+"下，编译器会变得更加复杂，并且对于代码的可靠性也会降低，因为它需要跟踪任何变"
+"量的多种可能类型。"
+
+#: src/ch03-05-control-flow.md:257
+msgid "Repetition with Loops"
+msgstr "循环中的重复操作"
+
+#: src/ch03-05-control-flow.md:259
+msgid ""
+"It’s often useful to execute a block of code more than once. For this task, "
+"Rust provides several _loops_, which will run through the code inside the "
+"loop body to the end and then start immediately back at the beginning. To "
+"experiment with loops, let’s make a new project called _loops_."
+msgstr ""
+"多次执行一段代码通常是非常有用的。为此，Rust提供了多种循环结构，这些结构会依"
+"次执行循环体内的代码，直到最后，然后再立即从开始处重新开始。为了尝试使用循环"
+"结构，让我们创建一个新的项目，命名为 _loops_。"
+
+#: src/ch03-05-control-flow.md:264
+msgid ""
+"Rust has three kinds of loops: `loop`, `while`, and `for`. Let’s try each "
+"one."
+msgstr "Rust 有三种循环结构：`loop`、`while` 和 `for`。让我们分别尝试每一种。"
+
+#: src/ch03-05-control-flow.md:266
+msgid "Repeating Code with `loop`"
+msgstr "使用 `loop` 重复代码"
+
+#: src/ch03-05-control-flow.md:268
+msgid ""
+"The `loop` keyword tells Rust to execute a block of code over and over again "
+"either forever or until you explicitly tell it to stop."
+msgstr ""
+"关键字 `loop` 告诉Rust重复执行一段代码，可以永远执行，也可以直到你明确指示停"
+"止为止。"
+
+#: src/ch03-05-control-flow.md:271
+msgid ""
+"As an example, change the _src/main.rs_ file in your _loops_ directory to "
+"look like this:"
+msgstr "例如，将您在 _loops_ 目录中的 _src/main.rs_ 文件更改为如下形式："
+
+#: src/ch03-05-control-flow.md:279
+msgid "\"again!\""
+msgstr "“再次！”"
+
+#: src/ch03-05-control-flow.md:284
+msgid ""
+"When we run this program, we’ll see `again!` printed over and over "
+"continuously until we stop the program manually. Most terminals support the "
+"keyboard shortcut <kbd>ctrl</kbd>\\-<kbd>C</kbd> to interrupt a program that "
+"is stuck in a continual loop. Give it a try:"
+msgstr ""
+"当我们运行这个程序时，会看到 `again!` 不断被打印出来，直到我们手动停止程序。"
+"大多数终端都支持键盘快捷键<kbd>ctrl</kbd>-<kbd>C</kbd>来中断那些陷入无限循环"
+"的程序。试试看吧："
+
+#: src/ch03-05-control-flow.md:295
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling loops v0.1.0 (file:///projects/loops)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.08s\n"
+"     Running `target/debug/loops`\n"
+"again!\n"
+"again!\n"
+"again!\n"
+"again!\n"
+"^Cagain!\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling loops v0.1.0 (file:///projects/loops)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.08s\n"
+"     Running `target/debug/loops`\n"
+"again!\n"
+"again!\n"
+"again!\n"
+"again!\n"
+"^Cagain!\n"
+"```"
+
+#: src/ch03-05-control-flow.md:307
+msgid ""
+"The symbol `^C` represents where you pressed <kbd>ctrl</kbd>\\-<kbd>C</kbd>."
+msgstr "符号 `^C` 表示您按下 <kbd>ctrl</kbd>-<kbd>C</kbd> 的位置。"
+
+#: src/ch03-05-control-flow.md:309
+msgid ""
+"You may or may not see the word `again!` printed after the `^C`, depending "
+"on where the code was in the loop when it received the interrupt signal."
+msgstr ""
+"您可能会看到，也可能不会看到单词 `again!` 被打印在 `^C` 之后，这取决于代码在"
+"循环中接收到中断信号时的位置。"
+
+#: src/ch03-05-control-flow.md:312
+msgid ""
+"Fortunately, Rust also provides a way to break out of a loop using code. You "
+"can place the `break` keyword within the loop to tell the program when to "
+"stop executing the loop. Recall that we did this in the guessing game in the "
+"[“Quitting After a Correct Guess”](ch02-00-guessing-game-tutorial."
+"html#quitting-after-a-correct-guess)<!-- ignore\n"
+"--> section of Chapter 2 to exit the program when the user won the game by "
+"guessing the correct number."
+msgstr ""
+"幸运的是，Rust还提供了一种通过代码来跳出循环的方法。你可以在循环内部添加 "
+"`break` 关键字，以此来告诉程序何时停止执行循环。回想一下，在第二章的“猜对后退"
+"出”部分，我们就是使用这种方法在用户猜对数字后退出程序的。"
+
+#: src/ch03-05-control-flow.md:319
+msgid ""
+"We also used `continue` in the guessing game, which in a loop tells the "
+"program to skip over any remaining code in this iteration of the loop and go "
+"to the next iteration."
+msgstr ""
+"在猜谜游戏中，我们还使用了 `continue` 这个符号。它会在循环中告诉程序跳过本次"
+"循环中所有剩余的代码，直接进入下一次循环。"
+
+#: src/ch03-05-control-flow.md:323
+msgid "Returning Values from Loops"
+msgstr "从循环中返回值"
+
+#: src/ch03-05-control-flow.md:325
+msgid ""
+"One of the uses of a `loop` is to retry an operation you know might fail, "
+"such as checking whether a thread has completed its job. You might also need "
+"to pass the result of that operation out of the loop to the rest of your "
+"code. To do this, you can add the value you want returned after the `break` "
+"expression you use to stop the loop; that value will be returned out of the "
+"loop so that you can use it, as shown here:"
+msgstr ""
+"`loop`的一个用途是重新尝试一个可能失败的操作，比如检查一个线程是否已经完成了"
+"它的任务。你可能还需要将该操作的结果从循环中传递出去，以便让其他代码能够使用"
+"它。为此，你可以在使用的`break`表达式之后添加你想要返回的值；这个值将会从循环"
+"中返回，从而可以被其他代码使用，如下所示："
+
+#: src/ch03-05-control-flow.md:344
+msgid "\"The result is {result}\""
+msgstr "\"The result is {result}\""
+
+#: src/ch03-05-control-flow.md:348
+msgid ""
+"Before the loop, we declare a variable named `counter` and initialize it to "
+"`0`. Then, we declare a variable named `result` to hold the value returned "
+"from the loop. On every iteration of the loop, we add `1` to the `counter` "
+"variable, and then check whether the `counter` is equal to `10`. When it is, "
+"we use the `break` keyword with the value `counter * 2`. After the loop, we "
+"use a semicolon to end the statement that assigns the value to `result`. "
+"Finally, we print the value in `result`, which in this case is `20`."
+msgstr ""
+"在循环之前，我们声明一个名为 `counter` 的变量，并将其初始化为 `0`。然后，我们"
+"声明一个名为 `result` 的变量，用于存储循环返回的值。在循环的每次迭代中，我们"
+"将 `1` 添加到 `counter` 变量中，然后检查 `counter` 是否等于 `10`。当它们相等"
+"时，我们使用 `break` 关键字，并将值 `counter * 2` 赋给该变量。循环结束后，我"
+"们使用分号来结束将值赋给 `result` 的语句。最后，我们打印 `result` 中的值，在"
+"这个案例中，该值为 `20`。"
+
+#: src/ch03-05-control-flow.md:356
+msgid ""
+"You can also `return` from inside a loop. While `break` only exits the "
+"current loop, `return` always exits the current function."
+msgstr ""
+"您也可以在循环内部使用 `return`。而 `break` 仅会退出当前循环，而 `return` 则"
+"会退出当前函数。"
+
+#: src/ch03-05-control-flow.md:360
+msgid "<a id=\"loop-labels-to-disambiguate-between-multiple-loops\"></a>"
+msgstr "<a id=\"loop-labels-to-disambiguate-between-multiple-loops\"></a>"
+
+#: src/ch03-05-control-flow.md:362
+msgid "Disambiguating with Loop Labels"
+msgstr "使用循环标签进行歧义消除"
+
+#: src/ch03-05-control-flow.md:364
+msgid ""
+"If you have loops within loops, `break` and `continue` apply to the "
+"innermost loop at that point. You can optionally specify a _loop label_ on a "
+"loop that you can then use with `break` or `continue` to specify that those "
+"keywords apply to the labeled loop instead of the innermost loop. Loop "
+"labels must begin with a single quote. Here’s an example with two nested "
+"loops:"
+msgstr ""
+"如果你在循环内部还有循环，那么 `break` 和 `continue` 将适用于该循环中的最内层"
+"循环。你可以选择性地为某个循环指定一个 _循环标签_，然后可以使用 `break` 或 "
+"`continue` 来指定这些关键字适用于该带有标签的循环，而不是最内层的循环。循环标"
+"签必须以单引号开头。以下是一个包含两个嵌套循环的示例："
+
+#: src/ch03-05-control-flow.md:374
+msgid "\"count = {count}\""
+msgstr "\"count = {count}\""
+
+#: src/ch03-05-control-flow.md:378
+msgid "\"remaining = {remaining}\""
+msgstr "\"remaining = {remaining}\""
+
+#: src/ch03-05-control-flow.md:390
+msgid "\"End count = {count}\""
+msgstr "\"End count = {count}\""
+
+#: src/ch03-05-control-flow.md:394
+msgid ""
+"The outer loop has the label `'counting_up`, and it will count up from 0 to "
+"2. The inner loop without a label counts down from 10 to 9. The first "
+"`break` that doesn’t specify a label will exit the inner loop only. The "
+"`break 'counting_up;` statement will exit the outer loop. This code prints:"
+msgstr ""
+"外部循环有一个标签为 `'counting_up`，它将从0计数到2。没有标签的内部循环则从10"
+"计数到9。第一个没有指定标签的 `break` 语句只会退出内部循环。而 `break` "
+"'counting_up;` 语句则会退出外部循环。这段代码会输出："
+
+#: src/ch03-05-control-flow.md:399
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling loops v0.1.0 (file:///projects/loops)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.58s\n"
+"     Running `target/debug/loops`\n"
+"count = 0\n"
+"remaining = 10\n"
+"remaining = 9\n"
+"count = 1\n"
+"remaining = 10\n"
+"remaining = 9\n"
+"count = 2\n"
+"remaining = 10\n"
+"End count = 2\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling loops v0.1.0 (file:///projects/loops)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.58s\n"
+"     Running `target/debug/loops`\n"
+"count = 0\n"
+"remaining = 10\n"
+"remaining = 9\n"
+"count = 1\n"
+"remaining = 10\n"
+"remaining = 9\n"
+"count = 2\n"
+"remaining = 10\n"
+"End count = 2\n"
+"```"
+
+#: src/ch03-05-control-flow.md:416
+msgid "<a id=\"conditional-loops-with-while\"></a>"
+msgstr "<a id=\"conditional-loops-with-while\"></a>"
+
+#: src/ch03-05-control-flow.md:418
+msgid "Streamlining Conditional Loops with while"
+msgstr "使用 while 简化条件循环"
+
+#: src/ch03-05-control-flow.md:420
+msgid ""
+"A program will often need to evaluate a condition within a loop. While the "
+"condition is `true`, the loop runs. When the condition ceases to be `true`, "
+"the program calls `break`, stopping the loop. It’s possible to implement "
+"behavior like this using a combination of `loop`, `if`, `else`, and `break`; "
+"you could try that now in a program, if you’d like. However, this pattern is "
+"so common that Rust has a built-in language construct for it, called a "
+"`while` loop. In Listing 3-3, we use `while` to loop the program three "
+"times, counting down each time, and then, after the loop, to print a message "
+"and exit."
+msgstr ""
+"程序通常需要在循环中评估某个条件。当条件满足 `true` 时，循环会继续运行。当条"
+"件不再满足 `true` 时，程序会调用 `break` 来终止循环。可以使用 `loop`、 "
+"`if`、 `else` 和 `break` 的组合来实现这样的行为；如果你愿意，现在就可以在程序"
+"中尝试这样做。不过，这种模式非常常见，Rust 为此提供了一种内置的语言结构，称"
+"为 `while` 循环。在清单 3-3 中，我们使用 `while` 来循环执行程序三次，每次循环"
+"都会递减计数，然后在循环结束后打印一条消息并退出程序。"
+
+#: src/ch03-05-control-flow.md:436 src/ch03-05-control-flow.md:546
+msgid "\"{number}!\""
+msgstr "\"{number}!\""
+
+#: src/ch03-05-control-flow.md:441 src/ch03-05-control-flow.md:548
+msgid "\"LIFTOFF!!!\""
+msgstr "\"LIFTOFF!!!\""
+
+#: src/ch03-05-control-flow.md:447
+msgid ""
+"This construct eliminates a lot of nesting that would be necessary if you "
+"used `loop`, `if`, `else`, and `break`, and it’s clearer. While a condition "
+"evaluates to `true`, the code runs; otherwise, it exits the loop."
+msgstr ""
+"这种构造方式消除了使用`loop`、`if`、`else`和`break`时所需的许多嵌套结构，使得"
+"代码更加清晰。当条件评估结果为`true`时，代码会执行；否则，循环会终止。"
+
+#: src/ch03-05-control-flow.md:451
+msgid "Looping Through a Collection with `for`"
+msgstr "使用 `for` 遍历集合"
+
+#: src/ch03-05-control-flow.md:453
+msgid ""
+"You can choose to use the `while` construct to loop over the elements of a "
+"collection, such as an array. For example, the loop in Listing 3-4 prints "
+"each element in the array `a`."
+msgstr ""
+"您可以选择使用 `while` 结构来遍历集合中的元素，例如数组。例如，清单 3-4 中的"
+"循环会打印出数组 `a` 中的每个元素。"
+
+#: src/ch03-05-control-flow.md:465
+msgid "\"the value is: {}\""
+msgstr "\"the value of x is: {}\""
+
+#: src/ch03-05-control-flow.md:474
+msgid ""
+"Here, the code counts up through the elements in the array. It starts at "
+"index `0` and then loops until it reaches the final index in the array (that "
+"is, when `index < 5` is no longer `true`). Running this code will print "
+"every element in the array:"
+msgstr ""
+"这里的代码通过数组中的元素计数。 它从索引`0`开始，然后循环直到它达到数组中的"
+"最终索引(即)。 当`index < 5` 不再是 `true`。 运行此代码将打印数组中的每个元"
+"素："
+
+#: src/ch03-05-control-flow.md:479
+msgid ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling loops v0.1.0 (file:///projects/loops)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.32s\n"
+"     Running `target/debug/loops`\n"
+"the value is: 10\n"
+"the value is: 20\n"
+"the value is: 30\n"
+"the value is: 40\n"
+"the value is: 50\n"
+"```"
+msgstr ""
+"```console\n"
+"$ cargo run\n"
+"   Compiling loops v0.1.0 (file:///projects/loops)\n"
+"    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.32s\n"
+"     Running `target/debug/loops`\n"
+"the value is: 10\n"
+"the value is: 20\n"
+"the value is: 30\n"
+"the value is: 40\n"
+"the value is: 50\n"
+"```"
+
+#: src/ch03-05-control-flow.md:491
+msgid ""
+"All five array values appear in the terminal, as expected. Even though "
+"`index` will reach a value of `5` at some point, the loop stops executing "
+"before trying to fetch a sixth value from the array."
+msgstr ""
+"所有五个数组的值都会按预期出现在终端中。 即使`index` 在某个时候会达到`5` 的"
+"值。 在尝试从数组中获取第六个值之前，循环停止执行。"
+
+#: src/ch03-05-control-flow.md:495
+msgid ""
+"However, this approach is error-prone; we could cause the program to panic "
+"if the index value or test condition is incorrect. For example, if you "
+"changed the definition of the `a` array to have four elements but forgot to "
+"update the condition to `while index < 4`, the code would panic. It’s also "
+"slow, because the compiler adds runtime code to perform the conditional "
+"check of whether the index is within the bounds of the array on every "
+"iteration through the loop."
+msgstr ""
+"然而，这种方法是错误的发音；如果指数值或测试条件不正确，我们可能会使程序引起"
+"恐慌。 例如， 如果你修改了 “a” 数组的定义为有四个元素，但忘记将条件更新为 "
+"\"同时索引< 4\", 这个代码会引起恐慌。 这也很慢， 因为编译器通过循环添加运行时"
+"代码来进行条件检查索引是否在数组的范围内。"
+
+#: src/ch03-05-control-flow.md:502
+msgid ""
+"As a more concise alternative, you can use a `for` loop and execute some "
+"code for each item in a collection. A `for` loop looks like the code in "
+"Listing 3-5."
+msgstr ""
+"作为一个更简洁的替代，您可以使用 \"for\" 循环并在集合中对每个项目执行一些代"
+"码。 一个 \"for\" 循环看起来像是 3-5 列表中的代码。"
+
+#: src/ch03-05-control-flow.md:512
+msgid "\"the value is: {element}\""
+msgstr "\"the value of x is: {element}\""
+
+#: src/ch03-05-control-flow.md:519
+msgid ""
+"When we run this code, we’ll see the same output as in Listing 3-4. More "
+"importantly, we’ve now increased the safety of the code and eliminated the "
+"chance of bugs that might result from going beyond the end of the array or "
+"not going far enough and missing some items. Machine code generated from "
+"`for` loops can be more efficient as well because the index doesn’t need to "
+"be compared to the length of the array at every iteration."
+msgstr ""
+"当我们运行这个代码时，我们将看到与清单3-4中相同的输出。 更重要的是， 我们现在"
+"已经提高了代码的安全性并删除了可能因数组结束后出现的 bug 的可能性，或者还不够"
+"远，丢失了一些物品。 从 \"for\" 循环生成的机器代码可能更有效率，因为不需要在"
+"每次迭代中将索引与数组的长度进行比较。"
+
+#: src/ch03-05-control-flow.md:526
+msgid ""
+"Using the `for` loop, you wouldn’t need to remember to change any other code "
+"if you changed the number of values in the array, as you would with the "
+"method used in Listing 3-4."
+msgstr ""
+"通过使用 ``for`` 循环，如果你更改了数组中值的数量，就不需要记得修改其他代码，"
+"这与 Listing 3-4 中使用的那种方法相比更加方便。"
+
+#: src/ch03-05-control-flow.md:530
+msgid ""
+"The safety and conciseness of `for` loops make them the most commonly used "
+"loop construct in Rust. Even in situations in which you want to run some "
+"code a certain number of times, as in the countdown example that used a "
+"`while` loop in Listing 3-3, most Rustaceans would use a `for` loop. The way "
+"to do that would be to use a `Range`, provided by the standard library, "
+"which generates all numbers in sequence starting from one number and ending "
+"before another number."
+msgstr ""
+"`for`循环在安全性和简洁性方面表现优异，因此成为Rust中最常用的循环结构。即使是"
+"在需要重复执行某些代码的情况下，比如清单3-3中使用的倒计时示例中所用的`while`"
+"循环，大多数Rust开发者也会选择使用`for`循环。要实现这一点，可以使用标准库提供"
+"的`Range`循环结构，该结构能够按顺序生成所有数字，从数字1开始，并在某个数字之"
+"前结束。"
+
+#: src/ch03-05-control-flow.md:538
+msgid ""
+"Here’s what the countdown would look like using a `for` loop and another "
+"method we’ve not yet talked about, `rev`, to reverse the range:"
+msgstr ""
+"如果使用一个`for`循环，以及另一种我们尚未讨论的方法——`rev`来反转该范围，那么"
+"倒计时将会呈现如下效果："
+
+#: src/ch03-05-control-flow.md:552
+msgid "This code is a bit nicer, isn’t it?"
+msgstr "这段代码看起来更简洁了，不是吗？"
+
+#: src/ch03-05-control-flow.md:554
+msgid "Summary"
+msgstr "摘要"
+
+#: src/ch03-05-control-flow.md:556
+msgid ""
+"You made it! This was a sizable chapter: You learned about variables, scalar "
+"and compound data types, functions, comments, `if` expressions, and loops! "
+"To practice with the concepts discussed in this chapter, try building "
+"programs to do the following:"
+msgstr ""
+"你成功了！这一章的内容相当丰富：你学习了变量、标量及复合数据类型、函数、注"
+"释、``if``表达式以及循环！为了练习本章所讨论的概念，试着编写程序来实现以下任"
+"务："
+
+#: src/ch03-05-control-flow.md:561
+msgid "Convert temperatures between Fahrenheit and Celsius."
+msgstr "将温度从华氏度转换为摄氏度。"
+
+#: src/ch03-05-control-flow.md:562
+msgid "Generate the _n_th Fibonacci number."
+msgstr "生成第*n*个斐波那契数。 "
+
+#: src/ch03-05-control-flow.md:563
+msgid ""
+"Print the lyrics to the Christmas carol “The Twelve Days of Christmas,” "
+"taking advantage of the repetition in the song."
+msgstr "利用歌曲中的重复结构，打印出圣诞颂歌《十二天的圣诞节》的歌词。"
+
+#: src/ch03-05-control-flow.md:566
+msgid ""
+"When you’re ready to move on, we’ll talk about a concept in Rust that "
+"_doesn’t_ commonly exist in other programming languages: ownership."
+msgstr ""
+"当你准备继续前进时，我们将讨论一个在Rust中独有的概念——所有权。这个概念在其他"
+"编程语言中并不常见。"

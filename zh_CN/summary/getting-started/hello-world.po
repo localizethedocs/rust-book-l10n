@@ -1,0 +1,338 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch01-02-hello-world.md:1
+msgid "Hello, World!"
+msgstr "\"Hello, World！\""
+
+#: src/ch01-02-hello-world.md:3
+msgid ""
+"Now that you’ve installed Rust, it’s time to write your first Rust program. "
+"It’s traditional when learning a new language to write a little program that "
+"prints the text `Hello, world!` to the screen, so we’ll do the same here!"
+msgstr ""
+"既然你已经安装了Rust，现在是时候编写你的第一个Rust程序了。在学习新语言时，通"
+"常会先编写一个小程序，将文本“ `Hello, world!` ”打印到屏幕上。我们也会这样做！"
+
+#: src/ch01-02-hello-world.md:7
+msgid ""
+"Note: This book assumes basic familiarity with the command line. Rust makes "
+"no specific demands about your editing or tooling or where your code lives, "
+"so if you prefer to use an IDE instead of the command line, feel free to use "
+"your favorite IDE. Many IDEs now have some degree of Rust support; check the "
+"IDE’s documentation for details. The Rust team has been focusing on enabling "
+"great IDE support via `rust-analyzer`. See [Appendix D](appendix-04-useful-"
+"development-tools.html)<!-- ignore --> for more details."
+msgstr ""
+"注意：本书假设读者已经基本熟悉命令行操作。Rust对用户的编辑工具或代码存储位置"
+"没有特定要求，因此如果您更喜欢使用集成开发环境（IDE）而不是命令行，请随意选择"
+"您喜欢的IDE。如今许多IDE都提供了一定程度的Rust支持；请查阅IDE的文档以获取详细"
+"信息。Rust团队一直致力于通过 `rust-analyzer` 来提供出色的IDE支持。更多详情请"
+"参见[附录D](appendix-04-useful-development-tools.html)<!-- ignore -->。"
+
+#: src/ch01-02-hello-world.md:16
+msgid "<a id=\"creating-a-project-directory\"></a>"
+msgstr "<a id=\"creating-a-project-directory\"></a>"
+
+#: src/ch01-02-hello-world.md:18
+msgid "Project Directory Setup"
+msgstr "项目目录设置"
+
+#: src/ch01-02-hello-world.md:20
+msgid ""
+"You’ll start by making a directory to store your Rust code. It doesn’t "
+"matter to Rust where your code lives, but for the exercises and projects in "
+"this book, we suggest making a _projects_ directory in your home directory "
+"and keeping all your projects there."
+msgstr ""
+"首先，你需要创建一个目录来存放你的 Rust 代码。对于 Rust 来说，代码存储的位置"
+"并不重要，但针对本书中的练习和项目，我们建议在你的主目录中创建一个 "
+"_projects_ 目录，并将所有的项目都放在那里。"
+
+#: src/ch01-02-hello-world.md:25
+msgid ""
+"Open a terminal and enter the following commands to make a _projects_ "
+"directory and a directory for the “Hello, world!” project within the "
+"_projects_ directory."
+msgstr ""
+"打开终端并输入以下命令，以创建一个名为`_projects_`的目录，以及在该目录中用于"
+"存放“Hello, world!”项目的子目录。"
+
+#: src/ch01-02-hello-world.md:28
+msgid "For Linux, macOS, and PowerShell on Windows, enter this:"
+msgstr "对于Linux、macOS以及Windows上的PowerShell，请输入以下内容："
+
+#: src/ch01-02-hello-world.md:37
+msgid "For Windows CMD, enter this:"
+msgstr "在Windows CMD下，请输入以下内容："
+
+#: src/ch01-02-hello-world.md:40 src/ch01-02-hello-world.md:41
+msgid "\"%USERPROFILE%\\projects\""
+msgstr "\"%USERPROFILE%\\projects\""
+
+#: src/ch01-02-hello-world.md:47
+msgid "<a id=\"writing-and-running-a-rust-program\"></a>"
+msgstr "<a id=\"writing-and-running-a-rust-program\"></a>"
+
+#: src/ch01-02-hello-world.md:49
+msgid "Rust Program Basics"
+msgstr "Rust 程序基础"
+
+#: src/ch01-02-hello-world.md:51
+msgid ""
+"Next, make a new source file and call it _main.rs_. Rust files always end "
+"with the _.rs_ extension. If you’re using more than one word in your "
+"filename, the convention is to use an underscore to separate them. For "
+"example, use _hello_world.rs_ rather than _helloworld.rs_."
+msgstr ""
+"接下来，创建一个新的源文件，并将其命名为_main.rs_。Rust文件的扩展名通常为_."
+"rs_。如果你在文件名中使用了多个单词，通常可以使用下划线来分隔它们。例如，应该"
+"使用_hello_world.rs_而不是_helloworld.rs_。"
+
+#: src/ch01-02-hello-world.md:56
+msgid ""
+"Now open the _main.rs_ file you just created and enter the code in Listing "
+"1-1."
+msgstr "现在打开你刚刚创建的`_main.rs`文件，并输入列表1-1中的代码。"
+
+#: src/ch01-02-hello-world.md:62 src/ch01-02-hello-world.md:128
+msgid "\"Hello, world!\""
+msgstr "“你好，世界！”"
+
+#: src/ch01-02-hello-world.md:68
+msgid ""
+"Save the file and go back to your terminal window in the _~/projects/"
+"hello_world_ directory. On Linux or macOS, enter the following commands to "
+"compile and run the file:"
+msgstr ""
+"保存文件后，回到 `_~/projects/hello_world_`目录中的终端窗口。在Linux或MacOS系"
+"统中，输入以下命令来编译并运行该文件："
+
+#: src/ch01-02-hello-world.md:78
+msgid "On Windows, enter the command `.\\main` instead of `./main`:"
+msgstr "在Windows系统中，请输入命令 `.\\main` 而不是 `./main`："
+
+#: src/ch01-02-hello-world.md:86
+msgid ""
+"Regardless of your operating system, the string `Hello, world!` should print "
+"to the terminal. If you don’t see this output, refer back to the "
+"[“Troubleshooting”](ch01-01-installation.html#troubleshooting)<!-- ignore --"
+"> part of the Installation section for ways to get help."
+msgstr ""
+"无论您的操作系统如何，字符串`Hello, world!`都应该打印到终端。 如果您看不到此"
+"输出, 请参阅[\"疑难解答\"](ch01-01-installation.html#troubleshooting)<!-- "
+"ignore --> 安装部分的部分以获取帮助。"
+
+#: src/ch01-02-hello-world.md:91
+msgid ""
+"If `Hello, world!` did print, congratulations! You’ve officially written a "
+"Rust program. That makes you a Rust programmer—welcome!"
+msgstr ""
+"如果 `Hello, world!` 确实被打印出来了，恭喜！你正式编写了一个 Rust 程序。这使"
+"你成为了一名 Rust 程序员——欢迎加入！"
+
+#: src/ch01-02-hello-world.md:96
+msgid "<a id=\"anatomy-of-a-rust-program\"></a>"
+msgstr "<a id=\"anatomy-of-a-rust-program\"></a>"
+
+#: src/ch01-02-hello-world.md:98
+msgid "The Anatomy of a Rust Program"
+msgstr "Rust 程序的构成"
+
+#: src/ch01-02-hello-world.md:100
+msgid ""
+"Let’s review this “Hello, world!” program in detail. Here’s the first piece "
+"of the puzzle:"
+msgstr "让我们详细回顾一下这个“Hello, world!”程序。这就是问题的第一个部分："
+
+#: src/ch01-02-hello-world.md:109
+msgid ""
+"These lines define a function named `main`. The `main` function is special: "
+"It is always the first code that runs in every executable Rust program. "
+"Here, the first line declares a function named `main` that has no parameters "
+"and returns nothing. If there were parameters, they would go inside the "
+"parentheses (`()`)."
+msgstr ""
+"这些行定义了一个名为 `main` 的函数。而 `main` 这个函数很特别：它总是每个可执"
+"行的 Rust 程序中首先运行的部分。在这里，第一行定义了一个名为 `main` 的函数，"
+"该函数没有参数，并且不返回任何值。如果该函数有参数，那么参数将会放在括号中 "
+"(`()`)。"
+
+#: src/ch01-02-hello-world.md:114
+msgid ""
+"The function body is wrapped in `{}`. Rust requires curly brackets around "
+"all function bodies. It’s good style to place the opening curly bracket on "
+"the same line as the function declaration, adding one space in between."
+msgstr ""
+"函数体被包裹在 `{}` 中。Rust 要求所有函数体都用大括号包围。将开大括号放在与函"
+"数声明相同的行上，并且两者之间保留一个空格，这是一种良好的编程风格。"
+
+#: src/ch01-02-hello-world.md:118
+msgid ""
+"Note: If you want to stick to a standard style across Rust projects, you can "
+"use an automatic formatter tool called `rustfmt` to format your code in a "
+"particular style (more on `rustfmt` in [Appendix D](appendix-04-useful-"
+"development-tools.html)<!-- ignore -->). The Rust team has included this "
+"tool with the standard Rust distribution, as `rustc` is, so it should "
+"already be installed on your computer!"
+msgstr ""
+"注意：如果您希望在整个 Rust 项目中保持统一的风格，可以使用一个名为 `rustfmt` "
+"的自动格式化工具来按照特定格式对代码进行格式化。关于 `rustfmt` 的更多信息，"
+"(请参见[附录 D](appendix-04-useful-development-tools.html)<!-- ignore -->)。"
+"Rust 团队已经将这一工具作为标准 Rust 发行版的一部分包含进来，因此它应该已经安"
+"装在您的计算机上！"
+
+#: src/ch01-02-hello-world.md:125
+msgid "The body of the `main` function holds the following code:"
+msgstr "`main`函数的主体包含以下代码："
+
+#: src/ch01-02-hello-world.md:131
+msgid ""
+"This line does all the work in this little program: It prints text to the "
+"screen. There are three important details to notice here."
+msgstr ""
+"这一行代码完成了这个小程序的所有工作：它将文本打印到屏幕上。这里有三个需要注"
+"意的重要细节。"
+
+#: src/ch01-02-hello-world.md:134
+msgid ""
+"First, `println!` calls a Rust macro. If it had called a function instead, "
+"it would be entered as `println` (without the `!`). Rust macros are a way to "
+"write code that generates code to extend Rust syntax, and we’ll discuss them "
+"in more detail in [Chapter 20](ch20-05-macros.html)<!-- ignore -->. For now, "
+"you just need to know that using a `!` means that you’re calling a macro "
+"instead of a normal function and that macros don’t always follow the same "
+"rules as functions."
+msgstr ""
+"首先，`println!` 是一个 Rust 宏。如果它实际上调用的是函数，那么就会被表示为 "
+"`println`（而不是 `!`）。Rust 宏是一种编写代码的方式，可以生成扩展 Rust 语法"
+"的代码。我们将在[第 20 章](ch20-05-macros.html)<!-- ignore -->中详细讨论它"
+"们。目前，你只需要知道使用 `!` 意味着你调用的是宏而不是普通函数，而且宏并不总"
+"是遵循与函数相同的规则。"
+
+#: src/ch01-02-hello-world.md:141
+msgid ""
+"Second, you see the `\"Hello, world!\"` string. We pass this string as an "
+"argument to `println!`, and the string is printed to the screen."
+msgstr ""
+"其次，你会看到 `\"Hello, world!\"` 这个字符串。我们将这个字符串作为参数传递"
+"给 `println!`，然后该字符串会被打印到屏幕上。"
+
+#: src/ch01-02-hello-world.md:144
+msgid ""
+"Third, we end the line with a semicolon (`;`), which indicates that this "
+"expression is over, and the next one is ready to begin. Most lines of Rust "
+"code end with a semicolon."
+msgstr ""
+"第三，我们在行尾加上一个分号（`;`），这表示这一行已经结束，下一行可以开始了。"
+"大多数Rust代码的行都是以分号结尾的。"
+
+#: src/ch01-02-hello-world.md:149
+msgid "<a id=\"compiling-and-running-are-separate-steps\"></a>"
+msgstr "<a id=\"compiling-and-running-are-separate-steps\"></a>"
+
+#: src/ch01-02-hello-world.md:151
+msgid "Compilation and Execution"
+msgstr "编译与执行"
+
+#: src/ch01-02-hello-world.md:153
+msgid ""
+"You’ve just run a newly created program, so let’s examine each step in the "
+"process."
+msgstr "你刚刚运行了一个新创建的程序，现在让我们逐一检查这个过程中的每个步骤。"
+
+#: src/ch01-02-hello-world.md:156
+msgid ""
+"Before running a Rust program, you must compile it using the Rust compiler "
+"by entering the `rustc` command and passing it the name of your source file, "
+"like this:"
+msgstr ""
+"在运行一个 Rust 程序之前，你必须使用 Rust 编译器来编译它。具体操作是输入 "
+"`rustc` 命令，并传递你的源文件名，如下所示："
+
+#: src/ch01-02-hello-world.md:164
+msgid ""
+"If you have a C or C++ background, you’ll notice that this is similar to "
+"`gcc` or `clang`. After compiling successfully, Rust outputs a binary "
+"executable."
+msgstr ""
+"如果你有C或C++的背景知识，你会注意到这与`gcc`或`clang`类似。成功编译后，Rust"
+"会生成二进制可执行文件。"
+
+#: src/ch01-02-hello-world.md:167
+msgid ""
+"On Linux, macOS, and PowerShell on Windows, you can see the executable by "
+"entering the `ls` command in your shell:"
+msgstr ""
+"在 Linux、macOS 以及 Windows 上的 PowerShell 中，您可以通过在 shell 中输入 "
+"`ls` 命令来查看可执行文件："
+
+#: src/ch01-02-hello-world.md:175
+msgid ""
+"On Linux and macOS, you’ll see two files. With PowerShell on Windows, you’ll "
+"see the same three files that you would see using CMD. With CMD on Windows, "
+"you would enter the following:"
+msgstr ""
+"在 Linux 和 macOS 上，你会看到两个文件。而在 Windows 上使用 PowerShell 时，你"
+"会看到与使用 CMD 时相同的三个文件。在 Windows 上使用 CMD 时，你需要输入以下内"
+"容："
+
+#: src/ch01-02-hello-world.md:186
+msgid ""
+"This shows the source code file with the _.rs_ extension, the executable "
+"file (_main.exe_ on Windows, but _main_ on all other platforms), and, when "
+"using Windows, a file containing debugging information with the _.pdb_ "
+"extension. From here, you run the _main_ or _main.exe_ file, like this:"
+msgstr ""
+"这里展示了带有 `.rs_` 扩展名的源代码文件、可执行文件（在 Windows 系统是 "
+"`_main.exe_`，而在其他平台上则是 `_main_`），以及在使用 Windows 系统时，还包"
+"含带有 `.pdb_` 扩展名的调试信息的文件。从这里，你可以像这样运行 `_main_`或"
+"`_main.exe`文件："
+
+#: src/ch01-02-hello-world.md:195
+msgid ""
+"If your _main.rs_ is your “Hello, world!” program, this line prints `Hello, "
+"world!` to your terminal."
+msgstr ""
+"如果你的 _main.rs_ 文件是你的“Hello, world!”程序，那么这一行代码会在你的终端"
+"中输出 `Hello, world!`。"
+
+#: src/ch01-02-hello-world.md:198
+msgid ""
+"If you’re more familiar with a dynamic language, such as Ruby, Python, or "
+"JavaScript, you might not be used to compiling and running a program as "
+"separate steps. Rust is an _ahead-of-time compiled_ language, meaning you "
+"can compile a program and give the executable to someone else, and they can "
+"run it even without having Rust installed. If you give someone a _.rb_, _."
+"py_, or _.js_ file, they need to have a Ruby, Python, or JavaScript "
+"implementation installed (respectively). But in those languages, you only "
+"need one command to compile and run your program. Everything is a trade-off "
+"in language design."
+msgstr ""
+"如果你更熟悉像 Ruby、Python 或 JavaScript 这样的动态语言，你可能不习惯将程序"
+"的编译和运行分开进行。Rust 是一种 _提前编译_ 的语言，这意味着你可以先编译程"
+"序，然后将生成的可执行文件交给其他人，他们甚至不需要安装 Rust 就能运行该程"
+"序。如果你给某人一个 `.rb`、`.py` 或 `.js` 文件，那么他们就需要安装相应的 "
+"Ruby、Python 或 JavaScript 实现。但在这些语言中，你只需要一条命令就能编译并运"
+"行程序。在语言设计中，一切都是权衡的结果。"
+
+#: src/ch01-02-hello-world.md:207
+msgid ""
+"Just compiling with `rustc` is fine for simple programs, but as your project "
+"grows, you’ll want to manage all the options and make it easy to share your "
+"code. Next, we’ll introduce you to the Cargo tool, which will help you write "
+"real-world Rust programs."
+msgstr ""
+"对于简单的程序来说，使用 `rustc` 进行编译是可行的，但随着项目的增长，你需要管"
+"理所有相关选项，并且要方便地分享你的代码。接下来，我们将向您介绍 Cargo 工具，"
+"它可以帮助您编写实际的 Rust 程序。"
