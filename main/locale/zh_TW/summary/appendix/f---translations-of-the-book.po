@@ -94,8 +94,8 @@ msgstr ""
 
 #: src/appendix-06-translation.md:24
 msgid ""
-"[Farsi](https://github.com/RustFarsi/book), [Persian (FA)](https://github."
-"com/persian-rust/book)"
+"[Farsi](https://github.com/RustFarsi/book), [Persian (FA)](https://"
+"github.com/persian-rust/book)"
 msgstr ""
 
 #: src/appendix-06-translation.md:25

@@ -71,9 +71,10 @@ msgid ""
 "idiomatic-use-paths)<!-- ignore -->, in cases where the desired function is "
 "nested in more than one module, we’ve chosen to bring the parent module into "
 "scope rather than the function. By doing so, we can easily use other "
-"functions from `std::env`. It’s also less ambiguous than adding `use std::"
-"env::args` and then calling the function with just `args`, because `args` "
-"might easily be mistaken for a function that’s defined in the current module."
+"functions from `std::env`. It’s also less ambiguous than adding `use "
+"std::env::args` and then calling the function with just `args`, because "
+"`args` might easily be mistaken for a function that’s defined in the current "
+"module."
 msgstr ""
 
 #: src/ch12-01-accepting-command-line-arguments.md:65

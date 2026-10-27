@@ -22,8 +22,8 @@ msgstr ""
 #: src/ch17-04-streams.md:7
 msgid ""
 "Recall how we used the receiver for our async channel earlier in this "
-"chapter in the [“Message Passing”](ch17-02-concurrency-with-async."
-"html#message-passing)<!-- ignore --> section. The async `recv` method "
+"chapter in the [“Message Passing”](ch17-02-concurrency-with-"
+"async.html#message-passing)<!-- ignore --> section. The async `recv` method "
 "produces a sequence of items over time. This is an instance of a much more "
 "general pattern known as a _stream_. Many concepts are naturally represented "
 "as streams: items becoming available in a queue, chunks of data being pulled "
@@ -105,8 +105,8 @@ msgstr ""
 
 #: src/ch17-04-streams.md:108
 msgid ""
-"The fix to the compiler error is to add a `use` statement for `trpl::"
-"StreamExt`, as in Listing 17-22."
+"The fix to the compiler error is to add a `use` statement for "
+"`trpl::StreamExt`, as in Listing 17-22."
 msgstr ""
 
 #: src/ch17-04-streams.md:121

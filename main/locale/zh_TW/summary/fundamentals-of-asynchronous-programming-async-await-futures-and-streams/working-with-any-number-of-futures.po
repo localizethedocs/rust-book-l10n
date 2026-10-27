@@ -21,12 +21,12 @@ msgstr ""
 
 #: src/ch17-03-more-futures.md:8
 msgid ""
-"Recall from the [“Our First Async Program”](ch17-01-futures-and-syntax."
-"html#our-first-async-program)<!-- ignore --> section that at each await "
-"point, Rust gives a runtime a chance to pause the task and switch to another "
-"one if the future being awaited isn’t ready. The inverse is also true: Rust "
-"_only_ pauses async blocks and hands control back to a runtime at an await "
-"point. Everything between await points is synchronous."
+"Recall from the [“Our First Async Program”](ch17-01-futures-and-"
+"syntax.html#our-first-async-program)<!-- ignore --> section that at each "
+"await point, Rust gives a runtime a chance to pause the task and switch to "
+"another one if the future being awaited isn’t ready. The inverse is also "
+"true: Rust _only_ pauses async blocks and hands control back to a runtime at "
+"an await point. Everything between await points is synchronous."
 msgstr ""
 
 #: src/ch17-03-more-futures.md:14
@@ -273,8 +273,8 @@ msgstr ""
 msgid ""
 "That satisfies our goals for the types. Now let’s think about the _behavior_ "
 "we need: we want to race the future passed in against the duration. We can "
-"use `trpl::sleep` to make a timer future from the duration, and use `trpl::"
-"select` to run that timer with the future the caller passes in."
+"use `trpl::sleep` to make a timer future from the duration, and use "
+"`trpl::select` to run that timer with the future the caller passes in."
 msgstr ""
 
 #: src/ch17-03-more-futures.md:370

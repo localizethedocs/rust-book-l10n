@@ -86,9 +86,9 @@ msgid ""
 msgstr ""
 "`area`函数本应用于计算一个矩形的面积，但我们所编写的函数有两个参数，而且在我"
 "们的程序中没有任何地方说明这两个参数之间存在关联。将宽度和高度合并在一起会使"
-"代码更易于阅读和管理。我们已经在第三章的[“元组类型”](ch03-02-data-types."
-"html#the-tuple-type)<!-- ignore -->部分讨论过一种实现这一功能的方法，那就是使"
-"用元组。"
+"代码更易于阅读和管理。我们已经在第三章的[“元组类型”](ch03-02-data-"
+"types.html#the-tuple-type)<!-- ignore -->部分讨论过一种实现这一功能的方法，那"
+"就是使用元组。"
 
 #: src/ch05-02-example-structs.md:71
 msgid "Refactoring with Tuples"
@@ -359,8 +359,8 @@ msgid ""
 "writing-to-stderr-instead-of-stdout.html)<!-- ignore -->."
 msgstr ""
 "注意：调用 `dbg!` 宏会将输出打印到标准错误控制台流中（`stderr`），而 "
-"`println!` 则会将输出打印到标准输出控制台流中（`stdout`）。我们将在《第12"
-"章》“将错误重定向到标准错误”部分进一步讨论 `stderr` 和 `stdout` 的相关内容。"
+"`println!` 则会将输出打印到标准输出控制台流中（`stdout`）。我们将在《第12章》"
+"“将错误重定向到标准错误”部分进一步讨论 `stderr` 和 `stdout` 的相关内容。"
 "(ch12-06-writing-to-stderr-instead-of-stdout.html)<!-- ignore -->"
 
 #: src/ch05-02-example-structs.md:304

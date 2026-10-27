@@ -172,12 +172,12 @@ msgstr ""
 #: src/ch21-03-graceful-shutdown-and-cleanup.md:150
 msgid ""
 "However, the _only_ time this would come up would be when dropping the "
-"`Worker`. In exchange, we’d have to deal with an `Option<thread::"
-"JoinHandle<()>>` anywhere we accessed `worker.thread`. Idiomatic Rust uses "
-"`Option` quite a bit, but when you find yourself wrapping something you know "
-"will always be present in an `Option` as a workaround like this, it’s a good "
-"idea to look for alternative approaches to make your code cleaner and less "
-"error-prone."
+"`Worker`. In exchange, we’d have to deal with an "
+"`Option<thread::JoinHandle<()>>` anywhere we accessed `worker.thread`. "
+"Idiomatic Rust uses `Option` quite a bit, but when you find yourself "
+"wrapping something you know will always be present in an `Option` as a "
+"workaround like this, it’s a good idea to look for alternative approaches to "
+"make your code cleaner and less error-prone."
 msgstr ""
 
 #: src/ch21-03-graceful-shutdown-and-cleanup.md:158

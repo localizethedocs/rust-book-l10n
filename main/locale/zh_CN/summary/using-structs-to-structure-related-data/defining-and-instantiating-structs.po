@@ -256,9 +256,10 @@ msgstr ""
 "到了 `user2` 中。如果我们为 `email` 和 `username` 分别赋予了新的 `user2` 值，"
 "并且只使用了来自 `user1` 的 `active` 和 `sign_in_count` 值，那么即使在创建 "
 "`user2` 之后， `user1` 仍然有效。 `active` 和 `sign_in_count` 都是实现了 "
-"`Copy` 特性的类型，因此我们在[“仅栈式数据：复制”](ch04-01-what-is-ownership."
-"html#stack-only-data-copy)<!-- ignore -->部分讨论的行为仍然适用。在这个例子"
-"中，我们仍然可以使用 `user1.email`，因为它的数值并没有从 `user1` 中移出。"
+"`Copy` 特性的类型，因此我们在[“仅栈式数据：复制”](ch04-01-what-is-"
+"ownership.html#stack-only-data-copy)<!-- ignore -->部分讨论的行为仍然适用。在"
+"这个例子中，我们仍然可以使用 `user1.email`，因为它的数值并没有从 `user1` 中移"
+"出。"
 
 #: src/ch05-01-defining-structs.md:282
 msgid ""

@@ -96,8 +96,8 @@ msgid ""
 "**Paths to code in modules**: Once a module is part of your crate, you can "
 "refer to code in that module from anywhere else in that same crate, as long "
 "as the privacy rules allow, using the path to the code. For example, an "
-"`Asparagus` type in the garden vegetables module would be found at `crate::"
-"garden::vegetables::Asparagus`."
+"`Asparagus` type in the garden vegetables module would be found at "
+"`crate::garden::vegetables::Asparagus`."
 msgstr ""
 
 #: src/ch07-02-defining-modules-to-control-scope-and-privacy.md:43

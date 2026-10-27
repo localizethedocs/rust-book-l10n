@@ -105,11 +105,11 @@ msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:102
 msgid ""
-"In Listing 7-11, you might have wondered why we specified `use crate::"
-"front_of_house::hosting` and then called `hosting::add_to_waitlist` in "
-"`eat_at_restaurant`, rather than specifying the `use` path all the way out "
-"to the `add_to_waitlist` function to achieve the same result, as in Listing "
-"7-13."
+"In Listing 7-11, you might have wondered why we specified `use "
+"crate::front_of_house::hosting` and then called `hosting::add_to_waitlist` "
+"in `eat_at_restaurant`, rather than specifying the `use` path all the way "
+"out to the `add_to_waitlist` function to achieve the same result, as in "
+"Listing 7-13."
 msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:125
@@ -160,9 +160,9 @@ msgstr ""
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:178
 msgid ""
 "As you can see, using the parent modules distinguishes the two `Result` "
-"types. If instead we specified `use std::fmt::Result` and `use std::io::"
-"Result`, we’d have two `Result` types in the same scope, and Rust wouldn’t "
-"know which one we meant when we used `Result`."
+"types. If instead we specified `use std::fmt::Result` and `use "
+"std::io::Result`, we’d have two `Result` types in the same scope, and Rust "
+"wouldn’t know which one we meant when we used `Result`."
 msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:183
@@ -181,9 +181,9 @@ msgstr ""
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:209
 msgid ""
 "In the second `use` statement, we chose the new name `IoResult` for the "
-"`std::io::Result` type, which won’t conflict with the `Result` from `std::"
-"fmt` that we’ve also brought into scope. Listing 7-15 and Listing 7-16 are "
-"considered idiomatic, so the choice is up to you!"
+"`std::io::Result` type, which won’t conflict with the `Result` from "
+"`std::fmt` that we’ve also brought into scope. Listing 7-15 and Listing 7-16 "
+"are considered idiomatic, so the choice is up to you!"
 msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:214
@@ -209,11 +209,12 @@ msgstr ""
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:244
 msgid ""
 "Before this change, external code would have to call the `add_to_waitlist` "
-"function by using the path `restaurant::front_of_house::hosting::"
-"add_to_waitlist()`, which also would have required the `front_of_house` "
-"module to be marked as `pub`. Now that this `pub use` has re-exported the "
-"`hosting` module from the root module, external code can use the path "
-"`restaurant::hosting::add_to_waitlist()` instead."
+"function by using the path "
+"`restaurant::front_of_house::hosting::add_to_waitlist()`, which also would "
+"have required the `front_of_house` module to be marked as `pub`. Now that "
+"this `pub use` has re-exported the `hosting` module from the root module, "
+"external code can use the path `restaurant::hosting::add_to_waitlist()` "
+"instead."
 msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:251
@@ -299,10 +300,10 @@ msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:318
 msgid ""
-"Members of the Rust community have made many packages available at [crates."
-"io](https://crates.io/), and pulling any of them into your package involves "
-"these same steps: listing them in your package’s _Cargo.toml_ file and using "
-"`use` to bring items from their crates into scope."
+"Members of the Rust community have made many packages available at "
+"[crates.io](https://crates.io/), and pulling any of them into your package "
+"involves these same steps: listing them in your package’s _Cargo.toml_ file "
+"and using `use` to bring items from their crates into scope."
 msgstr ""
 
 #: src/ch07-04-bringing-paths-into-scope-with-the-use-keyword.md:323

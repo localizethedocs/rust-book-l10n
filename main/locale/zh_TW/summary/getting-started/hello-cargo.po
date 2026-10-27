@@ -125,8 +125,8 @@ msgstr ""
 msgid ""
 "The next three lines set the configuration information Cargo needs to "
 "compile your program: the name, the version, and the edition of Rust to use. "
-"We’ll talk about the `edition` key in [Appendix E](appendix-05-editions."
-"html)<!-- ignore -->."
+"We’ll talk about the `edition` key in [Appendix E](appendix-05-"
+"editions.html)<!-- ignore -->."
 msgstr ""
 
 #: src/ch01-03-hello-cargo.md:85
@@ -172,9 +172,9 @@ msgstr ""
 msgid ""
 "If you started a project that doesn’t use Cargo, as we did with the “Hello, "
 "world!” project, you can convert it to a project that does use Cargo. Move "
-"the project code into the _src_ directory and create an appropriate _Cargo."
-"toml_ file. One easy way to get that _Cargo.toml_ file is to run `cargo "
-"init`, which will create it for you automatically."
+"the project code into the _src_ directory and create an appropriate "
+"_Cargo.toml_ file. One easy way to get that _Cargo.toml_ file is to run "
+"`cargo init`, which will create it for you automatically."
 msgstr ""
 
 #: src/ch01-03-hello-cargo.md:117
@@ -354,8 +354,8 @@ msgstr ""
 
 #: src/ch01-03-hello-cargo.md:240
 msgid ""
-"For more information about Cargo, check out [its documentation](https://doc."
-"rust-lang.org/cargo/)."
+"For more information about Cargo, check out [its documentation](https://"
+"doc.rust-lang.org/cargo/)."
 msgstr ""
 
 #: src/ch01-03-hello-cargo.md:242

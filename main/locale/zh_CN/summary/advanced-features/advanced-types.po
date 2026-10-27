@@ -217,9 +217,9 @@ msgid ""
 "filled in as `std::io::Error`. The `Write` trait function signatures end up "
 "looking like this:"
 msgstr ""
-"因为这个声明位于`std::io`模块中，我们可以使用完全限定的别名`std::io::"
-"Result<T>`；也就是说，使用`Result<T, E>`，并将`E`填充为`std::io::Error`。"
-"`Write`特性函数的签名最终看起来像这样："
+"因为这个声明位于`std::io`模块中，我们可以使用完全限定的别名"
+"`std::io::Result<T>`；也就是说，使用`Result<T, E>`，并将`E`填充为"
+"`std::io::Error`。`Write`特性函数的签名最终看起来像这样："
 
 #: src/ch20-03-advanced-types.md:201
 msgid ""

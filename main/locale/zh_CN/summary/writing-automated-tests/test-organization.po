@@ -519,8 +519,8 @@ msgid ""
 msgstr ""
 "在测试结果中看到 `common`，同时还有 `running 0 tests` 的显示，这并不是我们想"
 "要的。我们只是想与其他集成测试文件共享一些代码而已。为了避免 `common` 出现在"
-"测试输出中，我们不会创建 _tests/common.rs_，而是会创建 _tests/common/mod."
-"rs_。现在项目目录看起来是这样的："
+"测试输出中，我们不会创建 _tests/common.rs_，而是会创建 _tests/common/"
+"mod.rs_。现在项目目录看起来是这样的："
 
 #: src/ch11-03-test-organization.md:310
 msgid ""
@@ -548,8 +548,8 @@ msgid ""
 "function from the `it_adds_two` test in _tests/integration_test.rs_:"
 msgstr ""
 "在创建了`_tests/common/mod.rs_`之后，我们可以在任何集成测试文件中将其作为模块"
-"来使用。以下是从`_tests/integration_test.rs_`中的`_tests/integration_test."
-"rs__`调用`it_adds_two`函数的一个示例："
+"来使用。以下是从`_tests/integration_test.rs_`中的`_tests/"
+"integration_test.rs__`调用`it_adds_two`函数的一个示例："
 
 #: src/ch11-03-test-organization.md:322
 msgid "<span class=\"filename\">Filename: tests/integration_test.rs</span>"

@@ -107,8 +107,8 @@ msgstr ""
 #: src/ch09-02-recoverable-errors-with-result.md:83
 msgid ""
 "Note that, like the `Option` enum, the `Result` enum and its variants have "
-"been brought into scope by the prelude, so we don’t need to specify `Result::"
-"` before the `Ok` and `Err` variants in the `match` arms."
+"been brought into scope by the prelude, so we don’t need to specify "
+"`Result::` before the `Ok` and `Err` variants in the `match` arms."
 msgstr ""
 
 #: src/ch09-02-recoverable-errors-with-result.md:87
@@ -470,9 +470,9 @@ msgid ""
 "Reading a file into a string is a fairly common operation, so the standard "
 "library provides the convenient `fs::read_to_string` function that opens the "
 "file, creates a new `String`, reads the contents of the file, puts the "
-"contents into that `String`, and returns it. Of course, using `fs::"
-"read_to_string` doesn’t give us the opportunity to explain all the error "
-"handling, so we did it the longer way first."
+"contents into that `String`, and returns it. Of course, using "
+"`fs::read_to_string` doesn’t give us the opportunity to explain all the "
+"error handling, so we did it the longer way first."
 msgstr ""
 
 #: src/ch09-02-recoverable-errors-with-result.md:496
@@ -664,11 +664,11 @@ msgstr ""
 
 #: src/ch09-02-recoverable-errors-with-result.md:661
 msgid ""
-"The `main` function may return any types that implement [the `std::process::"
-"Termination` trait](../std/process/trait.Termination.html)<!-- ignore -->, "
-"which contains a function `report` that returns an `ExitCode`. Consult the "
-"standard library documentation for more information on implementing the "
-"`Termination` trait for your own types."
+"The `main` function may return any types that implement [the "
+"`std::process::Termination` trait](../std/process/"
+"trait.Termination.html)<!-- ignore -->, which contains a function `report` "
+"that returns an `ExitCode`. Consult the standard library documentation for "
+"more information on implementing the `Termination` trait for your own types."
 msgstr ""
 
 #: src/ch09-02-recoverable-errors-with-result.md:667

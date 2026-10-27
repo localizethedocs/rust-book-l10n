@@ -325,9 +325,9 @@ msgid ""
 "of Chapter 15."
 msgstr ""
 "要更改可变引用所指向的值，我们必须使用`*`去解除引用操作，才能访问`i`中的值，"
-"然后再使用`+=`操作符。我们将在第15章的[“解除对值的引用”](ch15-02-deref."
-"html#following-the-pointer-to-the-value-with-the-dereference-operator)<!-- "
-"ignore -->部分详细讨论解除引用操作。"
+"然后再使用`+=`操作符。我们将在第15章的[“解除对值的引用”](ch15-02-"
+"deref.html#following-the-pointer-to-the-value-with-the-dereference-"
+"operator)<!-- ignore -->部分详细讨论解除引用操作。"
 
 #: src/ch08-01-vectors.md:250
 msgid ""

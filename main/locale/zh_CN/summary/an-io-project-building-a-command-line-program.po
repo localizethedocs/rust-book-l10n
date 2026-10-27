@@ -99,8 +99,8 @@ msgstr "处理错误 ([第9章] (ch09-00-error-handling.html) <!-- ignore -->)"
 
 #: src/ch12-00-an-io-project.md:35
 msgid ""
-"Using traits and lifetimes where appropriate ([Chapter 10](ch10-00-generics."
-"html)<!-- ignore -->)"
+"Using traits and lifetimes where appropriate ([Chapter 10](ch10-00-"
+"generics.html)<!-- ignore -->)"
 msgstr ""
 "在适当的地方使用特质和生命周期（[第10章](ch10-00-generics.html)<!-- ignore --"
 ">）"

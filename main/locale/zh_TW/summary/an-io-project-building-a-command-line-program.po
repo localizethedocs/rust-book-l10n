@@ -97,8 +97,8 @@ msgstr "處理錯誤（[第 9 章](ch09-00-error-handling.html)<!-- ignore -->�
 
 #: src/ch12-00-an-io-project.md:35
 msgid ""
-"Using traits and lifetimes where appropriate ([Chapter 10](ch10-00-generics."
-"html)<!-- ignore -->)"
+"Using traits and lifetimes where appropriate ([Chapter 10](ch10-00-"
+"generics.html)<!-- ignore -->)"
 msgstr ""
 "在適當的地方使用特徵與生命週期（[第 10 章](ch10-00-generics.html)<!-- ignore "
 "-->）"

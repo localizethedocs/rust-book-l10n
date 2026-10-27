@@ -160,8 +160,8 @@ msgstr ""
 msgid ""
 "If that’s all correct and Rust still isn’t working, there are a number of "
 "places you can get help. Find out how to get in touch with other Rustaceans "
-"(a silly nickname we call ourselves) on [the community page](https://www."
-"rust-lang.org/community)."
+"(a silly nickname we call ourselves) on [the community page](https://"
+"www.rust-lang.org/community)."
 msgstr ""
 
 #: src/ch01-01-installation.md:113

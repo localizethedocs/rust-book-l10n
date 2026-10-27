@@ -256,12 +256,12 @@ msgstr ""
 
 #: src/ch17-02-concurrency-with-async.md:294
 msgid ""
-"Note: Because all of this async code runs in an async block in a `trpl::"
-"block_on` call, everything within it can avoid blocking. However, the code "
-"_outside_ it will block on the `block_on` function returning. That’s the "
-"whole point of the `trpl::block_on` function: it lets you _choose_ where to "
-"block on some set of async code, and thus where to transition between sync "
-"and async code."
+"Note: Because all of this async code runs in an async block in a "
+"`trpl::block_on` call, everything within it can avoid blocking. However, the "
+"code _outside_ it will block on the `block_on` function returning. That’s "
+"the whole point of the `trpl::block_on` function: it lets you _choose_ where "
+"to block on some set of async code, and thus where to transition between "
+"sync and async code."
 msgstr ""
 
 #: src/ch17-02-concurrency-with-async.md:301

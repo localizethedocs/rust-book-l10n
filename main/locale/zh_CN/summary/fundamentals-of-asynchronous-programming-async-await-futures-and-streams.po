@@ -143,9 +143,9 @@ msgid ""
 "because those are the cases where an individual program would benefit from "
 "the operation being _non_\\-blocking."
 msgstr ""
-"注意：如果你仔细思考的话，这就是`_大多数`函数调用的工作方式。不过，术语“阻"
-"塞”通常用来指代那些与文件、网络或计算机上的其他资源交互的函数调用，因为这些情"
-"况下，单个程序会受益于非阻塞的操作。"
+"注意：如果你仔细思考的话，这就是`_大多数`函数调用的工作方式。不过，术语“阻塞”"
+"通常用来指代那些与文件、网络或计算机上的其他资源交互的函数调用，因为这些情况"
+"下，单个程序会受益于非阻塞的操作。"
 
 #: src/ch17-00-async-await.md:70
 msgid ""

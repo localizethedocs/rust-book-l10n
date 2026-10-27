@@ -65,9 +65,9 @@ msgstr ""
 msgid ""
 "The `eat_at_restaurant` function is part of our library crate’s public API, "
 "so we mark it with the `pub` keyword. In the [“Exposing Paths with the `pub` "
-"Keyword”](ch07-03-paths-for-referring-to-an-item-in-the-module-tree."
-"html#exposing-paths-with-the-pub-keyword)<!-- ignore --> section, we’ll go "
-"into more detail about `pub`."
+"Keyword”](ch07-03-paths-for-referring-to-an-item-in-the-module-"
+"tree.html#exposing-paths-with-the-pub-keyword)<!-- ignore --> section, we’ll "
+"go into more detail about `pub`."
 msgstr ""
 
 #: src/ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md:41

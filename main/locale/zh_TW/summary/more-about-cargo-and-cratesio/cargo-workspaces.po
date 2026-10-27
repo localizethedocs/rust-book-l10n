@@ -321,8 +321,8 @@ msgid ""
 "The top-level _Cargo.lock_ now contains information about the dependency of "
 "`add_one` on `rand`. However, even though `rand` is used somewhere in the "
 "workspace, we can’t use it in other crates in the workspace unless we add "
-"`rand` to their _Cargo.toml_ files as well. For example, if we add `use rand;"
-"` to the _adder/src/main.rs_ file for the `adder` package, we’ll get an "
+"`rand` to their _Cargo.toml_ files as well. For example, if we add `use "
+"rand;` to the _adder/src/main.rs_ file for the `adder` package, we’ll get an "
 "error:"
 msgstr ""
 
@@ -471,11 +471,11 @@ msgstr ""
 
 #: src/ch14-03-cargo-workspaces.md:403
 msgid ""
-"If you publish the crates in the workspace to [crates.io](https://crates."
-"io/)<!-- ignore -->, each crate in the workspace will need to be published "
-"separately. Like `cargo test`, we can publish a particular crate in our "
-"workspace by using the `-p` flag and specifying the name of the crate we "
-"want to publish."
+"If you publish the crates in the workspace to [crates.io](https://"
+"crates.io/)<!-- ignore -->, each crate in the workspace will need to be "
+"published separately. Like `cargo test`, we can publish a particular crate "
+"in our workspace by using the `-p` flag and specifying the name of the crate "
+"we want to publish."
 msgstr ""
 
 #: src/ch14-03-cargo-workspaces.md:409

@@ -197,8 +197,8 @@ msgstr ""
 #: src/ch20-05-macros.md:135
 msgid ""
 "The comma following `$()` indicates that a literal comma separator character "
-"must appear between each instance of the code that matches the code in "
-"`$()`. The `*` specifies that the pattern matches zero or more of whatever "
+"must appear between each instance of the code that matches the code in `$"
+"()`. The `*` specifies that the pattern matches zero or more of whatever "
 "precedes the `*`."
 msgstr ""
 
@@ -227,8 +227,9 @@ msgstr ""
 #: src/ch20-05-macros.md:163
 msgid ""
 "To learn more about how to write macros, consult the online documentation or "
-"other resources, such as [“The Little Book of Rust Macros”](https://veykril."
-"github.io/tlborm/) started by Daniel Keep and continued by Lukas Wirth."
+"other resources, such as [“The Little Book of Rust Macros”](https://"
+"veykril.github.io/tlborm/) started by Daniel Keep and continued by Lukas "
+"Wirth."
 msgstr ""
 
 #: src/ch20-05-macros.md:167
@@ -566,9 +567,9 @@ msgid ""
 "binary project in your _projects_ directory using `cargo new pancakes`. We "
 "need to add `hello_macro` and `hello_macro_derive` as dependencies in the "
 "`pancakes` crate’s _Cargo.toml_. If you’re publishing your versions of "
-"`hello_macro` and `hello_macro_derive` to [crates.io](https://crates."
-"io/)<!-- ignore -->, they would be regular dependencies; if not, you can "
-"specify them as `path` dependencies as follows:"
+"`hello_macro` and `hello_macro_derive` to [crates.io](https://"
+"crates.io/)<!-- ignore -->, they would be regular dependencies; if not, you "
+"can specify them as `path` dependencies as follows:"
 msgstr ""
 
 #: src/ch20-05-macros.md:511

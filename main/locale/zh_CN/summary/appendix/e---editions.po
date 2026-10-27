@@ -17,8 +17,9 @@ msgstr "附录E：版本信息"
 
 #: src/appendix-05-editions.md:3
 msgid ""
-"In Chapter 1, you saw that `cargo new` adds a bit of metadata to your _Cargo."
-"toml_ file about an edition. This appendix talks about what that means!"
+"In Chapter 1, you saw that `cargo new` adds a bit of metadata to your "
+"_Cargo.toml_ file about an edition. This appendix talks about what that "
+"means!"
 msgstr ""
 "在第1章中，您了解到 ``cargo new`` 会在您的_Cargo.toml_文件中添加一些关于版本"
 "的信息。本附录将详细解释这意味着什么！"

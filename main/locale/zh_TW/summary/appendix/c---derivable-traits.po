@@ -317,8 +317,8 @@ msgid ""
 "Instances with Struct Update Syntax”](ch05-01-defining-structs.html#creating-"
 "instances-from-other-instances-with-struct-update-syntax)<!--\n"
 "ignore --> section in Chapter 5. You can customize a few fields of a struct "
-"and then set and use a default value for the rest of the fields by using `.."
-"Default::default()`."
+"and then set and use a default value for the rest of the fields by using "
+"`..Default::default()`."
 msgstr ""
 
 #: src/appendix-03-derivable-traits.md:177

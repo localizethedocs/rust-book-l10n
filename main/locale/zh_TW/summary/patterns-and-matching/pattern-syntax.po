@@ -419,12 +419,12 @@ msgstr ""
 
 #: src/ch19-03-pattern-syntax.md:380
 msgid ""
-"The pattern of the first arm in the `match` expression matches a `Message::"
-"ChangeColor` enum variant that contains a `Color::Rgb` variant; then, the "
-"pattern binds to the three inner `i32` values. The pattern of the second arm "
-"also matches a `Message::ChangeColor` enum variant, but the inner enum "
-"matches `Color::Hsv` instead. We can specify these complex conditions in one "
-"`match` expression, even though two enums are involved."
+"The pattern of the first arm in the `match` expression matches a "
+"`Message::ChangeColor` enum variant that contains a `Color::Rgb` variant; "
+"then, the pattern binds to the three inner `i32` values. The pattern of the "
+"second arm also matches a `Message::ChangeColor` enum variant, but the inner "
+"enum matches `Color::Hsv` instead. We can specify these complex conditions "
+"in one `match` expression, even though two enums are involved."
 msgstr ""
 
 #: src/ch19-03-pattern-syntax.md:389
