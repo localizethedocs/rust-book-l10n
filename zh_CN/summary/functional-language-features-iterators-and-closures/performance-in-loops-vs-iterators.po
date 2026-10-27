@@ -1,0 +1,116 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch13-04-performance.md:3
+msgid "<a id=\"comparing-performance-loops-vs-iterators\"></a>"
+msgstr "<a id=\"comparing-performance-loops-vs-iterators\"></a>"
+
+#: src/ch13-04-performance.md:5
+msgid "Performance in Loops vs. Iterators"
+msgstr "循环与迭代器的性能对比"
+
+#: src/ch13-04-performance.md:7
+msgid ""
+"To determine whether to use loops or iterators, you need to know which "
+"implementation is faster: the version of the `search` function with an "
+"explicit `for` loop or the version with iterators."
+msgstr ""
+"要判断是使用循环还是迭代器，你需要了解哪种实现更快：是带有显式`for`循环的"
+"`search`函数的版本，还是使用迭代器的版本。"
+
+#: src/ch13-04-performance.md:11
+msgid ""
+"We ran a benchmark by loading the entire contents of _The Adventures of "
+"Sherlock Holmes_ by Sir Arthur Conan Doyle into a `String` and looking for "
+"the word _the_ in the contents. Here are the results of the benchmark on the "
+"version of `search` using the `for` loop and the version using iterators:"
+msgstr ""
+"我们执行了一个基准测试，将阿瑟·康纳·多伊尔所著的《夏洛克·福尔摩斯的冒险》整本"
+"书的内容加载到`String`中，然后查找其中的单词“the”。以下是使用`for`循环以及使"
+"用迭代器的`search`版本进行基准测试的结果："
+
+#: src/ch13-04-performance.md:21
+msgid ""
+"The two implementations have similar performance! We won’t explain the "
+"benchmark code here because the point is not to prove that the two versions "
+"are equivalent but to get a general sense of how these two implementations "
+"compare performance-wise."
+msgstr ""
+"这两种实现在性能上非常相似！我们不会在这里解释基准测试代码，因为重点不是证明"
+"这两个版本是等效的，而是了解这两种实现在性能上的对比情况。"
+
+#: src/ch13-04-performance.md:26
+msgid ""
+"For a more comprehensive benchmark, you should check using various texts of "
+"various sizes as the `contents`, different words and words of different "
+"lengths as the `query`, and all kinds of other variations. The point is "
+"this: Iterators, although a high-level abstraction, get compiled down to "
+"roughly the same code as if you’d written the lower-level code yourself. "
+"Iterators are one of Rust’s _zero-cost abstractions_, by which we mean that "
+"using the abstraction imposes no additional runtime overhead. This is "
+"analogous to how Bjarne Stroustrup, the original designer and implementor of "
+"C++, defines zero-overhead in his 2012 ETAPS keynote presentation "
+"“Foundations of C++”:"
+msgstr ""
+"于：尽管迭代器是一种高级抽象机制，但它在编译后仍然会被转化为与你自己编写底层"
+"代码大致相同的代码。迭代器是Rust中一种“零成本抽象”机制，这意味着使用这种抽象"
+"机制并不会带来额外的开销。不会增加额外的运行时间开销。这与Bjarne Stroustrup在"
+"2012年ETAPS主题演讲《C++的基础》中提出的“零开销”概念类似："
+
+#: src/ch13-04-performance.md:36
+msgid ""
+"In general, C++ implementations obey the zero-overhead principle: What you "
+"don’t use, you don’t pay for. And further: What you do use, you couldn’t "
+"hand code any better."
+msgstr ""
+"一般来说，C++的实现遵循零开销原则：不需要使用的部分，就无需为此支付成本。此"
+"外，一旦使用了某些功能，那么代码的其他部分也绝不可能做得更好。"
+
+#: src/ch13-04-performance.md:40
+msgid ""
+"In many cases, Rust code using iterators compiles to the same assembly you’d "
+"write by hand. Optimizations such as loop unrolling and eliminating bounds "
+"checking on array access apply and make the resultant code extremely "
+"efficient. Now that you know this, you can use iterators and closures "
+"without fear! They make code seem like it’s higher level but don’t impose a "
+"runtime performance penalty for doing so."
+msgstr ""
+"在许多情况下，使用迭代器的Rust代码编译后的汇编代码与手工编写的代码相同。诸如"
+"循环展开以及消除数组访问时的边界检查等优化措施会生效，从而使生成的代码效率极"
+"高。现在你知道了这一点，就可以放心地使用迭代器和闭包了！它们让代码看起来更高"
+"级，但并不会在运行时带来性能上的损失。"
+
+#: src/ch13-04-performance.md:47
+msgid "Summary"
+msgstr "摘要"
+
+#: src/ch13-04-performance.md:49
+msgid ""
+"Closures and iterators are Rust features inspired by functional programming "
+"language ideas. They contribute to Rust’s capability to clearly express high-"
+"level ideas at low-level performance. The implementations of closures and "
+"iterators are such that runtime performance is not affected. This is part of "
+"Rust’s goal to strive to provide zero-cost abstractions."
+msgstr ""
+"闭包和迭代器是受函数式编程理念启发的Rust特性。它们有助于Rust在保持低性能的同"
+"时，能够清晰地表达高级概念。闭包和迭代器的实现方式使得运行时的性能不会受到影"
+"响。这是Rust致力于提供零成本抽象的一部分目标。"
+
+#: src/ch13-04-performance.md:55
+msgid ""
+"Now that we’ve improved the expressiveness of our I/O project, let’s look at "
+"some more features of `cargo` that will help us share the project with the "
+"world."
+msgstr ""
+"现在我们已经提升了我们的I/O项目的表达能力，接下来让我们看看`cargo`的一些功"
+"能，这些功能将帮助我们向世界分享这个项目。"
