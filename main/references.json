@@ -37,9 +37,9 @@
     "branch" : "main",
     "commit" : 
     {
-      "date" : "2026-09-02 12:04:34 -0400",
-      "hash" : "1500248d8f230566e4ec9f27fcbb8fe9e2898ab1",
-      "title" : "Update to Rust 1.98"
+      "date" : "2026-10-28 14:58:38 -0400",
+      "hash" : "2771df165f092a4fbb9f46b5b2e7450f19010adb",
+      "title" : "Upgrade to rust 1.99.1"
     }
   },
   "type" : "branch",
