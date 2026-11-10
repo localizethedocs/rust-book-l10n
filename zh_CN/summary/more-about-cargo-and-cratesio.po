@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch14-00-more-about-cargo.md:1
+msgid "More About Cargo and Crates.io"
+msgstr "更多关于Cargo和Crates.io的信息"
+
+#: src/ch14-00-more-about-cargo.md:3
+msgid ""
+"So far, we’ve used only the most basic features of Cargo to build, run, and "
+"test our code, but it can do a lot more. In this chapter, we’ll discuss some "
+"of its other, more advanced features to show you how to do the following:"
+msgstr ""
+"到目前为止，我们仅使用了Cargo中最基本的功能来构建、运行和测试我们的代码，但实"
+"际上它还能做更多的事情。在本章中，我们将讨论一些更高级的功能，以展示如何执行"
+"以下操作："
+
+#: src/ch14-00-more-about-cargo.md:7
+msgid "Customize your build through release profiles."
+msgstr "通过发布配置文件来定制你的构建过程。"
+
+#: src/ch14-00-more-about-cargo.md:8
+msgid "Publish libraries on [crates.io](https://crates.io/)<!-- ignore -->."
+msgstr "在[crates.io](https://crates.io/)上发布库文件。"
+
+#: src/ch14-00-more-about-cargo.md:9
+msgid "Organize large projects with workspaces."
+msgstr "使用工作区来组织大型项目。"
+
+#: src/ch14-00-more-about-cargo.md:10
+msgid "Install binaries from [crates.io](https://crates.io/)<!-- ignore -->."
+msgstr "从[crates.io](https://crates.io/)安装二进制文件。"
+
+#: src/ch14-00-more-about-cargo.md:11
+msgid "Extend Cargo using custom commands."
+msgstr "通过自定义命令来扩展Cargo的功能。"
+
+#: src/ch14-00-more-about-cargo.md:13
+msgid ""
+"Cargo can do even more than the functionality we cover in this chapter, so "
+"for a full explanation of all its features, see [its documentation](https://"
+"doc.rust-lang.org/cargo/)."
+msgstr ""
+"Cargo的功能远不止我们在本章中介绍的那些功能。如需了解其所有特性的完整说明，请"
+"参阅[其文档](https://doc.rust-lang.org/cargo/)。"
