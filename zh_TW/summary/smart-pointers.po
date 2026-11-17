@@ -1,0 +1,114 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch15-00-smart-pointers.md:1
+msgid "Smart Pointers"
+msgstr "智慧指標"
+
+#: src/ch15-00-smart-pointers.md:3
+msgid ""
+"A pointer is a general concept for a variable that contains an address in "
+"memory. This address refers to, or “points at,” some other data. The most "
+"common kind of pointer in Rust is a reference, which you learned about in "
+"Chapter 4. References are indicated by the `&` symbol and borrow the value "
+"they point to. They don’t have any special capabilities other than referring "
+"to data, and they have no overhead."
+msgstr ""
+"指標是一種通用概念，指的是包含記憶體位址的變數。這個位址用來指向其他資料。"
+"Rust 中最常見的指標是參考，你在第 4 章已經學過。參考以 `&` 符號表示，並借用它"
+"所指向的值。除了指向資料外，它們沒有任何特殊能力，而且沒有額外開銷。"
+
+#: src/ch15-00-smart-pointers.md:10
+msgid ""
+"_Smart pointers_, on the other hand, are data structures that act like a "
+"pointer but also have additional metadata and capabilities. The concept of "
+"smart pointers isn’t unique to Rust: Smart pointers originated in C++ and "
+"exist in other languages as well. Rust has a variety of smart pointers "
+"defined in the standard library that provide functionality beyond that "
+"provided by references. To explore the general concept, we’ll look at a "
+"couple of different examples of smart pointers, including a _reference "
+"counting_ smart pointer type. This pointer enables you to allow data to have "
+"multiple owners by keeping track of the number of owners and, when no owners "
+"remain, cleaning up the data."
+msgstr ""
+"_智慧指標_ 則是類似指標但也具備額外中繼資料與能力的資料結構。智慧指標的概念並"
+"非 Rust 獨有：智慧指標起源於 C++，在其他語言中也存在。Rust 在標準函式庫中定義"
+"了多種智慧指標，提供超越參考的功能。為了探討這個一般概念，我們會看看幾個不同"
+"的智慧指標例子，包括一種 _參考計數_ 的智慧指標型別。這個指標會追蹤擁有者的數"
+"量，讓資料可以有多個擁有者，並在沒有擁有者時清理資料。"
+
+#: src/ch15-00-smart-pointers.md:20
+msgid ""
+"In Rust, with its concept of ownership and borrowing, there is an additional "
+"difference between references and smart pointers: While references only "
+"borrow data, in many cases smart pointers _own_ the data they point to."
+msgstr ""
+"在 Rust 中，由於擁有權與借用的概念，參考與智慧指標之間還有另一個差異：參考只"
+"會借用資料，但在許多情況下，智慧指標會 _擁有_ 它們所指向的資料。"
+
+#: src/ch15-00-smart-pointers.md:24
+msgid ""
+"Smart pointers are usually implemented using structs. Unlike an ordinary "
+"struct, smart pointers implement the `Deref` and `Drop` traits. The `Deref` "
+"trait allows an instance of the smart pointer struct to behave like a "
+"reference so that you can write your code to work with either references or "
+"smart pointers. The `Drop` trait allows you to customize the code that’s run "
+"when an instance of the smart pointer goes out of scope. In this chapter, "
+"we’ll discuss both of these traits and demonstrate why they’re important to "
+"smart pointers."
+msgstr ""
+"智慧指標通常以 struct 來實作。與一般的 struct 不同，智慧指標會實作 `Deref` "
+"與 `Drop` 特徵。`Deref` 特徵讓智慧指標 struct 的實例能像參考一樣運作，如此你"
+"就能撰寫同時可與參考或智慧指標一起運作的程式碼。`Drop` 特徵讓你自訂智慧指標實"
+"例離開作用域時要執行的程式碼。在本章中，我們會討論這兩個特徵，並示範為什麼它"
+"們對智慧指標很重要。"
+
+#: src/ch15-00-smart-pointers.md:32
+msgid ""
+"Given that the smart pointer pattern is a general design pattern used "
+"frequently in Rust, this chapter won’t cover every existing smart pointer. "
+"Many libraries have their own smart pointers, and you can even write your "
+"own. We’ll cover the most common smart pointers in the standard library:"
+msgstr ""
+"由於智慧指標模式是在 Rust 中常見的通用設計模式，本章不會涵蓋所有現有的智慧指"
+"標。許多函式庫都有自己的智慧指標，你甚至可以自行撰寫。我們會介紹標準函式庫中"
+"最常見的智慧指標："
+
+#: src/ch15-00-smart-pointers.md:37
+msgid "`Box<T>`, for allocating values on the heap"
+msgstr "`Box<T>`：在堆上配置值"
+
+#: src/ch15-00-smart-pointers.md:38
+msgid "`Rc<T>`, a reference counting type that enables multiple ownership"
+msgstr "`Rc<T>`：讓資料可被多重擁有的參考計數型別"
+
+#: src/ch15-00-smart-pointers.md:39
+msgid ""
+"`Ref<T>` and `RefMut<T>`, accessed through `RefCell<T>`, a type that "
+"enforces the borrowing rules at runtime instead of compile time"
+msgstr ""
+"`Ref<T>` 與 `RefMut<T>`：透過 `RefCell<T>` 取得的型別，它在執行期而非編譯期強"
+"制借用規則"
+
+#: src/ch15-00-smart-pointers.md:42
+msgid ""
+"In addition, we’ll cover the _interior mutability_ pattern where an "
+"immutable type exposes an API for mutating an interior value. We’ll also "
+"discuss reference cycles: how they can leak memory and how to prevent them."
+msgstr ""
+"此外，我們還會介紹 _內部可變性_ 模式，該模式讓不可變型別提供能修改內部值的 "
+"API。我們也會討論參考循環：它們如何造成記憶體洩漏，以及如何避免。"
+
+#: src/ch15-00-smart-pointers.md:46
+msgid "Let’s dive in!"
+msgstr "讓我們開始吧！"
