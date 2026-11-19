@@ -1,8 +1,22 @@
 {
   "dev" : [
     {
-      "VERSION" : "main",
+      "VERSION" : "nightly",
       "VERSION_COMPENDIUM" : ""
+    },
+    {
+      "VERSION" : "beta",
+      "VERSION_COMPENDIUM" : "nightly"
+    },
+    {
+      "VERSION" : "stable",
+      "VERSION_COMPENDIUM" : "nightly"
+    }
+  ],
+  "rel" : [
+    {
+      "VERSION" : "1",
+      "VERSION_COMPENDIUM" : "nightly"
     }
   ]
 }

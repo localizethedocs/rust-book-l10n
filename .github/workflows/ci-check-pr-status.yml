@@ -130,7 +130,7 @@ jobs:
       ENABLE: ${{ needs.before-check.outputs.SCRIPT_CHANGE == 'true' }}
       RUNNER: ${{ vars.RUNNER }}
       CHECKOUT: ${{ github.ref }}
-      VERSION: 'main'
+      VERSION: 'nightly'
       LANGUAGE: 'zh_TW'
       MODE_OF_UPDATE: 'COMPARE'
       BASEURL_HREF: ${{ vars.BASEURL_HREF }}

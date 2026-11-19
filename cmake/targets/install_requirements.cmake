@@ -308,7 +308,7 @@ execute_process(
             ${ENV_VARS_OF_SYSTEM}
             ${Rust_CARGO_EXECUTABLE} install
             --path packages/mdbook-trpl
-    WORKING_DIRECTORY ${PROJ_OUT_REPO_DIR}
+    WORKING_DIRECTORY ${PROJ_OUT_SUBMODULE_DIR}
     ECHO_OUTPUT_VARIABLE
     ECHO_ERROR_VARIABLE
     RESULT_VARIABLE RES_VAR

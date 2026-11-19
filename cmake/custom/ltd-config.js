@@ -7,7 +7,10 @@ var CONFIG_OPTIONS = {
     ["zh-tw",     "繁體中文"],
   ],
   CONFIG_VERSIONS: [
-    ["main",      "Development"],
+    ["nightly",   "Nightly"],
+    ["beta",      "Beta"],
+    ["stable",    "Stable"],
+    ["1",         "1.x"],
   ],
   CONFIG_PROJECTS: [
     ["Index",     "https://projects.localizethedocs.org"],

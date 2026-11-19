@@ -384,7 +384,7 @@ Alternatively, you can preview translations locally by running the following com
 # Please make sure the following prerequisites are installed:
 # CMake (3.25~), Git, Conda, Gettext
 LANGUAGE=en_US
-VERSION=main
+VERSION=nightly
 git clone --recurse-submodule https://github.com/localizethedocs/rust-book-l10n.git
 cd rust-book-l10n
 cmake --preset ${LANGUAGE} -DVERSION=${VERSION}

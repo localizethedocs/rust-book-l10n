@@ -23,7 +23,7 @@ on:
         description: 'VERSION input (for single mode)'
         required: true
         type: string
-        default: 'main'
+        default: 'nightly'
       VERSION_GROUP:
         description: 'VERSION_GROUP input (for group mode)'
         required: true
@@ -31,6 +31,7 @@ on:
         default: 'dev'
         options:
           - 'dev'
+          - 'rel'
       LANGUAGE:
         description: 'LANGUAGE input'
         required: true

@@ -7,6 +7,7 @@ on:
   # Triggers the workflow based on a schedule.
   schedule:
     - cron: '0 8 * * 2'   # CRON_dev
+    - cron: '1 8 * * 2'   # CRON_rel
   # Triggers the workflow manually through the GitHub UI.
   workflow_dispatch:
     inputs:
@@ -22,7 +23,7 @@ on:
         description: 'VERSION input (for single mode)'
         required: true
         type: string
-        default: 'main'
+        default: 'nightly'
       VERSION_GROUP:
         description: 'VERSION_GROUP input (for group mode)'
         required: true
@@ -30,9 +31,11 @@ on:
         default: 'dev'
         options:
           - 'dev'
+          - 'rel'
 
 env:
   CRON_dev: '0 8 * * 2'
+  CRON_rel: '1 8 * * 2'
 
 jobs:
   precondition:

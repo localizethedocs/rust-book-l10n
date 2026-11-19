@@ -32,11 +32,11 @@ set(LANGUAGE_SOURCE "en_US"
     CACHE STRING "The source language of the documentation")
     # Possible values are "en_US".
 
-set(VERSION "main"
+set(VERSION "nightly"
     CACHE STRING "The current version of the documentation.")
     # Possible values are versions listed in versions.json.
 
-set(VERSION_COMPENDIUM "main"
+set(VERSION_COMPENDIUM "nightly"
     CACHE STRING "The version of compendium from which the current version will merge translations.")
     # Possible values are NULL and versions listed in versions.json.
 
@@ -85,7 +85,7 @@ set(BRANCH_OF_WORKTREE "l10n"
 set(REMOTE_URL_OF_L10N "https://github.com/localizethedocs/rust-book-l10n.git"
     CACHE STRING "The remote URL of the 'l10n' repository.")
 
-set(REMOTE_URL_OF_DOCS "https://github.com/rust-lang/book.git"
+set(REMOTE_URL_OF_DOCS "https://github.com/rust-lang/rust.git"
     CACHE STRING "The remote URL of the 'docs' repository.")
 
 set(BASEURL_HREF "file://${PROJECT_SOURCE_DIR}/out/$CACHE{MDBOOK_RENDERER}"
@@ -116,7 +116,8 @@ set(PROJ_CMAKE_TARGETS_DIR          "${PROJ_SOURCE_DIR}/cmake/targets")
 set(PROJ_CONDA_DIR                  "${PROJ_SOURCE_DIR}/.conda")
 set(PROJ_OUT_DIR                    "${PROJ_SOURCE_DIR}/out")
 set(PROJ_OUT_REPO_DIR               "${PROJ_OUT_DIR}/repo")
-set(PROJ_OUT_REPO_DOCS_DIR          "${PROJ_OUT_REPO_DIR}")
+set(PROJ_OUT_SUBMODULE_DIR          "${PROJ_OUT_REPO_DIR}/src/doc/book")
+set(PROJ_OUT_REPO_DOCS_DIR          "${PROJ_OUT_SUBMODULE_DIR}")
 set(PROJ_OUT_REPO_DOCS_BOOK_DIR     "${PROJ_OUT_REPO_DOCS_DIR}")
 set(PROJ_OUT_REPO_DOCS_SRC_DIR      "${PROJ_OUT_REPO_DOCS_DIR}/src")
 set(PROJ_OUT_REPO_DOCS_THEME_DIR    "${PROJ_OUT_REPO_DOCS_DIR}/theme")
@@ -160,14 +161,35 @@ get_members_of_json_object(
 
 #[============================================================[
 # Validate the VERSION cache variable.
-# - For "main":
-#   - Set VERSION_TYPE    to "branch"
-#   - Set BRANCH_NAME     to "main"
+# - For "nightly":
+#   - Set VERSION_TYPE  to "branch"
+#   - Set BRANCH_NAME   to "main"
+# - For "beta":
+#   - Set VERSION_TYPE  to "branch"
+#   - Set BRANCH_NAME   to "beta"
+# - For "stable":
+#   - Set VERSION_TYPE  to "branch"
+#   - Set BRANCH_NAME   to "stable"
+# - For "[MAJOR]":
+#   - Set VERSION_TYPE  to "tag"
+#   - Set TAG_PATTERN   to "^([MAJOR])\\.([0-9]+)\\.([0-9]+)$"
+#   - Set TAG_SUFFIX    to ""
 #]============================================================]
 
-if     (VERSION MATCHES "^(main)$")
+if     (VERSION MATCHES "^(nightly)$")
     set(VERSION_TYPE    "branch")
     set(BRANCH_NAME     "main")
+elseif (VERSION MATCHES "^(beta)$")
+    set(VERSION_TYPE    "branch")
+    set(BRANCH_NAME     "beta")
+elseif (VERSION MATCHES "^(stable)$")
+    set(VERSION_TYPE    "branch")
+    set(BRANCH_NAME     "stable")
+elseif (VERSION MATCHES "^([0-9]+)$")
+    set(MAJOR           "${CMAKE_MATCH_1}")
+    set(VERSION_TYPE    "tag")
+    set(TAG_PATTERN     "^(${MAJOR})\\.([0-9]+)\\.([0-9]+)$")
+    set(TAG_SUFFIX      "")
 else()
     message(FATAL_ERROR "Invalid VERSION value. (${VERSION})")
 endif()
@@ -224,11 +246,31 @@ endif()
 # Set VERSION_OF_XXX to $CACHE{VERSION_OF_XXX} if it's not "[default]".
 #]============================================================]
 
-if     (VERSION MATCHES "^(main)$")
-    set(VERSION_OF_RUST                 "1.90")
+if     (VERSION MATCHES "^(nightly)$")
+    set(VERSION_OF_RUST                 "1")
     set(VERSION_OF_DASEL                "2")
     set(VERSION_OF_MDBOOK               "^0.5")
     set(VERSION_OF_MDBOOK_I18N_HELPERS  "^0.4")
+elseif (VERSION MATCHES "^(beta)$")
+    set(VERSION_OF_RUST                 "1")
+    set(VERSION_OF_DASEL                "2")
+    set(VERSION_OF_MDBOOK               "^0.5")
+    set(VERSION_OF_MDBOOK_I18N_HELPERS  "^0.4")
+elseif (VERSION MATCHES "^(stable)$")
+    set(VERSION_OF_RUST                 "1")
+    set(VERSION_OF_DASEL                "2")
+    set(VERSION_OF_MDBOOK               "^0.5")
+    set(VERSION_OF_MDBOOK_I18N_HELPERS  "^0.4")
+elseif (VERSION MATCHES "^([0-9]+)$")
+    if     (VERSION VERSION_LESS_EQUAL    "1" AND
+            VERSION VERSION_GREATER_EQUAL "1")
+        set(VERSION_OF_RUST                 "1")
+        set(VERSION_OF_DASEL                "2")
+        set(VERSION_OF_MDBOOK               "^0.5")
+        set(VERSION_OF_MDBOOK_I18N_HELPERS  "^0.4")
+    else()
+        message(FATAL_ERROR "Invalid VERSION value. (${VERSION})")
+    endif()
 else()
     message(FATAL_ERROR "Invalid VERSION value. (${VERSION})")
 endif()
@@ -341,6 +383,7 @@ message(STATUS "PROJ_CMAKE_TARGETS_DIR          = ${PROJ_CMAKE_TARGETS_DIR}")
 message(STATUS "PROJ_CONDA_DIR                  = ${PROJ_CONDA_DIR}")
 message(STATUS "PROJ_OUT_DIR                    = ${PROJ_OUT_DIR}")
 message(STATUS "PROJ_OUT_REPO_DIR               = ${PROJ_OUT_REPO_DIR}")
+message(STATUS "PROJ_OUT_SUBMODULE_DIR          = ${PROJ_OUT_SUBMODULE_DIR}")
 message(STATUS "PROJ_OUT_REPO_DOCS_DIR          = ${PROJ_OUT_REPO_DOCS_DIR}")
 message(STATUS "PROJ_OUT_REPO_DOCS_BOOK_DIR     = ${PROJ_OUT_REPO_DOCS_BOOK_DIR}")
 message(STATUS "PROJ_OUT_REPO_DOCS_SRC_DIR      = ${PROJ_OUT_REPO_DOCS_SRC_DIR}")
@@ -438,6 +481,7 @@ set(SCRIPT_MODE_CACHE
     -D PROJ_CONDA_DIR=${PROJ_CONDA_DIR}
     -D PROJ_OUT_DIR=${PROJ_OUT_DIR}
     -D PROJ_OUT_REPO_DIR=${PROJ_OUT_REPO_DIR}
+    -D PROJ_OUT_SUBMODULE_DIR=${PROJ_OUT_SUBMODULE_DIR}
     -D PROJ_OUT_REPO_DOCS_DIR=${PROJ_OUT_REPO_DOCS_DIR}
     -D PROJ_OUT_REPO_DOCS_BOOK_DIR=${PROJ_OUT_REPO_DOCS_BOOK_DIR}
     -D PROJ_OUT_REPO_DOCS_SRC_DIR=${PROJ_OUT_REPO_DOCS_SRC_DIR}

@@ -35,6 +35,7 @@ message("REMOTE_URL: ${REMOTE_URL}")
 message("LOCAL_PATH: ${LOCAL_PATH}/")
 message("")
 clone_repository_from_remote_to_local(
+    NO_SUBMODULE
     IN_REMOTE_URL   "${REMOTE_URL}"
     IN_LOCAL_PATH   "${LOCAL_PATH}")
 message("")
