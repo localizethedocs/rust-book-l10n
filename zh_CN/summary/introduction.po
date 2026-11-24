@@ -1,0 +1,453 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Rust Programming Language\n"
+"POT-Creation-Date: 2025-12-22T08:29:03Z\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/ch00-00-introduction.md:1
+msgid "Introduction"
+msgstr "引言"
+
+#: src/ch00-00-introduction.md:3
+msgid ""
+"Note: This edition of the book is the same as [The Rust Programming Language]"
+"(https://nostarch.com/rust-programming-language-3rd-edition) available in "
+"print and ebook format from [No Starch Press](https://nostarch.com/)."
+msgstr ""
+"注意：本书的版本与[Rust编程语言指南](https://nostarch.com/rust-programming-"
+"language-3rd-edition)相同，该书籍有纸质版和电子书版本，由[No Starch出版社]"
+"(https://nostarch.com/)提供。"
+
+#: src/ch00-00-introduction.md:10
+msgid ""
+"Welcome to _The Rust Programming Language_, an introductory book about Rust. "
+"The Rust programming language helps you write faster, more reliable "
+"software. High-level ergonomics and low-level control are often at odds in "
+"programming language design; Rust challenges that conflict. Through "
+"balancing powerful technical capacity and a great developer experience, Rust "
+"gives you the option to control low-level details (such as memory usage) "
+"without all the hassle traditionally associated with such control."
+msgstr ""
+"欢迎阅读《Rust编程语言》这本书，这是一本关于Rust的入门书籍。Rust编程语言帮助"
+"你编写更快速、更可靠的软件。在编程语言设计中，高级的人机交互与低级控制往往存"
+"在矛盾；Rust则挑战了这种矛盾。通过平衡强大的技术能力和出色的开发者体验，Rust"
+"让你能够控制低级细节（如内存使用），而无需承担传统上与此相关的所有麻烦。"
+
+#: src/ch00-00-introduction.md:18
+msgid "Who Rust Is For"
+msgstr "Rust适用于哪些场景"
+
+#: src/ch00-00-introduction.md:20
+msgid ""
+"Rust is ideal for many people for a variety of reasons. Let’s look at a few "
+"of the most important groups."
+msgstr "Rust因其多种原因而非常适合许多人。让我们来看看其中一些最重要的群体。"
+
+#: src/ch00-00-introduction.md:23
+msgid "Teams of Developers"
+msgstr "开发人员团队"
+
+#: src/ch00-00-introduction.md:25
+msgid ""
+"Rust is proving to be a productive tool for collaborating among large teams "
+"of developers with varying levels of systems programming knowledge. Low-"
+"level code is prone to various subtle bugs, which in most other languages "
+"can only be caught through extensive testing and careful code review by "
+"experienced developers. In Rust, the compiler plays a gatekeeper role by "
+"refusing to compile code with these elusive bugs, including concurrency "
+"bugs. By working alongside the compiler, the team can spend its time "
+"focusing on the program’s logic rather than chasing down bugs."
+msgstr ""
+"Rust被证明是大型开发团队之间协作的实用工具，无论团队成员在系统编程方面的知识"
+"水平如何。低级别代码容易存在各种细微的错误，而在大多数其他语言中，这些错误只"
+"能通过广泛的测试和经验丰富的开发人员的仔细代码审查来发现。在Rust中，编译器扮"
+"演着把关者的角色，它拒绝编译包含这些难以发现的错误的代码，包括并发相关的错"
+"误。通过这种机制，我们可以更好地协作。除了负责编译工作之外，团队可以将时间集"
+"中在程序的逻辑上，而不是忙于修复错误。"
+
+#: src/ch00-00-introduction.md:34
+msgid ""
+"Rust also brings contemporary developer tools to the systems programming "
+"world:"
+msgstr "Rust还为系统编程领域带来了现代的开发工具："
+
+#: src/ch00-00-introduction.md:36
+msgid ""
+"Cargo, the included dependency manager and build tool, makes adding, "
+"compiling, and managing dependencies painless and consistent across the Rust "
+"ecosystem."
+msgstr ""
+"Cargo是一个内置的依赖管理器和构建工具，能够轻松且一致地为Rust生态系统中的项目"
+"添加、编译和管理依赖项。"
+
+#: src/ch00-00-introduction.md:39
+msgid ""
+"The `rustfmt` formatting tool ensures a consistent coding style across "
+"developers."
+msgstr "`rustfmt`是一种格式化工具，可以确保所有开发者的编码风格保持一致。"
+
+#: src/ch00-00-introduction.md:41
+msgid ""
+"The Rust Language Server powers integrated development environment (IDE) "
+"integration for code completion and inline error messages."
+msgstr ""
+"Rust语言服务器为集成开发环境（IDE）提供了代码补全功能和内嵌式错误信息。"
+
+#: src/ch00-00-introduction.md:44
+msgid ""
+"By using these and other tools in the Rust ecosystem, developers can be "
+"productive while writing systems-level code."
+msgstr ""
+"通过使用Rust生态系统中的这些工具以及其他工具，开发者在编写系统级代码时能够更"
+"加高效。"
+
+#: src/ch00-00-introduction.md:47
+msgid "Students"
+msgstr "学生"
+
+#: src/ch00-00-introduction.md:49
+msgid ""
+"Rust is for students and those who are interested in learning about systems "
+"concepts. Using Rust, many people have learned about topics like operating "
+"systems development. The community is very welcoming and happy to answer "
+"students’ questions. Through efforts such as this book, the Rust teams want "
+"to make systems concepts more accessible to more people, especially those "
+"new to programming."
+msgstr ""
+"Rust 适合那些对系统概念感兴趣的学生以及想要学习相关知识的人员。通过使用 "
+"Rust，许多人能够了解操作系统开发等相关知识。该社区非常热情友好，乐于解答学生"
+"的疑问。通过像这本书这样的努力，Rust 团队希望让更多人对系统概念有所了解，尤其"
+"是那些刚开始学习编程的人。"
+
+#: src/ch00-00-introduction.md:56
+msgid "Companies"
+msgstr "公司"
+
+#: src/ch00-00-introduction.md:58
+msgid ""
+"Hundreds of companies, large and small, use Rust in production for a variety "
+"of tasks, including command line tools, web services, DevOps tooling, "
+"embedded devices, audio and video analysis and transcoding, "
+"cryptocurrencies, bioinformatics, search engines, Internet of Things "
+"applications, machine learning, and even major parts of the Firefox web "
+"browser."
+msgstr ""
+"数百家大大小小的公司都在使用Rust进行生产环境中的各种任务，包括命令行工具、网"
+"络服务、DevOps工具、嵌入式设备、音频和视频分析与转码、加密货币、生物信息学、"
+"搜索引擎、物联网应用、机器学习，甚至Firefox网络浏览器的关键部分。"
+
+#: src/ch00-00-introduction.md:64
+msgid "Open Source Developers"
+msgstr "开源开发者"
+
+#: src/ch00-00-introduction.md:66
+msgid ""
+"Rust is for people who want to build the Rust programming language, "
+"community, developer tools, and libraries. We’d love to have you contribute "
+"to the Rust language."
+msgstr ""
+"Rust是专为那些想要构建Rust编程语言、社区以及开发工具和相关库的人而设计的。我"
+"们非常希望你能为Rust语言做出贡献。"
+
+#: src/ch00-00-introduction.md:70
+msgid "People Who Value Speed and Stability"
+msgstr "重视速度和稳定性的人"
+
+#: src/ch00-00-introduction.md:72
+msgid ""
+"Rust is for people who crave speed and stability in a language. By speed, we "
+"mean both how quickly Rust code can run and the speed at which Rust lets you "
+"write programs. The Rust compiler’s checks ensure stability through feature "
+"additions and refactoring. This is in contrast to the brittle legacy code in "
+"languages without these checks, which developers are often afraid to modify. "
+"By striving for zero-cost abstractions—higher-level features that compile to "
+"lower-level code as fast as code written manually—Rust endeavors to make "
+"safe code be fast code as well."
+msgstr ""
+"Rust是那些渴望语言在速度和稳定性方面有所提升的人的理想选择。所谓速度，既指"
+"Rust代码运行的速度，也指Rust允许编写程序的速度。Rust编译器的检查功能通过添加"
+"功能和重构来确保代码的稳定性。这与那些没有这些检查的脆弱旧语言中的代码形成对"
+"比，后者往往让开发者不敢进行修改。通过追求零成本抽象——即那些可以编译成更高层"
+"次功能的特性——Rust能够为用户提供更好的体验。与手动编写的代码一样快速处理底层"
+"代码——Rust致力于让safecode也能成为高效的代码。"
+
+#: src/ch00-00-introduction.md:81
+msgid ""
+"The Rust language hopes to support many other users as well; those mentioned "
+"here are merely some of the biggest stakeholders. Overall, Rust’s greatest "
+"ambition is to eliminate the trade-offs that programmers have accepted for "
+"decades by providing safety _and_ productivity, speed _and_ ergonomics. Give "
+"Rust a try, and see if its choices work for you."
+msgstr ""
+"Rust语言希望也能支持更多的用户；这里提到的只是一些最重要的利益相关者。总体而"
+"言，Rust最大的目标是通过提供安全性与生产力、速度与易用性，消除程序员多年来不"
+"得不接受的权衡。试试Rust吧，看看它的选择是否适合你。"
+
+#: src/ch00-00-introduction.md:87
+msgid "Who This Book Is For"
+msgstr "这本书适合谁阅读"
+
+#: src/ch00-00-introduction.md:89
+msgid ""
+"This book assumes that you’ve written code in another programming language, "
+"but it doesn’t make any assumptions about which one. We’ve tried to make the "
+"material broadly accessible to those from a wide variety of programming "
+"backgrounds. We don’t spend a lot of time talking about what programming "
+"_is_ or how to think about it. If you’re entirely new to programming, you "
+"would be better served by reading a book that specifically provides an "
+"introduction to programming."
+msgstr ""
+"这本书假设您已经使用其他编程语言编写过代码，但并没有对具体的编程语言做出任何"
+"限制。我们努力使这些内容能够广泛地被来自不同编程背景的人所理解。我们没有花太"
+"多时间讨论什么是编程，或者应该如何思考编程问题。如果您是完全新的编程爱好者，"
+"那么阅读一本专门介绍编程的书籍会更适合您的需求。"
+
+#: src/ch00-00-introduction.md:97
+msgid "How to Use This Book"
+msgstr "如何使用这本书"
+
+#: src/ch00-00-introduction.md:99
+msgid ""
+"In general, this book assumes that you’re reading it in sequence from front "
+"to back. Later chapters build on concepts in earlier chapters, and earlier "
+"chapters might not delve into details on a particular topic but will revisit "
+"the topic in a later chapter."
+msgstr ""
+"一般来说，这本书假设你会按照从前到后的顺序阅读。后面的章节会基于前面章节中的"
+"概念进行展开，而前面的章节可能不会详细讨论某个特定主题，但会在后面的章节中再"
+"次提及该主题。"
+
+#: src/ch00-00-introduction.md:104
+msgid ""
+"You’ll find two kinds of chapters in this book: concept chapters and project "
+"chapters. In concept chapters, you’ll learn about an aspect of Rust. In "
+"project chapters, we’ll build small programs together, applying what you’ve "
+"learned so far. Chapter 2, Chapter 12, and Chapter 21 are project chapters; "
+"the rest are concept chapters."
+msgstr ""
+"在这本书中，你会遇到两种类型的章节：概念章节和项目章节。在概念章节中，你将学"
+"习Rust的某个方面。在项目章节中，我们将一起构建小型程序，运用迄今为止所学的知"
+"识。第2章、第12章和第21章是项目章节；其余的都是概念章节。"
+
+#: src/ch00-00-introduction.md:110
+msgid ""
+"**Chapter 1** explains how to install Rust, how to write a “Hello, world!” "
+"program, and how to use Cargo, Rust’s package manager and build tool. "
+"**Chapter 2** is a hands-on introduction to writing a program in Rust, "
+"having you build up a number-guessing game. Here, we cover concepts at a "
+"high level, and later chapters will provide additional detail. If you want "
+"to get your hands dirty right away, Chapter 2 is the place for that. If "
+"you’re a particularly meticulous learner who prefers to learn every detail "
+"before moving on to the next, you might want to skip Chapter 2 and go "
+"straight to **Chapter 3**, which covers Rust features that are similar to "
+"those of other programming languages; then, you can return to Chapter 2 when "
+"you’d like to work on a project applying the details you’ve learned."
+msgstr ""
+"**第1章**介绍了如何安装Rust语言，如何编写“Hello, world!”程序，以及如何使用"
+"Rust的包管理器与构建工具Cargo。**第2章**则是一个实践性的教程，指导读者如何用"
+"Rust编写程序，特别是如何构建一个数字猜谜游戏。在这1章中，我们会从宏观层面介绍"
+"相关概念，后续章节会提供更多的细节说明。如果你想要立即动手实践，那么第2章就是"
+"适合你的地方。如果你是特别……如果你是一个注重细节的学习者，喜欢在继续下一步之"
+"前先掌握每一个细节，那么你可以跳过第2章，直接进入**第3章**。第3章介绍了与其它"
+"编程语言类似的Rust特性。当你想要运用所学习的知识来开展某个项目时，再回到第2章"
+"进行学习吧。"
+
+#: src/ch00-00-introduction.md:122
+msgid ""
+"In **Chapter 4**, you’ll learn about Rust’s ownership system. **Chapter 5** "
+"discusses structs and methods. **Chapter 6** covers enums, `match` "
+"expressions, and the `if let` and `let...else` control flow constructs. "
+"You’ll use structs and enums to make custom types."
+msgstr ""
+"在**第4章**中，你将了解Rust的所有权系统。**第5章**则介绍了结构体和方法。**第6"
+"章**涵盖了枚举、`match`表达式，以及`if let`和`let...else`控制流结构。你将使用"
+"结构体和枚举来创建自定义类型。"
+
+#: src/ch00-00-introduction.md:127
+msgid ""
+"In **Chapter 7**, you’ll learn about Rust’s module system and about privacy "
+"rules for organizing your code and its public application programming "
+"interface (API). **Chapter 8** discusses some common collection data "
+"structures that the standard library provides: vectors, strings, and hash "
+"maps. **Chapter 9** explores Rust’s error-handling philosophy and techniques."
+msgstr ""
+"在**第7章**中，你将了解Rust的模块系统以及用于组织代码及其公共应用程序接口"
+"（API）的隐私规则。**第8章**介绍了标准库提供的一些常见的集合数据结构：向量、"
+"字符串和哈希映射。**第9章**则探讨了Rust的错误处理理念和技术。"
+
+#: src/ch00-00-introduction.md:133
+msgid ""
+"**Chapter 10** digs into generics, traits, and lifetimes, which give you the "
+"power to define code that applies to multiple types. **Chapter 11** is all "
+"about testing, which even with Rust’s safety guarantees is necessary to "
+"ensure that your program’s logic is correct. In **Chapter 12**, we’ll build "
+"our own implementation of a subset of functionality from the `grep` command "
+"line tool that searches for text within files. For this, we’ll use many of "
+"the concepts we discussed in the previous chapters."
+msgstr ""
+"**第10章**深入探讨了泛型、特质和生命周期，这些概念让你能够定义适用于多种类型"
+"的代码。**第11章**则全面介绍了测试的重要性，尽管Rust提供了安全保障，但测试仍"
+"然是确保程序逻辑正确的必要手段。**第12章**中，我们将自己实现了一个命令行工具"
+"`grep`的某些功能，该工具可以搜索文件中的文本。为此，我们将运用许多相关概念。"
+"我们在前面的章节中已经讨论过了。"
+
+#: src/ch00-00-introduction.md:141
+msgid ""
+"**Chapter 13** explores closures and iterators: features of Rust that come "
+"from functional programming languages. In **Chapter 14**, we’ll examine "
+"Cargo in more depth and talk about best practices for sharing your libraries "
+"with others. **Chapter 15** discusses smart pointers that the standard "
+"library provides and the traits that enable their functionality."
+msgstr ""
+"第13章探讨了闭包和迭代器：这些是源自函数式编程语言的Rust特性。在第14章中，我"
+"们将更深入地了解Cargo，并讨论与他人共享库文件的最佳实践。第15章则介绍了标准库"
+"中提供的智能指针以及实现其功能的特性。"
+
+#: src/ch00-00-introduction.md:147
+msgid ""
+"In **Chapter 16**, we’ll walk through different models of concurrent "
+"programming and talk about how Rust helps you program in multiple threads "
+"fearlessly. In **Chapter 17**, we build on that by exploring Rust’s async "
+"and await syntax, along with tasks, futures, and streams, and the "
+"lightweight concurrency model they enable."
+msgstr ""
+"在**第16章**中，我们将介绍不同的并发编程模型，并探讨Rust如何帮助您毫无顾虑地"
+"使用多个线程进行编程。在**第17章**中，我们将在此基础上进一步深入，探索Rust的"
+"异步和等待语法，以及任务、未来和流等概念，以及它们所支持的轻量级并发模型。"
+
+#: src/ch00-00-introduction.md:153
+msgid ""
+"**Chapter 18** looks at how Rust idioms compare to object-oriented "
+"programming principles you might be familiar with. **Chapter 19** is a "
+"reference on patterns and pattern matching, which are powerful ways of "
+"expressing ideas throughout Rust programs. **Chapter 20** contains a "
+"smorgasbord of advanced topics of interest, including unsafe Rust, macros, "
+"and more about lifetimes, traits, types, functions, and closures."
+msgstr ""
+"第18章探讨了Rust的惯用法与面向对象编程原则之间的比较。第19章则介绍了模式匹配"
+"的相关内容，这是在Rust程序中表达思想的有效方式。第20章涵盖了各种高级主题，包"
+"括不安全的Rust、宏以及关于生命周期、特性、类型、函数和闭包等方面的内容。"
+
+#: src/ch00-00-introduction.md:160
+msgid ""
+"In **Chapter 21**, we’ll complete a project in which we’ll implement a low-"
+"level multithreaded web server!"
+msgstr ""
+"在**第21章**中，我们将完成一个项目，其中会实现一个低级的多线程Web服务器！"
+
+#: src/ch00-00-introduction.md:163
+msgid ""
+"Finally, some appendixes contain useful information about the language in a "
+"more reference-like format. **Appendix A** covers Rust’s keywords, "
+"**Appendix B** covers Rust’s operators and symbols, **Appendix C** covers "
+"derivable traits provided by the standard library, **Appendix D** covers "
+"some useful development tools, and **Appendix E** explains Rust editions. In "
+"**Appendix F**, you can find translations of the book, and in **Appendix G** "
+"we’ll cover how Rust is made and what nightly Rust is."
+msgstr ""
+"最后，一些附录中包含了关于该语言的有用信息，这些内容以参考性更强的形式呈现。"
+"**附录A**介绍了Rust的关键字，**附录B**涵盖了Rust的运算符和符号，**附录C**介绍"
+"了标准库提供的可派生特性，**附录D**介绍了一些有用的开发工具，而**附录E**则解"
+"释了Rust的不同版本。**附录F**中提供了本书的翻译内容，而**附录G**则详细说明了"
+"Rust的构建过程以及当前版本的Rust是什么。"
+
+#: src/ch00-00-introduction.md:171
+msgid ""
+"There is no wrong way to read this book: If you want to skip ahead, go for "
+"it! You might have to jump back to earlier chapters if you experience any "
+"confusion. But do whatever works for you."
+msgstr ""
+"阅读这本书没有错误的方式：如果你想要跳过某些章节，那就这么做吧！如果你感到困"
+"惑，可能需要回到之前的章节。但无论哪种方式都随你喜欢。"
+
+#: src/ch00-00-introduction.md:175
+msgid "<span id=\"ferris\"></span>"
+msgstr "<span id=\"ferris\"></span>"
+
+#: src/ch00-00-introduction.md:177
+msgid ""
+"An important part of the process of learning Rust is learning how to read "
+"the error messages the compiler displays: These will guide you toward "
+"working code. As such, we’ll provide many examples that don’t compile along "
+"with the error message the compiler will show you in each situation. Know "
+"that if you enter and run a random example, it may not compile! Make sure "
+"you read the surrounding text to see whether the example you’re trying to "
+"run is meant to error. In most situations, we’ll lead you to the correct "
+"version of any code that doesn’t compile. Ferris will also help you "
+"distinguish code that isn’t meant to work:"
+msgstr ""
+"学习Rust的过程中，了解如何阅读编译器显示的错误信息是非常重要的。这些信息会帮"
+"助你编写出正确的代码。因此，我们会提供许多在每种情况下都不会编译的示例，以及"
+"编译器会显示的错误信息。请注意，如果你输入并运行某个随机示例，它可能无法编"
+"译！请确保仔细阅读周围的文本，以了解你试图运行的示例是否确实如此。错误。在大"
+"多数情况下，我们会引导您找到那些无法编译的代码的正确版本。Ferris还会帮助您区"
+"分那些不应该运行的代码："
+
+#: src/ch00-00-introduction.md:187
+msgid "Ferris"
+msgstr "费里斯"
+
+#: src/ch00-00-introduction.md:187
+msgid "Meaning"
+msgstr "含义"
+
+#: src/ch00-00-introduction.md:189
+msgid ""
+"<img src=\"img/ferris/does_not_compile.svg\" class=\"ferris-explain\" "
+"alt=\"Ferris with a question mark\"/>"
+msgstr ""
+"<img src=\"img/ferris/does_not_compile.svg\" class=\"ferris-explain\" "
+"alt=\"Ferris with a question mark\"/>"
+
+#: src/ch00-00-introduction.md:189
+msgid "This code does not compile!"
+msgstr "这段代码无法编译！"
+
+#: src/ch00-00-introduction.md:190
+msgid ""
+"<img src=\"img/ferris/panics.svg\" class=\"ferris-explain\" alt=\"Ferris "
+"throwing up their hands\"/>"
+msgstr ""
+"<img src=\"img/ferris/panics.svg\" class=\"ferris-explain\" alt=\"Ferris "
+"throwing up their hands\"/>"
+
+#: src/ch00-00-introduction.md:190
+msgid "This code panics!"
+msgstr "这段代码会导致程序崩溃！"
+
+#: src/ch00-00-introduction.md:191
+msgid ""
+"<img src=\"img/ferris/not_desired_behavior.svg\" class=\"ferris-explain\" "
+"alt=\"Ferris with one claw up, shrugging\"/>"
+msgstr ""
+"<img src=\"img/ferris/not_desired_behavior.svg\" class=\"ferris-explain\" "
+"alt=\"Ferris with one claw up, shrugging\"/>"
+
+#: src/ch00-00-introduction.md:191
+msgid "This code does not produce the desired behavior."
+msgstr "这段代码并没有产生预期的行为。"
+
+#: src/ch00-00-introduction.md:193
+msgid ""
+"In most situations, we’ll lead you to the correct version of any code that "
+"doesn’t compile."
+msgstr "在大多数情况下，我们会引导您找到任何无法编译的代码的正确版本。"
+
+#: src/ch00-00-introduction.md:196
+msgid "Source Code"
+msgstr "源代码"
+
+#: src/ch00-00-introduction.md:198
+msgid ""
+"The source files from which this book is generated can be found on [GitHub]"
+"(https://github.com/rust-lang/book/tree/main/src)."
+msgstr ""
+"可以在 [GitHub](https://github.com/rust-lang/book/tree/main/src)上找到生成这"
+"本书的源文件。"
